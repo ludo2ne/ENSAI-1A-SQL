@@ -1,0 +1,88 @@
+/* css styles */
+
+/************************************************************/
+/* Titles                                                   */
+/************************************************************/
+
+h1,h2,h3,h4 {
+  color:#447099;
+}
+
+h2::before {
+  content: '\25B6'; /*Arrow Forward*/
+  margin-right: 8px;
+}
+
+h3::before {
+  content: '\1F538'; /*Orange Diamond*/
+  margin-right: 8px;
+}
+
+h4::before {
+  content: '\1F4CD';  /*Pushpin*/
+  margin-right: 8px;
+}
+
+.header-section-number:after { /*add a dot after the section number (1 title -> 1. title)*/
+  content: ".";
+} 
+
+/************************************************************/
+/* Format                                                   */
+/************************************************************/
+
+.column{
+  width: 50%;
+  padding: 5px;
+}
+  
+img{                       /*center figures */
+  max-width: 100%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+p{
+  text-align: justify;
+}
+
+/************************************************************/
+/* Box                                                      */
+/************************************************************/
+
+.green-box,
+.blue-box,
+.yellow-box {
+  color: black;
+  border-radius: 10px;
+  margin: 0 0 15px;
+  overflow: hidden;
+  padding: 2px;
+  width: 100%;
+}
+
+.green-box {
+  background-color: #d9f0dd;
+  border: solid 2px #226D68;
+}
+
+.blue-box {
+	background-color: #bbc5ee;
+  border: solid 2px #2f3bda;
+}
+
+.yellow-box {
+  background-color: #fdf0c9;
+  border: solid 2px #fdc218;
+}
+
+/************************************************************/
+/* html Vs RevealJS                                         */
+/************************************************************/
+
+/* Hide revealJS speaker notes in the html*/
+.notes,
+.hide-html-render{
+  display: none;
+}

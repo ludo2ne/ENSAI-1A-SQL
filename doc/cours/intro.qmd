@@ -1,0 +1,21 @@
+---
+title: "Bases de Données Relationnelles et SQL"
+description: "[Slides](intro-slides.html)"
+author: "Ludovic Deneuville"
+format: 
+  html:
+    toc: true
+    toc-location: left
+    toc-depth: 2
+  revealjs:
+    theme: moon
+    footer: "[Home](../../index.html) --- [Introduction à SQL](intro.html)"
+    slide-number: c/t                    # collapsed/total
+    slide-level: 3
+    controls: true
+    output-file: intro-slides.html
+mermaid:
+  theme: forest
+code-line-numbers: false
+from: markdown+emoji
+---
