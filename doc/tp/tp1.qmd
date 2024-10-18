@@ -12,5 +12,89 @@ number-sections: true
 number-depth: 3
 ---
 
+
+## Introduction {.unnumbered}
+
+Vous allez réaliser ce TP sur le [Datalab du GENES](https://onyxia.lab.groupe-genes.fr/){target="_blank"}
+
+- [ ] Connectez-vous au Datalab
+  - Vous pouvez également utiliser le [Datalab SSPCloud de l'INSEE](https://datalab.sspcloud.fr/){target="_blank"} en créant un compte avec votre mail ENSAI.
+
+
+## Premiers pas sur le Datalab
+
 :construction:
 
+
+## Premières requêtes
+
+::: {.callout-caution}
+En cas d'indisponibilité du Datalab, DBeaver est directement installé sur les machines.
+:::
+
+### Lancement du service
+
+- [ ] Lancez le service [CloudBeaver](https://dbeaver.com/docs/cloudbeaver/){target="_blank"}
+  - Allez dans **Catalogue de services**
+  - Onglet **Databases**
+
+::: {.callout-tip title="CloudBeaver"}
+CloudBeaver est une application web légère dédiée à la gestion de bases de données. Elle permet de se connecter à divers types de bases de données, qu'elles soient SQL, NoSQL ou hébergées dans le cloud, à partir d'un seul point d'accès via un navigateur. CloudBeaver facilite l'exploration, la modification et la visualisation des données sans nécessiter l'installation de logiciels locaux. 
+
+Elle offre également des fonctionnalités de sécurité pour protéger l'accès aux données. Son interface conviviale en fait un outil accessible aussi bien aux développeurs qu'aux analystes de données.
+:::
+
+- [ ] Créez une nouvelle connexion **DuckDB**
+  - En haut à gauche, cliquez sur le +, puis New connection
+  - Sélectionner **DuckDB**
+  - Cliquez sur le bouton CREATE
+
+::: {.callout-tip title="DuckDB"}
+DuckDB est un moteur de base de données relationnelle conçu pour des analyses rapides et efficaces, directement intégré dans des environnements locaux comme Python ou R. Il est optimisé pour le traitement analytique en colonnes et peut gérer des ensembles de données de grande taille sans nécessiter de serveur externe. DuckDB est léger, facile à intégrer et offre des performances élevées pour les requêtes SQL. 
+
+Il est souvent utilisé pour l'analyse de données embarquée ou dans des flux de travail de science des données. Son architecture permet d'exécuter des requêtes SQL sur des fichiers locaux sans migration préalable des données.
+:::
+
+- [ ] Ouvrez un éditeur SQL
+  - En haut à gauche, cliquez sur SQL
+  - vous pouvez maintenant saisir du code *SQL*
+
+### Les prénoms
+
+::: {.callout-note title="Fichier des prénoms"}
+Le fichier des prénoms contient des données sur les prénoms attribués aux enfants nés en France depuis 1900. Ces données sont disponibles au niveau France et par département.
+
+Une version au format [parquet](https://parquet.apache.org/){target="_blank"} a été mise à disposition sur le site [data.gouv](https://www.data.gouv.fr/fr/datasets/base-prenoms-insee-format-parquet/){target="_blank"} par [Icem7](https://www.icem7.fr/){target="_blank"}
+:::
+
+::: {.callout-tip title="Fichier parquet"}
+Le format **Parquet** est un format de fichier de stockage de données optimisé pour les systèmes de traitement analytique de grande échelle. Voici ses principales caractéristiques :
+
+1. **Stockage en colonnes** : Parquet stocke les données par colonnes plutôt que par lignes, ce qui améliore l'efficacité de la compression et de l'accès aux données dans les charges de travail analytiques, notamment pour les systèmes de big data comme Hadoop ou Spark.
+   
+2. **Compression efficace** : Grâce à sa structure en colonnes, il permet une compression plus efficace que les formats en ligne (comme CSV), ce qui réduit la taille des fichiers et accélère le traitement.
+
+3. **Optimisé pour l'analytique** : Parquet est conçu pour les requêtes en lecture intensive, car il permet de charger uniquement les colonnes nécessaires pour une analyse, ce qui améliore les performances.
+
+4. **Interopérabilité** : Parquet est compatible avec plusieurs langages et outils d'analyse de données, notamment Hadoop, Spark, Hive, et divers environnements de traitement de données (Python, Java, etc.).
+
+5. **Format auto-descriptif** : Il inclut des métadonnées qui décrivent la structure des données, permettant de l'utiliser facilement dans différents environnements sans nécessiter de schémas externes.
+:::
+
+- [ ] Créez une vue `prenom` qui pointera vers le fichier parquet des prénoms
+  - vous pourrez ensuite requêter sur cette vue comme si c'était une table
+
+```{.sql}
+CREATE OR REPLACE VIEW prenom AS
+FROM 'https://static.data.gouv.fr/resources/base-prenoms-insee-format-parquet/20231121-161435/prenoms-nat2022.parquet'
+```
+
+- [ ] Listez tous les éléments de `prenom`
+- [ ] Listez les prénoms de l'année 2022
+- [ ] Listez les prénoms de l'année 2022 donnés plus de 2000 fois
+- [ ] Classez-les par sexe, puis par nombre de fois où ils ont été donné
+
+---
+
+- [ ] Listez les années où votre prénom a été donné
+- [ ] Classez par année déscroissante

@@ -10,8 +10,19 @@
 
 ### TP
 
-- [ ] DuckDB
-- [ ] Avec de vraies données
+#### Avant
+
+- TP1 : 1eres requetes, jointure, not exists
+- TP2 : GROUP BY, DATE
+- TP3 : VIEW, LEFT JOIN, COALESCE
+- TP4 : CREATE, ALTER, GRANT
+
+#### Après
+
+- TP0 : découverte du Datalab (1h)
+- TP1 : 1eres requetes, jointure, not exists
+- TP2 : DuckBD, WHERE, GROUP BY, DATE
+
 
 ## :rocket: Publier les pages
 
