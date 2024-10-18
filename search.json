@@ -1,16 +1,37 @@
 [
   {
-    "objectID": "doc/tp/tp1.html",
-    "href": "doc/tp/tp1.html",
-    "title": "Exercice BDR et SQL",
-    "section": "",
-    "text": "🚧"
-  },
-  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Base de données relationnelles",
     "section": "",
     "text": "6h de cours\n18h de TP/TD"
+  },
+  {
+    "objectID": "doc/tp/tp1.html",
+    "href": "doc/tp/tp1.html",
+    "title": "Exercice BDR et SQL",
+    "section": "",
+    "text": "Vous allez réaliser ce TP sur le Datalab du GENES\n\nConnectez-vous au Datalab\n\nVous pouvez également utiliser le Datalab SSPCloud de l’INSEE en créant un compte avec votre mail ENSAI."
+  },
+  {
+    "objectID": "doc/tp/tp1.html#introduction",
+    "href": "doc/tp/tp1.html#introduction",
+    "title": "Exercice BDR et SQL",
+    "section": "",
+    "text": "Vous allez réaliser ce TP sur le Datalab du GENES\n\nConnectez-vous au Datalab\n\nVous pouvez également utiliser le Datalab SSPCloud de l’INSEE en créant un compte avec votre mail ENSAI."
+  },
+  {
+    "objectID": "doc/tp/tp1.html#premiers-pas-sur-le-datalab",
+    "href": "doc/tp/tp1.html#premiers-pas-sur-le-datalab",
+    "title": "Exercice BDR et SQL",
+    "section": "1 Premiers pas sur le Datalab",
+    "text": "1 Premiers pas sur le Datalab\n🚧"
+  },
+  {
+    "objectID": "doc/tp/tp1.html#premières-requêtes",
+    "href": "doc/tp/tp1.html#premières-requêtes",
+    "title": "Exercice BDR et SQL",
+    "section": "2 Premières requêtes",
+    "text": "2 Premières requêtes\n\n\n\n\n\n\nCaution\n\n\n\nEn cas d’indisponibilité du Datalab, DBeaver est directement installé sur les machines.\n\n\n\n2.1 Lancement du service\n\nLancez le service CloudBeaver\n\nAllez dans Catalogue de services\nOnglet Databases\n\n\n\n\n\n\n\n\nCloudBeaver\n\n\n\nCloudBeaver est une application web légère dédiée à la gestion de bases de données. Elle permet de se connecter à divers types de bases de données, qu’elles soient SQL, NoSQL ou hébergées dans le cloud, à partir d’un seul point d’accès via un navigateur. CloudBeaver facilite l’exploration, la modification et la visualisation des données sans nécessiter l’installation de logiciels locaux.\nElle offre également des fonctionnalités de sécurité pour protéger l’accès aux données. Son interface conviviale en fait un outil accessible aussi bien aux développeurs qu’aux analystes de données.\n\n\n\nCréez une nouvelle connexion DuckDB\n\nEn haut à gauche, cliquez sur le +, puis New connection\nSélectionner DuckDB\nCliquez sur le bouton CREATE\n\n\n\n\n\n\n\n\nDuckDB\n\n\n\nDuckDB est un moteur de base de données relationnelle conçu pour des analyses rapides et efficaces, directement intégré dans des environnements locaux comme Python ou R. Il est optimisé pour le traitement analytique en colonnes et peut gérer des ensembles de données de grande taille sans nécessiter de serveur externe. DuckDB est léger, facile à intégrer et offre des performances élevées pour les requêtes SQL.\nIl est souvent utilisé pour l’analyse de données embarquée ou dans des flux de travail de science des données. Son architecture permet d’exécuter des requêtes SQL sur des fichiers locaux sans migration préalable des données.\n\n\n\nOuvrez un éditeur SQL\n\nEn haut à gauche, cliquez sur SQL\nvous pouvez maintenant saisir du code SQL\n\n\n\n\n2.2 Les prénoms\n\n\n\n\n\n\nFichier des prénoms\n\n\n\nLe fichier des prénoms contient des données sur les prénoms attribués aux enfants nés en France depuis 1900. Ces données sont disponibles au niveau France et par département.\nUne version au format parquet a été mise à disposition sur le site data.gouv par Icem7\n\n\n\n\n\n\n\n\nFichier parquet\n\n\n\nLe format Parquet est un format de fichier de stockage de données optimisé pour les systèmes de traitement analytique de grande échelle. Voici ses principales caractéristiques :\n\nStockage en colonnes : Parquet stocke les données par colonnes plutôt que par lignes, ce qui améliore l’efficacité de la compression et de l’accès aux données dans les charges de travail analytiques, notamment pour les systèmes de big data comme Hadoop ou Spark.\nCompression efficace : Grâce à sa structure en colonnes, il permet une compression plus efficace que les formats en ligne (comme CSV), ce qui réduit la taille des fichiers et accélère le traitement.\nOptimisé pour l’analytique : Parquet est conçu pour les requêtes en lecture intensive, car il permet de charger uniquement les colonnes nécessaires pour une analyse, ce qui améliore les performances.\nInteropérabilité : Parquet est compatible avec plusieurs langages et outils d’analyse de données, notamment Hadoop, Spark, Hive, et divers environnements de traitement de données (Python, Java, etc.).\nFormat auto-descriptif : Il inclut des métadonnées qui décrivent la structure des données, permettant de l’utiliser facilement dans différents environnements sans nécessiter de schémas externes.\n\n\n\n\nCréez une vue prenom qui pointera vers le fichier parquet des prénoms\n\nvous pourrez ensuite requêter sur cette vue comme si c’était une table\n\n\nCREATE OR REPLACE VIEW prenom AS\nFROM 'https://static.data.gouv.fr/resources/base-prenoms-insee-format-parquet/20231121-161435/prenoms-nat2022.parquet'\n\nListez tous les éléments de prenom\nListez les prénoms de l’année 2022\nListez les prénoms de l’année 2022 donnés plus de 2000 fois\nClassez-les par sexe, puis par nombre de fois où ils ont été donné\n\n\n\nListez les années où votre prénom a été donné\nClassez par année déscroissante"
   }
 ]
