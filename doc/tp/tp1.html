@@ -228,6 +228,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<p><span class="emoji" data-emoji="construction">🚧</span></p>
 <section id="introduction" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="introduction">Introduction</h2>
 <p>Vous allez réaliser ce TP sur le <a href="https://onyxia.lab.groupe-genes.fr/" target="_blank">Datalab du GENES</a></p>
@@ -365,6 +366,9 @@ Fichier parquet
 <li><label><input type="checkbox">Listez les années où votre prénom a été donné</label></li>
 <li><label><input type="checkbox">Classez par année déscroissante</label></li>
 </ul>
+<p>CREATE OR REPLACE VIEW fd_indcvi_2020 AS FROM ‘https://static.data.gouv.fr/resources/recensement-de-la-population-fichiers-detail-individus-localises-au-canton-ou-ville-2020-1/20231023-122841/fd-indcvi-2020.parquet’;</p>
+<p>DESCRIBE FROM fd_indcvi_2020 ;</p>
+<p>SELECT arm, voit, ROUND(sum(ipondi/nperr::int)) AS eft FROM fd_indcvi_2020 WHERE dept = ‘75’ AND NPERR &lt;&gt; ‘Z’ GROUP BY ALL ;</p>
 
 
 </section>
