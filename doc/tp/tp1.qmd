@@ -12,6 +12,7 @@ number-sections: true
 number-depth: 3
 ---
 
+:construction:
 
 ## Introduction {.unnumbered}
 
@@ -98,3 +99,22 @@ FROM 'https://static.data.gouv.fr/resources/base-prenoms-insee-format-parquet/20
 
 - [ ] Listez les années où votre prénom a été donné
 - [ ] Classez par année déscroissante
+
+
+
+
+
+
+
+CREATE OR REPLACE VIEW fd_indcvi_2020 AS
+FROM 'https://static.data.gouv.fr/resources/recensement-de-la-population-fichiers-detail-individus-localises-au-canton-ou-ville-2020-1/20231023-122841/fd-indcvi-2020.parquet'; 
+
+DESCRIBE FROM fd_indcvi_2020 ;
+
+SELECT arm, 
+       voit,
+       ROUND(sum(ipondi/nperr::int)) AS eft
+  FROM fd_indcvi_2020
+ WHERE dept = '75' 
+   AND NPERR <> 'Z'
+ GROUP BY ALL ; 
