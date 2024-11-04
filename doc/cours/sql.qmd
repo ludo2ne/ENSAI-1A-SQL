@@ -20,48 +20,70 @@ code-line-numbers: false
 from: markdown+emoji
 ---
 
+## Structured Query Language
 
-Le SQL (Structured Query Language) est un langage standardisé utilisé pour interagir avec des bases de données relationnelles. Il permet de créer, manipuler, interroger et gérer les données stockées dans des tables
+::: {.callout-note title="Définition"}
+Le SQL est un langage standardisé utilisé pour interagir avec des bases de données relationnelles. 
 
-Plusieurs composantes du langage :
+Il permet de créer, manipuler, interroger et gérer les données stockées dans des tables.
+:::
 
+### Composantes du langage
+
+- Définition de Données
+- Manipulation de Données
+- Contrôle des Transactions
+- Contrôle d'accès aux Données
+
+::: {.notes}
 - Manipulation de Données
   - CRUD
 - Définition de Données
   - Créer/Modifier/Supprimer une table
 - Contrôle des Transactions
-  - BEGIn, COMMIT, ROLLBACK
-- Contrôle des Données
+  - BEGIN, COMMIT, ROLLBACK
+- Contrôle d'accès aux Données
   - GRANT REVOKE
+:::
 
-### Définition de Données
+
+## Définition de Données
 
 #### CREATE
 
 Version simple
 
-CREATE TABLE joueur (
-    id_joueur INT,
-    nom TEXT,
-    prenom TEXT,
+```{.sql}
+CREATE TABLE joueuse (
+    id_joueuse     INT,
+    nom            TEXT,
+    prenom         TEXT,
     date_naissance DATE,
-    elo INT,
-    est_arbitre BOOLEAN,
-    code_pays TEXT
+    elo            INT,
+    est_arbitre    BOOLEAN,
+    code_pays      TEXT,
+    taux_victoires FLOAT
 );
+```
 
-Version évoluée
+---
 
+Version évoluée :
 
-CREATE TABLE joueur (
-    id_joueur SERIAL PRIMARY KEY,
-    nom VARCHAR(50) NOT NULL,
-    prenom VARCHAR(50) NOT NULL,
-    date_naissance DATE,
-    elo INT CHECK (elo > 0),
-    est_arbitre BOOLEAN DEFAULT false,
-    code_pays VARCHAR(2)
+```{.sql}
+CREATE TABLE joueuse (
+    id_joueuse     SERIAL          PRIMARY KEY,   
+    nom            VARCHAR(50)     NOT NULL, 
+    prenom         VARCHAR(50)     NOT NULL, 
+    date_naissance DATE,                 
+    elo            INT             CHECK (elo > 0),  
+    mail           VARCHAR(100),         
+    est_arbitre    BOOLEAN         DEFAULT false,
+    code_pays      VARCHAR(2),          
+    taux_victoires FLOAT  
 );
+```
+
 
 
 #### ALTER

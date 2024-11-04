@@ -22,7 +22,7 @@ from: markdown+emoji
 
 ## Une donnée ?
 
-::: incremental
+::: {.fragment}
 - texte (nom, prénom, ville...)
 - numérique (age, prix...)
 - date
@@ -34,16 +34,18 @@ from: markdown+emoji
 ---
 
 ::: {.callout-note title="Définition"}
-Une donnée est une information brute qui a un type et une valeur.
-:::
+Une **donnée** est une information brute qui possède :
 
+- un type
+- une valeur
+:::
 
 
 ## Une base de données ?
 
 :::::: incremental
 ::: {.callout-note title="Définition"}
-Une base de données est un ensemble de données rassemblées et stockées d'une manière organisée dans un but spécifique.
+Une **base de données** est un ensemble de données rassemblées et stockées de manière organisée dans un but spécifique.
 :::
 ::::::
 
@@ -111,21 +113,21 @@ Not Only SQL
 
 ## Base de données relationnelle
 
-### Tables
+### Table
 
-- Composées de lignes et de colonnes
+- Composée de lignes et de colonnes
 - Chaque table représente une entité
-- Chaque ligne est un enregistrement unique
-- Chaque colonne représente un attribut de l'entité
+- Chaque [ligne]{.underline} est un enregistrement
+- Chaque [colonne]{.underline} représente un attribut de l'entité
 - Types de données : texte, num...
 
 
 ### Relations entre les tables
 
-- **Clé primaire** (PK) pour identifier chaque enregistrement dans une table
+- [**Clé primaire**]{.underline} (PK) pour identifier chaque enregistrement dans une table
   - de manière unique
   - sans ambiguïté
-- **Clé étrangère** (FK) pour créer des liens avec d'autres tables
+- [**Clé étrangère**]{.underline} (FK) pour créer des liens avec d'autres tables
   - attribut d'une table A
   - correspond à la clé primaire d'une table B
 
@@ -134,13 +136,13 @@ Not Only SQL
 
 Comment relier ces 2 tables ?
 
-- Un joueur joue pour un seul club
-- Un club peut avoir plusieurs joueurs
+- une joueuse joue pour un seul club
+- Un club peut avoir plusieurs joueuses
 
 ```{mermaid}
 classDiagram
-    class Joueur {
-        id_joueur PK
+    class Joueuse {
+        id_joueuse PK
         nom
         prenom
         elo
@@ -153,6 +155,29 @@ classDiagram
     }
 ```
 
+---
+
+| **id_joueuse** | **nom**                | **prenom**       | **elo** |
+|----------------|------------------------|------------------|---------|
+| 1              | Guichard               | Pauline          | 2357    |
+| 2              | Daulyte-Cornette       | Deimante         | 2371    |
+| 3              | Navrotescu             | Andreea          | 2338    |
+| 4              | Sebag                  | Marie            | 2448    |
+| 5              | Millet                 | Sophie           | 2366    |
+| 6              | Skrichempko            | Almira           | 2361    |
+
+: joueuse
+
+---
+
+| **id_club**  | **nom**                          | **ville**            |
+|--------------|----------------------------------|----------------------|
+| 1            | C'Chartres Echecs                | Chartres             |
+| 2            | Bischwiller                      | Bischwiller          |
+| 3            | Asnieres - le Grand Echiquier    | Asnieres             |
+| 4            | Tours des Hauts-De-France        | Saint-Quentin        |
+
+: club {tbl-colwidths="[15,55,30]"}
 
 ### Clé étrangère
 
@@ -160,8 +185,8 @@ En ajoutant une clé étrangère.
 
 ```{mermaid}
 classDiagram
-    class Joueur {
-        id_joueur PK
+    class joueuse {
+        id_joueuse PK
         nom
         prenom
         elo
@@ -175,37 +200,20 @@ classDiagram
     }
 ```
 
----
 
-| **id_joueur**  | **Nom**                | **Prénom**       | **Elo** |
-|----------------|------------------------|------------------|---------|
-| 1              | Vachier-Lagrave        | Maxime           | 2737    |
-| 2              | Firouzja               | Alireza          | 2763    |
-| 3              | Bacrot                 | Étienne          | 2653    |
-| 4              | Sebag                  | Marie            | 2448    |
-| 5              | Millet                 | Sophie           | 2366    |
-| 6              | Skrichempko            | Almira           | 2361    |
 
 ---
 
-| **id_club**  | **Nom**                          | **Ville**            |
-|--------------|----------------------------------|----------------------|
-| 1            | C'Chartres Echecs                | Chartres             |
-| 2            | Bischwiller                      | Bischwiller          |
-| 3            | Asnieres - le Grand Echiquier    | Asnieres             |
-| 4            | Tours des Hauts-De-France        | Saint Quentin        |
-
----
-
-| **id_joueur**  | **Nom**                | **Prénom**       | **Elo** | **id_club**  |
+| **id_joueuse** | **nom**                | **prenom**       | **elo** | **id_club**  |
 |----------------|------------------------|------------------|---------|--------------|
-| 1              | Vachier-Lagrave        | Maxime           | 2737    | 3            |
-| 2              | Firouzja               | Alireza          | 2763    | 1            |
-| 3              | Bacrot                 | Étienne          | 2653    | 2            |
+| 1              | Guichard               | Pauline          | 2357    | 3            |
+| 2              | Daulyte                | Deimante         | 2371    | 1            | 
+| 3              | Navrotescu             | Andreea          | 2338    | 2            |
 | 4              | Sebag                  | Marie            | 2448    | 2            |
 | 5              | Millet                 | Sophie           | 2366    | 3            |
 | 6              | Skrichempko            | Almira           | 2361    | 2            |
 
+: joueuse
 
 ### Clé primaire
 
@@ -229,27 +237,27 @@ Remarque : pas obligatoire d'avoir une clé primaire
 
 ### Question
 
-Si un joueur peut appartenir à plusieurs clubs ?
+Si une joueuse peut adhérer à plusieurs clubs ? :confused:
 
 ::: {.notes}
 Par exemple si notre bdd contient aussi les clubs belges, allemands, espagnols...
 :::
 
-### 
+### Table d'association
 
-Création d'une table d'association : **adhesion**
+Création d'une table d'association : **adhesion** :sweat_smile:
 
 ```{mermaid}
 classDiagram
     class Adhesion {
-        id_joueur FK
+        id_joueuse FK
         id_club FK
     }
 ```
 
 ---
 
-| **id_club**  | **id_joueur**  |
+| **id_club**  | **id_joueuse** |
 |--------------|----------------|
 | 1            | 2              |
 | 2            | 3              |
@@ -259,6 +267,68 @@ classDiagram
 | 3            | 5              |
 | 4            | 1              |
 | 4            | 2              |
+
+: adhesion
+
+::: {.notes}
+Clé primaire ?
+
+- id_adhesion
+- (id_club, id_joueuse)
+:::
+
+
+## Associations
+
+Il existe plusieurs types d'associations entre tables.
+
+### Association 1:1
+
+Une entité dans la table A est associée à une seule entité dans la table B.
+
+Exemple :
+
+- Une personne a une seule carte vitale
+- Une carte vitale appartient à une seule personne
+
+:::{.notes}
+on aurait pu tout mettre dans la même table
+:::
+
+### Association 1:n
+
+Une entité dans la table A peut-être associée à plusieurs entités dans la table B.
+
+Exemple :
+
+- Un club est composé de plusieurs joueuses
+- Une joueuse adhère à un seul club
+
+### Association n:n
+
+Une entité dans la table A peut-être associée à plusieurs entités dans la table B.
+
+Et inversement, une entité dans la table B peut-être associée à plusieurs entités dans la table A.
+
+Exemple :
+
+- une joueuse participe à plusieurs tournois
+- Un tournoi regroupe plusieurs joueuses
+
+
+### Association récursive
+
+Une table peut avoir des relations avec elle-même
+
+Ici la table contient une clé étrangère qui référence sa propre clé primaire.
+
+Exemple :
+
+- Un employé a un supérieur
+
+
+
+
 
 
 
@@ -287,14 +357,3 @@ Site de vente de légumes
   - quantite
 
 
-CREATE TABLE joueur (
-    id_joueur SERIAL PRIMARY KEY,              -- Clé primaire avec séquence
-    nom VARCHAR(50) NOT NULL,                  -- Nom du joueur
-    prenom VARCHAR(50) NOT NULL,               -- Prénom du joueur
-    date_naissance DATE,                        -- Date de naissance
-    elo INT CHECK (elo > 0),                    -- Elo positif
-    mail VARCHAR(100),                          -- Adresse email
-    est_arbitre BOOLEAN DEFAULT false,          -- Indique si le joueur est arbitre, par défaut à false
-    pays VARCHAR(50),                           -- Pays d'origine
-    poids FLOAT                                 -- Poids du joueur
-);
