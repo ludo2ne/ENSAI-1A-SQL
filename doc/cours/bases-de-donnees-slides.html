@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Ludovic Deneuville">
-  <title>Quarto tutorial – Bases de Données Relationnelles et SQL</title>
+  <title>Quarto tutorial – Bases de Données</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -320,13 +320,17 @@
       margin-right: 0; 
     }
   </style>
+  <meta name="mermaid-theme" content="forest">
+  <script src="../../site_libs/quarto-diagram/mermaid.min.js"></script>
+  <script src="../../site_libs/quarto-diagram/mermaid-init.js"></script>
+  <link href="../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 </head>
 <body class="quarto-dark">
   <div class="reveal">
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Bases de Données Relationnelles et SQL</h1>
+  <h1 class="title">Bases de Données</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -337,27 +341,60 @@ Ludovic Deneuville
 </div>
 
 </section>
-<section id="bases-de-données-relationnelles-et-sql" class="title-slide slide level2 center">
-<h2>Bases de Données Relationnelles et SQL</h2>
+<section>
+<section id="une-donnée" class="title-slide slide level2 center">
+<h2>Une donnée ?</h2>
+<div>
 <ul>
-<li>6h CM</li>
-<li>18h TP</li>
-<li><code>ludovic.deneuville@ensai.fr</code></li>
-<li>bureau 161</li>
-<li>sur la base des cours de Benjamin Girault</li>
+<li class="fragment">texte (nom, prénom, ville…)</li>
+<li class="fragment">numérique (age, prix…)</li>
+<li class="fragment">date</li>
+<li class="fragment">liste (compétences, loisirs)</li>
+<li class="fragment">image</li>
+<li class="fragment">fichier</li>
 </ul>
+</div>
 </section>
+<section class="slide level3">
 
-<section id="objectifs" class="title-slide slide level2 center">
-<h2>Objectifs</h2>
-<ul>
-<li>Interrogation</li>
-<li>Création</li>
-<li>Modélisation</li>
-<li>Savoir utiliser le langage SQL</li>
-</ul>
+<div title="Définition">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Définition</strong></p>
+</div>
+<div class="callout-content">
+<p>Une donnée est une information brute qui a un type et une valeur.</p>
+</div>
+</div>
+</div>
+</div>
+</section></section>
+<section id="une-base-de-données" class="title-slide slide level2 center">
+<h2>Une base de données ?</h2>
+<div>
+<div title="Définition">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Définition</strong></p>
+</div>
+<div class="callout-content">
+<p>Une base de données est un ensemble de données rassemblées et stockées d’une manière organisée dans un but spécifique.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
 <aside class="notes">
-<p>UML pour la modélisation</p>
+<p>Types ?</p>
+<p>On n’utilise pas la même structure pour du texte ou des fichiers.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -371,19 +408,75 @@ Ludovic Deneuville
       }</style></aside>
 </section>
 
-<section id="sql" class="title-slide slide level2 center">
-<h2>SQL</h2>
+<section id="enjeux" class="title-slide slide level2 center">
+<h2>Enjeux</h2>
 <ul>
-<li>Syntaxe simple</li>
-<li>Efficace</li>
-<li>Très utilisé</li>
+<li>Accès aux données : langage SQL</li>
+<li>Sécurité des données : seuls les utilisateurs autorisés (droits)</li>
+<li>Partage des données : facile en lecture, mais en écriture ?</li>
+<li>Non-redondance des données</li>
+<li>Cohérence des données : respect des contraintes d’intégrité</li>
+</ul>
+</section>
+
+<section>
+<section id="types-de-bases-de-données" class="title-slide slide level2 center">
+<h2>Types de bases de données</h2>
+
+</section>
+<section id="hiérarchique" class="slide level3">
+<h3>Hiérarchique</h3>
+<ul>
+<li>Données organisées comme un arbre</li>
+<li>Relations de type parent-enfant</li>
+<li>Annuaires LDAP, système de fichiers</li>
+</ul>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">stateDiagram 
+    ENSAI --&gt; Permanent
+    ENSAI --&gt; Eleve
+    Permanent --&gt; Enseignant
+    Permanent --&gt; Administratif
+    Eleve --&gt; 1A
+    Eleve --&gt; 2A
+    Eleve --&gt; 3A
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="réseau" class="slide level3">
+<h3>Réseau</h3>
+<ul>
+<li>Organisée en graphe</li>
+<li>Les enregistrements peuvent avoir plusieurs parents et enfants</li>
+<li>Réseaux de transports &nbsp;</li>
+</ul>
+</section>
+<section id="relationnelle" class="slide level3">
+<h3>Relationnelle</h3>
+<ul>
+<li>Organisée en tables</li>
+<li>Lien entre les tables</li>
+</ul>
+</section>
+<section id="nosql" class="slide level3">
+<h3>NoSQL</h3>
+<p>Nombreux sous-types :</p>
+<ul>
+<li><strong>Clé-valeur</strong> : données sous forme de paires clé-valeur (DynamoDB)</li>
+<li><strong>Colonnes</strong> : Organisée en colonnes, adaptée aux grandes quantités de données (Cassandra)</li>
+<li><strong>Document</strong> : Stocke des documents semi-structurés (JSON, XML) (MongoDB)</li>
+<li><strong>Graphes</strong> : Organisée sous forme de nœuds et de relations, pour des données très connectées (Neo4j)</li>
 </ul>
 <aside class="notes">
-<ul>
-<li>c’est LA compétence à avoir</li>
-<li>ça s’encapsule dans plein de langages (R, Python, Julia, Stata, SAS…)</li>
-<li>utile pour Big Data</li>
-</ul>
+<p>Not Only SQL</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -396,32 +489,397 @@ Ludovic Deneuville
           display:block!important;
       }</style></aside>
 </section>
-
-<section id="évaluation" class="title-slide slide level2 center">
-<h2>Évaluation</h2>
+<section id="autres" class="slide level3">
+<h3>Autres</h3>
 <ul>
-<li>Lundi 6 Janvier 10h</li>
-<li>Durée : 2h</li>
-<li>Sur papier</li>
-<li>Sans documents</li>
+<li>Bases de données de séries temporelles</li>
+</ul>
+</section></section>
+<section>
+<section id="base-de-données-relationnelle" class="title-slide slide level2 center">
+<h2>Base de données relationnelle</h2>
+
+</section>
+<section id="tables" class="slide level3">
+<h3>Tables</h3>
+<ul>
+<li>Composées de lignes et de colonnes</li>
+<li>Chaque table représente une entité</li>
+<li>Chaque ligne est un enregistrement unique</li>
+<li>Chaque colonne représente un attribut de l’entité</li>
+<li>Types de données : texte, num…</li>
 </ul>
 </section>
-
-<section id="bibliographie" class="title-slide slide level2 center">
-<h2>Bibliographie</h2>
+<section id="relations-entre-les-tables" class="slide level3">
+<h3>Relations entre les tables</h3>
 <ul>
-<li>https://laurent-audibert.developpez.com/Cours-BD/?page=introduction-bases-de-donnees</li>
-<li>https://upinfo.univ-cotedazur.fr/im/bases-de-donnees/</li>
-<li>https://openclassrooms.com/fr/courses/6971126-implementez-vos-bases-de-donnees-relationnelles-avec-sql/7139618-decouvrez-le-systeme-de-gestion-de-base-de-donnees-sgbd</li>
-<li>https://oseox.fr/sql/</li>
+<li><strong>Clé primaire</strong> (PK) pour identifier chaque enregistrement dans une table
+<ul>
+<li>de manière unique</li>
+<li>sans ambiguïté</li>
+</ul></li>
+<li><strong>Clé étrangère</strong> (FK) pour créer des liens avec d’autres tables
+<ul>
+<li>attribut d’une table A</li>
+<li>correspond à la clé primaire d’une table B</li>
+</ul></li>
 </ul>
+</section>
+<section id="exemple" class="slide level3">
+<h3>Exemple</h3>
+<p>Comment relier ces 2 tables ?</p>
+<ul>
+<li>Un joueur joue pour un seul club</li>
+<li>Un club peut avoir plusieurs joueurs</li>
+</ul>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">classDiagram
+    class Joueur {
+        id_joueur PK
+        nom
+        prenom
+        elo
+    }
+    
+    class Club {
+        id_club PK
+        nom
+        ville
+    }
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="clé-étrangère" class="slide level3">
+<h3>Clé étrangère</h3>
+<p>En ajoutant une clé étrangère.</p>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">classDiagram
+    class Joueur {
+        id_joueur PK
+        nom
+        prenom
+        elo
+        id_club FK
+    }
+    
+    class Club {
+        id_club PK
+        nom
+        ville
+    }
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3">
+
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th><strong>id_joueur</strong></th>
+<th><strong>Nom</strong></th>
+<th><strong>Prénom</strong></th>
+<th><strong>Elo</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Vachier-Lagrave</td>
+<td>Maxime</td>
+<td>2737</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Firouzja</td>
+<td>Alireza</td>
+<td>2763</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Bacrot</td>
+<td>Étienne</td>
+<td>2653</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Sebag</td>
+<td>Marie</td>
+<td>2448</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Millet</td>
+<td>Sophie</td>
+<td>2366</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>Skrichempko</td>
+<td>Almira</td>
+<td>2361</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="slide level3">
+
+<table class="caption-top">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 48%">
+<col style="width: 31%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>id_club</strong></th>
+<th><strong>Nom</strong></th>
+<th><strong>Ville</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>C’Chartres Echecs</td>
+<td>Chartres</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Bischwiller</td>
+<td>Bischwiller</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Asnieres - le Grand Echiquier</td>
+<td>Asnieres</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Tours des Hauts-De-France</td>
+<td>Saint Quentin</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section class="slide level3">
+
+<table class="caption-top" style="width:100%;">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 29%">
+<col style="width: 22%">
+<col style="width: 11%">
+<col style="width: 17%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>id_joueur</strong></th>
+<th><strong>Nom</strong></th>
+<th><strong>Prénom</strong></th>
+<th><strong>Elo</strong></th>
+<th><strong>id_club</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Vachier-Lagrave</td>
+<td>Maxime</td>
+<td>2737</td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Firouzja</td>
+<td>Alireza</td>
+<td>2763</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Bacrot</td>
+<td>Étienne</td>
+<td>2653</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Sebag</td>
+<td>Marie</td>
+<td>2448</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Millet</td>
+<td>Sophie</td>
+<td>2366</td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>Skrichempko</td>
+<td>Almira</td>
+<td>2361</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="clé-primaire" class="slide level3">
+<h3>Clé primaire</h3>
+<ul>
+<li>Attribut (ou ensemble d’attributs)</li>
+<li>Unique</li>
+<li>Non nulle</li>
+<li>Immuable</li>
+</ul>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p>Sauf mention contraire, nous utiliserons une clé primaire “technique” : séquence.</p>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>Immuable :</p>
+<ul>
+<li>idéalement stable, elle ne change pas au cours du temps</li>
+<li>Pour maintenir l’intégrité des liens avec d’autres tables</li>
+</ul>
+<p>Remarque : pas obligatoire d’avoir une clé primaire</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="question" class="slide level3">
+<h3>Question</h3>
+<p>Si un joueur peut appartenir à plusieurs clubs ?</p>
+<aside class="notes">
+<p>Par exemple si notre bdd contient aussi les clubs belges, allemands, espagnols…</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="section" class="slide level3">
+<h3></h3>
+<p>Création d’une table d’association : <strong>adhesion</strong></p>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">classDiagram
+    class Adhesion {
+        id_joueur FK
+        id_club FK
+    }
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3">
+
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th><strong>id_club</strong></th>
+<th><strong>id_joueur</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>6</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>5</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="exemple-1" class="slide level3">
+<h3>Exemple</h3>
+<p>Site de vente de légumes</p>
+<ul>
+<li>Client &nbsp; - id_client &nbsp; - nom &nbsp; - prenom &nbsp; - mail</li>
+<li>Produit &nbsp; - id_produit &nbsp; - nom &nbsp; - description &nbsp; - prix</li>
+<li>Commande &nbsp; - id_commande &nbsp; - id_client</li>
+<li>LigneCommande &nbsp; - id_ligne_commande &nbsp; - id_commande &nbsp; - id_produit &nbsp; - quantite</li>
+</ul>
+<p>CREATE TABLE joueur ( id_joueur SERIAL PRIMARY KEY, – Clé primaire avec séquence nom VARCHAR(50) NOT NULL, – Nom du joueur prenom VARCHAR(50) NOT NULL, – Prénom du joueur date_naissance DATE, – Date de naissance elo INT CHECK (elo &gt; 0), – Elo positif mail VARCHAR(100), – Adresse email est_arbitre BOOLEAN DEFAULT false, – Indique si le joueur est arbitre, par défaut à false pays VARCHAR(50), – Pays d’origine poids FLOAT – Poids du joueur );</p>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
-<p><a href="../../index.html">Home</a> — <a href="intro.html">Introduction à SQL</a></p>
+<p><a href="../../index.html">Home</a> — <a href="bases-de-donnees.html">Bases de Données</a></p>
 </div>
 </div>
-</section>
+</section></section>
     </div>
   </div>
 

@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Ludovic Deneuville">
-  <title>Quarto tutorial – Bases de Données Relationnelles et SQL</title>
+  <title>Quarto tutorial – SQL</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -326,7 +326,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Bases de Données Relationnelles et SQL</h1>
+  <h1 class="title">SQL</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -337,88 +337,45 @@ Ludovic Deneuville
 </div>
 
 </section>
-<section id="bases-de-données-relationnelles-et-sql" class="title-slide slide level2 center">
-<h2>Bases de Données Relationnelles et SQL</h2>
+<section class="slide level3">
+
+<p>Le SQL (Structured Query Language) est un langage standardisé utilisé pour interagir avec des bases de données relationnelles. Il permet de créer, manipuler, interroger et gérer les données stockées dans des tables</p>
+<p>Plusieurs composantes du langage :</p>
 <ul>
-<li>6h CM</li>
-<li>18h TP</li>
-<li><code>ludovic.deneuville@ensai.fr</code></li>
-<li>bureau 161</li>
-<li>sur la base des cours de Benjamin Girault</li>
+<li>Manipulation de Données &nbsp; - CRUD</li>
+<li>Définition de Données &nbsp; - Créer/Modifier/Supprimer une table</li>
+<li>Contrôle des Transactions &nbsp; - BEGIn, COMMIT, ROLLBACK</li>
+<li>Contrôle des Données &nbsp; - GRANT REVOKE</li>
 </ul>
 </section>
-
-<section id="objectifs" class="title-slide slide level2 center">
-<h2>Objectifs</h2>
-<ul>
-<li>Interrogation</li>
-<li>Création</li>
-<li>Modélisation</li>
-<li>Savoir utiliser le langage SQL</li>
-</ul>
-<aside class="notes">
-<p>UML pour la modélisation</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
+<section id="définition-de-données" class="slide level3">
+<h3>Définition de Données</h3>
+<h4 id="create">CREATE</h4>
+<p>Version simple</p>
+<p>CREATE TABLE joueur ( &nbsp; &nbsp; id_joueur INT, &nbsp; &nbsp; nom TEXT, &nbsp; &nbsp; prenom TEXT, &nbsp; &nbsp; date_naissance DATE, &nbsp; &nbsp; elo INT, &nbsp; &nbsp; est_arbitre BOOLEAN, &nbsp; &nbsp; code_pays TEXT );</p>
+<p>Version évoluée</p>
+<p>CREATE TABLE joueur ( &nbsp; &nbsp; id_joueur SERIAL PRIMARY KEY, &nbsp; &nbsp; nom VARCHAR(50) NOT NULL, &nbsp; &nbsp; prenom VARCHAR(50) NOT NULL, &nbsp; &nbsp; date_naissance DATE, &nbsp; &nbsp; elo INT CHECK (elo &gt; 0), &nbsp; &nbsp; est_arbitre BOOLEAN DEFAULT false, &nbsp; &nbsp; code_pays VARCHAR(2) );</p>
+<h4 id="alter">ALTER</h4>
+<h4 id="delete">DELETE</h4>
 </section>
-
-<section id="sql" class="title-slide slide level2 center">
-<h2>SQL</h2>
-<ul>
-<li>Syntaxe simple</li>
-<li>Efficace</li>
-<li>Très utilisé</li>
-</ul>
-<aside class="notes">
-<ul>
-<li>c’est LA compétence à avoir</li>
-<li>ça s’encapsule dans plein de langages (R, Python, Julia, Stata, SAS…)</li>
-<li>utile pour Big Data</li>
-</ul>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
+<section id="manipulation-de-données" class="slide level3">
+<h3>Manipulation de Données</h3>
+<h4 id="select">SELECT</h4>
+<h4 id="insert">INSERT</h4>
+<h4 id="update">UPDATE</h4>
+<h4 id="delete-1">DELETE</h4>
 </section>
-
-<section id="évaluation" class="title-slide slide level2 center">
-<h2>Évaluation</h2>
+<section id="schema" class="slide level3">
+<h3>Schema</h3>
 <ul>
-<li>Lundi 6 Janvier 10h</li>
-<li>Durée : 2h</li>
-<li>Sur papier</li>
-<li>Sans documents</li>
-</ul>
-</section>
-
-<section id="bibliographie" class="title-slide slide level2 center">
-<h2>Bibliographie</h2>
-<ul>
-<li>https://laurent-audibert.developpez.com/Cours-BD/?page=introduction-bases-de-donnees</li>
-<li>https://upinfo.univ-cotedazur.fr/im/bases-de-donnees/</li>
-<li>https://openclassrooms.com/fr/courses/6971126-implementez-vos-bases-de-donnees-relationnelles-avec-sql/7139618-decouvrez-le-systeme-de-gestion-de-base-de-donnees-sgbd</li>
-<li>https://oseox.fr/sql/</li>
+<li>Vente de légume</li>
+<li>Utiliser la même bdd pour la gestion RH (employe, contrat, conge)</li>
+<li>créer un schéma pour séparer les tables</li>
 </ul>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
-<p><a href="../../index.html">Home</a> — <a href="intro.html">Introduction à SQL</a></p>
+<p><a href="../../index.html">Home</a> — <a href="sql.html">SQL</a></p>
 </div>
 </div>
 </section>

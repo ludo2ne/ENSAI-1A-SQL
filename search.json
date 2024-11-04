@@ -7,6 +7,83 @@
     "text": "6h de cours\n18h de TP/TD"
   },
   {
+    "objectID": "doc/cours/bases-de-donnees.html",
+    "href": "doc/cours/bases-de-donnees.html",
+    "title": "Bases de Données",
+    "section": "",
+    "text": "texte (nom, prénom, ville…)\nnumérique (age, prix…)\ndate\nliste (compétences, loisirs)\nimage\nfichier\n\n\n\n\n\n\n\n\n\nDéfinition\n\n\n\nUne donnée est une information brute qui a un type et une valeur."
+  },
+  {
+    "objectID": "doc/cours/bases-de-donnees.html#une-donnée",
+    "href": "doc/cours/bases-de-donnees.html#une-donnée",
+    "title": "Bases de Données",
+    "section": "",
+    "text": "texte (nom, prénom, ville…)\nnumérique (age, prix…)\ndate\nliste (compétences, loisirs)\nimage\nfichier\n\n\n\n\n\n\n\n\n\nDéfinition\n\n\n\nUne donnée est une information brute qui a un type et une valeur."
+  },
+  {
+    "objectID": "doc/cours/bases-de-donnees.html#une-base-de-données",
+    "href": "doc/cours/bases-de-donnees.html#une-base-de-données",
+    "title": "Bases de Données",
+    "section": "Une base de données ?",
+    "text": "Une base de données ?\n\n\n\n\n\n\n\nDéfinition\n\n\n\nUne base de données est un ensemble de données rassemblées et stockées d’une manière organisée dans un but spécifique.\n\n\n\n\nTypes ?\nOn n’utilise pas la même structure pour du texte ou des fichiers."
+  },
+  {
+    "objectID": "doc/cours/bases-de-donnees.html#enjeux",
+    "href": "doc/cours/bases-de-donnees.html#enjeux",
+    "title": "Bases de Données",
+    "section": "Enjeux",
+    "text": "Enjeux\n\nAccès aux données : langage SQL\nSécurité des données : seuls les utilisateurs autorisés (droits)\nPartage des données : facile en lecture, mais en écriture ?\nNon-redondance des données\nCohérence des données : respect des contraintes d’intégrité"
+  },
+  {
+    "objectID": "doc/cours/bases-de-donnees.html#types-de-bases-de-données",
+    "href": "doc/cours/bases-de-donnees.html#types-de-bases-de-données",
+    "title": "Bases de Données",
+    "section": "Types de bases de données",
+    "text": "Types de bases de données\n\nHiérarchique\n\nDonnées organisées comme un arbre\nRelations de type parent-enfant\nAnnuaires LDAP, système de fichiers\n\n\n\n\n\n\nstateDiagram \n    ENSAI --&gt; Permanent\n    ENSAI --&gt; Eleve\n    Permanent --&gt; Enseignant\n    Permanent --&gt; Administratif\n    Eleve --&gt; 1A\n    Eleve --&gt; 2A\n    Eleve --&gt; 3A\n\n\n\n\n\n\n\n\nRéseau\n\nOrganisée en graphe\nLes enregistrements peuvent avoir plusieurs parents et enfants\nRéseaux de transports  \n\n\n\nRelationnelle\n\nOrganisée en tables\nLien entre les tables\n\n\n\nNoSQL\nNombreux sous-types :\n\nClé-valeur : données sous forme de paires clé-valeur (DynamoDB)\nColonnes : Organisée en colonnes, adaptée aux grandes quantités de données (Cassandra)\nDocument : Stocke des documents semi-structurés (JSON, XML) (MongoDB)\nGraphes : Organisée sous forme de nœuds et de relations, pour des données très connectées (Neo4j)\n\n\nNot Only SQL\n\n\n\nAutres\n\nBases de données de séries temporelles"
+  },
+  {
+    "objectID": "doc/cours/bases-de-donnees.html#base-de-données-relationnelle",
+    "href": "doc/cours/bases-de-donnees.html#base-de-données-relationnelle",
+    "title": "Bases de Données",
+    "section": "Base de données relationnelle",
+    "text": "Base de données relationnelle\n\nTables\n\nComposées de lignes et de colonnes\nChaque table représente une entité\nChaque ligne est un enregistrement unique\nChaque colonne représente un attribut de l’entité\nTypes de données : texte, num…\n\n\n\nRelations entre les tables\n\nClé primaire (PK) pour identifier chaque enregistrement dans une table\n\nde manière unique\nsans ambiguïté\n\nClé étrangère (FK) pour créer des liens avec d’autres tables\n\nattribut d’une table A\ncorrespond à la clé primaire d’une table B\n\n\n\n\nExemple\nComment relier ces 2 tables ?\n\nUn joueur joue pour un seul club\nUn club peut avoir plusieurs joueurs\n\n\n\n\n\n\nclassDiagram\n    class Joueur {\n        id_joueur PK\n        nom\n        prenom\n        elo\n    }\n    \n    class Club {\n        id_club PK\n        nom\n        ville\n    }\n\n\n\n\n\n\n\n\nClé étrangère\nEn ajoutant une clé étrangère.\n\n\n\n\n\nclassDiagram\n    class Joueur {\n        id_joueur PK\n        nom\n        prenom\n        elo\n        id_club FK\n    }\n    \n    class Club {\n        id_club PK\n        nom\n        ville\n    }\n\n\n\n\n\n\n\n\n\n\nid_joueur\nNom\nPrénom\nElo\n\n\n\n\n1\nVachier-Lagrave\nMaxime\n2737\n\n\n2\nFirouzja\nAlireza\n2763\n\n\n3\nBacrot\nÉtienne\n2653\n\n\n4\nSebag\nMarie\n2448\n\n\n5\nMillet\nSophie\n2366\n\n\n6\nSkrichempko\nAlmira\n2361\n\n\n\n\n\n\n\n\n\n\n\n\nid_club\nNom\nVille\n\n\n\n\n1\nC’Chartres Echecs\nChartres\n\n\n2\nBischwiller\nBischwiller\n\n\n3\nAsnieres - le Grand Echiquier\nAsnieres\n\n\n4\nTours des Hauts-De-France\nSaint Quentin\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nid_joueur\nNom\nPrénom\nElo\nid_club\n\n\n\n\n1\nVachier-Lagrave\nMaxime\n2737\n3\n\n\n2\nFirouzja\nAlireza\n2763\n1\n\n\n3\nBacrot\nÉtienne\n2653\n2\n\n\n4\nSebag\nMarie\n2448\n2\n\n\n5\nMillet\nSophie\n2366\n3\n\n\n6\nSkrichempko\nAlmira\n2361\n2\n\n\n\n\n\nClé primaire\n\nAttribut (ou ensemble d’attributs)\nUnique\nNon nulle\nImmuable\n\n\n\n\n\n\n\nTip\n\n\n\nSauf mention contraire, nous utiliserons une clé primaire “technique” : séquence.\n\n\n\nImmuable :\n\nidéalement stable, elle ne change pas au cours du temps\nPour maintenir l’intégrité des liens avec d’autres tables\n\nRemarque : pas obligatoire d’avoir une clé primaire\n\n\n\nQuestion\nSi un joueur peut appartenir à plusieurs clubs ?\n\nPar exemple si notre bdd contient aussi les clubs belges, allemands, espagnols…\n\n\n\n\nCréation d’une table d’association : adhesion\n\n\n\n\n\nclassDiagram\n    class Adhesion {\n        id_joueur FK\n        id_club FK\n    }\n\n\n\n\n\n\n\n\n\n\nid_club\nid_joueur\n\n\n\n\n1\n2\n\n\n2\n3\n\n\n2\n4\n\n\n2\n6\n\n\n3\n1\n\n\n3\n5\n\n\n4\n1\n\n\n4\n2\n\n\n\n\n\nExemple\nSite de vente de légumes\n\nClient   - id_client   - nom   - prenom   - mail\nProduit   - id_produit   - nom   - description   - prix\nCommande   - id_commande   - id_client\nLigneCommande   - id_ligne_commande   - id_commande   - id_produit   - quantite\n\nCREATE TABLE joueur ( id_joueur SERIAL PRIMARY KEY, – Clé primaire avec séquence nom VARCHAR(50) NOT NULL, – Nom du joueur prenom VARCHAR(50) NOT NULL, – Prénom du joueur date_naissance DATE, – Date de naissance elo INT CHECK (elo &gt; 0), – Elo positif mail VARCHAR(100), – Adresse email est_arbitre BOOLEAN DEFAULT false, – Indique si le joueur est arbitre, par défaut à false pays VARCHAR(50), – Pays d’origine poids FLOAT – Poids du joueur );"
+  },
+  {
+    "objectID": "doc/cours/bases-de-donnees-slides.html#une-donnée",
+    "href": "doc/cours/bases-de-donnees-slides.html#une-donnée",
+    "title": "Bases de Données",
+    "section": "Une donnée ?",
+    "text": "Une donnée ?\n\n\ntexte (nom, prénom, ville…)\nnumérique (age, prix…)\ndate\nliste (compétences, loisirs)\nimage\nfichier"
+  },
+  {
+    "objectID": "doc/cours/bases-de-donnees-slides.html#une-base-de-données",
+    "href": "doc/cours/bases-de-donnees-slides.html#une-base-de-données",
+    "title": "Bases de Données",
+    "section": "Une base de données ?",
+    "text": "Une base de données ?\n\n\n\n\n\n\n\n\nDéfinition\n\n\nUne base de données est un ensemble de données rassemblées et stockées d’une manière organisée dans un but spécifique.\n\n\n\n\n\n\nTypes ?\nOn n’utilise pas la même structure pour du texte ou des fichiers."
+  },
+  {
+    "objectID": "doc/cours/bases-de-donnees-slides.html#enjeux",
+    "href": "doc/cours/bases-de-donnees-slides.html#enjeux",
+    "title": "Bases de Données",
+    "section": "Enjeux",
+    "text": "Enjeux\n\nAccès aux données : langage SQL\nSécurité des données : seuls les utilisateurs autorisés (droits)\nPartage des données : facile en lecture, mais en écriture ?\nNon-redondance des données\nCohérence des données : respect des contraintes d’intégrité"
+  },
+  {
+    "objectID": "doc/cours/bases-de-donnees-slides.html#types-de-bases-de-données",
+    "href": "doc/cours/bases-de-donnees-slides.html#types-de-bases-de-données",
+    "title": "Bases de Données",
+    "section": "Types de bases de données",
+    "text": "Types de bases de données"
+  },
+  {
+    "objectID": "doc/cours/bases-de-donnees-slides.html#base-de-données-relationnelle",
+    "href": "doc/cours/bases-de-donnees-slides.html#base-de-données-relationnelle",
+    "title": "Bases de Données",
+    "section": "Base de données relationnelle",
+    "text": "Base de données relationnelle"
+  },
+  {
     "objectID": "doc/tp/tp1.html",
     "href": "doc/tp/tp1.html",
     "title": "Exercice BDR et SQL",
@@ -33,5 +110,89 @@
     "title": "Exercice BDR et SQL",
     "section": "2 Premières requêtes",
     "text": "2 Premières requêtes\n\n\n\n\n\n\nCaution\n\n\n\nEn cas d’indisponibilité du Datalab, DBeaver est directement installé sur les machines.\n\n\n\n2.1 Lancement du service\n\nLancez le service CloudBeaver\n\nAllez dans Catalogue de services\nOnglet Databases\n\n\n\n\n\n\n\n\nCloudBeaver\n\n\n\nCloudBeaver est une application web légère dédiée à la gestion de bases de données. Elle permet de se connecter à divers types de bases de données, qu’elles soient SQL, NoSQL ou hébergées dans le cloud, à partir d’un seul point d’accès via un navigateur. CloudBeaver facilite l’exploration, la modification et la visualisation des données sans nécessiter l’installation de logiciels locaux.\nElle offre également des fonctionnalités de sécurité pour protéger l’accès aux données. Son interface conviviale en fait un outil accessible aussi bien aux développeurs qu’aux analystes de données.\n\n\n\nCréez une nouvelle connexion DuckDB\n\nEn haut à gauche, cliquez sur le +, puis New connection\nSélectionner DuckDB\nCliquez sur le bouton CREATE\n\n\n\n\n\n\n\n\nDuckDB\n\n\n\nDuckDB est un moteur de base de données relationnelle conçu pour des analyses rapides et efficaces, directement intégré dans des environnements locaux comme Python ou R. Il est optimisé pour le traitement analytique en colonnes et peut gérer des ensembles de données de grande taille sans nécessiter de serveur externe. DuckDB est léger, facile à intégrer et offre des performances élevées pour les requêtes SQL.\nIl est souvent utilisé pour l’analyse de données embarquée ou dans des flux de travail de science des données. Son architecture permet d’exécuter des requêtes SQL sur des fichiers locaux sans migration préalable des données.\n\n\n\nOuvrez un éditeur SQL\n\nEn haut à gauche, cliquez sur SQL\nvous pouvez maintenant saisir du code SQL\n\n\n\n\n2.2 Les prénoms\n\n\n\n\n\n\nFichier des prénoms\n\n\n\nLe fichier des prénoms contient des données sur les prénoms attribués aux enfants nés en France depuis 1900. Ces données sont disponibles au niveau France et par département.\nUne version au format parquet a été mise à disposition sur le site data.gouv par Icem7\n\n\n\n\n\n\n\n\nFichier parquet\n\n\n\nLe format Parquet est un format de fichier de stockage de données optimisé pour les systèmes de traitement analytique de grande échelle. Voici ses principales caractéristiques :\n\nStockage en colonnes : Parquet stocke les données par colonnes plutôt que par lignes, ce qui améliore l’efficacité de la compression et de l’accès aux données dans les charges de travail analytiques, notamment pour les systèmes de big data comme Hadoop ou Spark.\nCompression efficace : Grâce à sa structure en colonnes, il permet une compression plus efficace que les formats en ligne (comme CSV), ce qui réduit la taille des fichiers et accélère le traitement.\nOptimisé pour l’analytique : Parquet est conçu pour les requêtes en lecture intensive, car il permet de charger uniquement les colonnes nécessaires pour une analyse, ce qui améliore les performances.\nInteropérabilité : Parquet est compatible avec plusieurs langages et outils d’analyse de données, notamment Hadoop, Spark, Hive, et divers environnements de traitement de données (Python, Java, etc.).\nFormat auto-descriptif : Il inclut des métadonnées qui décrivent la structure des données, permettant de l’utiliser facilement dans différents environnements sans nécessiter de schémas externes.\n\n\n\n\nCréez une vue prenom qui pointera vers le fichier parquet des prénoms\n\nvous pourrez ensuite requêter sur cette vue comme si c’était une table\n\n\nCREATE OR REPLACE VIEW prenom AS\nFROM 'https://static.data.gouv.fr/resources/base-prenoms-insee-format-parquet/20231121-161435/prenoms-nat2022.parquet'\n\nListez tous les éléments de prenom\nListez les prénoms de l’année 2022\nListez les prénoms de l’année 2022 donnés plus de 2000 fois\nClassez-les par sexe, puis par nombre de fois où ils ont été donné\n\n\n\nListez les années où votre prénom a été donné\nClassez par année déscroissante\n\nCREATE OR REPLACE VIEW fd_indcvi_2020 AS FROM ‘https://static.data.gouv.fr/resources/recensement-de-la-population-fichiers-detail-individus-localises-au-canton-ou-ville-2020-1/20231023-122841/fd-indcvi-2020.parquet’;\nDESCRIBE FROM fd_indcvi_2020 ;\nSELECT arm, voit, ROUND(sum(ipondi/nperr::int)) AS eft FROM fd_indcvi_2020 WHERE dept = ‘75’ AND NPERR &lt;&gt; ‘Z’ GROUP BY ALL ;"
+  },
+  {
+    "objectID": "doc/cours/intro-slides.html#bases-de-données-relationnelles-et-sql",
+    "href": "doc/cours/intro-slides.html#bases-de-données-relationnelles-et-sql",
+    "title": "Bases de Données Relationnelles et SQL",
+    "section": "Bases de Données Relationnelles et SQL",
+    "text": "Bases de Données Relationnelles et SQL\n\n6h CM\n18h TP\nludovic.deneuville@ensai.fr\nbureau 161\nsur la base des cours de Benjamin Girault"
+  },
+  {
+    "objectID": "doc/cours/intro-slides.html#objectifs",
+    "href": "doc/cours/intro-slides.html#objectifs",
+    "title": "Bases de Données Relationnelles et SQL",
+    "section": "Objectifs",
+    "text": "Objectifs\n\nInterrogation\nCréation\nModélisation\nSavoir utiliser le langage SQL\n\n\nUML pour la modélisation"
+  },
+  {
+    "objectID": "doc/cours/intro-slides.html#sql",
+    "href": "doc/cours/intro-slides.html#sql",
+    "title": "Bases de Données Relationnelles et SQL",
+    "section": "SQL",
+    "text": "SQL\n\nSyntaxe simple\nEfficace\nTrès utilisé\n\n\n\nc’est LA compétence à avoir\nça s’encapsule dans plein de langages (R, Python, Julia, Stata, SAS…)\nutile pour Big Data"
+  },
+  {
+    "objectID": "doc/cours/intro-slides.html#évaluation",
+    "href": "doc/cours/intro-slides.html#évaluation",
+    "title": "Bases de Données Relationnelles et SQL",
+    "section": "Évaluation",
+    "text": "Évaluation\n\nLundi 6 Janvier 10h\nDurée : 2h\nSur papier\nSans documents"
+  },
+  {
+    "objectID": "doc/cours/intro-slides.html#bibliographie",
+    "href": "doc/cours/intro-slides.html#bibliographie",
+    "title": "Bases de Données Relationnelles et SQL",
+    "section": "Bibliographie",
+    "text": "Bibliographie\n\nhttps://laurent-audibert.developpez.com/Cours-BD/?page=introduction-bases-de-donnees\nhttps://upinfo.univ-cotedazur.fr/im/bases-de-donnees/\nhttps://openclassrooms.com/fr/courses/6971126-implementez-vos-bases-de-donnees-relationnelles-avec-sql/7139618-decouvrez-le-systeme-de-gestion-de-base-de-donnees-sgbd\nhttps://oseox.fr/sql/\n\n\n\n\nHome — Introduction à SQL"
+  },
+  {
+    "objectID": "doc/cours/intro.html",
+    "href": "doc/cours/intro.html",
+    "title": "Bases de Données Relationnelles et SQL",
+    "section": "",
+    "text": "6h CM\n18h TP\nludovic.deneuville@ensai.fr\nbureau 161\nsur la base des cours de Benjamin Girault"
+  },
+  {
+    "objectID": "doc/cours/intro.html#bases-de-données-relationnelles-et-sql",
+    "href": "doc/cours/intro.html#bases-de-données-relationnelles-et-sql",
+    "title": "Bases de Données Relationnelles et SQL",
+    "section": "",
+    "text": "6h CM\n18h TP\nludovic.deneuville@ensai.fr\nbureau 161\nsur la base des cours de Benjamin Girault"
+  },
+  {
+    "objectID": "doc/cours/intro.html#objectifs",
+    "href": "doc/cours/intro.html#objectifs",
+    "title": "Bases de Données Relationnelles et SQL",
+    "section": "Objectifs",
+    "text": "Objectifs\n\nInterrogation\nCréation\nModélisation\nSavoir utiliser le langage SQL\n\n\nUML pour la modélisation"
+  },
+  {
+    "objectID": "doc/cours/intro.html#sql",
+    "href": "doc/cours/intro.html#sql",
+    "title": "Bases de Données Relationnelles et SQL",
+    "section": "SQL",
+    "text": "SQL\n\nSyntaxe simple\nEfficace\nTrès utilisé\n\n\n\nc’est LA compétence à avoir\nça s’encapsule dans plein de langages (R, Python, Julia, Stata, SAS…)\nutile pour Big Data"
+  },
+  {
+    "objectID": "doc/cours/intro.html#évaluation",
+    "href": "doc/cours/intro.html#évaluation",
+    "title": "Bases de Données Relationnelles et SQL",
+    "section": "Évaluation",
+    "text": "Évaluation\n\nLundi 6 Janvier 10h\nDurée : 2h\nSur papier\nSans documents"
+  },
+  {
+    "objectID": "doc/cours/intro.html#bibliographie",
+    "href": "doc/cours/intro.html#bibliographie",
+    "title": "Bases de Données Relationnelles et SQL",
+    "section": "Bibliographie",
+    "text": "Bibliographie\n\nhttps://laurent-audibert.developpez.com/Cours-BD/?page=introduction-bases-de-donnees\nhttps://upinfo.univ-cotedazur.fr/im/bases-de-donnees/\nhttps://openclassrooms.com/fr/courses/6971126-implementez-vos-bases-de-donnees-relationnelles-avec-sql/7139618-decouvrez-le-systeme-de-gestion-de-base-de-donnees-sgbd\nhttps://oseox.fr/sql/"
+  },
+  {
+    "objectID": "doc/cours/sql.html",
+    "href": "doc/cours/sql.html",
+    "title": "SQL",
+    "section": "",
+    "text": "Le SQL (Structured Query Language) est un langage standardisé utilisé pour interagir avec des bases de données relationnelles. Il permet de créer, manipuler, interroger et gérer les données stockées dans des tables\nPlusieurs composantes du langage :\n\nManipulation de Données   - CRUD\nDéfinition de Données   - Créer/Modifier/Supprimer une table\nContrôle des Transactions   - BEGIn, COMMIT, ROLLBACK\nContrôle des Données   - GRANT REVOKE\n\n\nDéfinition de Données\n\nCREATE\nVersion simple\nCREATE TABLE joueur (     id_joueur INT,     nom TEXT,     prenom TEXT,     date_naissance DATE,     elo INT,     est_arbitre BOOLEAN,     code_pays TEXT );\nVersion évoluée\nCREATE TABLE joueur (     id_joueur SERIAL PRIMARY KEY,     nom VARCHAR(50) NOT NULL,     prenom VARCHAR(50) NOT NULL,     date_naissance DATE,     elo INT CHECK (elo &gt; 0),     est_arbitre BOOLEAN DEFAULT false,     code_pays VARCHAR(2) );\n\n\nALTER\n\n\nDELETE\n\n\n\nManipulation de Données\n\nSELECT\n\n\nINSERT\n\n\nUPDATE\n\n\nDELETE\n\n\n\nSchema\n\nVente de légume\nUtiliser la même bdd pour la gestion RH (employe, contrat, conge)\ncréer un schéma pour séparer les tables"
   }
 ]

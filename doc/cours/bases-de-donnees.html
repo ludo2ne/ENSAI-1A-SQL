@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Ludovic Deneuville">
-<meta name="description" content="Exercice d’apprentissage du SQL">
+<meta name="description" content="Slides">
 
-<title>Exercice BDR et SQL – Quarto tutorial</title>
+<title>Bases de Données – Quarto tutorial</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,40 +21,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -104,6 +70,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<meta name="mermaid-theme" content="forest">
+<script src="../../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="../../styles.css">
@@ -185,19 +155,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="3">
+    <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
-  <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#premiers-pas-sur-le-datalab" id="toc-premiers-pas-sur-le-datalab" class="nav-link" data-scroll-target="#premiers-pas-sur-le-datalab"><span class="header-section-number">1</span> Premiers pas sur le Datalab</a></li>
-  <li><a href="#premières-requêtes" id="toc-premières-requêtes" class="nav-link" data-scroll-target="#premières-requêtes"><span class="header-section-number">2</span> Premières requêtes</a>
   <ul class="collapse">
-  <li><a href="#lancement-du-service" id="toc-lancement-du-service" class="nav-link" data-scroll-target="#lancement-du-service"><span class="header-section-number">2.1</span> Lancement du service</a></li>
-  <li><a href="#les-prénoms" id="toc-les-prénoms" class="nav-link" data-scroll-target="#les-prénoms"><span class="header-section-number">2.2</span> Les prénoms</a></li>
-  </ul></li>
+  <li><a href="#une-donnée" id="toc-une-donnée" class="nav-link active" data-scroll-target="#une-donnée">Une donnée ?</a></li>
+  <li><a href="#une-base-de-données" id="toc-une-base-de-données" class="nav-link" data-scroll-target="#une-base-de-données">Une base de données ?</a></li>
+  <li><a href="#enjeux" id="toc-enjeux" class="nav-link" data-scroll-target="#enjeux">Enjeux</a></li>
+  <li><a href="#types-de-bases-de-données" id="toc-types-de-bases-de-données" class="nav-link" data-scroll-target="#types-de-bases-de-données">Types de bases de données</a></li>
+  <li><a href="#base-de-données-relationnelle" id="toc-base-de-données-relationnelle" class="nav-link" data-scroll-target="#base-de-données-relationnelle">Base de données relationnelle</a></li>
   </ul>
-</nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="bases-de-donnees-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -208,12 +176,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Exercice BDR et SQL</h1>
+<h1 class="title">Bases de Données</h1>
 </div>
 
 <div>
   <div class="description">
-    Exercice d’apprentissage du SQL
+    <a href="bases-de-donnees-slides.html">Slides</a>
   </div>
 </div>
 
@@ -236,147 +204,476 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p><span class="emoji" data-emoji="construction">🚧</span></p>
-<section id="introduction" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="introduction">Introduction</h2>
-<p>Vous allez réaliser ce TP sur le <a href="https://onyxia.lab.groupe-genes.fr/" target="_blank">Datalab du GENES</a></p>
-<ul class="task-list">
-<li><label><input type="checkbox">Connectez-vous au Datalab</label>
-<ul>
-<li>Vous pouvez également utiliser le <a href="https://datalab.sspcloud.fr/" target="_blank">Datalab SSPCloud de l’INSEE</a> en créant un compte avec votre mail ENSAI.</li>
-</ul></li>
+<section id="une-donnée" class="level2">
+<h2 class="anchored" data-anchor-id="une-donnée">Une donnée ?</h2>
+<div class="incremental">
+<ul class="incremental">
+<li>texte (nom, prénom, ville…)</li>
+<li>numérique (age, prix…)</li>
+<li>date</li>
+<li>liste (compétences, loisirs)</li>
+<li>image</li>
+<li>fichier</li>
 </ul>
-</section>
-<section id="premiers-pas-sur-le-datalab" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="premiers-pas-sur-le-datalab"><span class="header-section-number">1</span> Premiers pas sur le Datalab</h2>
-<p><span class="emoji" data-emoji="construction">🚧</span></p>
-</section>
-<section id="premières-requêtes" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="premières-requêtes"><span class="header-section-number">2</span> Premières requêtes</h2>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
 </div>
-<div class="callout-title-container flex-fill">
-Caution
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>En cas d’indisponibilité du Datalab, DBeaver est directement installé sur les machines.</p>
-</div>
-</div>
-<section id="lancement-du-service" class="level3" data-number="2.1">
-<h3 data-number="2.1" class="anchored" data-anchor-id="lancement-du-service"><span class="header-section-number">2.1</span> Lancement du service</h3>
-<ul class="task-list">
-<li><label><input type="checkbox">Lancez le service <a href="https://dbeaver.com/docs/cloudbeaver/" target="_blank">CloudBeaver</a></label>
-<ul>
-<li>Allez dans <strong>Catalogue de services</strong></li>
-<li>Onglet <strong>Databases</strong></li>
-</ul></li>
-</ul>
-<div class="callout callout-style-default callout-tip callout-titled" title="CloudBeaver">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-CloudBeaver
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>CloudBeaver est une application web légère dédiée à la gestion de bases de données. Elle permet de se connecter à divers types de bases de données, qu’elles soient SQL, NoSQL ou hébergées dans le cloud, à partir d’un seul point d’accès via un navigateur. CloudBeaver facilite l’exploration, la modification et la visualisation des données sans nécessiter l’installation de logiciels locaux.</p>
-<p>Elle offre également des fonctionnalités de sécurité pour protéger l’accès aux données. Son interface conviviale en fait un outil accessible aussi bien aux développeurs qu’aux analystes de données.</p>
-</div>
-</div>
-<ul class="task-list">
-<li><label><input type="checkbox">Créez une nouvelle connexion <strong>DuckDB</strong></label>
-<ul>
-<li>En haut à gauche, cliquez sur le +, puis New connection</li>
-<li>Sélectionner <strong>DuckDB</strong></li>
-<li>Cliquez sur le bouton CREATE</li>
-</ul></li>
-</ul>
-<div class="callout callout-style-default callout-tip callout-titled" title="DuckDB">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-DuckDB
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>DuckDB est un moteur de base de données relationnelle conçu pour des analyses rapides et efficaces, directement intégré dans des environnements locaux comme Python ou R. Il est optimisé pour le traitement analytique en colonnes et peut gérer des ensembles de données de grande taille sans nécessiter de serveur externe. DuckDB est léger, facile à intégrer et offre des performances élevées pour les requêtes SQL.</p>
-<p>Il est souvent utilisé pour l’analyse de données embarquée ou dans des flux de travail de science des données. Son architecture permet d’exécuter des requêtes SQL sur des fichiers locaux sans migration préalable des données.</p>
-</div>
-</div>
-<ul class="task-list">
-<li><label><input type="checkbox">Ouvrez un éditeur SQL</label>
-<ul>
-<li>En haut à gauche, cliquez sur SQL</li>
-<li>vous pouvez maintenant saisir du code <em>SQL</em></li>
-</ul></li>
-</ul>
-</section>
-<section id="les-prénoms" class="level3" data-number="2.2">
-<h3 data-number="2.2" class="anchored" data-anchor-id="les-prénoms"><span class="header-section-number">2.2</span> Les prénoms</h3>
-<div class="callout callout-style-default callout-note callout-titled" title="Fichier des prénoms">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Fichier des prénoms
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Le fichier des prénoms contient des données sur les prénoms attribués aux enfants nés en France depuis 1900. Ces données sont disponibles au niveau France et par département.</p>
-<p>Une version au format <a href="https://parquet.apache.org/" target="_blank">parquet</a> a été mise à disposition sur le site <a href="https://www.data.gouv.fr/fr/datasets/base-prenoms-insee-format-parquet/" target="_blank">data.gouv</a> par <a href="https://www.icem7.fr/" target="_blank">Icem7</a></p>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled" title="Fichier parquet">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Fichier parquet
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Le format <strong>Parquet</strong> est un format de fichier de stockage de données optimisé pour les systèmes de traitement analytique de grande échelle. Voici ses principales caractéristiques :</p>
-<ol type="1">
-<li><p><strong>Stockage en colonnes</strong> : Parquet stocke les données par colonnes plutôt que par lignes, ce qui améliore l’efficacité de la compression et de l’accès aux données dans les charges de travail analytiques, notamment pour les systèmes de big data comme Hadoop ou Spark.</p></li>
-<li><p><strong>Compression efficace</strong> : Grâce à sa structure en colonnes, il permet une compression plus efficace que les formats en ligne (comme CSV), ce qui réduit la taille des fichiers et accélère le traitement.</p></li>
-<li><p><strong>Optimisé pour l’analytique</strong> : Parquet est conçu pour les requêtes en lecture intensive, car il permet de charger uniquement les colonnes nécessaires pour une analyse, ce qui améliore les performances.</p></li>
-<li><p><strong>Interopérabilité</strong> : Parquet est compatible avec plusieurs langages et outils d’analyse de données, notamment Hadoop, Spark, Hive, et divers environnements de traitement de données (Python, Java, etc.).</p></li>
-<li><p><strong>Format auto-descriptif</strong> : Il inclut des métadonnées qui décrivent la structure des données, permettant de l’utiliser facilement dans différents environnements sans nécessiter de schémas externes.</p></li>
-</ol>
-</div>
-</div>
-<ul class="task-list">
-<li><label><input type="checkbox">Créez une vue <code>prenom</code> qui pointera vers le fichier parquet des prénoms</label>
-<ul>
-<li>vous pourrez ensuite requêter sur cette vue comme si c’était une table</li>
-</ul></li>
-</ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">OR</span> <span class="kw">REPLACE</span> <span class="kw">VIEW</span> prenom <span class="kw">AS</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> <span class="st">'https://static.data.gouv.fr/resources/base-prenoms-insee-format-parquet/20231121-161435/prenoms-nat2022.parquet'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul class="task-list">
-<li><label><input type="checkbox">Listez tous les éléments de <code>prenom</code></label></li>
-<li><label><input type="checkbox">Listez les prénoms de l’année 2022</label></li>
-<li><label><input type="checkbox">Listez les prénoms de l’année 2022 donnés plus de 2000 fois</label></li>
-<li><label><input type="checkbox">Classez-les par sexe, puis par nombre de fois où ils ont été donné</label></li>
-</ul>
 <hr>
-<ul class="task-list">
-<li><label><input type="checkbox">Listez les années où votre prénom a été donné</label></li>
-<li><label><input type="checkbox">Classez par année déscroissante</label></li>
+<div class="callout callout-style-default callout-note callout-titled" title="Définition">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Définition
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Une donnée est une information brute qui a un type et une valeur.</p>
+</div>
+</div>
+</section>
+<section id="une-base-de-données" class="level2">
+<h2 class="anchored" data-anchor-id="une-base-de-données">Une base de données ?</h2>
+<div class="incremental">
+<div class="callout callout-style-default callout-note callout-titled" title="Définition">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Définition
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Une base de données est un ensemble de données rassemblées et stockées d’une manière organisée dans un but spécifique.</p>
+</div>
+</div>
+</div>
+<div class="notes">
+<p>Types ?</p>
+<p>On n’utilise pas la même structure pour du texte ou des fichiers.</p>
+</div>
+</section>
+<section id="enjeux" class="level2">
+<h2 class="anchored" data-anchor-id="enjeux">Enjeux</h2>
+<ul>
+<li>Accès aux données : langage SQL</li>
+<li>Sécurité des données : seuls les utilisateurs autorisés (droits)</li>
+<li>Partage des données : facile en lecture, mais en écriture ?</li>
+<li>Non-redondance des données</li>
+<li>Cohérence des données : respect des contraintes d’intégrité</li>
 </ul>
-<p>CREATE OR REPLACE VIEW fd_indcvi_2020 AS FROM ‘https://static.data.gouv.fr/resources/recensement-de-la-population-fichiers-detail-individus-localises-au-canton-ou-ville-2020-1/20231023-122841/fd-indcvi-2020.parquet’;</p>
-<p>DESCRIBE FROM fd_indcvi_2020 ;</p>
-<p>SELECT arm, voit, ROUND(sum(ipondi/nperr::int)) AS eft FROM fd_indcvi_2020 WHERE dept = ‘75’ AND NPERR &lt;&gt; ‘Z’ GROUP BY ALL ;</p>
+</section>
+<section id="types-de-bases-de-données" class="level2">
+<h2 class="anchored" data-anchor-id="types-de-bases-de-données">Types de bases de données</h2>
+<section id="hiérarchique" class="level3">
+<h3 class="anchored" data-anchor-id="hiérarchique">Hiérarchique</h3>
+<ul>
+<li>Données organisées comme un arbre</li>
+<li>Relations de type parent-enfant</li>
+<li>Annuaires LDAP, système de fichiers</li>
+</ul>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">stateDiagram 
+    ENSAI --&gt; Permanent
+    ENSAI --&gt; Eleve
+    Permanent --&gt; Enseignant
+    Permanent --&gt; Administratif
+    Eleve --&gt; 1A
+    Eleve --&gt; 2A
+    Eleve --&gt; 3A
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="réseau" class="level3">
+<h3 class="anchored" data-anchor-id="réseau">Réseau</h3>
+<ul>
+<li>Organisée en graphe</li>
+<li>Les enregistrements peuvent avoir plusieurs parents et enfants</li>
+<li>Réseaux de transports &nbsp;</li>
+</ul>
+</section>
+<section id="relationnelle" class="level3">
+<h3 class="anchored" data-anchor-id="relationnelle">Relationnelle</h3>
+<ul>
+<li>Organisée en tables</li>
+<li>Lien entre les tables</li>
+</ul>
+</section>
+<section id="nosql" class="level3">
+<h3 class="anchored" data-anchor-id="nosql">NoSQL</h3>
+<p>Nombreux sous-types :</p>
+<ul>
+<li><strong>Clé-valeur</strong> : données sous forme de paires clé-valeur (DynamoDB)</li>
+<li><strong>Colonnes</strong> : Organisée en colonnes, adaptée aux grandes quantités de données (Cassandra)</li>
+<li><strong>Document</strong> : Stocke des documents semi-structurés (JSON, XML) (MongoDB)</li>
+<li><strong>Graphes</strong> : Organisée sous forme de nœuds et de relations, pour des données très connectées (Neo4j)</li>
+</ul>
+<div class="notes">
+<p>Not Only SQL</p>
+</div>
+</section>
+<section id="autres" class="level3">
+<h3 class="anchored" data-anchor-id="autres">Autres</h3>
+<ul>
+<li>Bases de données de séries temporelles</li>
+</ul>
+</section>
+</section>
+<section id="base-de-données-relationnelle" class="level2">
+<h2 class="anchored" data-anchor-id="base-de-données-relationnelle">Base de données relationnelle</h2>
+<section id="tables" class="level3">
+<h3 class="anchored" data-anchor-id="tables">Tables</h3>
+<ul>
+<li>Composées de lignes et de colonnes</li>
+<li>Chaque table représente une entité</li>
+<li>Chaque ligne est un enregistrement unique</li>
+<li>Chaque colonne représente un attribut de l’entité</li>
+<li>Types de données : texte, num…</li>
+</ul>
+</section>
+<section id="relations-entre-les-tables" class="level3">
+<h3 class="anchored" data-anchor-id="relations-entre-les-tables">Relations entre les tables</h3>
+<ul>
+<li><strong>Clé primaire</strong> (PK) pour identifier chaque enregistrement dans une table
+<ul>
+<li>de manière unique</li>
+<li>sans ambiguïté</li>
+</ul></li>
+<li><strong>Clé étrangère</strong> (FK) pour créer des liens avec d’autres tables
+<ul>
+<li>attribut d’une table A</li>
+<li>correspond à la clé primaire d’une table B</li>
+</ul></li>
+</ul>
+</section>
+<section id="exemple" class="level3">
+<h3 class="anchored" data-anchor-id="exemple">Exemple</h3>
+<p>Comment relier ces 2 tables ?</p>
+<ul>
+<li>Un joueur joue pour un seul club</li>
+<li>Un club peut avoir plusieurs joueurs</li>
+</ul>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">classDiagram
+    class Joueur {
+        id_joueur PK
+        nom
+        prenom
+        elo
+    }
+    
+    class Club {
+        id_club PK
+        nom
+        ville
+    }
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="clé-étrangère" class="level3">
+<h3 class="anchored" data-anchor-id="clé-étrangère">Clé étrangère</h3>
+<p>En ajoutant une clé étrangère.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">classDiagram
+    class Joueur {
+        id_joueur PK
+        nom
+        prenom
+        elo
+        id_club FK
+    }
+    
+    class Club {
+        id_club PK
+        nom
+        ville
+    }
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<hr>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th><strong>id_joueur</strong></th>
+<th><strong>Nom</strong></th>
+<th><strong>Prénom</strong></th>
+<th><strong>Elo</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Vachier-Lagrave</td>
+<td>Maxime</td>
+<td>2737</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Firouzja</td>
+<td>Alireza</td>
+<td>2763</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Bacrot</td>
+<td>Étienne</td>
+<td>2653</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Sebag</td>
+<td>Marie</td>
+<td>2448</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Millet</td>
+<td>Sophie</td>
+<td>2366</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>Skrichempko</td>
+<td>Almira</td>
+<td>2361</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 48%">
+<col style="width: 31%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>id_club</strong></th>
+<th><strong>Nom</strong></th>
+<th><strong>Ville</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>C’Chartres Echecs</td>
+<td>Chartres</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Bischwiller</td>
+<td>Bischwiller</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Asnieres - le Grand Echiquier</td>
+<td>Asnieres</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Tours des Hauts-De-France</td>
+<td>Saint Quentin</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 29%">
+<col style="width: 22%">
+<col style="width: 11%">
+<col style="width: 17%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>id_joueur</strong></th>
+<th><strong>Nom</strong></th>
+<th><strong>Prénom</strong></th>
+<th><strong>Elo</strong></th>
+<th><strong>id_club</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Vachier-Lagrave</td>
+<td>Maxime</td>
+<td>2737</td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Firouzja</td>
+<td>Alireza</td>
+<td>2763</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Bacrot</td>
+<td>Étienne</td>
+<td>2653</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Sebag</td>
+<td>Marie</td>
+<td>2448</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Millet</td>
+<td>Sophie</td>
+<td>2366</td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>Skrichempko</td>
+<td>Almira</td>
+<td>2361</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="clé-primaire" class="level3">
+<h3 class="anchored" data-anchor-id="clé-primaire">Clé primaire</h3>
+<ul>
+<li>Attribut (ou ensemble d’attributs)</li>
+<li>Unique</li>
+<li>Non nulle</li>
+<li>Immuable</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Sauf mention contraire, nous utiliserons une clé primaire “technique” : séquence.</p>
+</div>
+</div>
+<div class="notes">
+<p>Immuable :</p>
+<ul>
+<li>idéalement stable, elle ne change pas au cours du temps</li>
+<li>Pour maintenir l’intégrité des liens avec d’autres tables</li>
+</ul>
+<p>Remarque : pas obligatoire d’avoir une clé primaire</p>
+</div>
+</section>
+<section id="question" class="level3">
+<h3 class="anchored" data-anchor-id="question">Question</h3>
+<p>Si un joueur peut appartenir à plusieurs clubs ?</p>
+<div class="notes">
+<p>Par exemple si notre bdd contient aussi les clubs belges, allemands, espagnols…</p>
+</div>
+</section>
+<section id="section" class="level3">
+<h3 class="anchored" data-anchor-id="section"></h3>
+<p>Création d’une table d’association : <strong>adhesion</strong></p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">classDiagram
+    class Adhesion {
+        id_joueur FK
+        id_club FK
+    }
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<hr>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th><strong>id_club</strong></th>
+<th><strong>id_joueur</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>6</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>5</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="exemple-1" class="level3">
+<h3 class="anchored" data-anchor-id="exemple-1">Exemple</h3>
+<p>Site de vente de légumes</p>
+<ul>
+<li>Client &nbsp; - id_client &nbsp; - nom &nbsp; - prenom &nbsp; - mail</li>
+<li>Produit &nbsp; - id_produit &nbsp; - nom &nbsp; - description &nbsp; - prix</li>
+<li>Commande &nbsp; - id_commande &nbsp; - id_client</li>
+<li>LigneCommande &nbsp; - id_ligne_commande &nbsp; - id_commande &nbsp; - id_produit &nbsp; - quantite</li>
+</ul>
+<p>CREATE TABLE joueur ( id_joueur SERIAL PRIMARY KEY, – Clé primaire avec séquence nom VARCHAR(50) NOT NULL, – Nom du joueur prenom VARCHAR(50) NOT NULL, – Prénom du joueur date_naissance DATE, – Date de naissance elo INT CHECK (elo &gt; 0), – Elo positif mail VARCHAR(100), – Adresse email est_arbitre BOOLEAN DEFAULT false, – Indique si le joueur est arbitre, par défaut à false pays VARCHAR(50), – Pays d’origine poids FLOAT – Poids du joueur );</p>
 
 
 </section>
