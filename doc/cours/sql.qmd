@@ -1,0 +1,87 @@
+---
+title: "SQL"
+description: "[Slides](sql-slides.html)"
+author: "Ludovic Deneuville"
+format: 
+  html:
+    toc: true
+    toc-location: left
+    toc-depth: 2
+  revealjs:
+    theme: moon
+    footer: "[Home](../../index.html) --- [SQL](sql.html)"
+    slide-number: c/t                    # collapsed/total
+    slide-level: 3
+    controls: true
+    output-file: sql-slides.html
+mermaid:
+  theme: forest
+code-line-numbers: false
+from: markdown+emoji
+---
+
+
+Le SQL (Structured Query Language) est un langage standardisé utilisé pour interagir avec des bases de données relationnelles. Il permet de créer, manipuler, interroger et gérer les données stockées dans des tables
+
+Plusieurs composantes du langage :
+
+- Manipulation de Données
+  - CRUD
+- Définition de Données
+  - Créer/Modifier/Supprimer une table
+- Contrôle des Transactions
+  - BEGIn, COMMIT, ROLLBACK
+- Contrôle des Données
+  - GRANT REVOKE
+
+### Définition de Données
+
+#### CREATE
+
+Version simple
+
+CREATE TABLE joueur (
+    id_joueur INT,
+    nom TEXT,
+    prenom TEXT,
+    date_naissance DATE,
+    elo INT,
+    est_arbitre BOOLEAN,
+    code_pays TEXT
+);
+
+Version évoluée
+
+
+CREATE TABLE joueur (
+    id_joueur SERIAL PRIMARY KEY,
+    nom VARCHAR(50) NOT NULL,
+    prenom VARCHAR(50) NOT NULL,
+    date_naissance DATE,
+    elo INT CHECK (elo > 0),
+    est_arbitre BOOLEAN DEFAULT false,
+    code_pays VARCHAR(2)
+);
+
+
+#### ALTER
+
+#### DELETE
+
+
+### Manipulation de Données
+
+#### SELECT
+
+#### INSERT
+
+#### UPDATE
+
+#### DELETE
+
+
+### Schema
+
+- Vente de légume
+- Utiliser la même bdd pour la gestion RH (employe, contrat, conge)
+- créer un schéma pour séparer les tables

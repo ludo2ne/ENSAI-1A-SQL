@@ -1,0 +1,300 @@
+---
+title: "Bases de Données"
+description: "[Slides](bases-de-donnees-slides.html)"
+author: "Ludovic Deneuville"
+format: 
+  html:
+    toc: true
+    toc-location: left
+    toc-depth: 2
+  revealjs:
+    theme: moon
+    footer: "[Home](../../index.html) --- [Bases de Données](bases-de-donnees.html)"
+    slide-number: c/t                    # collapsed/total
+    slide-level: 3
+    controls: true
+    output-file: bases-de-donnees-slides.html
+mermaid:
+  theme: forest
+code-line-numbers: false
+from: markdown+emoji
+---
+
+## Une donnée ?
+
+::: incremental
+- texte (nom, prénom, ville...)
+- numérique (age, prix...)
+- date
+- liste (compétences, loisirs)
+- image
+- fichier
+:::
+
+---
+
+::: {.callout-note title="Définition"}
+Une donnée est une information brute qui a un type et une valeur.
+:::
+
+
+
+## Une base de données ?
+
+:::::: incremental
+::: {.callout-note title="Définition"}
+Une base de données est un ensemble de données rassemblées et stockées d'une manière organisée dans un but spécifique.
+:::
+::::::
+
+:::{.notes}
+Types ?
+
+On n'utilise pas la même structure pour du texte ou des fichiers.
+:::
+
+## Enjeux
+
+- Accès aux données : langage SQL
+- Sécurité des données : seuls les utilisateurs autorisés (droits)
+- Partage des données : facile en lecture, mais en écriture ?
+- Non-redondance des données
+- Cohérence des données : respect des contraintes d'intégrité
+
+## Types de bases de données
+
+### Hiérarchique
+
+- Données organisées comme un arbre 
+- Relations de type parent-enfant
+- Annuaires LDAP, système de fichiers
+
+```{mermaid}
+stateDiagram 
+    ENSAI --> Permanent
+    ENSAI --> Eleve
+    Permanent --> Enseignant
+    Permanent --> Administratif
+    Eleve --> 1A
+    Eleve --> 2A
+    Eleve --> 3A
+```
+
+### Réseau
+
+- Organisée en graphe
+- Les enregistrements peuvent avoir plusieurs parents et enfants
+- Réseaux de transports
+  
+
+### Relationnelle
+
+- Organisée en tables
+- Lien entre les tables
+
+### NoSQL
+
+Nombreux sous-types :
+
+- **Clé-valeur** : données sous forme de paires clé-valeur (DynamoDB)
+- **Colonnes** : Organisée en colonnes, adaptée aux grandes quantités de données (Cassandra)
+- **Document** : Stocke des documents semi-structurés (JSON, XML) (MongoDB)
+- **Graphes** : Organisée sous forme de nœuds et de relations, pour des données très connectées (Neo4j)
+
+:::{.notes}
+Not Only SQL
+:::
+
+### Autres
+
+- Bases de données de séries temporelles
+
+## Base de données relationnelle
+
+### Tables
+
+- Composées de lignes et de colonnes
+- Chaque table représente une entité
+- Chaque ligne est un enregistrement unique
+- Chaque colonne représente un attribut de l'entité
+- Types de données : texte, num...
+
+
+### Relations entre les tables
+
+- **Clé primaire** (PK) pour identifier chaque enregistrement dans une table
+  - de manière unique
+  - sans ambiguïté
+- **Clé étrangère** (FK) pour créer des liens avec d'autres tables
+  - attribut d'une table A
+  - correspond à la clé primaire d'une table B
+
+
+### Exemple
+
+Comment relier ces 2 tables ?
+
+- Un joueur joue pour un seul club
+- Un club peut avoir plusieurs joueurs
+
+```{mermaid}
+classDiagram
+    class Joueur {
+        id_joueur PK
+        nom
+        prenom
+        elo
+    }
+    
+    class Club {
+        id_club PK
+        nom
+        ville
+    }
+```
+
+
+### Clé étrangère
+
+En ajoutant une clé étrangère.
+
+```{mermaid}
+classDiagram
+    class Joueur {
+        id_joueur PK
+        nom
+        prenom
+        elo
+        id_club FK
+    }
+    
+    class Club {
+        id_club PK
+        nom
+        ville
+    }
+```
+
+---
+
+| **id_joueur**  | **Nom**                | **Prénom**       | **Elo** |
+|----------------|------------------------|------------------|---------|
+| 1              | Vachier-Lagrave        | Maxime           | 2737    |
+| 2              | Firouzja               | Alireza          | 2763    |
+| 3              | Bacrot                 | Étienne          | 2653    |
+| 4              | Sebag                  | Marie            | 2448    |
+| 5              | Millet                 | Sophie           | 2366    |
+| 6              | Skrichempko            | Almira           | 2361    |
+
+---
+
+| **id_club**  | **Nom**                          | **Ville**            |
+|--------------|----------------------------------|----------------------|
+| 1            | C'Chartres Echecs                | Chartres             |
+| 2            | Bischwiller                      | Bischwiller          |
+| 3            | Asnieres - le Grand Echiquier    | Asnieres             |
+| 4            | Tours des Hauts-De-France        | Saint Quentin        |
+
+---
+
+| **id_joueur**  | **Nom**                | **Prénom**       | **Elo** | **id_club**  |
+|----------------|------------------------|------------------|---------|--------------|
+| 1              | Vachier-Lagrave        | Maxime           | 2737    | 3            |
+| 2              | Firouzja               | Alireza          | 2763    | 1            |
+| 3              | Bacrot                 | Étienne          | 2653    | 2            |
+| 4              | Sebag                  | Marie            | 2448    | 2            |
+| 5              | Millet                 | Sophie           | 2366    | 3            |
+| 6              | Skrichempko            | Almira           | 2361    | 2            |
+
+
+### Clé primaire
+
+- Attribut (ou ensemble d'attributs)
+- Unique
+- Non nulle
+- Immuable
+
+::: {.callout-tip}
+Sauf mention contraire, nous utiliserons une clé primaire "technique" : séquence.
+:::
+
+:::{.notes}
+Immuable : 
+
+- idéalement stable, elle ne change pas au cours du temps
+- Pour maintenir l'intégrité des liens avec d'autres tables
+
+Remarque : pas obligatoire d'avoir une clé primaire
+:::
+
+### Question
+
+Si un joueur peut appartenir à plusieurs clubs ?
+
+::: {.notes}
+Par exemple si notre bdd contient aussi les clubs belges, allemands, espagnols...
+:::
+
+### 
+
+Création d'une table d'association : **adhesion**
+
+```{mermaid}
+classDiagram
+    class Adhesion {
+        id_joueur FK
+        id_club FK
+    }
+```
+
+---
+
+| **id_club**  | **id_joueur**  |
+|--------------|----------------|
+| 1            | 2              |
+| 2            | 3              |
+| 2            | 4              |
+| 2            | 6              |
+| 3            | 1              |
+| 3            | 5              |
+| 4            | 1              |
+| 4            | 2              |
+
+
+
+
+### Exemple
+
+Site de vente de légumes
+
+- Client
+  - id_client
+  - nom
+  - prenom
+  - mail
+- Produit
+  - id_produit
+  - nom
+  - description
+  - prix
+- Commande
+  - id_commande
+  - id_client
+- LigneCommande
+  - id_ligne_commande
+  - id_commande
+  - id_produit
+  - quantite
+
+
+CREATE TABLE joueur (
+    id_joueur SERIAL PRIMARY KEY,              -- Clé primaire avec séquence
+    nom VARCHAR(50) NOT NULL,                  -- Nom du joueur
+    prenom VARCHAR(50) NOT NULL,               -- Prénom du joueur
+    date_naissance DATE,                        -- Date de naissance
+    elo INT CHECK (elo > 0),                    -- Elo positif
+    mail VARCHAR(100),                          -- Adresse email
+    est_arbitre BOOLEAN DEFAULT false,          -- Indique si le joueur est arbitre, par défaut à false
+    pays VARCHAR(50),                           -- Pays d'origine
+    poids FLOAT                                 -- Poids du joueur
+);

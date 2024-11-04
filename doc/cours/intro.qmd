@@ -19,3 +19,49 @@ mermaid:
 code-line-numbers: false
 from: markdown+emoji
 ---
+
+## Bases de Données Relationnelles et SQL
+
+- 6h CM
+- 18h TP
+- `ludovic.deneuville@ensai.fr`
+- bureau 161
+- sur la base des cours de Benjamin Girault
+
+## Objectifs
+
+- Interrogation
+- Création
+- Modélisation
+- Savoir utiliser le langage SQL
+
+:::{.notes}
+UML pour la modélisation
+:::
+
+## SQL
+
+- Syntaxe simple
+- Efficace
+- Très utilisé
+
+:::{.notes}
+- c'est LA compétence à avoir
+- ça s'encapsule dans plein de langages (R, Python, Julia, Stata, SAS...)
+- utile pour Big Data
+:::
+
+
+## Évaluation
+
+- Lundi 6 Janvier 10h
+- Durée : 2h
+- Sur papier
+- Sans documents
+
+## Bibliographie
+
+- https://laurent-audibert.developpez.com/Cours-BD/?page=introduction-bases-de-donnees
+- https://upinfo.univ-cotedazur.fr/im/bases-de-donnees/
+- https://openclassrooms.com/fr/courses/6971126-implementez-vos-bases-de-donnees-relationnelles-avec-sql/7139618-decouvrez-le-systeme-de-gestion-de-base-de-donnees-sgbd
+- https://oseox.fr/sql/

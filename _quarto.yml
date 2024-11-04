@@ -19,10 +19,14 @@ website:
         menu:
           - href: doc/cours/intro.qmd
             text: "Introduction"
+          - href: doc/cours/bases-de-donnees.qmd
+            text: "Base de données"
+          - href: doc/cours/sql.qmd
+            text: "SQL"
       - text: TP
         menu:
           - href: doc/tp/tp1.qmd
-            text: "Lesson"
+            text: "TP1"
     right:
       - icon: github
         href: "{{< meta var.url-repo >}}"
