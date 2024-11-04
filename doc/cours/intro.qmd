@@ -51,6 +51,12 @@ UML pour la modélisation
 - utile pour Big Data
 :::
 
+## Les TP
+
+- 5 TP + 1 TD
+- Datalab
+- cloudBeaver
+
 
 ## Évaluation
 
@@ -65,3 +71,4 @@ UML pour la modélisation
 - https://upinfo.univ-cotedazur.fr/im/bases-de-donnees/
 - https://openclassrooms.com/fr/courses/6971126-implementez-vos-bases-de-donnees-relationnelles-avec-sql/7139618-decouvrez-le-systeme-de-gestion-de-base-de-donnees-sgbd
 - https://oseox.fr/sql/
+- https://learnsql.fr/blog/aide-memoire-pour-les-entretiens-sql/

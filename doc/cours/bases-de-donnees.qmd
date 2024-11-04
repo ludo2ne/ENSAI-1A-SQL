@@ -40,6 +40,16 @@ Une **donnée** est une information brute qui possède :
 - une valeur
 :::
 
+### Où stocker des données
+
+::: {.incremental}
+- Fichier txt
+- Fichier csv
+- Fichier [json](https://www.json.org/json-fr.html){target="_blank"}
+- Fichier [parquet](https://parquet.apache.org/){target="_blank"}
+- Base de données
+:::
+
 
 ## Une base de données ?
 
@@ -93,6 +103,12 @@ stateDiagram
 
 - Organisée en tables
 - Lien entre les tables
+
+::: {.notes}
+Quelques tables sont gérables avec Excel ou Calc.
+
+Mais ça devient vite trop compliqué.
+:::
 
 ### NoSQL
 
@@ -327,10 +343,62 @@ Exemple :
 - Un employé a un supérieur
 
 
+## SGBD
 
+::: {.callout-important title="Définition"}
+Un **Système de Gestion de Bases de Données** est un logiciel qui permet de créer, gérer et manipuler des bases de données.
 
+Il fournit des outils pour stocker, récupérer, modifier et sécuriser les données.
+:::
 
+- **[PostgreSQL](https://www.postgresql.org/){target="_blank"}**
+- [MySQL](https://www.mysql.com/){target="_blank"}
+- [Oracle Database](https://www.oracle.com/database/){target="_blank"}
+- [SQLite](https://www.sqlite.org/){target="_blank"}
+- [MariaDB](https://mariadb.org/){target="_blank"}
 
+### PostgreSQL
+
+- Open Source, Libre
+- Communauté active
+- Stable et performant
+- Basé sur le modèle client-serveur
+- Extension [PostGIS](https://postgis.net/){target="_blank"} (Données géographiques)
+
+::: {.notes}
+utilisé à l'INSEE
+
+client-serveur classique : 
+
+- le composant serveur central « postmaster » gère tous les fichiers de bdd 
+- ainsi que toutes les connexions établies pour la communication avec le serveur de bdd. 
+
+Les utilisateurs n'ont besoin que d'un programme client approprié pour établir la connexion
+:::
+
+### Outil de Gestion et Administration
+
+Il est nécessaire d'avoir un **outil pour gérer et administrer** une base de données.
+
+::: {.callout-tip}
+- PostgreSQL : Installé sur un serveur, sert de moteur de base de données
+- pgAdmin : Interface graphique pour interagir avec PostgreSQL
+:::
+
+- [pgAdmin](https://www.pgadmin.org/){target="_blank"}
+- [DBeaver](https://dbeaver.io/){target="_blank"}
+
+### Kesako
+
+- Base de données : endroit où sont stockées les informations
+- SGBD : logiciel qui permet de créer, gérer et manipuler les bases de données
+- Outil de gestion du SGBD : application graphique qui facilite l'interaction avec un SGBD
+
+::: {.notes}
+- BDD : bibliothèque
+- SGBD : bibliothécaire
+- Outil : tableau de bord interactif pour les bibliothécaires
+:::
 
 
 ### Exemple

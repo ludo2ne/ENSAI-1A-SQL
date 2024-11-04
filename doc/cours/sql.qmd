@@ -28,6 +28,16 @@ Le SQL est un langage standardisé utilisé pour interagir avec des bases de don
 Il permet de créer, manipuler, interroger et gérer les données stockées dans des tables.
 :::
 
+### Norme SQL
+
+SQL est un language normé dont la dernière version est **SQL:2023**.
+
+::: {.callout-caution}
+Les SGBD ne respectent pas exactement la norme SQL.
+
+À un niveau avancé d'utilisation, il y a des différences entre les SGBD.
+:::
+
 ### Composantes du langage
 
 - Définition de Données
@@ -49,9 +59,7 @@ Il permet de créer, manipuler, interroger et gérer les données stockées dans
 
 ## Définition de Données
 
-#### CREATE
-
-Version simple
+### Créer une table
 
 ```{.sql}
 CREATE TABLE joueuse (
@@ -66,16 +74,18 @@ CREATE TABLE joueuse (
 );
 ```
 
----
+::: {.notes}
+C'est comme créer les colonnes d'un tableau.
+:::
 
-Version évoluée :
+### CREATE avancé
 
 ```{.sql}
 CREATE TABLE joueuse (
     id_joueuse     SERIAL          PRIMARY KEY,   
     nom            VARCHAR(50)     NOT NULL, 
     prenom         VARCHAR(50)     NOT NULL, 
-    date_naissance DATE,                 
+    date_naissance DATETIME,                 
     elo            INT             CHECK (elo > 0),  
     mail           VARCHAR(100),         
     est_arbitre    BOOLEAN         DEFAULT false,
@@ -84,26 +94,218 @@ CREATE TABLE joueuse (
 );
 ```
 
+### Bonnes pratiques
+
+- Nom de table représentatif et au singulier
+- Pas de majuscules, pas d'accents
+- Mots séparés par des underscores (snake_case)
+- Ne pas utiliser de mots clés réservés (date, user...)
+- Ne pas avoir de colonne qui porte le même nom que sa table
+
+::: {.notes}
+dans les requêtes : mots clés en majuscules
+:::
+
+### Modifier une colonne
+
+Modifier le type :
+
+```{.sql}
+ALTER TABLE joueuse
+ALTER COLUMN nom TYPE VARCHAR(80);
+```
+
+Renommer :
+
+```{.sql}
+ALTER TABLE joueuse
+RENAME COLUMN date_naissance TO dnais;
+```
+
+### Créer/Supprimer une colonne
+
+Ajout :
+
+```{.sql}
+ALTER TABLE joueuse
+ADD COLUMN titre VARCHAR(5);
+```
+
+Suppression :
+
+```{.sql}
+ALTER TABLE joueuse
+DROP COLUMN taux_victoires;
+```
+
+### Autres possibilités
+
+- Renommer une table
+- Ajouter / Supprimer une contrainte
+- Ajouter une clé étrangère
+- Définir / Supprimer une valeur par défaut
 
 
-#### ALTER
+### Supprimer une table
 
-#### DELETE
+```{.sql}
+DROP TABLE joueuse;
+```
+
+::: {.callout-warning}
+**Cette opération est irréversible !**
+
+ Elle supprime définitivement :
+ 
+ - la table
+ - toutes les données qu'elle contient
+:::
+
+```{.sql}
+DROP TABLE IF EXISTS joueuse;      -- utile pour les scripts SQL
+```
 
 
-### Manipulation de Données
+## Schéma
 
-#### SELECT
+Utile lorsque le nombre de table devient grand.
 
-#### INSERT
-
-#### UPDATE
-
-#### DELETE
+- Organisation des objets, clarté
+- Gestion des permissions
 
 
-### Schema
+```{.sql}
+CREATE SCHEMA echecs;
+```
 
+::: {.notes}
 - Vente de légume
-- Utiliser la même bdd pour la gestion RH (employe, contrat, conge)
+- Utiliser la même bdd pour la gestion RH, le métier et la compta
 - créer un schéma pour séparer les tables
+:::
+
+### Table dans un schéma
+
+```{.sql}
+CREATE TABLE echecs.club (
+    id_club          SERIAL          PRIMARY KEY,  
+    nom              VARCHAR(100)    NOT NULL,   
+    ville            VARCHAR(100)    NOT NULL, 
+    date_creation    DATE
+);
+```
+
+Déplacer la table *joueuse* dans le schéma *echecs* :
+
+```{.sql}
+ALTER TABLE joueuse SET SCHEMA echecs;
+```
+
+::: {.notes}
+C'est comme créer un fichier dans un dossier.
+
+Par défaut les objets sont créés dans le schéma `public`.
+:::
+
+
+## Manipulation de Données
+
+### Insérer des données
+
+```{.sql}
+INSERT INTO echecs.club 
+(nom,                              ville,            date_creation)
+VALUES           
+('C''Chartres Echecs',            'Chartres',        '1991-09-01'),
+('Bischwiller',                   'Bischwiller',     '1976-09-01'),
+('Asnieres - le Grand Echiquier', 'Asnieres',        '1987-03-20'),
+('Tours des Hauts-De-France',     'Saint-Quentin',   '1999-12-01');
+```
+
+:::::: {.fragment}
+::: {.callout-tip title="Où est la colonne id_club"}
+La colonne *id_club* est une séquence gérée par le SGBD.
+
+Les valeurs sont générées automatiquement à l'insertion et la séquence incrémentée.
+:::
+:::::: 
+
+:::{.notes}
+- Pas de double quotes en SQL !!!
+- '' : Pour ajouter un simple quote dans une chaine
+:::
+
+## Lire des données
+
+```{.sql}
+SELECT *
+  FROM echecs.club;
+```
+
+| id_club |            nom                   |     ville     | date_creation |
+|---------|----------------------------------|---------------|---------------|
+|    1    | C'Chartres Echecs                | Chartres      | 1991-09-01    |
+|    2    | Bischwiller                      | Bischwiller   | 1976-09-01    |
+|    3    | Asnieres - le Grand Echiquier    | Asnieres      | 1987-03-20    |
+|    4    | Tours des Hauts-De-France        | Saint-Quentin | 1999-12-01    |
+
+### Colonnes à afficher
+
+```{.sql}
+SELECT nom,
+       prenom,
+       elo
+  FROM echecs.joueuse;
+```
+
+| **nom**                | **prenom**       | **elo** |
+|------------------------|------------------|---------|
+| Guichard               | Pauline          | 2357    |
+| Daulyte-Cornette       | Deimante         | 2371    |
+| Navrotescu             | Andreea          | 2338    |
+| Sebag                  | Marie            | 2448    |
+| Millet                 | Sophie           | 2366    |
+| Skrichempko            | Almira           | 2361    |
+
+
+### Filter les lignes
+
+```{.sql}
+SELECT nom,
+       prenom,
+       elo
+  FROM echecs.joueuse
+ WHERE elo > 2400;
+```
+
+| **nom**                | **prenom**       | **elo** |
+|------------------------|------------------|---------|
+| Sebag                  | Marie            | 2448    |
+
+### Plusieurs filtres
+
+```{.sql}
+SELECT nom,
+       prenom,
+       elo
+  FROM echecs.joueuse
+ WHERE elo < 2400
+   AND prenom LIKE 'A%';
+```
+
+| **nom**                | **prenom**       | **elo** |
+|------------------------|------------------|---------|
+| Navrotescu             | Andreea          | 2338    |
+| Skrichempko            | Almira           | 2361    |
+
+BETWEEN
+OR
+IN
+NOT IN
+
+
+### UPDATE
+
+### DELETE
+
+
