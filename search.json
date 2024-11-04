@@ -11,21 +11,21 @@
     "href": "doc/cours/bases-de-donnees.html",
     "title": "Bases de Données",
     "section": "",
-    "text": "texte (nom, prénom, ville…)\nnumérique (age, prix…)\ndate\nliste (compétences, loisirs)\nimage\nfichier\n\n\n\n\n\n\n\n\n\nDéfinition\n\n\n\nUne donnée est une information brute qui a un type et une valeur."
+    "text": "texte (nom, prénom, ville…)\nnumérique (age, prix…)\ndate\nliste (compétences, loisirs)\nimage\nfichier\n\n\n\n\n\n\n\n\n\nDéfinition\n\n\n\nUne donnée est une information brute qui possède :\n\nun type\nune valeur"
   },
   {
     "objectID": "doc/cours/bases-de-donnees.html#une-donnée",
     "href": "doc/cours/bases-de-donnees.html#une-donnée",
     "title": "Bases de Données",
     "section": "",
-    "text": "texte (nom, prénom, ville…)\nnumérique (age, prix…)\ndate\nliste (compétences, loisirs)\nimage\nfichier\n\n\n\n\n\n\n\n\n\nDéfinition\n\n\n\nUne donnée est une information brute qui a un type et une valeur."
+    "text": "texte (nom, prénom, ville…)\nnumérique (age, prix…)\ndate\nliste (compétences, loisirs)\nimage\nfichier\n\n\n\n\n\n\n\n\n\nDéfinition\n\n\n\nUne donnée est une information brute qui possède :\n\nun type\nune valeur"
   },
   {
     "objectID": "doc/cours/bases-de-donnees.html#une-base-de-données",
     "href": "doc/cours/bases-de-donnees.html#une-base-de-données",
     "title": "Bases de Données",
     "section": "Une base de données ?",
-    "text": "Une base de données ?\n\n\n\n\n\n\n\nDéfinition\n\n\n\nUne base de données est un ensemble de données rassemblées et stockées d’une manière organisée dans un but spécifique.\n\n\n\n\nTypes ?\nOn n’utilise pas la même structure pour du texte ou des fichiers."
+    "text": "Une base de données ?\n\n\n\n\n\n\n\nDéfinition\n\n\n\nUne base de données est un ensemble de données rassemblées et stockées de manière organisée dans un but spécifique.\n\n\n\n\nTypes ?\nOn n’utilise pas la même structure pour du texte ou des fichiers."
   },
   {
     "objectID": "doc/cours/bases-de-donnees.html#enjeux",
@@ -46,7 +46,14 @@
     "href": "doc/cours/bases-de-donnees.html#base-de-données-relationnelle",
     "title": "Bases de Données",
     "section": "Base de données relationnelle",
-    "text": "Base de données relationnelle\n\nTables\n\nComposées de lignes et de colonnes\nChaque table représente une entité\nChaque ligne est un enregistrement unique\nChaque colonne représente un attribut de l’entité\nTypes de données : texte, num…\n\n\n\nRelations entre les tables\n\nClé primaire (PK) pour identifier chaque enregistrement dans une table\n\nde manière unique\nsans ambiguïté\n\nClé étrangère (FK) pour créer des liens avec d’autres tables\n\nattribut d’une table A\ncorrespond à la clé primaire d’une table B\n\n\n\n\nExemple\nComment relier ces 2 tables ?\n\nUn joueur joue pour un seul club\nUn club peut avoir plusieurs joueurs\n\n\n\n\n\n\nclassDiagram\n    class Joueur {\n        id_joueur PK\n        nom\n        prenom\n        elo\n    }\n    \n    class Club {\n        id_club PK\n        nom\n        ville\n    }\n\n\n\n\n\n\n\n\nClé étrangère\nEn ajoutant une clé étrangère.\n\n\n\n\n\nclassDiagram\n    class Joueur {\n        id_joueur PK\n        nom\n        prenom\n        elo\n        id_club FK\n    }\n    \n    class Club {\n        id_club PK\n        nom\n        ville\n    }\n\n\n\n\n\n\n\n\n\n\nid_joueur\nNom\nPrénom\nElo\n\n\n\n\n1\nVachier-Lagrave\nMaxime\n2737\n\n\n2\nFirouzja\nAlireza\n2763\n\n\n3\nBacrot\nÉtienne\n2653\n\n\n4\nSebag\nMarie\n2448\n\n\n5\nMillet\nSophie\n2366\n\n\n6\nSkrichempko\nAlmira\n2361\n\n\n\n\n\n\n\n\n\n\n\n\nid_club\nNom\nVille\n\n\n\n\n1\nC’Chartres Echecs\nChartres\n\n\n2\nBischwiller\nBischwiller\n\n\n3\nAsnieres - le Grand Echiquier\nAsnieres\n\n\n4\nTours des Hauts-De-France\nSaint Quentin\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nid_joueur\nNom\nPrénom\nElo\nid_club\n\n\n\n\n1\nVachier-Lagrave\nMaxime\n2737\n3\n\n\n2\nFirouzja\nAlireza\n2763\n1\n\n\n3\nBacrot\nÉtienne\n2653\n2\n\n\n4\nSebag\nMarie\n2448\n2\n\n\n5\nMillet\nSophie\n2366\n3\n\n\n6\nSkrichempko\nAlmira\n2361\n2\n\n\n\n\n\nClé primaire\n\nAttribut (ou ensemble d’attributs)\nUnique\nNon nulle\nImmuable\n\n\n\n\n\n\n\nTip\n\n\n\nSauf mention contraire, nous utiliserons une clé primaire “technique” : séquence.\n\n\n\nImmuable :\n\nidéalement stable, elle ne change pas au cours du temps\nPour maintenir l’intégrité des liens avec d’autres tables\n\nRemarque : pas obligatoire d’avoir une clé primaire\n\n\n\nQuestion\nSi un joueur peut appartenir à plusieurs clubs ?\n\nPar exemple si notre bdd contient aussi les clubs belges, allemands, espagnols…\n\n\n\n\nCréation d’une table d’association : adhesion\n\n\n\n\n\nclassDiagram\n    class Adhesion {\n        id_joueur FK\n        id_club FK\n    }\n\n\n\n\n\n\n\n\n\n\nid_club\nid_joueur\n\n\n\n\n1\n2\n\n\n2\n3\n\n\n2\n4\n\n\n2\n6\n\n\n3\n1\n\n\n3\n5\n\n\n4\n1\n\n\n4\n2\n\n\n\n\n\nExemple\nSite de vente de légumes\n\nClient   - id_client   - nom   - prenom   - mail\nProduit   - id_produit   - nom   - description   - prix\nCommande   - id_commande   - id_client\nLigneCommande   - id_ligne_commande   - id_commande   - id_produit   - quantite\n\nCREATE TABLE joueur ( id_joueur SERIAL PRIMARY KEY, – Clé primaire avec séquence nom VARCHAR(50) NOT NULL, – Nom du joueur prenom VARCHAR(50) NOT NULL, – Prénom du joueur date_naissance DATE, – Date de naissance elo INT CHECK (elo &gt; 0), – Elo positif mail VARCHAR(100), – Adresse email est_arbitre BOOLEAN DEFAULT false, – Indique si le joueur est arbitre, par défaut à false pays VARCHAR(50), – Pays d’origine poids FLOAT – Poids du joueur );"
+    "text": "Base de données relationnelle\n\nTable\n\nComposée de lignes et de colonnes\nChaque table représente une entité\nChaque ligne est un enregistrement\nChaque colonne représente un attribut de l’entité\nTypes de données : texte, num…\n\n\n\nRelations entre les tables\n\nClé primaire (PK) pour identifier chaque enregistrement dans une table\n\nde manière unique\nsans ambiguïté\n\nClé étrangère (FK) pour créer des liens avec d’autres tables\n\nattribut d’une table A\ncorrespond à la clé primaire d’une table B\n\n\n\n\nExemple\nComment relier ces 2 tables ?\n\nune joueuse joue pour un seul club\nUn club peut avoir plusieurs joueuses\n\n\n\n\n\n\nclassDiagram\n    class Joueuse {\n        id_joueuse PK\n        nom\n        prenom\n        elo\n    }\n    \n    class Club {\n        id_club PK\n        nom\n        ville\n    }\n\n\n\n\n\n\n\n\njoueuse\n\n\nid_joueuse\nnom\nprenom\nelo\n\n\n\n\n1\nGuichard\nPauline\n2357\n\n\n2\nDaulyte-Cornette\nDeimante\n2371\n\n\n3\nNavrotescu\nAndreea\n2338\n\n\n4\nSebag\nMarie\n2448\n\n\n5\nMillet\nSophie\n2366\n\n\n6\nSkrichempko\nAlmira\n2361\n\n\n\n\n\nclub\n\n\n\n\n\n\n\nid_club\nnom\nville\n\n\n\n\n1\nC’Chartres Echecs\nChartres\n\n\n2\nBischwiller\nBischwiller\n\n\n3\nAsnieres - le Grand Echiquier\nAsnieres\n\n\n4\nTours des Hauts-De-France\nSaint-Quentin\n\n\n\n\n\nClé étrangère\nEn ajoutant une clé étrangère.\n\n\n\n\n\nclassDiagram\n    class joueuse {\n        id_joueuse PK\n        nom\n        prenom\n        elo\n        id_club FK\n    }\n    \n    class Club {\n        id_club PK\n        nom\n        ville\n    }\n\n\n\n\n\n\n\n\njoueuse\n\n\n\n\n\n\n\n\n\nid_joueuse\nnom\nprenom\nelo\nid_club\n\n\n\n\n1\nGuichard\nPauline\n2357\n3\n\n\n2\nDaulyte\nDeimante\n2371\n1\n\n\n3\nNavrotescu\nAndreea\n2338\n2\n\n\n4\nSebag\nMarie\n2448\n2\n\n\n5\nMillet\nSophie\n2366\n3\n\n\n6\nSkrichempko\nAlmira\n2361\n2\n\n\n\n\n\nClé primaire\n\nAttribut (ou ensemble d’attributs)\nUnique\nNon nulle\nImmuable\n\n\n\n\n\n\n\nTip\n\n\n\nSauf mention contraire, nous utiliserons une clé primaire “technique” : séquence.\n\n\n\nImmuable :\n\nidéalement stable, elle ne change pas au cours du temps\nPour maintenir l’intégrité des liens avec d’autres tables\n\nRemarque : pas obligatoire d’avoir une clé primaire\n\n\n\nQuestion\nSi une joueuse peut adhérer à plusieurs clubs ? 😕\n\nPar exemple si notre bdd contient aussi les clubs belges, allemands, espagnols…\n\n\n\nTable d’association\nCréation d’une table d’association : adhesion 😅\n\n\n\n\n\nclassDiagram\n    class Adhesion {\n        id_joueuse FK\n        id_club FK\n    }\n\n\n\n\n\n\n\n\nadhesion\n\n\nid_club\nid_joueuse\n\n\n\n\n1\n2\n\n\n2\n3\n\n\n2\n4\n\n\n2\n6\n\n\n3\n1\n\n\n3\n5\n\n\n4\n1\n\n\n4\n2\n\n\n\n\nClé primaire ?\n\nid_adhesion\n(id_club, id_joueuse)"
+  },
+  {
+    "objectID": "doc/cours/bases-de-donnees.html#associations",
+    "href": "doc/cours/bases-de-donnees.html#associations",
+    "title": "Bases de Données",
+    "section": "Associations",
+    "text": "Associations\nIl existe plusieurs types d’associations entre tables.\n\nAssociation 1:1\nUne entité dans la table A est associée à une seule entité dans la table B.\nExemple :\n\nUne personne a une seule carte vitale\nUne carte vitale appartient à une seule personne\n\n\non aurait pu tout mettre dans la même table\n\n\n\nAssociation 1:n\nUne entité dans la table A peut-être associée à plusieurs entités dans la table B.\nExemple :\n\nUn club est composé de plusieurs joueuses\nUne joueuse adhère à un seul club\n\n\n\nAssociation n:n\nUne entité dans la table A peut-être associée à plusieurs entités dans la table B.\nEt inversement, une entité dans la table B peut-être associée à plusieurs entités dans la table A.\nExemple :\n\nune joueuse participe à plusieurs tournois\nUn tournoi regroupe plusieurs joueuses\n\n\n\nAssociation récursive\nUne table peut avoir des relations avec elle-même\nIci la table contient une clé étrangère qui référence sa propre clé primaire.\nExemple :\n\nUn employé a un supérieur\n\n\n\nExemple\nSite de vente de légumes\n\nClient   - id_client   - nom   - prenom   - mail\nProduit   - id_produit   - nom   - description   - prix\nCommande   - id_commande   - id_client\nLigneCommande   - id_ligne_commande   - id_commande   - id_produit   - quantite"
   },
   {
     "objectID": "doc/cours/bases-de-donnees-slides.html#une-donnée",
@@ -60,7 +67,7 @@
     "href": "doc/cours/bases-de-donnees-slides.html#une-base-de-données",
     "title": "Bases de Données",
     "section": "Une base de données ?",
-    "text": "Une base de données ?\n\n\n\n\n\n\n\n\nDéfinition\n\n\nUne base de données est un ensemble de données rassemblées et stockées d’une manière organisée dans un but spécifique.\n\n\n\n\n\n\nTypes ?\nOn n’utilise pas la même structure pour du texte ou des fichiers."
+    "text": "Une base de données ?\n\n\n\n\n\n\n\n\nDéfinition\n\n\nUne base de données est un ensemble de données rassemblées et stockées de manière organisée dans un but spécifique.\n\n\n\n\n\n\nTypes ?\nOn n’utilise pas la même structure pour du texte ou des fichiers."
   },
   {
     "objectID": "doc/cours/bases-de-donnees-slides.html#enjeux",
@@ -82,6 +89,13 @@
     "title": "Bases de Données",
     "section": "Base de données relationnelle",
     "text": "Base de données relationnelle"
+  },
+  {
+    "objectID": "doc/cours/bases-de-donnees-slides.html#associations",
+    "href": "doc/cours/bases-de-donnees-slides.html#associations",
+    "title": "Bases de Données",
+    "section": "Associations",
+    "text": "Associations\nIl existe plusieurs types d’associations entre tables."
   },
   {
     "objectID": "doc/tp/tp1.html",
@@ -189,10 +203,38 @@
     "text": "Bibliographie\n\nhttps://laurent-audibert.developpez.com/Cours-BD/?page=introduction-bases-de-donnees\nhttps://upinfo.univ-cotedazur.fr/im/bases-de-donnees/\nhttps://openclassrooms.com/fr/courses/6971126-implementez-vos-bases-de-donnees-relationnelles-avec-sql/7139618-decouvrez-le-systeme-de-gestion-de-base-de-donnees-sgbd\nhttps://oseox.fr/sql/"
   },
   {
+    "objectID": "doc/cours/sql-slides.html#structured-query-language",
+    "href": "doc/cours/sql-slides.html#structured-query-language",
+    "title": "SQL",
+    "section": "Structured Query Language",
+    "text": "Structured Query Language\n\n\n\n\n\n\n\nDéfinition\n\n\nLe SQL est un langage standardisé utilisé pour interagir avec des bases de données relationnelles.\nIl permet de créer, manipuler, interroger et gérer les données stockées dans des tables."
+  },
+  {
+    "objectID": "doc/cours/sql-slides.html#définition-de-données",
+    "href": "doc/cours/sql-slides.html#définition-de-données",
+    "title": "SQL",
+    "section": "Définition de Données",
+    "text": "Définition de Données"
+  },
+  {
     "objectID": "doc/cours/sql.html",
     "href": "doc/cours/sql.html",
     "title": "SQL",
     "section": "",
-    "text": "Le SQL (Structured Query Language) est un langage standardisé utilisé pour interagir avec des bases de données relationnelles. Il permet de créer, manipuler, interroger et gérer les données stockées dans des tables\nPlusieurs composantes du langage :\n\nManipulation de Données   - CRUD\nDéfinition de Données   - Créer/Modifier/Supprimer une table\nContrôle des Transactions   - BEGIn, COMMIT, ROLLBACK\nContrôle des Données   - GRANT REVOKE\n\n\nDéfinition de Données\n\nCREATE\nVersion simple\nCREATE TABLE joueur (     id_joueur INT,     nom TEXT,     prenom TEXT,     date_naissance DATE,     elo INT,     est_arbitre BOOLEAN,     code_pays TEXT );\nVersion évoluée\nCREATE TABLE joueur (     id_joueur SERIAL PRIMARY KEY,     nom VARCHAR(50) NOT NULL,     prenom VARCHAR(50) NOT NULL,     date_naissance DATE,     elo INT CHECK (elo &gt; 0),     est_arbitre BOOLEAN DEFAULT false,     code_pays VARCHAR(2) );\n\n\nALTER\n\n\nDELETE\n\n\n\nManipulation de Données\n\nSELECT\n\n\nINSERT\n\n\nUPDATE\n\n\nDELETE\n\n\n\nSchema\n\nVente de légume\nUtiliser la même bdd pour la gestion RH (employe, contrat, conge)\ncréer un schéma pour séparer les tables"
+    "text": "Définition\n\n\n\nLe SQL est un langage standardisé utilisé pour interagir avec des bases de données relationnelles.\nIl permet de créer, manipuler, interroger et gérer les données stockées dans des tables.\n\n\n\n\n\nDéfinition de Données\nManipulation de Données\nContrôle des Transactions\nContrôle d’accès aux Données\n\n\n\nManipulation de Données   - CRUD\nDéfinition de Données   - Créer/Modifier/Supprimer une table\nContrôle des Transactions   - BEGIN, COMMIT, ROLLBACK\nContrôle d’accès aux Données   - GRANT REVOKE"
+  },
+  {
+    "objectID": "doc/cours/sql.html#structured-query-language",
+    "href": "doc/cours/sql.html#structured-query-language",
+    "title": "SQL",
+    "section": "",
+    "text": "Définition\n\n\n\nLe SQL est un langage standardisé utilisé pour interagir avec des bases de données relationnelles.\nIl permet de créer, manipuler, interroger et gérer les données stockées dans des tables.\n\n\n\n\n\nDéfinition de Données\nManipulation de Données\nContrôle des Transactions\nContrôle d’accès aux Données\n\n\n\nManipulation de Données   - CRUD\nDéfinition de Données   - Créer/Modifier/Supprimer une table\nContrôle des Transactions   - BEGIN, COMMIT, ROLLBACK\nContrôle d’accès aux Données   - GRANT REVOKE"
+  },
+  {
+    "objectID": "doc/cours/sql.html#définition-de-données",
+    "href": "doc/cours/sql.html#définition-de-données",
+    "title": "SQL",
+    "section": "Définition de Données",
+    "text": "Définition de Données\n\nCREATE\nVersion simple\nCREATE TABLE joueuse (\n    id_joueuse     INT,\n    nom            TEXT,\n    prenom         TEXT,\n    date_naissance DATE,\n    elo            INT,\n    est_arbitre    BOOLEAN,\n    code_pays      TEXT,\n    taux_victoires FLOAT\n);\n\nVersion évoluée :\nCREATE TABLE joueuse (\n    id_joueuse     SERIAL          PRIMARY KEY,   \n    nom            VARCHAR(50)     NOT NULL, \n    prenom         VARCHAR(50)     NOT NULL, \n    date_naissance DATE,                 \n    elo            INT             CHECK (elo &gt; 0),  \n    mail           VARCHAR(100),         \n    est_arbitre    BOOLEAN         DEFAULT false,\n    code_pays      VARCHAR(2),          \n    taux_victoires FLOAT  \n);\n\n\nALTER\n\n\nDELETE\n\n\nManipulation de Données\n\nSELECT\n\n\nINSERT\n\n\nUPDATE\n\n\nDELETE\n\n\n\nSchema\n\nVente de légume\nUtiliser la même bdd pour la gestion RH (employe, contrat, conge)\ncréer un schéma pour séparer les tables"
   }
 ]

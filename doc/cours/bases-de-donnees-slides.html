@@ -344,14 +344,14 @@ Ludovic Deneuville
 <section>
 <section id="une-donnée" class="title-slide slide level2 center">
 <h2>Une donnée ?</h2>
-<div>
+<div class="fragment">
 <ul>
-<li class="fragment">texte (nom, prénom, ville…)</li>
-<li class="fragment">numérique (age, prix…)</li>
-<li class="fragment">date</li>
-<li class="fragment">liste (compétences, loisirs)</li>
-<li class="fragment">image</li>
-<li class="fragment">fichier</li>
+<li>texte (nom, prénom, ville…)</li>
+<li>numérique (age, prix…)</li>
+<li>date</li>
+<li>liste (compétences, loisirs)</li>
+<li>image</li>
+<li>fichier</li>
 </ul>
 </div>
 </section>
@@ -367,7 +367,11 @@ Ludovic Deneuville
 <p><strong>Définition</strong></p>
 </div>
 <div class="callout-content">
-<p>Une donnée est une information brute qui a un type et une valeur.</p>
+<p>Une <strong>donnée</strong> est une information brute qui possède :</p>
+<ul>
+<li>un type</li>
+<li>une valeur</li>
+</ul>
 </div>
 </div>
 </div>
@@ -386,7 +390,7 @@ Ludovic Deneuville
 <p><strong>Définition</strong></p>
 </div>
 <div class="callout-content">
-<p>Une base de données est un ensemble de données rassemblées et stockées d’une manière organisée dans un but spécifique.</p>
+<p>Une <strong>base de données</strong> est un ensemble de données rassemblées et stockées de manière organisée dans un but spécifique.</p>
 </div>
 </div>
 </div>
@@ -500,25 +504,25 @@ Ludovic Deneuville
 <h2>Base de données relationnelle</h2>
 
 </section>
-<section id="tables" class="slide level3">
-<h3>Tables</h3>
+<section id="table" class="slide level3">
+<h3>Table</h3>
 <ul>
-<li>Composées de lignes et de colonnes</li>
+<li>Composée de lignes et de colonnes</li>
 <li>Chaque table représente une entité</li>
-<li>Chaque ligne est un enregistrement unique</li>
-<li>Chaque colonne représente un attribut de l’entité</li>
+<li>Chaque <u>ligne</u> est un enregistrement</li>
+<li>Chaque <u>colonne</u> représente un attribut de l’entité</li>
 <li>Types de données : texte, num…</li>
 </ul>
 </section>
 <section id="relations-entre-les-tables" class="slide level3">
 <h3>Relations entre les tables</h3>
 <ul>
-<li><strong>Clé primaire</strong> (PK) pour identifier chaque enregistrement dans une table
+<li><u><strong>Clé primaire</strong></u> (PK) pour identifier chaque enregistrement dans une table
 <ul>
 <li>de manière unique</li>
 <li>sans ambiguïté</li>
 </ul></li>
-<li><strong>Clé étrangère</strong> (FK) pour créer des liens avec d’autres tables
+<li><u><strong>Clé étrangère</strong></u> (FK) pour créer des liens avec d’autres tables
 <ul>
 <li>attribut d’une table A</li>
 <li>correspond à la clé primaire d’une table B</li>
@@ -529,8 +533,8 @@ Ludovic Deneuville
 <h3>Exemple</h3>
 <p>Comment relier ces 2 tables ?</p>
 <ul>
-<li>Un joueur joue pour un seul club</li>
-<li>Un club peut avoir plusieurs joueurs</li>
+<li>une joueuse joue pour un seul club</li>
+<li>Un club peut avoir plusieurs joueuses</li>
 </ul>
 <div class="cell" data-reveal="true" data-layout-align="default">
 <div class="cell-output-display">
@@ -538,40 +542,11 @@ Ludovic Deneuville
 <p></p><figure class=""><p></p>
 <div>
 <pre class="mermaid mermaid-js">classDiagram
-    class Joueur {
-        id_joueur PK
+    class Joueuse {
+        id_joueuse PK
         nom
         prenom
         elo
-    }
-    
-    class Club {
-        id_club PK
-        nom
-        ville
-    }
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-</section>
-<section id="clé-étrangère" class="slide level3">
-<h3>Clé étrangère</h3>
-<p>En ajoutant une clé étrangère.</p>
-<div class="cell" data-reveal="true" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class=""><p></p>
-<div>
-<pre class="mermaid mermaid-js">classDiagram
-    class Joueur {
-        id_joueur PK
-        nom
-        prenom
-        elo
-        id_club FK
     }
     
     class Club {
@@ -589,32 +564,33 @@ Ludovic Deneuville
 <section class="slide level3">
 
 <table class="caption-top">
+<caption>joueuse</caption>
 <thead>
 <tr class="header">
-<th><strong>id_joueur</strong></th>
-<th><strong>Nom</strong></th>
-<th><strong>Prénom</strong></th>
-<th><strong>Elo</strong></th>
+<th><strong>id_joueuse</strong></th>
+<th><strong>nom</strong></th>
+<th><strong>prenom</strong></th>
+<th><strong>elo</strong></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>1</td>
-<td>Vachier-Lagrave</td>
-<td>Maxime</td>
-<td>2737</td>
+<td>Guichard</td>
+<td>Pauline</td>
+<td>2357</td>
 </tr>
 <tr class="even">
 <td>2</td>
-<td>Firouzja</td>
-<td>Alireza</td>
-<td>2763</td>
+<td>Daulyte-Cornette</td>
+<td>Deimante</td>
+<td>2371</td>
 </tr>
 <tr class="odd">
 <td>3</td>
-<td>Bacrot</td>
-<td>Étienne</td>
-<td>2653</td>
+<td>Navrotescu</td>
+<td>Andreea</td>
+<td>2338</td>
 </tr>
 <tr class="even">
 <td>4</td>
@@ -640,16 +616,17 @@ Ludovic Deneuville
 <section class="slide level3">
 
 <table class="caption-top">
+<caption>club</caption>
 <colgroup>
-<col style="width: 20%">
-<col style="width: 48%">
-<col style="width: 31%">
+<col style="width: 15%">
+<col style="width: 55%">
+<col style="width: 30%">
 </colgroup>
 <thead>
 <tr class="header">
 <th><strong>id_club</strong></th>
-<th><strong>Nom</strong></th>
-<th><strong>Ville</strong></th>
+<th><strong>nom</strong></th>
+<th><strong>ville</strong></th>
 </tr>
 </thead>
 <tbody>
@@ -671,14 +648,44 @@ Ludovic Deneuville
 <tr class="even">
 <td>4</td>
 <td>Tours des Hauts-De-France</td>
-<td>Saint Quentin</td>
+<td>Saint-Quentin</td>
 </tr>
 </tbody>
 </table>
 </section>
+<section id="clé-étrangère" class="slide level3">
+<h3>Clé étrangère</h3>
+<p>En ajoutant une clé étrangère.</p>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">classDiagram
+    class joueuse {
+        id_joueuse PK
+        nom
+        prenom
+        elo
+        id_club FK
+    }
+    
+    class Club {
+        id_club PK
+        nom
+        ville
+    }
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
 <section class="slide level3">
 
 <table class="caption-top" style="width:100%;">
+<caption>joueuse</caption>
 <colgroup>
 <col style="width: 19%">
 <col style="width: 29%">
@@ -688,33 +695,33 @@ Ludovic Deneuville
 </colgroup>
 <thead>
 <tr class="header">
-<th><strong>id_joueur</strong></th>
-<th><strong>Nom</strong></th>
-<th><strong>Prénom</strong></th>
-<th><strong>Elo</strong></th>
+<th><strong>id_joueuse</strong></th>
+<th><strong>nom</strong></th>
+<th><strong>prenom</strong></th>
+<th><strong>elo</strong></th>
 <th><strong>id_club</strong></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td>1</td>
-<td>Vachier-Lagrave</td>
-<td>Maxime</td>
-<td>2737</td>
+<td>Guichard</td>
+<td>Pauline</td>
+<td>2357</td>
 <td>3</td>
 </tr>
 <tr class="even">
 <td>2</td>
-<td>Firouzja</td>
-<td>Alireza</td>
-<td>2763</td>
+<td>Daulyte</td>
+<td>Deimante</td>
+<td>2371</td>
 <td>1</td>
 </tr>
 <tr class="odd">
 <td>3</td>
-<td>Bacrot</td>
-<td>Étienne</td>
-<td>2653</td>
+<td>Navrotescu</td>
+<td>Andreea</td>
+<td>2338</td>
 <td>2</td>
 </tr>
 <tr class="even">
@@ -783,7 +790,7 @@ Ludovic Deneuville
 </section>
 <section id="question" class="slide level3">
 <h3>Question</h3>
-<p>Si un joueur peut appartenir à plusieurs clubs ?</p>
+<p>Si une joueuse peut adhérer à plusieurs clubs ? <span class="emoji" data-emoji="confused">😕</span></p>
 <aside class="notes">
 <p>Par exemple si notre bdd contient aussi les clubs belges, allemands, espagnols…</p>
 <style type="text/css">
@@ -798,9 +805,9 @@ Ludovic Deneuville
           display:block!important;
       }</style></aside>
 </section>
-<section id="section" class="slide level3">
-<h3></h3>
-<p>Création d’une table d’association : <strong>adhesion</strong></p>
+<section id="table-dassociation" class="slide level3">
+<h3>Table d’association</h3>
+<p>Création d’une table d’association : <strong>adhesion</strong> <span class="emoji" data-emoji="sweat_smile">😅</span></p>
 <div class="cell" data-reveal="true" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -808,7 +815,7 @@ Ludovic Deneuville
 <div>
 <pre class="mermaid mermaid-js">classDiagram
     class Adhesion {
-        id_joueur FK
+        id_joueuse FK
         id_club FK
     }
 </pre>
@@ -821,10 +828,11 @@ Ludovic Deneuville
 <section class="slide level3">
 
 <table class="caption-top">
+<caption>adhesion</caption>
 <thead>
 <tr class="header">
 <th><strong>id_club</strong></th>
-<th><strong>id_joueur</strong></th>
+<th><strong>id_joueuse</strong></th>
 </tr>
 </thead>
 <tbody>
@@ -862,6 +870,78 @@ Ludovic Deneuville
 </tr>
 </tbody>
 </table>
+<aside class="notes">
+<p>Clé primaire ?</p>
+<ul>
+<li>id_adhesion</li>
+<li>(id_club, id_joueuse)</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="associations" class="title-slide slide level2 center">
+<h2>Associations</h2>
+<p>Il existe plusieurs types d’associations entre tables.</p>
+</section>
+<section id="association-11" class="slide level3">
+<h3>Association 1:1</h3>
+<p>Une entité dans la table A est associée à une seule entité dans la table B.</p>
+<p>Exemple :</p>
+<ul>
+<li>Une personne a une seule carte vitale</li>
+<li>Une carte vitale appartient à une seule personne</li>
+</ul>
+<aside class="notes">
+<p>on aurait pu tout mettre dans la même table</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="association-1n" class="slide level3">
+<h3>Association 1:n</h3>
+<p>Une entité dans la table A peut-être associée à plusieurs entités dans la table B.</p>
+<p>Exemple :</p>
+<ul>
+<li>Un club est composé de plusieurs joueuses</li>
+<li>Une joueuse adhère à un seul club</li>
+</ul>
+</section>
+<section id="association-nn" class="slide level3">
+<h3>Association n:n</h3>
+<p>Une entité dans la table A peut-être associée à plusieurs entités dans la table B.</p>
+<p>Et inversement, une entité dans la table B peut-être associée à plusieurs entités dans la table A.</p>
+<p>Exemple :</p>
+<ul>
+<li>une joueuse participe à plusieurs tournois</li>
+<li>Un tournoi regroupe plusieurs joueuses</li>
+</ul>
+</section>
+<section id="association-récursive" class="slide level3">
+<h3>Association récursive</h3>
+<p>Une table peut avoir des relations avec elle-même</p>
+<p>Ici la table contient une clé étrangère qui référence sa propre clé primaire.</p>
+<p>Exemple :</p>
+<ul>
+<li>Un employé a un supérieur</li>
+</ul>
 </section>
 <section id="exemple-1" class="slide level3">
 <h3>Exemple</h3>
@@ -872,7 +952,6 @@ Ludovic Deneuville
 <li>Commande &nbsp; - id_commande &nbsp; - id_client</li>
 <li>LigneCommande &nbsp; - id_ligne_commande &nbsp; - id_commande &nbsp; - id_produit &nbsp; - quantite</li>
 </ul>
-<p>CREATE TABLE joueur ( id_joueur SERIAL PRIMARY KEY, – Clé primaire avec séquence nom VARCHAR(50) NOT NULL, – Nom du joueur prenom VARCHAR(50) NOT NULL, – Prénom du joueur date_naissance DATE, – Date de naissance elo INT CHECK (elo &gt; 0), – Elo positif mail VARCHAR(100), – Adresse email est_arbitre BOOLEAN DEFAULT false, – Indique si le joueur est arbitre, par défaut à false pays VARCHAR(50), – Pays d’origine poids FLOAT – Poids du joueur );</p>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">

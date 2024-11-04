@@ -22,6 +22,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -151,12 +185,19 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    
+    <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul class="collapse">
+  <li><a href="#structured-query-language" id="toc-structured-query-language" class="nav-link active" data-scroll-target="#structured-query-language">Structured Query Language</a></li>
+  <li><a href="#définition-de-données" id="toc-définition-de-données" class="nav-link" data-scroll-target="#définition-de-données">Définition de Données</a></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="sql-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-    <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="sql-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></div>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -190,29 +231,74 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Le SQL (Structured Query Language) est un langage standardisé utilisé pour interagir avec des bases de données relationnelles. Il permet de créer, manipuler, interroger et gérer les données stockées dans des tables</p>
-<p>Plusieurs composantes du langage :</p>
+<section id="structured-query-language" class="level2">
+<h2 class="anchored" data-anchor-id="structured-query-language">Structured Query Language</h2>
+<div class="callout callout-style-default callout-note callout-titled" title="Définition">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Définition
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Le SQL est un langage standardisé utilisé pour interagir avec des bases de données relationnelles.</p>
+<p>Il permet de créer, manipuler, interroger et gérer les données stockées dans des tables.</p>
+</div>
+</div>
+<section id="composantes-du-langage" class="level3">
+<h3 class="anchored" data-anchor-id="composantes-du-langage">Composantes du langage</h3>
+<ul>
+<li>Définition de Données</li>
+<li>Manipulation de Données</li>
+<li>Contrôle des Transactions</li>
+<li>Contrôle d’accès aux Données</li>
+</ul>
+<div class="notes">
 <ul>
 <li>Manipulation de Données &nbsp; - CRUD</li>
 <li>Définition de Données &nbsp; - Créer/Modifier/Supprimer une table</li>
-<li>Contrôle des Transactions &nbsp; - BEGIn, COMMIT, ROLLBACK</li>
-<li>Contrôle des Données &nbsp; - GRANT REVOKE</li>
+<li>Contrôle des Transactions &nbsp; - BEGIN, COMMIT, ROLLBACK</li>
+<li>Contrôle d’accès aux Données &nbsp; - GRANT REVOKE</li>
 </ul>
-<section id="définition-de-données" class="level3">
-<h3 class="anchored" data-anchor-id="définition-de-données">Définition de Données</h3>
+</div>
+</section>
+</section>
+<section id="définition-de-données" class="level2">
+<h2 class="anchored" data-anchor-id="définition-de-données">Définition de Données</h2>
 <section id="create" class="level4">
 <h4 class="anchored" data-anchor-id="create">CREATE</h4>
 <p>Version simple</p>
-<p>CREATE TABLE joueur ( &nbsp; &nbsp; id_joueur INT, &nbsp; &nbsp; nom TEXT, &nbsp; &nbsp; prenom TEXT, &nbsp; &nbsp; date_naissance DATE, &nbsp; &nbsp; elo INT, &nbsp; &nbsp; est_arbitre BOOLEAN, &nbsp; &nbsp; code_pays TEXT );</p>
-<p>Version évoluée</p>
-<p>CREATE TABLE joueur ( &nbsp; &nbsp; id_joueur SERIAL PRIMARY KEY, &nbsp; &nbsp; nom VARCHAR(50) NOT NULL, &nbsp; &nbsp; prenom VARCHAR(50) NOT NULL, &nbsp; &nbsp; date_naissance DATE, &nbsp; &nbsp; elo INT CHECK (elo &gt; 0), &nbsp; &nbsp; est_arbitre BOOLEAN DEFAULT false, &nbsp; &nbsp; code_pays VARCHAR(2) );</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> joueuse (</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>&nbsp; &nbsp; id_joueuse     <span class="dt">INT</span>,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>&nbsp; &nbsp; nom            TEXT,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>&nbsp; &nbsp; prenom         TEXT,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>&nbsp; &nbsp; date_naissance <span class="dt">DATE</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>&nbsp; &nbsp; elo            <span class="dt">INT</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>&nbsp; &nbsp; est_arbitre    <span class="dt">BOOLEAN</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>&nbsp; &nbsp; code_pays      TEXT,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    taux_victoires <span class="dt">FLOAT</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<hr>
+<p>Version évoluée :</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> joueuse (</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    id_joueuse     SERIAL          <span class="kw">PRIMARY</span> <span class="kw">KEY</span>,   </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    nom            <span class="dt">VARCHAR</span>(<span class="dv">50</span>)     <span class="kw">NOT</span> <span class="kw">NULL</span>, </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    prenom         <span class="dt">VARCHAR</span>(<span class="dv">50</span>)     <span class="kw">NOT</span> <span class="kw">NULL</span>, </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    date_naissance <span class="dt">DATE</span>,                 </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    elo            <span class="dt">INT</span>             <span class="kw">CHECK</span> (elo <span class="op">&gt;</span> <span class="dv">0</span>),  </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    mail           <span class="dt">VARCHAR</span>(<span class="dv">100</span>),         </span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    est_arbitre    <span class="dt">BOOLEAN</span>         <span class="kw">DEFAULT</span> <span class="kw">false</span>,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    code_pays      <span class="dt">VARCHAR</span>(<span class="dv">2</span>),          </span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    taux_victoires <span class="dt">FLOAT</span>  </span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="alter" class="level4">
 <h4 class="anchored" data-anchor-id="alter">ALTER</h4>
 </section>
 <section id="delete" class="level4">
 <h4 class="anchored" data-anchor-id="delete">DELETE</h4>
-</section>
 </section>
 <section id="manipulation-de-données" class="level3">
 <h3 class="anchored" data-anchor-id="manipulation-de-données">Manipulation de Données</h3>
@@ -238,6 +324,7 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
