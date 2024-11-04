@@ -11,14 +11,14 @@
     "href": "doc/cours/bases-de-donnees.html",
     "title": "Bases de Données",
     "section": "",
-    "text": "texte (nom, prénom, ville…)\nnumérique (age, prix…)\ndate\nliste (compétences, loisirs)\nimage\nfichier\n\n\n\n\n\n\n\n\n\nDéfinition\n\n\n\nUne donnée est une information brute qui possède :\n\nun type\nune valeur"
+    "text": "texte (nom, prénom, ville…)\nnumérique (age, prix…)\ndate\nliste (compétences, loisirs)\nimage\nfichier\n\n\n\n\n\n\n\n\n\nDéfinition\n\n\n\nUne donnée est une information brute qui possède :\n\nun type\nune valeur\n\n\n\n\n\n\n\nFichier txt\nFichier csv\nFichier json\nFichier parquet\nBase de données"
   },
   {
     "objectID": "doc/cours/bases-de-donnees.html#une-donnée",
     "href": "doc/cours/bases-de-donnees.html#une-donnée",
     "title": "Bases de Données",
     "section": "",
-    "text": "texte (nom, prénom, ville…)\nnumérique (age, prix…)\ndate\nliste (compétences, loisirs)\nimage\nfichier\n\n\n\n\n\n\n\n\n\nDéfinition\n\n\n\nUne donnée est une information brute qui possède :\n\nun type\nune valeur"
+    "text": "texte (nom, prénom, ville…)\nnumérique (age, prix…)\ndate\nliste (compétences, loisirs)\nimage\nfichier\n\n\n\n\n\n\n\n\n\nDéfinition\n\n\n\nUne donnée est une information brute qui possède :\n\nun type\nune valeur\n\n\n\n\n\n\n\nFichier txt\nFichier csv\nFichier json\nFichier parquet\nBase de données"
   },
   {
     "objectID": "doc/cours/bases-de-donnees.html#une-base-de-données",
@@ -39,7 +39,7 @@
     "href": "doc/cours/bases-de-donnees.html#types-de-bases-de-données",
     "title": "Bases de Données",
     "section": "Types de bases de données",
-    "text": "Types de bases de données\n\nHiérarchique\n\nDonnées organisées comme un arbre\nRelations de type parent-enfant\nAnnuaires LDAP, système de fichiers\n\n\n\n\n\n\nstateDiagram \n    ENSAI --&gt; Permanent\n    ENSAI --&gt; Eleve\n    Permanent --&gt; Enseignant\n    Permanent --&gt; Administratif\n    Eleve --&gt; 1A\n    Eleve --&gt; 2A\n    Eleve --&gt; 3A\n\n\n\n\n\n\n\n\nRéseau\n\nOrganisée en graphe\nLes enregistrements peuvent avoir plusieurs parents et enfants\nRéseaux de transports  \n\n\n\nRelationnelle\n\nOrganisée en tables\nLien entre les tables\n\n\n\nNoSQL\nNombreux sous-types :\n\nClé-valeur : données sous forme de paires clé-valeur (DynamoDB)\nColonnes : Organisée en colonnes, adaptée aux grandes quantités de données (Cassandra)\nDocument : Stocke des documents semi-structurés (JSON, XML) (MongoDB)\nGraphes : Organisée sous forme de nœuds et de relations, pour des données très connectées (Neo4j)\n\n\nNot Only SQL\n\n\n\nAutres\n\nBases de données de séries temporelles"
+    "text": "Types de bases de données\n\nHiérarchique\n\nDonnées organisées comme un arbre\nRelations de type parent-enfant\nAnnuaires LDAP, système de fichiers\n\n\n\n\n\n\nstateDiagram \n    ENSAI --&gt; Permanent\n    ENSAI --&gt; Eleve\n    Permanent --&gt; Enseignant\n    Permanent --&gt; Administratif\n    Eleve --&gt; 1A\n    Eleve --&gt; 2A\n    Eleve --&gt; 3A\n\n\n\n\n\n\n\n\nRéseau\n\nOrganisée en graphe\nLes enregistrements peuvent avoir plusieurs parents et enfants\nRéseaux de transports  \n\n\n\nRelationnelle\n\nOrganisée en tables\nLien entre les tables\n\n\nQuelques tables sont gérables avec Excel ou Calc.\nMais ça devient vite trop compliqué.\n\n\n\nNoSQL\nNombreux sous-types :\n\nClé-valeur : données sous forme de paires clé-valeur (DynamoDB)\nColonnes : Organisée en colonnes, adaptée aux grandes quantités de données (Cassandra)\nDocument : Stocke des documents semi-structurés (JSON, XML) (MongoDB)\nGraphes : Organisée sous forme de nœuds et de relations, pour des données très connectées (Neo4j)\n\n\nNot Only SQL\n\n\n\nAutres\n\nBases de données de séries temporelles"
   },
   {
     "objectID": "doc/cours/bases-de-donnees.html#base-de-données-relationnelle",
@@ -53,7 +53,14 @@
     "href": "doc/cours/bases-de-donnees.html#associations",
     "title": "Bases de Données",
     "section": "Associations",
-    "text": "Associations\nIl existe plusieurs types d’associations entre tables.\n\nAssociation 1:1\nUne entité dans la table A est associée à une seule entité dans la table B.\nExemple :\n\nUne personne a une seule carte vitale\nUne carte vitale appartient à une seule personne\n\n\non aurait pu tout mettre dans la même table\n\n\n\nAssociation 1:n\nUne entité dans la table A peut-être associée à plusieurs entités dans la table B.\nExemple :\n\nUn club est composé de plusieurs joueuses\nUne joueuse adhère à un seul club\n\n\n\nAssociation n:n\nUne entité dans la table A peut-être associée à plusieurs entités dans la table B.\nEt inversement, une entité dans la table B peut-être associée à plusieurs entités dans la table A.\nExemple :\n\nune joueuse participe à plusieurs tournois\nUn tournoi regroupe plusieurs joueuses\n\n\n\nAssociation récursive\nUne table peut avoir des relations avec elle-même\nIci la table contient une clé étrangère qui référence sa propre clé primaire.\nExemple :\n\nUn employé a un supérieur\n\n\n\nExemple\nSite de vente de légumes\n\nClient   - id_client   - nom   - prenom   - mail\nProduit   - id_produit   - nom   - description   - prix\nCommande   - id_commande   - id_client\nLigneCommande   - id_ligne_commande   - id_commande   - id_produit   - quantite"
+    "text": "Associations\nIl existe plusieurs types d’associations entre tables.\n\nAssociation 1:1\nUne entité dans la table A est associée à une seule entité dans la table B.\nExemple :\n\nUne personne a une seule carte vitale\nUne carte vitale appartient à une seule personne\n\n\non aurait pu tout mettre dans la même table\n\n\n\nAssociation 1:n\nUne entité dans la table A peut-être associée à plusieurs entités dans la table B.\nExemple :\n\nUn club est composé de plusieurs joueuses\nUne joueuse adhère à un seul club\n\n\n\nAssociation n:n\nUne entité dans la table A peut-être associée à plusieurs entités dans la table B.\nEt inversement, une entité dans la table B peut-être associée à plusieurs entités dans la table A.\nExemple :\n\nune joueuse participe à plusieurs tournois\nUn tournoi regroupe plusieurs joueuses\n\n\n\nAssociation récursive\nUne table peut avoir des relations avec elle-même\nIci la table contient une clé étrangère qui référence sa propre clé primaire.\nExemple :\n\nUn employé a un supérieur"
+  },
+  {
+    "objectID": "doc/cours/bases-de-donnees.html#sgbd",
+    "href": "doc/cours/bases-de-donnees.html#sgbd",
+    "title": "Bases de Données",
+    "section": "SGBD",
+    "text": "SGBD\n\n\n\n\n\n\nDéfinition\n\n\n\nUn Système de Gestion de Bases de Données est un logiciel qui permet de créer, gérer et manipuler des bases de données.\nIl fournit des outils pour stocker, récupérer, modifier et sécuriser les données.\n\n\n\nPostgreSQL\nMySQL\nOracle Database\nSQLite\nMariaDB\n\n\nPostgreSQL\n\nOpen Source, Libre\nCommunauté active\nStable et performant\nBasé sur le modèle client-serveur\nExtension PostGIS (Données géographiques)\n\n\nutilisé à l’INSEE\nclient-serveur classique :\n\nle composant serveur central « postmaster » gère tous les fichiers de bdd\nainsi que toutes les connexions établies pour la communication avec le serveur de bdd.\n\nLes utilisateurs n’ont besoin que d’un programme client approprié pour établir la connexion\n\n\n\nOutil de Gestion et Administration\nIl est nécessaire d’avoir un outil pour gérer et administrer une base de données.\n\n\n\n\n\n\nTip\n\n\n\n\nPostgreSQL : Installé sur un serveur, sert de moteur de base de données\npgAdmin : Interface graphique pour interagir avec PostgreSQL\n\n\n\n\npgAdmin\nDBeaver\n\n\n\nKesako\n\nBase de données : endroit où sont stockées les informations\nSGBD : logiciel qui permet de créer, gérer et manipuler les bases de données\nOutil de gestion du SGBD : application graphique qui facilite l’interaction avec un SGBD\n\n\n\nBDD : bibliothèque\nSGBD : bibliothécaire\nOutil : tableau de bord interactif pour les bibliothécaires\n\n\n\n\nExemple\nSite de vente de légumes\n\nClient   - id_client   - nom   - prenom   - mail\nProduit   - id_produit   - nom   - description   - prix\nCommande   - id_commande   - id_client\nLigneCommande   - id_ligne_commande   - id_commande   - id_produit   - quantite"
   },
   {
     "objectID": "doc/cours/bases-de-donnees-slides.html#une-donnée",
@@ -96,6 +103,13 @@
     "title": "Bases de Données",
     "section": "Associations",
     "text": "Associations\nIl existe plusieurs types d’associations entre tables."
+  },
+  {
+    "objectID": "doc/cours/bases-de-donnees-slides.html#sgbd",
+    "href": "doc/cours/bases-de-donnees-slides.html#sgbd",
+    "title": "Bases de Données",
+    "section": "SGBD",
+    "text": "SGBD\n\n\n\n\n\n\n\nDéfinition\n\n\nUn Système de Gestion de Bases de Données est un logiciel qui permet de créer, gérer et manipuler des bases de données.\nIl fournit des outils pour stocker, récupérer, modifier et sécuriser les données.\n\n\n\n\n\nPostgreSQL\nMySQL\nOracle Database\nSQLite\nMariaDB"
   },
   {
     "objectID": "doc/tp/tp1.html",
@@ -147,6 +161,13 @@
     "text": "SQL\n\nSyntaxe simple\nEfficace\nTrès utilisé\n\n\n\nc’est LA compétence à avoir\nça s’encapsule dans plein de langages (R, Python, Julia, Stata, SAS…)\nutile pour Big Data"
   },
   {
+    "objectID": "doc/cours/intro-slides.html#les-tp",
+    "href": "doc/cours/intro-slides.html#les-tp",
+    "title": "Bases de Données Relationnelles et SQL",
+    "section": "Les TP",
+    "text": "Les TP\n\n5 TP + 1 TD\nDatalab\ncloudBeaver"
+  },
+  {
     "objectID": "doc/cours/intro-slides.html#évaluation",
     "href": "doc/cours/intro-slides.html#évaluation",
     "title": "Bases de Données Relationnelles et SQL",
@@ -158,7 +179,7 @@
     "href": "doc/cours/intro-slides.html#bibliographie",
     "title": "Bases de Données Relationnelles et SQL",
     "section": "Bibliographie",
-    "text": "Bibliographie\n\nhttps://laurent-audibert.developpez.com/Cours-BD/?page=introduction-bases-de-donnees\nhttps://upinfo.univ-cotedazur.fr/im/bases-de-donnees/\nhttps://openclassrooms.com/fr/courses/6971126-implementez-vos-bases-de-donnees-relationnelles-avec-sql/7139618-decouvrez-le-systeme-de-gestion-de-base-de-donnees-sgbd\nhttps://oseox.fr/sql/\n\n\n\n\nHome — Introduction à SQL"
+    "text": "Bibliographie\n\nhttps://laurent-audibert.developpez.com/Cours-BD/?page=introduction-bases-de-donnees\nhttps://upinfo.univ-cotedazur.fr/im/bases-de-donnees/\nhttps://openclassrooms.com/fr/courses/6971126-implementez-vos-bases-de-donnees-relationnelles-avec-sql/7139618-decouvrez-le-systeme-de-gestion-de-base-de-donnees-sgbd\nhttps://oseox.fr/sql/\nhttps://learnsql.fr/blog/aide-memoire-pour-les-entretiens-sql/\n\n\n\n\nHome — Introduction à SQL"
   },
   {
     "objectID": "doc/cours/intro.html",
@@ -189,6 +210,13 @@
     "text": "SQL\n\nSyntaxe simple\nEfficace\nTrès utilisé\n\n\n\nc’est LA compétence à avoir\nça s’encapsule dans plein de langages (R, Python, Julia, Stata, SAS…)\nutile pour Big Data"
   },
   {
+    "objectID": "doc/cours/intro.html#les-tp",
+    "href": "doc/cours/intro.html#les-tp",
+    "title": "Bases de Données Relationnelles et SQL",
+    "section": "Les TP",
+    "text": "Les TP\n\n5 TP + 1 TD\nDatalab\ncloudBeaver"
+  },
+  {
     "objectID": "doc/cours/intro.html#évaluation",
     "href": "doc/cours/intro.html#évaluation",
     "title": "Bases de Données Relationnelles et SQL",
@@ -200,7 +228,7 @@
     "href": "doc/cours/intro.html#bibliographie",
     "title": "Bases de Données Relationnelles et SQL",
     "section": "Bibliographie",
-    "text": "Bibliographie\n\nhttps://laurent-audibert.developpez.com/Cours-BD/?page=introduction-bases-de-donnees\nhttps://upinfo.univ-cotedazur.fr/im/bases-de-donnees/\nhttps://openclassrooms.com/fr/courses/6971126-implementez-vos-bases-de-donnees-relationnelles-avec-sql/7139618-decouvrez-le-systeme-de-gestion-de-base-de-donnees-sgbd\nhttps://oseox.fr/sql/"
+    "text": "Bibliographie\n\nhttps://laurent-audibert.developpez.com/Cours-BD/?page=introduction-bases-de-donnees\nhttps://upinfo.univ-cotedazur.fr/im/bases-de-donnees/\nhttps://openclassrooms.com/fr/courses/6971126-implementez-vos-bases-de-donnees-relationnelles-avec-sql/7139618-decouvrez-le-systeme-de-gestion-de-base-de-donnees-sgbd\nhttps://oseox.fr/sql/\nhttps://learnsql.fr/blog/aide-memoire-pour-les-entretiens-sql/"
   },
   {
     "objectID": "doc/cours/sql-slides.html#structured-query-language",
@@ -217,24 +245,66 @@
     "text": "Définition de Données"
   },
   {
+    "objectID": "doc/cours/sql-slides.html#schéma",
+    "href": "doc/cours/sql-slides.html#schéma",
+    "title": "SQL",
+    "section": "Schéma",
+    "text": "Schéma\nUtile lorsque le nombre de table devient grand.\n\nOrganisation des objets, clarté\nGestion des permissions\n\nCREATE SCHEMA echecs;\n\n\nVente de légume\nUtiliser la même bdd pour la gestion RH, le métier et la compta\ncréer un schéma pour séparer les tables"
+  },
+  {
+    "objectID": "doc/cours/sql-slides.html#manipulation-de-données",
+    "href": "doc/cours/sql-slides.html#manipulation-de-données",
+    "title": "SQL",
+    "section": "Manipulation de Données",
+    "text": "Manipulation de Données"
+  },
+  {
+    "objectID": "doc/cours/sql-slides.html#lire-des-données",
+    "href": "doc/cours/sql-slides.html#lire-des-données",
+    "title": "SQL",
+    "section": "Lire des données",
+    "text": "Lire des données\nSELECT *\n  FROM echecs.club;\n\n\n\n\n\n\n\n\n\nid_club\nnom\nville\ndate_creation\n\n\n\n\n1\nC’Chartres Echecs\nChartres\n1991-09-01\n\n\n2\nBischwiller\nBischwiller\n1976-09-01\n\n\n3\nAsnieres - le Grand Echiquier\nAsnieres\n1987-03-20\n\n\n4\nTours des Hauts-De-France\nSaint-Quentin\n1999-12-01"
+  },
+  {
     "objectID": "doc/cours/sql.html",
     "href": "doc/cours/sql.html",
     "title": "SQL",
     "section": "",
-    "text": "Définition\n\n\n\nLe SQL est un langage standardisé utilisé pour interagir avec des bases de données relationnelles.\nIl permet de créer, manipuler, interroger et gérer les données stockées dans des tables.\n\n\n\n\n\nDéfinition de Données\nManipulation de Données\nContrôle des Transactions\nContrôle d’accès aux Données\n\n\n\nManipulation de Données   - CRUD\nDéfinition de Données   - Créer/Modifier/Supprimer une table\nContrôle des Transactions   - BEGIN, COMMIT, ROLLBACK\nContrôle d’accès aux Données   - GRANT REVOKE"
+    "text": "Définition\n\n\n\nLe SQL est un langage standardisé utilisé pour interagir avec des bases de données relationnelles.\nIl permet de créer, manipuler, interroger et gérer les données stockées dans des tables.\n\n\n\n\nSQL est un language normé dont la dernière version est SQL:2023.\n\n\n\n\n\n\nCaution\n\n\n\nLes SGBD ne respectent pas exactement la norme SQL.\nÀ un niveau avancé d’utilisation, il y a des différences entre les SGBD.\n\n\n\n\n\n\nDéfinition de Données\nManipulation de Données\nContrôle des Transactions\nContrôle d’accès aux Données\n\n\n\nManipulation de Données   - CRUD\nDéfinition de Données   - Créer/Modifier/Supprimer une table\nContrôle des Transactions   - BEGIN, COMMIT, ROLLBACK\nContrôle d’accès aux Données   - GRANT REVOKE"
   },
   {
     "objectID": "doc/cours/sql.html#structured-query-language",
     "href": "doc/cours/sql.html#structured-query-language",
     "title": "SQL",
     "section": "",
-    "text": "Définition\n\n\n\nLe SQL est un langage standardisé utilisé pour interagir avec des bases de données relationnelles.\nIl permet de créer, manipuler, interroger et gérer les données stockées dans des tables.\n\n\n\n\n\nDéfinition de Données\nManipulation de Données\nContrôle des Transactions\nContrôle d’accès aux Données\n\n\n\nManipulation de Données   - CRUD\nDéfinition de Données   - Créer/Modifier/Supprimer une table\nContrôle des Transactions   - BEGIN, COMMIT, ROLLBACK\nContrôle d’accès aux Données   - GRANT REVOKE"
+    "text": "Définition\n\n\n\nLe SQL est un langage standardisé utilisé pour interagir avec des bases de données relationnelles.\nIl permet de créer, manipuler, interroger et gérer les données stockées dans des tables.\n\n\n\n\nSQL est un language normé dont la dernière version est SQL:2023.\n\n\n\n\n\n\nCaution\n\n\n\nLes SGBD ne respectent pas exactement la norme SQL.\nÀ un niveau avancé d’utilisation, il y a des différences entre les SGBD.\n\n\n\n\n\n\nDéfinition de Données\nManipulation de Données\nContrôle des Transactions\nContrôle d’accès aux Données\n\n\n\nManipulation de Données   - CRUD\nDéfinition de Données   - Créer/Modifier/Supprimer une table\nContrôle des Transactions   - BEGIN, COMMIT, ROLLBACK\nContrôle d’accès aux Données   - GRANT REVOKE"
   },
   {
     "objectID": "doc/cours/sql.html#définition-de-données",
     "href": "doc/cours/sql.html#définition-de-données",
     "title": "SQL",
     "section": "Définition de Données",
-    "text": "Définition de Données\n\nCREATE\nVersion simple\nCREATE TABLE joueuse (\n    id_joueuse     INT,\n    nom            TEXT,\n    prenom         TEXT,\n    date_naissance DATE,\n    elo            INT,\n    est_arbitre    BOOLEAN,\n    code_pays      TEXT,\n    taux_victoires FLOAT\n);\n\nVersion évoluée :\nCREATE TABLE joueuse (\n    id_joueuse     SERIAL          PRIMARY KEY,   \n    nom            VARCHAR(50)     NOT NULL, \n    prenom         VARCHAR(50)     NOT NULL, \n    date_naissance DATE,                 \n    elo            INT             CHECK (elo &gt; 0),  \n    mail           VARCHAR(100),         \n    est_arbitre    BOOLEAN         DEFAULT false,\n    code_pays      VARCHAR(2),          \n    taux_victoires FLOAT  \n);\n\n\nALTER\n\n\nDELETE\n\n\nManipulation de Données\n\nSELECT\n\n\nINSERT\n\n\nUPDATE\n\n\nDELETE\n\n\n\nSchema\n\nVente de légume\nUtiliser la même bdd pour la gestion RH (employe, contrat, conge)\ncréer un schéma pour séparer les tables"
+    "text": "Définition de Données\n\nCréer une table\nCREATE TABLE joueuse (\n    id_joueuse     INT,\n    nom            TEXT,\n    prenom         TEXT,\n    date_naissance DATE,\n    elo            INT,\n    est_arbitre    BOOLEAN,\n    code_pays      TEXT,\n    taux_victoires FLOAT\n);\n\nC’est comme créer les colonnes d’un tableau.\n\n\n\nCREATE avancé\nCREATE TABLE joueuse (\n    id_joueuse     SERIAL          PRIMARY KEY,   \n    nom            VARCHAR(50)     NOT NULL, \n    prenom         VARCHAR(50)     NOT NULL, \n    date_naissance DATETIME,                 \n    elo            INT             CHECK (elo &gt; 0),  \n    mail           VARCHAR(100),         \n    est_arbitre    BOOLEAN         DEFAULT false,\n    code_pays      VARCHAR(2),          \n    taux_victoires FLOAT  \n);\n\n\nBonnes pratiques\n\nNom de table représentatif et au singulier\nPas de majuscules, pas d’accents\nMots séparés par des underscores (snake_case)\nNe pas utiliser de mots clés réservés (date, user…)\nNe pas avoir de colonne qui porte le même nom que sa table\n\n\ndans les requêtes : mots clés en majuscules\n\n\n\nModifier une colonne\nModifier le type :\nALTER TABLE joueuse\nALTER COLUMN nom TYPE VARCHAR(80);\nRenommer :\nALTER TABLE joueuse\nRENAME COLUMN date_naissance TO dnais;\n\n\nCréer/Supprimer une colonne\nAjout :\nALTER TABLE joueuse\nADD COLUMN titre VARCHAR(5);\nSuppression :\nALTER TABLE joueuse\nDROP COLUMN taux_victoires;\n\n\nAutres possibilités\n\nRenommer une table\nAjouter / Supprimer une contrainte\nAjouter une clé étrangère\nDéfinir / Supprimer une valeur par défaut\n\n\n\nSupprimer une table\nDROP TABLE joueuse;\n\n\n\n\n\n\nWarning\n\n\n\nCette opération est irréversible !\nElle supprime définitivement :\n\nla table\ntoutes les données qu’elle contient\n\n\n\nDROP TABLE IF EXISTS joueuse;      -- utile pour les scripts SQL"
+  },
+  {
+    "objectID": "doc/cours/sql.html#schéma",
+    "href": "doc/cours/sql.html#schéma",
+    "title": "SQL",
+    "section": "Schéma",
+    "text": "Schéma\nUtile lorsque le nombre de table devient grand.\n\nOrganisation des objets, clarté\nGestion des permissions\n\nCREATE SCHEMA echecs;\n\n\nVente de légume\nUtiliser la même bdd pour la gestion RH, le métier et la compta\ncréer un schéma pour séparer les tables\n\n\n\nTable dans un schéma\nCREATE TABLE echecs.club (\n    id_club          SERIAL          PRIMARY KEY,  \n    nom              VARCHAR(100)    NOT NULL,   \n    ville            VARCHAR(100)    NOT NULL, \n    date_creation    DATE\n);\nDéplacer la table joueuse dans le schéma echecs :\nALTER TABLE joueuse SET SCHEMA echecs;\n\nC’est comme créer un fichier dans un dossier.\nPar défaut les objets sont créés dans le schéma public."
+  },
+  {
+    "objectID": "doc/cours/sql.html#manipulation-de-données",
+    "href": "doc/cours/sql.html#manipulation-de-données",
+    "title": "SQL",
+    "section": "Manipulation de Données",
+    "text": "Manipulation de Données\n\nInsérer des données\nINSERT INTO echecs.club \n(nom,                              ville,            date_creation)\nVALUES           \n('C''Chartres Echecs',            'Chartres',        '1991-09-01'),\n('Bischwiller',                   'Bischwiller',     '1976-09-01'),\n('Asnieres - le Grand Echiquier', 'Asnieres',        '1987-03-20'),\n('Tours des Hauts-De-France',     'Saint-Quentin',   '1999-12-01');\n\n\n\n\n\n\n\nOù est la colonne id_club\n\n\n\nLa colonne id_club est une séquence gérée par le SGBD.\nLes valeurs sont générées automatiquement à l’insertion et la séquence incrémentée.\n\n\n\n\n\nPas de double quotes en SQL !!!\n’’ : Pour ajouter un simple quote dans une chaine"
+  },
+  {
+    "objectID": "doc/cours/sql.html#lire-des-données",
+    "href": "doc/cours/sql.html#lire-des-données",
+    "title": "SQL",
+    "section": "Lire des données",
+    "text": "Lire des données\nSELECT *\n  FROM echecs.club;\n\n\n\n\n\n\n\n\n\nid_club\nnom\nville\ndate_creation\n\n\n\n\n1\nC’Chartres Echecs\nChartres\n1991-09-01\n\n\n2\nBischwiller\nBischwiller\n1976-09-01\n\n\n3\nAsnieres - le Grand Echiquier\nAsnieres\n1987-03-20\n\n\n4\nTours des Hauts-De-France\nSaint-Quentin\n1999-12-01\n\n\n\n\nColonnes à afficher\nSELECT nom,\n       prenom,\n       elo\n  FROM echecs.joueuse;\n\n\n\nnom\nprenom\nelo\n\n\n\n\nGuichard\nPauline\n2357\n\n\nDaulyte-Cornette\nDeimante\n2371\n\n\nNavrotescu\nAndreea\n2338\n\n\nSebag\nMarie\n2448\n\n\nMillet\nSophie\n2366\n\n\nSkrichempko\nAlmira\n2361\n\n\n\n\n\nFilter les lignes\nSELECT nom,\n       prenom,\n       elo\n  FROM echecs.joueuse\n WHERE elo &gt; 2400;\n\n\n\nnom\nprenom\nelo\n\n\n\n\nSebag\nMarie\n2448\n\n\n\n\n\nPlusieurs filtres\nSELECT nom,\n       prenom,\n       elo\n  FROM echecs.joueuse\n WHERE elo &lt; 2400\n   AND prenom LIKE 'A%';\n\n\n\nnom\nprenom\nelo\n\n\n\n\nNavrotescu\nAndreea\n2338\n\n\nSkrichempko\nAlmira\n2361\n\n\n\nBETWEEN OR IN NOT IN\n\n\nUPDATE\n\n\nDELETE"
   }
 ]

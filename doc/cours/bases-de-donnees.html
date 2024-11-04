@@ -165,6 +165,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#types-de-bases-de-données" id="toc-types-de-bases-de-données" class="nav-link" data-scroll-target="#types-de-bases-de-données">Types de bases de données</a></li>
   <li><a href="#base-de-données-relationnelle" id="toc-base-de-données-relationnelle" class="nav-link" data-scroll-target="#base-de-données-relationnelle">Base de données relationnelle</a></li>
   <li><a href="#associations" id="toc-associations" class="nav-link" data-scroll-target="#associations">Associations</a></li>
+  <li><a href="#sgbd" id="toc-sgbd" class="nav-link" data-scroll-target="#sgbd">SGBD</a></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="bases-de-donnees-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
 </nav>
@@ -235,6 +236,18 @@ Définition
 </ul>
 </div>
 </div>
+<section id="où-stocker-des-données" class="level3">
+<h3 class="anchored" data-anchor-id="où-stocker-des-données">Où stocker des données</h3>
+<div class="incremental">
+<ul class="incremental">
+<li>Fichier txt</li>
+<li>Fichier csv</li>
+<li>Fichier <a href="https://www.json.org/json-fr.html" target="_blank">json</a></li>
+<li>Fichier <a href="https://parquet.apache.org/" target="_blank">parquet</a></li>
+<li>Base de données</li>
+</ul>
+</div>
+</section>
 </section>
 <section id="une-base-de-données" class="level2">
 <h2 class="anchored" data-anchor-id="une-base-de-données">Une base de données ?</h2>
@@ -311,6 +324,10 @@ Définition
 <li>Organisée en tables</li>
 <li>Lien entre les tables</li>
 </ul>
+<div class="notes">
+<p>Quelques tables sont gérables avec Excel ou Calc.</p>
+<p>Mais ça devient vite trop compliqué.</p>
+</div>
 </section>
 <section id="nosql" class="level3">
 <h3 class="anchored" data-anchor-id="nosql">NoSQL</h3>
@@ -723,6 +740,88 @@ Tip
 <ul>
 <li>Un employé a un supérieur</li>
 </ul>
+</section>
+</section>
+<section id="sgbd" class="level2">
+<h2 class="anchored" data-anchor-id="sgbd">SGBD</h2>
+<div class="callout callout-style-default callout-important callout-titled" title="Définition">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Définition
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Un <strong>Système de Gestion de Bases de Données</strong> est un logiciel qui permet de créer, gérer et manipuler des bases de données.</p>
+<p>Il fournit des outils pour stocker, récupérer, modifier et sécuriser les données.</p>
+</div>
+</div>
+<ul>
+<li><strong><a href="https://www.postgresql.org/" target="_blank">PostgreSQL</a></strong></li>
+<li><a href="https://www.mysql.com/" target="_blank">MySQL</a></li>
+<li><a href="https://www.oracle.com/database/" target="_blank">Oracle Database</a></li>
+<li><a href="https://www.sqlite.org/" target="_blank">SQLite</a></li>
+<li><a href="https://mariadb.org/" target="_blank">MariaDB</a></li>
+</ul>
+<section id="postgresql" class="level3">
+<h3 class="anchored" data-anchor-id="postgresql">PostgreSQL</h3>
+<ul>
+<li>Open Source, Libre</li>
+<li>Communauté active</li>
+<li>Stable et performant</li>
+<li>Basé sur le modèle client-serveur</li>
+<li>Extension <a href="https://postgis.net/" target="_blank">PostGIS</a> (Données géographiques)</li>
+</ul>
+<div class="notes">
+<p>utilisé à l’INSEE</p>
+<p>client-serveur classique :</p>
+<ul>
+<li>le composant serveur central « postmaster » gère tous les fichiers de bdd</li>
+<li>ainsi que toutes les connexions établies pour la communication avec le serveur de bdd.</li>
+</ul>
+<p>Les utilisateurs n’ont besoin que d’un programme client approprié pour établir la connexion</p>
+</div>
+</section>
+<section id="outil-de-gestion-et-administration" class="level3">
+<h3 class="anchored" data-anchor-id="outil-de-gestion-et-administration">Outil de Gestion et Administration</h3>
+<p>Il est nécessaire d’avoir un <strong>outil pour gérer et administrer</strong> une base de données.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>PostgreSQL : Installé sur un serveur, sert de moteur de base de données</li>
+<li>pgAdmin : Interface graphique pour interagir avec PostgreSQL</li>
+</ul>
+</div>
+</div>
+<ul>
+<li><a href="https://www.pgadmin.org/" target="_blank">pgAdmin</a></li>
+<li><a href="https://dbeaver.io/" target="_blank">DBeaver</a></li>
+</ul>
+</section>
+<section id="kesako" class="level3">
+<h3 class="anchored" data-anchor-id="kesako">Kesako</h3>
+<ul>
+<li>Base de données : endroit où sont stockées les informations</li>
+<li>SGBD : logiciel qui permet de créer, gérer et manipuler les bases de données</li>
+<li>Outil de gestion du SGBD : application graphique qui facilite l’interaction avec un SGBD</li>
+</ul>
+<div class="notes">
+<ul>
+<li>BDD : bibliothèque</li>
+<li>SGBD : bibliothécaire</li>
+<li>Outil : tableau de bord interactif pour les bibliothécaires</li>
+</ul>
+</div>
 </section>
 <section id="exemple-1" class="level3">
 <h3 class="anchored" data-anchor-id="exemple-1">Exemple</h3>

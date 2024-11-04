@@ -191,6 +191,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#structured-query-language" id="toc-structured-query-language" class="nav-link active" data-scroll-target="#structured-query-language">Structured Query Language</a></li>
   <li><a href="#définition-de-données" id="toc-définition-de-données" class="nav-link" data-scroll-target="#définition-de-données">Définition de Données</a></li>
+  <li><a href="#schéma" id="toc-schéma" class="nav-link" data-scroll-target="#schéma">Schéma</a></li>
+  <li><a href="#manipulation-de-données" id="toc-manipulation-de-données" class="nav-link" data-scroll-target="#manipulation-de-données">Manipulation de Données</a></li>
+  <li><a href="#lire-des-données" id="toc-lire-des-données" class="nav-link" data-scroll-target="#lire-des-données">Lire des données</a></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="sql-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
 </nav>
@@ -247,6 +250,24 @@ Définition
 <p>Il permet de créer, manipuler, interroger et gérer les données stockées dans des tables.</p>
 </div>
 </div>
+<section id="norme-sql" class="level3">
+<h3 class="anchored" data-anchor-id="norme-sql">Norme SQL</h3>
+<p>SQL est un language normé dont la dernière version est <strong>SQL:2023</strong>.</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Les SGBD ne respectent pas exactement la norme SQL.</p>
+<p>À un niveau avancé d’utilisation, il y a des différences entre les SGBD.</p>
+</div>
+</div>
+</section>
 <section id="composantes-du-langage" class="level3">
 <h3 class="anchored" data-anchor-id="composantes-du-langage">Composantes du langage</h3>
 <ul>
@@ -267,9 +288,8 @@ Définition
 </section>
 <section id="définition-de-données" class="level2">
 <h2 class="anchored" data-anchor-id="définition-de-données">Définition de Données</h2>
-<section id="create" class="level4">
-<h4 class="anchored" data-anchor-id="create">CREATE</h4>
-<p>Version simple</p>
+<section id="créer-une-table" class="level3">
+<h3 class="anchored" data-anchor-id="créer-une-table">Créer une table</h3>
 <div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> joueuse (</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>&nbsp; &nbsp; id_joueuse     <span class="dt">INT</span>,</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>&nbsp; &nbsp; nom            TEXT,</span>
@@ -280,13 +300,17 @@ Définition
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>&nbsp; &nbsp; code_pays      TEXT,</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    taux_victoires <span class="dt">FLOAT</span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<hr>
-<p>Version évoluée :</p>
+<div class="notes">
+<p>C’est comme créer les colonnes d’un tableau.</p>
+</div>
+</section>
+<section id="create-avancé" class="level3">
+<h3 class="anchored" data-anchor-id="create-avancé">CREATE avancé</h3>
 <div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> joueuse (</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    id_joueuse     SERIAL          <span class="kw">PRIMARY</span> <span class="kw">KEY</span>,   </span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    nom            <span class="dt">VARCHAR</span>(<span class="dv">50</span>)     <span class="kw">NOT</span> <span class="kw">NULL</span>, </span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    prenom         <span class="dt">VARCHAR</span>(<span class="dv">50</span>)     <span class="kw">NOT</span> <span class="kw">NULL</span>, </span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    date_naissance <span class="dt">DATE</span>,                 </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    date_naissance DATETIME,                 </span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    elo            <span class="dt">INT</span>             <span class="kw">CHECK</span> (elo <span class="op">&gt;</span> <span class="dv">0</span>),  </span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    mail           <span class="dt">VARCHAR</span>(<span class="dv">100</span>),         </span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    est_arbitre    <span class="dt">BOOLEAN</span>         <span class="kw">DEFAULT</span> <span class="kw">false</span>,</span>
@@ -294,34 +318,290 @@ Définition
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    taux_victoires <span class="dt">FLOAT</span>  </span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="alter" class="level4">
-<h4 class="anchored" data-anchor-id="alter">ALTER</h4>
+<section id="bonnes-pratiques" class="level3">
+<h3 class="anchored" data-anchor-id="bonnes-pratiques">Bonnes pratiques</h3>
+<ul>
+<li>Nom de table représentatif et au singulier</li>
+<li>Pas de majuscules, pas d’accents</li>
+<li>Mots séparés par des underscores (snake_case)</li>
+<li>Ne pas utiliser de mots clés réservés (date, user…)</li>
+<li>Ne pas avoir de colonne qui porte le même nom que sa table</li>
+</ul>
+<div class="notes">
+<p>dans les requêtes : mots clés en majuscules</p>
+</div>
 </section>
-<section id="delete" class="level4">
-<h4 class="anchored" data-anchor-id="delete">DELETE</h4>
+<section id="modifier-une-colonne" class="level3">
+<h3 class="anchored" data-anchor-id="modifier-une-colonne">Modifier une colonne</h3>
+<p>Modifier le type :</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ALTER</span> <span class="kw">TABLE</span> joueuse</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">ALTER</span> <span class="kw">COLUMN</span> nom <span class="kw">TYPE</span> <span class="dt">VARCHAR</span>(<span class="dv">80</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Renommer :</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ALTER</span> <span class="kw">TABLE</span> joueuse</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">RENAME</span> <span class="kw">COLUMN</span> date_naissance <span class="kw">TO</span> dnais;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="manipulation-de-données" class="level3">
-<h3 class="anchored" data-anchor-id="manipulation-de-données">Manipulation de Données</h3>
-<section id="select" class="level4">
-<h4 class="anchored" data-anchor-id="select">SELECT</h4>
+<section id="créersupprimer-une-colonne" class="level3">
+<h3 class="anchored" data-anchor-id="créersupprimer-une-colonne">Créer/Supprimer une colonne</h3>
+<p>Ajout :</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ALTER</span> <span class="kw">TABLE</span> joueuse</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">ADD</span> <span class="kw">COLUMN</span> titre <span class="dt">VARCHAR</span>(<span class="dv">5</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Suppression :</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ALTER</span> <span class="kw">TABLE</span> joueuse</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">DROP</span> <span class="kw">COLUMN</span> taux_victoires;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="insert" class="level4">
-<h4 class="anchored" data-anchor-id="insert">INSERT</h4>
+<section id="autres-possibilités" class="level3">
+<h3 class="anchored" data-anchor-id="autres-possibilités">Autres possibilités</h3>
+<ul>
+<li>Renommer une table</li>
+<li>Ajouter / Supprimer une contrainte</li>
+<li>Ajouter une clé étrangère</li>
+<li>Définir / Supprimer une valeur par défaut</li>
+</ul>
 </section>
-<section id="update" class="level4">
-<h4 class="anchored" data-anchor-id="update">UPDATE</h4>
+<section id="supprimer-une-table" class="level3">
+<h3 class="anchored" data-anchor-id="supprimer-une-table">Supprimer une table</h3>
+<div class="sourceCode" id="cb7"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">DROP</span> <span class="kw">TABLE</span> joueuse;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Cette opération est irréversible !</strong></p>
+<p>Elle supprime définitivement :</p>
+<ul>
+<li>la table</li>
+<li>toutes les données qu’elle contient</li>
+</ul>
+</div>
+</div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">DROP</span> <span class="kw">TABLE</span> <span class="cf">IF</span> <span class="kw">EXISTS</span> joueuse;      <span class="co">-- utile pour les scripts SQL</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="delete-1" class="level4">
-<h4 class="anchored" data-anchor-id="delete-1">DELETE</h4>
 </section>
-</section>
-<section id="schema" class="level3">
-<h3 class="anchored" data-anchor-id="schema">Schema</h3>
+<section id="schéma" class="level2">
+<h2 class="anchored" data-anchor-id="schéma">Schéma</h2>
+<p>Utile lorsque le nombre de table devient grand.</p>
+<ul>
+<li>Organisation des objets, clarté</li>
+<li>Gestion des permissions</li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">SCHEMA</span> echecs;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="notes">
 <ul>
 <li>Vente de légume</li>
-<li>Utiliser la même bdd pour la gestion RH (employe, contrat, conge)</li>
+<li>Utiliser la même bdd pour la gestion RH, le métier et la compta</li>
 <li>créer un schéma pour séparer les tables</li>
 </ul>
+</div>
+<section id="table-dans-un-schéma" class="level3">
+<h3 class="anchored" data-anchor-id="table-dans-un-schéma">Table dans un schéma</h3>
+<div class="sourceCode" id="cb10"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> echecs.club (</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>    id_club          SERIAL          <span class="kw">PRIMARY</span> <span class="kw">KEY</span>,  </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    nom              <span class="dt">VARCHAR</span>(<span class="dv">100</span>)    <span class="kw">NOT</span> <span class="kw">NULL</span>,   </span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    ville            <span class="dt">VARCHAR</span>(<span class="dv">100</span>)    <span class="kw">NOT</span> <span class="kw">NULL</span>, </span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    date_creation    <span class="dt">DATE</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Déplacer la table <em>joueuse</em> dans le schéma <em>echecs</em> :</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ALTER</span> <span class="kw">TABLE</span> joueuse <span class="kw">SET</span> <span class="kw">SCHEMA</span> echecs;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="notes">
+<p>C’est comme créer un fichier dans un dossier.</p>
+<p>Par défaut les objets sont créés dans le schéma <code>public</code>.</p>
+</div>
+</section>
+</section>
+<section id="manipulation-de-données" class="level2">
+<h2 class="anchored" data-anchor-id="manipulation-de-données">Manipulation de Données</h2>
+<section id="insérer-des-données" class="level3">
+<h3 class="anchored" data-anchor-id="insérer-des-données">Insérer des données</h3>
+<div class="sourceCode" id="cb12"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> echecs.club </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>(nom,                              ville,            date_creation)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="kw">VALUES</span>           </span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>(<span class="st">'C</span><span class="ch">''</span><span class="st">Chartres Echecs'</span>,            <span class="st">'Chartres'</span>,        <span class="st">'1991-09-01'</span>),</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>(<span class="st">'Bischwiller'</span>,                   <span class="st">'Bischwiller'</span>,     <span class="st">'1976-09-01'</span>),</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>(<span class="st">'Asnieres - le Grand Echiquier'</span>, <span class="st">'Asnieres'</span>,        <span class="st">'1987-03-20'</span>),</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>(<span class="st">'Tours des Hauts-De-France'</span>,     <span class="st">'Saint-Quentin'</span>,   <span class="st">'1999-12-01'</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="fragment">
+<div class="callout callout-style-default callout-tip callout-titled" title="Où est la colonne id_club">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Où est la colonne id_club
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>La colonne <em>id_club</em> est une séquence gérée par le SGBD.</p>
+<p>Les valeurs sont générées automatiquement à l’insertion et la séquence incrémentée.</p>
+</div>
+</div>
+</div>
+<div class="notes">
+<ul>
+<li>Pas de double quotes en SQL !!!</li>
+<li>’’ : Pour ajouter un simple quote dans une chaine</li>
+</ul>
+</div>
+</section>
+</section>
+<section id="lire-des-données" class="level2">
+<h2 class="anchored" data-anchor-id="lire-des-données">Lire des données</h2>
+<div class="sourceCode" id="cb13"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.club;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 46%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>id_club</th>
+<th>nom</th>
+<th>ville</th>
+<th>date_creation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>C’Chartres Echecs</td>
+<td>Chartres</td>
+<td>1991-09-01</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Bischwiller</td>
+<td>Bischwiller</td>
+<td>1976-09-01</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Asnieres - le Grand Echiquier</td>
+<td>Asnieres</td>
+<td>1987-03-20</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Tours des Hauts-De-France</td>
+<td>Saint-Quentin</td>
+<td>1999-12-01</td>
+</tr>
+</tbody>
+</table>
+<section id="colonnes-à-afficher" class="level3">
+<h3 class="anchored" data-anchor-id="colonnes-à-afficher">Colonnes à afficher</h3>
+<div class="sourceCode" id="cb14"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>       prenom,</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>       elo</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th><strong>nom</strong></th>
+<th><strong>prenom</strong></th>
+<th><strong>elo</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Guichard</td>
+<td>Pauline</td>
+<td>2357</td>
+</tr>
+<tr class="even">
+<td>Daulyte-Cornette</td>
+<td>Deimante</td>
+<td>2371</td>
+</tr>
+<tr class="odd">
+<td>Navrotescu</td>
+<td>Andreea</td>
+<td>2338</td>
+</tr>
+<tr class="even">
+<td>Sebag</td>
+<td>Marie</td>
+<td>2448</td>
+</tr>
+<tr class="odd">
+<td>Millet</td>
+<td>Sophie</td>
+<td>2366</td>
+</tr>
+<tr class="even">
+<td>Skrichempko</td>
+<td>Almira</td>
+<td>2361</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="filter-les-lignes" class="level3">
+<h3 class="anchored" data-anchor-id="filter-les-lignes">Filter les lignes</h3>
+<div class="sourceCode" id="cb15"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>       prenom,</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>       elo</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> elo <span class="op">&gt;</span> <span class="dv">2400</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th><strong>nom</strong></th>
+<th><strong>prenom</strong></th>
+<th><strong>elo</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Sebag</td>
+<td>Marie</td>
+<td>2448</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="plusieurs-filtres" class="level3">
+<h3 class="anchored" data-anchor-id="plusieurs-filtres">Plusieurs filtres</h3>
+<div class="sourceCode" id="cb16"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>       prenom,</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>       elo</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> elo <span class="op">&lt;</span> <span class="dv">2400</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>   <span class="kw">AND</span> prenom <span class="kw">LIKE</span> <span class="st">'A%'</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th><strong>nom</strong></th>
+<th><strong>prenom</strong></th>
+<th><strong>elo</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Navrotescu</td>
+<td>Andreea</td>
+<td>2338</td>
+</tr>
+<tr class="even">
+<td>Skrichempko</td>
+<td>Almira</td>
+<td>2361</td>
+</tr>
+</tbody>
+</table>
+<p>BETWEEN OR IN NOT IN</p>
+</section>
+<section id="update" class="level3">
+<h3 class="anchored" data-anchor-id="update">UPDATE</h3>
+</section>
+<section id="delete" class="level3">
+<h3 class="anchored" data-anchor-id="delete">DELETE</h3>
 
 
 </section>

@@ -422,6 +422,24 @@ Ludovic Deneuville
 </div>
 </div>
 </section>
+<section id="norme-sql" class="slide level3">
+<h3>Norme SQL</h3>
+<p>SQL est un language normé dont la dernière version est <strong>SQL:2023</strong>.</p>
+<div class="callout callout-caution callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Caution</strong></p>
+</div>
+<div class="callout-content">
+<p>Les SGBD ne respectent pas exactement la norme SQL.</p>
+<p>À un niveau avancé d’utilisation, il y a des différences entre les SGBD.</p>
+</div>
+</div>
+</div>
+</section>
 <section id="composantes-du-langage" class="slide level3">
 <h3>Composantes du langage</h3>
 <ul>
@@ -454,8 +472,8 @@ Ludovic Deneuville
 <h2>Définition de Données</h2>
 
 </section>
-<h4 id="create">CREATE</h4>
-<p>Version simple</p>
+<section id="créer-une-table" class="slide level3">
+<h3>Créer une table</h3>
 <div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> joueuse (</span>
 <span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a>&nbsp; &nbsp; id_joueuse     <span class="dt">INT</span>,</span>
 <span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a>&nbsp; &nbsp; nom            TEXT,</span>
@@ -466,37 +484,364 @@ Ludovic Deneuville
 <span id="cb1-8"><a aria-hidden="true" tabindex="-1"></a>&nbsp; &nbsp; code_pays      TEXT,</span>
 <span id="cb1-9"><a aria-hidden="true" tabindex="-1"></a>    taux_victoires <span class="dt">FLOAT</span></span>
 <span id="cb1-10"><a aria-hidden="true" tabindex="-1"></a>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<section class="slide level3">
-
-<p>Version évoluée :</p>
+<aside class="notes">
+<p>C’est comme créer les colonnes d’un tableau.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="create-avancé" class="slide level3">
+<h3>CREATE avancé</h3>
 <div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> joueuse (</span>
 <span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a>    id_joueuse     SERIAL          <span class="kw">PRIMARY</span> <span class="kw">KEY</span>,   </span>
 <span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a>    nom            <span class="dt">VARCHAR</span>(<span class="dv">50</span>)     <span class="kw">NOT</span> <span class="kw">NULL</span>, </span>
 <span id="cb2-4"><a aria-hidden="true" tabindex="-1"></a>    prenom         <span class="dt">VARCHAR</span>(<span class="dv">50</span>)     <span class="kw">NOT</span> <span class="kw">NULL</span>, </span>
-<span id="cb2-5"><a aria-hidden="true" tabindex="-1"></a>    date_naissance <span class="dt">DATE</span>,                 </span>
+<span id="cb2-5"><a aria-hidden="true" tabindex="-1"></a>    date_naissance DATETIME,                 </span>
 <span id="cb2-6"><a aria-hidden="true" tabindex="-1"></a>    elo            <span class="dt">INT</span>             <span class="kw">CHECK</span> (elo <span class="op">&gt;</span> <span class="dv">0</span>),  </span>
 <span id="cb2-7"><a aria-hidden="true" tabindex="-1"></a>    mail           <span class="dt">VARCHAR</span>(<span class="dv">100</span>),         </span>
 <span id="cb2-8"><a aria-hidden="true" tabindex="-1"></a>    est_arbitre    <span class="dt">BOOLEAN</span>         <span class="kw">DEFAULT</span> <span class="kw">false</span>,</span>
 <span id="cb2-9"><a aria-hidden="true" tabindex="-1"></a>    code_pays      <span class="dt">VARCHAR</span>(<span class="dv">2</span>),          </span>
 <span id="cb2-10"><a aria-hidden="true" tabindex="-1"></a>    taux_victoires <span class="dt">FLOAT</span>  </span>
 <span id="cb2-11"><a aria-hidden="true" tabindex="-1"></a>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<h4 id="alter">ALTER</h4>
-<h4 id="delete">DELETE</h4>
 </section>
-<section id="manipulation-de-données" class="slide level3">
-<h3>Manipulation de Données</h3>
-<h4 id="select">SELECT</h4>
-<h4 id="insert">INSERT</h4>
-<h4 id="update">UPDATE</h4>
-<h4 id="delete-1">DELETE</h4>
+<section id="bonnes-pratiques" class="slide level3">
+<h3>Bonnes pratiques</h3>
+<ul>
+<li>Nom de table représentatif et au singulier</li>
+<li>Pas de majuscules, pas d’accents</li>
+<li>Mots séparés par des underscores (snake_case)</li>
+<li>Ne pas utiliser de mots clés réservés (date, user…)</li>
+<li>Ne pas avoir de colonne qui porte le même nom que sa table</li>
+</ul>
+<aside class="notes">
+<p>dans les requêtes : mots clés en majuscules</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section id="schema" class="slide level3">
-<h3>Schema</h3>
+<section id="modifier-une-colonne" class="slide level3">
+<h3>Modifier une colonne</h3>
+<p>Modifier le type :</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">ALTER</span> <span class="kw">TABLE</span> joueuse</span>
+<span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a><span class="kw">ALTER</span> <span class="kw">COLUMN</span> nom <span class="kw">TYPE</span> <span class="dt">VARCHAR</span>(<span class="dv">80</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Renommer :</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">ALTER</span> <span class="kw">TABLE</span> joueuse</span>
+<span id="cb4-2"><a aria-hidden="true" tabindex="-1"></a><span class="kw">RENAME</span> <span class="kw">COLUMN</span> date_naissance <span class="kw">TO</span> dnais;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="créersupprimer-une-colonne" class="slide level3">
+<h3>Créer/Supprimer une colonne</h3>
+<p>Ajout :</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">ALTER</span> <span class="kw">TABLE</span> joueuse</span>
+<span id="cb5-2"><a aria-hidden="true" tabindex="-1"></a><span class="kw">ADD</span> <span class="kw">COLUMN</span> titre <span class="dt">VARCHAR</span>(<span class="dv">5</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Suppression :</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">ALTER</span> <span class="kw">TABLE</span> joueuse</span>
+<span id="cb6-2"><a aria-hidden="true" tabindex="-1"></a><span class="kw">DROP</span> <span class="kw">COLUMN</span> taux_victoires;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="autres-possibilités" class="slide level3">
+<h3>Autres possibilités</h3>
+<ul>
+<li>Renommer une table</li>
+<li>Ajouter / Supprimer une contrainte</li>
+<li>Ajouter une clé étrangère</li>
+<li>Définir / Supprimer une valeur par défaut</li>
+</ul>
+</section>
+<section id="supprimer-une-table" class="slide level3">
+<h3>Supprimer une table</h3>
+<div class="sourceCode" id="cb7"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">DROP</span> <span class="kw">TABLE</span> joueuse;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Warning</strong></p>
+</div>
+<div class="callout-content">
+<p><strong>Cette opération est irréversible !</strong></p>
+<p>Elle supprime définitivement :</p>
+<ul>
+<li>la table</li>
+<li>toutes les données qu’elle contient</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb8-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">DROP</span> <span class="kw">TABLE</span> <span class="cf">IF</span> <span class="kw">EXISTS</span> joueuse;      <span class="co">-- utile pour les scripts SQL</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section></section>
+<section>
+<section id="schéma" class="title-slide slide level2 center">
+<h2>Schéma</h2>
+<p>Utile lorsque le nombre de table devient grand.</p>
+<ul>
+<li>Organisation des objets, clarté</li>
+<li>Gestion des permissions</li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb9-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">SCHEMA</span> echecs;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<aside class="notes">
 <ul>
 <li>Vente de légume</li>
-<li>Utiliser la même bdd pour la gestion RH (employe, contrat, conge)</li>
+<li>Utiliser la même bdd pour la gestion RH, le métier et la compta</li>
 <li>créer un schéma pour séparer les tables</li>
 </ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="table-dans-un-schéma" class="slide level3">
+<h3>Table dans un schéma</h3>
+<div class="sourceCode" id="cb10"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb10-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> echecs.club (</span>
+<span id="cb10-2"><a aria-hidden="true" tabindex="-1"></a>    id_club          SERIAL          <span class="kw">PRIMARY</span> <span class="kw">KEY</span>,  </span>
+<span id="cb10-3"><a aria-hidden="true" tabindex="-1"></a>    nom              <span class="dt">VARCHAR</span>(<span class="dv">100</span>)    <span class="kw">NOT</span> <span class="kw">NULL</span>,   </span>
+<span id="cb10-4"><a aria-hidden="true" tabindex="-1"></a>    ville            <span class="dt">VARCHAR</span>(<span class="dv">100</span>)    <span class="kw">NOT</span> <span class="kw">NULL</span>, </span>
+<span id="cb10-5"><a aria-hidden="true" tabindex="-1"></a>    date_creation    <span class="dt">DATE</span></span>
+<span id="cb10-6"><a aria-hidden="true" tabindex="-1"></a>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Déplacer la table <em>joueuse</em> dans le schéma <em>echecs</em> :</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb11-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">ALTER</span> <span class="kw">TABLE</span> joueuse <span class="kw">SET</span> <span class="kw">SCHEMA</span> echecs;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<aside class="notes">
+<p>C’est comme créer un fichier dans un dossier.</p>
+<p>Par défaut les objets sont créés dans le schéma <code>public</code>.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="manipulation-de-données" class="title-slide slide level2 center">
+<h2>Manipulation de Données</h2>
+
+</section>
+<section id="insérer-des-données" class="slide level3">
+<h3>Insérer des données</h3>
+<div class="sourceCode" id="cb12"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb12-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> echecs.club </span>
+<span id="cb12-2"><a aria-hidden="true" tabindex="-1"></a>(nom,                              ville,            date_creation)</span>
+<span id="cb12-3"><a aria-hidden="true" tabindex="-1"></a><span class="kw">VALUES</span>           </span>
+<span id="cb12-4"><a aria-hidden="true" tabindex="-1"></a>(<span class="st">'C</span><span class="ch">''</span><span class="st">Chartres Echecs'</span>,            <span class="st">'Chartres'</span>,        <span class="st">'1991-09-01'</span>),</span>
+<span id="cb12-5"><a aria-hidden="true" tabindex="-1"></a>(<span class="st">'Bischwiller'</span>,                   <span class="st">'Bischwiller'</span>,     <span class="st">'1976-09-01'</span>),</span>
+<span id="cb12-6"><a aria-hidden="true" tabindex="-1"></a>(<span class="st">'Asnieres - le Grand Echiquier'</span>, <span class="st">'Asnieres'</span>,        <span class="st">'1987-03-20'</span>),</span>
+<span id="cb12-7"><a aria-hidden="true" tabindex="-1"></a>(<span class="st">'Tours des Hauts-De-France'</span>,     <span class="st">'Saint-Quentin'</span>,   <span class="st">'1999-12-01'</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="fragment">
+<div title="Où est la colonne id_club">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Où est la colonne id_club</strong></p>
+</div>
+<div class="callout-content">
+<p>La colonne <em>id_club</em> est une séquence gérée par le SGBD.</p>
+<p>Les valeurs sont générées automatiquement à l’insertion et la séquence incrémentée.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<aside class="notes">
+<ul>
+<li>Pas de double quotes en SQL !!!</li>
+<li>’’ : Pour ajouter un simple quote dans une chaine</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section>
+<section id="lire-des-données" class="title-slide slide level2 center">
+<h2>Lire des données</h2>
+<div class="sourceCode" id="cb13"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb13-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb13-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.club;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<table class="caption-top" style="width:100%;">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 46%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>id_club</th>
+<th>nom</th>
+<th>ville</th>
+<th>date_creation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>C’Chartres Echecs</td>
+<td>Chartres</td>
+<td>1991-09-01</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Bischwiller</td>
+<td>Bischwiller</td>
+<td>1976-09-01</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Asnieres - le Grand Echiquier</td>
+<td>Asnieres</td>
+<td>1987-03-20</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Tours des Hauts-De-France</td>
+<td>Saint-Quentin</td>
+<td>1999-12-01</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="colonnes-à-afficher" class="slide level3">
+<h3>Colonnes à afficher</h3>
+<div class="sourceCode" id="cb14"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb14-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
+<span id="cb14-2"><a aria-hidden="true" tabindex="-1"></a>       prenom,</span>
+<span id="cb14-3"><a aria-hidden="true" tabindex="-1"></a>       elo</span>
+<span id="cb14-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th><strong>nom</strong></th>
+<th><strong>prenom</strong></th>
+<th><strong>elo</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Guichard</td>
+<td>Pauline</td>
+<td>2357</td>
+</tr>
+<tr class="even">
+<td>Daulyte-Cornette</td>
+<td>Deimante</td>
+<td>2371</td>
+</tr>
+<tr class="odd">
+<td>Navrotescu</td>
+<td>Andreea</td>
+<td>2338</td>
+</tr>
+<tr class="even">
+<td>Sebag</td>
+<td>Marie</td>
+<td>2448</td>
+</tr>
+<tr class="odd">
+<td>Millet</td>
+<td>Sophie</td>
+<td>2366</td>
+</tr>
+<tr class="even">
+<td>Skrichempko</td>
+<td>Almira</td>
+<td>2361</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="filter-les-lignes" class="slide level3">
+<h3>Filter les lignes</h3>
+<div class="sourceCode" id="cb15"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb15-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
+<span id="cb15-2"><a aria-hidden="true" tabindex="-1"></a>       prenom,</span>
+<span id="cb15-3"><a aria-hidden="true" tabindex="-1"></a>       elo</span>
+<span id="cb15-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
+<span id="cb15-5"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> elo <span class="op">&gt;</span> <span class="dv">2400</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th><strong>nom</strong></th>
+<th><strong>prenom</strong></th>
+<th><strong>elo</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Sebag</td>
+<td>Marie</td>
+<td>2448</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="plusieurs-filtres" class="slide level3">
+<h3>Plusieurs filtres</h3>
+<div class="sourceCode" id="cb16"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb16-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
+<span id="cb16-2"><a aria-hidden="true" tabindex="-1"></a>       prenom,</span>
+<span id="cb16-3"><a aria-hidden="true" tabindex="-1"></a>       elo</span>
+<span id="cb16-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
+<span id="cb16-5"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> elo <span class="op">&lt;</span> <span class="dv">2400</span></span>
+<span id="cb16-6"><a aria-hidden="true" tabindex="-1"></a>   <span class="kw">AND</span> prenom <span class="kw">LIKE</span> <span class="st">'A%'</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th><strong>nom</strong></th>
+<th><strong>prenom</strong></th>
+<th><strong>elo</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Navrotescu</td>
+<td>Andreea</td>
+<td>2338</td>
+</tr>
+<tr class="even">
+<td>Skrichempko</td>
+<td>Almira</td>
+<td>2361</td>
+</tr>
+</tbody>
+</table>
+<p>BETWEEN OR IN NOT IN</p>
+</section>
+<section id="update" class="slide level3">
+<h3>UPDATE</h3>
+</section>
+<section id="delete" class="slide level3">
+<h3>DELETE</h3>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
