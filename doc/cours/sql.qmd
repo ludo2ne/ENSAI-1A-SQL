@@ -59,6 +59,10 @@ Les SGBD ne respectent pas exactement la norme SQL.
 
 ## Définition de Données
 
+::: {.notes}
+Ici nous n'allons travailler que sur une seule table à la fois
+:::
+
 ### Créer une table
 
 ```{.sql}
@@ -115,6 +119,8 @@ ALTER TABLE joueuse
 ALTER COLUMN nom TYPE VARCHAR(80);
 ```
 
+<br>
+
 Renommer :
 
 ```{.sql}
@@ -130,6 +136,8 @@ Ajout :
 ALTER TABLE joueuse
 ADD COLUMN titre VARCHAR(5);
 ```
+
+<br>
 
 Suppression :
 
@@ -195,6 +203,8 @@ CREATE TABLE echecs.club (
 );
 ```
 
+<br>
+
 Déplacer la table *joueuse* dans le schéma *echecs* :
 
 ```{.sql}
@@ -208,10 +218,19 @@ Par défaut les objets sont créés dans le schéma `public`.
 :::
 
 
-## Manipulation de Données
+## Insérer des données
 
-### Insérer des données
+```{mermaid}
+classDiagram
+    class Club {
+        id_club PK
+        nom
+        ville
+        date_creation
+    }
+```
 
+:::::: {.fragment}
 ```{.sql}
 INSERT INTO echecs.club 
 (nom,                              ville,            date_creation)
@@ -221,26 +240,58 @@ VALUES
 ('Asnieres - le Grand Echiquier', 'Asnieres',        '1987-03-20'),
 ('Tours des Hauts-De-France',     'Saint-Quentin',   '1999-12-01');
 ```
+::::::
 
 :::::: {.fragment}
-::: {.callout-tip title="Où est la colonne id_club"}
+Pourquoi l'on n'insère pas la colonne *id_club* ? :confused:
+::::::
+
+:::{.notes}
+Attention à bien mettre les virgules au bon endroit
+:::
+
+### Séquence
+
 La colonne *id_club* est une séquence gérée par le SGBD.
 
-Les valeurs sont générées automatiquement à l'insertion et la séquence incrémentée.
+Les valeurs sont générées automatiquement à l'insertion et la séquence est incrémentée (1, 2, 3...).
+
+::: {.callout-tip title="Séquences" collapse="true"}
+Il est possible de créer et gérer ses propres séquences :
+
+```{.sql}
+CREATE SEQUENCE nom_sequence START 1 INCREMENT BY 1;
+
+SELECT currval('nom_sequence'); -- dernière valeur utilisée
+SELECT nextval('nom_sequence'); -- prochaine valeur
+
+ALTER SEQUENCE nom_sequence RESTART WITH nouvelle_valeur;
+
+DROP SEQUENCE nom_sequence;
+
+```
 :::
-:::::: 
+
 
 :::{.notes}
 - Pas de double quotes en SQL !!!
 - '' : Pour ajouter un simple quote dans une chaine
 :::
 
+
 ## Lire des données
+
+`SELECT * FROM table` pour tout afficher.
 
 ```{.sql}
 SELECT *
   FROM echecs.club;
 ```
+
+<br>
+
+:::::: {.fragment}
+::: {.small-table}
 
 | id_club |            nom                   |     ville     | date_creation |
 |---------|----------------------------------|---------------|---------------|
@@ -249,7 +300,12 @@ SELECT *
 |    3    | Asnieres - le Grand Echiquier    | Asnieres      | 1987-03-20    |
 |    4    | Tours des Hauts-De-France        | Saint-Quentin | 1999-12-01    |
 
+:::
+::::::
+
 ### Colonnes à afficher
+
+Listez les colonnes à afficher après le `SELECT`
 
 ```{.sql}
 SELECT nom,
@@ -257,6 +313,11 @@ SELECT nom,
        elo
   FROM echecs.joueuse;
 ```
+
+<br>
+
+:::::: {.fragment}
+::: {.small-table}
 
 | **nom**                | **prenom**       | **elo** |
 |------------------------|------------------|---------|
@@ -267,8 +328,12 @@ SELECT nom,
 | Millet                 | Sophie           | 2366    |
 | Skrichempko            | Almira           | 2361    |
 
+:::
+::::::
 
 ### Filter les lignes
+
+Filtrez sur les lignes avec une clause `WHERE`.
 
 ```{.sql}
 SELECT nom,
@@ -278,11 +343,21 @@ SELECT nom,
  WHERE elo > 2400;
 ```
 
+<br>
+
+:::::: {.fragment}
+::: {.small-table}
+
 | **nom**                | **prenom**       | **elo** |
 |------------------------|------------------|---------|
 | Sebag                  | Marie            | 2448    |
 
+:::
+::::::
+
 ### Plusieurs filtres
+
+Le mot clé `AND` permet d'ajouter d'autres filtres. 
 
 ```{.sql}
 SELECT nom,
@@ -293,19 +368,284 @@ SELECT nom,
    AND prenom LIKE 'A%';
 ```
 
+<br>
+
+:::::: {.fragment}
+::: {.small-table}
+
 | **nom**                | **prenom**       | **elo** |
 |------------------------|------------------|---------|
 | Navrotescu             | Andreea          | 2338    |
 | Skrichempko            | Almira           | 2361    |
 
-BETWEEN
-OR
-IN
-NOT IN
+:::
+::::::
+
+::: {.notes}
+1 seul WHERE
+
+plusieurs AND
+:::
+
+---
+
+Vous pouvez autoriser plusieurs conditions avec `OR`.
+
+```{.sql}
+SELECT nom,
+       prenom,
+       elo
+  FROM echecs.joueuse
+ WHERE elo > 2400
+    OR prenom LIKE 'A%';
+```
+
+<br>
+
+:::::: {.fragment}
+::: {.small-table}
+
+| **nom**                | **prenom**       | **elo** |
+|------------------------|------------------|---------|
+| Sebag                  | Marie            | 2448    |
+| Navrotescu             | Andreea          | 2338    |
+| Skrichempko            | Almira           | 2361    |
+
+:::
+::::::
 
 
-### UPDATE
+### LIKE
 
-### DELETE
+```{.sql}
+SELECT *
+  FROM echecs.joueuse
+ WHERE prenom LIKE 'A%'         -- commence par A
+    OR prenom LIKE '%A'         -- termine par A
+    OR prenom LIKE '%A%'        -- contient au moins un A
+    OR UPPER(prenom) LIKE '%A%' -- contient au moins un A ou un a
+    OR prenom LIKE 'A__'        -- commence par A suivi de 2 autres caractères
+```
+
+
+- `%` : représente entre 0 et une infinité de caractères
+- `_` : représente exactement 1 caractère
+
+::: {.callout-caution}
+Attention aux MAJUSCULES ≠ minuscules
+:::
+
+
+### Plage de valeurs
+
+`BETWEEN` permet de spécifier une plage de valeurs numériques.
+
+```{.sql}
+SELECT nom,
+       prenom,
+       elo
+  FROM echecs.joueuse
+ WHERE elo BETWEEN 2350 AND 2400;
+```
+
+<br>
+
+:::::: {.fragment}
+::: {.small-table}
+
+| **nom**                | **prenom**       | **elo** |
+|------------------------|------------------|---------|
+| Guichard               | Pauline          | 2357    |
+| Daulyte-Cornette       | Deimante         | 2371    |
+| Millet                 | Sophie           | 2366    |
+| Skrichempko            | Almira           | 2361    |
+
+:::
+::::::
+
+
+### Valeurs dans une liste
+
+Vous pouvez spécifier qu'un attribut doit appartenir à un liste avec `IN`.
+
+Ou inversement avec `NOT IN`.
+
+```{.sql}
+SELECT nom,
+       prenom,
+       elo
+  FROM echecs.joueuse
+ WHERE prenom IN ('Deimante', 'Sophie');
+```
+
+<br>
+
+:::::: {.fragment}
+::: {.small-table}
+
+| **nom**                | **prenom**       | **elo** |
+|------------------------|------------------|---------|
+| Daulyte-Cornette       | Deimante         | 2371    |
+| Millet                 | Sophie           | 2366    |
+
+:::
+::::::
+
+::: {.notes}
+Possible de lister des valeurs numériques
+:::
+
+### Filtre sur les attributs booléens
+
+```{.sql}
+SELECT *
+  FROM echecs.joueuse
+ WHERE est_arbitre IS TRUE;
+```
+
+### Filtre sur les valeurs nulles
+
+```{.sql}
+SELECT *
+  FROM echecs.joueuse
+ WHERE mail IS NULL; -- IS NOT NULL
+```
+
+
+### Ordonner le résultat
+
+`ORDER BY` pour ordonner selon plusieurs colonnes.
+
+```{.sql}
+SELECT nom,
+       prenom,
+       elo
+  FROM echecs.joueuse
+ ORDER BY elo,
+          taux_victoires DESC;
+```
+
+:::::: {.fragment}
+::: {.small-table}
+
+| **nom**                | **prenom**       | **elo** |
+|------------------------|------------------|---------|
+| Navrotescu             | Andreea          | 2338    |
+| Guichard               | Pauline          | 2357    |
+| Skrichempko            | Almira           | 2361    |
+| Millet                 | Sophie           | 2366    |
+| Daulyte-Cornette       | Deimante         | 2371    |
+| Sebag                  | Marie            | 2448    |
+
+:::
+::::::
+
+### Afficher n lignes
+
+```{.sql}
+SELECT nom,
+       prenom,
+       elo
+  FROM echecs.joueuse
+ LIMIT 3;
+```
+
+<br>
+
+:::::: {.fragment}
+::: {.small-table}
+
+| **nom**                | **prenom**       | **elo** |
+|------------------------|------------------|---------|
+| Guichard               | Pauline          | 2357    |
+| Daulyte-Cornette       | Deimante         | 2371    |
+| Navrotescu             | Andreea          | 2338    |
+
+:::
+::::::
+
+## Mise à jour
+
+```{.sql}
+UPDATE echecs.joueuse
+   SET elo = 2399
+ WHERE id_joueuse = 1;
+```
+
+
+<br>
+
+:::::: {.fragment}
+::: {.small-table}
+
+
+```{.sql}
+SELECT nom,
+       prenom,
+       elo
+  FROM echecs.joueuse
+ WHERE id_joueuse = 1;
+```
+
+<br>
+
+| **nom**                | **prenom**       | **elo** |
+|------------------------|------------------|---------|
+| Guichard               | Pauline          | 2399    |
+
+:::
+::::::
+
+
+
+## Suppression
+
+
+
+## Autres SELECT
+
+### Type DATE
+
+Quelques opérations avec le type `DATE`.
+
+```{.sql}
+SELECT nom,
+       prenom,
+       EXTRACT(YEAR FROM date_naissance) AS annee_naissance
+  FROM echecs.joueuse
+ WHERE date_naissance >= '1991-04-20'
+    OR date_naissance BETWEEN '1991-04-20' AND '1992-12-31'
+    OR EXTRACT(MONTH FROM date_naissance) = 4;
+```
+
+### Jouer avec les colonnes
+
+```{.sql}
+SELECT CONCAT(nom, ' ', prenom) AS nom_complet,
+       elo
+FROM echecs.joueuse;
+```
+
+<br>
+
+:::::: {.fragment}
+::: {.small-table}
+
+| **nom_complet**                   | **elo** |
+|-----------------------------------|---------|
+| Guichard         Pauline          | 2357    |
+| Daulyte-Cornette Deimante         | 2371    |
+| Navrotescu       Andreea          | 2338    |
+| Sebag            Marie            | 2448    |
+| Millet           Sophie           | 2366    |
+| Skrichempko      Almira           | 2361    |
+
+:::
+::::::
+
+
+
+
+
 
 

@@ -45,3 +45,5 @@ format:
       dark: solar
       light: cosmo
     css: styles.css
+  revealjs: 
+    css: styles-reveal.css
