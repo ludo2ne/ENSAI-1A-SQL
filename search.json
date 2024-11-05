@@ -242,7 +242,7 @@
     "href": "doc/cours/sql-slides.html#définition-de-données",
     "title": "SQL",
     "section": "Définition de Données",
-    "text": "Définition de Données"
+    "text": "Définition de Données\n\nIci nous n’allons travailler que sur une seule table à la fois"
   },
   {
     "objectID": "doc/cours/sql-slides.html#schéma",
@@ -252,18 +252,39 @@
     "text": "Schéma\nUtile lorsque le nombre de table devient grand.\n\nOrganisation des objets, clarté\nGestion des permissions\n\nCREATE SCHEMA echecs;\n\n\nVente de légume\nUtiliser la même bdd pour la gestion RH, le métier et la compta\ncréer un schéma pour séparer les tables"
   },
   {
-    "objectID": "doc/cours/sql-slides.html#manipulation-de-données",
-    "href": "doc/cours/sql-slides.html#manipulation-de-données",
+    "objectID": "doc/cours/sql-slides.html#insérer-des-données",
+    "href": "doc/cours/sql-slides.html#insérer-des-données",
     "title": "SQL",
-    "section": "Manipulation de Données",
-    "text": "Manipulation de Données"
+    "section": "Insérer des données",
+    "text": "Insérer des données\n\n\n\n\n\nclassDiagram\n    class Club {\n        id_club PK\n        nom\n        ville\n        date_creation\n    }\n\n\n\n\n\n\n\nINSERT INTO echecs.club \n(nom,                              ville,            date_creation)\nVALUES           \n('C''Chartres Echecs',            'Chartres',        '1991-09-01'),\n('Bischwiller',                   'Bischwiller',     '1976-09-01'),\n('Asnieres - le Grand Echiquier', 'Asnieres',        '1987-03-20'),\n('Tours des Hauts-De-France',     'Saint-Quentin',   '1999-12-01');\n\n\nPourquoi l’on n’insère pas la colonne id_club ? 😕\n\n\nAttention à bien mettre les virgules au bon endroit"
   },
   {
     "objectID": "doc/cours/sql-slides.html#lire-des-données",
     "href": "doc/cours/sql-slides.html#lire-des-données",
     "title": "SQL",
     "section": "Lire des données",
-    "text": "Lire des données\nSELECT *\n  FROM echecs.club;\n\n\n\n\n\n\n\n\n\nid_club\nnom\nville\ndate_creation\n\n\n\n\n1\nC’Chartres Echecs\nChartres\n1991-09-01\n\n\n2\nBischwiller\nBischwiller\n1976-09-01\n\n\n3\nAsnieres - le Grand Echiquier\nAsnieres\n1987-03-20\n\n\n4\nTours des Hauts-De-France\nSaint-Quentin\n1999-12-01"
+    "text": "Lire des données\nSELECT * FROM table pour tout afficher.\nSELECT *\n  FROM echecs.club;\n\n\n\n\n\n\n\n\n\n\n\n\nid_club\nnom\nville\ndate_creation\n\n\n\n\n1\nC’Chartres Echecs\nChartres\n1991-09-01\n\n\n2\nBischwiller\nBischwiller\n1976-09-01\n\n\n3\nAsnieres - le Grand Echiquier\nAsnieres\n1987-03-20\n\n\n4\nTours des Hauts-De-France\nSaint-Quentin\n1999-12-01"
+  },
+  {
+    "objectID": "doc/cours/sql-slides.html#mise-à-jour",
+    "href": "doc/cours/sql-slides.html#mise-à-jour",
+    "title": "SQL",
+    "section": "Mise à jour",
+    "text": "Mise à jour\nUPDATE echecs.joueuse\n   SET elo = 2399\n WHERE id_joueuse = 1;\n\n\n\nSELECT nom,\n       prenom,\n       elo\n  FROM echecs.joueuse\n WHERE id_joueuse = 1;\n\n\n\n\nnom\nprenom\nelo\n\n\n\n\nGuichard\nPauline\n2399"
+  },
+  {
+    "objectID": "doc/cours/sql-slides.html#suppression",
+    "href": "doc/cours/sql-slides.html#suppression",
+    "title": "SQL",
+    "section": "Suppression",
+    "text": "Suppression"
+  },
+  {
+    "objectID": "doc/cours/sql-slides.html#autres-select",
+    "href": "doc/cours/sql-slides.html#autres-select",
+    "title": "SQL",
+    "section": "Autres SELECT",
+    "text": "Autres SELECT"
   },
   {
     "objectID": "doc/cours/sql.html",
@@ -284,27 +305,48 @@
     "href": "doc/cours/sql.html#définition-de-données",
     "title": "SQL",
     "section": "Définition de Données",
-    "text": "Définition de Données\n\nCréer une table\nCREATE TABLE joueuse (\n    id_joueuse     INT,\n    nom            TEXT,\n    prenom         TEXT,\n    date_naissance DATE,\n    elo            INT,\n    est_arbitre    BOOLEAN,\n    code_pays      TEXT,\n    taux_victoires FLOAT\n);\n\nC’est comme créer les colonnes d’un tableau.\n\n\n\nCREATE avancé\nCREATE TABLE joueuse (\n    id_joueuse     SERIAL          PRIMARY KEY,   \n    nom            VARCHAR(50)     NOT NULL, \n    prenom         VARCHAR(50)     NOT NULL, \n    date_naissance DATETIME,                 \n    elo            INT             CHECK (elo &gt; 0),  \n    mail           VARCHAR(100),         \n    est_arbitre    BOOLEAN         DEFAULT false,\n    code_pays      VARCHAR(2),          \n    taux_victoires FLOAT  \n);\n\n\nBonnes pratiques\n\nNom de table représentatif et au singulier\nPas de majuscules, pas d’accents\nMots séparés par des underscores (snake_case)\nNe pas utiliser de mots clés réservés (date, user…)\nNe pas avoir de colonne qui porte le même nom que sa table\n\n\ndans les requêtes : mots clés en majuscules\n\n\n\nModifier une colonne\nModifier le type :\nALTER TABLE joueuse\nALTER COLUMN nom TYPE VARCHAR(80);\nRenommer :\nALTER TABLE joueuse\nRENAME COLUMN date_naissance TO dnais;\n\n\nCréer/Supprimer une colonne\nAjout :\nALTER TABLE joueuse\nADD COLUMN titre VARCHAR(5);\nSuppression :\nALTER TABLE joueuse\nDROP COLUMN taux_victoires;\n\n\nAutres possibilités\n\nRenommer une table\nAjouter / Supprimer une contrainte\nAjouter une clé étrangère\nDéfinir / Supprimer une valeur par défaut\n\n\n\nSupprimer une table\nDROP TABLE joueuse;\n\n\n\n\n\n\nWarning\n\n\n\nCette opération est irréversible !\nElle supprime définitivement :\n\nla table\ntoutes les données qu’elle contient\n\n\n\nDROP TABLE IF EXISTS joueuse;      -- utile pour les scripts SQL"
+    "text": "Définition de Données\n\nIci nous n’allons travailler que sur une seule table à la fois\n\n\nCréer une table\nCREATE TABLE joueuse (\n    id_joueuse     INT,\n    nom            TEXT,\n    prenom         TEXT,\n    date_naissance DATE,\n    elo            INT,\n    est_arbitre    BOOLEAN,\n    code_pays      TEXT,\n    taux_victoires FLOAT\n);\n\nC’est comme créer les colonnes d’un tableau.\n\n\n\nCREATE avancé\nCREATE TABLE joueuse (\n    id_joueuse     SERIAL          PRIMARY KEY,   \n    nom            VARCHAR(50)     NOT NULL, \n    prenom         VARCHAR(50)     NOT NULL, \n    date_naissance DATETIME,                 \n    elo            INT             CHECK (elo &gt; 0),  \n    mail           VARCHAR(100),         \n    est_arbitre    BOOLEAN         DEFAULT false,\n    code_pays      VARCHAR(2),          \n    taux_victoires FLOAT  \n);\n\n\nBonnes pratiques\n\nNom de table représentatif et au singulier\nPas de majuscules, pas d’accents\nMots séparés par des underscores (snake_case)\nNe pas utiliser de mots clés réservés (date, user…)\nNe pas avoir de colonne qui porte le même nom que sa table\n\n\ndans les requêtes : mots clés en majuscules\n\n\n\nModifier une colonne\nModifier le type :\nALTER TABLE joueuse\nALTER COLUMN nom TYPE VARCHAR(80);\n\nRenommer :\nALTER TABLE joueuse\nRENAME COLUMN date_naissance TO dnais;\n\n\nCréer/Supprimer une colonne\nAjout :\nALTER TABLE joueuse\nADD COLUMN titre VARCHAR(5);\n\nSuppression :\nALTER TABLE joueuse\nDROP COLUMN taux_victoires;\n\n\nAutres possibilités\n\nRenommer une table\nAjouter / Supprimer une contrainte\nAjouter une clé étrangère\nDéfinir / Supprimer une valeur par défaut\n\n\n\nSupprimer une table\nDROP TABLE joueuse;\n\n\n\n\n\n\nWarning\n\n\n\nCette opération est irréversible !\nElle supprime définitivement :\n\nla table\ntoutes les données qu’elle contient\n\n\n\nDROP TABLE IF EXISTS joueuse;      -- utile pour les scripts SQL"
   },
   {
     "objectID": "doc/cours/sql.html#schéma",
     "href": "doc/cours/sql.html#schéma",
     "title": "SQL",
     "section": "Schéma",
-    "text": "Schéma\nUtile lorsque le nombre de table devient grand.\n\nOrganisation des objets, clarté\nGestion des permissions\n\nCREATE SCHEMA echecs;\n\n\nVente de légume\nUtiliser la même bdd pour la gestion RH, le métier et la compta\ncréer un schéma pour séparer les tables\n\n\n\nTable dans un schéma\nCREATE TABLE echecs.club (\n    id_club          SERIAL          PRIMARY KEY,  \n    nom              VARCHAR(100)    NOT NULL,   \n    ville            VARCHAR(100)    NOT NULL, \n    date_creation    DATE\n);\nDéplacer la table joueuse dans le schéma echecs :\nALTER TABLE joueuse SET SCHEMA echecs;\n\nC’est comme créer un fichier dans un dossier.\nPar défaut les objets sont créés dans le schéma public."
+    "text": "Schéma\nUtile lorsque le nombre de table devient grand.\n\nOrganisation des objets, clarté\nGestion des permissions\n\nCREATE SCHEMA echecs;\n\n\nVente de légume\nUtiliser la même bdd pour la gestion RH, le métier et la compta\ncréer un schéma pour séparer les tables\n\n\n\nTable dans un schéma\nCREATE TABLE echecs.club (\n    id_club          SERIAL          PRIMARY KEY,  \n    nom              VARCHAR(100)    NOT NULL,   \n    ville            VARCHAR(100)    NOT NULL, \n    date_creation    DATE\n);\n\nDéplacer la table joueuse dans le schéma echecs :\nALTER TABLE joueuse SET SCHEMA echecs;\n\nC’est comme créer un fichier dans un dossier.\nPar défaut les objets sont créés dans le schéma public."
   },
   {
-    "objectID": "doc/cours/sql.html#manipulation-de-données",
-    "href": "doc/cours/sql.html#manipulation-de-données",
+    "objectID": "doc/cours/sql.html#insérer-des-données",
+    "href": "doc/cours/sql.html#insérer-des-données",
     "title": "SQL",
-    "section": "Manipulation de Données",
-    "text": "Manipulation de Données\n\nInsérer des données\nINSERT INTO echecs.club \n(nom,                              ville,            date_creation)\nVALUES           \n('C''Chartres Echecs',            'Chartres',        '1991-09-01'),\n('Bischwiller',                   'Bischwiller',     '1976-09-01'),\n('Asnieres - le Grand Echiquier', 'Asnieres',        '1987-03-20'),\n('Tours des Hauts-De-France',     'Saint-Quentin',   '1999-12-01');\n\n\n\n\n\n\n\nOù est la colonne id_club\n\n\n\nLa colonne id_club est une séquence gérée par le SGBD.\nLes valeurs sont générées automatiquement à l’insertion et la séquence incrémentée.\n\n\n\n\n\nPas de double quotes en SQL !!!\n’’ : Pour ajouter un simple quote dans une chaine"
+    "section": "Insérer des données",
+    "text": "Insérer des données\n\n\n\n\n\nclassDiagram\n    class Club {\n        id_club PK\n        nom\n        ville\n        date_creation\n    }\n\n\n\n\n\n\n\nINSERT INTO echecs.club \n(nom,                              ville,            date_creation)\nVALUES           \n('C''Chartres Echecs',            'Chartres',        '1991-09-01'),\n('Bischwiller',                   'Bischwiller',     '1976-09-01'),\n('Asnieres - le Grand Echiquier', 'Asnieres',        '1987-03-20'),\n('Tours des Hauts-De-France',     'Saint-Quentin',   '1999-12-01');\n\n\nPourquoi l’on n’insère pas la colonne id_club ? 😕\n\n\nAttention à bien mettre les virgules au bon endroit\n\n\nSéquence\nLa colonne id_club est une séquence gérée par le SGBD.\nLes valeurs sont générées automatiquement à l’insertion et la séquence est incrémentée (1, 2, 3…).\n\n\n\n\n\n\nSéquences\n\n\n\n\n\nIl est possible de créer et gérer ses propres séquences :\nCREATE SEQUENCE nom_sequence START 1 INCREMENT BY 1;\n\nSELECT currval('nom_sequence'); -- dernière valeur utilisée\nSELECT nextval('nom_sequence'); -- prochaine valeur\n\nALTER SEQUENCE nom_sequence RESTART WITH nouvelle_valeur;\n\nDROP SEQUENCE nom_sequence;\n\n\n\n\n\nPas de double quotes en SQL !!!\n’’ : Pour ajouter un simple quote dans une chaine"
   },
   {
     "objectID": "doc/cours/sql.html#lire-des-données",
     "href": "doc/cours/sql.html#lire-des-données",
     "title": "SQL",
     "section": "Lire des données",
-    "text": "Lire des données\nSELECT *\n  FROM echecs.club;\n\n\n\n\n\n\n\n\n\nid_club\nnom\nville\ndate_creation\n\n\n\n\n1\nC’Chartres Echecs\nChartres\n1991-09-01\n\n\n2\nBischwiller\nBischwiller\n1976-09-01\n\n\n3\nAsnieres - le Grand Echiquier\nAsnieres\n1987-03-20\n\n\n4\nTours des Hauts-De-France\nSaint-Quentin\n1999-12-01\n\n\n\n\nColonnes à afficher\nSELECT nom,\n       prenom,\n       elo\n  FROM echecs.joueuse;\n\n\n\nnom\nprenom\nelo\n\n\n\n\nGuichard\nPauline\n2357\n\n\nDaulyte-Cornette\nDeimante\n2371\n\n\nNavrotescu\nAndreea\n2338\n\n\nSebag\nMarie\n2448\n\n\nMillet\nSophie\n2366\n\n\nSkrichempko\nAlmira\n2361\n\n\n\n\n\nFilter les lignes\nSELECT nom,\n       prenom,\n       elo\n  FROM echecs.joueuse\n WHERE elo &gt; 2400;\n\n\n\nnom\nprenom\nelo\n\n\n\n\nSebag\nMarie\n2448\n\n\n\n\n\nPlusieurs filtres\nSELECT nom,\n       prenom,\n       elo\n  FROM echecs.joueuse\n WHERE elo &lt; 2400\n   AND prenom LIKE 'A%';\n\n\n\nnom\nprenom\nelo\n\n\n\n\nNavrotescu\nAndreea\n2338\n\n\nSkrichempko\nAlmira\n2361\n\n\n\nBETWEEN OR IN NOT IN\n\n\nUPDATE\n\n\nDELETE"
+    "text": "Lire des données\nSELECT * FROM table pour tout afficher.\nSELECT *\n  FROM echecs.club;\n\n\n\n\n\n\n\n\n\n\n\n\nid_club\nnom\nville\ndate_creation\n\n\n\n\n1\nC’Chartres Echecs\nChartres\n1991-09-01\n\n\n2\nBischwiller\nBischwiller\n1976-09-01\n\n\n3\nAsnieres - le Grand Echiquier\nAsnieres\n1987-03-20\n\n\n4\nTours des Hauts-De-France\nSaint-Quentin\n1999-12-01\n\n\n\n\n\n\nColonnes à afficher\nListez les colonnes à afficher après le SELECT\nSELECT nom,\n       prenom,\n       elo\n  FROM echecs.joueuse;\n\n\n\n\n\n\nnom\nprenom\nelo\n\n\n\n\nGuichard\nPauline\n2357\n\n\nDaulyte-Cornette\nDeimante\n2371\n\n\nNavrotescu\nAndreea\n2338\n\n\nSebag\nMarie\n2448\n\n\nMillet\nSophie\n2366\n\n\nSkrichempko\nAlmira\n2361\n\n\n\n\n\n\n\nFilter les lignes\nFiltrez sur les lignes avec une clause WHERE.\nSELECT nom,\n       prenom,\n       elo\n  FROM echecs.joueuse\n WHERE elo &gt; 2400;\n\n\n\n\n\n\nnom\nprenom\nelo\n\n\n\n\nSebag\nMarie\n2448\n\n\n\n\n\n\n\nPlusieurs filtres\nLe mot clé AND permet d’ajouter d’autres filtres.\nSELECT nom,\n       prenom,\n       elo\n  FROM echecs.joueuse\n WHERE elo &lt; 2400\n   AND prenom LIKE 'A%';\n\n\n\n\n\n\nnom\nprenom\nelo\n\n\n\n\nNavrotescu\nAndreea\n2338\n\n\nSkrichempko\nAlmira\n2361\n\n\n\n\n\n\n1 seul WHERE\nplusieurs AND\n\n\nVous pouvez autoriser plusieurs conditions avec OR.\nSELECT nom,\n       prenom,\n       elo\n  FROM echecs.joueuse\n WHERE elo &gt; 2400\n    OR prenom LIKE 'A%';\n\n\n\n\n\n\nnom\nprenom\nelo\n\n\n\n\nSebag\nMarie\n2448\n\n\nNavrotescu\nAndreea\n2338\n\n\nSkrichempko\nAlmira\n2361\n\n\n\n\n\n\n\nLIKE\nSELECT *\n  FROM echecs.joueuse\n WHERE prenom LIKE 'A%'         -- commence par A\n    OR prenom LIKE '%A'         -- termine par A\n    OR prenom LIKE '%A%'        -- contient au moins un A\n    OR UPPER(prenom) LIKE '%A%' -- contient au moins un A ou un a\n    OR prenom LIKE 'A__'        -- commence par A suivi de 2 autres caractères\n\n% : représente entre 0 et une infinité de caractères\n_ : représente exactement 1 caractère\n\n\n\n\n\n\n\nCaution\n\n\n\nAttention aux MAJUSCULES ≠ minuscules\n\n\n\n\nPlage de valeurs\nBETWEEN permet de spécifier une plage de valeurs numériques.\nSELECT nom,\n       prenom,\n       elo\n  FROM echecs.joueuse\n WHERE elo BETWEEN 2350 AND 2400;\n\n\n\n\n\n\nnom\nprenom\nelo\n\n\n\n\nGuichard\nPauline\n2357\n\n\nDaulyte-Cornette\nDeimante\n2371\n\n\nMillet\nSophie\n2366\n\n\nSkrichempko\nAlmira\n2361\n\n\n\n\n\n\n\nValeurs dans une liste\nVous pouvez spécifier qu’un attribut doit appartenir à un liste avec IN.\nOu inversement avec NOT IN.\nSELECT nom,\n       prenom,\n       elo\n  FROM echecs.joueuse\n WHERE prenom IN ('Deimante', 'Sophie');\n\n\n\n\n\n\nnom\nprenom\nelo\n\n\n\n\nDaulyte-Cornette\nDeimante\n2371\n\n\nMillet\nSophie\n2366\n\n\n\n\n\n\nPossible de lister des valeurs numériques\n\n\n\nFiltre sur les attributs booléens\nSELECT *\n  FROM echecs.joueuse\n WHERE est_arbitre IS TRUE;\n\n\nFiltre sur les valeurs nulles\nSELECT *\n  FROM echecs.joueuse\n WHERE mail IS NULL; -- IS NOT NULL\n\n\nOrdonner le résultat\nORDER BY pour ordonner selon plusieurs colonnes.\nSELECT nom,\n       prenom,\n       elo\n  FROM echecs.joueuse\n ORDER BY elo,\n          taux_victoires DESC;\n\n\n\n\n\nnom\nprenom\nelo\n\n\n\n\nNavrotescu\nAndreea\n2338\n\n\nGuichard\nPauline\n2357\n\n\nSkrichempko\nAlmira\n2361\n\n\nMillet\nSophie\n2366\n\n\nDaulyte-Cornette\nDeimante\n2371\n\n\nSebag\nMarie\n2448\n\n\n\n\n\n\n\nAfficher n lignes\nSELECT nom,\n       prenom,\n       elo\n  FROM echecs.joueuse\n LIMIT 3;\n\n\n\n\n\n\nnom\nprenom\nelo\n\n\n\n\nGuichard\nPauline\n2357\n\n\nDaulyte-Cornette\nDeimante\n2371\n\n\nNavrotescu\nAndreea\n2338"
+  },
+  {
+    "objectID": "doc/cours/sql.html#mise-à-jour",
+    "href": "doc/cours/sql.html#mise-à-jour",
+    "title": "SQL",
+    "section": "Mise à jour",
+    "text": "Mise à jour\nUPDATE echecs.joueuse\n   SET elo = 2399\n WHERE id_joueuse = 1;\n\n\n\nSELECT nom,\n       prenom,\n       elo\n  FROM echecs.joueuse\n WHERE id_joueuse = 1;\n\n\n\n\nnom\nprenom\nelo\n\n\n\n\nGuichard\nPauline\n2399"
+  },
+  {
+    "objectID": "doc/cours/sql.html#suppression",
+    "href": "doc/cours/sql.html#suppression",
+    "title": "SQL",
+    "section": "Suppression",
+    "text": "Suppression"
+  },
+  {
+    "objectID": "doc/cours/sql.html#autres-select",
+    "href": "doc/cours/sql.html#autres-select",
+    "title": "SQL",
+    "section": "Autres SELECT",
+    "text": "Autres SELECT\n\nType DATE\nQuelques opérations avec le type DATE.\nSELECT nom,\n       prenom,\n       EXTRACT(YEAR FROM date_naissance) AS annee_naissance\n  FROM echecs.joueuse\n WHERE date_naissance &gt;= '1991-04-20'\n    OR date_naissance BETWEEN '1991-04-20' AND '1992-12-31'\n    OR EXTRACT(MONTH FROM date_naissance) = 4;\n\n\nJouer avec les colonnes\nSELECT CONCAT(nom, ' ', prenom) AS nom_complet,\n       elo\nFROM echecs.joueuse;\n\n\n\n\n\n\nnom_complet\nelo\n\n\n\n\nGuichard Pauline\n2357\n\n\nDaulyte-Cornette Deimante\n2371\n\n\nNavrotescu Andreea\n2338\n\n\nSebag Marie\n2448\n\n\nMillet Sophie\n2366\n\n\nSkrichempko Almira\n2361"
   }
 ]
