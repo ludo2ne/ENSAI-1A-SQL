@@ -120,7 +120,7 @@ Important : La PK est NOT NULL et UNIQUE
 
 ### Schéma
 
-Utile lorsque le nombre de table devient grand.
+Utile lorsque le nombre de tables devient grand.
 
 - Organisation des objets, clarté
 - Gestion des permissions
@@ -157,10 +157,16 @@ Déplacer la table *joueuse* dans le schéma *echecs* :
 ALTER TABLE joueuse SET SCHEMA echecs;
 ```
 
+:::::: {.fragment}
+::: {.callout-note title="Schéma par défaut"}
+Par défaut les objets sont créés dans le schéma `public`.
+
+Ça devient rapidement un joyeux bazar si on ne range pas ses tables.
+:::
+::::::
+
 ::: {.notes}
 C'est comme créer un fichier dans un dossier.
-
-Par défaut les objets sont créés dans le schéma `public`.
 :::
 
 
@@ -224,12 +230,14 @@ FOREIGN KEY (id_club)
 REFERENCES club(id_club);
 ```
 
+:::::: {.fragment}
 ::: {.callout-tip title="Clé étrangère"}
 Dans la table joueuse, l'attribut `id_club` a pour valeur soit :
 
 - une valeur de `id_club` de la table *club*
 - NULL
 :::
+::::::
 
 
 ### Autres possibilités
@@ -245,6 +253,7 @@ Dans la table joueuse, l'attribut `id_club` a pour valeur soit :
 DROP TABLE joueuse;
 ```
 
+:::::: {.fragment}
 ::: {.callout-warning}
 **Cette opération est irréversible !**
 
@@ -253,6 +262,7 @@ DROP TABLE joueuse;
  - la table
  - toutes les données qu'elle contient
 :::
+::::::
 
 ```{.sql}
 DROP TABLE IF EXISTS joueuse;      -- utile pour les scripts SQL
@@ -343,6 +353,10 @@ SELECT *
 
 :::
 ::::::
+
+::: {.notes}
+- `*` : toutes les colonnes
+:::
 
 ### Colonnes à afficher
 
@@ -472,8 +486,8 @@ SELECT *
 - `%` : représente entre 0 et une infinité de caractères
 - `_` : représente exactement 1 caractère
 
-::: {.callout-caution}
-Attention aux MAJUSCULES ≠ minuscules
+::: {.callout-caution title="Attention à la Casse"}
+MAJUSCULES ≠ minuscules
 :::
 
 
@@ -659,7 +673,7 @@ DELETE FROM echecs.joueuse
 Vider la table :
 
 ```{.sql}
-DELETE FROM echecs.joueuse
+DELETE FROM echecs.joueuse;
 ```
 
 ## Validation des opérations
@@ -680,8 +694,9 @@ Attention : il n'y a pas de garde-fou lorsque vous êtes en Auto-commit.
 :::
 ::::::
 
-:construction: TODO à approfondir plus tard
-
+::: {.notes}
+Vu plus tard dans le cours
+:::
 
 
 ## Dates et Heures
@@ -742,7 +757,7 @@ Vous pouvez utiliser également sur le type *TIMESTAMP* :
 
 ### Tester si un attribut est NULL
 
-Joueuse dont le mail n'est pas renseigné :
+Joueuses dont le mail n'est pas renseigné :
 
 ```{.sql}
 SELECT *

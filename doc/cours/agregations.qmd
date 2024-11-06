@@ -8,6 +8,7 @@ format:
     toc-location: left
     toc-depth: 3
     number-sections: true
+    number-depth: 2
   revealjs:
     theme: moon
     footer: "[Home](../../index.html) --- [Agrégations](agregations.html)"
