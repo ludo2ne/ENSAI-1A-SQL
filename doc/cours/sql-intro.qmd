@@ -1,6 +1,6 @@
 ---
 title: "SQL"
-description: "[Slides](sql-slides.html)"
+description: "[Slides](sql-intro-slides.html)"
 author: "Ludovic Deneuville"
 format: 
   html:
@@ -9,11 +9,11 @@ format:
     toc-depth: 2
   revealjs:
     theme: moon
-    footer: "[Home](../../index.html) --- [SQL](sql.html)"
+    footer: "[Home](../../index.html) --- [SQL](sql-intro.html)"
     slide-number: c/t                    # collapsed/total
     slide-level: 3
     controls: true
-    output-file: sql-slides.html
+    output-file: sql-intro-slides.html
 mermaid:
   theme: forest
 code-line-numbers: false
@@ -85,18 +85,82 @@ C'est comme créer les colonnes d'un tableau.
 ### CREATE avancé
 
 ```{.sql}
-CREATE TABLE joueuse (
+CREATE TABLE echecs.joueuse (
     id_joueuse     SERIAL          PRIMARY KEY,   
     nom            VARCHAR(50)     NOT NULL, 
     prenom         VARCHAR(50)     NOT NULL, 
-    date_naissance DATETIME,                 
+    date_naissance TIMESTAMP,                 
     elo            INT             CHECK (elo > 0),  
-    mail           VARCHAR(100),         
+    mail           VARCHAR(100)    UNIQUE,         
     est_arbitre    BOOLEAN         DEFAULT false,
     code_pays      VARCHAR(2),          
     taux_victoires FLOAT  
 );
 ```
+
+:::::: {.fragment}
+::: {.callout-important title="Contraintes"}
+- `NOT NULL` : l'attribut doit être renseigné
+- `UNIQUE` : chaque valeur de l'attribut est unique (pas de doublons)
+- `CHECK` : pour vérifier la cohérence d'un attribut
+:::
+::::::
+
+::: {.notes}
+- Schéma echecs : j'y viens juste après
+- SERIAL : séquence numérique, on en reparle dans quelques minutes
+- VARCHAR(50) pour limiter la taille des valeurs
+- DEFAULT : valeur par défaut (principalement lors de l'INSERT)
+
+Important : La PK est NOT NULL et UNIQUE
+:::
+
+
+### Schéma
+
+Utile lorsque le nombre de table devient grand.
+
+- Organisation des objets, clarté
+- Gestion des permissions
+
+
+```{.sql}
+CREATE SCHEMA echecs;
+```
+
+::: {.notes}
+- Vente de légume
+- Utiliser la même bdd pour la gestion RH, le métier et la compta
+- créer un schéma pour séparer les tables
+:::
+
+---
+
+#### Table dans un schéma
+
+```{.sql}
+CREATE TABLE echecs.club (
+    id_club          SERIAL          PRIMARY KEY,  
+    nom              VARCHAR(100)    NOT NULL,   
+    ville            VARCHAR(100)    NOT NULL, 
+    date_creation    DATE
+);
+```
+
+<br>
+
+Déplacer la table *joueuse* dans le schéma *echecs* :
+
+```{.sql}
+ALTER TABLE joueuse SET SCHEMA echecs;
+```
+
+::: {.notes}
+C'est comme créer un fichier dans un dossier.
+
+Par défaut les objets sont créés dans le schéma `public`.
+:::
+
 
 ### Bonnes pratiques
 
@@ -134,7 +198,7 @@ Ajout :
 
 ```{.sql}
 ALTER TABLE joueuse
-ADD COLUMN titre VARCHAR(5);
+ADD COLUMN id_club INT;
 ```
 
 <br>
@@ -146,11 +210,30 @@ ALTER TABLE joueuse
 DROP COLUMN taux_victoires;
 ```
 
+### Définir une clé étrangère
+
+- Nous venons de créer une colonne `id_club`
+- Lions maintenant cette colonne à la table *club*
+
+```{.sql}
+ALTER TABLE joueuse
+ADD CONSTRAINT fk_id_club
+FOREIGN KEY (id_club)
+REFERENCES club(id_club);
+```
+
+::: {.callout-tip title="Clé étrangère"}
+Dans la table joueuse, l'attribut `id_club` a pour valeur soit :
+
+- une valeur de `id_club` de la table *club*
+- NULL
+:::
+
+
 ### Autres possibilités
 
 - Renommer une table
 - Ajouter / Supprimer une contrainte
-- Ajouter une clé étrangère
 - Définir / Supprimer une valeur par défaut
 
 
@@ -172,50 +255,6 @@ DROP TABLE joueuse;
 ```{.sql}
 DROP TABLE IF EXISTS joueuse;      -- utile pour les scripts SQL
 ```
-
-
-## Schéma
-
-Utile lorsque le nombre de table devient grand.
-
-- Organisation des objets, clarté
-- Gestion des permissions
-
-
-```{.sql}
-CREATE SCHEMA echecs;
-```
-
-::: {.notes}
-- Vente de légume
-- Utiliser la même bdd pour la gestion RH, le métier et la compta
-- créer un schéma pour séparer les tables
-:::
-
-### Table dans un schéma
-
-```{.sql}
-CREATE TABLE echecs.club (
-    id_club          SERIAL          PRIMARY KEY,  
-    nom              VARCHAR(100)    NOT NULL,   
-    ville            VARCHAR(100)    NOT NULL, 
-    date_creation    DATE
-);
-```
-
-<br>
-
-Déplacer la table *joueuse* dans le schéma *echecs* :
-
-```{.sql}
-ALTER TABLE joueuse SET SCHEMA echecs;
-```
-
-::: {.notes}
-C'est comme créer un fichier dans un dossier.
-
-Par défaut les objets sont créés dans le schéma `public`.
-:::
 
 
 ## Insérer des données
@@ -503,14 +542,6 @@ SELECT *
  WHERE est_arbitre IS TRUE;
 ```
 
-### Filtre sur les valeurs nulles
-
-```{.sql}
-SELECT *
-  FROM echecs.joueuse
- WHERE mail IS NULL; -- IS NOT NULL
-```
-
 
 ### Ordonner le résultat
 
@@ -540,6 +571,10 @@ SELECT nom,
 :::
 ::::::
 
+::: {.notes}
+- ORDER BY 2 : 2e colonne
+:::
+
 ### Afficher n lignes
 
 ```{.sql}
@@ -564,7 +599,7 @@ SELECT nom,
 :::
 ::::::
 
-## Mise à jour
+## Mise à jour de données
 
 ```{.sql}
 UPDATE echecs.joueuse
@@ -580,7 +615,8 @@ UPDATE echecs.joueuse
 
 
 ```{.sql}
-SELECT nom,
+SELECT id_joueuse,
+       nom,
        prenom,
        elo
   FROM echecs.joueuse
@@ -589,20 +625,64 @@ SELECT nom,
 
 <br>
 
-| **nom**                | **prenom**       | **elo** |
-|------------------------|------------------|---------|
-| Guichard               | Pauline          | 2399    |
+| **id_joueuse**  | **nom**                | **prenom**       | **elo** |
+|-----------------|------------------------|------------------|---------|
+| 1               | Guichard               | Pauline          | 2399    |
 
 :::
 ::::::
 
+### Màj globale
+
+Imaginons que vous souhaitez modifier le `elo` de toutes les joueuses.
+
+```{.sql}
+UPDATE echecs.joueuse
+   SET elo = elo + 100;
+```
+
+::: {.callout-warning}
+Généralement un message d'avertissement vous demande si vous êtes certains de vouloir mettre à jour toutes les lignes.
+:::
+
+## Suppression de données
+
+Supprimer une joueuse :
+
+```{.sql}
+DELETE FROM echecs.joueuse
+ WHERE id_joueuse = 1;
+```
+
+Vider la table :
+
+```{.sql}
+DELETE FROM echecs.joueuse
+```
+
+## Validation des opérations
+
+Et si ? :scream: 
+
+Vous avez exécuté par erreur `DELETE FROM joueuse;` 
+
+:::::: {.fragment}
+Il y a un système de transactions avec les mots clés :
+
+- BEGIN
+- COMMIT
+- ROLLBACK
+
+:::::: {.callout-warning title="Auto-commit"}
+Attention : il n'y a pas de garde-fou lorsque vous êtes en Auto-commit.
+:::
+::::::
+
+:construction: TODO à approfondir plus tard
 
 
-## Suppression
 
-
-
-## Autres SELECT
+## Dates et Heures
 
 ### Type DATE
 
@@ -611,12 +691,109 @@ Quelques opérations avec le type `DATE`.
 ```{.sql}
 SELECT nom,
        prenom,
-       EXTRACT(YEAR FROM date_naissance) AS annee_naissance
+       EXTRACT(YEAR FROM date_naissance) AS annee_naissance,
+       AGE(CURRENT_DATE, date_naissance) AS age
   FROM echecs.joueuse
  WHERE date_naissance >= '1991-04-20'
     OR date_naissance BETWEEN '1991-04-20' AND '1992-12-31'
     OR EXTRACT(MONTH FROM date_naissance) = 4;
 ```
+
+### Type TIMESTAMP
+
+Pour stocker la date et l'heure
+
+```{.sql}
+CREATE TABLE echecs.club (
+    id_club          SERIAL          PRIMARY KEY,  
+    nom              VARCHAR(100)    NOT NULL,   
+    ville            VARCHAR(100)    NOT NULL, 
+    date_creation    TIMESTAMP
+);
+```
+
+---
+
+#### Utilisations
+
+```{.sql}
+INSERT INTO echecs.club (nom, ville, date_creation)
+VALUES ('C''Chartres Echecs', 'Chartres', '1991-09-01 20:00:00');
+```
+
+<br>
+
+```{.sql}
+INSERT INTO echecs.club (nom, ville, date_creation)
+VALUES ('Bischwiller', 'Bischwiller', CURRENT_TIMESTAMP);
+```
+
+Vous pouvez utiliser également sur le type *TIMESTAMP* : 
+
+- `EXTRACT`, 
+- `BETWEEN`, 
+- les opérateurs de comparaison
+
+
+
+## Valeurs nulles
+
+### Tester si un attribut est NULL
+
+Joueuse dont le mail n'est pas renseigné :
+
+```{.sql}
+SELECT *
+  FROM echecs.joueuse
+ WHERE mail IS NULL; 
+```
+
+Et inversemenent
+
+```{.sql}
+SELECT *
+  FROM echecs.joueuse
+ WHERE mail IS NOT NULL;
+```
+
+### COALESCE
+
+::: {.callout-tip title="La fonction COALESCE"}
+En PostgreSQL, la fonction COALESCE :
+
+- prend un nombre quelconque de paramètres
+- retourne le 1er paramètre dont la valeur est NON NULLE
+:::
+
+:::{.notes}
+```{.python}
+c(x1, x2, ... xn):
+  if x1:
+    return x1
+  else:
+    return c(x2, ... xn)
+```
+
+NVL pour Oracle (à ne pas confondre avec MVL)
+:::
+
+### COALESCE - Exemple
+
+```{.sql}
+SELECT COALESCE(mail, tel, 'pas de contact')
+  FROM echecs.joueuse
+ WHERE id_joueuse = 1
+```
+
+La requête ci-dessus va afficher :
+
+- Si mail est NON NULL :arrow_right: mail
+- Sinon 
+  - Si tel NON NULL :arrow_right: tel
+  - Sinon :arrow_right: `pas de contact`
+
+
+## Divers
 
 ### Jouer avec les colonnes
 
@@ -642,10 +819,3 @@ FROM echecs.joueuse;
 
 :::
 ::::::
-
-
-
-
-
-
-

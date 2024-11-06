@@ -5,7 +5,7 @@ project:
   type: website
 
 website:
-  title: "Quarto tutorial"
+  title: "Base de données"
   repo-url: "{{< meta var.url-repo >}}"
   repo-branch: main
   reader-mode: true
@@ -21,13 +21,17 @@ website:
             text: "Introduction"
           - href: doc/cours/bases-de-donnees.qmd
             text: "Base de données"
-          - href: doc/cours/sql.qmd
-            text: "SQL"
+          - href: doc/cours/sql-intro.qmd
+            text: "Introduction à SQL"
+          - href: doc/cours/algebre.qmd
+            text: "Algèbre Relationnelle"
       - text: TP
         menu:
           - href: doc/tp/tp1.qmd
             text: "TP1"
     right:
+      - href: doc/glossaire.qmd
+        text: Glossaire
       - icon: github
         href: "{{< meta var.url-repo >}}"
         target: "_blank"

@@ -1,0 +1,160 @@
+---
+title: "Glossaire"
+description: "Vocabulaire sur les bases de données"
+author: "Ludovic Deneuville"
+format: html
+from: markdown+emoji
+---
+
+:construction:
+
+## Table 
+
+Structure de données dans une base de données relationnelle qui contient :
+
+- des lignes représentant des entités
+- des colonnes représentant un attribut de ces entités
+
+Synonymes : Relation
+
+### Ligne
+
+Un ensemble de valeurs correspondant à un objet ou une entité dans une table.
+
+Synonymes : Enregistrement, Entité, Tuple, Observation
+
+### Colonne
+
+Une structure verticale dans une table qui contient un type spécifique de données.
+
+Synonymes : Attribut, Champs, Propriété, Variable, Dimension
+
+### Clé primaire
+
+Un champ ou un ensemble de champs qui identifie de manière unique chaque ligne d'une table.
+
+### Clé étrangère
+
+Un champ dans une table qui est une référence à la clé primaire d'une autre table. 
+
+Elle est utilisée pour établir une relation entre deux tables.
+
+
+
+
+
+---
+
+
+
+
+
+
+Voici un glossaire des termes clés associés aux **bases de données**, **SQL**, et **PostgreSQL** :
+
+### **Bases de Données**
+
+- **Base de données (BDD)** : Un ensemble organisé de données, généralement stockées et accessibles électroniquement. Elle est utilisée pour faciliter la gestion, la récupération, l'ajout, la mise à jour et la suppression des données.
+
+- **Système de Gestion de Base de Données (SGBD)** : Logiciel permettant de créer, gérer et manipuler des bases de données. Il permet la gestion des données et des utilisateurs via des interfaces (commandes SQL, API, etc.).
+
+
+
+- **Index** : Un moyen d'accélérer les requêtes en créant une structure de données qui permet une recherche rapide sur des colonnes spécifiques.
+
+- **Schéma** : Un modèle ou une structure de données qui définit la façon dont les données sont organisées dans une base de données. Un schéma peut contenir des tables, des vues, des fonctions, etc.
+
+- **Jointure (Join)** : Une opération qui permet de combiner des données provenant de plusieurs tables en fonction de relations définies entre elles.
+
+- **Transaction** : Un ensemble d'opérations qui sont exécutées de manière atomique (tout ou rien). Si une transaction échoue, toutes les modifications sont annulées.
+
+---
+
+### **SQL (Structured Query Language)**
+
+- **SQL** : Un langage standardisé pour interagir avec des bases de données relationnelles. SQL permet de créer, lire, mettre à jour et supprimer des données (CRUD).
+
+- **SELECT** : Commande utilisée pour extraire des données d'une ou plusieurs tables.
+
+- **INSERT** : Commande utilisée pour insérer de nouvelles lignes de données dans une table.
+
+- **UPDATE** : Commande utilisée pour modifier les données existantes dans une table.
+
+- **DELETE** : Commande utilisée pour supprimer des lignes dans une table.
+
+- **WHERE** : Clause utilisée pour filtrer les résultats d'une requête en fonction de conditions spécifiques.
+
+- **GROUP BY** : Clause utilisée pour regrouper les résultats d'une requête selon un ou plusieurs attributs.
+
+- **ORDER BY** : Clause utilisée pour trier les résultats d'une requête selon un ou plusieurs critères.
+
+- **JOIN** : Opération qui combine des données de plusieurs tables en fonction de conditions de correspondance.
+
+- **HAVING** : Clause utilisée pour filtrer les résultats agrégés d'une requête, généralement utilisée après un `GROUP BY`.
+
+- **DISTINCT** : Mot-clé utilisé pour éliminer les doublons dans les résultats d'une requête.
+
+- **LIMIT** : Limite le nombre de résultats renvoyés par une requête.
+
+- **INSERT INTO SELECT** : Commande permettant d’insérer le résultat d’une requête SELECT dans une autre table.
+
+- **ALTER** : Commande permettant de modifier la structure d'une table (par exemple, ajouter ou supprimer des colonnes).
+
+- **DROP** : Commande permettant de supprimer une table ou un autre objet dans une base de données.
+
+- **CREATE** : Commande utilisée pour créer des tables, des vues, des index, des procédures, etc.
+
+- **INDEX** : Structure de données permettant de rendre les recherches plus rapides sur des colonnes de tables.
+
+- **TRANSACTION** : Un bloc de commandes SQL qui peut être validé (`COMMIT`) ou annulé (`ROLLBACK`) dans son ensemble.
+
+- **COMMIT** : Commande permettant de valider une transaction.
+
+- **ROLLBACK** : Commande permettant d'annuler une transaction et de revenir à l'état antérieur.
+
+---
+
+### **PostgreSQL**
+
+- **PostgreSQL** : Un système de gestion de base de données relationnelle open-source avancé. Il supporte les types de données complexes, la gestion des transactions, les index, les jointures, et d'autres fonctionnalités avancées.
+
+- **pgAdmin** : Interface graphique pour administrer des bases de données PostgreSQL. Elle permet de créer, modifier, supprimer des objets de base de données, et d'exécuter des requêtes SQL.
+
+- **Tableau de Bord PostgreSQL** : L’interface utilisateur pour administrer et gérer des instances de PostgreSQL, à travers des outils graphiques ou des requêtes SQL.
+
+- **Vacuum** : Processus dans PostgreSQL qui nettoie et libère l’espace occupé par des tuples morts dans les tables et les index. Il optimise aussi la performance de la base de données.
+
+- **Replication** : Mécanisme dans PostgreSQL permettant de copier les données d'une base de données vers une autre pour des fins de sauvegarde ou de haute disponibilité.
+
+- **Sequence** : Un objet dans PostgreSQL qui génère des valeurs numériques uniques, souvent utilisé pour les valeurs de clés primaires auto-incrémentées.
+
+- **Foreign Data Wrapper (FDW)** : Permet à PostgreSQL de se connecter à des bases de données externes et de traiter les données comme si elles étaient locales.
+
+- **Extension** : Une fonctionnalité supplémentaire dans PostgreSQL permettant d'ajouter des modules spécifiques pour étendre les capacités du système (par exemple, `PostGIS` pour la gestion des données géographiques).
+
+- **PL/pgSQL** : Un langage procédural utilisé dans PostgreSQL pour écrire des fonctions et des procédures stockées.
+
+- **Array** : Un type de données qui permet de stocker plusieurs valeurs dans une seule colonne dans PostgreSQL.
+
+- **JSON/JSONB** : Types de données pour stocker des documents JSON dans PostgreSQL, où `JSONB` offre des performances supérieures pour les opérations de lecture et d'indexation.
+
+- **CTE (Common Table Expression)** : Une sous-requête qui peut être utilisée dans une requête principale pour améliorer la lisibilité et la structure des requêtes complexes.
+
+---
+
+### **Autres Concepts**
+
+- **ACID** : Propriétés des transactions garantissant leur intégrité : **Atomicité**, **Cohérence**, **Isolation**, **Durabilité**.
+
+- **Normalisation** : Processus de conception d'une base de données pour éliminer la redondance et les anomalies, en divisant les données en tables liées par des clés étrangères.
+
+- **Schéma** : Un ensemble d'objets (tables, vues, fonctions, etc.) organisés dans une base de données.
+
+- **DDL (Data Definition Language)** : Langage SQL utilisé pour définir et gérer la structure de la base de données (par exemple, `CREATE`, `ALTER`, `DROP`).
+
+- **DML (Data Manipulation Language)** : Langage SQL utilisé pour manipuler les données dans les tables (par exemple, `SELECT`, `INSERT`, `UPDATE`, `DELETE`).
+
+- **DCL (Data Control Language)** : Langage SQL utilisé pour contrôler l'accès aux données (par exemple, `GRANT`, `REVOKE`).
+
+- **SQL Injection** : Technique d'attaque où des requêtes SQL malveillantes sont insérées dans un formulaire ou une URL pour manipuler la base de données.
+

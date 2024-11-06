@@ -1,0 +1,176 @@
+---
+title: "Algèbre Relationnelle"
+description: "[Slides](algebre-slides.html)"
+author: "Ludovic Deneuville"
+format: 
+  html:
+    toc: true
+    toc-location: left
+    toc-depth: 2
+  revealjs:
+    theme: moon
+    footer: "[Home](../../index.html) --- [SQL](algebre.html)"
+    slide-number: c/t                    # collapsed/total
+    slide-level: 3
+    controls: true
+    output-file: algebre-slides.html
+mermaid:
+  theme: forest
+code-line-numbers: false
+from: markdown+emoji
+---
+
+## Algèbre Relationnelle
+
+- [A Relational Model of Data for Large Shared Data Banks](https://www.seas.upenn.edu/~zives/03f/cis550/codd.pdf){target="_blank"}, Edgar F. Codd, 1970
+- Objectif : Modéliser une base de données ainsi que ses opérations
+- Dans un SGBD relationel, tout est question de relation
+
+
+## Principaux opérateurs
+
+| **Opérateur**        | **Description**                              |
+|----------------------|----------------------------------------------|
+| **σ (Sélection)**    | Filtrer les lignes selon une condition      |
+| **π (Projection)**   | Sélectionner des colonnes spécifiques        |
+| **U (Union)**        | Combiner les lignes de deux relations       |
+| **− (Différence)**   | Retourner les lignes présentes dans une relation mais pas dans l'autre |
+| **∩ (Intersection)** | Trouver les lignes communes aux deux relations |
+| **⨝ (Jointure)**    | Combiner deux relations basées sur une condition |
+| **ρ (Renommage)**    | Renommer une relation ou ses colonnes        |
+| **÷ (Division)**     | Trouver les éléments associés à tous les éléments d'une autre relation |
+
+
+### Sélection
+
+- Permet de filtrer les lignes d'une table selon une condition
+
+::: {.fragment}
+- Mot clé SQL : WHERE :warning:
+:::
+
+
+
+
+
+L'**algèbre relationnelle** est un langage formel pour manipuler des bases de données relationnelles. Elle définit un ensemble d'opérations sur les relations (tables) qui permettent de traiter et de manipuler les données de manière logique. Voici les principaux opérateurs de l'algèbre relationnelle :
+
+### 1. **Sélection (σ - Select)**
+
+
+
+**Syntaxe** :
+``` 
+σ (condition)(Relation)
+```
+
+**Exemple** : Sélectionner toutes les lignes où l'âge est supérieur à 18 ans dans une table `Personnes`.
+``` 
+σ(age > 18)(Personnes)
+```
+
+### 2. **Projection (π - Project)**
+
+L'opérateur **projection** permet de sélectionner certaines colonnes d'une relation (table) et d'ignorer les autres.
+
+**Syntaxe** :
+``` 
+π (colonnes)(Relation)
+```
+
+**Exemple** : Projeter seulement les colonnes `nom` et `prénom` d'une table `Personnes`.
+``` 
+π(nom, prénom)(Personnes)
+```
+
+### 3. **Union (∪ - Union)**
+
+L'opérateur **union** combine les lignes de deux relations (tables) ayant le même nombre de colonnes et des types compatibles.
+
+**Syntaxe** :
+``` 
+Relation1 ∪ Relation2
+```
+
+**Exemple** : Unir les résultats de deux tables `Personnes_Adulte` et `Personnes_Enfant` (toutes deux ayant les colonnes `nom` et `prénom`).
+``` 
+Personnes_Adulte ∪ Personnes_Enfant
+```
+
+### 4. **Différence (− - Difference)**
+
+L'opérateur **différence** renvoie les lignes qui se trouvent dans la première relation mais pas dans la seconde.
+
+**Syntaxe** :
+``` 
+Relation1 − Relation2
+```
+
+**Exemple** : Trouver les personnes qui ne sont pas dans la table `Personnes_Adulte`.
+``` 
+Personnes − Personnes_Adulte
+```
+
+### 5. **Intersection (∩ - Intersection)**
+
+L'opérateur **intersection** renvoie les lignes communes aux deux relations.
+
+**Syntaxe** :
+``` 
+Relation1 ∩ Relation2
+```
+
+**Exemple** : Trouver les personnes qui sont à la fois dans `Personnes_Adulte` et `Personnes_Enfant`.
+``` 
+Personnes_Adulte ∩ Personnes_Enfant
+```
+
+### 6. **Jointure (⨝ - Join)**
+
+L'opérateur **jointure** permet de combiner deux relations (tables) basées sur une condition de correspondance entre les colonnes.
+
+**Syntaxe** :
+``` 
+Relation1 ⨝ (condition) Relation2
+```
+
+**Exemple** : Effectuer une jointure entre `Personnes` et `Adresses` sur l'attribut `id_personne`.
+``` 
+Personnes ⨝ Personnes.id_personne = Adresses.id_personne Adresses
+```
+
+Il existe plusieurs types de jointures, par exemple :
+- **Jointure naturelle (Natural Join)** : joint les relations basées sur toutes les colonnes ayant le même nom dans les deux relations.
+- **Jointure externe (Outer Join)** : inclut également les lignes qui ne correspondent pas dans les relations, avec des valeurs nulles pour les colonnes non correspondantes.
+
+### 7. **Renommage (ρ - Rename)**
+
+L'opérateur **renommage** permet de renommer une relation ou ses colonnes.
+
+**Syntaxe** :
+``` 
+ρ (nouveau_nom)(Relation)
+```
+
+**Exemple** : Renommer la relation `Personnes` en `Individus`.
+``` 
+ρ(Individus)(Personnes)
+```
+
+### 8. **Division (÷ - Division)**
+
+L'opérateur **division** est utilisé pour trouver les éléments dans une relation qui sont associés à tous les éléments d'une autre relation. C'est utile pour des requêtes de type "trouver des objets qui satisfont toutes les conditions".
+
+**Syntaxe** :
+``` 
+Relation1 ÷ Relation2
+```
+
+**Exemple** : Trouver les produits qui ont été vendus à tous les clients, où `Ventes` contient des colonnes `produit` et `client`, et `Clients_Interesés` contient une seule colonne `client`.
+``` 
+Ventes ÷ Clients_Interesés
+```
+
+
+
+Ces opérateurs de l'algèbre relationnelle sont essentiels pour manipuler et interroger des bases de données relationnelles de manière logique, indépendamment du SGBD (Système de Gestion de Base de Données) sous-jacent.

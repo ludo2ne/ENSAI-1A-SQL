@@ -51,6 +51,41 @@ UML pour la modélisation
 - utile pour Big Data
 :::
 
+## Conventions
+
+- `<...>` : texte à remplacer
+- `[...]` : élément optionnel
+- Mots clés en MAJUSCULE
+
+### Requêtes SQL jolies
+
+- retour à la ligne
+- mots clés alignés
+
+::: {.fragment}
+```{.sql filename="pasbien.sql"}
+SELECT c.nom AS club, AVG(j.elo) AS moyenne_elo FROM joueuse j INNER JOIN club c USING (id_club) WHERE mail IS NOT NULL GROUP BY c.nom ORDER BY 2 DESC;
+```
+::: 
+
+<br>
+
+::: {.fragment}
+```{.sql filename="bien.sql"}
+SELECT c.nom AS club, 
+       AVG(j.elo) AS moyenne_elo
+  FROM joueuse j 
+ INNER JOIN club c USING (id_club) 
+ WHERE j.mail IS NOT NULL 
+ GROUP BY c.nom 
+ ORDER BY 2 DESC;
+```
+::: 
+
+::: {.notes}
+Faites un effort pour vous même et pour vos relecteurs
+:::
+
 ## Les TP
 
 - 5 TP + 1 TD
