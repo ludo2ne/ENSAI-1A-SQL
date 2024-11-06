@@ -122,6 +122,10 @@ ul.task-list li input[type="checkbox"] {
     <a class="dropdown-item" href="../../doc/cours/algebre.html">
  <span class="dropdown-text">Algèbre Relationnelle</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../../doc/cours/jointures.html">
+ <span class="dropdown-text">Jointures</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -166,14 +170,45 @@ ul.task-list li input[type="checkbox"] {
     <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">On this page</h2>
    
+  <ul>
+  <li><a href="#une-donnée" id="toc-une-donnée" class="nav-link active" data-scroll-target="#une-donnée"><span class="header-section-number">1</span> Une donnée ?</a>
   <ul class="collapse">
-  <li><a href="#une-donnée" id="toc-une-donnée" class="nav-link active" data-scroll-target="#une-donnée">Une donnée ?</a></li>
-  <li><a href="#une-base-de-données" id="toc-une-base-de-données" class="nav-link" data-scroll-target="#une-base-de-données">Une base de données ?</a></li>
-  <li><a href="#enjeux" id="toc-enjeux" class="nav-link" data-scroll-target="#enjeux">Enjeux</a></li>
-  <li><a href="#types-de-bases-de-données" id="toc-types-de-bases-de-données" class="nav-link" data-scroll-target="#types-de-bases-de-données">Types de bases de données</a></li>
-  <li><a href="#base-de-données-relationnelle" id="toc-base-de-données-relationnelle" class="nav-link" data-scroll-target="#base-de-données-relationnelle">Base de données relationnelle</a></li>
-  <li><a href="#associations" id="toc-associations" class="nav-link" data-scroll-target="#associations">Associations</a></li>
-  <li><a href="#sgbd" id="toc-sgbd" class="nav-link" data-scroll-target="#sgbd">SGBD</a></li>
+  <li><a href="#où-stocker-des-données" id="toc-où-stocker-des-données" class="nav-link" data-scroll-target="#où-stocker-des-données"><span class="header-section-number">1.1</span> Où stocker des données</a></li>
+  </ul></li>
+  <li><a href="#une-base-de-données" id="toc-une-base-de-données" class="nav-link" data-scroll-target="#une-base-de-données"><span class="header-section-number">2</span> Une base de données ?</a></li>
+  <li><a href="#enjeux" id="toc-enjeux" class="nav-link" data-scroll-target="#enjeux"><span class="header-section-number">3</span> Enjeux</a></li>
+  <li><a href="#types-de-bases-de-données" id="toc-types-de-bases-de-données" class="nav-link" data-scroll-target="#types-de-bases-de-données"><span class="header-section-number">4</span> Types de bases de données</a>
+  <ul class="collapse">
+  <li><a href="#hiérarchique" id="toc-hiérarchique" class="nav-link" data-scroll-target="#hiérarchique"><span class="header-section-number">4.1</span> Hiérarchique</a></li>
+  <li><a href="#réseau" id="toc-réseau" class="nav-link" data-scroll-target="#réseau"><span class="header-section-number">4.2</span> Réseau</a></li>
+  <li><a href="#relationnelle" id="toc-relationnelle" class="nav-link" data-scroll-target="#relationnelle"><span class="header-section-number">4.3</span> Relationnelle</a></li>
+  <li><a href="#nosql" id="toc-nosql" class="nav-link" data-scroll-target="#nosql"><span class="header-section-number">4.4</span> NoSQL</a></li>
+  <li><a href="#autres" id="toc-autres" class="nav-link" data-scroll-target="#autres"><span class="header-section-number">4.5</span> Autres</a></li>
+  </ul></li>
+  <li><a href="#base-de-données-relationnelle" id="toc-base-de-données-relationnelle" class="nav-link" data-scroll-target="#base-de-données-relationnelle"><span class="header-section-number">5</span> Base de données relationnelle</a>
+  <ul class="collapse">
+  <li><a href="#table" id="toc-table" class="nav-link" data-scroll-target="#table"><span class="header-section-number">5.1</span> Table</a></li>
+  <li><a href="#relations-entre-les-tables" id="toc-relations-entre-les-tables" class="nav-link" data-scroll-target="#relations-entre-les-tables"><span class="header-section-number">5.2</span> Relations entre les tables</a></li>
+  <li><a href="#exemple" id="toc-exemple" class="nav-link" data-scroll-target="#exemple"><span class="header-section-number">5.3</span> Exemple</a></li>
+  <li><a href="#clé-étrangère" id="toc-clé-étrangère" class="nav-link" data-scroll-target="#clé-étrangère"><span class="header-section-number">5.4</span> Clé étrangère</a></li>
+  <li><a href="#clé-primaire" id="toc-clé-primaire" class="nav-link" data-scroll-target="#clé-primaire"><span class="header-section-number">5.5</span> Clé primaire</a></li>
+  <li><a href="#question" id="toc-question" class="nav-link" data-scroll-target="#question"><span class="header-section-number">5.6</span> Question</a></li>
+  <li><a href="#table-dassociation" id="toc-table-dassociation" class="nav-link" data-scroll-target="#table-dassociation"><span class="header-section-number">5.7</span> Table d’association</a></li>
+  </ul></li>
+  <li><a href="#associations" id="toc-associations" class="nav-link" data-scroll-target="#associations"><span class="header-section-number">6</span> Associations</a>
+  <ul class="collapse">
+  <li><a href="#association-11" id="toc-association-11" class="nav-link" data-scroll-target="#association-11"><span class="header-section-number">6.1</span> Association 1:1</a></li>
+  <li><a href="#association-1n" id="toc-association-1n" class="nav-link" data-scroll-target="#association-1n"><span class="header-section-number">6.2</span> Association 1:n</a></li>
+  <li><a href="#association-nn" id="toc-association-nn" class="nav-link" data-scroll-target="#association-nn"><span class="header-section-number">6.3</span> Association n:n</a></li>
+  <li><a href="#association-récursive" id="toc-association-récursive" class="nav-link" data-scroll-target="#association-récursive"><span class="header-section-number">6.4</span> Association récursive</a></li>
+  </ul></li>
+  <li><a href="#sgbd" id="toc-sgbd" class="nav-link" data-scroll-target="#sgbd"><span class="header-section-number">7</span> SGBD</a>
+  <ul class="collapse">
+  <li><a href="#postgresql" id="toc-postgresql" class="nav-link" data-scroll-target="#postgresql"><span class="header-section-number">7.1</span> PostgreSQL</a></li>
+  <li><a href="#outil-de-gestion-et-administration" id="toc-outil-de-gestion-et-administration" class="nav-link" data-scroll-target="#outil-de-gestion-et-administration"><span class="header-section-number">7.2</span> Outil de Gestion et Administration</a></li>
+  <li><a href="#kesako" id="toc-kesako" class="nav-link" data-scroll-target="#kesako"><span class="header-section-number">7.3</span> Kesako</a></li>
+  <li><a href="#exemple-1" id="toc-exemple-1" class="nav-link" data-scroll-target="#exemple-1"><span class="header-section-number">7.4</span> Exemple</a></li>
+  </ul></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="bases-de-donnees-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
 </nav>
@@ -214,8 +249,8 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="une-donnée" class="level2">
-<h2 class="anchored" data-anchor-id="une-donnée">Une donnée ?</h2>
+<section id="une-donnée" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="une-donnée"><span class="header-section-number">1</span> Une donnée ?</h2>
 <div class="fragment">
 <ul>
 <li>texte (nom, prénom, ville…)</li>
@@ -244,8 +279,8 @@ Définition
 </ul>
 </div>
 </div>
-<section id="où-stocker-des-données" class="level3">
-<h3 class="anchored" data-anchor-id="où-stocker-des-données">Où stocker des données</h3>
+<section id="où-stocker-des-données" class="level3" data-number="1.1">
+<h3 data-number="1.1" class="anchored" data-anchor-id="où-stocker-des-données"><span class="header-section-number">1.1</span> Où stocker des données</h3>
 <div class="incremental">
 <ul class="incremental">
 <li>Fichier txt</li>
@@ -257,8 +292,8 @@ Définition
 </div>
 </section>
 </section>
-<section id="une-base-de-données" class="level2">
-<h2 class="anchored" data-anchor-id="une-base-de-données">Une base de données ?</h2>
+<section id="une-base-de-données" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="une-base-de-données"><span class="header-section-number">2</span> Une base de données ?</h2>
 <div class="incremental">
 <div class="callout callout-style-default callout-note callout-titled" title="Définition">
 <div class="callout-header d-flex align-content-center">
@@ -279,8 +314,8 @@ Définition
 <p>On n’utilise pas la même structure pour du texte ou des fichiers.</p>
 </div>
 </section>
-<section id="enjeux" class="level2">
-<h2 class="anchored" data-anchor-id="enjeux">Enjeux</h2>
+<section id="enjeux" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="enjeux"><span class="header-section-number">3</span> Enjeux</h2>
 <ul>
 <li>Accès aux données : langage SQL</li>
 <li>Sécurité des données : seuls les utilisateurs autorisés (droits)</li>
@@ -289,10 +324,10 @@ Définition
 <li>Cohérence des données : respect des contraintes d’intégrité</li>
 </ul>
 </section>
-<section id="types-de-bases-de-données" class="level2">
-<h2 class="anchored" data-anchor-id="types-de-bases-de-données">Types de bases de données</h2>
-<section id="hiérarchique" class="level3">
-<h3 class="anchored" data-anchor-id="hiérarchique">Hiérarchique</h3>
+<section id="types-de-bases-de-données" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="types-de-bases-de-données"><span class="header-section-number">4</span> Types de bases de données</h2>
+<section id="hiérarchique" class="level3" data-number="4.1">
+<h3 data-number="4.1" class="anchored" data-anchor-id="hiérarchique"><span class="header-section-number">4.1</span> Hiérarchique</h3>
 <ul>
 <li>Données organisées comme un arbre</li>
 <li>Relations de type parent-enfant</li>
@@ -318,16 +353,16 @@ Définition
 </div>
 </div>
 </section>
-<section id="réseau" class="level3">
-<h3 class="anchored" data-anchor-id="réseau">Réseau</h3>
+<section id="réseau" class="level3" data-number="4.2">
+<h3 data-number="4.2" class="anchored" data-anchor-id="réseau"><span class="header-section-number">4.2</span> Réseau</h3>
 <ul>
 <li>Organisée en graphe</li>
 <li>Les enregistrements peuvent avoir plusieurs parents et enfants</li>
 <li>Réseaux de transports &nbsp;</li>
 </ul>
 </section>
-<section id="relationnelle" class="level3">
-<h3 class="anchored" data-anchor-id="relationnelle">Relationnelle</h3>
+<section id="relationnelle" class="level3" data-number="4.3">
+<h3 data-number="4.3" class="anchored" data-anchor-id="relationnelle"><span class="header-section-number">4.3</span> Relationnelle</h3>
 <ul>
 <li>Organisée en tables</li>
 <li>Lien entre les tables</li>
@@ -337,8 +372,8 @@ Définition
 <p>Mais ça devient vite trop compliqué.</p>
 </div>
 </section>
-<section id="nosql" class="level3">
-<h3 class="anchored" data-anchor-id="nosql">NoSQL</h3>
+<section id="nosql" class="level3" data-number="4.4">
+<h3 data-number="4.4" class="anchored" data-anchor-id="nosql"><span class="header-section-number">4.4</span> NoSQL</h3>
 <p>Nombreux sous-types :</p>
 <ul>
 <li><strong>Clé-valeur</strong> : données sous forme de paires clé-valeur (DynamoDB)</li>
@@ -350,17 +385,17 @@ Définition
 <p>Not Only SQL</p>
 </div>
 </section>
-<section id="autres" class="level3">
-<h3 class="anchored" data-anchor-id="autres">Autres</h3>
+<section id="autres" class="level3" data-number="4.5">
+<h3 data-number="4.5" class="anchored" data-anchor-id="autres"><span class="header-section-number">4.5</span> Autres</h3>
 <ul>
 <li>Bases de données de séries temporelles</li>
 </ul>
 </section>
 </section>
-<section id="base-de-données-relationnelle" class="level2">
-<h2 class="anchored" data-anchor-id="base-de-données-relationnelle">Base de données relationnelle</h2>
-<section id="table" class="level3">
-<h3 class="anchored" data-anchor-id="table">Table</h3>
+<section id="base-de-données-relationnelle" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="base-de-données-relationnelle"><span class="header-section-number">5</span> Base de données relationnelle</h2>
+<section id="table" class="level3" data-number="5.1">
+<h3 data-number="5.1" class="anchored" data-anchor-id="table"><span class="header-section-number">5.1</span> Table</h3>
 <ul>
 <li>Composée de lignes et de colonnes</li>
 <li>Chaque table représente une entité</li>
@@ -369,8 +404,8 @@ Définition
 <li>Types de données : texte, num…</li>
 </ul>
 </section>
-<section id="relations-entre-les-tables" class="level3">
-<h3 class="anchored" data-anchor-id="relations-entre-les-tables">Relations entre les tables</h3>
+<section id="relations-entre-les-tables" class="level3" data-number="5.2">
+<h3 data-number="5.2" class="anchored" data-anchor-id="relations-entre-les-tables"><span class="header-section-number">5.2</span> Relations entre les tables</h3>
 <ul>
 <li><u><strong>Clé primaire</strong></u> (PK) pour identifier chaque enregistrement dans une table
 <ul>
@@ -384,8 +419,8 @@ Définition
 </ul></li>
 </ul>
 </section>
-<section id="exemple" class="level3">
-<h3 class="anchored" data-anchor-id="exemple">Exemple</h3>
+<section id="exemple" class="level3" data-number="5.3">
+<h3 data-number="5.3" class="anchored" data-anchor-id="exemple"><span class="header-section-number">5.3</span> Exemple</h3>
 <p>Comment relier ces 2 tables ?</p>
 <ul>
 <li>une joueuse joue pour un seul club</li>
@@ -504,8 +539,8 @@ Définition
 </tbody>
 </table>
 </section>
-<section id="clé-étrangère" class="level3">
-<h3 class="anchored" data-anchor-id="clé-étrangère">Clé étrangère</h3>
+<section id="clé-étrangère" class="level3" data-number="5.4">
+<h3 data-number="5.4" class="anchored" data-anchor-id="clé-étrangère"><span class="header-section-number">5.4</span> Clé étrangère</h3>
 <p>En ajoutant une clé étrangère.</p>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
@@ -597,8 +632,8 @@ Définition
 </tbody>
 </table>
 </section>
-<section id="clé-primaire" class="level3">
-<h3 class="anchored" data-anchor-id="clé-primaire">Clé primaire</h3>
+<section id="clé-primaire" class="level3" data-number="5.5">
+<h3 data-number="5.5" class="anchored" data-anchor-id="clé-primaire"><span class="header-section-number">5.5</span> Clé primaire</h3>
 <ul>
 <li>Attribut (ou ensemble d’attributs)</li>
 <li>Unique</li>
@@ -627,15 +662,15 @@ Tip
 <p>Remarque : pas obligatoire d’avoir une clé primaire</p>
 </div>
 </section>
-<section id="question" class="level3">
-<h3 class="anchored" data-anchor-id="question">Question</h3>
+<section id="question" class="level3" data-number="5.6">
+<h3 data-number="5.6" class="anchored" data-anchor-id="question"><span class="header-section-number">5.6</span> Question</h3>
 <p>Si une joueuse peut adhérer à plusieurs clubs ? <span class="emoji" data-emoji="confused">😕</span></p>
 <div class="notes">
 <p>Par exemple si notre bdd contient aussi les clubs belges, allemands, espagnols…</p>
 </div>
 </section>
-<section id="table-dassociation" class="level3">
-<h3 class="anchored" data-anchor-id="table-dassociation">Table d’association</h3>
+<section id="table-dassociation" class="level3" data-number="5.7">
+<h3 data-number="5.7" class="anchored" data-anchor-id="table-dassociation"><span class="header-section-number">5.7</span> Table d’association</h3>
 <p>Création d’une table d’association : <strong>adhesion</strong> <span class="emoji" data-emoji="sweat_smile">😅</span></p>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
@@ -706,11 +741,11 @@ Tip
 </div>
 </section>
 </section>
-<section id="associations" class="level2">
-<h2 class="anchored" data-anchor-id="associations">Associations</h2>
+<section id="associations" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="associations"><span class="header-section-number">6</span> Associations</h2>
 <p>Il existe plusieurs types d’associations entre tables.</p>
-<section id="association-11" class="level3">
-<h3 class="anchored" data-anchor-id="association-11">Association 1:1</h3>
+<section id="association-11" class="level3" data-number="6.1">
+<h3 data-number="6.1" class="anchored" data-anchor-id="association-11"><span class="header-section-number">6.1</span> Association 1:1</h3>
 <p>Une entité dans la table A est associée à une seule entité dans la table B.</p>
 <p>Exemple :</p>
 <ul>
@@ -721,8 +756,8 @@ Tip
 <p>on aurait pu tout mettre dans la même table</p>
 </div>
 </section>
-<section id="association-1n" class="level3">
-<h3 class="anchored" data-anchor-id="association-1n">Association 1:n</h3>
+<section id="association-1n" class="level3" data-number="6.2">
+<h3 data-number="6.2" class="anchored" data-anchor-id="association-1n"><span class="header-section-number">6.2</span> Association 1:n</h3>
 <p>Une entité dans la table A peut-être associée à plusieurs entités dans la table B.</p>
 <p>Exemple :</p>
 <ul>
@@ -730,8 +765,8 @@ Tip
 <li>Une joueuse adhère à un seul club</li>
 </ul>
 </section>
-<section id="association-nn" class="level3">
-<h3 class="anchored" data-anchor-id="association-nn">Association n:n</h3>
+<section id="association-nn" class="level3" data-number="6.3">
+<h3 data-number="6.3" class="anchored" data-anchor-id="association-nn"><span class="header-section-number">6.3</span> Association n:n</h3>
 <p>Une entité dans la table A peut-être associée à plusieurs entités dans la table B.</p>
 <p>Et inversement, une entité dans la table B peut-être associée à plusieurs entités dans la table A.</p>
 <p>Exemple :</p>
@@ -740,8 +775,8 @@ Tip
 <li>Un tournoi regroupe plusieurs joueuses</li>
 </ul>
 </section>
-<section id="association-récursive" class="level3">
-<h3 class="anchored" data-anchor-id="association-récursive">Association récursive</h3>
+<section id="association-récursive" class="level3" data-number="6.4">
+<h3 data-number="6.4" class="anchored" data-anchor-id="association-récursive"><span class="header-section-number">6.4</span> Association récursive</h3>
 <p>Une table peut avoir des relations avec elle-même</p>
 <p>Ici la table contient une clé étrangère qui référence sa propre clé primaire.</p>
 <p>Exemple :</p>
@@ -750,8 +785,8 @@ Tip
 </ul>
 </section>
 </section>
-<section id="sgbd" class="level2">
-<h2 class="anchored" data-anchor-id="sgbd">SGBD</h2>
+<section id="sgbd" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="sgbd"><span class="header-section-number">7</span> SGBD</h2>
 <div class="callout callout-style-default callout-important callout-titled" title="Définition">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -773,8 +808,8 @@ Définition
 <li><a href="https://www.sqlite.org/" target="_blank">SQLite</a></li>
 <li><a href="https://mariadb.org/" target="_blank">MariaDB</a></li>
 </ul>
-<section id="postgresql" class="level3">
-<h3 class="anchored" data-anchor-id="postgresql">PostgreSQL</h3>
+<section id="postgresql" class="level3" data-number="7.1">
+<h3 data-number="7.1" class="anchored" data-anchor-id="postgresql"><span class="header-section-number">7.1</span> PostgreSQL</h3>
 <ul>
 <li>Open Source, Libre</li>
 <li>Communauté active</li>
@@ -792,8 +827,8 @@ Définition
 <p>Les utilisateurs n’ont besoin que d’un programme client approprié pour établir la connexion</p>
 </div>
 </section>
-<section id="outil-de-gestion-et-administration" class="level3">
-<h3 class="anchored" data-anchor-id="outil-de-gestion-et-administration">Outil de Gestion et Administration</h3>
+<section id="outil-de-gestion-et-administration" class="level3" data-number="7.2">
+<h3 data-number="7.2" class="anchored" data-anchor-id="outil-de-gestion-et-administration"><span class="header-section-number">7.2</span> Outil de Gestion et Administration</h3>
 <p>Il est nécessaire d’avoir un <strong>outil pour gérer et administrer</strong> une base de données.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -816,8 +851,8 @@ Tip
 <li><a href="https://dbeaver.io/" target="_blank">DBeaver</a></li>
 </ul>
 </section>
-<section id="kesako" class="level3">
-<h3 class="anchored" data-anchor-id="kesako">Kesako</h3>
+<section id="kesako" class="level3" data-number="7.3">
+<h3 data-number="7.3" class="anchored" data-anchor-id="kesako"><span class="header-section-number">7.3</span> Kesako</h3>
 <ul>
 <li>Base de données : endroit où sont stockées les informations</li>
 <li>SGBD : logiciel qui permet de créer, gérer et manipuler les bases de données</li>
@@ -831,8 +866,8 @@ Tip
 </ul>
 </div>
 </section>
-<section id="exemple-1" class="level3">
-<h3 class="anchored" data-anchor-id="exemple-1">Exemple</h3>
+<section id="exemple-1" class="level3" data-number="7.4">
+<h3 data-number="7.4" class="anchored" data-anchor-id="exemple-1"><span class="header-section-number">7.4</span> Exemple</h3>
 <p>Site de vente de légumes</p>
 <ul>
 <li>Client &nbsp; - id_client &nbsp; - nom &nbsp; - prenom &nbsp; - mail</li>
