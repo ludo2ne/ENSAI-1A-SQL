@@ -21,4 +21,179 @@ code-line-numbers: false
 from: markdown+emoji
 ---
 
-## GROUp BY
+## Données utilisées
+
+::: {.small-table}
+| **id_joueuse** | **nom**                | **prenom**       | **elo** | **club**     |
+|----------------|------------------------|------------------|---------|--------------|
+| 1              | Guichard               | Pauline          | 2357    | Asnieres     |
+| 2              | Daulyte                | Deimante         | 2371    | Chartres     | 
+| 3              | Navrotescu             | Andreea          | 2338    | Asnieres     |
+| 4              | Sebag                  | Marie            | 2448    | Bischwiller  |
+| 5              | Millet                 | Sophie           | 2366    | Asnieres     |
+| 6              | Skrichempko            | Almira           | 2361    | Bischwiller  |
+:::
+
+## Questions
+
+Quelques questions que l'on peut se poser :
+
+::: {.incremental}
+- Quel est le id_joueuse maximum ?
+- Quel est le nombre de joueuses ?
+- Quelle est la moyenne des elo par club ?
+:::
+
+## Compter les lignes
+
+```{.sql}
+SELECT COUNT(*)
+  FROM echecs.joueuse;
+```
+
+::: {.small-table}
+| **count** |
+|-----------|
+| 6         |
+:::
+
+<br>
+
+```{.sql}
+SELECT COUNT(*)
+  FROM echecs.joueuse
+ WHERE elo < 2400;
+```
+
+::: {.small-table}
+| **count** |
+|-----------|
+| 5         |
+:::
+
+
+## Somme
+
+```{.sql}
+SELECT SUM(elo)
+  FROM echecs.joueuse;
+```
+
+::: {.small-table}
+| **sum_elo** |
+|-------------|
+| 14223       |
+:::
+
+::: {.notes}
+```{.sql}
+SELECT SUM(elo) / COUNT(elo)
+  FROM echecs.joueuse;
+```
+
+:::
+
+## Stats descriptives
+
+```{.sql}
+SELECT MAX(elo),
+       MIN(elo),
+       AVG(elo)
+  FROM echecs.joueuse;
+```
+
+::: {.small-table}
+| **max_elo** | **min_elo** | **avg_elo** |
+|-------------|-------------|-------------|
+| 2448        | 2338        | 2373.5      |
+:::
+
+::: {.callout-tip}
+Vous pouvez également calculer : `VARIANCE`, `STDDEV`.
+:::
+
+
+::: {.fragment}
+Comment afficher la joueuse avec le plus grand elo ? :dizzy_face:
+:::
+
+
+### Sous-requête
+
+En utilisant une **sous-requête** :
+
+- `SELECT MAX(elo) FROM joueuse` :arrow_right: renvoie un nombre
+- Nous pouvons ensuite tester si *elo* est égal à ce nombre
+
+```{.sql}
+SELECT nom,
+       prenom,
+       elo
+  FROM echecs.joueuse
+ WHERE elo = (SELECT MAX(elo) FROM echecs.joueuse);
+```
+
+## Regroupement
+
+Comment obtenir la moyenne elo par club ?
+
+:::::: {.fragment}
+
+```{.sql}
+SELECT club,
+       AVG(elo)
+  FROM echecs.joueuse
+ GROUP BY club;
+```
+
+::: {.small-table}
+| **club**         | **avg_elo** |
+|------------------|-------------|
+| Asnieres         | 2372.4      |
+| Chartres         | 2371.0      |
+| Bischwiller      | 2404.5      |
+
+:::
+::::::
+
+::: {.notes}
+Vous pouvez utiliser ROUND() pour arrondir.
+:::
+
+### Colonnes du GROUP BY
+
+Vous pouvez grouper en utilisant plusieurs colonnes.
+
+::: {.callout-important}
+Les colonnes présentes dans le *SELECT* doivent impérativement être présentes dans le *GROUP BY*.
+
+L'inverse n'est pas vrai. Vous pouvez avoir des colonnes du *GROUP BY* que vous n'affichez pas dans le *SELECT*.
+:::
+
+::: {.notes}
+je dis bien colonnes et pas fonctions d'aggrégation
+:::
+
+
+### Filtre suite au GROUP BY
+
+Comment faire pour afficher uniquement les clubs où la moyenne élo est inférieure à 2400 ?
+
+:::::: {.fragment}
+
+```{.sql}
+SELECT club,
+       AVG(elo)
+  FROM echecs.joueuse
+ GROUP BY club
+HAVING AVG(elo) < 2400;
+```
+
+::: {.small-table}
+| **club**         | **avg_elo** |
+|------------------|-------------|
+| Asnieres         | 2372.4      |
+| Chartres         | 2371.0      |
+
+:::
+::::::

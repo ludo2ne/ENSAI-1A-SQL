@@ -99,6 +99,29 @@ Faites un effort pour vous même et pour vos relecteurs
 - Datalab
 - cloudBeaver
 
+### Bien
+
+- Lire attentivement les consignes
+- Essayer de résoudre par soi même
+- Chercher sur internet
+- Demander de l'aide à ses camarades
+- Demander de l'aide à l'enseignant
+
+::: {.notes}
+ça peut paraitre un peu infentilisant mais c'est nécessaire de le rappeler !!!
+:::
+
+### Pas bien
+
+- Poster l'énoncer sur ChatGPT
+- Copier / Coller la réponse sans rien comprendre
+
+::: {.notes}
+- Je ne dis pas qu'il ne faut jamais utiliser les LLM
+- ça peut servir pour débgugger
+- ou pour des taches sans VA
+- mais pas pour apprendre et retenir
+:::
 
 ## Évaluation
 
@@ -114,3 +137,9 @@ Faites un effort pour vous même et pour vos relecteurs
 - https://openclassrooms.com/fr/courses/6971126-implementez-vos-bases-de-donnees-relationnelles-avec-sql/7139618-decouvrez-le-systeme-de-gestion-de-base-de-donnees-sgbd
 - https://oseox.fr/sql/
 - https://learnsql.fr/blog/aide-memoire-pour-les-entretiens-sql/
+
+::: {.notes}
+- désolé s'il y a des fautes, j'ai écrit ce cours un peu dans l'urgence
+- n'hésitez pas à me les notifier (pas de point bonus)
+- moi j'ai le droit, après je serai assez intransigent si vous laissez des fautes dans vos rapports
+:::
