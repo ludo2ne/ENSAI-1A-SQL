@@ -11,77 +11,77 @@
     "href": "doc/cours/jointures.html",
     "title": "Jointures entre Tables",
     "section": "",
-    "text": "Objectif : regrouper les données de plusieurs tables\nFaire une jointure est comme créer un gros tableau"
+    "text": "Objectifs\n\n\n\n\nRegrouper les données de plusieurs tables\nEn utilisant les liens entre ces tables\n\n\n\n\n\nJusqu’à maintenant, on aurait pu tout faire sous excel…\nFaire une jointure est comme créer un gros tableau\n\n\n\n\nDans les exemples ci-dessous, nous allons utiliser ces 2 tables.\nVous pouvez tout à fait faire des jointures avec 3 tables, 4 tables…\n\n\n\n\n\nclassDiagram\n    class Joueuse {\n        id_joueuse PK\n        nom\n        prenom\n        elo\n        id_club\n    }\n    \n    class Club {\n        id_club PK\n        nom\n        ville\n    }\n\n\n\n\n\n\n\n\n\n\nJoueuseClub\n\n\n\n\n\n\n\n\n\n\n\n\n\nid_joueuse\nnom\nprenom\nelo\nid_club\n\n\n\n\n1\nGuichard\nPauline\n2357\n3\n\n\n2\nDaulyte\nDeimante\n2371\n1\n\n\n3\nNavrotescu\nAndreea\n2338\n2\n\n\n4\nSebag\nMarie\n2448\n2\n\n\n5\nMillet\nSophie\n2366\n3\n\n\n6\nSkrichempko\nAlmira\n2361\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nid_club\nnom\nville\n\n\n\n\n1\nC’Chartres Echecs\nChartres\n\n\n2\nBischwiller\nBischwiller\n\n\n3\nAsnieres - le Grand Echiquier\nAsnieres\n\n\n4\nTours des Hauts-De-France\nSaint-Quentin\n\n\n\n\n\n\n\n\n\nDes remarques sur ces données ?\nComment-vous pensez que l’on va faire la jointure ?"
   },
   {
     "objectID": "doc/cours/jointures.html#jointures",
     "href": "doc/cours/jointures.html#jointures",
     "title": "Jointures entre Tables",
     "section": "",
-    "text": "Objectif : regrouper les données de plusieurs tables\nFaire une jointure est comme créer un gros tableau"
+    "text": "Objectifs\n\n\n\n\nRegrouper les données de plusieurs tables\nEn utilisant les liens entre ces tables\n\n\n\n\n\nJusqu’à maintenant, on aurait pu tout faire sous excel…\nFaire une jointure est comme créer un gros tableau\n\n\n\n\nDans les exemples ci-dessous, nous allons utiliser ces 2 tables.\nVous pouvez tout à fait faire des jointures avec 3 tables, 4 tables…\n\n\n\n\n\nclassDiagram\n    class Joueuse {\n        id_joueuse PK\n        nom\n        prenom\n        elo\n        id_club\n    }\n    \n    class Club {\n        id_club PK\n        nom\n        ville\n    }\n\n\n\n\n\n\n\n\n\n\nJoueuseClub\n\n\n\n\n\n\n\n\n\n\n\n\n\nid_joueuse\nnom\nprenom\nelo\nid_club\n\n\n\n\n1\nGuichard\nPauline\n2357\n3\n\n\n2\nDaulyte\nDeimante\n2371\n1\n\n\n3\nNavrotescu\nAndreea\n2338\n2\n\n\n4\nSebag\nMarie\n2448\n2\n\n\n5\nMillet\nSophie\n2366\n3\n\n\n6\nSkrichempko\nAlmira\n2361\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nid_club\nnom\nville\n\n\n\n\n1\nC’Chartres Echecs\nChartres\n\n\n2\nBischwiller\nBischwiller\n\n\n3\nAsnieres - le Grand Echiquier\nAsnieres\n\n\n4\nTours des Hauts-De-France\nSaint-Quentin\n\n\n\n\n\n\n\n\n\nDes remarques sur ces données ?\nComment-vous pensez que l’on va faire la jointure ?"
   },
   {
     "objectID": "doc/cours/jointures.html#jointure-interne",
     "href": "doc/cours/jointures.html#jointure-interne",
     "title": "Jointures entre Tables",
     "section": "2 Jointure interne",
-    "text": "2 Jointure interne\nINNER"
+    "text": "2 Jointure interne\nL’INNER JOIN renvoie uniquement les lignes qui ont des correspondances dans les deux tables.\n\n1ere tentative\nSELECT nom,\n       prenom,\n       nom AS club\n  FROM echecs.joueuse\n INNER JOIN echecs.club ON id_club = id_club;\n\nNous affichons nom et prenom de la table joueuse\nNous ajoutons le nom du club\nNous faisons la jointure entre joueuse et club via la colonne id_club\n\n\nDes soucis dans cette requête ? 😕\n\n\n\n2e tentative\nSELECT joueuse.nom,\n       joueuse.prenom,\n       club.nom AS club\n  FROM echecs.joueuse\n INNER JOIN echecs.club ON club.id_club = joueuse.id_club;\n\nÇa fonctionne !\nMais c’est un peu long d’écrire avant chaque colonne le nom de la table.\n\n\n\nAlias\nSELECT j.nom,            -- signifie colonne nom de la table d'alias j\n       j.prenom,\n       c.nom AS club\n  FROM echecs.joueuse j  -- déclare j comme alias de la table joueuse\n INNER JOIN echecs.club c ON c.id_club = j.id_club;\n\n\n\n\n\n\nAlias\n\n\n\n\nL’Alias est comme un surnom pour la table\nPar défaut l’alias de la table est son propre nom (i.e. si vous ne déclarez pas d’alias)\nGénéralement on utilise comme alias la 1ere lettre ou les 2 premières lettres\n\n\n\n\n\nUSING\n\n\n\n\n\n\nTip\n\n\n\nSi votre base de données est bien conçue, les colonnes utilisées pour les jointures portent le même nom dans les deux tables.\nDans ce cas, et uniquement dans ce cas, vous pouvez utiliser le mot clé USING à la place de ON.\n\n\nSELECT j.nom,\n       j.prenom,\n       c.nom AS club\n  FROM echecs.joueuse j\n INNER JOIN echecs.club c USING (id_club);\n\nSi vos colonnes n’ont pas le même nom, pas possible de faire USING\n\n\n\nAu final\nSELECT j.nom,\n       j.prenom,\n       c.nom AS club\n  FROM echecs.joueuse j\n  JOIN echecs.club c USING (id_club);\nVous pouvez même enlever le INNER qui est optionnel.\n\n\nÀ ne pas faire\n\n\n\n\n\n\nCaution\n\n\n\nIl est aussi possible de faire une jointure avec NATURAL JOIN sans préciser aucun nom de colonnes. Cela va joindre les tables via les colonnes ayant le même nom dans les 2 tables.\nCette pratique est déconseillée, car vous ne maitrisez pas les colonnes servant à la jointure et c’est visuellement moins parlant.\n\n\n\n\n\n\n\n\nAncienne écriture\n\n\n\nSELECT j.nom,\n       j.prenom,\n       c.nom AS club\n  FROM echecs.joueuse j,\n       echecs.club c \n WHERE j.id_club = c.id_club;\n\n\n\nAncienne écriture encore utilisée par un certain nombre.\n\n\n\nRésultat\n\n\n\n\nnom\nprenom\nclub\n\n\n\n\nDaulyte\nDeimante\nC’Chartres Echecs\n\n\nNavrotescu\nAndreea\nBischwiller\n\n\nSebag\nMarie\nBischwiller\n\n\nGuichard\nPauline\nAsnieres - le Grand Echiquier\n\n\nMillet\nSophie\nAsnieres - le Grand Echiquier\n\n\n\n\n\nIl n’y a pas quelque chose qui vous chagrine ? 😦\n\n\nA votre avis, pourquoi il manque une joueuse ?"
   },
   {
     "objectID": "doc/cours/jointures.html#jointure-externe",
     "href": "doc/cours/jointures.html#jointure-externe",
     "title": "Jointures entre Tables",
     "section": "3 Jointure externe",
-    "text": "3 Jointure externe\nLEFT RIGHT"
+    "text": "3 Jointure externe\nCe serait pas mal d’afficher toutes les joueuses, même celles qui n’ont pas de club.\nComment faire ? 😐\n\n\n\n\n\n\n\nIdée\n\nLister les noms et prénoms des joueuses\nÉventuellement compléter avec le nom du club\n\n\nSELECT j.nom,\n       j.prenom,\n       c.nom AS club\n  FROM echecs.joueuse j\n  LEFT JOIN echecs.club c USING (id_club);\n\n\n\nLEFT JOIN\nUtilisons un LEFT JOIN pour faire une jointure externe :\n\nnous gardons toutes les données présentes dans les tables avant le LEFT JOIN\nnous complétons si possible avec les données des tables après le LEFT JOIN\n\n\n\n\n\n\n\nRIGHT JOIN\n\n\n\nÀ l’inverse, le RIGHT JOIN garde tout ce qu’il y a après et compléte si possible avec ce qu’il y a avant.\nIl est moins utilisé car moins intuitif, mais reste parfois indispensable.\n\n\n\nIl y a certains cas particuliers où le RIGHT JOIN est indispensable\nVous verrez parfois LEFT OUTER JOIN\n\n\n\nRésultat\n\nLEFT JOINRIGHT JOIN\n\n\n\n\n\n\nnom\nprenom\nclub\n\n\n\n\nDaulyte\nDeimante\nC’Chartres Echecs\n\n\nNavrotescu\nAndreea\nBischwiller\n\n\nSebag\nMarie\nBischwiller\n\n\nGuichard\nPauline\nAsnieres - le Grand Echiquier\n\n\nMillet\nSophie\nAsnieres - le Grand Echiquier\n\n\nSkrichempko\nAlmira\n\n\n\n\n\n\n\n\n\n\n\nnom\nprenom\nclub\n\n\n\n\nDaulyte\nDeimante\nC’Chartres Echecs\n\n\nNavrotescu\nAndreea\nBischwiller\n\n\nSebag\nMarie\nBischwiller\n\n\nGuichard\nPauline\nAsnieres - le Grand Echiquier\n\n\nMillet\nSophie\nAsnieres - le Grand Echiquier\n\n\n\n\nTours des Hauts-De-France"
   },
   {
     "objectID": "doc/cours/jointures.html#jointure-complète",
     "href": "doc/cours/jointures.html#jointure-complète",
     "title": "Jointures entre Tables",
-    "section": "4 Jointure Complète",
-    "text": "4 Jointure Complète\nFULL JOIN"
+    "section": "4 Jointure complète",
+    "text": "4 Jointure complète\nLe FULL JOIN permet de faire une jointure bilatérale (i.e. un UNION entre les éléments de la LEFT JOIN et de la RIGHT JOIN)\nSELECT j.nom,\n       j.prenom,\n       c.nom AS club\n  FROM echecs.joueuse j\n  FULL JOIN echecs.club c USING (id_club);\n\nRésultat\n\n\n\n\nnom\nprenom\nclub\n\n\n\n\nDaulyte\nDeimante\nC’Chartres Echecs\n\n\nNavrotescu\nAndreea\nBischwiller\n\n\nSebag\nMarie\nBischwiller\n\n\nGuichard\nPauline\nAsnieres - le Grand Echiquier\n\n\nMillet\nSophie\nAsnieres - le Grand Echiquier\n\n\nSkrichempko\nAlmira\n\n\n\n\n\nTours des Hauts-De-France"
   },
   {
     "objectID": "doc/cours/jointures.html#jointure-croisée",
     "href": "doc/cours/jointures.html#jointure-croisée",
     "title": "Jointures entre Tables",
     "section": "5 Jointure croisée",
-    "text": "5 Jointure croisée\nCROSS JOIN renvoie le produit cartésien des deux tables"
+    "text": "5 Jointure croisée\nCROSS JOIN renvoie le produit cartésien des deux tables.\n\n\n\n\nnom\nprenom\nclub\n\n\n\n\nDaulyte\nDeimante\nC’Chartres Echecs\n\n\nDaulyte\nDeimante\nBischwiller\n\n\nDaulyte\nDeimante\nAsnieres - le Grand Echiquier\n\n\nDaulyte\nDeimante\nTours des Hauts-De-France\n\n\nNavrotescu\nAndreea\nC’Chartres Echecs\n\n\nNavrotescu\nAndreea\nBischwiller\n\n\nNavrotescu\nAndreea\nAsnieres - le Grand Echiquier\n\n\n…\n…\n…"
   },
   {
     "objectID": "doc/cours/jointures-slides.html#jointures",
     "href": "doc/cours/jointures-slides.html#jointures",
     "title": "Jointures entre Tables",
     "section": "Jointures",
-    "text": "Jointures\nObjectif : regrouper les données de plusieurs tables\nFaire une jointure est comme créer un gros tableau"
+    "text": "Jointures\n\n\n\n\n\n\n\nObjectifs\n\n\n\nRegrouper les données de plusieurs tables\nEn utilisant les liens entre ces tables\n\n\n\n\n\n\n\nJusqu’à maintenant, on aurait pu tout faire sous excel…\nFaire une jointure est comme créer un gros tableau"
   },
   {
     "objectID": "doc/cours/jointures-slides.html#jointure-interne",
     "href": "doc/cours/jointures-slides.html#jointure-interne",
     "title": "Jointures entre Tables",
     "section": "Jointure interne",
-    "text": "Jointure interne\nINNER"
+    "text": "Jointure interne\nL’INNER JOIN renvoie uniquement les lignes qui ont des correspondances dans les deux tables."
   },
   {
     "objectID": "doc/cours/jointures-slides.html#jointure-externe",
     "href": "doc/cours/jointures-slides.html#jointure-externe",
     "title": "Jointures entre Tables",
     "section": "Jointure externe",
-    "text": "Jointure externe\nLEFT RIGHT"
+    "text": "Jointure externe\nCe serait pas mal d’afficher toutes les joueuses, même celles qui n’ont pas de club.\nComment faire ? 😐"
   },
   {
     "objectID": "doc/cours/jointures-slides.html#jointure-complète",
     "href": "doc/cours/jointures-slides.html#jointure-complète",
     "title": "Jointures entre Tables",
-    "section": "Jointure Complète",
-    "text": "Jointure Complète\nFULL JOIN"
+    "section": "Jointure complète",
+    "text": "Jointure complète\nLe FULL JOIN permet de faire une jointure bilatérale (i.e. un UNION entre les éléments de la LEFT JOIN et de la RIGHT JOIN)\nSELECT j.nom,\n       j.prenom,\n       c.nom AS club\n  FROM echecs.joueuse j\n  FULL JOIN echecs.club c USING (id_club);"
   },
   {
     "objectID": "doc/cours/jointures-slides.html#jointure-croisée",
     "href": "doc/cours/jointures-slides.html#jointure-croisée",
     "title": "Jointures entre Tables",
     "section": "Jointure croisée",
-    "text": "Jointure croisée\nCROSS JOIN renvoie le produit cartésien des deux tables\n\n\n\nHome — Jointures"
+    "text": "Jointure croisée\nCROSS JOIN renvoie le produit cartésien des deux tables.\n\n\n\n\nnom\nprenom\nclub\n\n\n\n\nDaulyte\nDeimante\nC’Chartres Echecs\n\n\nDaulyte\nDeimante\nBischwiller\n\n\nDaulyte\nDeimante\nAsnieres - le Grand Echiquier\n\n\nDaulyte\nDeimante\nTours des Hauts-De-France\n\n\nNavrotescu\nAndreea\nC’Chartres Echecs\n\n\nNavrotescu\nAndreea\nBischwiller\n\n\nNavrotescu\nAndreea\nAsnieres - le Grand Echiquier\n\n\n…\n…\n…\n\n\n\n\n\n\nHome — Jointures"
   },
   {
     "objectID": "doc/cours/algebre.html",
@@ -102,7 +102,7 @@
     "href": "doc/cours/algebre.html#principaux-opérateurs",
     "title": "Algèbre Relationnelle",
     "section": "2 Principaux opérateurs",
-    "text": "2 Principaux opérateurs\n\n\n\n\n\n\n\nOpérateur\nDescription\n\n\n\n\nσ (Sélection)\nFiltrer les lignes selon une condition\n\n\nπ (Projection)\nSélectionner des colonnes spécifiques\n\n\nU (Union)\nCombiner les lignes de deux relations\n\n\n− (Différence)\nRetourner les lignes présentes dans une relation mais pas dans l’autre\n\n\n∩ (Intersection)\nTrouver les lignes communes aux deux relations\n\n\n⨝ (Jointure)\nCombiner deux relations basées sur une condition\n\n\n\n\n2.1 Sélection\n\nPermet de filtrer les lignes d’une table selon une condition\n\n\n\n⚠️ Mot clé SQL associé : WHERE\n\nSELECT *\n  FROM echecs.joueuse\n WHERE elo &lt; 2400;\n\n\n\n2.2 Projection\n\nPermet de sélectionner certaines colonnes d’une table.\nMot clé SQL associé : SELECT\n\nSELECT nom,\n       prenom\n  FROM echecs.joueuse;\n\n\n2.3 Union\n\nCombine les lignes de deux tables ayant le même nombre de colonnes et des types compatibles\n\nSELECT nom,\n       prenom\n  FROM echecs.joueuse\n\nUNION\n\nSELECT nom,\n       prenom\n  FROM echecs.joueur;\n\n\n\n\n\n\nTip\n\n\n\n\nUNION : Combine les résultats des requêtes et supprime les doublons\nUNION ALL : Combine les résultats des requêtes et garde tous les doublons\n\n\n\n\n\n2.4 Différence\n\nLignes qui se trouvent dans la première relation mais pas dans la seconde\n\n-- Joueuses évoluant dans un club français et pas dans un club belge\nSELECT nom,\n       prenom\n  FROM echecs.joueuse_club_fr\n\nEXCEPT\n\nSELECT nom,\n       prenom\n  FROM echecs.joueuse_club_be;\n\nImaginons que vous ayez créé 2 tables :\n\njoueuses évoluant dans un club français\njoueuses évoluant dans un club belge\n\n\n\n\n2.5 Intersection\n\nLignes communes aux deux tables\n\n-- Joueuses évoluant dans un club francais et dans un club belge\nSELECT nom,\n       prenom\n  FROM echecs.joueuse_club_fr\n\nINTERSECT\n\nSELECT nom,\n       prenom\n  FROM echecs.joueuse_club_be;\n\n\n2.6 Jointure\n\nPermet de combiner deux tables basées sur une correspondance entre les colonnes\n\nSELECT j.nom,\n       j.prenom,\n       c.nom AS club\n  FROM echecs.joueuse j\n  JOIN echecs.club c USING (id_club);"
+    "text": "2 Principaux opérateurs\n\n\n\n\n\n\n\n\nOpérateur\nDescription\n\n\n\n\nσ (Sélection)\nFiltrer les lignes selon une condition\n\n\nπ (Projection)\nSélectionner des colonnes spécifiques\n\n\nU (Union)\nCombiner les lignes de deux relations\n\n\n− (Différence)\nRetourner les lignes présentes dans une relation mais pas dans l’autre\n\n\n∩ (Intersection)\nTrouver les lignes communes aux deux relations\n\n\n⨝ (Jointure)\nCombiner deux relations basées sur une condition\n\n\n\n\n\n2.1 Sélection\n\nPermet de filtrer les lignes d’une table selon une condition\n\n\n\n⚠️ Mot clé SQL associé : WHERE\n\nSELECT *\n  FROM echecs.joueuse\n WHERE elo &lt; 2400;\n\n\n\n2.2 Projection\n\nPermet de sélectionner certaines colonnes d’une table.\nMot clé SQL associé : SELECT\n\nSELECT nom,\n       prenom\n  FROM echecs.joueuse;\n\n\n2.3 Union\n\nCombine les lignes de deux tables ayant le même nombre de colonnes et des types compatibles\n\nSELECT nom,\n       prenom\n  FROM echecs.joueuse\n\nUNION\n\nSELECT nom,\n       prenom\n  FROM echecs.joueur;\n\n\n\n\n\n\nTip\n\n\n\n\nUNION : Combine les résultats des requêtes et supprime les doublons\nUNION ALL : Combine les résultats des requêtes et garde tous les doublons\n\n\n\n\n\n2.4 Différence\n\nLignes qui se trouvent dans la première relation mais pas dans la seconde\n\n-- Joueuses évoluant dans un club français et pas dans un club belge\nSELECT nom,\n       prenom\n  FROM echecs.joueuse_club_fr\n\nEXCEPT\n\nSELECT nom,\n       prenom\n  FROM echecs.joueuse_club_be;\n\nImaginons que vous ayez créé 2 tables :\n\njoueuses évoluant dans un club français\njoueuses évoluant dans un club belge\n\n\n\n\n2.5 Intersection\n\nLignes communes aux deux tables\n\n-- Joueuses évoluant dans un club francais et dans un club belge\nSELECT nom,\n       prenom\n  FROM echecs.joueuse_club_fr\n\nINTERSECT\n\nSELECT nom,\n       prenom\n  FROM echecs.joueuse_club_be;\n\n\n2.6 Jointure\n\nPermet de combiner deux tables basées sur une correspondance entre les colonnes\n\nSELECT j.nom,\n       j.prenom,\n       c.nom AS club\n  FROM echecs.joueuse j\n  JOIN echecs.club c USING (id_club);"
   },
   {
     "objectID": "doc/cours/algebre-slides.html#algèbre-relationnelle",
@@ -116,7 +116,189 @@
     "href": "doc/cours/algebre-slides.html#principaux-opérateurs",
     "title": "Algèbre Relationnelle",
     "section": "Principaux opérateurs",
-    "text": "Principaux opérateurs\n\n\n\n\n\n\n\nOpérateur\nDescription\n\n\n\n\nσ (Sélection)\nFiltrer les lignes selon une condition\n\n\nπ (Projection)\nSélectionner des colonnes spécifiques\n\n\nU (Union)\nCombiner les lignes de deux relations\n\n\n− (Différence)\nRetourner les lignes présentes dans une relation mais pas dans l’autre\n\n\n∩ (Intersection)\nTrouver les lignes communes aux deux relations\n\n\n⨝ (Jointure)\nCombiner deux relations basées sur une condition"
+    "text": "Principaux opérateurs\n\n\n\n\n\n\n\n\nOpérateur\nDescription\n\n\n\n\nσ (Sélection)\nFiltrer les lignes selon une condition\n\n\nπ (Projection)\nSélectionner des colonnes spécifiques\n\n\nU (Union)\nCombiner les lignes de deux relations\n\n\n− (Différence)\nRetourner les lignes présentes dans une relation mais pas dans l’autre\n\n\n∩ (Intersection)\nTrouver les lignes communes aux deux relations\n\n\n⨝ (Jointure)\nCombiner deux relations basées sur une condition"
+  },
+  {
+    "objectID": "doc/cours/bases-de-donnees.html",
+    "href": "doc/cours/bases-de-donnees.html",
+    "title": "Bases de Données",
+    "section": "",
+    "text": "texte (nom, prénom, ville…)\nnumérique (age, prix…)\ndate\nliste (compétences, loisirs)\nimage\nfichier\n\n\n\n\n\n\n\n\n\nDéfinition\n\n\n\nUne donnée est une information brute qui possède :\n\nun type\nune valeur\n\n\n\n\n\n\n\nFichier txt\nFichier csv\nFichier json\nFichier parquet\nBase de données"
+  },
+  {
+    "objectID": "doc/cours/bases-de-donnees.html#une-donnée",
+    "href": "doc/cours/bases-de-donnees.html#une-donnée",
+    "title": "Bases de Données",
+    "section": "",
+    "text": "texte (nom, prénom, ville…)\nnumérique (age, prix…)\ndate\nliste (compétences, loisirs)\nimage\nfichier\n\n\n\n\n\n\n\n\n\nDéfinition\n\n\n\nUne donnée est une information brute qui possède :\n\nun type\nune valeur\n\n\n\n\n\n\n\nFichier txt\nFichier csv\nFichier json\nFichier parquet\nBase de données"
+  },
+  {
+    "objectID": "doc/cours/bases-de-donnees.html#une-base-de-données",
+    "href": "doc/cours/bases-de-donnees.html#une-base-de-données",
+    "title": "Bases de Données",
+    "section": "2 Une base de données ?",
+    "text": "2 Une base de données ?\n\n\n\n\n\n\n\nDéfinition\n\n\n\nUne base de données est un ensemble de données rassemblées et stockées de manière organisée dans un but spécifique.\n\n\n\n\nTypes ?\nOn n’utilise pas la même structure pour du texte ou des fichiers."
+  },
+  {
+    "objectID": "doc/cours/bases-de-donnees.html#enjeux",
+    "href": "doc/cours/bases-de-donnees.html#enjeux",
+    "title": "Bases de Données",
+    "section": "3 Enjeux",
+    "text": "3 Enjeux\n\nAccès aux données : langage SQL\nSécurité des données : seuls les utilisateurs autorisés (droits)\nPartage des données : facile en lecture, mais en écriture ?\nNon-redondance des données\nCohérence des données : respect des contraintes d’intégrité"
+  },
+  {
+    "objectID": "doc/cours/bases-de-donnees.html#types-de-bases-de-données",
+    "href": "doc/cours/bases-de-donnees.html#types-de-bases-de-données",
+    "title": "Bases de Données",
+    "section": "4 Types de bases de données",
+    "text": "4 Types de bases de données\n\n4.1 Hiérarchique\n\nDonnées organisées comme un arbre\nRelations de type parent-enfant\nAnnuaires LDAP, système de fichiers\n\n\n\n\n\n\nstateDiagram \n    ENSAI --&gt; Permanent\n    ENSAI --&gt; Eleve\n    Permanent --&gt; Enseignant\n    Permanent --&gt; Administratif\n    Eleve --&gt; 1A\n    Eleve --&gt; 2A\n    Eleve --&gt; 3A\n\n\n\n\n\n\n\n\n4.2 Réseau\n\nOrganisée en graphe\nLes enregistrements peuvent avoir plusieurs parents et enfants\nRéseaux de transports  \n\n\n\n4.3 Relationnelle\n\nOrganisée en tables\nLien entre les tables\n\n\nQuelques tables sont gérables avec Excel ou Calc.\nMais ça devient vite trop compliqué.\n\n\n\n4.4 NoSQL\nNombreux sous-types :\n\nClé-valeur : données sous forme de paires clé-valeur (DynamoDB)\nColonnes : Organisée en colonnes, adaptée aux grandes quantités de données (Cassandra)\nDocument : Stocke des documents semi-structurés (JSON, XML) (MongoDB)\nGraphes : Organisée sous forme de nœuds et de relations, pour des données très connectées (Neo4j)\n\n\nNot Only SQL\n\n\n\n4.5 Autres\n\nBases de données de séries temporelles"
+  },
+  {
+    "objectID": "doc/cours/bases-de-donnees.html#base-de-données-relationnelle",
+    "href": "doc/cours/bases-de-donnees.html#base-de-données-relationnelle",
+    "title": "Bases de Données",
+    "section": "5 Base de données relationnelle",
+    "text": "5 Base de données relationnelle\n\n5.1 Table\n\nComposée de lignes et de colonnes\nChaque table représente une entité\nChaque ligne est un enregistrement\nChaque colonne représente un attribut de l’entité\nTypes de données : texte, num…\n\n\n\n5.2 Relations entre les tables\n\nClé primaire (PK) pour identifier chaque enregistrement dans une table\n\nde manière unique\nsans ambiguïté\n\nClé étrangère (FK) pour créer des liens avec d’autres tables\n\nattribut d’une table A\ncorrespond à la clé primaire d’une table B\n\n\n\n\n5.3 Exemple\nComment relier ces 2 tables ?\n\nune joueuse joue pour un seul club\nUn club peut avoir plusieurs joueuses\n\n\n\n\n\n\nclassDiagram\n    class Joueuse {\n        id_joueuse PK\n        nom\n        prenom\n        elo\n    }\n    \n    class Club {\n        id_club PK\n        nom\n        ville\n    }\n\n\n\n\n\n\n\n\n\njoueuse\n\n\nid_joueuse\nnom\nprenom\nelo\n\n\n\n\n1\nGuichard\nPauline\n2357\n\n\n2\nDaulyte-Cornette\nDeimante\n2371\n\n\n3\nNavrotescu\nAndreea\n2338\n\n\n4\nSebag\nMarie\n2448\n\n\n5\nMillet\nSophie\n2366\n\n\n6\nSkrichempko\nAlmira\n2361\n\n\n\n\n\n\n\nclub\n\n\n\n\n\n\n\nid_club\nnom\nville\n\n\n\n\n1\nC’Chartres Echecs\nChartres\n\n\n2\nBischwiller\nBischwiller\n\n\n3\nAsnieres - le Grand Echiquier\nAsnieres\n\n\n4\nTours des Hauts-De-France\nSaint-Quentin\n\n\n\n\n\n\n5.4 Clé étrangère\nEn ajoutant une clé étrangère.\n\n\n\n\n\nclassDiagram\n    class joueuse {\n        id_joueuse PK\n        nom\n        prenom\n        elo\n        id_club FK\n    }\n    \n    class Club {\n        id_club PK\n        nom\n        ville\n    }\n\n\n\n\n\n\n\n\n\njoueuse\n\n\n\n\n\n\n\n\n\nid_joueuse\nnom\nprenom\nelo\nid_club\n\n\n\n\n1\nGuichard\nPauline\n2357\n3\n\n\n2\nDaulyte\nDeimante\n2371\n1\n\n\n3\nNavrotescu\nAndreea\n2338\n2\n\n\n4\nSebag\nMarie\n2448\n2\n\n\n5\nMillet\nSophie\n2366\n3\n\n\n6\nSkrichempko\nAlmira\n2361\n2\n\n\n\n\n\n\n5.5 Clé primaire\n\nAttribut (ou ensemble d’attributs)\nUnique\nNon nulle\nImmuable\n\n\n\n\n\n\n\nTip\n\n\n\nSauf mention contraire, nous utiliserons une clé primaire “technique” : séquence.\n\n\n\nImmuable :\n\nidéalement stable, elle ne change pas au cours du temps\nPour maintenir l’intégrité des liens avec d’autres tables\n\nRemarque : pas obligatoire d’avoir une clé primaire\n\n\n\n5.6 Question\nSi une joueuse peut adhérer à plusieurs clubs ? 😕\n\nPar exemple si notre bdd contient aussi les clubs belges, allemands, espagnols…\n\n\n\n5.7 Table d’association\nCréation d’une table d’association : adhesion 😅\n\n\n\n\n\nclassDiagram\n    class Adhesion {\n        id_joueuse FK\n        id_club FK\n    }\n\n\n\n\n\n\n\n\n\nadhesion\n\n\nid_club\nid_joueuse\n\n\n\n\n1\n2\n\n\n2\n3\n\n\n2\n4\n\n\n2\n6\n\n\n3\n1\n\n\n3\n5\n\n\n4\n1\n\n\n4\n2\n\n\n\n\n\nClé primaire ?\n\nid_adhesion\n(id_club, id_joueuse)"
+  },
+  {
+    "objectID": "doc/cours/bases-de-donnees.html#associations",
+    "href": "doc/cours/bases-de-donnees.html#associations",
+    "title": "Bases de Données",
+    "section": "6 Associations",
+    "text": "6 Associations\nIl existe plusieurs types d’associations entre tables.\n\n6.1 Association 1:1\nUne entité dans la table A est associée à une seule entité dans la table B.\nExemple :\n\nUne personne a une seule carte vitale\nUne carte vitale appartient à une seule personne\n\n\non aurait pu tout mettre dans la même table\n\n\n\n6.2 Association 1:n\nUne entité dans la table A peut-être associée à plusieurs entités dans la table B.\nExemple :\n\nUn club est composé de plusieurs joueuses\nUne joueuse adhère à un seul club\n\n\n\n6.3 Association n:n\nUne entité dans la table A peut-être associée à plusieurs entités dans la table B.\nEt inversement, une entité dans la table B peut-être associée à plusieurs entités dans la table A.\nExemple :\n\nune joueuse participe à plusieurs tournois\nUn tournoi regroupe plusieurs joueuses\n\n\n\n6.4 Association récursive\nUne table peut avoir des relations avec elle-même\nIci la table contient une clé étrangère qui référence sa propre clé primaire.\nExemple :\n\nUn employé a un supérieur"
+  },
+  {
+    "objectID": "doc/cours/bases-de-donnees.html#sgbd",
+    "href": "doc/cours/bases-de-donnees.html#sgbd",
+    "title": "Bases de Données",
+    "section": "7 SGBD",
+    "text": "7 SGBD\n\n\n\n\n\n\nDéfinition\n\n\n\nUn Système de Gestion de Bases de Données est un logiciel qui permet de créer, gérer et manipuler des bases de données.\nIl fournit des outils pour stocker, récupérer, modifier et sécuriser les données.\n\n\n\nPostgreSQL\nMySQL\nOracle Database\nSQLite\nMariaDB\n\n\n7.1 PostgreSQL\n\nOpen Source, Libre\nCommunauté active\nStable et performant\nBasé sur le modèle client-serveur\nExtension PostGIS (Données géographiques)\n\n\nutilisé à l’INSEE\nclient-serveur classique :\n\nle composant serveur central « postmaster » gère tous les fichiers de bdd\nainsi que toutes les connexions établies pour la communication avec le serveur de bdd.\n\nLes utilisateurs n’ont besoin que d’un programme client approprié pour établir la connexion\n\n\n\n7.2 Outil de Gestion et Administration\nIl est nécessaire d’avoir un outil pour gérer et administrer une base de données.\n\n\n\n\n\n\nTip\n\n\n\n\nPostgreSQL : Installé sur un serveur, sert de moteur de base de données\npgAdmin : Interface graphique pour interagir avec PostgreSQL\n\n\n\n\npgAdmin\nDBeaver\n\n\n\n7.3 Kesako\n\nBase de données : endroit où sont stockées les informations\nSGBD : logiciel qui permet de créer, gérer et manipuler les bases de données\nOutil de gestion du SGBD : application graphique qui facilite l’interaction avec un SGBD\n\n\n\nBDD : bibliothèque\nSGBD : bibliothécaire\nOutil : tableau de bord interactif pour les bibliothécaires\n\n\n\n\n7.4 Exemple\nSite de vente de légumes\n\nClient   - id_client   - nom   - prenom   - mail\nProduit   - id_produit   - nom   - description   - prix\nCommande   - id_commande   - id_client\nLigneCommande   - id_ligne_commande   - id_commande   - id_produit   - quantite"
+  },
+  {
+    "objectID": "doc/cours/bases-de-donnees-slides.html#une-donnée",
+    "href": "doc/cours/bases-de-donnees-slides.html#une-donnée",
+    "title": "Bases de Données",
+    "section": "Une donnée ?",
+    "text": "Une donnée ?\n\n\ntexte (nom, prénom, ville…)\nnumérique (age, prix…)\ndate\nliste (compétences, loisirs)\nimage\nfichier"
+  },
+  {
+    "objectID": "doc/cours/bases-de-donnees-slides.html#une-base-de-données",
+    "href": "doc/cours/bases-de-donnees-slides.html#une-base-de-données",
+    "title": "Bases de Données",
+    "section": "Une base de données ?",
+    "text": "Une base de données ?\n\n\n\n\n\n\n\n\nDéfinition\n\n\nUne base de données est un ensemble de données rassemblées et stockées de manière organisée dans un but spécifique.\n\n\n\n\n\n\nTypes ?\nOn n’utilise pas la même structure pour du texte ou des fichiers."
+  },
+  {
+    "objectID": "doc/cours/bases-de-donnees-slides.html#enjeux",
+    "href": "doc/cours/bases-de-donnees-slides.html#enjeux",
+    "title": "Bases de Données",
+    "section": "Enjeux",
+    "text": "Enjeux\n\nAccès aux données : langage SQL\nSécurité des données : seuls les utilisateurs autorisés (droits)\nPartage des données : facile en lecture, mais en écriture ?\nNon-redondance des données\nCohérence des données : respect des contraintes d’intégrité"
+  },
+  {
+    "objectID": "doc/cours/bases-de-donnees-slides.html#types-de-bases-de-données",
+    "href": "doc/cours/bases-de-donnees-slides.html#types-de-bases-de-données",
+    "title": "Bases de Données",
+    "section": "Types de bases de données",
+    "text": "Types de bases de données"
+  },
+  {
+    "objectID": "doc/cours/bases-de-donnees-slides.html#base-de-données-relationnelle",
+    "href": "doc/cours/bases-de-donnees-slides.html#base-de-données-relationnelle",
+    "title": "Bases de Données",
+    "section": "Base de données relationnelle",
+    "text": "Base de données relationnelle"
+  },
+  {
+    "objectID": "doc/cours/bases-de-donnees-slides.html#associations",
+    "href": "doc/cours/bases-de-donnees-slides.html#associations",
+    "title": "Bases de Données",
+    "section": "Associations",
+    "text": "Associations\nIl existe plusieurs types d’associations entre tables."
+  },
+  {
+    "objectID": "doc/cours/bases-de-donnees-slides.html#sgbd",
+    "href": "doc/cours/bases-de-donnees-slides.html#sgbd",
+    "title": "Bases de Données",
+    "section": "SGBD",
+    "text": "SGBD\n\n\n\n\n\n\n\nDéfinition\n\n\nUn Système de Gestion de Bases de Données est un logiciel qui permet de créer, gérer et manipuler des bases de données.\nIl fournit des outils pour stocker, récupérer, modifier et sécuriser les données.\n\n\n\n\n\nPostgreSQL\nMySQL\nOracle Database\nSQLite\nMariaDB"
+  },
+  {
+    "objectID": "doc/tp/tp1.html",
+    "href": "doc/tp/tp1.html",
+    "title": "Exercice BDR et SQL",
+    "section": "",
+    "text": "🚧"
+  },
+  {
+    "objectID": "doc/tp/tp1.html#introduction",
+    "href": "doc/tp/tp1.html#introduction",
+    "title": "Exercice BDR et SQL",
+    "section": "Introduction",
+    "text": "Introduction\nVous allez réaliser ce TP sur le Datalab du GENES\n\nConnectez-vous au Datalab\n\nVous pouvez également utiliser le Datalab SSPCloud de l’INSEE en créant un compte avec votre mail ENSAI."
+  },
+  {
+    "objectID": "doc/tp/tp1.html#premiers-pas-sur-le-datalab",
+    "href": "doc/tp/tp1.html#premiers-pas-sur-le-datalab",
+    "title": "Exercice BDR et SQL",
+    "section": "1 Premiers pas sur le Datalab",
+    "text": "1 Premiers pas sur le Datalab\n🚧"
+  },
+  {
+    "objectID": "doc/tp/tp1.html#premières-requêtes",
+    "href": "doc/tp/tp1.html#premières-requêtes",
+    "title": "Exercice BDR et SQL",
+    "section": "2 Premières requêtes",
+    "text": "2 Premières requêtes\n\n\n\n\n\n\nCaution\n\n\n\nEn cas d’indisponibilité du Datalab, DBeaver est directement installé sur les machines.\n\n\n\n2.1 Lancement du service\n\nLancez le service CloudBeaver\n\nAllez dans Catalogue de services\nOnglet Databases\n\n\n\n\n\n\n\n\nCloudBeaver\n\n\n\nCloudBeaver est une application web légère dédiée à la gestion de bases de données. Elle permet de se connecter à divers types de bases de données, qu’elles soient SQL, NoSQL ou hébergées dans le cloud, à partir d’un seul point d’accès via un navigateur. CloudBeaver facilite l’exploration, la modification et la visualisation des données sans nécessiter l’installation de logiciels locaux.\nElle offre également des fonctionnalités de sécurité pour protéger l’accès aux données. Son interface conviviale en fait un outil accessible aussi bien aux développeurs qu’aux analystes de données.\n\n\n\nCréez une nouvelle connexion DuckDB\n\nEn haut à gauche, cliquez sur le +, puis New connection\nSélectionner DuckDB\nCliquez sur le bouton CREATE\n\n\n\n\n\n\n\n\nDuckDB\n\n\n\nDuckDB est un moteur de base de données relationnelle conçu pour des analyses rapides et efficaces, directement intégré dans des environnements locaux comme Python ou R. Il est optimisé pour le traitement analytique en colonnes et peut gérer des ensembles de données de grande taille sans nécessiter de serveur externe. DuckDB est léger, facile à intégrer et offre des performances élevées pour les requêtes SQL.\nIl est souvent utilisé pour l’analyse de données embarquée ou dans des flux de travail de science des données. Son architecture permet d’exécuter des requêtes SQL sur des fichiers locaux sans migration préalable des données.\n\n\n\nOuvrez un éditeur SQL\n\nEn haut à gauche, cliquez sur SQL\nvous pouvez maintenant saisir du code SQL\n\n\n\n\n2.2 Les prénoms\n\n\n\n\n\n\nFichier des prénoms\n\n\n\nLe fichier des prénoms contient des données sur les prénoms attribués aux enfants nés en France depuis 1900. Ces données sont disponibles au niveau France et par département.\nUne version au format parquet a été mise à disposition sur le site data.gouv par Icem7\n\n\n\n\n\n\n\n\nFichier parquet\n\n\n\nLe format Parquet est un format de fichier de stockage de données optimisé pour les systèmes de traitement analytique de grande échelle. Voici ses principales caractéristiques :\n\nStockage en colonnes : Parquet stocke les données par colonnes plutôt que par lignes, ce qui améliore l’efficacité de la compression et de l’accès aux données dans les charges de travail analytiques, notamment pour les systèmes de big data comme Hadoop ou Spark.\nCompression efficace : Grâce à sa structure en colonnes, il permet une compression plus efficace que les formats en ligne (comme CSV), ce qui réduit la taille des fichiers et accélère le traitement.\nOptimisé pour l’analytique : Parquet est conçu pour les requêtes en lecture intensive, car il permet de charger uniquement les colonnes nécessaires pour une analyse, ce qui améliore les performances.\nInteropérabilité : Parquet est compatible avec plusieurs langages et outils d’analyse de données, notamment Hadoop, Spark, Hive, et divers environnements de traitement de données (Python, Java, etc.).\nFormat auto-descriptif : Il inclut des métadonnées qui décrivent la structure des données, permettant de l’utiliser facilement dans différents environnements sans nécessiter de schémas externes.\n\n\n\n\nCréez une vue prenom qui pointera vers le fichier parquet des prénoms\n\nvous pourrez ensuite requêter sur cette vue comme si c’était une table\n\n\nCREATE OR REPLACE VIEW prenom AS\nFROM 'https://static.data.gouv.fr/resources/base-prenoms-insee-format-parquet/20231121-161435/prenoms-nat2022.parquet'\n\nListez tous les éléments de prenom\nListez les prénoms de l’année 2022\nListez les prénoms de l’année 2022 donnés plus de 2000 fois\nClassez-les par sexe, puis par nombre de fois où ils ont été donné\n\n\n\nListez les années où votre prénom a été donné\nClassez par année déscroissante\n\nCREATE OR REPLACE VIEW fd_indcvi_2020 AS FROM ‘https://static.data.gouv.fr/resources/recensement-de-la-population-fichiers-detail-individus-localises-au-canton-ou-ville-2020-1/20231023-122841/fd-indcvi-2020.parquet’;\nDESCRIBE FROM fd_indcvi_2020 ;\nSELECT arm, voit, ROUND(sum(ipondi/nperr::int)) AS eft FROM fd_indcvi_2020 WHERE dept = ‘75’ AND NPERR &lt;&gt; ‘Z’ GROUP BY ALL ;"
+  },
+  {
+    "objectID": "doc/cours/intro-slides.html#bases-de-données-relationnelles-et-sql",
+    "href": "doc/cours/intro-slides.html#bases-de-données-relationnelles-et-sql",
+    "title": "Bases de Données Relationnelles et SQL",
+    "section": "Bases de Données Relationnelles et SQL",
+    "text": "Bases de Données Relationnelles et SQL\n\n6h CM\n18h TP\nludovic.deneuville@ensai.fr\nbureau 161\nsur la base des cours de Benjamin Girault"
+  },
+  {
+    "objectID": "doc/cours/intro-slides.html#objectifs",
+    "href": "doc/cours/intro-slides.html#objectifs",
+    "title": "Bases de Données Relationnelles et SQL",
+    "section": "Objectifs",
+    "text": "Objectifs\n\nInterrogation\nCréation\nModélisation\nSavoir utiliser le langage SQL\n\n\nUML pour la modélisation"
+  },
+  {
+    "objectID": "doc/cours/intro-slides.html#sql",
+    "href": "doc/cours/intro-slides.html#sql",
+    "title": "Bases de Données Relationnelles et SQL",
+    "section": "SQL",
+    "text": "SQL\n\nSyntaxe simple\nEfficace\nTrès utilisé\n\n\n\nc’est LA compétence à avoir\nça s’encapsule dans plein de langages (R, Python, Julia, Stata, SAS…)\nutile pour Big Data"
+  },
+  {
+    "objectID": "doc/cours/intro-slides.html#conventions",
+    "href": "doc/cours/intro-slides.html#conventions",
+    "title": "Bases de Données Relationnelles et SQL",
+    "section": "Conventions",
+    "text": "Conventions\n\n&lt;...&gt; : texte à remplacer\n[...] : élément optionnel\nUne requête se termine par un ;\nMots clés en MAJUSCULE\n-- Ce qui vient ensuite est commenté\n\n\n\nParfois possible d’utiliser /* commentaire */\n; : même si les logiciels souvent s’en moquent"
+  },
+  {
+    "objectID": "doc/cours/intro-slides.html#les-tp",
+    "href": "doc/cours/intro-slides.html#les-tp",
+    "title": "Bases de Données Relationnelles et SQL",
+    "section": "Les TP",
+    "text": "Les TP\n\n5 TP + 1 TD\nDatalab\ncloudBeaver"
+  },
+  {
+    "objectID": "doc/cours/intro-slides.html#évaluation",
+    "href": "doc/cours/intro-slides.html#évaluation",
+    "title": "Bases de Données Relationnelles et SQL",
+    "section": "Évaluation",
+    "text": "Évaluation\n\nLundi 6 Janvier 10h\nDurée : 2h\nSur papier\nSans documents"
+  },
+  {
+    "objectID": "doc/cours/intro-slides.html#bibliographie",
+    "href": "doc/cours/intro-slides.html#bibliographie",
+    "title": "Bases de Données Relationnelles et SQL",
+    "section": "Bibliographie",
+    "text": "Bibliographie\n\nhttps://laurent-audibert.developpez.com/Cours-BD/?page=introduction-bases-de-donnees\nhttps://upinfo.univ-cotedazur.fr/im/bases-de-donnees/\nhttps://openclassrooms.com/fr/courses/6971126-implementez-vos-bases-de-donnees-relationnelles-avec-sql/7139618-decouvrez-le-systeme-de-gestion-de-base-de-donnees-sgbd\nhttps://oseox.fr/sql/\nhttps://learnsql.fr/blog/aide-memoire-pour-les-entretiens-sql/\n\n\n\n\nHome — Introduction à SQL"
   },
   {
     "objectID": "doc/cours/intro.html",
@@ -175,186 +357,11 @@
     "text": "Bibliographie\n\nhttps://laurent-audibert.developpez.com/Cours-BD/?page=introduction-bases-de-donnees\nhttps://upinfo.univ-cotedazur.fr/im/bases-de-donnees/\nhttps://openclassrooms.com/fr/courses/6971126-implementez-vos-bases-de-donnees-relationnelles-avec-sql/7139618-decouvrez-le-systeme-de-gestion-de-base-de-donnees-sgbd\nhttps://oseox.fr/sql/\nhttps://learnsql.fr/blog/aide-memoire-pour-les-entretiens-sql/"
   },
   {
-    "objectID": "doc/cours/intro-slides.html#bases-de-données-relationnelles-et-sql",
-    "href": "doc/cours/intro-slides.html#bases-de-données-relationnelles-et-sql",
-    "title": "Bases de Données Relationnelles et SQL",
-    "section": "Bases de Données Relationnelles et SQL",
-    "text": "Bases de Données Relationnelles et SQL\n\n6h CM\n18h TP\nludovic.deneuville@ensai.fr\nbureau 161\nsur la base des cours de Benjamin Girault"
-  },
-  {
-    "objectID": "doc/cours/intro-slides.html#objectifs",
-    "href": "doc/cours/intro-slides.html#objectifs",
-    "title": "Bases de Données Relationnelles et SQL",
-    "section": "Objectifs",
-    "text": "Objectifs\n\nInterrogation\nCréation\nModélisation\nSavoir utiliser le langage SQL\n\n\nUML pour la modélisation"
-  },
-  {
-    "objectID": "doc/cours/intro-slides.html#sql",
-    "href": "doc/cours/intro-slides.html#sql",
-    "title": "Bases de Données Relationnelles et SQL",
-    "section": "SQL",
-    "text": "SQL\n\nSyntaxe simple\nEfficace\nTrès utilisé\n\n\n\nc’est LA compétence à avoir\nça s’encapsule dans plein de langages (R, Python, Julia, Stata, SAS…)\nutile pour Big Data"
-  },
-  {
-    "objectID": "doc/cours/intro-slides.html#conventions",
-    "href": "doc/cours/intro-slides.html#conventions",
-    "title": "Bases de Données Relationnelles et SQL",
-    "section": "Conventions",
-    "text": "Conventions\n\n&lt;...&gt; : texte à remplacer\n[...] : élément optionnel\nUne requête se termine par un ;\nMots clés en MAJUSCULE\n-- Ce qui vient ensuite est commenté\n\n\n\nParfois possible d’utiliser /* commentaire */\n; : même si les logiciels souvent s’en moquent"
-  },
-  {
-    "objectID": "doc/cours/intro-slides.html#les-tp",
-    "href": "doc/cours/intro-slides.html#les-tp",
-    "title": "Bases de Données Relationnelles et SQL",
-    "section": "Les TP",
-    "text": "Les TP\n\n5 TP + 1 TD\nDatalab\ncloudBeaver"
-  },
-  {
-    "objectID": "doc/cours/intro-slides.html#évaluation",
-    "href": "doc/cours/intro-slides.html#évaluation",
-    "title": "Bases de Données Relationnelles et SQL",
-    "section": "Évaluation",
-    "text": "Évaluation\n\nLundi 6 Janvier 10h\nDurée : 2h\nSur papier\nSans documents"
-  },
-  {
-    "objectID": "doc/cours/intro-slides.html#bibliographie",
-    "href": "doc/cours/intro-slides.html#bibliographie",
-    "title": "Bases de Données Relationnelles et SQL",
-    "section": "Bibliographie",
-    "text": "Bibliographie\n\nhttps://laurent-audibert.developpez.com/Cours-BD/?page=introduction-bases-de-donnees\nhttps://upinfo.univ-cotedazur.fr/im/bases-de-donnees/\nhttps://openclassrooms.com/fr/courses/6971126-implementez-vos-bases-de-donnees-relationnelles-avec-sql/7139618-decouvrez-le-systeme-de-gestion-de-base-de-donnees-sgbd\nhttps://oseox.fr/sql/\nhttps://learnsql.fr/blog/aide-memoire-pour-les-entretiens-sql/\n\n\n\n\nHome — Introduction à SQL"
-  },
-  {
-    "objectID": "doc/tp/tp1.html",
-    "href": "doc/tp/tp1.html",
-    "title": "Exercice BDR et SQL",
-    "section": "",
-    "text": "🚧"
-  },
-  {
-    "objectID": "doc/tp/tp1.html#introduction",
-    "href": "doc/tp/tp1.html#introduction",
-    "title": "Exercice BDR et SQL",
-    "section": "Introduction",
-    "text": "Introduction\nVous allez réaliser ce TP sur le Datalab du GENES\n\nConnectez-vous au Datalab\n\nVous pouvez également utiliser le Datalab SSPCloud de l’INSEE en créant un compte avec votre mail ENSAI."
-  },
-  {
-    "objectID": "doc/tp/tp1.html#premiers-pas-sur-le-datalab",
-    "href": "doc/tp/tp1.html#premiers-pas-sur-le-datalab",
-    "title": "Exercice BDR et SQL",
-    "section": "1 Premiers pas sur le Datalab",
-    "text": "1 Premiers pas sur le Datalab\n🚧"
-  },
-  {
-    "objectID": "doc/tp/tp1.html#premières-requêtes",
-    "href": "doc/tp/tp1.html#premières-requêtes",
-    "title": "Exercice BDR et SQL",
-    "section": "2 Premières requêtes",
-    "text": "2 Premières requêtes\n\n\n\n\n\n\nCaution\n\n\n\nEn cas d’indisponibilité du Datalab, DBeaver est directement installé sur les machines.\n\n\n\n2.1 Lancement du service\n\nLancez le service CloudBeaver\n\nAllez dans Catalogue de services\nOnglet Databases\n\n\n\n\n\n\n\n\nCloudBeaver\n\n\n\nCloudBeaver est une application web légère dédiée à la gestion de bases de données. Elle permet de se connecter à divers types de bases de données, qu’elles soient SQL, NoSQL ou hébergées dans le cloud, à partir d’un seul point d’accès via un navigateur. CloudBeaver facilite l’exploration, la modification et la visualisation des données sans nécessiter l’installation de logiciels locaux.\nElle offre également des fonctionnalités de sécurité pour protéger l’accès aux données. Son interface conviviale en fait un outil accessible aussi bien aux développeurs qu’aux analystes de données.\n\n\n\nCréez une nouvelle connexion DuckDB\n\nEn haut à gauche, cliquez sur le +, puis New connection\nSélectionner DuckDB\nCliquez sur le bouton CREATE\n\n\n\n\n\n\n\n\nDuckDB\n\n\n\nDuckDB est un moteur de base de données relationnelle conçu pour des analyses rapides et efficaces, directement intégré dans des environnements locaux comme Python ou R. Il est optimisé pour le traitement analytique en colonnes et peut gérer des ensembles de données de grande taille sans nécessiter de serveur externe. DuckDB est léger, facile à intégrer et offre des performances élevées pour les requêtes SQL.\nIl est souvent utilisé pour l’analyse de données embarquée ou dans des flux de travail de science des données. Son architecture permet d’exécuter des requêtes SQL sur des fichiers locaux sans migration préalable des données.\n\n\n\nOuvrez un éditeur SQL\n\nEn haut à gauche, cliquez sur SQL\nvous pouvez maintenant saisir du code SQL\n\n\n\n\n2.2 Les prénoms\n\n\n\n\n\n\nFichier des prénoms\n\n\n\nLe fichier des prénoms contient des données sur les prénoms attribués aux enfants nés en France depuis 1900. Ces données sont disponibles au niveau France et par département.\nUne version au format parquet a été mise à disposition sur le site data.gouv par Icem7\n\n\n\n\n\n\n\n\nFichier parquet\n\n\n\nLe format Parquet est un format de fichier de stockage de données optimisé pour les systèmes de traitement analytique de grande échelle. Voici ses principales caractéristiques :\n\nStockage en colonnes : Parquet stocke les données par colonnes plutôt que par lignes, ce qui améliore l’efficacité de la compression et de l’accès aux données dans les charges de travail analytiques, notamment pour les systèmes de big data comme Hadoop ou Spark.\nCompression efficace : Grâce à sa structure en colonnes, il permet une compression plus efficace que les formats en ligne (comme CSV), ce qui réduit la taille des fichiers et accélère le traitement.\nOptimisé pour l’analytique : Parquet est conçu pour les requêtes en lecture intensive, car il permet de charger uniquement les colonnes nécessaires pour une analyse, ce qui améliore les performances.\nInteropérabilité : Parquet est compatible avec plusieurs langages et outils d’analyse de données, notamment Hadoop, Spark, Hive, et divers environnements de traitement de données (Python, Java, etc.).\nFormat auto-descriptif : Il inclut des métadonnées qui décrivent la structure des données, permettant de l’utiliser facilement dans différents environnements sans nécessiter de schémas externes.\n\n\n\n\nCréez une vue prenom qui pointera vers le fichier parquet des prénoms\n\nvous pourrez ensuite requêter sur cette vue comme si c’était une table\n\n\nCREATE OR REPLACE VIEW prenom AS\nFROM 'https://static.data.gouv.fr/resources/base-prenoms-insee-format-parquet/20231121-161435/prenoms-nat2022.parquet'\n\nListez tous les éléments de prenom\nListez les prénoms de l’année 2022\nListez les prénoms de l’année 2022 donnés plus de 2000 fois\nClassez-les par sexe, puis par nombre de fois où ils ont été donné\n\n\n\nListez les années où votre prénom a été donné\nClassez par année déscroissante\n\nCREATE OR REPLACE VIEW fd_indcvi_2020 AS FROM ‘https://static.data.gouv.fr/resources/recensement-de-la-population-fichiers-detail-individus-localises-au-canton-ou-ville-2020-1/20231023-122841/fd-indcvi-2020.parquet’;\nDESCRIBE FROM fd_indcvi_2020 ;\nSELECT arm, voit, ROUND(sum(ipondi/nperr::int)) AS eft FROM fd_indcvi_2020 WHERE dept = ‘75’ AND NPERR &lt;&gt; ‘Z’ GROUP BY ALL ;"
-  },
-  {
-    "objectID": "doc/cours/bases-de-donnees-slides.html#une-donnée",
-    "href": "doc/cours/bases-de-donnees-slides.html#une-donnée",
-    "title": "Bases de Données",
-    "section": "Une donnée ?",
-    "text": "Une donnée ?\n\n\ntexte (nom, prénom, ville…)\nnumérique (age, prix…)\ndate\nliste (compétences, loisirs)\nimage\nfichier"
-  },
-  {
-    "objectID": "doc/cours/bases-de-donnees-slides.html#une-base-de-données",
-    "href": "doc/cours/bases-de-donnees-slides.html#une-base-de-données",
-    "title": "Bases de Données",
-    "section": "Une base de données ?",
-    "text": "Une base de données ?\n\n\n\n\n\n\n\n\nDéfinition\n\n\nUne base de données est un ensemble de données rassemblées et stockées de manière organisée dans un but spécifique.\n\n\n\n\n\n\nTypes ?\nOn n’utilise pas la même structure pour du texte ou des fichiers."
-  },
-  {
-    "objectID": "doc/cours/bases-de-donnees-slides.html#enjeux",
-    "href": "doc/cours/bases-de-donnees-slides.html#enjeux",
-    "title": "Bases de Données",
-    "section": "Enjeux",
-    "text": "Enjeux\n\nAccès aux données : langage SQL\nSécurité des données : seuls les utilisateurs autorisés (droits)\nPartage des données : facile en lecture, mais en écriture ?\nNon-redondance des données\nCohérence des données : respect des contraintes d’intégrité"
-  },
-  {
-    "objectID": "doc/cours/bases-de-donnees-slides.html#types-de-bases-de-données",
-    "href": "doc/cours/bases-de-donnees-slides.html#types-de-bases-de-données",
-    "title": "Bases de Données",
-    "section": "Types de bases de données",
-    "text": "Types de bases de données"
-  },
-  {
-    "objectID": "doc/cours/bases-de-donnees-slides.html#base-de-données-relationnelle",
-    "href": "doc/cours/bases-de-donnees-slides.html#base-de-données-relationnelle",
-    "title": "Bases de Données",
-    "section": "Base de données relationnelle",
-    "text": "Base de données relationnelle"
-  },
-  {
-    "objectID": "doc/cours/bases-de-donnees-slides.html#associations",
-    "href": "doc/cours/bases-de-donnees-slides.html#associations",
-    "title": "Bases de Données",
-    "section": "Associations",
-    "text": "Associations\nIl existe plusieurs types d’associations entre tables."
-  },
-  {
-    "objectID": "doc/cours/bases-de-donnees-slides.html#sgbd",
-    "href": "doc/cours/bases-de-donnees-slides.html#sgbd",
-    "title": "Bases de Données",
-    "section": "SGBD",
-    "text": "SGBD\n\n\n\n\n\n\n\nDéfinition\n\n\nUn Système de Gestion de Bases de Données est un logiciel qui permet de créer, gérer et manipuler des bases de données.\nIl fournit des outils pour stocker, récupérer, modifier et sécuriser les données.\n\n\n\n\n\nPostgreSQL\nMySQL\nOracle Database\nSQLite\nMariaDB"
-  },
-  {
-    "objectID": "doc/cours/bases-de-donnees.html",
-    "href": "doc/cours/bases-de-donnees.html",
-    "title": "Bases de Données",
-    "section": "",
-    "text": "texte (nom, prénom, ville…)\nnumérique (age, prix…)\ndate\nliste (compétences, loisirs)\nimage\nfichier\n\n\n\n\n\n\n\n\n\nDéfinition\n\n\n\nUne donnée est une information brute qui possède :\n\nun type\nune valeur\n\n\n\n\n\n\n\nFichier txt\nFichier csv\nFichier json\nFichier parquet\nBase de données"
-  },
-  {
-    "objectID": "doc/cours/bases-de-donnees.html#une-donnée",
-    "href": "doc/cours/bases-de-donnees.html#une-donnée",
-    "title": "Bases de Données",
-    "section": "",
-    "text": "texte (nom, prénom, ville…)\nnumérique (age, prix…)\ndate\nliste (compétences, loisirs)\nimage\nfichier\n\n\n\n\n\n\n\n\n\nDéfinition\n\n\n\nUne donnée est une information brute qui possède :\n\nun type\nune valeur\n\n\n\n\n\n\n\nFichier txt\nFichier csv\nFichier json\nFichier parquet\nBase de données"
-  },
-  {
-    "objectID": "doc/cours/bases-de-donnees.html#une-base-de-données",
-    "href": "doc/cours/bases-de-donnees.html#une-base-de-données",
-    "title": "Bases de Données",
-    "section": "2 Une base de données ?",
-    "text": "2 Une base de données ?\n\n\n\n\n\n\n\nDéfinition\n\n\n\nUne base de données est un ensemble de données rassemblées et stockées de manière organisée dans un but spécifique.\n\n\n\n\nTypes ?\nOn n’utilise pas la même structure pour du texte ou des fichiers."
-  },
-  {
-    "objectID": "doc/cours/bases-de-donnees.html#enjeux",
-    "href": "doc/cours/bases-de-donnees.html#enjeux",
-    "title": "Bases de Données",
-    "section": "3 Enjeux",
-    "text": "3 Enjeux\n\nAccès aux données : langage SQL\nSécurité des données : seuls les utilisateurs autorisés (droits)\nPartage des données : facile en lecture, mais en écriture ?\nNon-redondance des données\nCohérence des données : respect des contraintes d’intégrité"
-  },
-  {
-    "objectID": "doc/cours/bases-de-donnees.html#types-de-bases-de-données",
-    "href": "doc/cours/bases-de-donnees.html#types-de-bases-de-données",
-    "title": "Bases de Données",
-    "section": "4 Types de bases de données",
-    "text": "4 Types de bases de données\n\n4.1 Hiérarchique\n\nDonnées organisées comme un arbre\nRelations de type parent-enfant\nAnnuaires LDAP, système de fichiers\n\n\n\n\n\n\nstateDiagram \n    ENSAI --&gt; Permanent\n    ENSAI --&gt; Eleve\n    Permanent --&gt; Enseignant\n    Permanent --&gt; Administratif\n    Eleve --&gt; 1A\n    Eleve --&gt; 2A\n    Eleve --&gt; 3A\n\n\n\n\n\n\n\n\n4.2 Réseau\n\nOrganisée en graphe\nLes enregistrements peuvent avoir plusieurs parents et enfants\nRéseaux de transports  \n\n\n\n4.3 Relationnelle\n\nOrganisée en tables\nLien entre les tables\n\n\nQuelques tables sont gérables avec Excel ou Calc.\nMais ça devient vite trop compliqué.\n\n\n\n4.4 NoSQL\nNombreux sous-types :\n\nClé-valeur : données sous forme de paires clé-valeur (DynamoDB)\nColonnes : Organisée en colonnes, adaptée aux grandes quantités de données (Cassandra)\nDocument : Stocke des documents semi-structurés (JSON, XML) (MongoDB)\nGraphes : Organisée sous forme de nœuds et de relations, pour des données très connectées (Neo4j)\n\n\nNot Only SQL\n\n\n\n4.5 Autres\n\nBases de données de séries temporelles"
-  },
-  {
-    "objectID": "doc/cours/bases-de-donnees.html#base-de-données-relationnelle",
-    "href": "doc/cours/bases-de-donnees.html#base-de-données-relationnelle",
-    "title": "Bases de Données",
-    "section": "5 Base de données relationnelle",
-    "text": "5 Base de données relationnelle\n\n5.1 Table\n\nComposée de lignes et de colonnes\nChaque table représente une entité\nChaque ligne est un enregistrement\nChaque colonne représente un attribut de l’entité\nTypes de données : texte, num…\n\n\n\n5.2 Relations entre les tables\n\nClé primaire (PK) pour identifier chaque enregistrement dans une table\n\nde manière unique\nsans ambiguïté\n\nClé étrangère (FK) pour créer des liens avec d’autres tables\n\nattribut d’une table A\ncorrespond à la clé primaire d’une table B\n\n\n\n\n5.3 Exemple\nComment relier ces 2 tables ?\n\nune joueuse joue pour un seul club\nUn club peut avoir plusieurs joueuses\n\n\n\n\n\n\nclassDiagram\n    class Joueuse {\n        id_joueuse PK\n        nom\n        prenom\n        elo\n    }\n    \n    class Club {\n        id_club PK\n        nom\n        ville\n    }\n\n\n\n\n\n\n\n\njoueuse\n\n\nid_joueuse\nnom\nprenom\nelo\n\n\n\n\n1\nGuichard\nPauline\n2357\n\n\n2\nDaulyte-Cornette\nDeimante\n2371\n\n\n3\nNavrotescu\nAndreea\n2338\n\n\n4\nSebag\nMarie\n2448\n\n\n5\nMillet\nSophie\n2366\n\n\n6\nSkrichempko\nAlmira\n2361\n\n\n\n\n\nclub\n\n\n\n\n\n\n\nid_club\nnom\nville\n\n\n\n\n1\nC’Chartres Echecs\nChartres\n\n\n2\nBischwiller\nBischwiller\n\n\n3\nAsnieres - le Grand Echiquier\nAsnieres\n\n\n4\nTours des Hauts-De-France\nSaint-Quentin\n\n\n\n\n\n5.4 Clé étrangère\nEn ajoutant une clé étrangère.\n\n\n\n\n\nclassDiagram\n    class joueuse {\n        id_joueuse PK\n        nom\n        prenom\n        elo\n        id_club FK\n    }\n    \n    class Club {\n        id_club PK\n        nom\n        ville\n    }\n\n\n\n\n\n\n\n\njoueuse\n\n\n\n\n\n\n\n\n\nid_joueuse\nnom\nprenom\nelo\nid_club\n\n\n\n\n1\nGuichard\nPauline\n2357\n3\n\n\n2\nDaulyte\nDeimante\n2371\n1\n\n\n3\nNavrotescu\nAndreea\n2338\n2\n\n\n4\nSebag\nMarie\n2448\n2\n\n\n5\nMillet\nSophie\n2366\n3\n\n\n6\nSkrichempko\nAlmira\n2361\n2\n\n\n\n\n\n5.5 Clé primaire\n\nAttribut (ou ensemble d’attributs)\nUnique\nNon nulle\nImmuable\n\n\n\n\n\n\n\nTip\n\n\n\nSauf mention contraire, nous utiliserons une clé primaire “technique” : séquence.\n\n\n\nImmuable :\n\nidéalement stable, elle ne change pas au cours du temps\nPour maintenir l’intégrité des liens avec d’autres tables\n\nRemarque : pas obligatoire d’avoir une clé primaire\n\n\n\n5.6 Question\nSi une joueuse peut adhérer à plusieurs clubs ? 😕\n\nPar exemple si notre bdd contient aussi les clubs belges, allemands, espagnols…\n\n\n\n5.7 Table d’association\nCréation d’une table d’association : adhesion 😅\n\n\n\n\n\nclassDiagram\n    class Adhesion {\n        id_joueuse FK\n        id_club FK\n    }\n\n\n\n\n\n\n\n\nadhesion\n\n\nid_club\nid_joueuse\n\n\n\n\n1\n2\n\n\n2\n3\n\n\n2\n4\n\n\n2\n6\n\n\n3\n1\n\n\n3\n5\n\n\n4\n1\n\n\n4\n2\n\n\n\n\nClé primaire ?\n\nid_adhesion\n(id_club, id_joueuse)"
-  },
-  {
-    "objectID": "doc/cours/bases-de-donnees.html#associations",
-    "href": "doc/cours/bases-de-donnees.html#associations",
-    "title": "Bases de Données",
-    "section": "6 Associations",
-    "text": "6 Associations\nIl existe plusieurs types d’associations entre tables.\n\n6.1 Association 1:1\nUne entité dans la table A est associée à une seule entité dans la table B.\nExemple :\n\nUne personne a une seule carte vitale\nUne carte vitale appartient à une seule personne\n\n\non aurait pu tout mettre dans la même table\n\n\n\n6.2 Association 1:n\nUne entité dans la table A peut-être associée à plusieurs entités dans la table B.\nExemple :\n\nUn club est composé de plusieurs joueuses\nUne joueuse adhère à un seul club\n\n\n\n6.3 Association n:n\nUne entité dans la table A peut-être associée à plusieurs entités dans la table B.\nEt inversement, une entité dans la table B peut-être associée à plusieurs entités dans la table A.\nExemple :\n\nune joueuse participe à plusieurs tournois\nUn tournoi regroupe plusieurs joueuses\n\n\n\n6.4 Association récursive\nUne table peut avoir des relations avec elle-même\nIci la table contient une clé étrangère qui référence sa propre clé primaire.\nExemple :\n\nUn employé a un supérieur"
-  },
-  {
-    "objectID": "doc/cours/bases-de-donnees.html#sgbd",
-    "href": "doc/cours/bases-de-donnees.html#sgbd",
-    "title": "Bases de Données",
-    "section": "7 SGBD",
-    "text": "7 SGBD\n\n\n\n\n\n\nDéfinition\n\n\n\nUn Système de Gestion de Bases de Données est un logiciel qui permet de créer, gérer et manipuler des bases de données.\nIl fournit des outils pour stocker, récupérer, modifier et sécuriser les données.\n\n\n\nPostgreSQL\nMySQL\nOracle Database\nSQLite\nMariaDB\n\n\n7.1 PostgreSQL\n\nOpen Source, Libre\nCommunauté active\nStable et performant\nBasé sur le modèle client-serveur\nExtension PostGIS (Données géographiques)\n\n\nutilisé à l’INSEE\nclient-serveur classique :\n\nle composant serveur central « postmaster » gère tous les fichiers de bdd\nainsi que toutes les connexions établies pour la communication avec le serveur de bdd.\n\nLes utilisateurs n’ont besoin que d’un programme client approprié pour établir la connexion\n\n\n\n7.2 Outil de Gestion et Administration\nIl est nécessaire d’avoir un outil pour gérer et administrer une base de données.\n\n\n\n\n\n\nTip\n\n\n\n\nPostgreSQL : Installé sur un serveur, sert de moteur de base de données\npgAdmin : Interface graphique pour interagir avec PostgreSQL\n\n\n\n\npgAdmin\nDBeaver\n\n\n\n7.3 Kesako\n\nBase de données : endroit où sont stockées les informations\nSGBD : logiciel qui permet de créer, gérer et manipuler les bases de données\nOutil de gestion du SGBD : application graphique qui facilite l’interaction avec un SGBD\n\n\n\nBDD : bibliothèque\nSGBD : bibliothécaire\nOutil : tableau de bord interactif pour les bibliothécaires\n\n\n\n\n7.4 Exemple\nSite de vente de légumes\n\nClient   - id_client   - nom   - prenom   - mail\nProduit   - id_produit   - nom   - description   - prix\nCommande   - id_commande   - id_client\nLigneCommande   - id_ligne_commande   - id_commande   - id_produit   - quantite"
+    "objectID": "doc/cours/agregations-slides.html#group-by",
+    "href": "doc/cours/agregations-slides.html#group-by",
+    "title": "Agrégations",
+    "section": "GROUp BY",
+    "text": "GROUp BY\n\n\n\nHome — Agrégations"
   },
   {
     "objectID": "doc/cours/sql-intro-slides.html#structured-query-language",

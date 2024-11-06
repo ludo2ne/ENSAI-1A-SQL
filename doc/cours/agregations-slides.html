@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Ludovic Deneuville">
-  <title>Base de données – Algèbre Relationnelle</title>
+  <title>Base de données – Agrégations</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -29,71 +29,6 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-    /* CSS for syntax highlighting */
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-      }
-    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-    div.sourceCode
-      { color: #f8f8f2;  }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span { color: #f8f8f2; } /* Normal */
-    code span.al { color: #f07178; background-color: #2a0f15; font-weight: bold; } /* Alert */
-    code span.an { color: #d4d0ab; } /* Annotation */
-    code span.at { color: #00e0e0; } /* Attribute */
-    code span.bn { color: #d4d0ab; } /* BaseN */
-    code span.bu { color: #abe338; } /* BuiltIn */
-    code span.cf { color: #ffa07a; font-weight: bold; } /* ControlFlow */
-    code span.ch { color: #abe338; } /* Char */
-    code span.cn { color: #ffd700; } /* Constant */
-    code span.co { color: #f8f8f2; font-style: italic; } /* Comment */
-    code span.cv { color: #ffd700; } /* CommentVar */
-    code span.do { color: #f8f8f2; } /* Documentation */
-    code span.dt { color: #ffa07a; } /* DataType */
-    code span.dv { color: #d4d0ab; } /* DecVal */
-    code span.er { color: #f07178; text-decoration: underline; } /* Error */
-    code span.ex { color: #00e0e0; font-weight: bold; } /* Extension */
-    code span.fl { color: #d4d0ab; } /* Float */
-    code span.fu { color: #ffa07a; } /* Function */
-    code span.im { color: #abe338; } /* Import */
-    code span.in { color: #d4d0ab; } /* Information */
-    code span.kw { color: #ffa07a; font-weight: bold; } /* Keyword */
-    code span.op { color: #ffa07a; } /* Operator */
-    code span.ot { color: #00e0e0; } /* Other */
-    code span.pp { color: #dcc6e0; } /* Preprocessor */
-    code span.re { color: #00e0e0; background-color: #f8f8f2; } /* RegionMarker */
-    code span.sc { color: #abe338; } /* SpecialChar */
-    code span.ss { color: #abe338; } /* SpecialString */
-    code span.st { color: #abe338; } /* String */
-    code span.va { color: #00e0e0; } /* Variable */
-    code span.vs { color: #abe338; } /* VerbatimString */
-    code span.wa { color: #dcc6e0; } /* Warning */
   </style>
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto.css">
   <link rel="stylesheet" href="../../styles-reveal.css">
@@ -392,7 +327,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Algèbre Relationnelle</h1>
+  <h1 class="title">Agrégations</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -403,180 +338,15 @@ Ludovic Deneuville
 </div>
 
 </section>
-<section id="algèbre-relationnelle" class="title-slide slide level2 center">
-<h2>Algèbre Relationnelle</h2>
-<ul>
-<li><a href="https://www.seas.upenn.edu/~zives/03f/cis550/codd.pdf" target="_blank">A Relational Model of Data for Large Shared Data Banks</a>, Edgar F. Codd, 1970</li>
-<li>Objectif : Modéliser une base de données ainsi que ses opérations</li>
-<li>Dans un SGBD relationel, tout est question de relation</li>
-</ul>
-</section>
-
-<section>
-<section id="principaux-opérateurs" class="title-slide slide level2 center">
-<h2>Principaux opérateurs</h2>
-<div class="small-table">
-<table class="caption-top">
-<colgroup>
-<col style="width: 32%">
-<col style="width: 67%">
-</colgroup>
-<thead>
-<tr class="header">
-<th><strong>Opérateur</strong></th>
-<th><strong>Description</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>σ (Sélection)</strong></td>
-<td>Filtrer les lignes selon une condition</td>
-</tr>
-<tr class="even">
-<td><strong>π (Projection)</strong></td>
-<td>Sélectionner des colonnes spécifiques</td>
-</tr>
-<tr class="odd">
-<td><strong>U (Union)</strong></td>
-<td>Combiner les lignes de deux relations</td>
-</tr>
-<tr class="even">
-<td><strong>− (Différence)</strong></td>
-<td>Retourner les lignes présentes dans une relation mais pas dans l’autre</td>
-</tr>
-<tr class="odd">
-<td><strong>∩ (Intersection)</strong></td>
-<td>Trouver les lignes communes aux deux relations</td>
-</tr>
-<tr class="even">
-<td><strong>⨝ (Jointure)</strong></td>
-<td>Combiner deux relations basées sur une condition</td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-<section id="sélection" class="slide level3">
-<h3>Sélection</h3>
-<ul>
-<li>Permet de filtrer les lignes d’une table selon une condition</li>
-</ul>
-<div class="fragment">
-<ul>
-<li><span class="emoji" data-emoji="warning">⚠️</span> Mot clé SQL associé : WHERE</li>
-</ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
-<span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
-<span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> elo <span class="op">&lt;</span> <span class="dv">2400</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="projection" class="slide level3">
-<h3>Projection</h3>
-<ul>
-<li>Permet de sélectionner certaines colonnes d’une table.</li>
-<li>Mot clé SQL associé : SELECT</li>
-</ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
-<span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a>       prenom</span>
-<span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="union" class="slide level3">
-<h3>Union</h3>
-<ul>
-<li>Combine les lignes de deux tables ayant le même nombre de colonnes et des types compatibles</li>
-</ul>
-<div class="sourceCode" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
-<span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a>       prenom</span>
-<span id="cb3-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
-<span id="cb3-4"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a aria-hidden="true" tabindex="-1"></a><span class="kw">UNION</span></span>
-<span id="cb3-6"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
-<span id="cb3-8"><a aria-hidden="true" tabindex="-1"></a>       prenom</span>
-<span id="cb3-9"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueur;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="callout callout-tip callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Tip</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li><strong>UNION</strong> : Combine les résultats des requêtes et supprime les doublons</li>
-<li><strong>UNION ALL</strong> : Combine les résultats des requêtes et garde tous les doublons</li>
-</ul>
-</div>
-</div>
-</div>
-</section>
-<section id="différence" class="slide level3">
-<h3>Différence</h3>
-<ul>
-<li>Lignes qui se trouvent dans la première relation mais pas dans la seconde</li>
-</ul>
-<div class="sourceCode" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">-- Joueuses évoluant dans un club français et pas dans un club belge</span></span>
-<span id="cb4-2"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
-<span id="cb4-3"><a aria-hidden="true" tabindex="-1"></a>       prenom</span>
-<span id="cb4-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse_club_fr</span>
-<span id="cb4-5"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-6"><a aria-hidden="true" tabindex="-1"></a><span class="kw">EXCEPT</span></span>
-<span id="cb4-7"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-8"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
-<span id="cb4-9"><a aria-hidden="true" tabindex="-1"></a>       prenom</span>
-<span id="cb4-10"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse_club_be;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<aside class="notes">
-<p>Imaginons que vous ayez créé 2 tables :</p>
-<ul>
-<li>joueuses évoluant dans un club français</li>
-<li>joueuses évoluant dans un club belge</li>
-</ul>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="intersection" class="slide level3">
-<h3>Intersection</h3>
-<ul>
-<li>Lignes communes aux deux tables</li>
-</ul>
-<div class="sourceCode" id="cb5"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">-- Joueuses évoluant dans un club francais et dans un club belge</span></span>
-<span id="cb5-2"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
-<span id="cb5-3"><a aria-hidden="true" tabindex="-1"></a>       prenom</span>
-<span id="cb5-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse_club_fr</span>
-<span id="cb5-5"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-6"><a aria-hidden="true" tabindex="-1"></a><span class="kw">INTERSECT</span></span>
-<span id="cb5-7"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-8"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
-<span id="cb5-9"><a aria-hidden="true" tabindex="-1"></a>       prenom</span>
-<span id="cb5-10"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse_club_be;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="jointure" class="slide level3">
-<h3>Jointure</h3>
-<ul>
-<li>Permet de combiner deux tables basées sur une correspondance entre les colonnes</li>
-</ul>
-<div class="sourceCode" id="cb6"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> j.nom,</span>
-<span id="cb6-2"><a aria-hidden="true" tabindex="-1"></a>       j.prenom,</span>
-<span id="cb6-3"><a aria-hidden="true" tabindex="-1"></a>       c.nom <span class="kw">AS</span> club</span>
-<span id="cb6-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse j</span>
-<span id="cb6-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> echecs.club c <span class="kw">USING</span> (id_club);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="group-by" class="title-slide slide level2 center">
+<h2>GROUp BY</h2>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
-<p><a href="../../index.html">Home</a> — <a href="algebre.html">Algèbre Relationnelle</a></p>
+<p><a href="../../index.html">Home</a> — <a href="agregations.html">Agrégations</a></p>
 </div>
 </div>
-</section></section>
+</section>
     </div>
   </div>
 
