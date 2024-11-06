@@ -571,7 +571,7 @@ Ludovic Deneuville
 </section>
 <section id="schéma" class="slide level3">
 <h3>Schéma</h3>
-<p>Utile lorsque le nombre de table devient grand.</p>
+<p>Utile lorsque le nombre de tables devient grand.</p>
 <ul>
 <li>Organisation des objets, clarté</li>
 <li>Gestion des permissions</li>
@@ -607,9 +607,26 @@ Ludovic Deneuville
 <p><br></p>
 <p>Déplacer la table <em>joueuse</em> dans le schéma <em>echecs</em> :</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">ALTER</span> <span class="kw">TABLE</span> joueuse <span class="kw">SET</span> <span class="kw">SCHEMA</span> echecs;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="fragment">
+<div title="Schéma par défaut">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Schéma par défaut</strong></p>
+</div>
+<div class="callout-content">
+<p>Par défaut les objets sont créés dans le schéma <code>public</code>.</p>
+<p>Ça devient rapidement un joyeux bazar si on ne range pas ses tables.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
 <aside class="notes">
 <p>C’est comme créer un fichier dans un dossier.</p>
-<p>Par défaut les objets sont créés dans le schéma <code>public</code>.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -675,6 +692,7 @@ Ludovic Deneuville
 <span id="cb10-2"><a aria-hidden="true" tabindex="-1"></a><span class="kw">ADD</span> <span class="kw">CONSTRAINT</span> fk_id_club</span>
 <span id="cb10-3"><a aria-hidden="true" tabindex="-1"></a><span class="kw">FOREIGN</span> <span class="kw">KEY</span> (id_club)</span>
 <span id="cb10-4"><a aria-hidden="true" tabindex="-1"></a><span class="kw">REFERENCES</span> club(id_club);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="fragment">
 <div title="Clé étrangère">
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
@@ -694,6 +712,7 @@ Ludovic Deneuville
 </div>
 </div>
 </div>
+</div>
 </section>
 <section id="autres-possibilités" class="slide level3">
 <h3>Autres possibilités</h3>
@@ -706,6 +725,7 @@ Ludovic Deneuville
 <section id="supprimer-une-table" class="slide level3">
 <h3>Supprimer une table</h3>
 <div class="sourceCode" id="cb11"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb11-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">DROP</span> <span class="kw">TABLE</span> joueuse;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="fragment">
 <div class="callout callout-warning callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -721,6 +741,7 @@ Ludovic Deneuville
 <li>la table</li>
 <li>toutes les données qu’elle contient</li>
 </ul>
+</div>
 </div>
 </div>
 </div>
@@ -870,6 +891,21 @@ Ludovic Deneuville
 </table>
 </div>
 </div>
+<aside class="notes">
+<ul>
+<li><code>*</code> : toutes les colonnes</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="colonnes-à-afficher" class="slide level3">
 <h3>Colonnes à afficher</h3>
@@ -1059,16 +1095,18 @@ Ludovic Deneuville
 <li><code>%</code> : représente entre 0 et une infinité de caractères</li>
 <li><code>_</code> : représente exactement 1 caractère</li>
 </ul>
+<div title="Attention à la Casse">
 <div class="callout callout-caution callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Caution</strong></p>
+<p><strong>Attention à la Casse</strong></p>
 </div>
 <div class="callout-content">
-<p>Attention aux MAJUSCULES ≠ minuscules</p>
+<p>MAJUSCULES ≠ minuscules</p>
+</div>
 </div>
 </div>
 </div>
@@ -1350,7 +1388,7 @@ Ludovic Deneuville
 <div class="sourceCode" id="cb29"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb29-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">DELETE</span> <span class="kw">FROM</span> echecs.joueuse</span>
 <span id="cb29-2"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> id_joueuse <span class="op">=</span> <span class="dv">1</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Vider la table :</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb30-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">DELETE</span> <span class="kw">FROM</span> echecs.joueuse</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb30-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">DELETE</span> <span class="kw">FROM</span> echecs.joueuse;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 
 <section id="validation-des-opérations" class="title-slide slide level2 center">
@@ -1380,7 +1418,19 @@ Ludovic Deneuville
 </div>
 </div>
 </div>
-<p><span class="emoji" data-emoji="construction">🚧</span> TODO à approfondir plus tard</p>
+<aside class="notes">
+<p>Vu plus tard dans le cours</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 
 <section>
@@ -1432,7 +1482,7 @@ Ludovic Deneuville
 </section>
 <section id="tester-si-un-attribut-est-null" class="slide level3">
 <h3>Tester si un attribut est NULL</h3>
-<p>Joueuse dont le mail n’est pas renseigné :</p>
+<p>Joueuses dont le mail n’est pas renseigné :</p>
 <div class="sourceCode" id="cb35"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb35-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
 <span id="cb35-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
 <span id="cb35-3"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> mail <span class="kw">IS</span> <span class="kw">NULL</span>; </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>

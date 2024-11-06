@@ -433,7 +433,7 @@ Contraintes
 </section>
 <section id="schéma" class="level3">
 <h3 class="anchored" data-anchor-id="schéma">Schéma</h3>
-<p>Utile lorsque le nombre de table devient grand.</p>
+<p>Utile lorsque le nombre de tables devient grand.</p>
 <ul>
 <li>Organisation des objets, clarté</li>
 <li>Gestion des permissions</li>
@@ -458,9 +458,24 @@ Contraintes
 <p><br></p>
 <p>Déplacer la table <em>joueuse</em> dans le schéma <em>echecs</em> :</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ALTER</span> <span class="kw">TABLE</span> joueuse <span class="kw">SET</span> <span class="kw">SCHEMA</span> echecs;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="fragment">
+<div class="callout callout-style-default callout-note callout-titled" title="Schéma par défaut">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Schéma par défaut
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Par défaut les objets sont créés dans le schéma <code>public</code>.</p>
+<p>Ça devient rapidement un joyeux bazar si on ne range pas ses tables.</p>
+</div>
+</div>
+</div>
 <div class="notes">
 <p>C’est comme créer un fichier dans un dossier.</p>
-<p>Par défaut les objets sont créés dans le schéma <code>public</code>.</p>
 </div>
 </section>
 </section>
@@ -507,6 +522,7 @@ Contraintes
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="kw">ADD</span> <span class="kw">CONSTRAINT</span> fk_id_club</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="kw">FOREIGN</span> <span class="kw">KEY</span> (id_club)</span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="kw">REFERENCES</span> club(id_club);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="fragment">
 <div class="callout callout-style-default callout-tip callout-titled" title="Clé étrangère">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -524,6 +540,7 @@ Clé étrangère
 </ul>
 </div>
 </div>
+</div>
 </section>
 <section id="autres-possibilités" class="level3">
 <h3 class="anchored" data-anchor-id="autres-possibilités">Autres possibilités</h3>
@@ -536,6 +553,7 @@ Clé étrangère
 <section id="supprimer-une-table" class="level3">
 <h3 class="anchored" data-anchor-id="supprimer-une-table">Supprimer une table</h3>
 <div class="sourceCode" id="cb11"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">DROP</span> <span class="kw">TABLE</span> joueuse;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="fragment">
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -552,6 +570,7 @@ Warning
 <li>la table</li>
 <li>toutes les données qu’elle contient</li>
 </ul>
+</div>
 </div>
 </div>
 <div class="sourceCode" id="cb12"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">DROP</span> <span class="kw">TABLE</span> <span class="cf">IF</span> <span class="kw">EXISTS</span> joueuse;      <span class="co">-- utile pour les scripts SQL</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -597,7 +616,7 @@ Warning
 <p>La colonne <em>id_club</em> est une séquence gérée par le SGBD.</p>
 <p>Les valeurs sont générées automatiquement à l’insertion et la séquence est incrémentée (1, 2, 3…).</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Séquences">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -606,7 +625,7 @@ Séquences
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Il est possible de créer et gérer ses propres séquences :</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">SEQUENCE</span> nom_sequence <span class="kw">START</span> <span class="dv">1</span> <span class="kw">INCREMENT</span> <span class="kw">BY</span> <span class="dv">1</span>;</span>
@@ -679,6 +698,11 @@ Séquences
 </tbody>
 </table>
 </div>
+</div>
+<div class="notes">
+<ul>
+<li><code>*</code> : toutes les colonnes</li>
+</ul>
 </div>
 <section id="colonnes-à-afficher" class="level3">
 <h3 class="anchored" data-anchor-id="colonnes-à-afficher">Colonnes à afficher</h3>
@@ -856,17 +880,17 @@ Séquences
 <li><code>%</code> : représente entre 0 et une infinité de caractères</li>
 <li><code>_</code> : représente exactement 1 caractère</li>
 </ul>
-<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout callout-style-default callout-caution callout-titled" title="Attention à la Casse">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Caution
+Attention à la Casse
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Attention aux MAJUSCULES ≠ minuscules</p>
+<p>MAJUSCULES ≠ minuscules</p>
 </div>
 </div>
 </section>
@@ -1127,7 +1151,7 @@ Warning
 <div class="sourceCode" id="cb29"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="kw">DELETE</span> <span class="kw">FROM</span> echecs.joueuse</span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> id_joueuse <span class="op">=</span> <span class="dv">1</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Vider la table :</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="kw">DELETE</span> <span class="kw">FROM</span> echecs.joueuse</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="kw">DELETE</span> <span class="kw">FROM</span> echecs.joueuse;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="validation-des-opérations" class="level2" data-number="7">
 <h2 data-number="7" class="anchored" data-anchor-id="validation-des-opérations"><span class="header-section-number">7</span> Validation des opérations</h2>
@@ -1154,7 +1178,9 @@ Auto-commit
 </div>
 </div>
 </div>
-<p><span class="emoji" data-emoji="construction">🚧</span> TODO à approfondir plus tard</p>
+<div class="notes">
+<p>Vu plus tard dans le cours</p>
+</div>
 </section>
 <section id="dates-et-heures" class="level2" data-number="8">
 <h2 data-number="8" class="anchored" data-anchor-id="dates-et-heures"><span class="header-section-number">8</span> Dates et Heures</h2>
@@ -1200,7 +1226,7 @@ Auto-commit
 <h2 data-number="9" class="anchored" data-anchor-id="valeurs-nulles"><span class="header-section-number">9</span> Valeurs nulles</h2>
 <section id="tester-si-un-attribut-est-null" class="level3">
 <h3 class="anchored" data-anchor-id="tester-si-un-attribut-est-null">Tester si un attribut est NULL</h3>
-<p>Joueuse dont le mail n’est pas renseigné :</p>
+<p>Joueuses dont le mail n’est pas renseigné :</p>
 <div class="sourceCode" id="cb35"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> mail <span class="kw">IS</span> <span class="kw">NULL</span>; </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>

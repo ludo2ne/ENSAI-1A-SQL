@@ -223,12 +223,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#somme" id="toc-somme" class="nav-link" data-scroll-target="#somme"><span class="header-section-number">4</span> Somme</a></li>
   <li><a href="#stats-descriptives" id="toc-stats-descriptives" class="nav-link" data-scroll-target="#stats-descriptives"><span class="header-section-number">5</span> Stats descriptives</a>
   <ul class="collapse">
-  <li><a href="#sous-requête" id="toc-sous-requête" class="nav-link" data-scroll-target="#sous-requête"><span class="header-section-number">5.1</span> Sous-requête</a></li>
+  <li><a href="#sous-requête" id="toc-sous-requête" class="nav-link" data-scroll-target="#sous-requête">Sous-requête</a></li>
   </ul></li>
   <li><a href="#regroupement" id="toc-regroupement" class="nav-link" data-scroll-target="#regroupement"><span class="header-section-number">6</span> Regroupement</a>
   <ul class="collapse">
-  <li><a href="#colonnes-du-group-by" id="toc-colonnes-du-group-by" class="nav-link" data-scroll-target="#colonnes-du-group-by"><span class="header-section-number">6.1</span> Colonnes du GROUP BY</a></li>
-  <li><a href="#filtre-suite-au-group-by" id="toc-filtre-suite-au-group-by" class="nav-link" data-scroll-target="#filtre-suite-au-group-by"><span class="header-section-number">6.2</span> Filtre suite au GROUP BY</a></li>
+  <li><a href="#colonnes-du-group-by" id="toc-colonnes-du-group-by" class="nav-link" data-scroll-target="#colonnes-du-group-by">Colonnes du GROUP BY</a></li>
+  <li><a href="#filtre-suite-au-group-by" id="toc-filtre-suite-au-group-by" class="nav-link" data-scroll-target="#filtre-suite-au-group-by">Filtre suite au GROUP BY</a></li>
   </ul></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="agregations-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
@@ -448,8 +448,8 @@ Tip
 <div class="fragment">
 <p>Comment afficher la joueuse avec le plus grand elo ? <span class="emoji" data-emoji="dizzy_face">😵</span></p>
 </div>
-<section id="sous-requête" class="level3" data-number="5.1">
-<h3 data-number="5.1" class="anchored" data-anchor-id="sous-requête"><span class="header-section-number">5.1</span> Sous-requête</h3>
+<section id="sous-requête" class="level3">
+<h3 class="anchored" data-anchor-id="sous-requête">Sous-requête</h3>
 <p>En utilisant une <strong>sous-requête</strong> :</p>
 <ul>
 <li><code>SELECT MAX(elo) FROM joueuse</code> <span class="emoji" data-emoji="arrow_right">➡️</span> renvoie un nombre</li>
@@ -498,8 +498,8 @@ Tip
 <div class="notes">
 <p>Vous pouvez utiliser ROUND() pour arrondir.</p>
 </div>
-<section id="colonnes-du-group-by" class="level3" data-number="6.1">
-<h3 data-number="6.1" class="anchored" data-anchor-id="colonnes-du-group-by"><span class="header-section-number">6.1</span> Colonnes du GROUP BY</h3>
+<section id="colonnes-du-group-by" class="level3">
+<h3 class="anchored" data-anchor-id="colonnes-du-group-by">Colonnes du GROUP BY</h3>
 <p>Vous pouvez grouper en utilisant plusieurs colonnes.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -519,8 +519,8 @@ Important
 <p>je dis bien colonnes et pas fonctions d’aggrégation</p>
 </div>
 </section>
-<section id="filtre-suite-au-group-by" class="level3" data-number="6.2">
-<h3 data-number="6.2" class="anchored" data-anchor-id="filtre-suite-au-group-by"><span class="header-section-number">6.2</span> Filtre suite au GROUP BY</h3>
+<section id="filtre-suite-au-group-by" class="level3">
+<h3 class="anchored" data-anchor-id="filtre-suite-au-group-by">Filtre suite au GROUP BY</h3>
 <p>Comment faire pour afficher uniquement les clubs où la moyenne élo est inférieure à 2400 ?</p>
 <div class="fragment">
 <div class="sourceCode" id="cb8"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> club,</span>

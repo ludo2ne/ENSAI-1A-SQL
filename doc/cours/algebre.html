@@ -220,12 +220,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#algèbre-relationnelle" id="toc-algèbre-relationnelle" class="nav-link active" data-scroll-target="#algèbre-relationnelle"><span class="header-section-number">1</span> Algèbre Relationnelle</a></li>
   <li><a href="#principaux-opérateurs" id="toc-principaux-opérateurs" class="nav-link" data-scroll-target="#principaux-opérateurs"><span class="header-section-number">2</span> Principaux opérateurs</a>
   <ul class="collapse">
-  <li><a href="#sélection" id="toc-sélection" class="nav-link" data-scroll-target="#sélection"><span class="header-section-number">2.1</span> Sélection</a></li>
-  <li><a href="#projection" id="toc-projection" class="nav-link" data-scroll-target="#projection"><span class="header-section-number">2.2</span> Projection</a></li>
-  <li><a href="#union" id="toc-union" class="nav-link" data-scroll-target="#union"><span class="header-section-number">2.3</span> Union</a></li>
-  <li><a href="#différence" id="toc-différence" class="nav-link" data-scroll-target="#différence"><span class="header-section-number">2.4</span> Différence</a></li>
-  <li><a href="#intersection" id="toc-intersection" class="nav-link" data-scroll-target="#intersection"><span class="header-section-number">2.5</span> Intersection</a></li>
-  <li><a href="#jointure" id="toc-jointure" class="nav-link" data-scroll-target="#jointure"><span class="header-section-number">2.6</span> Jointure</a></li>
+  <li><a href="#sélection" id="toc-sélection" class="nav-link" data-scroll-target="#sélection">Sélection</a></li>
+  <li><a href="#projection" id="toc-projection" class="nav-link" data-scroll-target="#projection">Projection</a></li>
+  <li><a href="#union" id="toc-union" class="nav-link" data-scroll-target="#union">Union</a></li>
+  <li><a href="#différence" id="toc-différence" class="nav-link" data-scroll-target="#différence">Différence</a></li>
+  <li><a href="#intersection" id="toc-intersection" class="nav-link" data-scroll-target="#intersection">Intersection</a></li>
+  <li><a href="#jointure" id="toc-jointure" class="nav-link" data-scroll-target="#jointure">Jointure</a></li>
   </ul></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="algebre-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
@@ -317,8 +317,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tbody>
 </table>
 </div>
-<section id="sélection" class="level3" data-number="2.1">
-<h3 data-number="2.1" class="anchored" data-anchor-id="sélection"><span class="header-section-number">2.1</span> Sélection</h3>
+<section id="sélection" class="level3">
+<h3 class="anchored" data-anchor-id="sélection">Sélection</h3>
 <ul>
 <li>Permet de filtrer les lignes d’une table selon une condition</li>
 </ul>
@@ -331,8 +331,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> elo <span class="op">&lt;</span> <span class="dv">2400</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
-<section id="projection" class="level3" data-number="2.2">
-<h3 data-number="2.2" class="anchored" data-anchor-id="projection"><span class="header-section-number">2.2</span> Projection</h3>
+<section id="projection" class="level3">
+<h3 class="anchored" data-anchor-id="projection">Projection</h3>
 <ul>
 <li>Permet de sélectionner certaines colonnes d’une table.</li>
 <li>Mot clé SQL associé : SELECT</li>
@@ -341,8 +341,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>       prenom</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="union" class="level3" data-number="2.3">
-<h3 data-number="2.3" class="anchored" data-anchor-id="union"><span class="header-section-number">2.3</span> Union</h3>
+<section id="union" class="level3">
+<h3 class="anchored" data-anchor-id="union">Union</h3>
 <ul>
 <li>Combine les lignes de deux tables ayant le même nombre de colonnes et des types compatibles</li>
 </ul>
@@ -372,8 +372,8 @@ Tip
 </div>
 </div>
 </section>
-<section id="différence" class="level3" data-number="2.4">
-<h3 data-number="2.4" class="anchored" data-anchor-id="différence"><span class="header-section-number">2.4</span> Différence</h3>
+<section id="différence" class="level3">
+<h3 class="anchored" data-anchor-id="différence">Différence</h3>
 <ul>
 <li>Lignes qui se trouvent dans la première relation mais pas dans la seconde</li>
 </ul>
@@ -395,8 +395,8 @@ Tip
 </ul>
 </div>
 </section>
-<section id="intersection" class="level3" data-number="2.5">
-<h3 data-number="2.5" class="anchored" data-anchor-id="intersection"><span class="header-section-number">2.5</span> Intersection</h3>
+<section id="intersection" class="level3">
+<h3 class="anchored" data-anchor-id="intersection">Intersection</h3>
 <ul>
 <li>Lignes communes aux deux tables</li>
 </ul>
@@ -411,8 +411,8 @@ Tip
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>       prenom</span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse_club_be;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="jointure" class="level3" data-number="2.6">
-<h3 data-number="2.6" class="anchored" data-anchor-id="jointure"><span class="header-section-number">2.6</span> Jointure</h3>
+<section id="jointure" class="level3">
+<h3 class="anchored" data-anchor-id="jointure">Jointure</h3>
 <ul>
 <li>Permet de combiner deux tables basées sur une correspondance entre les colonnes</li>
 </ul>
