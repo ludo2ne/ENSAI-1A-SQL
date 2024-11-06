@@ -298,7 +298,7 @@
     "href": "doc/cours/intro-slides.html#bibliographie",
     "title": "Bases de Données Relationnelles et SQL",
     "section": "Bibliographie",
-    "text": "Bibliographie\n\nhttps://laurent-audibert.developpez.com/Cours-BD/?page=introduction-bases-de-donnees\nhttps://upinfo.univ-cotedazur.fr/im/bases-de-donnees/\nhttps://openclassrooms.com/fr/courses/6971126-implementez-vos-bases-de-donnees-relationnelles-avec-sql/7139618-decouvrez-le-systeme-de-gestion-de-base-de-donnees-sgbd\nhttps://oseox.fr/sql/\nhttps://learnsql.fr/blog/aide-memoire-pour-les-entretiens-sql/\n\n\n\n\nHome — Introduction à SQL"
+    "text": "Bibliographie\n\nhttps://laurent-audibert.developpez.com/Cours-BD/?page=introduction-bases-de-donnees\nhttps://upinfo.univ-cotedazur.fr/im/bases-de-donnees/\nhttps://openclassrooms.com/fr/courses/6971126-implementez-vos-bases-de-donnees-relationnelles-avec-sql/7139618-decouvrez-le-systeme-de-gestion-de-base-de-donnees-sgbd\nhttps://oseox.fr/sql/\nhttps://learnsql.fr/blog/aide-memoire-pour-les-entretiens-sql/\n\n\n\ndésolé s’il y a des fautes, j’ai écrit ce cours un peu dans l’urgence\nn’hésitez pas à me les notifier (pas de point bonus)\nmoi j’ai le droit, après je serai assez intransigent si vous laissez des fautes dans vos rapports\n\n\n\n\n\nHome — Introduction à SQL"
   },
   {
     "objectID": "doc/cours/intro.html",
@@ -340,7 +340,7 @@
     "href": "doc/cours/intro.html#les-tp",
     "title": "Bases de Données Relationnelles et SQL",
     "section": "Les TP",
-    "text": "Les TP\n\n5 TP + 1 TD\nDatalab\ncloudBeaver"
+    "text": "Les TP\n\n5 TP + 1 TD\nDatalab\ncloudBeaver\n\n\nBien\n\nLire attentivement les consignes\nEssayer de résoudre par soi même\nChercher sur internet\nDemander de l’aide à ses camarades\nDemander de l’aide à l’enseignant\n\n\nça peut paraitre un peu infentilisant mais c’est nécessaire de le rappeler !!!\n\n\n\nPas bien\n\nPoster l’énoncer sur ChatGPT\nCopier / Coller la réponse sans rien comprendre\n\n\n\nJe ne dis pas qu’il ne faut jamais utiliser les LLM\nça peut servir pour débgugger\nou pour des taches sans VA\nmais pas pour apprendre et retenir"
   },
   {
     "objectID": "doc/cours/intro.html#évaluation",
@@ -354,14 +354,98 @@
     "href": "doc/cours/intro.html#bibliographie",
     "title": "Bases de Données Relationnelles et SQL",
     "section": "Bibliographie",
-    "text": "Bibliographie\n\nhttps://laurent-audibert.developpez.com/Cours-BD/?page=introduction-bases-de-donnees\nhttps://upinfo.univ-cotedazur.fr/im/bases-de-donnees/\nhttps://openclassrooms.com/fr/courses/6971126-implementez-vos-bases-de-donnees-relationnelles-avec-sql/7139618-decouvrez-le-systeme-de-gestion-de-base-de-donnees-sgbd\nhttps://oseox.fr/sql/\nhttps://learnsql.fr/blog/aide-memoire-pour-les-entretiens-sql/"
+    "text": "Bibliographie\n\nhttps://laurent-audibert.developpez.com/Cours-BD/?page=introduction-bases-de-donnees\nhttps://upinfo.univ-cotedazur.fr/im/bases-de-donnees/\nhttps://openclassrooms.com/fr/courses/6971126-implementez-vos-bases-de-donnees-relationnelles-avec-sql/7139618-decouvrez-le-systeme-de-gestion-de-base-de-donnees-sgbd\nhttps://oseox.fr/sql/\nhttps://learnsql.fr/blog/aide-memoire-pour-les-entretiens-sql/\n\n\n\ndésolé s’il y a des fautes, j’ai écrit ce cours un peu dans l’urgence\nn’hésitez pas à me les notifier (pas de point bonus)\nmoi j’ai le droit, après je serai assez intransigent si vous laissez des fautes dans vos rapports"
   },
   {
-    "objectID": "doc/cours/agregations-slides.html#group-by",
-    "href": "doc/cours/agregations-slides.html#group-by",
+    "objectID": "doc/cours/agregations-slides.html#données-utilisées",
+    "href": "doc/cours/agregations-slides.html#données-utilisées",
     "title": "Agrégations",
-    "section": "GROUp BY",
-    "text": "GROUp BY\n\n\n\nHome — Agrégations"
+    "section": "Données utilisées",
+    "text": "Données utilisées\n\n\n\n\n\n\n\n\n\n\n\nid_joueuse\nnom\nprenom\nelo\nclub\n\n\n\n\n1\nGuichard\nPauline\n2357\nAsnieres\n\n\n2\nDaulyte\nDeimante\n2371\nChartres\n\n\n3\nNavrotescu\nAndreea\n2338\nAsnieres\n\n\n4\nSebag\nMarie\n2448\nBischwiller\n\n\n5\nMillet\nSophie\n2366\nAsnieres\n\n\n6\nSkrichempko\nAlmira\n2361\nBischwiller"
+  },
+  {
+    "objectID": "doc/cours/agregations-slides.html#questions",
+    "href": "doc/cours/agregations-slides.html#questions",
+    "title": "Agrégations",
+    "section": "Questions",
+    "text": "Questions\nQuelques questions que l’on peut se poser :\n\n\nQuel est le id_joueuse maximum ?\nQuel est le nombre de joueuses ?\nQuelle est la moyenne des elo par club ?"
+  },
+  {
+    "objectID": "doc/cours/agregations-slides.html#compter-les-lignes",
+    "href": "doc/cours/agregations-slides.html#compter-les-lignes",
+    "title": "Agrégations",
+    "section": "Compter les lignes",
+    "text": "Compter les lignes\nSELECT COUNT(*)\n  FROM echecs.joueuse;\n\n\n\n\ncount\n\n\n\n\n6\n\n\n\n\n\nSELECT COUNT(*)\n  FROM echecs.joueuse\n WHERE elo &lt; 2400;\n\n\n\n\ncount\n\n\n\n\n5"
+  },
+  {
+    "objectID": "doc/cours/agregations-slides.html#somme",
+    "href": "doc/cours/agregations-slides.html#somme",
+    "title": "Agrégations",
+    "section": "Somme",
+    "text": "Somme\nSELECT SUM(elo)\n  FROM echecs.joueuse;\n\n\n\n\nsum_elo\n\n\n\n\n14223\n\n\n\n\n\nSELECT SUM(elo) / COUNT(elo)\n  FROM echecs.joueuse;"
+  },
+  {
+    "objectID": "doc/cours/agregations-slides.html#stats-descriptives",
+    "href": "doc/cours/agregations-slides.html#stats-descriptives",
+    "title": "Agrégations",
+    "section": "Stats descriptives",
+    "text": "Stats descriptives\nSELECT MAX(elo),\n       MIN(elo),\n       AVG(elo)\n  FROM echecs.joueuse;\n\n\n\n\nmax_elo\nmin_elo\navg_elo\n\n\n\n\n2448\n2338\n2373.5\n\n\n\n\n\n\n\n\n\n\nTip\n\n\nVous pouvez également calculer : VARIANCE, STDDEV.\n\n\n\n\nComment afficher la joueuse avec le plus grand elo ? 😵"
+  },
+  {
+    "objectID": "doc/cours/agregations-slides.html#regroupement",
+    "href": "doc/cours/agregations-slides.html#regroupement",
+    "title": "Agrégations",
+    "section": "Regroupement",
+    "text": "Regroupement\nComment obtenir la moyenne elo par club ?\n\nSELECT club,\n       AVG(elo)\n  FROM echecs.joueuse\n GROUP BY club;\n\n\n\n\nclub\navg_elo\n\n\n\n\nAsnieres\n2372.4\n\n\nChartres\n2371.0\n\n\nBischwiller\n2404.5\n\n\n\n\n\n\nVous pouvez utiliser ROUND() pour arrondir."
+  },
+  {
+    "objectID": "doc/cours/agregations.html",
+    "href": "doc/cours/agregations.html",
+    "title": "Agrégations",
+    "section": "",
+    "text": "id_joueuse\nnom\nprenom\nelo\nclub\n\n\n\n\n1\nGuichard\nPauline\n2357\nAsnieres\n\n\n2\nDaulyte\nDeimante\n2371\nChartres\n\n\n3\nNavrotescu\nAndreea\n2338\nAsnieres\n\n\n4\nSebag\nMarie\n2448\nBischwiller\n\n\n5\nMillet\nSophie\n2366\nAsnieres\n\n\n6\nSkrichempko\nAlmira\n2361\nBischwiller"
+  },
+  {
+    "objectID": "doc/cours/agregations.html#données-utilisées",
+    "href": "doc/cours/agregations.html#données-utilisées",
+    "title": "Agrégations",
+    "section": "",
+    "text": "id_joueuse\nnom\nprenom\nelo\nclub\n\n\n\n\n1\nGuichard\nPauline\n2357\nAsnieres\n\n\n2\nDaulyte\nDeimante\n2371\nChartres\n\n\n3\nNavrotescu\nAndreea\n2338\nAsnieres\n\n\n4\nSebag\nMarie\n2448\nBischwiller\n\n\n5\nMillet\nSophie\n2366\nAsnieres\n\n\n6\nSkrichempko\nAlmira\n2361\nBischwiller"
+  },
+  {
+    "objectID": "doc/cours/agregations.html#questions",
+    "href": "doc/cours/agregations.html#questions",
+    "title": "Agrégations",
+    "section": "2 Questions",
+    "text": "2 Questions\nQuelques questions que l’on peut se poser :\n\n\nQuel est le id_joueuse maximum ?\nQuel est le nombre de joueuses ?\nQuelle est la moyenne des elo par club ?"
+  },
+  {
+    "objectID": "doc/cours/agregations.html#compter-les-lignes",
+    "href": "doc/cours/agregations.html#compter-les-lignes",
+    "title": "Agrégations",
+    "section": "3 Compter les lignes",
+    "text": "3 Compter les lignes\nSELECT COUNT(*)\n  FROM echecs.joueuse;\n\n\n\n\ncount\n\n\n\n\n6\n\n\n\n\n\nSELECT COUNT(*)\n  FROM echecs.joueuse\n WHERE elo &lt; 2400;\n\n\n\n\ncount\n\n\n\n\n5"
+  },
+  {
+    "objectID": "doc/cours/agregations.html#somme",
+    "href": "doc/cours/agregations.html#somme",
+    "title": "Agrégations",
+    "section": "4 Somme",
+    "text": "4 Somme\nSELECT SUM(elo)\n  FROM echecs.joueuse;\n\n\n\n\nsum_elo\n\n\n\n\n14223\n\n\n\n\n\nSELECT SUM(elo) / COUNT(elo)\n  FROM echecs.joueuse;"
+  },
+  {
+    "objectID": "doc/cours/agregations.html#stats-descriptives",
+    "href": "doc/cours/agregations.html#stats-descriptives",
+    "title": "Agrégations",
+    "section": "5 Stats descriptives",
+    "text": "5 Stats descriptives\nSELECT MAX(elo),\n       MIN(elo),\n       AVG(elo)\n  FROM echecs.joueuse;\n\n\n\n\nmax_elo\nmin_elo\navg_elo\n\n\n\n\n2448\n2338\n2373.5\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nVous pouvez également calculer : VARIANCE, STDDEV.\n\n\n\nComment afficher la joueuse avec le plus grand elo ? 😵\n\n\n5.1 Sous-requête\nEn utilisant une sous-requête :\n\nSELECT MAX(elo) FROM joueuse ➡️ renvoie un nombre\nNous pouvons ensuite tester si elo est égal à ce nombre\n\nSELECT nom,\n       prenom,\n       elo\n  FROM echecs.joueuse\n WHERE elo = (SELECT MAX(elo) FROM echecs.joueuse);"
+  },
+  {
+    "objectID": "doc/cours/agregations.html#regroupement",
+    "href": "doc/cours/agregations.html#regroupement",
+    "title": "Agrégations",
+    "section": "6 Regroupement",
+    "text": "6 Regroupement\nComment obtenir la moyenne elo par club ?\n\nSELECT club,\n       AVG(elo)\n  FROM echecs.joueuse\n GROUP BY club;\n\n\n\n\nclub\navg_elo\n\n\n\n\nAsnieres\n2372.4\n\n\nChartres\n2371.0\n\n\nBischwiller\n2404.5\n\n\n\n\n\n\nVous pouvez utiliser ROUND() pour arrondir.\n\n\n6.1 Colonnes du GROUP BY\nVous pouvez grouper en utilisant plusieurs colonnes.\n\n\n\n\n\n\nImportant\n\n\n\nLes colonnes présentes dans le SELECT doivent impérativement être présentes dans le GROUP BY.\nL’inverse n’est pas vrai. Vous pouvez avoir des colonnes du GROUP BY que vous n’affichez pas dans le SELECT.\n\n\n\nje dis bien colonnes et pas fonctions d’aggrégation\n\n\n\n6.2 Filtre suite au GROUP BY\nComment faire pour afficher uniquement les clubs où la moyenne élo est inférieure à 2400 ?\n\nSELECT club,\n       AVG(elo)\n  FROM echecs.joueuse\n GROUP BY club\nHAVING AVG(elo) &lt; 2400;\n\n\n\n\nclub\navg_elo\n\n\n\n\nAsnieres\n2372.4\n\n\nChartres\n2371.0"
   },
   {
     "objectID": "doc/cours/sql-intro-slides.html#structured-query-language",

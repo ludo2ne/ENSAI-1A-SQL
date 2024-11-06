@@ -29,6 +29,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #f8f8f2;  }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #f8f8f2; } /* Normal */
+    code span.al { color: #f07178; background-color: #2a0f15; font-weight: bold; } /* Alert */
+    code span.an { color: #d4d0ab; } /* Annotation */
+    code span.at { color: #00e0e0; } /* Attribute */
+    code span.bn { color: #d4d0ab; } /* BaseN */
+    code span.bu { color: #abe338; } /* BuiltIn */
+    code span.cf { color: #ffa07a; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #abe338; } /* Char */
+    code span.cn { color: #ffd700; } /* Constant */
+    code span.co { color: #f8f8f2; font-style: italic; } /* Comment */
+    code span.cv { color: #ffd700; } /* CommentVar */
+    code span.do { color: #f8f8f2; } /* Documentation */
+    code span.dt { color: #ffa07a; } /* DataType */
+    code span.dv { color: #d4d0ab; } /* DecVal */
+    code span.er { color: #f07178; text-decoration: underline; } /* Error */
+    code span.ex { color: #00e0e0; font-weight: bold; } /* Extension */
+    code span.fl { color: #d4d0ab; } /* Float */
+    code span.fu { color: #ffa07a; } /* Function */
+    code span.im { color: #abe338; } /* Import */
+    code span.in { color: #d4d0ab; } /* Information */
+    code span.kw { color: #ffa07a; font-weight: bold; } /* Keyword */
+    code span.op { color: #ffa07a; } /* Operator */
+    code span.ot { color: #00e0e0; } /* Other */
+    code span.pp { color: #dcc6e0; } /* Preprocessor */
+    code span.re { color: #00e0e0; background-color: #f8f8f2; } /* RegionMarker */
+    code span.sc { color: #abe338; } /* SpecialChar */
+    code span.ss { color: #abe338; } /* SpecialString */
+    code span.st { color: #abe338; } /* String */
+    code span.va { color: #00e0e0; } /* Variable */
+    code span.vs { color: #abe338; } /* VerbatimString */
+    code span.wa { color: #dcc6e0; } /* Warning */
   </style>
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto.css">
   <link rel="stylesheet" href="../../styles-reveal.css">
@@ -338,15 +403,329 @@ Ludovic Deneuville
 </div>
 
 </section>
-<section id="group-by" class="title-slide slide level2 center">
-<h2>GROUp BY</h2>
+<section id="données-utilisées" class="title-slide slide level2 center">
+<h2>Données utilisées</h2>
+<div class="small-table">
+<table class="caption-top" style="width:100%;">
+<colgroup>
+<col style="width: 19%">
+<col style="width: 29%">
+<col style="width: 22%">
+<col style="width: 11%">
+<col style="width: 17%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>id_joueuse</strong></th>
+<th><strong>nom</strong></th>
+<th><strong>prenom</strong></th>
+<th><strong>elo</strong></th>
+<th><strong>club</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Guichard</td>
+<td>Pauline</td>
+<td>2357</td>
+<td>Asnieres</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Daulyte</td>
+<td>Deimante</td>
+<td>2371</td>
+<td>Chartres</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Navrotescu</td>
+<td>Andreea</td>
+<td>2338</td>
+<td>Asnieres</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Sebag</td>
+<td>Marie</td>
+<td>2448</td>
+<td>Bischwiller</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Millet</td>
+<td>Sophie</td>
+<td>2366</td>
+<td>Asnieres</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>Skrichempko</td>
+<td>Almira</td>
+<td>2361</td>
+<td>Bischwiller</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<section id="questions" class="title-slide slide level2 center">
+<h2>Questions</h2>
+<p>Quelques questions que l’on peut se poser :</p>
+<div>
+<ul>
+<li class="fragment">Quel est le id_joueuse maximum ?</li>
+<li class="fragment">Quel est le nombre de joueuses ?</li>
+<li class="fragment">Quelle est la moyenne des elo par club ?</li>
+</ul>
+</div>
+</section>
+
+<section id="compter-les-lignes" class="title-slide slide level2 center">
+<h2>Compter les lignes</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">COUNT</span>(<span class="op">*</span>)</span>
+<span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="small-table">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th><strong>count</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>6</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><br></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">COUNT</span>(<span class="op">*</span>)</span>
+<span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
+<span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> elo <span class="op">&lt;</span> <span class="dv">2400</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="small-table">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th><strong>count</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>5</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<section id="somme" class="title-slide slide level2 center">
+<h2>Somme</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">SUM</span>(elo)</span>
+<span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="small-table">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th><strong>sum_elo</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>14223</td>
+</tr>
+</tbody>
+</table>
+</div>
+<aside class="notes">
+<div class="sourceCode" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">SUM</span>(elo) <span class="op">/</span> <span class="fu">COUNT</span>(elo)</span>
+<span id="cb4-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+
+<section>
+<section id="stats-descriptives" class="title-slide slide level2 center">
+<h2>Stats descriptives</h2>
+<div class="sourceCode" id="cb5"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">MAX</span>(elo),</span>
+<span id="cb5-2"><a aria-hidden="true" tabindex="-1"></a>       <span class="fu">MIN</span>(elo),</span>
+<span id="cb5-3"><a aria-hidden="true" tabindex="-1"></a>       <span class="fu">AVG</span>(elo)</span>
+<span id="cb5-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="small-table">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th><strong>max_elo</strong></th>
+<th><strong>min_elo</strong></th>
+<th><strong>avg_elo</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2448</td>
+<td>2338</td>
+<td>2373.5</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p>Vous pouvez également calculer : <code>VARIANCE</code>, <code>STDDEV</code>.</p>
+</div>
+</div>
+</div>
+<div class="fragment">
+<p>Comment afficher la joueuse avec le plus grand elo ? <span class="emoji" data-emoji="dizzy_face">😵</span></p>
+</div>
+</section>
+<section id="sous-requête" class="slide level3">
+<h3>Sous-requête</h3>
+<p>En utilisant une <strong>sous-requête</strong> :</p>
+<ul>
+<li><code>SELECT MAX(elo) FROM joueuse</code> <span class="emoji" data-emoji="arrow_right">➡️</span> renvoie un nombre</li>
+<li>Nous pouvons ensuite tester si <em>elo</em> est égal à ce nombre</li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
+<span id="cb6-2"><a aria-hidden="true" tabindex="-1"></a>       prenom,</span>
+<span id="cb6-3"><a aria-hidden="true" tabindex="-1"></a>       elo</span>
+<span id="cb6-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
+<span id="cb6-5"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> elo <span class="op">=</span> (<span class="kw">SELECT</span> <span class="fu">MAX</span>(elo) <span class="kw">FROM</span> echecs.joueuse);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section></section>
+<section>
+<section id="regroupement" class="title-slide slide level2 center">
+<h2>Regroupement</h2>
+<p>Comment obtenir la moyenne elo par club ?</p>
+<div class="fragment">
+<div class="sourceCode" id="cb7"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> club,</span>
+<span id="cb7-2"><a aria-hidden="true" tabindex="-1"></a>       <span class="fu">AVG</span>(elo)</span>
+<span id="cb7-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
+<span id="cb7-4"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">GROUP</span> <span class="kw">BY</span> club;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="small-table">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th><strong>club</strong></th>
+<th><strong>avg_elo</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Asnieres</td>
+<td>2372.4</td>
+</tr>
+<tr class="even">
+<td>Chartres</td>
+<td>2371.0</td>
+</tr>
+<tr class="odd">
+<td>Bischwiller</td>
+<td>2404.5</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<aside class="notes">
+<p>Vous pouvez utiliser ROUND() pour arrondir.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="colonnes-du-group-by" class="slide level3">
+<h3>Colonnes du GROUP BY</h3>
+<p>Vous pouvez grouper en utilisant plusieurs colonnes.</p>
+<div class="callout callout-important callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Important</strong></p>
+</div>
+<div class="callout-content">
+<p>Les colonnes présentes dans le <em>SELECT</em> doivent impérativement être présentes dans le <em>GROUP BY</em>.</p>
+<p>L’inverse n’est pas vrai. Vous pouvez avoir des colonnes du <em>GROUP BY</em> que vous n’affichez pas dans le <em>SELECT</em>.</p>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>je dis bien colonnes et pas fonctions d’aggrégation</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="filtre-suite-au-group-by" class="slide level3">
+<h3>Filtre suite au GROUP BY</h3>
+<p>Comment faire pour afficher uniquement les clubs où la moyenne élo est inférieure à 2400 ?</p>
+<div class="fragment">
+<div class="sourceCode" id="cb8"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb8-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> club,</span>
+<span id="cb8-2"><a aria-hidden="true" tabindex="-1"></a>       <span class="fu">AVG</span>(elo)</span>
+<span id="cb8-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
+<span id="cb8-4"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">GROUP</span> <span class="kw">BY</span> club</span>
+<span id="cb8-5"><a aria-hidden="true" tabindex="-1"></a><span class="kw">HAVING</span> <span class="fu">AVG</span>(elo) <span class="op">&lt;</span> <span class="dv">2400</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="small-table">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th><strong>club</strong></th>
+<th><strong>avg_elo</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Asnieres</td>
+<td>2372.4</td>
+</tr>
+<tr class="even">
+<td>Chartres</td>
+<td>2371.0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 <p><a href="../../index.html">Home</a> — <a href="agregations.html">Agrégations</a></p>
 </div>
 </div>
-</section>
+</section></section>
     </div>
   </div>
 
