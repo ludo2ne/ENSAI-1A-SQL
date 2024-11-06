@@ -1,0 +1,45 @@
+---
+title: "Jointures entre Tables"
+description: "[Slides](jointures-slides.html)"
+author: "Ludovic Deneuville"
+format: 
+  html:
+    toc: true
+    toc-location: left
+    toc-depth: 3
+    number-sections: true
+  revealjs:
+    theme: moon
+    footer: "[Home](../../index.html) --- [Jointures](jointures.html)"
+    slide-number: c/t                    # collapsed/total
+    slide-level: 3
+    controls: true
+    output-file: jointures-slides.html
+mermaid:
+  theme: forest
+code-line-numbers: false
+from: markdown+emoji
+---
+
+## Jointures
+
+Objectif : regrouper les données de plusieurs tables
+
+Faire une jointure est comme créer un gros tableau
+
+## Jointure interne
+
+INNER
+
+## Jointure externe
+
+LEFT RIGHT
+
+## Jointure Complète
+
+FULL JOIN
+
+## Jointure croisée
+
+CROSS JOIN renvoie le produit cartésien des deux tables
+

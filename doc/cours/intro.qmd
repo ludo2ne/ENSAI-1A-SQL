@@ -55,7 +55,14 @@ UML pour la modélisation
 
 - `<...>` : texte à remplacer
 - `[...]` : élément optionnel
+- Une requête se termine par un `;`
 - Mots clés en MAJUSCULE
+- `-- Ce qui vient ensuite est commenté`
+
+::: {.notes}
+- Parfois possible d'utiliser `/* commentaire */`
+- `;` : même si les logiciels souvent s'en moquent
+:::
 
 ### Requêtes SQL jolies
 

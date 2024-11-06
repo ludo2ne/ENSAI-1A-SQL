@@ -25,6 +25,8 @@ website:
             text: "Introduction à SQL"
           - href: doc/cours/algebre.qmd
             text: "Algèbre Relationnelle"
+          - href: doc/cours/jointures.qmd
+            text: "Jointures"
       - text: TP
         menu:
           - href: doc/tp/tp1.qmd

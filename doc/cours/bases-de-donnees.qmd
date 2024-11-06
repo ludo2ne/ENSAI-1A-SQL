@@ -6,7 +6,8 @@ format:
   html:
     toc: true
     toc-location: left
-    toc-depth: 2
+    toc-depth: 3
+    number-sections: true
   revealjs:
     theme: moon
     footer: "[Home](../../index.html) --- [Bases de Données](bases-de-donnees.html)"

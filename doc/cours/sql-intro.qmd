@@ -1,12 +1,13 @@
 ---
-title: "SQL"
+title: "SQL - Introduction"
 description: "[Slides](sql-intro-slides.html)"
 author: "Ludovic Deneuville"
 format: 
   html:
     toc: true
     toc-location: left
-    toc-depth: 2
+    toc-depth: 3
+    number-sections: true
   revealjs:
     theme: moon
     footer: "[Home](../../index.html) --- [SQL](sql-intro.html)"
