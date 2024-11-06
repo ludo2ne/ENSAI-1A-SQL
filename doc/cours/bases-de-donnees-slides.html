@@ -500,12 +500,44 @@ Ludovic Deneuville
 <section id="nosql" class="slide level3">
 <h3>NoSQL</h3>
 <p>Nombreux sous-types :</p>
-<ul>
-<li><strong>Clé-valeur</strong> : données sous forme de paires clé-valeur (DynamoDB)</li>
-<li><strong>Colonnes</strong> : Organisée en colonnes, adaptée aux grandes quantités de données (Cassandra)</li>
-<li><strong>Document</strong> : Stocke des documents semi-structurés (JSON, XML) (MongoDB)</li>
-<li><strong>Graphes</strong> : Organisée sous forme de nœuds et de relations, pour des données très connectées (Neo4j)</li>
-</ul>
+<div class="small-table">
+<table class="caption-top">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 68%">
+<col style="width: 19%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Type</strong></th>
+<th><strong>Description</strong></th>
+<th><strong>Exemple</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Clé-valeur</td>
+<td>Données sous forme de paires clé-valeur. Idéale pour des lectures rapides avec peu de structure.</td>
+<td>DynamoDB</td>
+</tr>
+<tr class="even">
+<td>Colonnes</td>
+<td>Organisée en colonnes, adaptée aux grandes quantités de données avec peu de relations entre elles.</td>
+<td>Cassandra</td>
+</tr>
+<tr class="odd">
+<td>Document</td>
+<td>Stocke des documents semi-structurés, souvent en format JSON ou XML, permettant une grande flexibilité.</td>
+<td>MongoDB</td>
+</tr>
+<tr class="even">
+<td>Graphes</td>
+<td>Organisée sous forme de nœuds et de relations, idéale pour des données très connectées ou inter-relées.</td>
+<td>Neo4j</td>
+</tr>
+</tbody>
+</table>
+</div>
 <aside class="notes">
 <p>Not Only SQL</p>
 <style type="text/css">
@@ -999,10 +1031,9 @@ Ludovic Deneuville
 </div>
 <ul>
 <li><strong><a href="https://www.postgresql.org/" target="_blank">PostgreSQL</a></strong></li>
-<li><a href="https://www.mysql.com/" target="_blank">MySQL</a></li>
+<li><a href="https://www.mysql.com/" target="_blank">MySQL</a>, <a href="https://mariadb.org/" target="_blank">MariaDB</a></li>
 <li><a href="https://www.oracle.com/database/" target="_blank">Oracle Database</a></li>
 <li><a href="https://www.sqlite.org/" target="_blank">SQLite</a></li>
-<li><a href="https://mariadb.org/" target="_blank">MariaDB</a></li>
 </ul>
 </section>
 <section id="postgresql" class="slide level3">
@@ -1071,6 +1102,11 @@ Ludovic Deneuville
 <li>SGBD : bibliothécaire</li>
 <li>Outil : tableau de bord interactif pour les bibliothécaires</li>
 </ul>
+<p>A l’ENSAI :</p>
+<ul>
+<li>vous avez chacun une bdd (nom=id)</li>
+<li>utilisez DBeaver pour vous y connecter</li>
+</ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1082,16 +1118,6 @@ Ludovic Deneuville
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
-</section>
-<section id="exemple-1" class="slide level3">
-<h3>Exemple</h3>
-<p>Site de vente de légumes</p>
-<ul>
-<li>Client &nbsp; - id_client &nbsp; - nom &nbsp; - prenom &nbsp; - mail</li>
-<li>Produit &nbsp; - id_produit &nbsp; - nom &nbsp; - description &nbsp; - prix</li>
-<li>Commande &nbsp; - id_commande &nbsp; - id_client</li>
-<li>LigneCommande &nbsp; - id_ligne_commande &nbsp; - id_commande &nbsp; - id_produit &nbsp; - quantite</li>
-</ul>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">

@@ -130,6 +130,14 @@ ul.task-list li input[type="checkbox"] {
     <a class="dropdown-item" href="../../doc/cours/jointures.html">
  <span class="dropdown-text">Jointures</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../../doc/cours/sql-avance.html">
+ <span class="dropdown-text">SQL avancé</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../doc/cours/modelisation.html">
+ <span class="dropdown-text">Modélisation</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -137,6 +145,10 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">TP</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-tp">    
+        <li>
+    <a class="dropdown-item" href="../../doc/tp/tp0.html">
+ <span class="dropdown-text">TP0</span></a>
+  </li>  
         <li>
     <a class="dropdown-item" href="../../doc/tp/tp1.html">
  <span class="dropdown-text">TP1</span></a>
@@ -211,7 +223,6 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#postgresql" id="toc-postgresql" class="nav-link" data-scroll-target="#postgresql"><span class="header-section-number">7.1</span> PostgreSQL</a></li>
   <li><a href="#outil-de-gestion-et-administration" id="toc-outil-de-gestion-et-administration" class="nav-link" data-scroll-target="#outil-de-gestion-et-administration"><span class="header-section-number">7.2</span> Outil de Gestion et Administration</a></li>
   <li><a href="#kesako" id="toc-kesako" class="nav-link" data-scroll-target="#kesako"><span class="header-section-number">7.3</span> Kesako</a></li>
-  <li><a href="#exemple-1" id="toc-exemple-1" class="nav-link" data-scroll-target="#exemple-1"><span class="header-section-number">7.4</span> Exemple</a></li>
   </ul></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="bases-de-donnees-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
@@ -379,12 +390,44 @@ Définition
 <section id="nosql" class="level3" data-number="4.4">
 <h3 data-number="4.4" class="anchored" data-anchor-id="nosql"><span class="header-section-number">4.4</span> NoSQL</h3>
 <p>Nombreux sous-types :</p>
-<ul>
-<li><strong>Clé-valeur</strong> : données sous forme de paires clé-valeur (DynamoDB)</li>
-<li><strong>Colonnes</strong> : Organisée en colonnes, adaptée aux grandes quantités de données (Cassandra)</li>
-<li><strong>Document</strong> : Stocke des documents semi-structurés (JSON, XML) (MongoDB)</li>
-<li><strong>Graphes</strong> : Organisée sous forme de nœuds et de relations, pour des données très connectées (Neo4j)</li>
-</ul>
+<div class="small-table">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 68%">
+<col style="width: 19%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Type</strong></th>
+<th><strong>Description</strong></th>
+<th><strong>Exemple</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Clé-valeur</td>
+<td>Données sous forme de paires clé-valeur. Idéale pour des lectures rapides avec peu de structure.</td>
+<td>DynamoDB</td>
+</tr>
+<tr class="even">
+<td>Colonnes</td>
+<td>Organisée en colonnes, adaptée aux grandes quantités de données avec peu de relations entre elles.</td>
+<td>Cassandra</td>
+</tr>
+<tr class="odd">
+<td>Document</td>
+<td>Stocke des documents semi-structurés, souvent en format JSON ou XML, permettant une grande flexibilité.</td>
+<td>MongoDB</td>
+</tr>
+<tr class="even">
+<td>Graphes</td>
+<td>Organisée sous forme de nœuds et de relations, idéale pour des données très connectées ou inter-relées.</td>
+<td>Neo4j</td>
+</tr>
+</tbody>
+</table>
+</div>
 <div class="notes">
 <p>Not Only SQL</p>
 </div>
@@ -815,10 +858,9 @@ Définition
 </div>
 <ul>
 <li><strong><a href="https://www.postgresql.org/" target="_blank">PostgreSQL</a></strong></li>
-<li><a href="https://www.mysql.com/" target="_blank">MySQL</a></li>
+<li><a href="https://www.mysql.com/" target="_blank">MySQL</a>, <a href="https://mariadb.org/" target="_blank">MariaDB</a></li>
 <li><a href="https://www.oracle.com/database/" target="_blank">Oracle Database</a></li>
 <li><a href="https://www.sqlite.org/" target="_blank">SQLite</a></li>
-<li><a href="https://mariadb.org/" target="_blank">MariaDB</a></li>
 </ul>
 <section id="postgresql" class="level3" data-number="7.1">
 <h3 data-number="7.1" class="anchored" data-anchor-id="postgresql"><span class="header-section-number">7.1</span> PostgreSQL</h3>
@@ -876,17 +918,12 @@ Tip
 <li>SGBD : bibliothécaire</li>
 <li>Outil : tableau de bord interactif pour les bibliothécaires</li>
 </ul>
-</div>
-</section>
-<section id="exemple-1" class="level3" data-number="7.4">
-<h3 data-number="7.4" class="anchored" data-anchor-id="exemple-1"><span class="header-section-number">7.4</span> Exemple</h3>
-<p>Site de vente de légumes</p>
+<p>A l’ENSAI :</p>
 <ul>
-<li>Client &nbsp; - id_client &nbsp; - nom &nbsp; - prenom &nbsp; - mail</li>
-<li>Produit &nbsp; - id_produit &nbsp; - nom &nbsp; - description &nbsp; - prix</li>
-<li>Commande &nbsp; - id_commande &nbsp; - id_client</li>
-<li>LigneCommande &nbsp; - id_ligne_commande &nbsp; - id_commande &nbsp; - id_produit &nbsp; - quantite</li>
+<li>vous avez chacun une bdd (nom=id)</li>
+<li>utilisez DBeaver pour vous y connecter</li>
 </ul>
+</div>
 
 
 </section>

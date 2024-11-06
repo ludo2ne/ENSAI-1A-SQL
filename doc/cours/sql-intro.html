@@ -164,6 +164,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="dropdown-item" href="../../doc/cours/jointures.html">
  <span class="dropdown-text">Jointures</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../../doc/cours/sql-avance.html">
+ <span class="dropdown-text">SQL avancé</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../doc/cours/modelisation.html">
+ <span class="dropdown-text">Modélisation</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -171,6 +179,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="menu-text">TP</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-tp">    
+        <li>
+    <a class="dropdown-item" href="../../doc/tp/tp0.html">
+ <span class="dropdown-text">TP0</span></a>
+  </li>  
         <li>
     <a class="dropdown-item" href="../../doc/tp/tp1.html">
  <span class="dropdown-text">TP1</span></a>
@@ -211,57 +223,58 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#structured-query-language" id="toc-structured-query-language" class="nav-link active" data-scroll-target="#structured-query-language"><span class="header-section-number">1</span> Structured Query Language</a>
   <ul class="collapse">
-  <li><a href="#norme-sql" id="toc-norme-sql" class="nav-link" data-scroll-target="#norme-sql"><span class="header-section-number">1.1</span> Norme SQL</a></li>
-  <li><a href="#composantes-du-langage" id="toc-composantes-du-langage" class="nav-link" data-scroll-target="#composantes-du-langage"><span class="header-section-number">1.2</span> Composantes du langage</a></li>
+  <li><a href="#norme-sql" id="toc-norme-sql" class="nav-link" data-scroll-target="#norme-sql">Norme SQL</a></li>
+  <li><a href="#composantes-du-langage" id="toc-composantes-du-langage" class="nav-link" data-scroll-target="#composantes-du-langage">Composantes du langage</a></li>
   </ul></li>
   <li><a href="#définition-de-données" id="toc-définition-de-données" class="nav-link" data-scroll-target="#définition-de-données"><span class="header-section-number">2</span> Définition de Données</a>
   <ul class="collapse">
-  <li><a href="#créer-une-table" id="toc-créer-une-table" class="nav-link" data-scroll-target="#créer-une-table"><span class="header-section-number">2.1</span> Créer une table</a></li>
-  <li><a href="#create-avancé" id="toc-create-avancé" class="nav-link" data-scroll-target="#create-avancé"><span class="header-section-number">2.2</span> CREATE avancé</a></li>
-  <li><a href="#schéma" id="toc-schéma" class="nav-link" data-scroll-target="#schéma"><span class="header-section-number">2.3</span> Schéma</a></li>
-  <li><a href="#bonnes-pratiques" id="toc-bonnes-pratiques" class="nav-link" data-scroll-target="#bonnes-pratiques"><span class="header-section-number">2.4</span> Bonnes pratiques</a></li>
-  <li><a href="#modifier-une-colonne" id="toc-modifier-une-colonne" class="nav-link" data-scroll-target="#modifier-une-colonne"><span class="header-section-number">2.5</span> Modifier une colonne</a></li>
-  <li><a href="#créersupprimer-une-colonne" id="toc-créersupprimer-une-colonne" class="nav-link" data-scroll-target="#créersupprimer-une-colonne"><span class="header-section-number">2.6</span> Créer/Supprimer une colonne</a></li>
-  <li><a href="#définir-une-clé-étrangère" id="toc-définir-une-clé-étrangère" class="nav-link" data-scroll-target="#définir-une-clé-étrangère"><span class="header-section-number">2.7</span> Définir une clé étrangère</a></li>
-  <li><a href="#autres-possibilités" id="toc-autres-possibilités" class="nav-link" data-scroll-target="#autres-possibilités"><span class="header-section-number">2.8</span> Autres possibilités</a></li>
-  <li><a href="#supprimer-une-table" id="toc-supprimer-une-table" class="nav-link" data-scroll-target="#supprimer-une-table"><span class="header-section-number">2.9</span> Supprimer une table</a></li>
+  <li><a href="#créer-une-table" id="toc-créer-une-table" class="nav-link" data-scroll-target="#créer-une-table">Créer une table</a></li>
+  <li><a href="#create-avancé" id="toc-create-avancé" class="nav-link" data-scroll-target="#create-avancé">CREATE avancé</a></li>
+  <li><a href="#schéma" id="toc-schéma" class="nav-link" data-scroll-target="#schéma">Schéma</a></li>
+  <li><a href="#bonnes-pratiques" id="toc-bonnes-pratiques" class="nav-link" data-scroll-target="#bonnes-pratiques">Bonnes pratiques</a></li>
+  <li><a href="#modifier-une-colonne" id="toc-modifier-une-colonne" class="nav-link" data-scroll-target="#modifier-une-colonne">Modifier une colonne</a></li>
+  <li><a href="#créersupprimer-une-colonne" id="toc-créersupprimer-une-colonne" class="nav-link" data-scroll-target="#créersupprimer-une-colonne">Créer/Supprimer une colonne</a></li>
+  <li><a href="#définir-une-clé-étrangère" id="toc-définir-une-clé-étrangère" class="nav-link" data-scroll-target="#définir-une-clé-étrangère">Définir une clé étrangère</a></li>
+  <li><a href="#autres-possibilités" id="toc-autres-possibilités" class="nav-link" data-scroll-target="#autres-possibilités">Autres possibilités</a></li>
+  <li><a href="#supprimer-une-table" id="toc-supprimer-une-table" class="nav-link" data-scroll-target="#supprimer-une-table">Supprimer une table</a></li>
   </ul></li>
   <li><a href="#insérer-des-données" id="toc-insérer-des-données" class="nav-link" data-scroll-target="#insérer-des-données"><span class="header-section-number">3</span> Insérer des données</a>
   <ul class="collapse">
-  <li><a href="#séquence" id="toc-séquence" class="nav-link" data-scroll-target="#séquence"><span class="header-section-number">3.1</span> Séquence</a></li>
+  <li><a href="#séquence" id="toc-séquence" class="nav-link" data-scroll-target="#séquence">Séquence</a></li>
   </ul></li>
   <li><a href="#lire-des-données" id="toc-lire-des-données" class="nav-link" data-scroll-target="#lire-des-données"><span class="header-section-number">4</span> Lire des données</a>
   <ul class="collapse">
-  <li><a href="#colonnes-à-afficher" id="toc-colonnes-à-afficher" class="nav-link" data-scroll-target="#colonnes-à-afficher"><span class="header-section-number">4.1</span> Colonnes à afficher</a></li>
-  <li><a href="#filter-les-lignes" id="toc-filter-les-lignes" class="nav-link" data-scroll-target="#filter-les-lignes"><span class="header-section-number">4.2</span> Filter les lignes</a></li>
-  <li><a href="#plusieurs-filtres" id="toc-plusieurs-filtres" class="nav-link" data-scroll-target="#plusieurs-filtres"><span class="header-section-number">4.3</span> Plusieurs filtres</a></li>
-  <li><a href="#like" id="toc-like" class="nav-link" data-scroll-target="#like"><span class="header-section-number">4.4</span> LIKE</a></li>
-  <li><a href="#plage-de-valeurs" id="toc-plage-de-valeurs" class="nav-link" data-scroll-target="#plage-de-valeurs"><span class="header-section-number">4.5</span> Plage de valeurs</a></li>
-  <li><a href="#valeurs-dans-une-liste" id="toc-valeurs-dans-une-liste" class="nav-link" data-scroll-target="#valeurs-dans-une-liste"><span class="header-section-number">4.6</span> Valeurs dans une liste</a></li>
-  <li><a href="#filtre-sur-les-attributs-booléens" id="toc-filtre-sur-les-attributs-booléens" class="nav-link" data-scroll-target="#filtre-sur-les-attributs-booléens"><span class="header-section-number">4.7</span> Filtre sur les attributs booléens</a></li>
-  <li><a href="#ordonner-le-résultat" id="toc-ordonner-le-résultat" class="nav-link" data-scroll-target="#ordonner-le-résultat"><span class="header-section-number">4.8</span> Ordonner le résultat</a></li>
-  <li><a href="#afficher-n-lignes" id="toc-afficher-n-lignes" class="nav-link" data-scroll-target="#afficher-n-lignes"><span class="header-section-number">4.9</span> Afficher n lignes</a></li>
+  <li><a href="#colonnes-à-afficher" id="toc-colonnes-à-afficher" class="nav-link" data-scroll-target="#colonnes-à-afficher">Colonnes à afficher</a></li>
+  <li><a href="#filter-les-lignes" id="toc-filter-les-lignes" class="nav-link" data-scroll-target="#filter-les-lignes">Filter les lignes</a></li>
+  <li><a href="#plusieurs-filtres" id="toc-plusieurs-filtres" class="nav-link" data-scroll-target="#plusieurs-filtres">Plusieurs filtres</a></li>
+  <li><a href="#like" id="toc-like" class="nav-link" data-scroll-target="#like">LIKE</a></li>
+  <li><a href="#plage-de-valeurs" id="toc-plage-de-valeurs" class="nav-link" data-scroll-target="#plage-de-valeurs">Plage de valeurs</a></li>
+  <li><a href="#valeurs-dans-une-liste" id="toc-valeurs-dans-une-liste" class="nav-link" data-scroll-target="#valeurs-dans-une-liste">Valeurs dans une liste</a></li>
+  <li><a href="#filtre-sur-les-attributs-booléens" id="toc-filtre-sur-les-attributs-booléens" class="nav-link" data-scroll-target="#filtre-sur-les-attributs-booléens">Filtre sur les attributs booléens</a></li>
+  <li><a href="#ordonner-le-résultat" id="toc-ordonner-le-résultat" class="nav-link" data-scroll-target="#ordonner-le-résultat">Ordonner le résultat</a></li>
+  <li><a href="#afficher-n-lignes" id="toc-afficher-n-lignes" class="nav-link" data-scroll-target="#afficher-n-lignes">Afficher n lignes</a></li>
   </ul></li>
   <li><a href="#mise-à-jour-de-données" id="toc-mise-à-jour-de-données" class="nav-link" data-scroll-target="#mise-à-jour-de-données"><span class="header-section-number">5</span> Mise à jour de données</a>
   <ul class="collapse">
-  <li><a href="#màj-globale" id="toc-màj-globale" class="nav-link" data-scroll-target="#màj-globale"><span class="header-section-number">5.1</span> Màj globale</a></li>
+  <li><a href="#màj-globale" id="toc-màj-globale" class="nav-link" data-scroll-target="#màj-globale">Màj globale</a></li>
   </ul></li>
   <li><a href="#suppression-de-données" id="toc-suppression-de-données" class="nav-link" data-scroll-target="#suppression-de-données"><span class="header-section-number">6</span> Suppression de données</a></li>
   <li><a href="#validation-des-opérations" id="toc-validation-des-opérations" class="nav-link" data-scroll-target="#validation-des-opérations"><span class="header-section-number">7</span> Validation des opérations</a></li>
   <li><a href="#dates-et-heures" id="toc-dates-et-heures" class="nav-link" data-scroll-target="#dates-et-heures"><span class="header-section-number">8</span> Dates et Heures</a>
   <ul class="collapse">
-  <li><a href="#type-date" id="toc-type-date" class="nav-link" data-scroll-target="#type-date"><span class="header-section-number">8.1</span> Type DATE</a></li>
-  <li><a href="#type-timestamp" id="toc-type-timestamp" class="nav-link" data-scroll-target="#type-timestamp"><span class="header-section-number">8.2</span> Type TIMESTAMP</a></li>
+  <li><a href="#type-date" id="toc-type-date" class="nav-link" data-scroll-target="#type-date">Type DATE</a></li>
+  <li><a href="#type-timestamp" id="toc-type-timestamp" class="nav-link" data-scroll-target="#type-timestamp">Type TIMESTAMP</a></li>
   </ul></li>
   <li><a href="#valeurs-nulles" id="toc-valeurs-nulles" class="nav-link" data-scroll-target="#valeurs-nulles"><span class="header-section-number">9</span> Valeurs nulles</a>
   <ul class="collapse">
-  <li><a href="#tester-si-un-attribut-est-null" id="toc-tester-si-un-attribut-est-null" class="nav-link" data-scroll-target="#tester-si-un-attribut-est-null"><span class="header-section-number">9.1</span> Tester si un attribut est NULL</a></li>
-  <li><a href="#coalesce" id="toc-coalesce" class="nav-link" data-scroll-target="#coalesce"><span class="header-section-number">9.2</span> COALESCE</a></li>
-  <li><a href="#coalesce---exemple" id="toc-coalesce---exemple" class="nav-link" data-scroll-target="#coalesce---exemple"><span class="header-section-number">9.3</span> COALESCE - Exemple</a></li>
+  <li><a href="#tester-si-un-attribut-est-null" id="toc-tester-si-un-attribut-est-null" class="nav-link" data-scroll-target="#tester-si-un-attribut-est-null">Tester si un attribut est NULL</a></li>
+  <li><a href="#coalesce" id="toc-coalesce" class="nav-link" data-scroll-target="#coalesce">COALESCE</a></li>
+  <li><a href="#coalesce---exemple" id="toc-coalesce---exemple" class="nav-link" data-scroll-target="#coalesce---exemple">COALESCE - Exemple</a></li>
   </ul></li>
   <li><a href="#divers" id="toc-divers" class="nav-link" data-scroll-target="#divers"><span class="header-section-number">10</span> Divers</a>
   <ul class="collapse">
-  <li><a href="#jouer-avec-les-colonnes" id="toc-jouer-avec-les-colonnes" class="nav-link" data-scroll-target="#jouer-avec-les-colonnes"><span class="header-section-number">10.1</span> Jouer avec les colonnes</a></li>
+  <li><a href="#jouer-avec-les-colonnes" id="toc-jouer-avec-les-colonnes" class="nav-link" data-scroll-target="#jouer-avec-les-colonnes">Jouer avec les colonnes</a></li>
+  <li><a href="#supprimer-les-doublons" id="toc-supprimer-les-doublons" class="nav-link" data-scroll-target="#supprimer-les-doublons">Supprimer les doublons</a></li>
   </ul></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="sql-intro-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
@@ -319,8 +332,8 @@ Définition
 <p>Il permet de créer, manipuler, interroger et gérer les données stockées dans des tables.</p>
 </div>
 </div>
-<section id="norme-sql" class="level3" data-number="1.1">
-<h3 data-number="1.1" class="anchored" data-anchor-id="norme-sql"><span class="header-section-number">1.1</span> Norme SQL</h3>
+<section id="norme-sql" class="level3">
+<h3 class="anchored" data-anchor-id="norme-sql">Norme SQL</h3>
 <p>SQL est un language normé dont la dernière version est <strong>SQL:2023</strong>.</p>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -337,8 +350,8 @@ Caution
 </div>
 </div>
 </section>
-<section id="composantes-du-langage" class="level3" data-number="1.2">
-<h3 data-number="1.2" class="anchored" data-anchor-id="composantes-du-langage"><span class="header-section-number">1.2</span> Composantes du langage</h3>
+<section id="composantes-du-langage" class="level3">
+<h3 class="anchored" data-anchor-id="composantes-du-langage">Composantes du langage</h3>
 <ul>
 <li>Définition de Données</li>
 <li>Manipulation de Données</li>
@@ -360,8 +373,8 @@ Caution
 <div class="notes">
 <p>Ici nous n’allons travailler que sur une seule table à la fois</p>
 </div>
-<section id="créer-une-table" class="level3" data-number="2.1">
-<h3 data-number="2.1" class="anchored" data-anchor-id="créer-une-table"><span class="header-section-number">2.1</span> Créer une table</h3>
+<section id="créer-une-table" class="level3">
+<h3 class="anchored" data-anchor-id="créer-une-table">Créer une table</h3>
 <div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> joueuse (</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>&nbsp; &nbsp; id_joueuse     <span class="dt">INT</span>,</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>&nbsp; &nbsp; nom            TEXT,</span>
@@ -376,8 +389,8 @@ Caution
 <p>C’est comme créer les colonnes d’un tableau.</p>
 </div>
 </section>
-<section id="create-avancé" class="level3" data-number="2.2">
-<h3 data-number="2.2" class="anchored" data-anchor-id="create-avancé"><span class="header-section-number">2.2</span> CREATE avancé</h3>
+<section id="create-avancé" class="level3">
+<h3 class="anchored" data-anchor-id="create-avancé">CREATE avancé</h3>
 <div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> echecs.joueuse (</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    id_joueuse     SERIAL          <span class="kw">PRIMARY</span> <span class="kw">KEY</span>,   </span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    nom            <span class="dt">VARCHAR</span>(<span class="dv">50</span>)     <span class="kw">NOT</span> <span class="kw">NULL</span>, </span>
@@ -418,8 +431,8 @@ Contraintes
 <p>Important : La PK est NOT NULL et UNIQUE</p>
 </div>
 </section>
-<section id="schéma" class="level3" data-number="2.3">
-<h3 data-number="2.3" class="anchored" data-anchor-id="schéma"><span class="header-section-number">2.3</span> Schéma</h3>
+<section id="schéma" class="level3">
+<h3 class="anchored" data-anchor-id="schéma">Schéma</h3>
 <p>Utile lorsque le nombre de table devient grand.</p>
 <ul>
 <li>Organisation des objets, clarté</li>
@@ -434,8 +447,8 @@ Contraintes
 </ul>
 </div>
 <hr>
-<section id="table-dans-un-schéma" class="level4" data-number="2.3.1">
-<h4 data-number="2.3.1" class="anchored" data-anchor-id="table-dans-un-schéma"><span class="header-section-number">2.3.1</span> Table dans un schéma</h4>
+<section id="table-dans-un-schéma" class="level4">
+<h4 class="anchored" data-anchor-id="table-dans-un-schéma">Table dans un schéma</h4>
 <div class="sourceCode" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> echecs.club (</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    id_club          SERIAL          <span class="kw">PRIMARY</span> <span class="kw">KEY</span>,  </span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    nom              <span class="dt">VARCHAR</span>(<span class="dv">100</span>)    <span class="kw">NOT</span> <span class="kw">NULL</span>,   </span>
@@ -451,8 +464,8 @@ Contraintes
 </div>
 </section>
 </section>
-<section id="bonnes-pratiques" class="level3" data-number="2.4">
-<h3 data-number="2.4" class="anchored" data-anchor-id="bonnes-pratiques"><span class="header-section-number">2.4</span> Bonnes pratiques</h3>
+<section id="bonnes-pratiques" class="level3">
+<h3 class="anchored" data-anchor-id="bonnes-pratiques">Bonnes pratiques</h3>
 <ul>
 <li>Nom de table représentatif et au singulier</li>
 <li>Pas de majuscules, pas d’accents</li>
@@ -464,8 +477,8 @@ Contraintes
 <p>dans les requêtes : mots clés en majuscules</p>
 </div>
 </section>
-<section id="modifier-une-colonne" class="level3" data-number="2.5">
-<h3 data-number="2.5" class="anchored" data-anchor-id="modifier-une-colonne"><span class="header-section-number">2.5</span> Modifier une colonne</h3>
+<section id="modifier-une-colonne" class="level3">
+<h3 class="anchored" data-anchor-id="modifier-une-colonne">Modifier une colonne</h3>
 <p>Modifier le type :</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ALTER</span> <span class="kw">TABLE</span> joueuse</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">ALTER</span> <span class="kw">COLUMN</span> nom <span class="kw">TYPE</span> <span class="dt">VARCHAR</span>(<span class="dv">80</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -474,8 +487,8 @@ Contraintes
 <div class="sourceCode" id="cb7"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ALTER</span> <span class="kw">TABLE</span> joueuse</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">RENAME</span> <span class="kw">COLUMN</span> date_naissance <span class="kw">TO</span> dnais;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="créersupprimer-une-colonne" class="level3" data-number="2.6">
-<h3 data-number="2.6" class="anchored" data-anchor-id="créersupprimer-une-colonne"><span class="header-section-number">2.6</span> Créer/Supprimer une colonne</h3>
+<section id="créersupprimer-une-colonne" class="level3">
+<h3 class="anchored" data-anchor-id="créersupprimer-une-colonne">Créer/Supprimer une colonne</h3>
 <p>Ajout :</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ALTER</span> <span class="kw">TABLE</span> joueuse</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">ADD</span> <span class="kw">COLUMN</span> id_club <span class="dt">INT</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -484,8 +497,8 @@ Contraintes
 <div class="sourceCode" id="cb9"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ALTER</span> <span class="kw">TABLE</span> joueuse</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">DROP</span> <span class="kw">COLUMN</span> taux_victoires;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="définir-une-clé-étrangère" class="level3" data-number="2.7">
-<h3 data-number="2.7" class="anchored" data-anchor-id="définir-une-clé-étrangère"><span class="header-section-number">2.7</span> Définir une clé étrangère</h3>
+<section id="définir-une-clé-étrangère" class="level3">
+<h3 class="anchored" data-anchor-id="définir-une-clé-étrangère">Définir une clé étrangère</h3>
 <ul>
 <li>Nous venons de créer une colonne <code>id_club</code></li>
 <li>Lions maintenant cette colonne à la table <em>club</em></li>
@@ -512,16 +525,16 @@ Clé étrangère
 </div>
 </div>
 </section>
-<section id="autres-possibilités" class="level3" data-number="2.8">
-<h3 data-number="2.8" class="anchored" data-anchor-id="autres-possibilités"><span class="header-section-number">2.8</span> Autres possibilités</h3>
+<section id="autres-possibilités" class="level3">
+<h3 class="anchored" data-anchor-id="autres-possibilités">Autres possibilités</h3>
 <ul>
 <li>Renommer une table</li>
 <li>Ajouter / Supprimer une contrainte</li>
 <li>Définir / Supprimer une valeur par défaut</li>
 </ul>
 </section>
-<section id="supprimer-une-table" class="level3" data-number="2.9">
-<h3 data-number="2.9" class="anchored" data-anchor-id="supprimer-une-table"><span class="header-section-number">2.9</span> Supprimer une table</h3>
+<section id="supprimer-une-table" class="level3">
+<h3 class="anchored" data-anchor-id="supprimer-une-table">Supprimer une table</h3>
 <div class="sourceCode" id="cb11"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">DROP</span> <span class="kw">TABLE</span> joueuse;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-style-default callout-warning callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -579,8 +592,8 @@ Warning
 <div class="notes">
 <p>Attention à bien mettre les virgules au bon endroit</p>
 </div>
-<section id="séquence" class="level3" data-number="3.1">
-<h3 data-number="3.1" class="anchored" data-anchor-id="séquence"><span class="header-section-number">3.1</span> Séquence</h3>
+<section id="séquence" class="level3">
+<h3 class="anchored" data-anchor-id="séquence">Séquence</h3>
 <p>La colonne <em>id_club</em> est une séquence gérée par le SGBD.</p>
 <p>Les valeurs sont générées automatiquement à l’insertion et la séquence est incrémentée (1, 2, 3…).</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Séquences">
@@ -667,8 +680,8 @@ Séquences
 </table>
 </div>
 </div>
-<section id="colonnes-à-afficher" class="level3" data-number="4.1">
-<h3 data-number="4.1" class="anchored" data-anchor-id="colonnes-à-afficher"><span class="header-section-number">4.1</span> Colonnes à afficher</h3>
+<section id="colonnes-à-afficher" class="level3">
+<h3 class="anchored" data-anchor-id="colonnes-à-afficher">Colonnes à afficher</h3>
 <p>Listez les colonnes à afficher après le <code>SELECT</code></p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>       prenom,</span>
@@ -721,8 +734,8 @@ Séquences
 </div>
 </div>
 </section>
-<section id="filter-les-lignes" class="level3" data-number="4.2">
-<h3 data-number="4.2" class="anchored" data-anchor-id="filter-les-lignes"><span class="header-section-number">4.2</span> Filter les lignes</h3>
+<section id="filter-les-lignes" class="level3">
+<h3 class="anchored" data-anchor-id="filter-les-lignes">Filter les lignes</h3>
 <p>Filtrez sur les lignes avec une clause <code>WHERE</code>.</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>       prenom,</span>
@@ -751,8 +764,8 @@ Séquences
 </div>
 </div>
 </section>
-<section id="plusieurs-filtres" class="level3" data-number="4.3">
-<h3 data-number="4.3" class="anchored" data-anchor-id="plusieurs-filtres"><span class="header-section-number">4.3</span> Plusieurs filtres</h3>
+<section id="plusieurs-filtres" class="level3">
+<h3 class="anchored" data-anchor-id="plusieurs-filtres">Plusieurs filtres</h3>
 <p>Le mot clé <code>AND</code> permet d’ajouter d’autres filtres.</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>       prenom,</span>
@@ -830,8 +843,8 @@ Séquences
 </div>
 </div>
 </section>
-<section id="like" class="level3" data-number="4.4">
-<h3 data-number="4.4" class="anchored" data-anchor-id="like"><span class="header-section-number">4.4</span> LIKE</h3>
+<section id="like" class="level3">
+<h3 class="anchored" data-anchor-id="like">LIKE</h3>
 <div class="sourceCode" id="cb20"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> prenom <span class="kw">LIKE</span> <span class="st">'A%'</span>         <span class="co">-- commence par A</span></span>
@@ -857,8 +870,8 @@ Caution
 </div>
 </div>
 </section>
-<section id="plage-de-valeurs" class="level3" data-number="4.5">
-<h3 data-number="4.5" class="anchored" data-anchor-id="plage-de-valeurs"><span class="header-section-number">4.5</span> Plage de valeurs</h3>
+<section id="plage-de-valeurs" class="level3">
+<h3 class="anchored" data-anchor-id="plage-de-valeurs">Plage de valeurs</h3>
 <p><code>BETWEEN</code> permet de spécifier une plage de valeurs numériques.</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>       prenom,</span>
@@ -902,8 +915,8 @@ Caution
 </div>
 </div>
 </section>
-<section id="valeurs-dans-une-liste" class="level3" data-number="4.6">
-<h3 data-number="4.6" class="anchored" data-anchor-id="valeurs-dans-une-liste"><span class="header-section-number">4.6</span> Valeurs dans une liste</h3>
+<section id="valeurs-dans-une-liste" class="level3">
+<h3 class="anchored" data-anchor-id="valeurs-dans-une-liste">Valeurs dans une liste</h3>
 <p>Vous pouvez spécifier qu’un attribut doit appartenir à un liste avec <code>IN</code>.</p>
 <p>Ou inversement avec <code>NOT IN</code>.</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
@@ -941,14 +954,14 @@ Caution
 <p>Possible de lister des valeurs numériques</p>
 </div>
 </section>
-<section id="filtre-sur-les-attributs-booléens" class="level3" data-number="4.7">
-<h3 data-number="4.7" class="anchored" data-anchor-id="filtre-sur-les-attributs-booléens"><span class="header-section-number">4.7</span> Filtre sur les attributs booléens</h3>
+<section id="filtre-sur-les-attributs-booléens" class="level3">
+<h3 class="anchored" data-anchor-id="filtre-sur-les-attributs-booléens">Filtre sur les attributs booléens</h3>
 <div class="sourceCode" id="cb23"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> est_arbitre <span class="kw">IS</span> <span class="kw">TRUE</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="ordonner-le-résultat" class="level3" data-number="4.8">
-<h3 data-number="4.8" class="anchored" data-anchor-id="ordonner-le-résultat"><span class="header-section-number">4.8</span> Ordonner le résultat</h3>
+<section id="ordonner-le-résultat" class="level3">
+<h3 class="anchored" data-anchor-id="ordonner-le-résultat">Ordonner le résultat</h3>
 <p><code>ORDER BY</code> pour ordonner selon plusieurs colonnes.</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>       prenom,</span>
@@ -1007,8 +1020,8 @@ Caution
 </ul>
 </div>
 </section>
-<section id="afficher-n-lignes" class="level3" data-number="4.9">
-<h3 data-number="4.9" class="anchored" data-anchor-id="afficher-n-lignes"><span class="header-section-number">4.9</span> Afficher n lignes</h3>
+<section id="afficher-n-lignes" class="level3">
+<h3 class="anchored" data-anchor-id="afficher-n-lignes">Afficher n lignes</h3>
 <div class="sourceCode" id="cb25"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>       prenom,</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>       elo</span>
@@ -1088,8 +1101,8 @@ Caution
 </table>
 </div>
 </div>
-<section id="màj-globale" class="level3" data-number="5.1">
-<h3 data-number="5.1" class="anchored" data-anchor-id="màj-globale"><span class="header-section-number">5.1</span> Màj globale</h3>
+<section id="màj-globale" class="level3">
+<h3 class="anchored" data-anchor-id="màj-globale">Màj globale</h3>
 <p>Imaginons que vous souhaitez modifier le <code>elo</code> de toutes les joueuses.</p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="kw">UPDATE</span> echecs.joueuse</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>   <span class="kw">SET</span> elo <span class="op">=</span> elo <span class="op">+</span> <span class="dv">100</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1145,8 +1158,8 @@ Auto-commit
 </section>
 <section id="dates-et-heures" class="level2" data-number="8">
 <h2 data-number="8" class="anchored" data-anchor-id="dates-et-heures"><span class="header-section-number">8</span> Dates et Heures</h2>
-<section id="type-date" class="level3" data-number="8.1">
-<h3 data-number="8.1" class="anchored" data-anchor-id="type-date"><span class="header-section-number">8.1</span> Type DATE</h3>
+<section id="type-date" class="level3">
+<h3 class="anchored" data-anchor-id="type-date">Type DATE</h3>
 <p>Quelques opérations avec le type <code>DATE</code>.</p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
 <span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>       prenom,</span>
@@ -1157,8 +1170,8 @@ Auto-commit
 <span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">OR</span> date_naissance <span class="kw">BETWEEN</span> <span class="st">'1991-04-20'</span> <span class="kw">AND</span> <span class="st">'1992-12-31'</span></span>
 <span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">OR</span> <span class="fu">EXTRACT</span>(<span class="dt">MONTH</span> <span class="kw">FROM</span> date_naissance) <span class="op">=</span> <span class="dv">4</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="type-timestamp" class="level3" data-number="8.2">
-<h3 data-number="8.2" class="anchored" data-anchor-id="type-timestamp"><span class="header-section-number">8.2</span> Type TIMESTAMP</h3>
+<section id="type-timestamp" class="level3">
+<h3 class="anchored" data-anchor-id="type-timestamp">Type TIMESTAMP</h3>
 <p>Pour stocker la date et l’heure</p>
 <div class="sourceCode" id="cb32"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> echecs.club (</span>
 <span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>    id_club          SERIAL          <span class="kw">PRIMARY</span> <span class="kw">KEY</span>,  </span>
@@ -1167,8 +1180,8 @@ Auto-commit
 <span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>    date_creation    <span class="dt">TIMESTAMP</span></span>
 <span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <hr>
-<section id="utilisations" class="level4" data-number="8.2.1">
-<h4 data-number="8.2.1" class="anchored" data-anchor-id="utilisations"><span class="header-section-number">8.2.1</span> Utilisations</h4>
+<section id="utilisations" class="level4">
+<h4 class="anchored" data-anchor-id="utilisations">Utilisations</h4>
 <div class="sourceCode" id="cb33"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> echecs.club (nom, ville, date_creation)</span>
 <span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="kw">VALUES</span> (<span class="st">'C</span><span class="ch">''</span><span class="st">Chartres Echecs'</span>, <span class="st">'Chartres'</span>, <span class="st">'1991-09-01 20:00:00'</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><br></p>
@@ -1185,8 +1198,8 @@ Auto-commit
 </section>
 <section id="valeurs-nulles" class="level2" data-number="9">
 <h2 data-number="9" class="anchored" data-anchor-id="valeurs-nulles"><span class="header-section-number">9</span> Valeurs nulles</h2>
-<section id="tester-si-un-attribut-est-null" class="level3" data-number="9.1">
-<h3 data-number="9.1" class="anchored" data-anchor-id="tester-si-un-attribut-est-null"><span class="header-section-number">9.1</span> Tester si un attribut est NULL</h3>
+<section id="tester-si-un-attribut-est-null" class="level3">
+<h3 class="anchored" data-anchor-id="tester-si-un-attribut-est-null">Tester si un attribut est NULL</h3>
 <p>Joueuse dont le mail n’est pas renseigné :</p>
 <div class="sourceCode" id="cb35"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
@@ -1196,8 +1209,8 @@ Auto-commit
 <span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
 <span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> mail <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-<section id="coalesce" class="level3" data-number="9.2">
-<h3 data-number="9.2" class="anchored" data-anchor-id="coalesce"><span class="header-section-number">9.2</span> COALESCE</h3>
+<section id="coalesce" class="level3">
+<h3 class="anchored" data-anchor-id="coalesce">COALESCE</h3>
 <div class="callout callout-style-default callout-tip callout-titled" title="La fonction COALESCE">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1224,8 +1237,8 @@ La fonction COALESCE
 <p>NVL pour Oracle (à ne pas confondre avec MVL)</p>
 </div>
 </section>
-<section id="coalesce---exemple" class="level3" data-number="9.3">
-<h3 data-number="9.3" class="anchored" data-anchor-id="coalesce---exemple"><span class="header-section-number">9.3</span> COALESCE - Exemple</h3>
+<section id="coalesce---exemple" class="level3">
+<h3 class="anchored" data-anchor-id="coalesce---exemple">COALESCE - Exemple</h3>
 <div class="sourceCode" id="cb38"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">COALESCE</span>(mail, tel, <span class="st">'pas de contact'</span>)</span>
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
 <span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> id_joueuse <span class="op">=</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1242,8 +1255,8 @@ La fonction COALESCE
 </section>
 <section id="divers" class="level2" data-number="10">
 <h2 data-number="10" class="anchored" data-anchor-id="divers"><span class="header-section-number">10</span> Divers</h2>
-<section id="jouer-avec-les-colonnes" class="level3" data-number="10.1">
-<h3 data-number="10.1" class="anchored" data-anchor-id="jouer-avec-les-colonnes"><span class="header-section-number">10.1</span> Jouer avec les colonnes</h3>
+<section id="jouer-avec-les-colonnes" class="level3">
+<h3 class="anchored" data-anchor-id="jouer-avec-les-colonnes">Jouer avec les colonnes</h3>
 <div class="sourceCode" id="cb39"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">CONCAT</span>(nom, <span class="st">' '</span>, prenom) <span class="kw">AS</span> nom_complet,</span>
 <span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>       elo</span>
 <span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> echecs.joueuse;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1286,6 +1299,12 @@ La fonction COALESCE
 </table>
 </div>
 </div>
+</section>
+<section id="supprimer-les-doublons" class="level3">
+<h3 class="anchored" data-anchor-id="supprimer-les-doublons">Supprimer les doublons</h3>
+<p>Le mot clé <code>DISTINCT</code> permet de supprimer les doublons.</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="kw">DISTINCT</span> prenom</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> echecs.joueuse;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
 </section>

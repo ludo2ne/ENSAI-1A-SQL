@@ -11,7 +11,7 @@
   <meta name="generator" content="quarto-1.5.57">
 
   <meta name="author" content="Ludovic Deneuville">
-  <title>Base de données – Bases de Données Relationnelles et SQL</title>
+  <title>Base de données – SQL avancé</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -29,71 +29,6 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
-    /* CSS for syntax highlighting */
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-      }
-    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-    div.sourceCode
-      { color: #f8f8f2;  }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span { color: #f8f8f2; } /* Normal */
-    code span.al { color: #f07178; background-color: #2a0f15; font-weight: bold; } /* Alert */
-    code span.an { color: #d4d0ab; } /* Annotation */
-    code span.at { color: #00e0e0; } /* Attribute */
-    code span.bn { color: #d4d0ab; } /* BaseN */
-    code span.bu { color: #abe338; } /* BuiltIn */
-    code span.cf { color: #ffa07a; font-weight: bold; } /* ControlFlow */
-    code span.ch { color: #abe338; } /* Char */
-    code span.cn { color: #ffd700; } /* Constant */
-    code span.co { color: #f8f8f2; font-style: italic; } /* Comment */
-    code span.cv { color: #ffd700; } /* CommentVar */
-    code span.do { color: #f8f8f2; } /* Documentation */
-    code span.dt { color: #ffa07a; } /* DataType */
-    code span.dv { color: #d4d0ab; } /* DecVal */
-    code span.er { color: #f07178; text-decoration: underline; } /* Error */
-    code span.ex { color: #00e0e0; font-weight: bold; } /* Extension */
-    code span.fl { color: #d4d0ab; } /* Float */
-    code span.fu { color: #ffa07a; } /* Function */
-    code span.im { color: #abe338; } /* Import */
-    code span.in { color: #d4d0ab; } /* Information */
-    code span.kw { color: #ffa07a; font-weight: bold; } /* Keyword */
-    code span.op { color: #ffa07a; } /* Operator */
-    code span.ot { color: #00e0e0; } /* Other */
-    code span.pp { color: #dcc6e0; } /* Preprocessor */
-    code span.re { color: #00e0e0; background-color: #f8f8f2; } /* RegionMarker */
-    code span.sc { color: #abe338; } /* SpecialChar */
-    code span.ss { color: #abe338; } /* SpecialString */
-    code span.st { color: #abe338; } /* String */
-    code span.va { color: #00e0e0; } /* Variable */
-    code span.vs { color: #abe338; } /* VerbatimString */
-    code span.wa { color: #dcc6e0; } /* Warning */
   </style>
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto.css">
   <link rel="stylesheet" href="../../styles-reveal.css">
@@ -392,7 +327,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Bases de Données Relationnelles et SQL</h1>
+  <h1 class="title">SQL avancé</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -403,248 +338,31 @@ Ludovic Deneuville
 </div>
 
 </section>
-<section id="bases-de-données-relationnelles-et-sql" class="title-slide slide level2 center">
-<h2>Bases de Données Relationnelles et SQL</h2>
-<ul>
-<li>6h CM</li>
-<li>18h TP</li>
-<li><code>ludovic.deneuville@ensai.fr</code></li>
-<li>bureau 161</li>
-<li>sur la base des cours de Benjamin Girault</li>
-</ul>
+<section class="slide level3">
+
+<p><span class="emoji" data-emoji="construction">🚧</span></p>
+</section>
+<section id="vue" class="title-slide slide level2 center">
+<h2>VUE</h2>
+
 </section>
 
-<section id="objectifs" class="title-slide slide level2 center">
-<h2>Objectifs</h2>
-<ul>
-<li>Interrogation</li>
-<li>Création</li>
-<li>Modélisation</li>
-<li>Savoir utiliser le langage SQL</li>
-</ul>
-<aside class="notes">
-<p>UML pour la modélisation</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
+<section id="index" class="title-slide slide level2 center">
+<h2>INDEX</h2>
+
 </section>
 
-<section id="sql" class="title-slide slide level2 center">
-<h2>SQL</h2>
-<ul>
-<li>Syntaxe simple</li>
-<li>Efficace</li>
-<li>Très utilisé</li>
-</ul>
-<aside class="notes">
-<ul>
-<li>c’est LA compétence à avoir</li>
-<li>ça s’encapsule dans plein de langages (R, Python, Julia, Stata, SAS…)</li>
-<li>utile pour Big Data</li>
-</ul>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
+<section id="with" class="title-slide slide level2 center">
+<h2>WITH</h2>
+
 </section>
 
-<section>
-<section id="conventions" class="title-slide slide level2 center">
-<h2>Conventions</h2>
-<ul>
-<li><code>&lt;...&gt;</code> : texte à remplacer</li>
-<li><code>[...]</code> : élément optionnel</li>
-<li>Une requête se termine par un <code>;</code></li>
-<li>Mots clés en MAJUSCULE</li>
-<li><code>-- Ce qui vient ensuite est commenté</code></li>
-</ul>
-<aside class="notes">
-<ul>
-<li>Parfois possible d’utiliser <code>/* commentaire */</code></li>
-<li><code>;</code> : même si les logiciels souvent s’en moquent</li>
-</ul>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="requêtes-sql-jolies" class="slide level3">
-<h3>Requêtes SQL jolies</h3>
-<ul>
-<li>retour à la ligne</li>
-<li>mots clés alignés</li>
-</ul>
-<div class="fragment">
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>pasbien.sql</strong></pre>
-</div>
-<div class="sourceCode" id="cb1" data-filename="pasbien.sql"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> c.nom <span class="kw">AS</span> club, <span class="fu">AVG</span>(j.elo) <span class="kw">AS</span> moyenne_elo <span class="kw">FROM</span> joueuse j <span class="kw">INNER</span> <span class="kw">JOIN</span> club c <span class="kw">USING</span> (id_club) <span class="kw">WHERE</span> mail <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">GROUP</span> <span class="kw">BY</span> c.nom <span class="kw">ORDER</span> <span class="kw">BY</span> <span class="dv">2</span> <span class="kw">DESC</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-<p><br></p>
-<div class="fragment">
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>bien.sql</strong></pre>
-</div>
-<div class="sourceCode" id="cb2" data-filename="bien.sql"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> c.nom <span class="kw">AS</span> club, </span>
-<span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a>       <span class="fu">AVG</span>(j.elo) <span class="kw">AS</span> moyenne_elo</span>
-<span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> joueuse j </span>
-<span id="cb2-4"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">INNER</span> <span class="kw">JOIN</span> club c <span class="kw">USING</span> (id_club) </span>
-<span id="cb2-5"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> j.mail <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span> </span>
-<span id="cb2-6"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">GROUP</span> <span class="kw">BY</span> c.nom </span>
-<span id="cb2-7"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">ORDER</span> <span class="kw">BY</span> <span class="dv">2</span> <span class="kw">DESC</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-<aside class="notes">
-<p>Faites un effort pour vous même et pour vos relecteurs</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section></section>
-<section>
-<section id="les-tp" class="title-slide slide level2 center">
-<h2>Les TP</h2>
-<ul>
-<li>5 TP + 1 TD</li>
-<li>Datalab</li>
-<li>cloudBeaver</li>
-</ul>
-</section>
-<section id="ce-quil-faut-faire" class="slide level3">
-<h3>Ce qu’il faut faire</h3>
-<ul>
-<li>Lire attentivement les consignes</li>
-<li>Essayer de résoudre par soi même</li>
-<li>Chercher sur internet</li>
-<li>Demander de l’aide à ses camarades</li>
-<li>Demander de l’aide à l’enseignant</li>
-</ul>
-<aside class="notes">
-<p>ça peut paraitre un peu infentilisant mais c’est nécessaire de le rappeler !!!</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="à-ne-pas-faire" class="slide level3">
-<h3>À ne pas faire</h3>
-<ul>
-<li>Poster l’énoncé sur ChatGPT</li>
-<li>Copier / Coller la réponse sans rien comprendre</li>
-</ul>
-<aside class="notes">
-<ul>
-<li>Je ne dis pas qu’il ne faut jamais utiliser les LLM</li>
-<li>ça peut servir pour débgugger</li>
-<li>ou pour des taches sans VA</li>
-<li>mais pas pour apprendre et retenir</li>
-</ul>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section></section>
-<section id="évaluation" class="title-slide slide level2 center">
-<h2>Évaluation</h2>
-<ul>
-<li>Lundi 6 Janvier 10h</li>
-<li>Durée : 2h</li>
-<li>Sur papier</li>
-<li>Sans documents</li>
-</ul>
-<aside class="notes">
-<ul>
-<li>partie QCM</li>
-<li>des requêtes SQL à écrire</li>
-</ul>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-
-<section id="bibliographie" class="title-slide slide level2 smaller center">
-<h2>Bibliographie</h2>
-<ul>
-<li><a href="https://laurent-audibert.developpez.com/Cours-BD/" target="_blank">https://laurent-audibert.developpez.com/Cours-BD/</a></li>
-<li><a href="https://upinfo.univ-cotedazur.fr/im/bases-de-donnees/" target="_blank">https://upinfo.univ-cotedazur.fr/im/bases-de-donnees/</a></li>
-<li><a href="https://oseox.fr/sql/" target="_blank">https://oseox.fr/sql/</a></li>
-<li><a href="https://learnsql.fr/blog/aide-memoire-pour-les-entretiens-sql/" target="_blank">https://learnsql.fr/blog/aide-memoire-pour-les-entretiens-sql/</a></li>
-</ul>
-<aside class="notes">
-<ul>
-<li>désolé s’il y a des fautes, j’ai écrit ce cours un peu dans l’urgence</li>
-<li>n’hésitez pas à me les notifier (pas de point bonus)</li>
-<li>moi j’ai le droit, après je serai assez intransigent si vous laissez des fautes dans vos rapports</li>
-</ul>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
+<section id="grant" class="title-slide slide level2 center">
+<h2>GRANT</h2>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
-<p><a href="../../index.html">Home</a> — <a href="intro.html">Introduction à SQL</a></p>
+<p><a href="../../index.html">Home</a> — <a href="sql-avance.html">SQL avancé</a></p>
 </div>
 </div>
 </section>
