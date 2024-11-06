@@ -9,7 +9,7 @@
 <meta name="author" content="Ludovic Deneuville">
 <meta name="description" content="Slides">
 
-<title>Bases de Données Relationnelles et SQL – Base de données</title>
+<title>Algèbre Relationnelle – Base de données</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,40 +21,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -197,15 +163,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul class="collapse">
-  <li><a href="#bases-de-données-relationnelles-et-sql" id="toc-bases-de-données-relationnelles-et-sql" class="nav-link active" data-scroll-target="#bases-de-données-relationnelles-et-sql">Bases de Données Relationnelles et SQL</a></li>
-  <li><a href="#objectifs" id="toc-objectifs" class="nav-link" data-scroll-target="#objectifs">Objectifs</a></li>
-  <li><a href="#sql" id="toc-sql" class="nav-link" data-scroll-target="#sql">SQL</a></li>
-  <li><a href="#conventions" id="toc-conventions" class="nav-link" data-scroll-target="#conventions">Conventions</a></li>
-  <li><a href="#les-tp" id="toc-les-tp" class="nav-link" data-scroll-target="#les-tp">Les TP</a></li>
-  <li><a href="#évaluation" id="toc-évaluation" class="nav-link" data-scroll-target="#évaluation">Évaluation</a></li>
-  <li><a href="#bibliographie" id="toc-bibliographie" class="nav-link" data-scroll-target="#bibliographie">Bibliographie</a></li>
+  <li><a href="#algèbre-relationnelle" id="toc-algèbre-relationnelle" class="nav-link active" data-scroll-target="#algèbre-relationnelle">Algèbre Relationnelle</a></li>
+  <li><a href="#principaux-opérateurs" id="toc-principaux-opérateurs" class="nav-link" data-scroll-target="#principaux-opérateurs">Principaux opérateurs</a></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="intro-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="algebre-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -216,12 +177,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Bases de Données Relationnelles et SQL</h1>
+<h1 class="title">Algèbre Relationnelle</h1>
 </div>
 
 <div>
   <div class="description">
-    <a href="intro-slides.html">Slides</a>
+    <a href="algebre-slides.html">Slides</a>
   </div>
 </div>
 
@@ -244,112 +205,141 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="bases-de-données-relationnelles-et-sql" class="level2">
-<h2 class="anchored" data-anchor-id="bases-de-données-relationnelles-et-sql">Bases de Données Relationnelles et SQL</h2>
+<section id="algèbre-relationnelle" class="level2">
+<h2 class="anchored" data-anchor-id="algèbre-relationnelle">Algèbre Relationnelle</h2>
 <ul>
-<li>6h CM</li>
-<li>18h TP</li>
-<li><code>ludovic.deneuville@ensai.fr</code></li>
-<li>bureau 161</li>
-<li>sur la base des cours de Benjamin Girault</li>
+<li><a href="https://www.seas.upenn.edu/~zives/03f/cis550/codd.pdf" target="_blank">A Relational Model of Data for Large Shared Data Banks</a>, Edgar F. Codd, 1970</li>
+<li>Objectif : Modéliser une base de données ainsi que ses opérations</li>
+<li>Dans un SGBD relationel, tout est question de relation</li>
 </ul>
 </section>
-<section id="objectifs" class="level2">
-<h2 class="anchored" data-anchor-id="objectifs">Objectifs</h2>
+<section id="principaux-opérateurs" class="level2">
+<h2 class="anchored" data-anchor-id="principaux-opérateurs">Principaux opérateurs</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 32%">
+<col style="width: 67%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Opérateur</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>σ (Sélection)</strong></td>
+<td>Filtrer les lignes selon une condition</td>
+</tr>
+<tr class="even">
+<td><strong>π (Projection)</strong></td>
+<td>Sélectionner des colonnes spécifiques</td>
+</tr>
+<tr class="odd">
+<td><strong>U (Union)</strong></td>
+<td>Combiner les lignes de deux relations</td>
+</tr>
+<tr class="even">
+<td><strong>− (Différence)</strong></td>
+<td>Retourner les lignes présentes dans une relation mais pas dans l’autre</td>
+</tr>
+<tr class="odd">
+<td><strong>∩ (Intersection)</strong></td>
+<td>Trouver les lignes communes aux deux relations</td>
+</tr>
+<tr class="even">
+<td><strong>⨝ (Jointure)</strong></td>
+<td>Combiner deux relations basées sur une condition</td>
+</tr>
+<tr class="odd">
+<td><strong>ρ (Renommage)</strong></td>
+<td>Renommer une relation ou ses colonnes</td>
+</tr>
+<tr class="even">
+<td><strong>÷ (Division)</strong></td>
+<td>Trouver les éléments associés à tous les éléments d’une autre relation</td>
+</tr>
+</tbody>
+</table>
+<section id="sélection" class="level3">
+<h3 class="anchored" data-anchor-id="sélection">Sélection</h3>
 <ul>
-<li>Interrogation</li>
-<li>Création</li>
-<li>Modélisation</li>
-<li>Savoir utiliser le langage SQL</li>
-</ul>
-<div class="notes">
-<p>UML pour la modélisation</p>
-</div>
-</section>
-<section id="sql" class="level2">
-<h2 class="anchored" data-anchor-id="sql">SQL</h2>
-<ul>
-<li>Syntaxe simple</li>
-<li>Efficace</li>
-<li>Très utilisé</li>
-</ul>
-<div class="notes">
-<ul>
-<li>c’est LA compétence à avoir</li>
-<li>ça s’encapsule dans plein de langages (R, Python, Julia, Stata, SAS…)</li>
-<li>utile pour Big Data</li>
-</ul>
-</div>
-</section>
-<section id="conventions" class="level2">
-<h2 class="anchored" data-anchor-id="conventions">Conventions</h2>
-<ul>
-<li><code>&lt;...&gt;</code> : texte à remplacer</li>
-<li><code>[...]</code> : élément optionnel</li>
-<li>Mots clés en MAJUSCULE</li>
-</ul>
-<section id="requêtes-sql-jolies" class="level3">
-<h3 class="anchored" data-anchor-id="requêtes-sql-jolies">Requêtes SQL jolies</h3>
-<ul>
-<li>retour à la ligne</li>
-<li>mots clés alignés</li>
+<li>Permet de filtrer les lignes d’une table selon une condition</li>
 </ul>
 <div class="fragment">
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>pasbien.sql</strong></pre>
-</div>
-<div class="sourceCode" id="cb1" data-filename="pasbien.sql"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> c.nom <span class="kw">AS</span> club, <span class="fu">AVG</span>(j.elo) <span class="kw">AS</span> moyenne_elo <span class="kw">FROM</span> joueuse j <span class="kw">INNER</span> <span class="kw">JOIN</span> club c <span class="kw">USING</span> (id_club) <span class="kw">WHERE</span> mail <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">GROUP</span> <span class="kw">BY</span> c.nom <span class="kw">ORDER</span> <span class="kw">BY</span> <span class="dv">2</span> <span class="kw">DESC</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-<p><br></p>
-<div class="fragment">
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>bien.sql</strong></pre>
-</div>
-<div class="sourceCode" id="cb2" data-filename="bien.sql"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> c.nom <span class="kw">AS</span> club, </span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">AVG</span>(j.elo) <span class="kw">AS</span> moyenne_elo</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> joueuse j </span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a> <span class="kw">INNER</span> <span class="kw">JOIN</span> club c <span class="kw">USING</span> (id_club) </span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> j.mail <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span> </span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a> <span class="kw">GROUP</span> <span class="kw">BY</span> c.nom </span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a> <span class="kw">ORDER</span> <span class="kw">BY</span> <span class="dv">2</span> <span class="kw">DESC</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-<div class="notes">
-<p>Faites un effort pour vous même et pour vos relecteurs</p>
-</div>
-</section>
-</section>
-<section id="les-tp" class="level2">
-<h2 class="anchored" data-anchor-id="les-tp">Les TP</h2>
 <ul>
-<li>5 TP + 1 TD</li>
-<li>Datalab</li>
-<li>cloudBeaver</li>
+<li>Mot clé SQL : WHERE <span class="emoji" data-emoji="warning">⚠️</span></li>
 </ul>
+</div>
+<p>L’<strong>algèbre relationnelle</strong> est un langage formel pour manipuler des bases de données relationnelles. Elle définit un ensemble d’opérations sur les relations (tables) qui permettent de traiter et de manipuler les données de manière logique. Voici les principaux opérateurs de l’algèbre relationnelle :</p>
 </section>
-<section id="évaluation" class="level2">
-<h2 class="anchored" data-anchor-id="évaluation">Évaluation</h2>
-<ul>
-<li>Lundi 6 Janvier 10h</li>
-<li>Durée : 2h</li>
-<li>Sur papier</li>
-<li>Sans documents</li>
-</ul>
+<section id="sélection-σ---select" class="level3">
+<h3 class="anchored" data-anchor-id="sélection-σ---select">1. <strong>Sélection (σ - Select)</strong></h3>
+<p><strong>Syntaxe</strong> :</p>
+<pre><code>σ (condition)(Relation)</code></pre>
+<p><strong>Exemple</strong> : Sélectionner toutes les lignes où l’âge est supérieur à 18 ans dans une table <code>Personnes</code>.</p>
+<pre><code>σ(age &gt; 18)(Personnes)</code></pre>
 </section>
-<section id="bibliographie" class="level2">
-<h2 class="anchored" data-anchor-id="bibliographie">Bibliographie</h2>
-<ul>
-<li>https://laurent-audibert.developpez.com/Cours-BD/?page=introduction-bases-de-donnees</li>
-<li>https://upinfo.univ-cotedazur.fr/im/bases-de-donnees/</li>
-<li>https://openclassrooms.com/fr/courses/6971126-implementez-vos-bases-de-donnees-relationnelles-avec-sql/7139618-decouvrez-le-systeme-de-gestion-de-base-de-donnees-sgbd</li>
-<li>https://oseox.fr/sql/</li>
-<li>https://learnsql.fr/blog/aide-memoire-pour-les-entretiens-sql/</li>
-</ul>
+<section id="projection-π---project" class="level3">
+<h3 class="anchored" data-anchor-id="projection-π---project">2. <strong>Projection (π - Project)</strong></h3>
+<p>L’opérateur <strong>projection</strong> permet de sélectionner certaines colonnes d’une relation (table) et d’ignorer les autres.</p>
+<p><strong>Syntaxe</strong> :</p>
+<pre><code>π (colonnes)(Relation)</code></pre>
+<p><strong>Exemple</strong> : Projeter seulement les colonnes <code>nom</code> et <code>prénom</code> d’une table <code>Personnes</code>.</p>
+<pre><code>π(nom, prénom)(Personnes)</code></pre>
+</section>
+<section id="union---union" class="level3">
+<h3 class="anchored" data-anchor-id="union---union">3. <strong>Union (∪ - Union)</strong></h3>
+<p>L’opérateur <strong>union</strong> combine les lignes de deux relations (tables) ayant le même nombre de colonnes et des types compatibles.</p>
+<p><strong>Syntaxe</strong> :</p>
+<pre><code>Relation1 ∪ Relation2</code></pre>
+<p><strong>Exemple</strong> : Unir les résultats de deux tables <code>Personnes_Adulte</code> et <code>Personnes_Enfant</code> (toutes deux ayant les colonnes <code>nom</code> et <code>prénom</code>).</p>
+<pre><code>Personnes_Adulte ∪ Personnes_Enfant</code></pre>
+</section>
+<section id="différence---difference" class="level3">
+<h3 class="anchored" data-anchor-id="différence---difference">4. <strong>Différence (− - Difference)</strong></h3>
+<p>L’opérateur <strong>différence</strong> renvoie les lignes qui se trouvent dans la première relation mais pas dans la seconde.</p>
+<p><strong>Syntaxe</strong> :</p>
+<pre><code>Relation1 − Relation2</code></pre>
+<p><strong>Exemple</strong> : Trouver les personnes qui ne sont pas dans la table <code>Personnes_Adulte</code>.</p>
+<pre><code>Personnes − Personnes_Adulte</code></pre>
+</section>
+<section id="intersection---intersection" class="level3">
+<h3 class="anchored" data-anchor-id="intersection---intersection">5. <strong>Intersection (∩ - Intersection)</strong></h3>
+<p>L’opérateur <strong>intersection</strong> renvoie les lignes communes aux deux relations.</p>
+<p><strong>Syntaxe</strong> :</p>
+<pre><code>Relation1 ∩ Relation2</code></pre>
+<p><strong>Exemple</strong> : Trouver les personnes qui sont à la fois dans <code>Personnes_Adulte</code> et <code>Personnes_Enfant</code>.</p>
+<pre><code>Personnes_Adulte ∩ Personnes_Enfant</code></pre>
+</section>
+<section id="jointure---join" class="level3">
+<h3 class="anchored" data-anchor-id="jointure---join">6. <strong>Jointure (⨝ - Join)</strong></h3>
+<p>L’opérateur <strong>jointure</strong> permet de combiner deux relations (tables) basées sur une condition de correspondance entre les colonnes.</p>
+<p><strong>Syntaxe</strong> :</p>
+<pre><code>Relation1 ⨝ (condition) Relation2</code></pre>
+<p><strong>Exemple</strong> : Effectuer une jointure entre <code>Personnes</code> et <code>Adresses</code> sur l’attribut <code>id_personne</code>.</p>
+<pre><code>Personnes ⨝ Personnes.id_personne = Adresses.id_personne Adresses</code></pre>
+<p>Il existe plusieurs types de jointures, par exemple : - <strong>Jointure naturelle (Natural Join)</strong> : joint les relations basées sur toutes les colonnes ayant le même nom dans les deux relations. - <strong>Jointure externe (Outer Join)</strong> : inclut également les lignes qui ne correspondent pas dans les relations, avec des valeurs nulles pour les colonnes non correspondantes.</p>
+</section>
+<section id="renommage-ρ---rename" class="level3">
+<h3 class="anchored" data-anchor-id="renommage-ρ---rename">7. <strong>Renommage (ρ - Rename)</strong></h3>
+<p>L’opérateur <strong>renommage</strong> permet de renommer une relation ou ses colonnes.</p>
+<p><strong>Syntaxe</strong> :</p>
+<pre><code>ρ (nouveau_nom)(Relation)</code></pre>
+<p><strong>Exemple</strong> : Renommer la relation <code>Personnes</code> en <code>Individus</code>.</p>
+<pre><code>ρ(Individus)(Personnes)</code></pre>
+</section>
+<section id="division---division" class="level3">
+<h3 class="anchored" data-anchor-id="division---division">8. <strong>Division (÷ - Division)</strong></h3>
+<p>L’opérateur <strong>division</strong> est utilisé pour trouver les éléments dans une relation qui sont associés à tous les éléments d’une autre relation. C’est utile pour des requêtes de type “trouver des objets qui satisfont toutes les conditions”.</p>
+<p><strong>Syntaxe</strong> :</p>
+<pre><code>Relation1 ÷ Relation2</code></pre>
+<p><strong>Exemple</strong> : Trouver les produits qui ont été vendus à tous les clients, où <code>Ventes</code> contient des colonnes <code>produit</code> et <code>client</code>, et <code>Clients_Interesés</code> contient une seule colonne <code>client</code>.</p>
+<pre><code>Ventes ÷ Clients_Interesés</code></pre>
+<p>Ces opérateurs de l’algèbre relationnelle sont essentiels pour manipuler et interroger des bases de données relationnelles de manière logique, indépendamment du SGBD (Système de Gestion de Base de Données) sous-jacent.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

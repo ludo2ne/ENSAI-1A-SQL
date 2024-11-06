@@ -7,6 +7,153 @@
     "text": "6h de cours\n18h de TP/TD"
   },
   {
+    "objectID": "doc/cours/sql-intro.html",
+    "href": "doc/cours/sql-intro.html",
+    "title": "SQL",
+    "section": "",
+    "text": "Définition\n\n\n\nLe SQL est un langage standardisé utilisé pour interagir avec des bases de données relationnelles.\nIl permet de créer, manipuler, interroger et gérer les données stockées dans des tables.\n\n\n\n\nSQL est un language normé dont la dernière version est SQL:2023.\n\n\n\n\n\n\nCaution\n\n\n\nLes SGBD ne respectent pas exactement la norme SQL.\nÀ un niveau avancé d’utilisation, il y a des différences entre les SGBD.\n\n\n\n\n\n\nDéfinition de Données\nManipulation de Données\nContrôle des Transactions\nContrôle d’accès aux Données\n\n\n\nManipulation de Données   - CRUD\nDéfinition de Données   - Créer/Modifier/Supprimer une table\nContrôle des Transactions   - BEGIN, COMMIT, ROLLBACK\nContrôle d’accès aux Données   - GRANT REVOKE"
+  },
+  {
+    "objectID": "doc/cours/sql-intro.html#structured-query-language",
+    "href": "doc/cours/sql-intro.html#structured-query-language",
+    "title": "SQL",
+    "section": "",
+    "text": "Définition\n\n\n\nLe SQL est un langage standardisé utilisé pour interagir avec des bases de données relationnelles.\nIl permet de créer, manipuler, interroger et gérer les données stockées dans des tables.\n\n\n\n\nSQL est un language normé dont la dernière version est SQL:2023.\n\n\n\n\n\n\nCaution\n\n\n\nLes SGBD ne respectent pas exactement la norme SQL.\nÀ un niveau avancé d’utilisation, il y a des différences entre les SGBD.\n\n\n\n\n\n\nDéfinition de Données\nManipulation de Données\nContrôle des Transactions\nContrôle d’accès aux Données\n\n\n\nManipulation de Données   - CRUD\nDéfinition de Données   - Créer/Modifier/Supprimer une table\nContrôle des Transactions   - BEGIN, COMMIT, ROLLBACK\nContrôle d’accès aux Données   - GRANT REVOKE"
+  },
+  {
+    "objectID": "doc/cours/sql-intro.html#définition-de-données",
+    "href": "doc/cours/sql-intro.html#définition-de-données",
+    "title": "SQL",
+    "section": "Définition de Données",
+    "text": "Définition de Données\n\nIci nous n’allons travailler que sur une seule table à la fois\n\n\nCréer une table\nCREATE TABLE joueuse (\n    id_joueuse     INT,\n    nom            TEXT,\n    prenom         TEXT,\n    date_naissance DATE,\n    elo            INT,\n    est_arbitre    BOOLEAN,\n    code_pays      TEXT,\n    taux_victoires FLOAT\n);\n\nC’est comme créer les colonnes d’un tableau.\n\n\n\nCREATE avancé\nCREATE TABLE echecs.joueuse (\n    id_joueuse     SERIAL          PRIMARY KEY,   \n    nom            VARCHAR(50)     NOT NULL, \n    prenom         VARCHAR(50)     NOT NULL, \n    date_naissance TIMESTAMP,                 \n    elo            INT             CHECK (elo &gt; 0),  \n    mail           VARCHAR(100)    UNIQUE,         \n    est_arbitre    BOOLEAN         DEFAULT false,\n    code_pays      VARCHAR(2),          \n    taux_victoires FLOAT  \n);\n\n\n\n\n\n\n\nContraintes\n\n\n\n\nNOT NULL : l’attribut doit être renseigné\nUNIQUE : chaque valeur de l’attribut est unique (pas de doublons)\nCHECK : pour vérifier la cohérence d’un attribut\n\n\n\n\n\n\nSchéma echecs : j’y viens juste après\nSERIAL : séquence numérique, on en reparle dans quelques minutes\nVARCHAR(50) pour limiter la taille des valeurs\nDEFAULT : valeur par défaut (principalement lors de l’INSERT)\n\nImportant : La PK est NOT NULL et UNIQUE\n\n\n\nSchéma\nUtile lorsque le nombre de table devient grand.\n\nOrganisation des objets, clarté\nGestion des permissions\n\nCREATE SCHEMA echecs;\n\n\nVente de légume\nUtiliser la même bdd pour la gestion RH, le métier et la compta\ncréer un schéma pour séparer les tables\n\n\n\n\nTable dans un schéma\nCREATE TABLE echecs.club (\n    id_club          SERIAL          PRIMARY KEY,  \n    nom              VARCHAR(100)    NOT NULL,   \n    ville            VARCHAR(100)    NOT NULL, \n    date_creation    DATE\n);\n\nDéplacer la table joueuse dans le schéma echecs :\nALTER TABLE joueuse SET SCHEMA echecs;\n\nC’est comme créer un fichier dans un dossier.\nPar défaut les objets sont créés dans le schéma public.\n\n\n\n\nBonnes pratiques\n\nNom de table représentatif et au singulier\nPas de majuscules, pas d’accents\nMots séparés par des underscores (snake_case)\nNe pas utiliser de mots clés réservés (date, user…)\nNe pas avoir de colonne qui porte le même nom que sa table\n\n\ndans les requêtes : mots clés en majuscules\n\n\n\nModifier une colonne\nModifier le type :\nALTER TABLE joueuse\nALTER COLUMN nom TYPE VARCHAR(80);\n\nRenommer :\nALTER TABLE joueuse\nRENAME COLUMN date_naissance TO dnais;\n\n\nCréer/Supprimer une colonne\nAjout :\nALTER TABLE joueuse\nADD COLUMN id_club INT;\n\nSuppression :\nALTER TABLE joueuse\nDROP COLUMN taux_victoires;\n\n\nDéfinir une clé étrangère\n\nNous venons de créer une colonne id_club\nLions maintenant cette colonne à la table club\n\nALTER TABLE joueuse\nADD CONSTRAINT fk_id_club\nFOREIGN KEY (id_club)\nREFERENCES club(id_club);\n\n\n\n\n\n\nClé étrangère\n\n\n\nDans la table joueuse, l’attribut id_club a pour valeur soit :\n\nune valeur de id_club de la table club\nNULL\n\n\n\n\n\nAutres possibilités\n\nRenommer une table\nAjouter / Supprimer une contrainte\nDéfinir / Supprimer une valeur par défaut\n\n\n\nSupprimer une table\nDROP TABLE joueuse;\n\n\n\n\n\n\nWarning\n\n\n\nCette opération est irréversible !\nElle supprime définitivement :\n\nla table\ntoutes les données qu’elle contient\n\n\n\nDROP TABLE IF EXISTS joueuse;      -- utile pour les scripts SQL"
+  },
+  {
+    "objectID": "doc/cours/sql-intro.html#insérer-des-données",
+    "href": "doc/cours/sql-intro.html#insérer-des-données",
+    "title": "SQL",
+    "section": "Insérer des données",
+    "text": "Insérer des données\n\n\n\n\n\nclassDiagram\n    class Club {\n        id_club PK\n        nom\n        ville\n        date_creation\n    }\n\n\n\n\n\n\n\nINSERT INTO echecs.club \n(nom,                              ville,            date_creation)\nVALUES           \n('C''Chartres Echecs',            'Chartres',        '1991-09-01'),\n('Bischwiller',                   'Bischwiller',     '1976-09-01'),\n('Asnieres - le Grand Echiquier', 'Asnieres',        '1987-03-20'),\n('Tours des Hauts-De-France',     'Saint-Quentin',   '1999-12-01');\n\n\nPourquoi l’on n’insère pas la colonne id_club ? 😕\n\n\nAttention à bien mettre les virgules au bon endroit\n\n\nSéquence\nLa colonne id_club est une séquence gérée par le SGBD.\nLes valeurs sont générées automatiquement à l’insertion et la séquence est incrémentée (1, 2, 3…).\n\n\n\n\n\n\nSéquences\n\n\n\n\n\nIl est possible de créer et gérer ses propres séquences :\nCREATE SEQUENCE nom_sequence START 1 INCREMENT BY 1;\n\nSELECT currval('nom_sequence'); -- dernière valeur utilisée\nSELECT nextval('nom_sequence'); -- prochaine valeur\n\nALTER SEQUENCE nom_sequence RESTART WITH nouvelle_valeur;\n\nDROP SEQUENCE nom_sequence;\n\n\n\n\n\nPas de double quotes en SQL !!!\n’’ : Pour ajouter un simple quote dans une chaine"
+  },
+  {
+    "objectID": "doc/cours/sql-intro.html#lire-des-données",
+    "href": "doc/cours/sql-intro.html#lire-des-données",
+    "title": "SQL",
+    "section": "Lire des données",
+    "text": "Lire des données\nSELECT * FROM table pour tout afficher.\nSELECT *\n  FROM echecs.club;\n\n\n\n\n\n\n\n\n\n\n\n\nid_club\nnom\nville\ndate_creation\n\n\n\n\n1\nC’Chartres Echecs\nChartres\n1991-09-01\n\n\n2\nBischwiller\nBischwiller\n1976-09-01\n\n\n3\nAsnieres - le Grand Echiquier\nAsnieres\n1987-03-20\n\n\n4\nTours des Hauts-De-France\nSaint-Quentin\n1999-12-01\n\n\n\n\n\n\nColonnes à afficher\nListez les colonnes à afficher après le SELECT\nSELECT nom,\n       prenom,\n       elo\n  FROM echecs.joueuse;\n\n\n\n\n\n\nnom\nprenom\nelo\n\n\n\n\nGuichard\nPauline\n2357\n\n\nDaulyte-Cornette\nDeimante\n2371\n\n\nNavrotescu\nAndreea\n2338\n\n\nSebag\nMarie\n2448\n\n\nMillet\nSophie\n2366\n\n\nSkrichempko\nAlmira\n2361\n\n\n\n\n\n\n\nFilter les lignes\nFiltrez sur les lignes avec une clause WHERE.\nSELECT nom,\n       prenom,\n       elo\n  FROM echecs.joueuse\n WHERE elo &gt; 2400;\n\n\n\n\n\n\nnom\nprenom\nelo\n\n\n\n\nSebag\nMarie\n2448\n\n\n\n\n\n\n\nPlusieurs filtres\nLe mot clé AND permet d’ajouter d’autres filtres.\nSELECT nom,\n       prenom,\n       elo\n  FROM echecs.joueuse\n WHERE elo &lt; 2400\n   AND prenom LIKE 'A%';\n\n\n\n\n\n\nnom\nprenom\nelo\n\n\n\n\nNavrotescu\nAndreea\n2338\n\n\nSkrichempko\nAlmira\n2361\n\n\n\n\n\n\n1 seul WHERE\nplusieurs AND\n\n\nVous pouvez autoriser plusieurs conditions avec OR.\nSELECT nom,\n       prenom,\n       elo\n  FROM echecs.joueuse\n WHERE elo &gt; 2400\n    OR prenom LIKE 'A%';\n\n\n\n\n\n\nnom\nprenom\nelo\n\n\n\n\nSebag\nMarie\n2448\n\n\nNavrotescu\nAndreea\n2338\n\n\nSkrichempko\nAlmira\n2361\n\n\n\n\n\n\n\nLIKE\nSELECT *\n  FROM echecs.joueuse\n WHERE prenom LIKE 'A%'         -- commence par A\n    OR prenom LIKE '%A'         -- termine par A\n    OR prenom LIKE '%A%'        -- contient au moins un A\n    OR UPPER(prenom) LIKE '%A%' -- contient au moins un A ou un a\n    OR prenom LIKE 'A__'        -- commence par A suivi de 2 autres caractères\n\n% : représente entre 0 et une infinité de caractères\n_ : représente exactement 1 caractère\n\n\n\n\n\n\n\nCaution\n\n\n\nAttention aux MAJUSCULES ≠ minuscules\n\n\n\n\nPlage de valeurs\nBETWEEN permet de spécifier une plage de valeurs numériques.\nSELECT nom,\n       prenom,\n       elo\n  FROM echecs.joueuse\n WHERE elo BETWEEN 2350 AND 2400;\n\n\n\n\n\n\nnom\nprenom\nelo\n\n\n\n\nGuichard\nPauline\n2357\n\n\nDaulyte-Cornette\nDeimante\n2371\n\n\nMillet\nSophie\n2366\n\n\nSkrichempko\nAlmira\n2361\n\n\n\n\n\n\n\nValeurs dans une liste\nVous pouvez spécifier qu’un attribut doit appartenir à un liste avec IN.\nOu inversement avec NOT IN.\nSELECT nom,\n       prenom,\n       elo\n  FROM echecs.joueuse\n WHERE prenom IN ('Deimante', 'Sophie');\n\n\n\n\n\n\nnom\nprenom\nelo\n\n\n\n\nDaulyte-Cornette\nDeimante\n2371\n\n\nMillet\nSophie\n2366\n\n\n\n\n\n\nPossible de lister des valeurs numériques\n\n\n\nFiltre sur les attributs booléens\nSELECT *\n  FROM echecs.joueuse\n WHERE est_arbitre IS TRUE;\n\n\nOrdonner le résultat\nORDER BY pour ordonner selon plusieurs colonnes.\nSELECT nom,\n       prenom,\n       elo\n  FROM echecs.joueuse\n ORDER BY elo,\n          taux_victoires DESC;\n\n\n\n\n\nnom\nprenom\nelo\n\n\n\n\nNavrotescu\nAndreea\n2338\n\n\nGuichard\nPauline\n2357\n\n\nSkrichempko\nAlmira\n2361\n\n\nMillet\nSophie\n2366\n\n\nDaulyte-Cornette\nDeimante\n2371\n\n\nSebag\nMarie\n2448\n\n\n\n\n\n\n\nORDER BY 2 : 2e colonne\n\n\n\n\nAfficher n lignes\nSELECT nom,\n       prenom,\n       elo\n  FROM echecs.joueuse\n LIMIT 3;\n\n\n\n\n\n\nnom\nprenom\nelo\n\n\n\n\nGuichard\nPauline\n2357\n\n\nDaulyte-Cornette\nDeimante\n2371\n\n\nNavrotescu\nAndreea\n2338"
+  },
+  {
+    "objectID": "doc/cours/sql-intro.html#mise-à-jour-de-données",
+    "href": "doc/cours/sql-intro.html#mise-à-jour-de-données",
+    "title": "SQL",
+    "section": "Mise à jour de données",
+    "text": "Mise à jour de données\nUPDATE echecs.joueuse\n   SET elo = 2399\n WHERE id_joueuse = 1;\n\n\n\nSELECT id_joueuse,\n       nom,\n       prenom,\n       elo\n  FROM echecs.joueuse\n WHERE id_joueuse = 1;\n\n\n\n\n\n\n\n\n\n\nid_joueuse\nnom\nprenom\nelo\n\n\n\n\n1\nGuichard\nPauline\n2399\n\n\n\n\n\n\nMàj globale\nImaginons que vous souhaitez modifier le elo de toutes les joueuses.\nUPDATE echecs.joueuse\n   SET elo = elo + 100;\n\n\n\n\n\n\nWarning\n\n\n\nGénéralement un message d’avertissement vous demande si vous êtes certains de vouloir mettre à jour toutes les lignes."
+  },
+  {
+    "objectID": "doc/cours/sql-intro.html#suppression-de-données",
+    "href": "doc/cours/sql-intro.html#suppression-de-données",
+    "title": "SQL",
+    "section": "Suppression de données",
+    "text": "Suppression de données\nSupprimer une joueuse :\nDELETE FROM echecs.joueuse\n WHERE id_joueuse = 1;\nVider la table :\nDELETE FROM echecs.joueuse"
+  },
+  {
+    "objectID": "doc/cours/sql-intro.html#validation-des-opérations",
+    "href": "doc/cours/sql-intro.html#validation-des-opérations",
+    "title": "SQL",
+    "section": "Validation des opérations",
+    "text": "Validation des opérations\nEt si ? 😱\nVous avez exécuté par erreur DELETE FROM joueuse;\n\nIl y a un système de transactions avec les mots clés :\n\nBEGIN\nCOMMIT\nROLLBACK\n\n\n\n\n\n\n\nAuto-commit\n\n\n\nAttention : il n’y a pas de garde-fou lorsque vous êtes en Auto-commit.\n\n\n\n🚧 TODO à approfondir plus tard"
+  },
+  {
+    "objectID": "doc/cours/sql-intro.html#dates-et-heures",
+    "href": "doc/cours/sql-intro.html#dates-et-heures",
+    "title": "SQL",
+    "section": "Dates et Heures",
+    "text": "Dates et Heures\n\nType DATE\nQuelques opérations avec le type DATE.\nSELECT nom,\n       prenom,\n       EXTRACT(YEAR FROM date_naissance) AS annee_naissance,\n       AGE(CURRENT_DATE, date_naissance) AS age\n  FROM echecs.joueuse\n WHERE date_naissance &gt;= '1991-04-20'\n    OR date_naissance BETWEEN '1991-04-20' AND '1992-12-31'\n    OR EXTRACT(MONTH FROM date_naissance) = 4;\n\n\nType TIMESTAMP\nPour stocker la date et l’heure\nCREATE TABLE echecs.club (\n    id_club          SERIAL          PRIMARY KEY,  \n    nom              VARCHAR(100)    NOT NULL,   \n    ville            VARCHAR(100)    NOT NULL, \n    date_creation    TIMESTAMP\n);\n\n\nUtilisations\nINSERT INTO echecs.club (nom, ville, date_creation)\nVALUES ('C''Chartres Echecs', 'Chartres', '1991-09-01 20:00:00');\n\nINSERT INTO echecs.club (nom, ville, date_creation)\nVALUES ('Bischwiller', 'Bischwiller', CURRENT_TIMESTAMP);\nVous pouvez utiliser également sur le type TIMESTAMP :\n\nEXTRACT,\nBETWEEN,\nles opérateurs de comparaison"
+  },
+  {
+    "objectID": "doc/cours/sql-intro.html#valeurs-nulles",
+    "href": "doc/cours/sql-intro.html#valeurs-nulles",
+    "title": "SQL",
+    "section": "Valeurs nulles",
+    "text": "Valeurs nulles\n\nTester si un attribut est NULL\nJoueuse dont le mail n’est pas renseigné :\nSELECT *\n  FROM echecs.joueuse\n WHERE mail IS NULL; \nEt inversemenent\nSELECT *\n  FROM echecs.joueuse\n WHERE mail IS NOT NULL;\n\n\nCOALESCE\n\n\n\n\n\n\nLa fonction COALESCE\n\n\n\nEn PostgreSQL, la fonction COALESCE :\n\nprend un nombre quelconque de paramètres\nretourne le 1er paramètre dont la valeur est NON NULLE\n\n\n\n\nc(x1, x2, ... xn):\n  if x1:\n    return x1\n  else:\n    return c(x2, ... xn)\nNVL pour Oracle (à ne pas confondre avec MVL)\n\n\n\nCOALESCE - Exemple\nSELECT COALESCE(mail, tel, 'pas de contact')\n  FROM echecs.joueuse\n WHERE id_joueuse = 1\nLa requête ci-dessus va afficher :\n\nSi mail est NON NULL ➡️ mail\nSinon\n\nSi tel NON NULL ➡️ tel\nSinon ➡️ pas de contact"
+  },
+  {
+    "objectID": "doc/cours/sql-intro.html#divers",
+    "href": "doc/cours/sql-intro.html#divers",
+    "title": "SQL",
+    "section": "Divers",
+    "text": "Divers\n\nJouer avec les colonnes\nSELECT CONCAT(nom, ' ', prenom) AS nom_complet,\n       elo\nFROM echecs.joueuse;\n\n\n\n\n\n\nnom_complet\nelo\n\n\n\n\nGuichard Pauline\n2357\n\n\nDaulyte-Cornette Deimante\n2371\n\n\nNavrotescu Andreea\n2338\n\n\nSebag Marie\n2448\n\n\nMillet Sophie\n2366\n\n\nSkrichempko Almira\n2361"
+  },
+  {
+    "objectID": "doc/cours/sql-intro-slides.html#structured-query-language",
+    "href": "doc/cours/sql-intro-slides.html#structured-query-language",
+    "title": "SQL",
+    "section": "Structured Query Language",
+    "text": "Structured Query Language\n\n\n\n\n\n\n\nDéfinition\n\n\nLe SQL est un langage standardisé utilisé pour interagir avec des bases de données relationnelles.\nIl permet de créer, manipuler, interroger et gérer les données stockées dans des tables."
+  },
+  {
+    "objectID": "doc/cours/sql-intro-slides.html#définition-de-données",
+    "href": "doc/cours/sql-intro-slides.html#définition-de-données",
+    "title": "SQL",
+    "section": "Définition de Données",
+    "text": "Définition de Données\n\nIci nous n’allons travailler que sur une seule table à la fois"
+  },
+  {
+    "objectID": "doc/cours/sql-intro-slides.html#insérer-des-données",
+    "href": "doc/cours/sql-intro-slides.html#insérer-des-données",
+    "title": "SQL",
+    "section": "Insérer des données",
+    "text": "Insérer des données\n\n\n\n\n\nclassDiagram\n    class Club {\n        id_club PK\n        nom\n        ville\n        date_creation\n    }\n\n\n\n\n\n\n\nINSERT INTO echecs.club \n(nom,                              ville,            date_creation)\nVALUES           \n('C''Chartres Echecs',            'Chartres',        '1991-09-01'),\n('Bischwiller',                   'Bischwiller',     '1976-09-01'),\n('Asnieres - le Grand Echiquier', 'Asnieres',        '1987-03-20'),\n('Tours des Hauts-De-France',     'Saint-Quentin',   '1999-12-01');\n\n\nPourquoi l’on n’insère pas la colonne id_club ? 😕\n\n\nAttention à bien mettre les virgules au bon endroit"
+  },
+  {
+    "objectID": "doc/cours/sql-intro-slides.html#lire-des-données",
+    "href": "doc/cours/sql-intro-slides.html#lire-des-données",
+    "title": "SQL",
+    "section": "Lire des données",
+    "text": "Lire des données\nSELECT * FROM table pour tout afficher.\nSELECT *\n  FROM echecs.club;\n\n\n\n\n\n\n\n\n\n\n\n\nid_club\nnom\nville\ndate_creation\n\n\n\n\n1\nC’Chartres Echecs\nChartres\n1991-09-01\n\n\n2\nBischwiller\nBischwiller\n1976-09-01\n\n\n3\nAsnieres - le Grand Echiquier\nAsnieres\n1987-03-20\n\n\n4\nTours des Hauts-De-France\nSaint-Quentin\n1999-12-01"
+  },
+  {
+    "objectID": "doc/cours/sql-intro-slides.html#mise-à-jour-de-données",
+    "href": "doc/cours/sql-intro-slides.html#mise-à-jour-de-données",
+    "title": "SQL",
+    "section": "Mise à jour de données",
+    "text": "Mise à jour de données\nUPDATE echecs.joueuse\n   SET elo = 2399\n WHERE id_joueuse = 1;\n\n\n\nSELECT id_joueuse,\n       nom,\n       prenom,\n       elo\n  FROM echecs.joueuse\n WHERE id_joueuse = 1;\n\n\n\n\n\n\n\n\n\n\nid_joueuse\nnom\nprenom\nelo\n\n\n\n\n1\nGuichard\nPauline\n2399"
+  },
+  {
+    "objectID": "doc/cours/sql-intro-slides.html#suppression-de-données",
+    "href": "doc/cours/sql-intro-slides.html#suppression-de-données",
+    "title": "SQL",
+    "section": "Suppression de données",
+    "text": "Suppression de données\nSupprimer une joueuse :\nDELETE FROM echecs.joueuse\n WHERE id_joueuse = 1;\nVider la table :\nDELETE FROM echecs.joueuse"
+  },
+  {
+    "objectID": "doc/cours/sql-intro-slides.html#validation-des-opérations",
+    "href": "doc/cours/sql-intro-slides.html#validation-des-opérations",
+    "title": "SQL",
+    "section": "Validation des opérations",
+    "text": "Validation des opérations\nEt si ? 😱\nVous avez exécuté par erreur DELETE FROM joueuse;\n\nIl y a un système de transactions avec les mots clés :\n\nBEGIN\nCOMMIT\nROLLBACK\n\n\n\n\n\n\n\n\nAuto-commit\n\n\nAttention : il n’y a pas de garde-fou lorsque vous êtes en Auto-commit.\n\n\n\n\n\n🚧 TODO à approfondir plus tard"
+  },
+  {
+    "objectID": "doc/cours/sql-intro-slides.html#dates-et-heures",
+    "href": "doc/cours/sql-intro-slides.html#dates-et-heures",
+    "title": "SQL",
+    "section": "Dates et Heures",
+    "text": "Dates et Heures"
+  },
+  {
+    "objectID": "doc/cours/sql-intro-slides.html#valeurs-nulles",
+    "href": "doc/cours/sql-intro-slides.html#valeurs-nulles",
+    "title": "SQL",
+    "section": "Valeurs nulles",
+    "text": "Valeurs nulles"
+  },
+  {
+    "objectID": "doc/cours/sql-intro-slides.html#divers",
+    "href": "doc/cours/sql-intro-slides.html#divers",
+    "title": "SQL",
+    "section": "Divers",
+    "text": "Divers"
+  },
+  {
     "objectID": "doc/cours/bases-de-donnees.html",
     "href": "doc/cours/bases-de-donnees.html",
     "title": "Bases de Données",
@@ -161,6 +308,13 @@
     "text": "SQL\n\nSyntaxe simple\nEfficace\nTrès utilisé\n\n\n\nc’est LA compétence à avoir\nça s’encapsule dans plein de langages (R, Python, Julia, Stata, SAS…)\nutile pour Big Data"
   },
   {
+    "objectID": "doc/cours/intro-slides.html#conventions",
+    "href": "doc/cours/intro-slides.html#conventions",
+    "title": "Bases de Données Relationnelles et SQL",
+    "section": "Conventions",
+    "text": "Conventions\n\n&lt;...&gt; : texte à remplacer\n[...] : élément optionnel\nMots clés en MAJUSCULE"
+  },
+  {
     "objectID": "doc/cours/intro-slides.html#les-tp",
     "href": "doc/cours/intro-slides.html#les-tp",
     "title": "Bases de Données Relationnelles et SQL",
@@ -210,6 +364,13 @@
     "text": "SQL\n\nSyntaxe simple\nEfficace\nTrès utilisé\n\n\n\nc’est LA compétence à avoir\nça s’encapsule dans plein de langages (R, Python, Julia, Stata, SAS…)\nutile pour Big Data"
   },
   {
+    "objectID": "doc/cours/intro.html#conventions",
+    "href": "doc/cours/intro.html#conventions",
+    "title": "Bases de Données Relationnelles et SQL",
+    "section": "Conventions",
+    "text": "Conventions\n\n&lt;...&gt; : texte à remplacer\n[...] : élément optionnel\nMots clés en MAJUSCULE\n\n\nRequêtes SQL jolies\n\nretour à la ligne\nmots clés alignés\n\n\n\n\npasbien.sql\n\nSELECT c.nom AS club, AVG(j.elo) AS moyenne_elo FROM joueuse j INNER JOIN club c USING (id_club) WHERE mail IS NOT NULL GROUP BY c.nom ORDER BY 2 DESC;\n\n\n\n\n\n\nbien.sql\n\nSELECT c.nom AS club, \n       AVG(j.elo) AS moyenne_elo\n  FROM joueuse j \n INNER JOIN club c USING (id_club) \n WHERE j.mail IS NOT NULL \n GROUP BY c.nom \n ORDER BY 2 DESC;\n\n\n\nFaites un effort pour vous même et pour vos relecteurs"
+  },
+  {
     "objectID": "doc/cours/intro.html#les-tp",
     "href": "doc/cours/intro.html#les-tp",
     "title": "Bases de Données Relationnelles et SQL",
@@ -231,122 +392,52 @@
     "text": "Bibliographie\n\nhttps://laurent-audibert.developpez.com/Cours-BD/?page=introduction-bases-de-donnees\nhttps://upinfo.univ-cotedazur.fr/im/bases-de-donnees/\nhttps://openclassrooms.com/fr/courses/6971126-implementez-vos-bases-de-donnees-relationnelles-avec-sql/7139618-decouvrez-le-systeme-de-gestion-de-base-de-donnees-sgbd\nhttps://oseox.fr/sql/\nhttps://learnsql.fr/blog/aide-memoire-pour-les-entretiens-sql/"
   },
   {
-    "objectID": "doc/cours/sql-slides.html#structured-query-language",
-    "href": "doc/cours/sql-slides.html#structured-query-language",
-    "title": "SQL",
-    "section": "Structured Query Language",
-    "text": "Structured Query Language\n\n\n\n\n\n\n\nDéfinition\n\n\nLe SQL est un langage standardisé utilisé pour interagir avec des bases de données relationnelles.\nIl permet de créer, manipuler, interroger et gérer les données stockées dans des tables."
+    "objectID": "doc/cours/algebre-slides.html#algèbre-relationnelle",
+    "href": "doc/cours/algebre-slides.html#algèbre-relationnelle",
+    "title": "Algèbre Relationnelle",
+    "section": "Algèbre Relationnelle",
+    "text": "Algèbre Relationnelle\n\nA Relational Model of Data for Large Shared Data Banks, Edgar F. Codd, 1970\nObjectif : Modéliser une base de données ainsi que ses opérations\nDans un SGBD relationel, tout est question de relation"
   },
   {
-    "objectID": "doc/cours/sql-slides.html#définition-de-données",
-    "href": "doc/cours/sql-slides.html#définition-de-données",
-    "title": "SQL",
-    "section": "Définition de Données",
-    "text": "Définition de Données\n\nIci nous n’allons travailler que sur une seule table à la fois"
+    "objectID": "doc/cours/algebre-slides.html#principaux-opérateurs",
+    "href": "doc/cours/algebre-slides.html#principaux-opérateurs",
+    "title": "Algèbre Relationnelle",
+    "section": "Principaux opérateurs",
+    "text": "Principaux opérateurs\n\n\n\n\n\n\n\nOpérateur\nDescription\n\n\n\n\nσ (Sélection)\nFiltrer les lignes selon une condition\n\n\nπ (Projection)\nSélectionner des colonnes spécifiques\n\n\nU (Union)\nCombiner les lignes de deux relations\n\n\n− (Différence)\nRetourner les lignes présentes dans une relation mais pas dans l’autre\n\n\n∩ (Intersection)\nTrouver les lignes communes aux deux relations\n\n\n⨝ (Jointure)\nCombiner deux relations basées sur une condition\n\n\nρ (Renommage)\nRenommer une relation ou ses colonnes\n\n\n÷ (Division)\nTrouver les éléments associés à tous les éléments d’une autre relation"
   },
   {
-    "objectID": "doc/cours/sql-slides.html#schéma",
-    "href": "doc/cours/sql-slides.html#schéma",
-    "title": "SQL",
-    "section": "Schéma",
-    "text": "Schéma\nUtile lorsque le nombre de table devient grand.\n\nOrganisation des objets, clarté\nGestion des permissions\n\nCREATE SCHEMA echecs;\n\n\nVente de légume\nUtiliser la même bdd pour la gestion RH, le métier et la compta\ncréer un schéma pour séparer les tables"
-  },
-  {
-    "objectID": "doc/cours/sql-slides.html#insérer-des-données",
-    "href": "doc/cours/sql-slides.html#insérer-des-données",
-    "title": "SQL",
-    "section": "Insérer des données",
-    "text": "Insérer des données\n\n\n\n\n\nclassDiagram\n    class Club {\n        id_club PK\n        nom\n        ville\n        date_creation\n    }\n\n\n\n\n\n\n\nINSERT INTO echecs.club \n(nom,                              ville,            date_creation)\nVALUES           \n('C''Chartres Echecs',            'Chartres',        '1991-09-01'),\n('Bischwiller',                   'Bischwiller',     '1976-09-01'),\n('Asnieres - le Grand Echiquier', 'Asnieres',        '1987-03-20'),\n('Tours des Hauts-De-France',     'Saint-Quentin',   '1999-12-01');\n\n\nPourquoi l’on n’insère pas la colonne id_club ? 😕\n\n\nAttention à bien mettre les virgules au bon endroit"
-  },
-  {
-    "objectID": "doc/cours/sql-slides.html#lire-des-données",
-    "href": "doc/cours/sql-slides.html#lire-des-données",
-    "title": "SQL",
-    "section": "Lire des données",
-    "text": "Lire des données\nSELECT * FROM table pour tout afficher.\nSELECT *\n  FROM echecs.club;\n\n\n\n\n\n\n\n\n\n\n\n\nid_club\nnom\nville\ndate_creation\n\n\n\n\n1\nC’Chartres Echecs\nChartres\n1991-09-01\n\n\n2\nBischwiller\nBischwiller\n1976-09-01\n\n\n3\nAsnieres - le Grand Echiquier\nAsnieres\n1987-03-20\n\n\n4\nTours des Hauts-De-France\nSaint-Quentin\n1999-12-01"
-  },
-  {
-    "objectID": "doc/cours/sql-slides.html#mise-à-jour",
-    "href": "doc/cours/sql-slides.html#mise-à-jour",
-    "title": "SQL",
-    "section": "Mise à jour",
-    "text": "Mise à jour\nUPDATE echecs.joueuse\n   SET elo = 2399\n WHERE id_joueuse = 1;\n\n\n\nSELECT nom,\n       prenom,\n       elo\n  FROM echecs.joueuse\n WHERE id_joueuse = 1;\n\n\n\n\nnom\nprenom\nelo\n\n\n\n\nGuichard\nPauline\n2399"
-  },
-  {
-    "objectID": "doc/cours/sql-slides.html#suppression",
-    "href": "doc/cours/sql-slides.html#suppression",
-    "title": "SQL",
-    "section": "Suppression",
-    "text": "Suppression"
-  },
-  {
-    "objectID": "doc/cours/sql-slides.html#autres-select",
-    "href": "doc/cours/sql-slides.html#autres-select",
-    "title": "SQL",
-    "section": "Autres SELECT",
-    "text": "Autres SELECT"
-  },
-  {
-    "objectID": "doc/cours/sql.html",
-    "href": "doc/cours/sql.html",
-    "title": "SQL",
+    "objectID": "doc/cours/algebre.html",
+    "href": "doc/cours/algebre.html",
+    "title": "Algèbre Relationnelle",
     "section": "",
-    "text": "Définition\n\n\n\nLe SQL est un langage standardisé utilisé pour interagir avec des bases de données relationnelles.\nIl permet de créer, manipuler, interroger et gérer les données stockées dans des tables.\n\n\n\n\nSQL est un language normé dont la dernière version est SQL:2023.\n\n\n\n\n\n\nCaution\n\n\n\nLes SGBD ne respectent pas exactement la norme SQL.\nÀ un niveau avancé d’utilisation, il y a des différences entre les SGBD.\n\n\n\n\n\n\nDéfinition de Données\nManipulation de Données\nContrôle des Transactions\nContrôle d’accès aux Données\n\n\n\nManipulation de Données   - CRUD\nDéfinition de Données   - Créer/Modifier/Supprimer une table\nContrôle des Transactions   - BEGIN, COMMIT, ROLLBACK\nContrôle d’accès aux Données   - GRANT REVOKE"
+    "text": "A Relational Model of Data for Large Shared Data Banks, Edgar F. Codd, 1970\nObjectif : Modéliser une base de données ainsi que ses opérations\nDans un SGBD relationel, tout est question de relation"
   },
   {
-    "objectID": "doc/cours/sql.html#structured-query-language",
-    "href": "doc/cours/sql.html#structured-query-language",
-    "title": "SQL",
+    "objectID": "doc/cours/algebre.html#algèbre-relationnelle",
+    "href": "doc/cours/algebre.html#algèbre-relationnelle",
+    "title": "Algèbre Relationnelle",
     "section": "",
-    "text": "Définition\n\n\n\nLe SQL est un langage standardisé utilisé pour interagir avec des bases de données relationnelles.\nIl permet de créer, manipuler, interroger et gérer les données stockées dans des tables.\n\n\n\n\nSQL est un language normé dont la dernière version est SQL:2023.\n\n\n\n\n\n\nCaution\n\n\n\nLes SGBD ne respectent pas exactement la norme SQL.\nÀ un niveau avancé d’utilisation, il y a des différences entre les SGBD.\n\n\n\n\n\n\nDéfinition de Données\nManipulation de Données\nContrôle des Transactions\nContrôle d’accès aux Données\n\n\n\nManipulation de Données   - CRUD\nDéfinition de Données   - Créer/Modifier/Supprimer une table\nContrôle des Transactions   - BEGIN, COMMIT, ROLLBACK\nContrôle d’accès aux Données   - GRANT REVOKE"
+    "text": "A Relational Model of Data for Large Shared Data Banks, Edgar F. Codd, 1970\nObjectif : Modéliser une base de données ainsi que ses opérations\nDans un SGBD relationel, tout est question de relation"
   },
   {
-    "objectID": "doc/cours/sql.html#définition-de-données",
-    "href": "doc/cours/sql.html#définition-de-données",
-    "title": "SQL",
-    "section": "Définition de Données",
-    "text": "Définition de Données\n\nIci nous n’allons travailler que sur une seule table à la fois\n\n\nCréer une table\nCREATE TABLE joueuse (\n    id_joueuse     INT,\n    nom            TEXT,\n    prenom         TEXT,\n    date_naissance DATE,\n    elo            INT,\n    est_arbitre    BOOLEAN,\n    code_pays      TEXT,\n    taux_victoires FLOAT\n);\n\nC’est comme créer les colonnes d’un tableau.\n\n\n\nCREATE avancé\nCREATE TABLE joueuse (\n    id_joueuse     SERIAL          PRIMARY KEY,   \n    nom            VARCHAR(50)     NOT NULL, \n    prenom         VARCHAR(50)     NOT NULL, \n    date_naissance DATETIME,                 \n    elo            INT             CHECK (elo &gt; 0),  \n    mail           VARCHAR(100),         \n    est_arbitre    BOOLEAN         DEFAULT false,\n    code_pays      VARCHAR(2),          \n    taux_victoires FLOAT  \n);\n\n\nBonnes pratiques\n\nNom de table représentatif et au singulier\nPas de majuscules, pas d’accents\nMots séparés par des underscores (snake_case)\nNe pas utiliser de mots clés réservés (date, user…)\nNe pas avoir de colonne qui porte le même nom que sa table\n\n\ndans les requêtes : mots clés en majuscules\n\n\n\nModifier une colonne\nModifier le type :\nALTER TABLE joueuse\nALTER COLUMN nom TYPE VARCHAR(80);\n\nRenommer :\nALTER TABLE joueuse\nRENAME COLUMN date_naissance TO dnais;\n\n\nCréer/Supprimer une colonne\nAjout :\nALTER TABLE joueuse\nADD COLUMN titre VARCHAR(5);\n\nSuppression :\nALTER TABLE joueuse\nDROP COLUMN taux_victoires;\n\n\nAutres possibilités\n\nRenommer une table\nAjouter / Supprimer une contrainte\nAjouter une clé étrangère\nDéfinir / Supprimer une valeur par défaut\n\n\n\nSupprimer une table\nDROP TABLE joueuse;\n\n\n\n\n\n\nWarning\n\n\n\nCette opération est irréversible !\nElle supprime définitivement :\n\nla table\ntoutes les données qu’elle contient\n\n\n\nDROP TABLE IF EXISTS joueuse;      -- utile pour les scripts SQL"
+    "objectID": "doc/cours/algebre.html#principaux-opérateurs",
+    "href": "doc/cours/algebre.html#principaux-opérateurs",
+    "title": "Algèbre Relationnelle",
+    "section": "Principaux opérateurs",
+    "text": "Principaux opérateurs\n\n\n\n\n\n\n\nOpérateur\nDescription\n\n\n\n\nσ (Sélection)\nFiltrer les lignes selon une condition\n\n\nπ (Projection)\nSélectionner des colonnes spécifiques\n\n\nU (Union)\nCombiner les lignes de deux relations\n\n\n− (Différence)\nRetourner les lignes présentes dans une relation mais pas dans l’autre\n\n\n∩ (Intersection)\nTrouver les lignes communes aux deux relations\n\n\n⨝ (Jointure)\nCombiner deux relations basées sur une condition\n\n\nρ (Renommage)\nRenommer une relation ou ses colonnes\n\n\n÷ (Division)\nTrouver les éléments associés à tous les éléments d’une autre relation\n\n\n\n\nSélection\n\nPermet de filtrer les lignes d’une table selon une condition\n\n\n\nMot clé SQL : WHERE ⚠️\n\n\nL’algèbre relationnelle est un langage formel pour manipuler des bases de données relationnelles. Elle définit un ensemble d’opérations sur les relations (tables) qui permettent de traiter et de manipuler les données de manière logique. Voici les principaux opérateurs de l’algèbre relationnelle :\n\n\n1. Sélection (σ - Select)\nSyntaxe :\nσ (condition)(Relation)\nExemple : Sélectionner toutes les lignes où l’âge est supérieur à 18 ans dans une table Personnes.\nσ(age &gt; 18)(Personnes)\n\n\n2. Projection (π - Project)\nL’opérateur projection permet de sélectionner certaines colonnes d’une relation (table) et d’ignorer les autres.\nSyntaxe :\nπ (colonnes)(Relation)\nExemple : Projeter seulement les colonnes nom et prénom d’une table Personnes.\nπ(nom, prénom)(Personnes)\n\n\n3. Union (∪ - Union)\nL’opérateur union combine les lignes de deux relations (tables) ayant le même nombre de colonnes et des types compatibles.\nSyntaxe :\nRelation1 ∪ Relation2\nExemple : Unir les résultats de deux tables Personnes_Adulte et Personnes_Enfant (toutes deux ayant les colonnes nom et prénom).\nPersonnes_Adulte ∪ Personnes_Enfant\n\n\n4. Différence (− - Difference)\nL’opérateur différence renvoie les lignes qui se trouvent dans la première relation mais pas dans la seconde.\nSyntaxe :\nRelation1 − Relation2\nExemple : Trouver les personnes qui ne sont pas dans la table Personnes_Adulte.\nPersonnes − Personnes_Adulte\n\n\n5. Intersection (∩ - Intersection)\nL’opérateur intersection renvoie les lignes communes aux deux relations.\nSyntaxe :\nRelation1 ∩ Relation2\nExemple : Trouver les personnes qui sont à la fois dans Personnes_Adulte et Personnes_Enfant.\nPersonnes_Adulte ∩ Personnes_Enfant\n\n\n6. Jointure (⨝ - Join)\nL’opérateur jointure permet de combiner deux relations (tables) basées sur une condition de correspondance entre les colonnes.\nSyntaxe :\nRelation1 ⨝ (condition) Relation2\nExemple : Effectuer une jointure entre Personnes et Adresses sur l’attribut id_personne.\nPersonnes ⨝ Personnes.id_personne = Adresses.id_personne Adresses\nIl existe plusieurs types de jointures, par exemple : - Jointure naturelle (Natural Join) : joint les relations basées sur toutes les colonnes ayant le même nom dans les deux relations. - Jointure externe (Outer Join) : inclut également les lignes qui ne correspondent pas dans les relations, avec des valeurs nulles pour les colonnes non correspondantes.\n\n\n7. Renommage (ρ - Rename)\nL’opérateur renommage permet de renommer une relation ou ses colonnes.\nSyntaxe :\nρ (nouveau_nom)(Relation)\nExemple : Renommer la relation Personnes en Individus.\nρ(Individus)(Personnes)\n\n\n8. Division (÷ - Division)\nL’opérateur division est utilisé pour trouver les éléments dans une relation qui sont associés à tous les éléments d’une autre relation. C’est utile pour des requêtes de type “trouver des objets qui satisfont toutes les conditions”.\nSyntaxe :\nRelation1 ÷ Relation2\nExemple : Trouver les produits qui ont été vendus à tous les clients, où Ventes contient des colonnes produit et client, et Clients_Interesés contient une seule colonne client.\nVentes ÷ Clients_Interesés\nCes opérateurs de l’algèbre relationnelle sont essentiels pour manipuler et interroger des bases de données relationnelles de manière logique, indépendamment du SGBD (Système de Gestion de Base de Données) sous-jacent."
   },
   {
-    "objectID": "doc/cours/sql.html#schéma",
-    "href": "doc/cours/sql.html#schéma",
-    "title": "SQL",
-    "section": "Schéma",
-    "text": "Schéma\nUtile lorsque le nombre de table devient grand.\n\nOrganisation des objets, clarté\nGestion des permissions\n\nCREATE SCHEMA echecs;\n\n\nVente de légume\nUtiliser la même bdd pour la gestion RH, le métier et la compta\ncréer un schéma pour séparer les tables\n\n\n\nTable dans un schéma\nCREATE TABLE echecs.club (\n    id_club          SERIAL          PRIMARY KEY,  \n    nom              VARCHAR(100)    NOT NULL,   \n    ville            VARCHAR(100)    NOT NULL, \n    date_creation    DATE\n);\n\nDéplacer la table joueuse dans le schéma echecs :\nALTER TABLE joueuse SET SCHEMA echecs;\n\nC’est comme créer un fichier dans un dossier.\nPar défaut les objets sont créés dans le schéma public."
+    "objectID": "doc/glossaire.html",
+    "href": "doc/glossaire.html",
+    "title": "Glossaire",
+    "section": "",
+    "text": "🚧"
   },
   {
-    "objectID": "doc/cours/sql.html#insérer-des-données",
-    "href": "doc/cours/sql.html#insérer-des-données",
-    "title": "SQL",
-    "section": "Insérer des données",
-    "text": "Insérer des données\n\n\n\n\n\nclassDiagram\n    class Club {\n        id_club PK\n        nom\n        ville\n        date_creation\n    }\n\n\n\n\n\n\n\nINSERT INTO echecs.club \n(nom,                              ville,            date_creation)\nVALUES           \n('C''Chartres Echecs',            'Chartres',        '1991-09-01'),\n('Bischwiller',                   'Bischwiller',     '1976-09-01'),\n('Asnieres - le Grand Echiquier', 'Asnieres',        '1987-03-20'),\n('Tours des Hauts-De-France',     'Saint-Quentin',   '1999-12-01');\n\n\nPourquoi l’on n’insère pas la colonne id_club ? 😕\n\n\nAttention à bien mettre les virgules au bon endroit\n\n\nSéquence\nLa colonne id_club est une séquence gérée par le SGBD.\nLes valeurs sont générées automatiquement à l’insertion et la séquence est incrémentée (1, 2, 3…).\n\n\n\n\n\n\nSéquences\n\n\n\n\n\nIl est possible de créer et gérer ses propres séquences :\nCREATE SEQUENCE nom_sequence START 1 INCREMENT BY 1;\n\nSELECT currval('nom_sequence'); -- dernière valeur utilisée\nSELECT nextval('nom_sequence'); -- prochaine valeur\n\nALTER SEQUENCE nom_sequence RESTART WITH nouvelle_valeur;\n\nDROP SEQUENCE nom_sequence;\n\n\n\n\n\nPas de double quotes en SQL !!!\n’’ : Pour ajouter un simple quote dans une chaine"
-  },
-  {
-    "objectID": "doc/cours/sql.html#lire-des-données",
-    "href": "doc/cours/sql.html#lire-des-données",
-    "title": "SQL",
-    "section": "Lire des données",
-    "text": "Lire des données\nSELECT * FROM table pour tout afficher.\nSELECT *\n  FROM echecs.club;\n\n\n\n\n\n\n\n\n\n\n\n\nid_club\nnom\nville\ndate_creation\n\n\n\n\n1\nC’Chartres Echecs\nChartres\n1991-09-01\n\n\n2\nBischwiller\nBischwiller\n1976-09-01\n\n\n3\nAsnieres - le Grand Echiquier\nAsnieres\n1987-03-20\n\n\n4\nTours des Hauts-De-France\nSaint-Quentin\n1999-12-01\n\n\n\n\n\n\nColonnes à afficher\nListez les colonnes à afficher après le SELECT\nSELECT nom,\n       prenom,\n       elo\n  FROM echecs.joueuse;\n\n\n\n\n\n\nnom\nprenom\nelo\n\n\n\n\nGuichard\nPauline\n2357\n\n\nDaulyte-Cornette\nDeimante\n2371\n\n\nNavrotescu\nAndreea\n2338\n\n\nSebag\nMarie\n2448\n\n\nMillet\nSophie\n2366\n\n\nSkrichempko\nAlmira\n2361\n\n\n\n\n\n\n\nFilter les lignes\nFiltrez sur les lignes avec une clause WHERE.\nSELECT nom,\n       prenom,\n       elo\n  FROM echecs.joueuse\n WHERE elo &gt; 2400;\n\n\n\n\n\n\nnom\nprenom\nelo\n\n\n\n\nSebag\nMarie\n2448\n\n\n\n\n\n\n\nPlusieurs filtres\nLe mot clé AND permet d’ajouter d’autres filtres.\nSELECT nom,\n       prenom,\n       elo\n  FROM echecs.joueuse\n WHERE elo &lt; 2400\n   AND prenom LIKE 'A%';\n\n\n\n\n\n\nnom\nprenom\nelo\n\n\n\n\nNavrotescu\nAndreea\n2338\n\n\nSkrichempko\nAlmira\n2361\n\n\n\n\n\n\n1 seul WHERE\nplusieurs AND\n\n\nVous pouvez autoriser plusieurs conditions avec OR.\nSELECT nom,\n       prenom,\n       elo\n  FROM echecs.joueuse\n WHERE elo &gt; 2400\n    OR prenom LIKE 'A%';\n\n\n\n\n\n\nnom\nprenom\nelo\n\n\n\n\nSebag\nMarie\n2448\n\n\nNavrotescu\nAndreea\n2338\n\n\nSkrichempko\nAlmira\n2361\n\n\n\n\n\n\n\nLIKE\nSELECT *\n  FROM echecs.joueuse\n WHERE prenom LIKE 'A%'         -- commence par A\n    OR prenom LIKE '%A'         -- termine par A\n    OR prenom LIKE '%A%'        -- contient au moins un A\n    OR UPPER(prenom) LIKE '%A%' -- contient au moins un A ou un a\n    OR prenom LIKE 'A__'        -- commence par A suivi de 2 autres caractères\n\n% : représente entre 0 et une infinité de caractères\n_ : représente exactement 1 caractère\n\n\n\n\n\n\n\nCaution\n\n\n\nAttention aux MAJUSCULES ≠ minuscules\n\n\n\n\nPlage de valeurs\nBETWEEN permet de spécifier une plage de valeurs numériques.\nSELECT nom,\n       prenom,\n       elo\n  FROM echecs.joueuse\n WHERE elo BETWEEN 2350 AND 2400;\n\n\n\n\n\n\nnom\nprenom\nelo\n\n\n\n\nGuichard\nPauline\n2357\n\n\nDaulyte-Cornette\nDeimante\n2371\n\n\nMillet\nSophie\n2366\n\n\nSkrichempko\nAlmira\n2361\n\n\n\n\n\n\n\nValeurs dans une liste\nVous pouvez spécifier qu’un attribut doit appartenir à un liste avec IN.\nOu inversement avec NOT IN.\nSELECT nom,\n       prenom,\n       elo\n  FROM echecs.joueuse\n WHERE prenom IN ('Deimante', 'Sophie');\n\n\n\n\n\n\nnom\nprenom\nelo\n\n\n\n\nDaulyte-Cornette\nDeimante\n2371\n\n\nMillet\nSophie\n2366\n\n\n\n\n\n\nPossible de lister des valeurs numériques\n\n\n\nFiltre sur les attributs booléens\nSELECT *\n  FROM echecs.joueuse\n WHERE est_arbitre IS TRUE;\n\n\nFiltre sur les valeurs nulles\nSELECT *\n  FROM echecs.joueuse\n WHERE mail IS NULL; -- IS NOT NULL\n\n\nOrdonner le résultat\nORDER BY pour ordonner selon plusieurs colonnes.\nSELECT nom,\n       prenom,\n       elo\n  FROM echecs.joueuse\n ORDER BY elo,\n          taux_victoires DESC;\n\n\n\n\n\nnom\nprenom\nelo\n\n\n\n\nNavrotescu\nAndreea\n2338\n\n\nGuichard\nPauline\n2357\n\n\nSkrichempko\nAlmira\n2361\n\n\nMillet\nSophie\n2366\n\n\nDaulyte-Cornette\nDeimante\n2371\n\n\nSebag\nMarie\n2448\n\n\n\n\n\n\n\nAfficher n lignes\nSELECT nom,\n       prenom,\n       elo\n  FROM echecs.joueuse\n LIMIT 3;\n\n\n\n\n\n\nnom\nprenom\nelo\n\n\n\n\nGuichard\nPauline\n2357\n\n\nDaulyte-Cornette\nDeimante\n2371\n\n\nNavrotescu\nAndreea\n2338"
-  },
-  {
-    "objectID": "doc/cours/sql.html#mise-à-jour",
-    "href": "doc/cours/sql.html#mise-à-jour",
-    "title": "SQL",
-    "section": "Mise à jour",
-    "text": "Mise à jour\nUPDATE echecs.joueuse\n   SET elo = 2399\n WHERE id_joueuse = 1;\n\n\n\nSELECT nom,\n       prenom,\n       elo\n  FROM echecs.joueuse\n WHERE id_joueuse = 1;\n\n\n\n\nnom\nprenom\nelo\n\n\n\n\nGuichard\nPauline\n2399"
-  },
-  {
-    "objectID": "doc/cours/sql.html#suppression",
-    "href": "doc/cours/sql.html#suppression",
-    "title": "SQL",
-    "section": "Suppression",
-    "text": "Suppression"
-  },
-  {
-    "objectID": "doc/cours/sql.html#autres-select",
-    "href": "doc/cours/sql.html#autres-select",
-    "title": "SQL",
-    "section": "Autres SELECT",
-    "text": "Autres SELECT\n\nType DATE\nQuelques opérations avec le type DATE.\nSELECT nom,\n       prenom,\n       EXTRACT(YEAR FROM date_naissance) AS annee_naissance\n  FROM echecs.joueuse\n WHERE date_naissance &gt;= '1991-04-20'\n    OR date_naissance BETWEEN '1991-04-20' AND '1992-12-31'\n    OR EXTRACT(MONTH FROM date_naissance) = 4;\n\n\nJouer avec les colonnes\nSELECT CONCAT(nom, ' ', prenom) AS nom_complet,\n       elo\nFROM echecs.joueuse;\n\n\n\n\n\n\nnom_complet\nelo\n\n\n\n\nGuichard Pauline\n2357\n\n\nDaulyte-Cornette Deimante\n2371\n\n\nNavrotescu Andreea\n2338\n\n\nSebag Marie\n2448\n\n\nMillet Sophie\n2366\n\n\nSkrichempko Almira\n2361"
+    "objectID": "doc/glossaire.html#table",
+    "href": "doc/glossaire.html#table",
+    "title": "Glossaire",
+    "section": "Table",
+    "text": "Table\nStructure de données dans une base de données relationnelle qui contient :\n\ndes lignes représentant des entités\ndes colonnes représentant un attribut de ces entités\n\nSynonymes : Relation\n\nLigne\nUn ensemble de valeurs correspondant à un objet ou une entité dans une table.\nSynonymes : Enregistrement, Entité, Tuple, Observation\n\n\nColonne\nUne structure verticale dans une table qui contient un type spécifique de données.\nSynonymes : Attribut, Champs, Propriété, Variable, Dimension\n\n\nClé primaire\nUn champ ou un ensemble de champs qui identifie de manière unique chaque ligne d’une table.\n\n\nClé étrangère\nUn champ dans une table qui est une référence à la clé primaire d’une autre table.\nElle est utilisée pour établir une relation entre deux tables.\n\nVoici un glossaire des termes clés associés aux bases de données, SQL, et PostgreSQL :\n\n\nBases de Données\n\nBase de données (BDD) : Un ensemble organisé de données, généralement stockées et accessibles électroniquement. Elle est utilisée pour faciliter la gestion, la récupération, l’ajout, la mise à jour et la suppression des données.\nSystème de Gestion de Base de Données (SGBD) : Logiciel permettant de créer, gérer et manipuler des bases de données. Il permet la gestion des données et des utilisateurs via des interfaces (commandes SQL, API, etc.).\nIndex : Un moyen d’accélérer les requêtes en créant une structure de données qui permet une recherche rapide sur des colonnes spécifiques.\nSchéma : Un modèle ou une structure de données qui définit la façon dont les données sont organisées dans une base de données. Un schéma peut contenir des tables, des vues, des fonctions, etc.\nJointure (Join) : Une opération qui permet de combiner des données provenant de plusieurs tables en fonction de relations définies entre elles.\nTransaction : Un ensemble d’opérations qui sont exécutées de manière atomique (tout ou rien). Si une transaction échoue, toutes les modifications sont annulées.\n\n\n\n\nSQL (Structured Query Language)\n\nSQL : Un langage standardisé pour interagir avec des bases de données relationnelles. SQL permet de créer, lire, mettre à jour et supprimer des données (CRUD).\nSELECT : Commande utilisée pour extraire des données d’une ou plusieurs tables.\nINSERT : Commande utilisée pour insérer de nouvelles lignes de données dans une table.\nUPDATE : Commande utilisée pour modifier les données existantes dans une table.\nDELETE : Commande utilisée pour supprimer des lignes dans une table.\nWHERE : Clause utilisée pour filtrer les résultats d’une requête en fonction de conditions spécifiques.\nGROUP BY : Clause utilisée pour regrouper les résultats d’une requête selon un ou plusieurs attributs.\nORDER BY : Clause utilisée pour trier les résultats d’une requête selon un ou plusieurs critères.\nJOIN : Opération qui combine des données de plusieurs tables en fonction de conditions de correspondance.\nHAVING : Clause utilisée pour filtrer les résultats agrégés d’une requête, généralement utilisée après un GROUP BY.\nDISTINCT : Mot-clé utilisé pour éliminer les doublons dans les résultats d’une requête.\nLIMIT : Limite le nombre de résultats renvoyés par une requête.\nINSERT INTO SELECT : Commande permettant d’insérer le résultat d’une requête SELECT dans une autre table.\nALTER : Commande permettant de modifier la structure d’une table (par exemple, ajouter ou supprimer des colonnes).\nDROP : Commande permettant de supprimer une table ou un autre objet dans une base de données.\nCREATE : Commande utilisée pour créer des tables, des vues, des index, des procédures, etc.\nINDEX : Structure de données permettant de rendre les recherches plus rapides sur des colonnes de tables.\nTRANSACTION : Un bloc de commandes SQL qui peut être validé (COMMIT) ou annulé (ROLLBACK) dans son ensemble.\nCOMMIT : Commande permettant de valider une transaction.\nROLLBACK : Commande permettant d’annuler une transaction et de revenir à l’état antérieur.\n\n\n\n\nPostgreSQL\n\nPostgreSQL : Un système de gestion de base de données relationnelle open-source avancé. Il supporte les types de données complexes, la gestion des transactions, les index, les jointures, et d’autres fonctionnalités avancées.\npgAdmin : Interface graphique pour administrer des bases de données PostgreSQL. Elle permet de créer, modifier, supprimer des objets de base de données, et d’exécuter des requêtes SQL.\nTableau de Bord PostgreSQL : L’interface utilisateur pour administrer et gérer des instances de PostgreSQL, à travers des outils graphiques ou des requêtes SQL.\nVacuum : Processus dans PostgreSQL qui nettoie et libère l’espace occupé par des tuples morts dans les tables et les index. Il optimise aussi la performance de la base de données.\nReplication : Mécanisme dans PostgreSQL permettant de copier les données d’une base de données vers une autre pour des fins de sauvegarde ou de haute disponibilité.\nSequence : Un objet dans PostgreSQL qui génère des valeurs numériques uniques, souvent utilisé pour les valeurs de clés primaires auto-incrémentées.\nForeign Data Wrapper (FDW) : Permet à PostgreSQL de se connecter à des bases de données externes et de traiter les données comme si elles étaient locales.\nExtension : Une fonctionnalité supplémentaire dans PostgreSQL permettant d’ajouter des modules spécifiques pour étendre les capacités du système (par exemple, PostGIS pour la gestion des données géographiques).\nPL/pgSQL : Un langage procédural utilisé dans PostgreSQL pour écrire des fonctions et des procédures stockées.\nArray : Un type de données qui permet de stocker plusieurs valeurs dans une seule colonne dans PostgreSQL.\nJSON/JSONB : Types de données pour stocker des documents JSON dans PostgreSQL, où JSONB offre des performances supérieures pour les opérations de lecture et d’indexation.\nCTE (Common Table Expression) : Une sous-requête qui peut être utilisée dans une requête principale pour améliorer la lisibilité et la structure des requêtes complexes.\n\n\n\n\nAutres Concepts\n\nACID : Propriétés des transactions garantissant leur intégrité : Atomicité, Cohérence, Isolation, Durabilité.\nNormalisation : Processus de conception d’une base de données pour éliminer la redondance et les anomalies, en divisant les données en tables liées par des clés étrangères.\nSchéma : Un ensemble d’objets (tables, vues, fonctions, etc.) organisés dans une base de données.\nDDL (Data Definition Language) : Langage SQL utilisé pour définir et gérer la structure de la base de données (par exemple, CREATE, ALTER, DROP).\nDML (Data Manipulation Language) : Langage SQL utilisé pour manipuler les données dans les tables (par exemple, SELECT, INSERT, UPDATE, DELETE).\nDCL (Data Control Language) : Langage SQL utilisé pour contrôler l’accès aux données (par exemple, GRANT, REVOKE).\nSQL Injection : Technique d’attaque où des requêtes SQL malveillantes sont insérées dans un formulaire ou une URL pour manipuler la base de données."
   }
 ]

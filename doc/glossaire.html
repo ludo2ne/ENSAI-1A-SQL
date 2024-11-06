@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Ludovic Deneuville">
-<meta name="description" content="Slides">
+<meta name="description" content="Vocabulaire sur les bases de données">
 
-<title>Bases de Données Relationnelles et SQL – Base de données</title>
+<title>Glossaire – Base de données</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,61 +22,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
-<script src="../../site_libs/quarto-html/quarto.js"></script>
-<script src="../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -106,17 +72,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
 
-<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="floating nav-fixed">
+<body class="nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../../index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Base de données</span>
     </a>
   </div>
@@ -127,7 +93,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html"> <i class="bi bi-house" role="img">
+    <a class="nav-link" href="../index.html"> <i class="bi bi-house" role="img">
 </i> 
 <span class="menu-text">Home</span></a>
   </li>  
@@ -137,19 +103,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-cours">    
         <li>
-    <a class="dropdown-item" href="../../doc/cours/intro.html">
+    <a class="dropdown-item" href="../doc/cours/intro.html">
  <span class="dropdown-text">Introduction</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../doc/cours/bases-de-donnees.html">
+    <a class="dropdown-item" href="../doc/cours/bases-de-donnees.html">
  <span class="dropdown-text">Base de données</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../doc/cours/sql-intro.html">
+    <a class="dropdown-item" href="../doc/cours/sql-intro.html">
  <span class="dropdown-text">Introduction à SQL</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../doc/cours/algebre.html">
+    <a class="dropdown-item" href="../doc/cours/algebre.html">
  <span class="dropdown-text">Algèbre Relationnelle</span></a>
   </li>  
     </ul>
@@ -160,7 +126,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-tp">    
         <li>
-    <a class="dropdown-item" href="../../doc/tp/tp1.html">
+    <a class="dropdown-item" href="../doc/tp/tp1.html">
  <span class="dropdown-text">TP1</span></a>
   </li>  
     </ul>
@@ -168,7 +134,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../doc/glossaire.html"> 
+    <a class="nav-link active" href="../doc/glossaire.html" aria-current="page"> 
 <span class="menu-text">Glossaire</span></a>
   </li>  
   <li class="nav-item compact">
@@ -192,36 +158,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul class="collapse">
-  <li><a href="#bases-de-données-relationnelles-et-sql" id="toc-bases-de-données-relationnelles-et-sql" class="nav-link active" data-scroll-target="#bases-de-données-relationnelles-et-sql">Bases de Données Relationnelles et SQL</a></li>
-  <li><a href="#objectifs" id="toc-objectifs" class="nav-link" data-scroll-target="#objectifs">Objectifs</a></li>
-  <li><a href="#sql" id="toc-sql" class="nav-link" data-scroll-target="#sql">SQL</a></li>
-  <li><a href="#conventions" id="toc-conventions" class="nav-link" data-scroll-target="#conventions">Conventions</a></li>
-  <li><a href="#les-tp" id="toc-les-tp" class="nav-link" data-scroll-target="#les-tp">Les TP</a></li>
-  <li><a href="#évaluation" id="toc-évaluation" class="nav-link" data-scroll-target="#évaluation">Évaluation</a></li>
-  <li><a href="#bibliographie" id="toc-bibliographie" class="nav-link" data-scroll-target="#bibliographie">Bibliographie</a></li>
-  </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="intro-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-    </div>
+    
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Bases de Données Relationnelles et SQL</h1>
+<h1 class="title">Glossaire</h1>
 </div>
 
 <div>
   <div class="description">
-    <a href="intro-slides.html">Slides</a>
+    Vocabulaire sur les bases de données
   </div>
 </div>
 
@@ -244,112 +193,106 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="bases-de-données-relationnelles-et-sql" class="level2">
-<h2 class="anchored" data-anchor-id="bases-de-données-relationnelles-et-sql">Bases de Données Relationnelles et SQL</h2>
+<p><span class="emoji" data-emoji="construction">🚧</span></p>
+<section id="table" class="level2">
+<h2 class="anchored" data-anchor-id="table">Table</h2>
+<p>Structure de données dans une base de données relationnelle qui contient :</p>
 <ul>
-<li>6h CM</li>
-<li>18h TP</li>
-<li><code>ludovic.deneuville@ensai.fr</code></li>
-<li>bureau 161</li>
-<li>sur la base des cours de Benjamin Girault</li>
+<li>des lignes représentant des entités</li>
+<li>des colonnes représentant un attribut de ces entités</li>
 </ul>
+<p>Synonymes : Relation</p>
+<section id="ligne" class="level3">
+<h3 class="anchored" data-anchor-id="ligne">Ligne</h3>
+<p>Un ensemble de valeurs correspondant à un objet ou une entité dans une table.</p>
+<p>Synonymes : Enregistrement, Entité, Tuple, Observation</p>
 </section>
-<section id="objectifs" class="level2">
-<h2 class="anchored" data-anchor-id="objectifs">Objectifs</h2>
-<ul>
-<li>Interrogation</li>
-<li>Création</li>
-<li>Modélisation</li>
-<li>Savoir utiliser le langage SQL</li>
-</ul>
-<div class="notes">
-<p>UML pour la modélisation</p>
-</div>
+<section id="colonne" class="level3">
+<h3 class="anchored" data-anchor-id="colonne">Colonne</h3>
+<p>Une structure verticale dans une table qui contient un type spécifique de données.</p>
+<p>Synonymes : Attribut, Champs, Propriété, Variable, Dimension</p>
 </section>
-<section id="sql" class="level2">
-<h2 class="anchored" data-anchor-id="sql">SQL</h2>
-<ul>
-<li>Syntaxe simple</li>
-<li>Efficace</li>
-<li>Très utilisé</li>
-</ul>
-<div class="notes">
-<ul>
-<li>c’est LA compétence à avoir</li>
-<li>ça s’encapsule dans plein de langages (R, Python, Julia, Stata, SAS…)</li>
-<li>utile pour Big Data</li>
-</ul>
-</div>
+<section id="clé-primaire" class="level3">
+<h3 class="anchored" data-anchor-id="clé-primaire">Clé primaire</h3>
+<p>Un champ ou un ensemble de champs qui identifie de manière unique chaque ligne d’une table.</p>
 </section>
-<section id="conventions" class="level2">
-<h2 class="anchored" data-anchor-id="conventions">Conventions</h2>
-<ul>
-<li><code>&lt;...&gt;</code> : texte à remplacer</li>
-<li><code>[...]</code> : élément optionnel</li>
-<li>Mots clés en MAJUSCULE</li>
-</ul>
-<section id="requêtes-sql-jolies" class="level3">
-<h3 class="anchored" data-anchor-id="requêtes-sql-jolies">Requêtes SQL jolies</h3>
-<ul>
-<li>retour à la ligne</li>
-<li>mots clés alignés</li>
-</ul>
-<div class="fragment">
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>pasbien.sql</strong></pre>
-</div>
-<div class="sourceCode" id="cb1" data-filename="pasbien.sql"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> c.nom <span class="kw">AS</span> club, <span class="fu">AVG</span>(j.elo) <span class="kw">AS</span> moyenne_elo <span class="kw">FROM</span> joueuse j <span class="kw">INNER</span> <span class="kw">JOIN</span> club c <span class="kw">USING</span> (id_club) <span class="kw">WHERE</span> mail <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">GROUP</span> <span class="kw">BY</span> c.nom <span class="kw">ORDER</span> <span class="kw">BY</span> <span class="dv">2</span> <span class="kw">DESC</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-<p><br></p>
-<div class="fragment">
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>bien.sql</strong></pre>
-</div>
-<div class="sourceCode" id="cb2" data-filename="bien.sql"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> c.nom <span class="kw">AS</span> club, </span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">AVG</span>(j.elo) <span class="kw">AS</span> moyenne_elo</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> joueuse j </span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a> <span class="kw">INNER</span> <span class="kw">JOIN</span> club c <span class="kw">USING</span> (id_club) </span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> j.mail <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span> </span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a> <span class="kw">GROUP</span> <span class="kw">BY</span> c.nom </span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a> <span class="kw">ORDER</span> <span class="kw">BY</span> <span class="dv">2</span> <span class="kw">DESC</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-<div class="notes">
-<p>Faites un effort pour vous même et pour vos relecteurs</p>
-</div>
+<section id="clé-étrangère" class="level3">
+<h3 class="anchored" data-anchor-id="clé-étrangère">Clé étrangère</h3>
+<p>Un champ dans une table qui est une référence à la clé primaire d’une autre table.</p>
+<p>Elle est utilisée pour établir une relation entre deux tables.</p>
+<hr>
+<p>Voici un glossaire des termes clés associés aux <strong>bases de données</strong>, <strong>SQL</strong>, et <strong>PostgreSQL</strong> :</p>
 </section>
-</section>
-<section id="les-tp" class="level2">
-<h2 class="anchored" data-anchor-id="les-tp">Les TP</h2>
+<section id="bases-de-données" class="level3">
+<h3 class="anchored" data-anchor-id="bases-de-données"><strong>Bases de Données</strong></h3>
 <ul>
-<li>5 TP + 1 TD</li>
-<li>Datalab</li>
-<li>cloudBeaver</li>
+<li><p><strong>Base de données (BDD)</strong> : Un ensemble organisé de données, généralement stockées et accessibles électroniquement. Elle est utilisée pour faciliter la gestion, la récupération, l’ajout, la mise à jour et la suppression des données.</p></li>
+<li><p><strong>Système de Gestion de Base de Données (SGBD)</strong> : Logiciel permettant de créer, gérer et manipuler des bases de données. Il permet la gestion des données et des utilisateurs via des interfaces (commandes SQL, API, etc.).</p></li>
+<li><p><strong>Index</strong> : Un moyen d’accélérer les requêtes en créant une structure de données qui permet une recherche rapide sur des colonnes spécifiques.</p></li>
+<li><p><strong>Schéma</strong> : Un modèle ou une structure de données qui définit la façon dont les données sont organisées dans une base de données. Un schéma peut contenir des tables, des vues, des fonctions, etc.</p></li>
+<li><p><strong>Jointure (Join)</strong> : Une opération qui permet de combiner des données provenant de plusieurs tables en fonction de relations définies entre elles.</p></li>
+<li><p><strong>Transaction</strong> : Un ensemble d’opérations qui sont exécutées de manière atomique (tout ou rien). Si une transaction échoue, toutes les modifications sont annulées.</p></li>
 </ul>
+<hr>
 </section>
-<section id="évaluation" class="level2">
-<h2 class="anchored" data-anchor-id="évaluation">Évaluation</h2>
+<section id="sql-structured-query-language" class="level3">
+<h3 class="anchored" data-anchor-id="sql-structured-query-language"><strong>SQL (Structured Query Language)</strong></h3>
 <ul>
-<li>Lundi 6 Janvier 10h</li>
-<li>Durée : 2h</li>
-<li>Sur papier</li>
-<li>Sans documents</li>
+<li><p><strong>SQL</strong> : Un langage standardisé pour interagir avec des bases de données relationnelles. SQL permet de créer, lire, mettre à jour et supprimer des données (CRUD).</p></li>
+<li><p><strong>SELECT</strong> : Commande utilisée pour extraire des données d’une ou plusieurs tables.</p></li>
+<li><p><strong>INSERT</strong> : Commande utilisée pour insérer de nouvelles lignes de données dans une table.</p></li>
+<li><p><strong>UPDATE</strong> : Commande utilisée pour modifier les données existantes dans une table.</p></li>
+<li><p><strong>DELETE</strong> : Commande utilisée pour supprimer des lignes dans une table.</p></li>
+<li><p><strong>WHERE</strong> : Clause utilisée pour filtrer les résultats d’une requête en fonction de conditions spécifiques.</p></li>
+<li><p><strong>GROUP BY</strong> : Clause utilisée pour regrouper les résultats d’une requête selon un ou plusieurs attributs.</p></li>
+<li><p><strong>ORDER BY</strong> : Clause utilisée pour trier les résultats d’une requête selon un ou plusieurs critères.</p></li>
+<li><p><strong>JOIN</strong> : Opération qui combine des données de plusieurs tables en fonction de conditions de correspondance.</p></li>
+<li><p><strong>HAVING</strong> : Clause utilisée pour filtrer les résultats agrégés d’une requête, généralement utilisée après un <code>GROUP BY</code>.</p></li>
+<li><p><strong>DISTINCT</strong> : Mot-clé utilisé pour éliminer les doublons dans les résultats d’une requête.</p></li>
+<li><p><strong>LIMIT</strong> : Limite le nombre de résultats renvoyés par une requête.</p></li>
+<li><p><strong>INSERT INTO SELECT</strong> : Commande permettant d’insérer le résultat d’une requête SELECT dans une autre table.</p></li>
+<li><p><strong>ALTER</strong> : Commande permettant de modifier la structure d’une table (par exemple, ajouter ou supprimer des colonnes).</p></li>
+<li><p><strong>DROP</strong> : Commande permettant de supprimer une table ou un autre objet dans une base de données.</p></li>
+<li><p><strong>CREATE</strong> : Commande utilisée pour créer des tables, des vues, des index, des procédures, etc.</p></li>
+<li><p><strong>INDEX</strong> : Structure de données permettant de rendre les recherches plus rapides sur des colonnes de tables.</p></li>
+<li><p><strong>TRANSACTION</strong> : Un bloc de commandes SQL qui peut être validé (<code>COMMIT</code>) ou annulé (<code>ROLLBACK</code>) dans son ensemble.</p></li>
+<li><p><strong>COMMIT</strong> : Commande permettant de valider une transaction.</p></li>
+<li><p><strong>ROLLBACK</strong> : Commande permettant d’annuler une transaction et de revenir à l’état antérieur.</p></li>
 </ul>
+<hr>
 </section>
-<section id="bibliographie" class="level2">
-<h2 class="anchored" data-anchor-id="bibliographie">Bibliographie</h2>
+<section id="postgresql" class="level3">
+<h3 class="anchored" data-anchor-id="postgresql"><strong>PostgreSQL</strong></h3>
 <ul>
-<li>https://laurent-audibert.developpez.com/Cours-BD/?page=introduction-bases-de-donnees</li>
-<li>https://upinfo.univ-cotedazur.fr/im/bases-de-donnees/</li>
-<li>https://openclassrooms.com/fr/courses/6971126-implementez-vos-bases-de-donnees-relationnelles-avec-sql/7139618-decouvrez-le-systeme-de-gestion-de-base-de-donnees-sgbd</li>
-<li>https://oseox.fr/sql/</li>
-<li>https://learnsql.fr/blog/aide-memoire-pour-les-entretiens-sql/</li>
+<li><p><strong>PostgreSQL</strong> : Un système de gestion de base de données relationnelle open-source avancé. Il supporte les types de données complexes, la gestion des transactions, les index, les jointures, et d’autres fonctionnalités avancées.</p></li>
+<li><p><strong>pgAdmin</strong> : Interface graphique pour administrer des bases de données PostgreSQL. Elle permet de créer, modifier, supprimer des objets de base de données, et d’exécuter des requêtes SQL.</p></li>
+<li><p><strong>Tableau de Bord PostgreSQL</strong> : L’interface utilisateur pour administrer et gérer des instances de PostgreSQL, à travers des outils graphiques ou des requêtes SQL.</p></li>
+<li><p><strong>Vacuum</strong> : Processus dans PostgreSQL qui nettoie et libère l’espace occupé par des tuples morts dans les tables et les index. Il optimise aussi la performance de la base de données.</p></li>
+<li><p><strong>Replication</strong> : Mécanisme dans PostgreSQL permettant de copier les données d’une base de données vers une autre pour des fins de sauvegarde ou de haute disponibilité.</p></li>
+<li><p><strong>Sequence</strong> : Un objet dans PostgreSQL qui génère des valeurs numériques uniques, souvent utilisé pour les valeurs de clés primaires auto-incrémentées.</p></li>
+<li><p><strong>Foreign Data Wrapper (FDW)</strong> : Permet à PostgreSQL de se connecter à des bases de données externes et de traiter les données comme si elles étaient locales.</p></li>
+<li><p><strong>Extension</strong> : Une fonctionnalité supplémentaire dans PostgreSQL permettant d’ajouter des modules spécifiques pour étendre les capacités du système (par exemple, <code>PostGIS</code> pour la gestion des données géographiques).</p></li>
+<li><p><strong>PL/pgSQL</strong> : Un langage procédural utilisé dans PostgreSQL pour écrire des fonctions et des procédures stockées.</p></li>
+<li><p><strong>Array</strong> : Un type de données qui permet de stocker plusieurs valeurs dans une seule colonne dans PostgreSQL.</p></li>
+<li><p><strong>JSON/JSONB</strong> : Types de données pour stocker des documents JSON dans PostgreSQL, où <code>JSONB</code> offre des performances supérieures pour les opérations de lecture et d’indexation.</p></li>
+<li><p><strong>CTE (Common Table Expression)</strong> : Une sous-requête qui peut être utilisée dans une requête principale pour améliorer la lisibilité et la structure des requêtes complexes.</p></li>
+</ul>
+<hr>
+</section>
+<section id="autres-concepts" class="level3">
+<h3 class="anchored" data-anchor-id="autres-concepts"><strong>Autres Concepts</strong></h3>
+<ul>
+<li><p><strong>ACID</strong> : Propriétés des transactions garantissant leur intégrité : <strong>Atomicité</strong>, <strong>Cohérence</strong>, <strong>Isolation</strong>, <strong>Durabilité</strong>.</p></li>
+<li><p><strong>Normalisation</strong> : Processus de conception d’une base de données pour éliminer la redondance et les anomalies, en divisant les données en tables liées par des clés étrangères.</p></li>
+<li><p><strong>Schéma</strong> : Un ensemble d’objets (tables, vues, fonctions, etc.) organisés dans une base de données.</p></li>
+<li><p><strong>DDL (Data Definition Language)</strong> : Langage SQL utilisé pour définir et gérer la structure de la base de données (par exemple, <code>CREATE</code>, <code>ALTER</code>, <code>DROP</code>).</p></li>
+<li><p><strong>DML (Data Manipulation Language)</strong> : Langage SQL utilisé pour manipuler les données dans les tables (par exemple, <code>SELECT</code>, <code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>).</p></li>
+<li><p><strong>DCL (Data Control Language)</strong> : Langage SQL utilisé pour contrôler l’accès aux données (par exemple, <code>GRANT</code>, <code>REVOKE</code>).</p></li>
+<li><p><strong>SQL Injection</strong> : Technique d’attaque où des requêtes SQL malveillantes sont insérées dans un formulaire ou une URL pour manipuler la base de données.</p></li>
 </ul>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
