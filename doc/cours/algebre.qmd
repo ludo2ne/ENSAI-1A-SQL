@@ -30,6 +30,7 @@ from: markdown+emoji
 
 ## Principaux opérateurs
 
+::: {.small-table}
 | **Opérateur**        | **Description**                              |
 |----------------------|----------------------------------------------|
 | **σ (Sélection)**    | Filtrer les lignes selon une condition      |
@@ -38,7 +39,7 @@ from: markdown+emoji
 | **− (Différence)**   | Retourner les lignes présentes dans une relation mais pas dans l'autre |
 | **∩ (Intersection)** | Trouver les lignes communes aux deux relations |
 | **⨝ (Jointure)**    | Combiner deux relations basées sur une condition |
-
+:::
 
 ### Sélection
 

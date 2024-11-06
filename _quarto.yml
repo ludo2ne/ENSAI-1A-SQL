@@ -23,6 +23,8 @@ website:
             text: "Base de données"
           - href: doc/cours/sql-intro.qmd
             text: "Introduction à SQL"
+          - href: doc/cours/agregations.qmd
+            text: "Agrégations"
           - href: doc/cours/algebre.qmd
             text: "Algèbre Relationnelle"
           - href: doc/cours/jointures.qmd

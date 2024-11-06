@@ -8,6 +8,7 @@ format:
     toc-location: left
     toc-depth: 3
     number-sections: true
+    number-depth: 2
   revealjs:
     theme: moon
     footer: "[Home](../../index.html) --- [Jointures](jointures.html)"
@@ -23,23 +24,325 @@ from: markdown+emoji
 
 ## Jointures
 
-Objectif : regrouper les données de plusieurs tables
+::: {.callout-important title="Objectifs"}
+- Regrouper les données de plusieurs tables
+- En utilisant les liens entre ces tables
+:::
 
-Faire une jointure est comme créer un gros tableau
+::: {.notes}
+- Jusqu'à maintenant, on aurait pu tout faire sous excel...
+- Faire une jointure est comme créer un gros tableau
+:::
+
+### Tables utilisées
+
+Dans les exemples ci-dessous, nous allons utiliser ces 2 tables.
+
+Vous pouvez tout à fait faire des jointures avec 3 tables, 4 tables...
+
+```{mermaid}
+classDiagram
+    class Joueuse {
+        id_joueuse PK
+        nom
+        prenom
+        elo
+        id_club
+    }
+    
+    class Club {
+        id_club PK
+        nom
+        ville
+    }
+```
+
+### Données
+
+:::::: {.panel-tabset .nav-pills}
+
+#### Joueuse
+
+::: {.small-table}
+| **id_joueuse** | **nom**                | **prenom**       | **elo** | **id_club**  |
+|----------------|------------------------|------------------|---------|--------------|
+| 1              | Guichard               | Pauline          | 2357    | 3            |
+| 2              | Daulyte                | Deimante         | 2371    | 1            | 
+| 3              | Navrotescu             | Andreea          | 2338    | 2            |
+| 4              | Sebag                  | Marie            | 2448    | 2            |
+| 5              | Millet                 | Sophie           | 2366    | 3            |
+| 6              | Skrichempko            | Almira           | 2361    |              |
+:::
+
+#### Club
+
+::: {.small-table}
+| **id_club**  | **nom**                          | **ville**            |
+|--------------|----------------------------------|----------------------|
+| 1            | C'Chartres Echecs                | Chartres             |
+| 2            | Bischwiller                      | Bischwiller          |
+| 3            | Asnieres - le Grand Echiquier    | Asnieres             |
+| 4            | Tours des Hauts-De-France        | Saint-Quentin        |
+:::
+
+::::::
+
+:::{.notes}
+- Des remarques sur ces données ?
+- Comment-vous pensez que l'on va faire la jointure ?
+:::
 
 ## Jointure interne
 
-INNER
+L'**INNER JOIN** renvoie uniquement les lignes qui ont des [correspondances dans les deux tables]{.underline}.
+
+### 1ere tentative
+
+```{.sql}
+SELECT nom,
+       prenom,
+       nom AS club
+  FROM echecs.joueuse
+ INNER JOIN echecs.club ON id_club = id_club;
+```
+
+- Nous affichons *nom* et *prenom* de la table *joueuse*
+- Nous ajoutons le *nom* du *club*
+- Nous faisons la jointure entre *joueuse* et *club* via la colonne *id_club*
+
+::: {.fragment}
+Des soucis dans cette requête ? :confused:
+:::
+
+### 2e tentative
+
+```{.sql}
+SELECT joueuse.nom,
+       joueuse.prenom,
+       club.nom AS club
+  FROM echecs.joueuse
+ INNER JOIN echecs.club ON club.id_club = joueuse.id_club;
+```
+
+::: {.fragment}
+Ça fonctionne !
+
+Mais c'est un peu long d'écrire avant chaque colonne le nom de la table.
+:::
+
+### Alias
+
+```{.sql}
+SELECT j.nom,            -- signifie colonne nom de la table d'alias j
+       j.prenom,
+       c.nom AS club
+  FROM echecs.joueuse j  -- déclare j comme alias de la table joueuse
+ INNER JOIN echecs.club c ON c.id_club = j.id_club;
+```
+
+::: {.callout-note title="Alias"}
+- L'Alias est comme un surnom pour la table
+- Par défaut l'alias de la table est son propre nom (i.e. si vous ne déclarez pas d'alias)
+- Généralement on utilise comme alias la 1ere lettre ou les 2 premières lettres
+:::
+
+### USING
+
+::: {.callout-tip}
+Si votre base de données est bien conçue, les colonnes utilisées pour les jointures portent le même nom dans les deux tables.
+
+Dans ce cas, et uniquement dans ce cas, vous pouvez utiliser le mot clé `USING` à la place de `ON`.
+:::
+
+```{.sql}
+SELECT j.nom,
+       j.prenom,
+       c.nom AS club
+  FROM echecs.joueuse j
+ INNER JOIN echecs.club c USING (id_club);
+```
+
+::: {.notes}
+Si vos colonnes n'ont pas le même nom, pas possible de faire USING
+:::
+
+### Au final
+
+```{.sql}
+SELECT j.nom,
+       j.prenom,
+       c.nom AS club
+  FROM echecs.joueuse j
+  JOIN echecs.club c USING (id_club);
+```
+
+Vous pouvez même enlever le `INNER` qui est optionnel.
+
+### À ne pas faire
+
+::: {.callout-caution}
+Il est aussi possible de faire une jointure avec `NATURAL JOIN` sans préciser aucun nom de colonnes. Cela va joindre les tables via les colonnes ayant le même nom dans les 2 tables.
+
+Cette pratique est déconseillée, car vous ne maitrisez pas les colonnes servant à la jointure et c'est visuellement moins parlant.
+:::
+
+::: {.callout-warning title="Ancienne écriture"}
+```{.sql}
+SELECT j.nom,
+       j.prenom,
+       c.nom AS club
+  FROM echecs.joueuse j,
+       echecs.club c 
+ WHERE j.id_club = c.id_club;
+```
+:::
+
+::: {.notes}
+Ancienne écriture encore utilisée par un certain nombre.
+:::
+
+### Résultat
+
+::: {.small-table}
+| **nom**        | **prenom** | **club**                    |
+|----------------|------------|-----------------------------|
+| Daulyte        | Deimante   | C'Chartres Echecs           |
+| Navrotescu     | Andreea    | Bischwiller                 |
+| Sebag          | Marie      | Bischwiller                 |
+| Guichard       | Pauline    | Asnieres - le Grand Echiquier |
+| Millet         | Sophie     | Asnieres - le Grand Echiquier | 
+:::
+
+::: {.fragment}
+Il n'y a pas quelque chose qui vous chagrine ? :frowning:
+:::
+
+::: {.notes}
+A votre avis, pourquoi il manque une joueuse ?
+:::
+
 
 ## Jointure externe
 
-LEFT RIGHT
+Ce serait pas mal d'afficher toutes les joueuses, même celles qui n'ont pas de club.
 
-## Jointure Complète
+Comment faire ? :neutral_face:
 
-FULL JOIN
+---
+
+:::::: {.hide-html-render}
+<iframe src="https://giphy.com/embed/1zRgQYRbZWFXGZ1Tgw" width="960" height="540" frameBorder="0" class="giphy-embed no-print" allowFullScreen></iframe>
+::::::
+
+---
+
+### Idée
+
+- Lister les noms et prénoms des joueuses
+- Éventuellement compléter avec le nom du club
+
+::: {.fragment}
+```{.sql}
+SELECT j.nom,
+       j.prenom,
+       c.nom AS club
+  FROM echecs.joueuse j
+  LEFT JOIN echecs.club c USING (id_club);
+```
+:::
+
+### LEFT JOIN
+
+Utilisons un `LEFT JOIN` pour faire une jointure externe :
+
+- nous gardons toutes les données présentes dans les tables avant le *LEFT JOIN*
+- nous complétons si possible avec les données des tables après le *LEFT JOIN*
+
+::: {.callout-tip title="RIGHT JOIN"}
+À l'inverse, le `RIGHT JOIN` garde tout ce qu'il y a après et compléte si possible avec ce qu'il y a avant.
+
+Il est moins utilisé car moins intuitif, mais reste parfois indispensable.
+:::
+
+::: {.notes}
+Il y a certains cas particuliers où le RIGHT JOIN est indispensable
+
+Vous verrez parfois LEFT OUTER JOIN
+:::
+
+### Résultat
+
+
+:::::: {.panel-tabset .nav-pills}
+
+#### LEFT JOIN
+
+::: {.small-table}
+| **nom**        | **prenom** | **club**                    |
+|----------------|------------|-----------------------------|
+| Daulyte        | Deimante   | C'Chartres Echecs           |
+| Navrotescu     | Andreea    | Bischwiller                 |
+| Sebag          | Marie      | Bischwiller                 |
+| Guichard       | Pauline    | Asnieres - le Grand Echiquier |
+| Millet         | Sophie     | Asnieres - le Grand Echiquier | 
+| Skrichempko    | Almira     |                             | 
+:::
+
+#### RIGHT JOIN
+
+::: {.small-table}
+| **nom**        | **prenom** | **club**                    |
+|----------------|------------|-----------------------------|
+| Daulyte        | Deimante   | C'Chartres Echecs           |
+| Navrotescu     | Andreea    | Bischwiller                 |
+| Sebag          | Marie      | Bischwiller                 |
+| Guichard       | Pauline    | Asnieres - le Grand Echiquier |
+| Millet         | Sophie     | Asnieres - le Grand Echiquier | 
+|                |            | Tours des Hauts-De-France   | 
+:::
+
+::::::
+
+
+## Jointure complète
+
+Le `FULL JOIN` permet de faire une jointure bilatérale (i.e. un UNION entre les éléments de la *LEFT JOIN* et de la *RIGHT JOIN*)
+
+```{.sql}
+SELECT j.nom,
+       j.prenom,
+       c.nom AS club
+  FROM echecs.joueuse j
+  FULL JOIN echecs.club c USING (id_club);
+```
+
+### Résultat
+
+::: {.small-table}
+| **nom**        | **prenom** | **club**                    |
+|----------------|------------|-----------------------------|
+| Daulyte        | Deimante   | C'Chartres Echecs           |
+| Navrotescu     | Andreea    | Bischwiller                 |
+| Sebag          | Marie      | Bischwiller                 |
+| Guichard       | Pauline    | Asnieres - le Grand Echiquier |
+| Millet         | Sophie     | Asnieres - le Grand Echiquier | 
+| Skrichempko    | Almira     |                             | 
+|                |            | Tours des Hauts-De-France   | 
+:::
+
 
 ## Jointure croisée
 
-CROSS JOIN renvoie le produit cartésien des deux tables
+`CROSS JOIN` renvoie le produit cartésien des deux tables.
 
+::: {.small-table}
+| **nom**        | **prenom** | **club**                    |
+|----------------|------------|-----------------------------|
+| Daulyte        | Deimante   | C'Chartres Echecs           |
+| Daulyte        | Deimante   | Bischwiller                 |
+| Daulyte        | Deimante   | Asnieres - le Grand Echiquier |
+| Daulyte        | Deimante   | Tours des Hauts-De-France   |
+| Navrotescu     | Andreea    | C'Chartres Echecs           |
+| Navrotescu     | Andreea    | Bischwiller                 |
+| Navrotescu     | Andreea    | Asnieres - le Grand Echiquier |
+| ...        | ...   | ...   |
