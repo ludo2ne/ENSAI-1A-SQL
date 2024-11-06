@@ -1,0 +1,33 @@
+---
+title: "SQL avancé"
+description: "[Slides](sql-avance-slides.html)"
+author: "Ludovic Deneuville"
+format: 
+  html:
+    toc: true
+    toc-location: left
+    toc-depth: 3
+    number-sections: true
+    number-depth: 2
+  revealjs:
+    theme: moon
+    footer: "[Home](../../index.html) --- [SQL avancé](sql-avance.html)"
+    slide-number: c/t                    # collapsed/total
+    slide-level: 3
+    controls: true
+    output-file: sql-avance-slides.html
+mermaid:
+  theme: forest
+code-line-numbers: false
+from: markdown+emoji
+---
+
+:construction:
+
+## VUE
+
+## INDEX
+
+## WITH
+
+## GRANT

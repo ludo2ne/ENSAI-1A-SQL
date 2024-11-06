@@ -1,0 +1,17 @@
+---
+title: "Découverte du Datalab"
+description: "Découverte du Datalab"
+author: "Ludovic Deneuville"
+format: 
+  html:
+    toc: true
+    toc-location: left
+    toc-expand: 3
+from: markdown+emoji
+number-sections: true
+number-depth: 3
+---
+
+:construction: 
+
+<https://ludo2ne.github.io/ENSAI-2A-Big-Data/docs/sspcloud.html>

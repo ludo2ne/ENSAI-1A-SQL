@@ -99,7 +99,7 @@ Faites un effort pour vous même et pour vos relecteurs
 - Datalab
 - cloudBeaver
 
-### Bien
+### Ce qu'il faut faire
 
 - Lire attentivement les consignes
 - Essayer de résoudre par soi même
@@ -111,9 +111,9 @@ Faites un effort pour vous même et pour vos relecteurs
 ça peut paraitre un peu infentilisant mais c'est nécessaire de le rappeler !!!
 :::
 
-### Pas bien
+### À ne pas faire
 
-- Poster l'énoncer sur ChatGPT
+- Poster l'énoncé sur ChatGPT
 - Copier / Coller la réponse sans rien comprendre
 
 ::: {.notes}
@@ -130,13 +130,17 @@ Faites un effort pour vous même et pour vos relecteurs
 - Sur papier
 - Sans documents
 
-## Bibliographie
+::: {.notes}
+- partie QCM
+- des requêtes SQL à écrire
+:::
 
-- https://laurent-audibert.developpez.com/Cours-BD/?page=introduction-bases-de-donnees
-- https://upinfo.univ-cotedazur.fr/im/bases-de-donnees/
-- https://openclassrooms.com/fr/courses/6971126-implementez-vos-bases-de-donnees-relationnelles-avec-sql/7139618-decouvrez-le-systeme-de-gestion-de-base-de-donnees-sgbd
-- https://oseox.fr/sql/
-- https://learnsql.fr/blog/aide-memoire-pour-les-entretiens-sql/
+## Bibliographie {.smaller}
+
+- <https://laurent-audibert.developpez.com/Cours-BD/>{target="_blank"}
+- <https://upinfo.univ-cotedazur.fr/im/bases-de-donnees/>{target="_blank"}
+- <https://oseox.fr/sql/>{target="_blank"}
+- <https://learnsql.fr/blog/aide-memoire-pour-les-entretiens-sql/>{target="_blank"}
 
 ::: {.notes}
 - désolé s'il y a des fautes, j'ai écrit ce cours un peu dans l'urgence

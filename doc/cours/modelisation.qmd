@@ -1,0 +1,53 @@
+---
+title: "Modélisation avec UML"
+description: "[Slides](modelisation-slides.html)"
+author: "Ludovic Deneuville"
+format: 
+  html:
+    toc: true
+    toc-location: left
+    toc-depth: 3
+    number-sections: true
+    number-depth: 2
+  revealjs:
+    theme: moon
+    footer: "[Home](../../index.html) --- [Modélisation](modelisation.html)"
+    slide-number: c/t                    # collapsed/total
+    slide-level: 3
+    controls: true
+    output-file: modelisation-slides.html
+mermaid:
+  theme: forest
+code-line-numbers: false
+from: markdown+emoji
+---
+
+:construction:
+
+## Dépendances fonctionnelles
+
+## Formes normales
+
+
+### Exemple
+
+Site de vente de légumes
+
+- Client
+  - id_client
+  - nom
+  - prenom
+  - mail
+- Produit
+  - id_produit
+  - nom
+  - description
+  - prix
+- Commande
+  - id_commande
+  - id_client
+- LigneCommande
+  - id_ligne_commande
+  - id_commande
+  - id_produit
+  - quantite

@@ -115,10 +115,14 @@ Mais ça devient vite trop compliqué.
 
 Nombreux sous-types :
 
-- **Clé-valeur** : données sous forme de paires clé-valeur (DynamoDB)
-- **Colonnes** : Organisée en colonnes, adaptée aux grandes quantités de données (Cassandra)
-- **Document** : Stocke des documents semi-structurés (JSON, XML) (MongoDB)
-- **Graphes** : Organisée sous forme de nœuds et de relations, pour des données très connectées (Neo4j)
+::: {.small-table}
+| **Type**      | **Description**                                                                          | **Exemple**              |
+|---------------|------------------------------------------------------------------------------------------|--------------------------|
+| Clé-valeur    | Données sous forme de paires clé-valeur. Idéale pour des lectures rapides avec peu de structure. | DynamoDB                 |
+| Colonnes      | Organisée en colonnes, adaptée aux grandes quantités de données avec peu de relations entre elles. | Cassandra                |
+| Document      | Stocke des documents semi-structurés, souvent en format JSON ou XML, permettant une grande flexibilité. | MongoDB                 |
+| Graphes       | Organisée sous forme de nœuds et de relations, idéale pour des données très connectées ou inter-relées. | Neo4j                   |
+:::
 
 :::{.notes}
 Not Only SQL
@@ -361,10 +365,9 @@ Il fournit des outils pour stocker, récupérer, modifier et sécuriser les donn
 :::
 
 - **[PostgreSQL](https://www.postgresql.org/){target="_blank"}**
-- [MySQL](https://www.mysql.com/){target="_blank"}
+- [MySQL](https://www.mysql.com/){target="_blank"}, [MariaDB](https://mariadb.org/){target="_blank"}
 - [Oracle Database](https://www.oracle.com/database/){target="_blank"}
 - [SQLite](https://www.sqlite.org/){target="_blank"}
-- [MariaDB](https://mariadb.org/){target="_blank"}
 
 ### PostgreSQL
 
@@ -407,30 +410,14 @@ Il est nécessaire d'avoir un **outil pour gérer et administrer** une base de d
 - BDD : bibliothèque
 - SGBD : bibliothécaire
 - Outil : tableau de bord interactif pour les bibliothécaires
+
+A l'ENSAI :
+
+- vous avez chacun une bdd (nom=id)
+- utilisez DBeaver pour vous y connecter
 :::
 
 
-### Exemple
 
-Site de vente de légumes
-
-- Client
-  - id_client
-  - nom
-  - prenom
-  - mail
-- Produit
-  - id_produit
-  - nom
-  - description
-  - prix
-- Commande
-  - id_commande
-  - id_client
-- LigneCommande
-  - id_ligne_commande
-  - id_commande
-  - id_produit
-  - quantite
 
 

@@ -29,8 +29,14 @@ website:
             text: "Algèbre Relationnelle"
           - href: doc/cours/jointures.qmd
             text: "Jointures"
+          - href: doc/cours/sql-avance.qmd
+            text: "SQL avancé"
+          - href: doc/cours/modelisation.qmd
+            text: "Modélisation"
       - text: TP
         menu:
+          - href: doc/tp/tp0.qmd
+            text: "TP0"
           - href: doc/tp/tp1.qmd
             text: "TP1"
     right:
