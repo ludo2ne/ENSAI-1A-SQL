@@ -9,3 +9,16 @@ from: markdown+emoji
 - 6h de cours
 - 18h de TP/TD
 
+Contenu du cours :
+
+- Les bases de données
+  - Les bases de données relationnelles
+- Introduction au langage SQL
+  - Créer des tables
+  - Lire des tables
+- Les Agrégations
+- L'Algébre relationnelle
+- Les jointures
+- SQL avancé (Vues, Index, Droits, CTE)
+- Modélisation UML
+  - Formes normales

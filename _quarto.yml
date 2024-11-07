@@ -36,7 +36,7 @@ website:
       - text: TP
         menu:
           - href: doc/tp/tp0.qmd
-            text: "TP0"
+            text: "TP0 - Datalab"
           - href: doc/tp/tp1.qmd
             text: "TP1"
     right:

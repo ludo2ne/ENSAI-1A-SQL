@@ -1,6 +1,6 @@
 ---
 title: "Découverte du Datalab"
-description: "Découverte du Datalab"
+description: "TP0 - Onyxia et le Datalab pour le statisticien"
 author: "Ludovic Deneuville"
 format: 
   html:
@@ -10,8 +10,406 @@ format:
 from: markdown+emoji
 number-sections: true
 number-depth: 3
+lightbox: true
 ---
 
 :construction: 
 
-<https://ludo2ne.github.io/ENSAI-2A-Big-Data/docs/sspcloud.html>
+
+## Introduction {.unnumbered}
+
+Vous allez effectuer une partie des TP sur le [Datalab du GENES](https://onyxia.lab.groupe-genes.fr/){target="_blank"}.
+
+Le Datalab permet aux statisticiens de découvrir, d'expérimenter, d'apprendre, de se former aux outils de la data.
+
+::: {.callout-tip title="Qu'est-ce que le Datalab ?" collapse="true"}
+Dans le monde professionnel, plusieurs problèmes se posent au statisticien :
+
+- sa machine n'est pas assez puissante
+- installer des logiciels est parfois compliqué car bloqué par le système
+
+À l'INSEE, un projet est né pour pallier à ce besoin : [Onyxia](https://www.onyxia.sh/){target="_blank"} porté par le [lab de l'INSEE](https://github.com/InseeFrLab){target="_blank"}.
+
+La première étape fut de créer une infrastructure Cloud avec des CPUs, des GPUs, de la RAM et du stockage.
+
+Ensuite, c'est très bien d'avoir accès à tout plein de ressources, encore faut-il savoir les utiliser. Or lancer des services dans le cloud nécessite quelques compétences spécifiques (Docker, Kubernetes, Helm, S3...) qui ne sont pas à la portée de tous.
+
+D'où l'idée de créer une interface graphique pour pouvoir lancer des services en quelques clics. Onyxia s'appuie sur des technologies sous-jacentes (Kubernetes, Helm, S3...) pour proposer une IHM agréable pour le datascientist. Cependant la philosophie du projet Onyxia est d'être une brique qui facilite le travail sans se rendre indispensable.
+
+À l'INSEE, une instance de ce logiciel a été installée sur le [Datalab SSP Cloud](https://datalab.sspcloud.fr/){target="_blank"} ouverte à tous les agents publics. Vous pouvez y créer un compte car c'est également ouvert à tous les élèves de l'ENSAI (en utilisant votre mail ENSAI).
+
+Onyxia est Libre et Open Source, ainsi chacun peut installer sa propre instance sur son infra. C'est ce qu'ont fait de nombreux organismes, ainsi que le GENES.
+
+Pour plus de détails, voir la section **Pour aller plus loin** à la fin.
+:::
+
+Le principe est d'offrir aux utilisateurs de nombreux services (Jupyter, Rstudio, VSCode, PostgreSQL...) à la demande et une puissance de calcul adaptée aux besoins.
+
+::: {.callout-caution}
+Ces services sont éphémères, car si les ressources sont importantes, il faut savoir les partager !
+
+Le principe général est le suivant :
+
+- Vous lancez votre service en réservant des ressources (CPU, GPU, RAM)
+- Vous effectuez votre travail
+- Vous sauvegardez votre code (git) et vos résultats (MinIO)
+- Vous supprimez votre service et libérez les ressources 
+:::
+
+
+## Objectifs {.unnumbered}
+
+Ce TP d'initiation va vous permettre de :
+
+- Configurer votre compte sur le datalab
+- Vous familiariser avec l'espace de stockage S3
+- Lancer vos premiers services
+
+
+## Créer et configuration de compte
+
+Pour profiter des services, vous devez créer un compte.
+
+### Générer un token GitHub
+
+Sur le datalab, vos services ont une durée de vie limitée.
+
+Pour sauvegarder vos programmes, la bonne pratique est d'utiliser un dépôt git. Nous allons donc créer et utiliser un jeton pour communiquer avec GitHub.
+
+Pour suivre la démarche, il faut disposer d'un compte [GitHub](https://github.com/){target="_blank"}. Il est possible de suivre une démarche similaire avec [GitLab](https://about.gitlab.com/){target="_blank"}.
+
+- [ ] Connectez-vous à votre compte GitHub
+- [ ] Allez dans settings > Developer settings > Personal access tokens > Tokens (classic)
+- [ ] Générez un [nouveau jeton classique](https://github.com/settings/tokens/new){target="_blank"}
+  - Renseigner : nom du token, date d'expiration
+  - :white_check_mark: Cochez repo
+  - Cliquez sur `Generate token`
+  - Copiez ce jeton commençant par "*ghp_*" et gardez le précieusement de côté quelques minutes
+
+::: {.callout-warning}
+- Ce jeton ne sera visible qu'une seule fois
+- si vous le perdez ou s'il est expiré, il faut en générer un nouveau
+:::
+
+
+### Déclarer votre jeton
+
+GitHub vous a fournit un jeton. Il faut maintenant le déclarer sur le [Datalab](https://datalab.sspcloud.fr/){target="_blank"} ([Doc officielle](https://inseefrlab.github.io/docs.sspcloud.fr/docs/fr/version-control.html){target="_blank"}) :
+
+- [ ] Allez dans `Mon Compte` > Onglet `Git`
+- [ ] Renseignez les informations suivantes 
+  - nom d'utilisateur Git 
+  - mail (celui utilisé pour votre compte GitHub)
+- [ ] Collez votre token
+
+
+## Le stockage
+
+Lorsque l'on travaille dans le cloud, il est essentiel de séparer les données des programmes pour mieux gérer les ressources, renforcer la sécurité en limitant les accès et les permissions, et permettre une scalabilité indépendante des composants.
+
+[MinIO](https://min.io/){target="_blank"} est une solution de stockage d'objets open-source qui permet de déployer facilement un stockage évolutif et performant. Elle est compatible avec l'API [S3 d'Amazon](https://aws.amazon.com/fr/s3/){target="_blank"}, ce qui facilite l'intégration avec les applications existantes. 
+
+MinIO offre :
+
+- une haute disponibilité, 
+- une sécurité renforcée grâce au chiffrement des données et des contrôles d'accès,
+- des performances élevées, particulièrement adaptées aux environnements nécessitant un accès rapide aux données, comme le Big Data et l'intelligence artificielle.
+
+### Votre bucket
+
+Lors de votre création de compte, un bucket est créé avec votre nom d'utilisateur. Dans ce bucket, vous pouvez :
+
+- créer / supprimer des dossiers
+- importer / supprimer des fichiers
+- créer un dossier nommé `diffusion` à la racine de votre bucket
+  - celui-ci sera accessible en lecture à tous les utilisateurs du datalab
+
+
+Pour accéder à votre stockage :
+
+- Depuis le Datalab, allez dans `Mes fichiers`
+- Depuis la [console MinIO](https://minio-console.lab.sspcloud.fr/){target="_blank"}
+- Depuis le terminal d'un service (voir [section ci-après](#Accéder-à-votre-stockage))
+
+
+### Stocker des fichiers
+
+- [ ] Téléchargez le [fichier des prénoms par département de naissance](https://www.insee.fr/fr/statistiques/7633685) en 2022 au format csv
+- [ ] Dans votre bucket, créez un dossier `diffusion`, puis à l'intérieur un dossier `INSEE`
+- [ ] Dans ce dossier, importez le fichier des prénoms
+
+
+## Les services
+
+### Dépôt pour le code
+
+Avant de créer un service, nous allons créer un dépôt GitHub qui permettra de sauvegarder votre code.
+
+- [ ] Dans GitHub, créer un [nouveau Repository](https://github.com/new){target="_blank"}
+  - Repository name : TP-datalab
+  - Public
+  - :white_check_mark: Cochez *Add a README file*
+  - .gitignore template : R
+  - Choose a license : Apache Licence 2.0
+  - `Create Repository`
+- [ ] Sur la page de votre repo, cliquez sur le bouton **[Code]{style="background-color: green"}**
+- [ ] Copiez l'adresse *https* du repo
+
+### Créer un service
+
+- [ ] Allez dans `Catalogue de services`, sélectionner le service *Rstudio*, puis cliquez sur `Lancer`
+- [ ] Allez dans Configuration
+  - De nombreux onglets permettent de configurer votre service
+  - Service : possibilité d'utiliser une autre image Docker
+  - Resources : choisir CPU et RAM
+  - Init : script à lancer au démarrage
+- [ ] Allez dans l'onglet `Git` et collez l'adresse *https* du repo
+- [ ] Lancez le service
+  - Attendez quelques secondes le temps que le service se lance
+- [ ] Cliquez pour copier le mot de passe
+- [ ] Cliquez sur `Ouvrir le service` :rocket:
+  - username : onyxia
+  - password : collez le mot de passe
+
+Votre R Studio s'ouvre et vous remarquez dans l'explorateur en bas à droite que votre repo git a été cloné.
+
+::: {.callout-note collapse="true" title="Ce qu'il se passe sous le capot"}
+
+Pour plus de détails, vous pouvez consulter la vidéo en bas de la page.
+
+Prenons l'exemple de ce qu'il se passe en arrière plan lorsque vous lancez un service `Vscode-python` :
+
+#### Construction de l'image Docker
+
+Une image Docker est un paquet léger et autonome qui contient tout le nécessaire pour exécuter une application : le code, les bibliothèques, les dépendances, les variables d'environnement et les fichiers de configuration.
+
+Les images Docker permettent de créer des environnements isolés et cohérents, garantissant ainsi la portabilité et la reproductibilité des applications.
+
+1. Nous partons de l'[image de base d'Onyxia](https://github.com/InseeFrLab/images-datascience/blob/main/base/Dockerfile){target="_blank"}
+    - ubuntu:22.04 et quelques éléments de config
+2. Nous ajoutons la couche [python-minimal](https://github.com/InseeFrLab/images-datascience/blob/main/python-minimal/Dockerfile){target="_blank"}
+    - installation de python et quelques packages classiques
+3. Nous ajoutons la couche [python-datascience](https://github.com/InseeFrLab/images-datascience/blob/main/python-datascience/Dockerfile){target="_blank"}
+    - Julia, Quarto et des packages de datascience (numpy, pandas...)
+4. Nous ajoutons la couche [vscode](https://github.com/InseeFrLab/images-datascience/blob/main/vscode/Dockerfile){target="_blank"}
+    - Installation de Visual Studio Code et configuration
+
+#### DockerHub
+
+Cette image est construite et déposée sur DockerHub [onyxia-vscode-python](https://hub.docker.com/r/inseefrlab/onyxia-vscode-python){target="_blank"}.
+
+Nous allons ensuite lancer une instance de cette image : un conteneur. Le conteneur est à l'image, ce que l'objet est à la classe.
+
+Pour gérer tous les conteneurs lancés sur le datalab, nous avons besoin d'un orchestrateur : Kubernetes. 
+
+#### Chart Helm
+
+Cependant, nous allons d'abord utiliser Helm pour faciliter le déploiement.
+
+Helm simplifie le processus de déploiement d'applications sur Kubernetes en automatisant les tâches répétitives et en fournissant une gestion centralisée des configurations.
+
+Le [chart Helm vscode-python](https://github.com/InseeFrLab/helm-charts-interactive-services/tree/main/charts/vscode-python){target="_blank"} est un ensemble de fichiers de configuration qui facilite le déploiement d'application dans un envrionnement Kubernetes.
+
+#### Déploiement sur Kube
+
+Kubernetes (K8s) est un système open-source qui automatise le déploiement, la mise à l'échelle et la gestion d'applications conteneurisées. C'est un orchestrateur de conteneurs.
+
+K8s récupére via le chart Helm toutes les infos nécessaires et déploie le conteneur (créé à partir de l'image Docker) sur l'infra du datalab
+
+:::
+
+### Jouer avec votre service
+
+- [ ] File > New File > R Script
+- [ ] Enregistrez ce fichier sous le nom *tp1.R* dans votre repo *TP-datalab*
+
+### Accéder à votre stockage
+
+Nous allons utiliser par exemple la librairie `aws.s3` pour accéder au stockage.
+
+- [ ] Chargez les librairies
+  - **aws.s3** : permet d'interagir avec le service Amazon S3 pour la gestion et le stockage de fichiers en ligne.
+  - **dplyr** : fournit des fonctions simples et rapides pour la manipulation de données
+
+
+```{.R}
+library(aws.s3)
+library(dplyr)
+```
+
+- [ ] Renseignez le nom de votre bucket (correspond à votre nom d'utilisateur)
+
+```{.R}
+bucket_name <- "<username>"
+```
+
+- [ ] Listez les fichiers de votre bucket
+
+```{.R}
+aws.s3::get_bucket(bucket_name, region = "")
+```
+
+- [ ] Listez les fichiers d'un dossier spécifique
+
+```{.R}
+specific_folder <- aws.s3::get_bucket(bucket_name, 
+                                      region = "", 
+                                      prefix = "diffusion/INSEE")
+
+# Affichage sous forme de dataframe
+bind_rows(lapply(specific_folder, function(x) {
+  data.frame(
+    FileName = basename(x$Key), 
+    Size = paste0(round(as.numeric(x$Size) / (1024 * 1024), 2), " Mo"), 
+    LastModified = format(as.POSIXct(x$LastModified, format="%Y-%m-%dT%H:%M:%OSZ", tz="UTC"), "%Y.%m.%d %H:%M"),
+    stringsAsFactors = FALSE
+  )
+}
+))
+```
+
+- [ ] Lisez un fichier csv
+
+```{.R}
+df <- aws.s3::s3read_using(
+  FUN = data.table::fread,
+  object = "/diffusion/INSEE/dpt2022_csv.zip",
+  bucket = bucket_name,
+  opts = list("region" = "")
+)
+```
+
+- [ ] Requêtez les données
+
+```{.R}
+# Top 10 des prénoms féminins en 2021
+top10f2021 <- df |>
+  filter(sexe == 2, annais == 2021, preusuel != "_PRENOMS_RARES") |>
+  group_by(preusuel) |>
+  summarise(nombre_total = sum(nombre)) |>
+  arrange(desc(nombre_total)) |>
+  head(10) |>
+  collect()  
+```
+
+- [ ] Exportez vos résultats vers MinIO
+
+```{.R}
+aws.s3::s3write_using(
+  top10f2021,
+  FUN = data.table::fwrite,
+  sep = ";",
+  col.names = TRUE,
+  object = "/diffusion/INSEE/output.csv",
+  bucket = "ludo2ne",
+  opts = list("region" = "")
+)
+```
+
+- [ ] Sur le SSP cloud, allez dans Mes fichiers > diffusion > INSEE
+  - le fichier *output.csv* a été généré
+  - rafraichissez la page si besoin
+- [ ] Double-cliquez sur ce fichier pour en avoir un aperçu
+
+
+### Client MinIO
+
+Le [client MinIO](https://min.io/docs/minio/linux/reference/minio-mc.html){target="_blank"} installé et [utilisable depuis le terminal]{.underline} permet également d'interagir avec vos fichiers.
+
+- [ ] `mc ls s3/<username>/diffusion` : pour lister le contenu de votre dossier diffusion
+- [ ] `mc cp s3/<username>/diffusion/INSEE/dpt2022.csv .` : pour copier le fichier depuis s3 dans votre dossier courant
+  - le fichier apparait dans votre explorer
+- [ ] Supprimez ce fichier : `rm dpt2022.csv`
+  - Car importer les fichiers de données dans son espace de travail n'est pas une bonne pratique
+
+::: {.callout-tip}
+La commande `mc --help` liste toutes les commandes possibles (ESPACE pour défiler, CTRL+C pour sortir)
+:::
+
+
+### Sauver son code
+
+- [ ] Allez dans le terminal
+- [ ] Positionnez-vous dans le repo : `cd /home/onyxia/work/TP-datalab`
+- [ ] `git status` pour voir l'état actuel
+  - le fichier *tp1.R* doit apparaître dans les *Untracked files*
+- [ ] Ajoutez ce fichier à l'index : `git add .`
+- [ ] Créez un commit : `git commit -m "création fichier tp1"`
+- [ ] Poussez ce commit vers votre dépôt distant (GitHub)
+  - Vous pouvez vérifier sur GitHub que votre fichier *tp1.R* est bien présent
+
+### Surveiller son service
+
+- [ ] Sur la page du Datalab, allez dans `Mes services`
+- [ ] Cliquez sur le nom du service (Rstudio)
+- [ ] Cliquez sur `Surveillance externe`
+
+Vous arrivez sur la page de l'outil **Grafana** qui permet d'observer les métriques de votre service.
+
+### Terminer son service
+
+Une fois vos travaux terminés, il est temps de libérer les ressources réservées.
+
+- [ ] Dans *Mes services*, mettez votre service à la poubelle
+
+De toute manière, vous pouvez aisément reproduire votre travail plus tard :
+
+- Votre code est sur GitHub
+- Vos données sont sur MinIO
+- Il suffit de relancer un nouveau service
+
+
+## Les secrets
+
+Certains éléments ne doivent pas être diffusés dans votre code (jetons d'accès, mots de passe...).
+
+Pour éviter d'avoir à nettoyer votre code à chaque fois que vous le poussez sur GitHub, le datalab propose de gérer vos secrets.
+
+### Créer un secret
+
+- [ ] Allez dans *Mes secrets*
+- [ ] Créez un `Nouveau secret` nommé *projet_patate*
+- [ ] Double-cliquez pour ouvrir ce secret
+- [ ] `Ajoutez une variable`
+  - Nom : PATATE_TOKEN
+  - Valeur : 123456
+  - Cliquez sur :white_check_mark: pour valider
+- [ ] Ajoutez une autre variable
+  - Nom : PATATE_PORT
+  - Valeur : 5236
+  - Cliquez sur :white_check_mark: pour valider
+
+### Utiliser dans un service
+
+- [ ] Préparez le lancement d'un service Rstudio
+- [ ] Dans la configuration, allez dans l'onglet `Vault`
+- [ ] secret : *projet_patate*
+- [ ] Lancez le service
+
+Dans votre servives, les deux variables d'environnement ont été créées. 
+
+- [ ] Vérifiez leur présence via le terminal : `env | grep PATATE` ou `echo $PATATE_TOKEN`
+- [ ] Obtenez la valeur dans un script R : `token <- Sys.getenv("PATATE_TOKEN")`
+
+
+## Pour aller plus loin {.unnumbered}
+
+### Le projet Onyxia de A à Z {.unnumbered  .unlisted}
+
+Une présentation complète du projet Onyxia au Devoxx 2023, de sa philosophie et de son fonctionnement par Olivier LEVITT, Joseph GARRONE et Frédéric COMTE.
+
+{{< video https://www.youtube.com/watch?v=GXINfnVB21E 
+    title="Construisons un cloud opensource pour le datascientist"
+>}}
+
+### Le projet Onyxia (version courte) {.unnumbered .unlisted}
+
+{{< video https://www.youtube.com/watch?v=sOOVg4I19BI >}}
+
+
+
+## Bibliographie {.unnumbered}
+
+- [Utiliser RStudio sur l’environnement SSP Cloud](https://book.utilitr.org/01_R_Insee/Fiche_utiliser_Rstudio_SSPCloud.html){target="_blank"}, UtilitR
+- [Découverte du Datalab](https://www.sspcloud.fr/formation){target="_blank"}, Plateforme SSP Cloud
+- [Découverte d'Onyxia et de son datalab SSP Cloud](https://github.com/TheAIWizard/Hands-on-Spark-Lab/blob/main/First-steps-with-cloud-computing/First-steps-with-cloud-computing.md){target="_blank"}, Nathan Randriamanana
