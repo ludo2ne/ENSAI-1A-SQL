@@ -143,7 +143,7 @@ ul.task-list li input[type="checkbox"] {
     <ul class="dropdown-menu" aria-labelledby="nav-menu-tp">    
         <li>
     <a class="dropdown-item" href="../doc/tp/tp0.html">
- <span class="dropdown-text">TP0</span></a>
+ <span class="dropdown-text">TP0 - Datalab</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../doc/tp/tp1.html">
@@ -240,75 +240,65 @@ ul.task-list li input[type="checkbox"] {
 <h3 class="anchored" data-anchor-id="clé-étrangère">Clé étrangère</h3>
 <p>Un champ dans une table qui est une référence à la clé primaire d’une autre table.</p>
 <p>Elle est utilisée pour établir une relation entre deux tables.</p>
-<hr>
-<p>Voici un glossaire des termes clés associés aux <strong>bases de données</strong>, <strong>SQL</strong>, et <strong>PostgreSQL</strong> :</p>
 </section>
-<section id="bases-de-données" class="level3">
-<h3 class="anchored" data-anchor-id="bases-de-données"><strong>Bases de Données</strong></h3>
+</section>
+<section id="bases-de-données" class="level2">
+<h2 class="anchored" data-anchor-id="bases-de-données">Bases de Données</h2>
 <ul>
-<li><p><strong>Base de données (BDD)</strong> : Un ensemble organisé de données, généralement stockées et accessibles électroniquement. Elle est utilisée pour faciliter la gestion, la récupération, l’ajout, la mise à jour et la suppression des données.</p></li>
-<li><p><strong>Système de Gestion de Base de Données (SGBD)</strong> : Logiciel permettant de créer, gérer et manipuler des bases de données. Il permet la gestion des données et des utilisateurs via des interfaces (commandes SQL, API, etc.).</p></li>
-<li><p><strong>Index</strong> : Un moyen d’accélérer les requêtes en créant une structure de données qui permet une recherche rapide sur des colonnes spécifiques.</p></li>
-<li><p><strong>Schéma</strong> : Un modèle ou une structure de données qui définit la façon dont les données sont organisées dans une base de données. Un schéma peut contenir des tables, des vues, des fonctions, etc.</p></li>
-<li><p><strong>Jointure (Join)</strong> : Une opération qui permet de combiner des données provenant de plusieurs tables en fonction de relations définies entre elles.</p></li>
-<li><p><strong>Transaction</strong> : Un ensemble d’opérations qui sont exécutées de manière atomique (tout ou rien). Si une transaction échoue, toutes les modifications sont annulées.</p></li>
+<li><strong>Base de données (BDD)</strong> : Un ensemble organisé de données, généralement stockées et accessibles électroniquement. Elle est utilisée pour faciliter la gestion, la récupération, l’ajout, la mise à jour et la suppression des données.</li>
+<li><strong>Système de Gestion de Base de Données (SGBD)</strong> : Logiciel permettant de créer, gérer et manipuler des bases de données. Il permet la gestion des données et des utilisateurs via des interfaces (commandes SQL, API, etc.).</li>
+<li><strong>PostgreSQL</strong> : Un système de gestion de base de données relationnelle open-source avancé. Il supporte les types de données complexes, la gestion des transactions, les index, les jointures, et d’autres fonctionnalités avancées.</li>
+<li><strong>pgAdmin</strong> : Interface graphique pour administrer des bases de données PostgreSQL. Elle permet de créer, modifier, supprimer des objets de base de données, et d’exécuter des requêtes SQL.</li>
 </ul>
-<hr>
 </section>
-<section id="sql-structured-query-language" class="level3">
-<h3 class="anchored" data-anchor-id="sql-structured-query-language"><strong>SQL (Structured Query Language)</strong></h3>
+<section id="sql-structured-query-language" class="level2">
+<h2 class="anchored" data-anchor-id="sql-structured-query-language">SQL (Structured Query Language)</h2>
 <ul>
-<li><p><strong>SQL</strong> : Un langage standardisé pour interagir avec des bases de données relationnelles. SQL permet de créer, lire, mettre à jour et supprimer des données (CRUD).</p></li>
-<li><p><strong>SELECT</strong> : Commande utilisée pour extraire des données d’une ou plusieurs tables.</p></li>
-<li><p><strong>INSERT</strong> : Commande utilisée pour insérer de nouvelles lignes de données dans une table.</p></li>
-<li><p><strong>UPDATE</strong> : Commande utilisée pour modifier les données existantes dans une table.</p></li>
-<li><p><strong>DELETE</strong> : Commande utilisée pour supprimer des lignes dans une table.</p></li>
-<li><p><strong>WHERE</strong> : Clause utilisée pour filtrer les résultats d’une requête en fonction de conditions spécifiques.</p></li>
-<li><p><strong>GROUP BY</strong> : Clause utilisée pour regrouper les résultats d’une requête selon un ou plusieurs attributs.</p></li>
-<li><p><strong>ORDER BY</strong> : Clause utilisée pour trier les résultats d’une requête selon un ou plusieurs critères.</p></li>
-<li><p><strong>JOIN</strong> : Opération qui combine des données de plusieurs tables en fonction de conditions de correspondance.</p></li>
-<li><p><strong>HAVING</strong> : Clause utilisée pour filtrer les résultats agrégés d’une requête, généralement utilisée après un <code>GROUP BY</code>.</p></li>
-<li><p><strong>DISTINCT</strong> : Mot-clé utilisé pour éliminer les doublons dans les résultats d’une requête.</p></li>
-<li><p><strong>LIMIT</strong> : Limite le nombre de résultats renvoyés par une requête.</p></li>
-<li><p><strong>INSERT INTO SELECT</strong> : Commande permettant d’insérer le résultat d’une requête SELECT dans une autre table.</p></li>
-<li><p><strong>ALTER</strong> : Commande permettant de modifier la structure d’une table (par exemple, ajouter ou supprimer des colonnes).</p></li>
-<li><p><strong>DROP</strong> : Commande permettant de supprimer une table ou un autre objet dans une base de données.</p></li>
-<li><p><strong>CREATE</strong> : Commande utilisée pour créer des tables, des vues, des index, des procédures, etc.</p></li>
-<li><p><strong>INDEX</strong> : Structure de données permettant de rendre les recherches plus rapides sur des colonnes de tables.</p></li>
-<li><p><strong>TRANSACTION</strong> : Un bloc de commandes SQL qui peut être validé (<code>COMMIT</code>) ou annulé (<code>ROLLBACK</code>) dans son ensemble.</p></li>
-<li><p><strong>COMMIT</strong> : Commande permettant de valider une transaction.</p></li>
-<li><p><strong>ROLLBACK</strong> : Commande permettant d’annuler une transaction et de revenir à l’état antérieur.</p></li>
+<li><strong>SQL</strong> : Un langage standardisé pour interagir avec des bases de données relationnelles. SQL permet de créer, lire, mettre à jour et supprimer des données (CRUD).</li>
 </ul>
-<hr>
-</section>
-<section id="postgresql" class="level3">
-<h3 class="anchored" data-anchor-id="postgresql"><strong>PostgreSQL</strong></h3>
+<section id="manipulation-de-données" class="level3">
+<h3 class="anchored" data-anchor-id="manipulation-de-données">Manipulation de données</h3>
 <ul>
-<li><p><strong>PostgreSQL</strong> : Un système de gestion de base de données relationnelle open-source avancé. Il supporte les types de données complexes, la gestion des transactions, les index, les jointures, et d’autres fonctionnalités avancées.</p></li>
-<li><p><strong>pgAdmin</strong> : Interface graphique pour administrer des bases de données PostgreSQL. Elle permet de créer, modifier, supprimer des objets de base de données, et d’exécuter des requêtes SQL.</p></li>
-<li><p><strong>Tableau de Bord PostgreSQL</strong> : L’interface utilisateur pour administrer et gérer des instances de PostgreSQL, à travers des outils graphiques ou des requêtes SQL.</p></li>
-<li><p><strong>Vacuum</strong> : Processus dans PostgreSQL qui nettoie et libère l’espace occupé par des tuples morts dans les tables et les index. Il optimise aussi la performance de la base de données.</p></li>
-<li><p><strong>Replication</strong> : Mécanisme dans PostgreSQL permettant de copier les données d’une base de données vers une autre pour des fins de sauvegarde ou de haute disponibilité.</p></li>
-<li><p><strong>Sequence</strong> : Un objet dans PostgreSQL qui génère des valeurs numériques uniques, souvent utilisé pour les valeurs de clés primaires auto-incrémentées.</p></li>
-<li><p><strong>Foreign Data Wrapper (FDW)</strong> : Permet à PostgreSQL de se connecter à des bases de données externes et de traiter les données comme si elles étaient locales.</p></li>
-<li><p><strong>Extension</strong> : Une fonctionnalité supplémentaire dans PostgreSQL permettant d’ajouter des modules spécifiques pour étendre les capacités du système (par exemple, <code>PostGIS</code> pour la gestion des données géographiques).</p></li>
-<li><p><strong>PL/pgSQL</strong> : Un langage procédural utilisé dans PostgreSQL pour écrire des fonctions et des procédures stockées.</p></li>
-<li><p><strong>Array</strong> : Un type de données qui permet de stocker plusieurs valeurs dans une seule colonne dans PostgreSQL.</p></li>
-<li><p><strong>JSON/JSONB</strong> : Types de données pour stocker des documents JSON dans PostgreSQL, où <code>JSONB</code> offre des performances supérieures pour les opérations de lecture et d’indexation.</p></li>
-<li><p><strong>CTE (Common Table Expression)</strong> : Une sous-requête qui peut être utilisée dans une requête principale pour améliorer la lisibilité et la structure des requêtes complexes.</p></li>
+<li><strong>INSERT INTO</strong> : Insérer de nouvelles lignes dans une table</li>
+<li><strong>UPDATE</strong> : Modifier les données existantes dans une table</li>
+<li><strong>DELETE</strong> : Supprimer des lignes dans une table.</li>
+<li><strong>SELECT</strong> : Sélectionner les colonnes à afficher</li>
+<li><strong>FROM</strong> : choisir la table contenant les données</li>
+<li><strong>JOIN</strong> : joindre d’autres tables</li>
+<li><strong>WHERE</strong> : Filter les lignes</li>
+<li><strong>GROUP BY</strong> : Agréger les lignes selon un ou plusieurs attributs</li>
+<li><strong>HAVING</strong> : Filtrer les résultats après agrégation</li>
+<li><strong>ORDER BY</strong> : Trier les lignes selon un ou plusieurs critères</li>
+<li><strong>DISTINCT</strong> : Mot-clé utilisé pour éliminer les doublons dans les résultats d’une requête.</li>
+<li><strong>CTE (Common Table Expression)</strong> : Une sous-requête qui peut être utilisée dans une requête principale pour améliorer la lisibilité et la structure des requêtes complexes.</li>
 </ul>
-<hr>
 </section>
-<section id="autres-concepts" class="level3">
-<h3 class="anchored" data-anchor-id="autres-concepts"><strong>Autres Concepts</strong></h3>
+<section id="définition-de-données" class="level3">
+<h3 class="anchored" data-anchor-id="définition-de-données">Définition de Données</h3>
 <ul>
-<li><p><strong>ACID</strong> : Propriétés des transactions garantissant leur intégrité : <strong>Atomicité</strong>, <strong>Cohérence</strong>, <strong>Isolation</strong>, <strong>Durabilité</strong>.</p></li>
-<li><p><strong>Normalisation</strong> : Processus de conception d’une base de données pour éliminer la redondance et les anomalies, en divisant les données en tables liées par des clés étrangères.</p></li>
-<li><p><strong>Schéma</strong> : Un ensemble d’objets (tables, vues, fonctions, etc.) organisés dans une base de données.</p></li>
-<li><p><strong>DDL (Data Definition Language)</strong> : Langage SQL utilisé pour définir et gérer la structure de la base de données (par exemple, <code>CREATE</code>, <code>ALTER</code>, <code>DROP</code>).</p></li>
-<li><p><strong>DML (Data Manipulation Language)</strong> : Langage SQL utilisé pour manipuler les données dans les tables (par exemple, <code>SELECT</code>, <code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>).</p></li>
-<li><p><strong>DCL (Data Control Language)</strong> : Langage SQL utilisé pour contrôler l’accès aux données (par exemple, <code>GRANT</code>, <code>REVOKE</code>).</p></li>
-<li><p><strong>SQL Injection</strong> : Technique d’attaque où des requêtes SQL malveillantes sont insérées dans un formulaire ou une URL pour manipuler la base de données.</p></li>
+<li><strong>CREATE</strong> : Créer des tables, des vues, des index…</li>
+<li><strong>ALTER</strong> : Modifier la structure d’une table</li>
+<li><strong>DROP</strong> : Supprimer une table ou un autre objet dans une base de données</li>
+<li><strong>INDEX</strong> : Structure de données permettant de rendre les recherches plus rapides sur des colonnes de tables</li>
+<li><strong>SEQUENCE</strong> : Génère des valeurs numériques uniques, souvent utilisée pour les valeurs de clés primaires auto-incrémentées</li>
+<li><strong>TRIGGER</strong></li>
+<li><strong>SCHEMA</strong> : Utilisé pour organiser une base de données. Un schéma peut contenir des tables, des vues, des fonctions…</li>
+</ul>
+</section>
+<section id="transaction" class="level3">
+<h3 class="anchored" data-anchor-id="transaction">Transaction</h3>
+<ul>
+<li><strong>TRANSACTION</strong> : Un bloc de commandes SQL qui peut être validé (<code>COMMIT</code>) ou annulé (<code>ROLLBACK</code>) dans son ensemble</li>
+<li><strong>COMMIT</strong> : Commande permettant de valider une transaction</li>
+<li><strong>ROLLBACK</strong> : Commande permettant d’annuler une transaction et de revenir à l’état antérieur</li>
+<li><strong>ACID</strong> : Propriétés des transactions garantissant leur intégrité : <strong>Atomicité</strong>, <strong>Cohérence</strong>, <strong>Isolation</strong>, <strong>Durabilité</strong>.</li>
+</ul>
+</section>
+<section id="accès-aux-données" class="level3">
+<h3 class="anchored" data-anchor-id="accès-aux-données">Accès aux données</h3>
+<ul>
+<li>GRANT</li>
+<li>REVOKE</li>
 </ul>
 
 
