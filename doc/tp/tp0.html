@@ -352,21 +352,49 @@ Caution
 </section>
 <section id="créer-et-configuration-de-compte" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="créer-et-configuration-de-compte"><span class="header-section-number">1</span> Créer et configuration de compte</h2>
-<p>Pour profiter des services, vous devez créer un compte.</p>
-<section id="générer-un-token-github" class="level3" data-number="1.1">
-<h3 data-number="1.1" class="anchored" data-anchor-id="générer-un-token-github"><span class="header-section-number">1.1</span> Générer un token GitHub</h3>
-<p>Sur le datalab, vos services ont une durée de vie limitée.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Sur le datalab, vos services ont une <u><strong>durée de vie limitée</strong></u>.</p>
 <p>Pour sauvegarder vos programmes, la bonne pratique est d’utiliser un dépôt git. Nous allons donc créer et utiliser un jeton pour communiquer avec GitHub.</p>
 <p>Pour suivre la démarche, il faut disposer d’un compte <a href="https://github.com/" target="_blank">GitHub</a>. Il est possible de suivre une démarche similaire avec <a href="https://about.gitlab.com/" target="_blank">GitLab</a>.</p>
+</div>
+</div>
+<section id="générer-un-token-github" class="level3" data-number="1.1">
+<h3 data-number="1.1" class="anchored" data-anchor-id="générer-un-token-github"><span class="header-section-number">1.1</span> Générer un token GitHub</h3>
+<div class="callout callout-style-default callout-tip callout-titled" title="Déjà fait ?">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Déjà fait ?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Si vous avez déjà généré et déclaré un jeton GitHub, inutile de refaire ces 2 étapes.</p>
+</div>
+</div>
 <ul class="task-list">
 <li><label><input type="checkbox">Connectez-vous à votre compte GitHub</label></li>
-<li><label><input type="checkbox">Allez dans settings &gt; Developer settings &gt; Personal access tokens &gt; Tokens (classic)</label></li>
+<li><label><input type="checkbox">Allez dans settings <span class="emoji" data-emoji="arrow_right">➡️</span> Developer settings <span class="emoji" data-emoji="arrow_right">➡️</span> Personal access tokens <span class="emoji" data-emoji="arrow_right">➡️</span> Tokens (classic)</label></li>
 <li><label><input type="checkbox">Générez un <a href="https://github.com/settings/tokens/new" target="_blank">nouveau jeton classique</a></label>
 <ul>
-<li>Renseigner : nom du token, date d’expiration</li>
+<li>Renseigner :
+<ul>
+<li>nom du token : Datalab GENES</li>
+<li>date d’expiration <span class="emoji" data-emoji="arrow_right">➡️</span> Custom <span class="emoji" data-emoji="arrow_right">➡️</span> 1 an</li>
+</ul></li>
 <li><span class="emoji" data-emoji="white_check_mark">✅</span> Cochez repo</li>
-<li>Cliquez sur <code>Generate token</code></li>
-<li>Copiez ce jeton commençant par “<em>ghp_</em>” et gardez le précieusement de côté quelques minutes</li>
+<li>Cliquez sur <span class="green-button">Generate token</span></li>
+<li>Copiez ce jeton commençant par <code>ghp_</code> et gardez le précieusement de côté quelques minutes</li>
 </ul></li>
 </ul>
 <div class="callout callout-style-default callout-warning callout-titled">
@@ -388,9 +416,9 @@ Warning
 </section>
 <section id="déclarer-votre-jeton" class="level3" data-number="1.2">
 <h3 data-number="1.2" class="anchored" data-anchor-id="déclarer-votre-jeton"><span class="header-section-number">1.2</span> Déclarer votre jeton</h3>
-<p>GitHub vous a fournit un jeton. Il faut maintenant le déclarer sur le <a href="https://datalab.sspcloud.fr/" target="_blank">Datalab</a> (<a href="https://inseefrlab.github.io/docs.sspcloud.fr/docs/fr/version-control.html" target="_blank">Doc officielle</a>) :</p>
+<p>GitHub vous a fournit un jeton. Il faut maintenant le déclarer sur le <a href="https://onyxia.lab.groupe-genes.fr/account/git" target="_blank">Datalab</a> :</p>
 <ul class="task-list">
-<li><label><input type="checkbox">Allez dans <code>Mon Compte</code> &gt; Onglet <code>Git</code></label></li>
+<li><label><input type="checkbox">Allez dans <code>Mon Compte</code> <span class="emoji" data-emoji="arrow_right">➡️</span> Onglet <code>Git</code></label></li>
 <li><label><input type="checkbox">Renseignez les informations suivantes</label>
 <ul>
 <li>nom d’utilisateur Git</li>
@@ -398,11 +426,29 @@ Warning
 </ul></li>
 <li><label><input type="checkbox">Collez votre token</label></li>
 </ul>
+<div class="callout callout-style-default callout-tip callout-titled" title="Config Git">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Config Git
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Vous pouvez maintenant échanger du code entre les services du Datalab et vos dépôts GitHub. <span class="emoji" data-emoji="tada">🎉</span></p>
+</div>
+</div>
 </section>
 </section>
 <section id="le-stockage" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="le-stockage"><span class="header-section-number">2</span> Le stockage</h2>
-<p>Lorsque l’on travaille dans le cloud, il est essentiel de séparer les données des programmes pour mieux gérer les ressources, renforcer la sécurité en limitant les accès et les permissions, et permettre une scalabilité indépendante des composants.</p>
+<p>Lorsque l’on travaille dans le cloud, il est essentiel de <u>séparer les données des programmes</u> pour :</p>
+<ul>
+<li>mieux gérer les ressources,</li>
+<li>renforcer la sécurité en limitant les accès et les permissions,</li>
+<li>permettre une scalabilité indépendante des composants.</li>
+</ul>
 <p><a href="https://min.io/" target="_blank">MinIO</a> est une solution de stockage d’objets open-source qui permet de déployer facilement un stockage évolutif et performant. Elle est compatible avec l’API <a href="https://aws.amazon.com/fr/s3/" target="_blank">S3 d’Amazon</a>, ce qui facilite l’intégration avec les applications existantes.</p>
 <p>MinIO offre :</p>
 <ul>
@@ -412,11 +458,24 @@ Warning
 </ul>
 <section id="votre-bucket" class="level3" data-number="2.1">
 <h3 data-number="2.1" class="anchored" data-anchor-id="votre-bucket"><span class="header-section-number">2.1</span> Votre bucket</h3>
+<div class="callout callout-style-default callout-note callout-titled" title="Définition">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Définition
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Un <strong>bucket</strong> est un conteneur de stockage utilisé pour regrouper des objets (fichiers et métadonnées) dans des systèmes de stockage de type cloud. Il facilite l’organisation, la gestion des permissions et l’accès aux données dans un espace de stockage structuré.</p>
+</div>
+</div>
 <p>Lors de votre création de compte, un bucket est créé avec votre nom d’utilisateur. Dans ce bucket, vous pouvez :</p>
 <ul>
 <li>créer / supprimer des dossiers</li>
 <li>importer / supprimer des fichiers</li>
-<li>créer un dossier nommé <code>diffusion</code> à la racine de votre bucket
+<li>créer un dossier nommé <em>diffusion</em> à la racine de votre bucket
 <ul>
 <li>celui-ci sera accessible en lecture à tous les utilisateurs du datalab</li>
 </ul></li>
@@ -431,10 +490,23 @@ Warning
 <section id="stocker-des-fichiers" class="level3" data-number="2.2">
 <h3 data-number="2.2" class="anchored" data-anchor-id="stocker-des-fichiers"><span class="header-section-number">2.2</span> Stocker des fichiers</h3>
 <ul class="task-list">
-<li><label><input type="checkbox">Téléchargez le <a href="https://www.insee.fr/fr/statistiques/7633685">fichier des prénoms par département de naissance</a> en 2022 au format csv</label></li>
+<li><label><input type="checkbox">Téléchargez le <a href="https://www.data.gouv.fr/fr/datasets/base-prenoms-insee-format-parquet/" target="_blank">fichier des prénoms par département de naissance</a> en 2022 au format parquet</label></li>
 <li><label><input type="checkbox">Dans votre bucket, créez un dossier <code>diffusion</code>, puis à l’intérieur un dossier <code>INSEE</code></label></li>
 <li><label><input type="checkbox">Dans ce dossier, importez le fichier des prénoms</label></li>
 </ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Nous allons ensuite utiliser ce fichier dans un service.</p>
+</div>
+</div>
 </section>
 </section>
 <section id="les-services" class="level2" data-number="3">
@@ -445,43 +517,40 @@ Warning
 <ul class="task-list">
 <li><label><input type="checkbox">Dans GitHub, créer un <a href="https://github.com/new" target="_blank">nouveau Repository</a></label>
 <ul>
-<li>Repository name : TP-datalab</li>
+<li>Repository name : TP0-datalab</li>
 <li>Public</li>
 <li><span class="emoji" data-emoji="white_check_mark">✅</span> Cochez <em>Add a README file</em></li>
-<li>.gitignore template : R</li>
+<li>.gitignore template : Python</li>
 <li>Choose a license : Apache Licence 2.0</li>
-<li><code>Create Repository</code></li>
+<li><span class="green-button">Create Repository</span></li>
 </ul></li>
-<li><label><input type="checkbox">Sur la page de votre repo, cliquez sur le bouton <strong><span style="background-color: green">Code</span></strong></label></li>
+<li><label><input type="checkbox">Sur la page de votre repo, cliquez sur le bouton <span class="green-button">Code</span></label></li>
 <li><label><input type="checkbox">Copiez l’adresse <em>https</em> du repo</label></li>
 </ul>
 </section>
 <section id="créer-un-service" class="level3" data-number="3.2">
 <h3 data-number="3.2" class="anchored" data-anchor-id="créer-un-service"><span class="header-section-number">3.2</span> Créer un service</h3>
 <ul class="task-list">
-<li><label><input type="checkbox">Allez dans <code>Catalogue de services</code>, sélectionner le service <em>Rstudio</em>, puis cliquez sur <code>Lancer</code></label></li>
-<li><label><input type="checkbox">Allez dans Configuration</label>
+<li><label><input type="checkbox">Allez dans <code>Catalogue de services</code>, sélectionner le service <em>Jupyter-python</em>, puis cliquez une fois sur <code>Lancer</code></label></li>
+<li><label><input type="checkbox">Ouvrez la Configuration</label>
 <ul>
 <li>De nombreux onglets permettent de configurer votre service</li>
 <li>Service : possibilité d’utiliser une autre image Docker</li>
 <li>Resources : choisir CPU et RAM</li>
 <li>Init : script à lancer au démarrage</li>
 </ul></li>
-<li><label><input type="checkbox">Allez dans l’onglet <code>Git</code> et collez l’adresse <em>https</em> du repo</label></li>
-<li><label><input type="checkbox">Lancez le service</label>
-<ul>
-<li>Attendez quelques secondes le temps que le service se lance</li>
-</ul></li>
+<li><label><input type="checkbox">Allez dans l’onglet <code>Git</code> et collez l’adresse <em>https</em> du repo dans la case <em>Repository url</em></label></li>
+<li><label><input type="checkbox"><code>Lancez</code> le service, puis attendez quelques secondes</label></li>
 <li><label><input type="checkbox">Cliquez pour copier le mot de passe</label></li>
 <li><label><input type="checkbox">Cliquez sur <code>Ouvrir le service</code> <span class="emoji" data-emoji="rocket">🚀</span></label>
 <ul>
-<li>username : onyxia</li>
 <li>password : collez le mot de passe</li>
 </ul></li>
 </ul>
-<p>Votre R Studio s’ouvre et vous remarquez dans l’explorateur en bas à droite que votre repo git a été cloné.</p>
+<p>Votre service <em>Jupyter Python</em> s’ouvre.</p>
+<p>Vous remarquez dans l’explorateur à gauche que votre repo git a été cloné dans le dossier <em>work</em>.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Ce qu'il se passe sous le capot">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -490,7 +559,7 @@ Ce qu’il se passe sous le capot
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Pour plus de détails, vous pouvez consulter la vidéo en bas de la page.</p>
 <p>Prenons l’exemple de ce qu’il se passe en arrière plan lorsque vous lancez un service <code>Vscode-python</code> :</p>
@@ -532,7 +601,7 @@ Ce qu’il se passe sous le capot
 <section id="déploiement-sur-kube" class="level4">
 <h4 class="anchored" data-anchor-id="déploiement-sur-kube">Déploiement sur Kube</h4>
 <p>Kubernetes (K8s) est un système open-source qui automatise le déploiement, la mise à l’échelle et la gestion d’applications conteneurisées. C’est un orchestrateur de conteneurs.</p>
-<p>K8s récupére via le chart Helm toutes les infos nécessaires et déploie le conteneur (créé à partir de l’image Docker) sur l’infra du datalab</p>
+<p>K8s récupére via le chart Helm toutes les infos nécessaires et déploie le conteneur (créé à partir de l’image Docker) sur l’infra du datalab.</p>
 </section>
 </div>
 </div>
@@ -541,98 +610,154 @@ Ce qu’il se passe sous le capot
 <section id="jouer-avec-votre-service" class="level3" data-number="3.3">
 <h3 data-number="3.3" class="anchored" data-anchor-id="jouer-avec-votre-service"><span class="header-section-number">3.3</span> Jouer avec votre service</h3>
 <ul class="task-list">
-<li><label><input type="checkbox">File &gt; New File &gt; R Script</label></li>
-<li><label><input type="checkbox">Enregistrez ce fichier sous le nom <em>tp1.R</em> dans votre repo <em>TP-datalab</em></label></li>
+<li><label><input type="checkbox">Dans l’explorateur, ouvrez le dossier <em>work</em>, puis le dossier <em>TP0-Datalab</em></label></li>
+<li><label><input type="checkbox">File <span class="emoji" data-emoji="arrow_right">➡️</span> New <span class="emoji" data-emoji="arrow_right">➡️</span> Notebook</label>
+<ul>
+<li>Select Kernel</li>
+<li>Cela crée un fichier <em>Untitled.ipynb</em> que vous pouvez renommer en <em>ex0.ipynb</em></li>
+</ul></li>
 </ul>
 </section>
 <section id="accéder-à-votre-stockage" class="level3" data-number="3.4">
 <h3 data-number="3.4" class="anchored" data-anchor-id="accéder-à-votre-stockage"><span class="header-section-number">3.4</span> Accéder à votre stockage</h3>
-<p>Nous allons utiliser par exemple la librairie <code>aws.s3</code> pour accéder au stockage.</p>
 <ul class="task-list">
-<li><label><input type="checkbox">Chargez les librairies</label>
+<li><label><input type="checkbox">Créez un dataframe Polars en important les données de votre fichier</label>
 <ul>
-<li><strong>aws.s3</strong> : permet d’interagir avec le service Amazon S3 pour la gestion et le stockage de fichiers en ligne.</li>
-<li><strong>dplyr</strong> : fournit des fonctions simples et rapides pour la manipulation de données</li>
-</ul></li>
+<li>Collez le code ci-dessous dans la première cellule, puis CTRL+ENTREE pour exécuter</li>
 </ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(aws.s3)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul class="task-list">
-<li><label><input type="checkbox">Renseignez le nom de votre bucket (correspond à votre nom d’utilisateur)</label></li>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>storage_options <span class="op">=</span> {</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"aws_endpoint"</span>:  <span class="st">'https://'</span><span class="op">+</span><span class="st">'minio-simple.lab.groupe-genes.fr'</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"aws_access_key_id"</span>: os.environ[<span class="st">"AWS_ACCESS_KEY_ID"</span>],</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"aws_secret_access_key"</span>: os.environ[<span class="st">"AWS_SECRET_ACCESS_KEY"</span>],</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"aws_region"</span>: os.environ[<span class="st">"AWS_DEFAULT_REGION"</span>],</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"aws_token"</span>: os.environ[<span class="st">"AWS_SESSION_TOKEN"</span>]</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>username <span class="op">=</span> os.environ[<span class="st">"VAULT_TOP_DIR"</span>] <span class="co"># un peu bancal pour avoir le username</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pl.read_parquet(source<span class="op">=</span><span class="ss">f"s3://</span><span class="sc">{</span>username<span class="sc">}</span><span class="ss">/diffusion/INSEE/prenoms-nat2022.parquet"</span>, </span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>                     storage_options<span class="op">=</span>storage_options)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>bucket_name <span class="ot">&lt;-</span> <span class="st">"&lt;username&gt;"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-note callout-titled" title="Polars">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Polars
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><a href="https://pola.rs/" target="_blank">Polars</a> est une bibliothèque rapide et performante pour la manipulation de données en Python et Rust, optimisée pour les grands volumes de données.</p>
+<p>Contrairement à <a href="https://pandas.pydata.org/" target="_blank">Pandas</a>, Polars utilise une approche orientée colonnes (columnar) et tire parti du traitement parallèle, ce qui le rend particulièrement adapté pour les opérations analytiques lourdes.</p>
+<p>Sa syntaxe, proche de celle de Pandas, permet des transformations, agrégations et manipulations de données avec des méthodes performantes et expressives.</p>
+</div>
+</div>
 <ul class="task-list">
-<li><label><input type="checkbox">Listez les fichiers de votre bucket</label></li>
+<li><label><input type="checkbox">Requêtez les données</label>
+<ul>
+<li>Créez une nouvelle celulle avec le bouton <code>+</code> de la barre d’outils</li>
+<li>Collez et exécutez ce code</li>
 </ul>
-<div class="sourceCode" id="cb3"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>aws.s3<span class="sc">::</span><span class="fu">get_bucket</span>(bucket_name, <span class="at">region =</span> <span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul class="task-list">
-<li><label><input type="checkbox">Listez les fichiers d’un dossier spécifique</label></li>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Top 10 des prénoms féminins en 2021</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>top10f2021 <span class="op">=</span> df<span class="op">\</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">filter</span>((pl.col(<span class="st">"sexe"</span>) <span class="op">==</span> <span class="dv">2</span>) <span class="op">&amp;</span> </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>            (pl.col(<span class="st">"annais"</span>) <span class="op">==</span> <span class="st">"2021"</span>) <span class="op">&amp;</span> </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>            (pl.col(<span class="st">"preusuel"</span>) <span class="op">!=</span> <span class="st">"_PRENOMS_RARES"</span>))<span class="op">\</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    .group_by(<span class="st">"preusuel"</span>)<span class="op">\</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    .agg(pl.col(<span class="st">"nombre"</span>).<span class="bu">sum</span>().alias(<span class="st">"nombre_total"</span>))<span class="op">\</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    .sort(<span class="st">"nombre_total"</span>, descending<span class="op">=</span><span class="va">True</span>)<span class="op">\</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    .limit(<span class="dv">10</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(top10f2021)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><label><input type="checkbox">Exportez vos résultats vers MinIO</label>
+<ul>
+<li>En utilisant la librairie <em>s3fs</em></li>
 </ul>
-<div class="sourceCode" id="cb4"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>specific_folder <span class="ot">&lt;-</span> aws.s3<span class="sc">::</span><span class="fu">get_bucket</span>(bucket_name, </span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">region =</span> <span class="st">""</span>, </span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">prefix =</span> <span class="st">"diffusion/INSEE"</span>)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Affichage sous forme de dataframe</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="fu">bind_rows</span>(<span class="fu">lapply</span>(specific_folder, <span class="cf">function</span>(x) {</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">FileName =</span> <span class="fu">basename</span>(x<span class="sc">$</span>Key), </span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">Size =</span> <span class="fu">paste0</span>(<span class="fu">round</span>(<span class="fu">as.numeric</span>(x<span class="sc">$</span>Size) <span class="sc">/</span> (<span class="dv">1024</span> <span class="sc">*</span> <span class="dv">1024</span>), <span class="dv">2</span>), <span class="st">" Mo"</span>), </span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">LastModified =</span> <span class="fu">format</span>(<span class="fu">as.POSIXct</span>(x<span class="sc">$</span>LastModified, <span class="at">format=</span><span class="st">"%Y-%m-%dT%H:%M:%OSZ"</span>, <span class="at">tz=</span><span class="st">"UTC"</span>), <span class="st">"%Y.%m.%d %H:%M"</span>),</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">stringsAsFactors =</span> <span class="cn">FALSE</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul class="task-list">
-<li><label><input type="checkbox">Lisez un fichier csv</label></li>
-</ul>
-<div class="sourceCode" id="cb5"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> aws.s3<span class="sc">::</span><span class="fu">s3read_using</span>(</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">FUN =</span> data.table<span class="sc">::</span>fread,</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">object =</span> <span class="st">"/diffusion/INSEE/dpt2022_csv.zip"</span>,</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">bucket =</span> bucket_name,</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">opts =</span> <span class="fu">list</span>(<span class="st">"region"</span> <span class="ot">=</span> <span class="st">""</span>)</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul class="task-list">
-<li><label><input type="checkbox">Requêtez les données</label></li>
-</ul>
-<div class="sourceCode" id="cb6"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Top 10 des prénoms féminins en 2021</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>top10f2021 <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(sexe <span class="sc">==</span> <span class="dv">2</span>, annais <span class="sc">==</span> <span class="dv">2021</span>, preusuel <span class="sc">!=</span> <span class="st">"_PRENOMS_RARES"</span>) <span class="sc">|&gt;</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(preusuel) <span class="sc">|&gt;</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">nombre_total =</span> <span class="fu">sum</span>(nombre)) <span class="sc">|&gt;</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(nombre_total)) <span class="sc">|&gt;</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">10</span>) <span class="sc">|&gt;</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">collect</span>()  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul class="task-list">
-<li><label><input type="checkbox">Exportez vos résultats vers MinIO</label></li>
-</ul>
-<div class="sourceCode" id="cb7"><pre class="sourceCode R code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>aws.s3<span class="sc">::</span><span class="fu">s3write_using</span>(</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  top10f2021,</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">FUN =</span> data.table<span class="sc">::</span>fwrite,</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">sep =</span> <span class="st">";"</span>,</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">col.names =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">object =</span> <span class="st">"/diffusion/INSEE/output.csv"</span>,</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">bucket =</span> <span class="st">"ludo2ne"</span>,</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">opts =</span> <span class="fu">list</span>(<span class="st">"region"</span> <span class="ot">=</span> <span class="st">""</span>)</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul class="task-list">
-<li><label><input type="checkbox">Sur le SSP cloud, allez dans Mes fichiers &gt; diffusion &gt; INSEE</label>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> s3fs</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>fs <span class="op">=</span> s3fs.S3FileSystem(</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    client_kwargs<span class="op">=</span>{<span class="st">'endpoint_url'</span>: <span class="st">'https://'</span><span class="op">+</span><span class="st">'minio-simple.lab.groupe-genes.fr'</span>},</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    key <span class="op">=</span> os.environ[<span class="st">"AWS_ACCESS_KEY_ID"</span>], </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    secret <span class="op">=</span> os.environ[<span class="st">"AWS_SECRET_ACCESS_KEY"</span>], </span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    token <span class="op">=</span> os.environ[<span class="st">"AWS_SESSION_TOKEN"</span>])</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>destination <span class="op">=</span> <span class="ss">f"s3://</span><span class="sc">{</span>username<span class="sc">}</span><span class="ss">/diffusion/INSEE/output.csv"</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> fs.<span class="bu">open</span>(destination, mode<span class="op">=</span><span class="st">'wb'</span>) <span class="im">as</span> f:</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    top10f2021.write_csv(f)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><label><input type="checkbox">Sur le Datalab, allez dans Mes fichiers <span class="emoji" data-emoji="arrow_right">➡️</span> diffusion <span class="emoji" data-emoji="arrow_right">➡️</span> INSEE</label>
 <ul>
 <li>le fichier <em>output.csv</em> a été généré</li>
 <li>rafraichissez la page si besoin</li>
 </ul></li>
 <li><label><input type="checkbox">Double-cliquez sur ce fichier pour en avoir un aperçu</label></li>
 </ul>
+<section id="exercice" class="level4">
+<h4 class="anchored" data-anchor-id="exercice">Exercice</h4>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Si vous êtes en avance</p>
+</div>
+</div>
+<p>Comme dans de très nombreux outils, il est possible d’encapsuler du <a href="https://docs.pola.rs/api/python/stable/reference/sql/index.html" target="_blank">SQL dans Polars</a>.</p>
+<p>Par exemple la requête du top10 féminin 2021 donne en SQL :</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df.sql(<span class="st">"""</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="st">  SELECT preusuel, </span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="st">         SUM(nombre) AS nombre_total</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM self</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="st">   WHERE preusuel &lt;&gt; '_PRENOMS_RARES'</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="st">     AND annais = '2021'</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="st">     AND sexe = 2</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="st">   GROUP BY preusuel</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="st">   ORDER BY 2 DESC</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="st">   LIMIT 10</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul class="task-list">
+<li><label><input type="checkbox">Créez une nouvelle cellule et écrivez une requête pour afficher les 5 années où sont nées le plus de filles</label></li>
+<li><label><input type="checkbox">Quels sont les prénoms masculins et féminins les plus donnés depuis 1900 ?</label></li>
+<li><label><input type="checkbox">Affichez le nombres de filles et de garçons nés chaque année depuis 2010</label>
+<ul>
+<li><span class="emoji" data-emoji="bulb">💡</span> Aide : <code>SUM(CASE WHEN ? THEN ? ELSE ? END)</code></li>
+</ul></li>
+</ul>
+</section>
 </section>
 <section id="client-minio" class="level3" data-number="3.5">
 <h3 data-number="3.5" class="anchored" data-anchor-id="client-minio"><span class="header-section-number">3.5</span> Client MinIO</h3>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Ne pas faire cette partie.</p>
+</div>
+</div>
 <p>Le <a href="https://min.io/docs/minio/linux/reference/minio-mc.html" target="_blank">client MinIO</a> installé et <u>utilisable depuis le terminal</u> permet également d’interagir avec vos fichiers.</p>
+<p>Ouvrez un terminal :</p>
 <ul class="task-list">
 <li><label><input type="checkbox"><code>mc ls s3/&lt;username&gt;/diffusion</code> : pour lister le contenu de votre dossier diffusion</label></li>
-<li><label><input type="checkbox"><code>mc cp s3/&lt;username&gt;/diffusion/INSEE/dpt2022.csv .</code> : pour copier le fichier depuis s3 dans votre dossier courant</label>
+<li><label><input type="checkbox"><code>mc cp s3/&lt;username&gt;/diffusion/INSEE/prenoms-nat2022.parquet .</code> : pour copier le fichier depuis s3 dans votre dossier courant</label>
 <ul>
 <li>le fichier apparait dans votre explorer</li>
 </ul></li>
-<li><label><input type="checkbox">Supprimez ce fichier : <code>rm dpt2022.csv</code></label>
+<li><label><input type="checkbox">Supprimez ce fichier : <code>rm prenoms-nat2022.parquet</code></label>
 <ul>
 <li>Car importer les fichiers de données dans son espace de travail n’est pas une bonne pratique</li>
 </ul></li>
@@ -654,25 +779,61 @@ Tip
 <section id="sauver-son-code" class="level3" data-number="3.6">
 <h3 data-number="3.6" class="anchored" data-anchor-id="sauver-son-code"><span class="header-section-number">3.6</span> Sauver son code</h3>
 <ul class="task-list">
-<li><label><input type="checkbox">Allez dans le terminal</label></li>
-<li><label><input type="checkbox">Positionnez-vous dans le repo : <code>cd /home/onyxia/work/TP-datalab</code></label></li>
+<li><label><input type="checkbox">Sur Jupyter, ouvrez un terminal</label>
+<ul>
+<li>File <span class="emoji" data-emoji="arrow_right">➡️</span> New <span class="emoji" data-emoji="arrow_right">➡️</span> Terminal</li>
+</ul></li>
+<li><label><input type="checkbox">Positionnez-vous dans le repo : <code>cd /home/onyxia/work/TP0-datalab/</code></label></li>
 <li><label><input type="checkbox"><code>git status</code> pour voir l’état actuel</label>
 <ul>
-<li>le fichier <em>tp1.R</em> doit apparaître dans les <em>Untracked files</em></li>
+<li>le fichier <em>ex0.ipynb</em> doit apparaître dans les <em>Untracked files</em></li>
 </ul></li>
-<li><label><input type="checkbox">Ajoutez ce fichier à l’index : <code>git add .</code></label></li>
-<li><label><input type="checkbox">Créez un commit : <code>git commit -m "création fichier tp1"</code></label></li>
+<li><label><input type="checkbox">Ajoutez ce fichier à l’index</label></li>
+<li><label><input type="checkbox">Créez un commit</label></li>
 <li><label><input type="checkbox">Poussez ce commit vers votre dépôt distant (GitHub)</label>
 <ul>
-<li>Vous pouvez vérifier sur GitHub que votre fichier <em>tp1.R</em> est bien présent</li>
+<li>Vous pouvez vérifier sur GitHub que votre fichier <em>ex0.ipynb</em> est bien présent</li>
 </ul></li>
 </ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><code>git add .</code></li>
+<li><code>git commit -m "création fichier tp1"</code></li>
+<li><code>git push</code></li>
+</ul>
+</div>
+</div>
+</div>
 </section>
 <section id="surveiller-son-service" class="level3" data-number="3.7">
 <h3 data-number="3.7" class="anchored" data-anchor-id="surveiller-son-service"><span class="header-section-number">3.7</span> Surveiller son service</h3>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Ne pas faire cette partie.</p>
+</div>
+</div>
 <ul class="task-list">
 <li><label><input type="checkbox">Sur la page du Datalab, allez dans <code>Mes services</code></label></li>
-<li><label><input type="checkbox">Cliquez sur le nom du service (Rstudio)</label></li>
+<li><label><input type="checkbox">Cliquez sur le nom du service (Jupyter-python)</label></li>
 <li><label><input type="checkbox">Cliquez sur <code>Surveillance externe</code></label></li>
 </ul>
 <p>Vous arrivez sur la page de l’outil <strong>Grafana</strong> qui permet d’observer les métriques de votre service.</p>
@@ -687,7 +848,7 @@ Tip
 <ul>
 <li>Votre code est sur GitHub</li>
 <li>Vos données sont sur MinIO</li>
-<li>Il suffit de relancer un nouveau service</li>
+<li>Il suffit de relancer un nouveau service et d’y brancher votre répo</li>
 </ul>
 </section>
 </section>
@@ -725,9 +886,27 @@ Tip
 </ul>
 <p>Dans votre servives, les deux variables d’environnement ont été créées.</p>
 <ul class="task-list">
-<li><label><input type="checkbox">Vérifiez leur présence via le terminal : <code>env | grep PATATE</code> ou <code>echo $PATATE_TOKEN</code></label></li>
-<li><label><input type="checkbox">Obtenez la valeur dans un script R : <code>token &lt;- Sys.getenv("PATATE_TOKEN")</code></label></li>
+<li><p><label><input type="checkbox">Vérifiez leur présence via le terminal : <code>env | grep PATATE</code> ou <code>echo $PATATE_TOKEN</code></label></p></li>
+<li><p><label><input type="checkbox">Ouvrez un notebook et récupérez la valeur de <em>PATATE_TOKEN</em></label></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>token <span class="op">=</span> os.environ[<span class="st">"PATATE_TOKEN"</span>]</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(token)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p><label><input type="checkbox">Une fois que vous avez fini de jouer, supprimez votre service</label></p></li>
 </ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Ce TP avait pour but de vous familiariser avec le Datalab. Vous pouvez l’utiliser pour faire du Python, du R, créer une base de données (prochain TP) ou utiliser de nombreux autres outils.</p>
+</div>
+</div>
 </section>
 </section>
 <section id="pour-aller-plus-loin" class="level2 unnumbered">
