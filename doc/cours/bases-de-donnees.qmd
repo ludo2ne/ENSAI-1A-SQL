@@ -51,6 +51,21 @@ Une **donnée** est une information brute qui possède :
 - Base de données
 :::
 
+:::::: {.fragment}
+::: {.callout-tip title="Articles intéressants"}
+- [Parquet pour remplacer csv](https://www.icem7.fr/outils/parquet-devrait-remplacer-le-format-csv/){target="_blank"}, Éric Mauvière, Icem7
+- [Comment bien préparer son Parquet](https://www.icem7.fr/outils/comment-bien-preparer-son-parquet/){target="_blank"}, Éric Mauvière, Icem7
+:::
+::::::
+
+::: {.notes}
+J'avais eu une question lors de la prez Git : où on stocke les données si on peut pas les mettre sur GitHub.
+
+- On ne garde pas les données sur sa machine (risque de fuite)
+- Dans l'idéal on bosse dans le cloud et on stocke sur S3
+- Sinon on travaille dans un espace dédié (AUS)
+:::
+
 
 ## Une base de données ?
 
