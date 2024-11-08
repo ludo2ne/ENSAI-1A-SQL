@@ -630,15 +630,15 @@ Ludovic Deneuville
 <h2>Regroupement</h2>
 <p>Comment obtenir la moyenne elo par club ?</p>
 <div class="fragment">
-<div class="sourceCode" id="cb7"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> club,    <span class="co">-- Supposons ici que la table joueuse a directement un attirbut club</span></span>
+<div class="sourceCode" id="cb7"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> ville_club,    <span class="co">-- Supposons que la table joueuse a un attribut ville_club</span></span>
 <span id="cb7-2"><a aria-hidden="true" tabindex="-1"></a>       <span class="fu">AVG</span>(elo)</span>
 <span id="cb7-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
-<span id="cb7-4"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">GROUP</span> <span class="kw">BY</span> club;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-4"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">GROUP</span> <span class="kw">BY</span> nom_club;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="small-table">
 <table class="caption-top">
 <thead>
 <tr class="header">
-<th><strong>club</strong></th>
+<th><strong>ville_club</strong></th>
 <th><strong>avg_elo</strong></th>
 </tr>
 </thead>
@@ -660,6 +660,7 @@ Ludovic Deneuville
 </div>
 </div>
 <aside class="notes">
+<p>J’ai mis ville_club car id_club c’est moins joli et on verra les jointures ensuite.</p>
 <p>Vous pouvez utiliser ROUND() pour arrondir.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -708,11 +709,12 @@ Ludovic Deneuville
 <h3>Filtre suite au GROUP BY</h3>
 <p>Comment faire pour afficher uniquement les clubs où la moyenne élo est inférieure à 2400 ?</p>
 <div class="fragment">
-<div class="sourceCode" id="cb8"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb8-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> club,</span>
+<div class="sourceCode" id="cb8"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb8-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> ville_club,</span>
 <span id="cb8-2"><a aria-hidden="true" tabindex="-1"></a>       <span class="fu">AVG</span>(elo)</span>
 <span id="cb8-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
-<span id="cb8-4"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">GROUP</span> <span class="kw">BY</span> club</span>
+<span id="cb8-4"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">GROUP</span> <span class="kw">BY</span> ville_club</span>
 <span id="cb8-5"><a aria-hidden="true" tabindex="-1"></a><span class="kw">HAVING</span> <span class="fu">AVG</span>(elo) <span class="op">&lt;</span> <span class="dv">2400</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><br></p>
 <div class="small-table">
 <table class="caption-top">
 <thead>
