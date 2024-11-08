@@ -235,10 +235,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#créer-un-service" id="toc-créer-un-service" class="nav-link" data-scroll-target="#créer-un-service"><span class="header-section-number">3.2</span> Créer un service</a></li>
   <li><a href="#jouer-avec-votre-service" id="toc-jouer-avec-votre-service" class="nav-link" data-scroll-target="#jouer-avec-votre-service"><span class="header-section-number">3.3</span> Jouer avec votre service</a></li>
   <li><a href="#accéder-à-votre-stockage" id="toc-accéder-à-votre-stockage" class="nav-link" data-scroll-target="#accéder-à-votre-stockage"><span class="header-section-number">3.4</span> Accéder à votre stockage</a></li>
-  <li><a href="#client-minio" id="toc-client-minio" class="nav-link" data-scroll-target="#client-minio"><span class="header-section-number">3.5</span> Client MinIO</a></li>
-  <li><a href="#sauver-son-code" id="toc-sauver-son-code" class="nav-link" data-scroll-target="#sauver-son-code"><span class="header-section-number">3.6</span> Sauver son code</a></li>
-  <li><a href="#surveiller-son-service" id="toc-surveiller-son-service" class="nav-link" data-scroll-target="#surveiller-son-service"><span class="header-section-number">3.7</span> Surveiller son service</a></li>
-  <li><a href="#terminer-son-service" id="toc-terminer-son-service" class="nav-link" data-scroll-target="#terminer-son-service"><span class="header-section-number">3.8</span> Terminer son service</a></li>
+  <li><a href="#jouer-avec-vos-données" id="toc-jouer-avec-vos-données" class="nav-link" data-scroll-target="#jouer-avec-vos-données"><span class="header-section-number">3.5</span> Jouer avec vos données</a></li>
+  <li><a href="#exportez-vos-résultats-vers-minio" id="toc-exportez-vos-résultats-vers-minio" class="nav-link" data-scroll-target="#exportez-vos-résultats-vers-minio"><span class="header-section-number">3.6</span> Exportez vos résultats vers MinIO</a></li>
+  <li><a href="#client-minio" id="toc-client-minio" class="nav-link" data-scroll-target="#client-minio"><span class="header-section-number">3.7</span> Client MinIO</a></li>
+  <li><a href="#sauver-son-code" id="toc-sauver-son-code" class="nav-link" data-scroll-target="#sauver-son-code"><span class="header-section-number">3.8</span> Sauver son code</a></li>
+  <li><a href="#surveiller-son-service" id="toc-surveiller-son-service" class="nav-link" data-scroll-target="#surveiller-son-service"><span class="header-section-number">3.9</span> Surveiller son service</a></li>
+  <li><a href="#terminer-son-service" id="toc-terminer-son-service" class="nav-link" data-scroll-target="#terminer-son-service"><span class="header-section-number">3.10</span> Terminer son service</a></li>
   </ul></li>
   <li><a href="#les-secrets" id="toc-les-secrets" class="nav-link" data-scroll-target="#les-secrets"><span class="header-section-number">4</span> Les secrets</a>
   <ul class="collapse">
@@ -659,7 +661,7 @@ Polars
 <ul class="task-list">
 <li><label><input type="checkbox">Requêtez les données</label>
 <ul>
-<li>Créez une nouvelle celulle avec le bouton <code>+</code> de la barre d’outils</li>
+<li>Créez une nouvelle cellule avec le bouton <code>+</code> de la barre d’outils</li>
 <li>Collez et exécutez ce code</li>
 </ul>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Top 10 des prénoms féminins en 2021</span></span>
@@ -673,28 +675,81 @@ Polars
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    .limit(<span class="dv">10</span>)</span>
 <span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(top10f2021)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-<li><label><input type="checkbox">Exportez vos résultats vers MinIO</label>
-<ul>
-<li>En utilisant la librairie <em>s3fs</em></li>
 </ul>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> s3fs</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>fs <span class="op">=</span> s3fs.S3FileSystem(</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    client_kwargs<span class="op">=</span>{<span class="st">'endpoint_url'</span>: <span class="st">'https://'</span><span class="op">+</span><span class="st">'minio-simple.lab.groupe-genes.fr'</span>},</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    key <span class="op">=</span> os.environ[<span class="st">"AWS_ACCESS_KEY_ID"</span>], </span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    secret <span class="op">=</span> os.environ[<span class="st">"AWS_SECRET_ACCESS_KEY"</span>], </span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    token <span class="op">=</span> os.environ[<span class="st">"AWS_SESSION_TOKEN"</span>])</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>destination <span class="op">=</span> <span class="ss">f"s3://</span><span class="sc">{</span>username<span class="sc">}</span><span class="ss">/diffusion/INSEE/output.csv"</span></span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> fs.<span class="bu">open</span>(destination, mode<span class="op">=</span><span class="st">'wb'</span>) <span class="im">as</span> f:</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    top10f2021.write_csv(f)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-<li><label><input type="checkbox">Sur le Datalab, allez dans Mes fichiers <span class="emoji" data-emoji="arrow_right">➡️</span> diffusion <span class="emoji" data-emoji="arrow_right">➡️</span> INSEE</label>
+</section>
+<section id="jouer-avec-vos-données" class="level3" data-number="3.5">
+<h3 data-number="3.5" class="anchored" data-anchor-id="jouer-avec-vos-données"><span class="header-section-number">3.5</span> Jouer avec vos données</h3>
+<ul class="task-list">
+<li><p><label><input type="checkbox">Générez le tableau du nombre de fois où votre prénom a été donné entre 2010 et 2020</label></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>prenom <span class="op">=</span> <span class="st">"Ludovic"</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>annee_debut, annee_fin <span class="op">=</span> <span class="dv">2010</span>, <span class="dv">2020</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>df_prenom_annee <span class="op">=</span> df<span class="op">\</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">filter</span>((pl.col(<span class="st">"annais"</span>) <span class="op">!=</span> <span class="st">"XXXX"</span>))<span class="op">\</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">filter</span>((pl.col(<span class="st">"preusuel"</span>) <span class="op">==</span> prenom.upper()) <span class="op">&amp;</span> </span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>            (pl.col(<span class="st">"annais"</span>).cast(pl.Int32) <span class="op">&gt;=</span> annee_debut) <span class="op">&amp;</span> </span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>            (pl.col(<span class="st">"annais"</span>).cast(pl.Int32) <span class="op">&lt;=</span> annee_fin))<span class="op">\</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    .group_by(<span class="st">"annais"</span>)<span class="op">\</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    .agg(pl.col(<span class="st">"nombre"</span>).<span class="bu">sum</span>().alias(<span class="st">"nombre_total"</span>))<span class="op">\</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    .sort(<span class="st">"annais"</span>)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_prenom_annee)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p><label><input type="checkbox">Faites un diagramme en barres</label></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Set seaborn style for a cleaner, more appealing look</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>sns.set_theme(style<span class="op">=</span><span class="st">"whitegrid"</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the plot</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Data</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>years <span class="op">=</span> df_prenom_annee[<span class="st">"annais"</span>].to_list()         <span class="co"># Extracts years as a list</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>counts <span class="op">=</span> df_prenom_annee[<span class="st">"nombre_total"</span>].to_list()  <span class="co"># Extracts counts as a list</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Bar plot with custom colors and transparency for better visuals</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>ax.bar(years, </span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>       counts, </span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>       color<span class="op">=</span><span class="st">"#4C72B0"</span>, </span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>       edgecolor<span class="op">=</span><span class="st">"black"</span>, </span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>       alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Set labels and title with padding for readability</span></span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Année"</span>, fontsize<span class="op">=</span><span class="dv">12</span>, labelpad<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Nombre d'occurences"</span>, fontsize<span class="op">=</span><span class="dv">12</span>, labelpad<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="ss">f"Occurrences du prénom </span><span class="sc">{</span>prenom<span class="sc">}</span><span class="ss"> par année (</span><span class="sc">{</span>annee_debut<span class="sc">}</span><span class="ss">-</span><span class="sc">{</span>annee_fin<span class="sc">}</span><span class="ss">)"</span>, fontsize<span class="op">=</span><span class="dv">14</span>, pad<span class="op">=</span><span class="dv">15</span>)</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Rotate x-axis labels, improve spacing, and format grid</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>ax.tick_params(axis<span class="op">=</span><span class="st">'x'</span>, rotation<span class="op">=</span><span class="dv">45</span>)</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()  <span class="co"># Adjust layout for tight fit</span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the plot</span></span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+</ul>
+</section>
+<section id="exportez-vos-résultats-vers-minio" class="level3" data-number="3.6">
+<h3 data-number="3.6" class="anchored" data-anchor-id="exportez-vos-résultats-vers-minio"><span class="header-section-number">3.6</span> Exportez vos résultats vers MinIO</h3>
+<ul class="task-list">
+<li><p><label><input type="checkbox">En utilisant la librairie <em>s3fs</em></label></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> s3fs</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>fs <span class="op">=</span> s3fs.S3FileSystem(</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    client_kwargs<span class="op">=</span>{<span class="st">'endpoint_url'</span>: <span class="st">'https://'</span><span class="op">+</span><span class="st">'minio-simple.lab.groupe-genes.fr'</span>},</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    key <span class="op">=</span> os.environ[<span class="st">"AWS_ACCESS_KEY_ID"</span>], </span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    secret <span class="op">=</span> os.environ[<span class="st">"AWS_SECRET_ACCESS_KEY"</span>], </span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    token <span class="op">=</span> os.environ[<span class="st">"AWS_SESSION_TOKEN"</span>])</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>destination <span class="op">=</span> <span class="ss">f"s3://</span><span class="sc">{</span>username<span class="sc">}</span><span class="ss">/diffusion/INSEE/output.csv"</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> fs.<span class="bu">open</span>(destination, mode<span class="op">=</span><span class="st">'wb'</span>) <span class="im">as</span> f:</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    top10f2021.write_csv(f)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p><label><input type="checkbox">Sur le Datalab, allez dans Mes fichiers <span class="emoji" data-emoji="arrow_right">➡️</span> diffusion <span class="emoji" data-emoji="arrow_right">➡️</span> INSEE</label></p>
 <ul>
 <li>le fichier <em>output.csv</em> a été généré</li>
 <li>rafraichissez la page si besoin</li>
 </ul></li>
-<li><label><input type="checkbox">Double-cliquez sur ce fichier pour en avoir un aperçu</label></li>
+<li><p><label><input type="checkbox">Double-cliquez sur ce fichier pour en avoir un aperçu</label></p></li>
 </ul>
 <section id="exercice" class="level4">
 <h4 class="anchored" data-anchor-id="exercice">Exercice</h4>
@@ -708,23 +763,24 @@ Note
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Si vous êtes en avance</p>
+<p>Si vous êtes en avance.</p>
 </div>
 </div>
 <p>Comme dans de très nombreux outils, il est possible d’encapsuler du <a href="https://docs.pola.rs/api/python/stable/reference/sql/index.html" target="_blank">SQL dans Polars</a>.</p>
 <p>Par exemple la requête du top10 féminin 2021 donne en SQL :</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df.sql(<span class="st">"""</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="st">  SELECT preusuel, </span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="st">         SUM(nombre) AS nombre_total</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM self</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="st">   WHERE preusuel &lt;&gt; '_PRENOMS_RARES'</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="st">     AND annais = '2021'</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="st">     AND sexe = 2</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="st">   GROUP BY preusuel</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="st">   ORDER BY 2 DESC</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="st">   LIMIT 10</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>df.sql(<span class="st">"""</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="st">  SELECT preusuel, </span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="st">         SUM(nombre) AS nombre_total</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM self</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="st">   WHERE preusuel &lt;&gt; '_PRENOMS_RARES'</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="st">     AND annais = '2021'</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="st">     AND sexe = 2</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="st">   GROUP BY preusuel</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="st">   ORDER BY 2 DESC</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="st">   LIMIT 10</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul class="task-list">
+<li><label><input type="checkbox">Ré-écrivez en SQL la requête du nombre de fois ou votre prénom a été donné entre 2010 et 2020</label></li>
 <li><label><input type="checkbox">Créez une nouvelle cellule et écrivez une requête pour afficher les 5 années où sont nées le plus de filles</label></li>
 <li><label><input type="checkbox">Quels sont les prénoms masculins et féminins les plus donnés depuis 1900 ?</label></li>
 <li><label><input type="checkbox">Affichez le nombres de filles et de garçons nés chaque année depuis 2010</label>
@@ -734,8 +790,8 @@ Note
 </ul>
 </section>
 </section>
-<section id="client-minio" class="level3" data-number="3.5">
-<h3 data-number="3.5" class="anchored" data-anchor-id="client-minio"><span class="header-section-number">3.5</span> Client MinIO</h3>
+<section id="client-minio" class="level3" data-number="3.7">
+<h3 data-number="3.7" class="anchored" data-anchor-id="client-minio"><span class="header-section-number">3.7</span> Client MinIO</h3>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -776,8 +832,8 @@ Tip
 </div>
 </div>
 </section>
-<section id="sauver-son-code" class="level3" data-number="3.6">
-<h3 data-number="3.6" class="anchored" data-anchor-id="sauver-son-code"><span class="header-section-number">3.6</span> Sauver son code</h3>
+<section id="sauver-son-code" class="level3" data-number="3.8">
+<h3 data-number="3.8" class="anchored" data-anchor-id="sauver-son-code"><span class="header-section-number">3.8</span> Sauver son code</h3>
 <ul class="task-list">
 <li><label><input type="checkbox">Sur Jupyter, ouvrez un terminal</label>
 <ul>
@@ -816,8 +872,8 @@ Tip
 </div>
 </div>
 </section>
-<section id="surveiller-son-service" class="level3" data-number="3.7">
-<h3 data-number="3.7" class="anchored" data-anchor-id="surveiller-son-service"><span class="header-section-number">3.7</span> Surveiller son service</h3>
+<section id="surveiller-son-service" class="level3" data-number="3.9">
+<h3 data-number="3.9" class="anchored" data-anchor-id="surveiller-son-service"><span class="header-section-number">3.9</span> Surveiller son service</h3>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -838,8 +894,8 @@ Caution
 </ul>
 <p>Vous arrivez sur la page de l’outil <strong>Grafana</strong> qui permet d’observer les métriques de votre service.</p>
 </section>
-<section id="terminer-son-service" class="level3" data-number="3.8">
-<h3 data-number="3.8" class="anchored" data-anchor-id="terminer-son-service"><span class="header-section-number">3.8</span> Terminer son service</h3>
+<section id="terminer-son-service" class="level3" data-number="3.10">
+<h3 data-number="3.10" class="anchored" data-anchor-id="terminer-son-service"><span class="header-section-number">3.10</span> Terminer son service</h3>
 <p>Une fois vos travaux terminés, il est temps de libérer les ressources réservées.</p>
 <ul class="task-list">
 <li><label><input type="checkbox">Dans <em>Mes services</em>, mettez votre service à la poubelle</label></li>
@@ -888,10 +944,10 @@ Caution
 <ul class="task-list">
 <li><p><label><input type="checkbox">Vérifiez leur présence via le terminal : <code>env | grep PATATE</code> ou <code>echo $PATATE_TOKEN</code></label></p></li>
 <li><p><label><input type="checkbox">Ouvrez un notebook et récupérez la valeur de <em>PATATE_TOKEN</em></label></p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>token <span class="op">=</span> os.environ[<span class="st">"PATATE_TOKEN"</span>]</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(token)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>token <span class="op">=</span> os.environ[<span class="st">"PATATE_TOKEN"</span>]</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(token)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p><label><input type="checkbox">Une fois que vous avez fini de jouer, supprimez votre service</label></p></li>
 </ul>
 <div class="callout callout-style-default callout-note callout-titled">
