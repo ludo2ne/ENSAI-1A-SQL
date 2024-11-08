@@ -42,7 +42,7 @@ Quelques questions que l'on peut se poser :
 ::: {.incremental}
 - Quel est le id_joueuse maximum ?
 - Quel est le nombre de joueuses ?
-- Quelle est la moyenne des elo par club ?
+- Quelle est la moyenne elo par club ?
 :::
 
 ## Compter les lignes
@@ -72,6 +72,9 @@ SELECT COUNT(*)
 | 5         |
 :::
 
+::: {.notes}
+J'utilise souvent COUNT(1) -> c'est pareil
+:::
 
 ## Somme
 
@@ -81,7 +84,7 @@ SELECT SUM(elo)
 ```
 
 ::: {.small-table}
-| **sum_elo** |
+| **sum**     |
 |-------------|
 | 14223       |
 :::
@@ -104,7 +107,7 @@ SELECT MAX(elo),
 ```
 
 ::: {.small-table}
-| **max_elo** | **min_elo** | **avg_elo** |
+| **max**     | **min**     | **avg**     |
 |-------------|-------------|-------------|
 | 2448        | 2338        | 2373.5      |
 :::
@@ -126,6 +129,7 @@ En utilisant une **sous-requête** :
 - `SELECT MAX(elo) FROM joueuse` :arrow_right: renvoie un nombre
 - Nous pouvons ensuite tester si *elo* est égal à ce nombre
 
+::: {.fragment}
 ```{.sql}
 SELECT nom,
        prenom,
@@ -133,6 +137,7 @@ SELECT nom,
   FROM echecs.joueuse
  WHERE elo = (SELECT MAX(elo) FROM echecs.joueuse);
 ```
+:::
 
 ## Regroupement
 
@@ -141,7 +146,7 @@ Comment obtenir la moyenne elo par club ?
 :::::: {.fragment}
 
 ```{.sql}
-SELECT club,
+SELECT club,    -- Supposons ici que la table joueuse a directement un attirbut club
        AVG(elo)
   FROM echecs.joueuse
  GROUP BY club;

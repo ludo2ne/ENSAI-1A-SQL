@@ -871,6 +871,15 @@ SELECT DISTINCT prenom
 FROM echecs.joueuse;
 ```
 
+### Et même !?
+
+```{.sql}
+SELECT 1,
+       TRUE,
+       'a',
+       current_date
+  FROM echecs.joueuse;
+```
 
 ## Résumé
 
