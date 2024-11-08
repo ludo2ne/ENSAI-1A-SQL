@@ -35,10 +35,10 @@ website:
             text: "Modélisation"
       - text: TP
         menu:
-          - href: doc/tp/tp0.qmd
-            text: "TP0 - Datalab"
           - href: doc/tp/tp1.qmd
-            text: "TP1"
+            text: "TP1 - Datalab"
+          - href: doc/tp/tp2.qmd
+            text: "TP2"
     right:
       - href: doc/glossaire.qmd
         text: Glossaire

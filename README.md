@@ -19,9 +19,9 @@
 
 #### Après
 
-- TP0 : découverte du Datalab (1h)
-- TP1 : 1eres requetes, jointure, not exists
-- TP2 : DuckBD, WHERE, GROUP BY, DATE
+- TP1 : découverte du Datalab (1h)
+- TP2 : 1eres requetes, jointure, not exists
+- TP3 : DuckBD, WHERE, GROUP BY, DATE
 
 
 ## :rocket: Publier les pages

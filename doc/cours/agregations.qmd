@@ -146,14 +146,14 @@ Comment obtenir la moyenne elo par club ?
 :::::: {.fragment}
 
 ```{.sql}
-SELECT club,    -- Supposons ici que la table joueuse a directement un attirbut club
+SELECT ville_club,    -- Supposons que la table joueuse a un attribut ville_club
        AVG(elo)
   FROM echecs.joueuse
- GROUP BY club;
+ GROUP BY nom_club;
 ```
 
 ::: {.small-table}
-| **club**         | **avg_elo** |
+| **ville_club**   | **avg_elo** |
 |------------------|-------------|
 | Asnieres         | 2372.4      |
 | Chartres         | 2371.0      |
@@ -163,6 +163,8 @@ SELECT club,    -- Supposons ici que la table joueuse a directement un attirbut 
 ::::::
 
 ::: {.notes}
+J'ai mis ville_club car id_club c'est moins joli et on verra les jointures ensuite.
+
 Vous pouvez utiliser ROUND() pour arrondir.
 :::
 
@@ -188,12 +190,14 @@ Comment faire pour afficher uniquement les clubs où la moyenne élo est inféri
 :::::: {.fragment}
 
 ```{.sql}
-SELECT club,
+SELECT ville_club,
        AVG(elo)
   FROM echecs.joueuse
- GROUP BY club
+ GROUP BY ville_club
 HAVING AVG(elo) < 2400;
 ```
+
+<br>
 
 ::: {.small-table}
 | **club**         | **avg_elo** |
