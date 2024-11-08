@@ -384,7 +384,7 @@ Ludovic Deneuville
 <ul>
 <li class="fragment">Fichier txt</li>
 <li class="fragment">Fichier csv</li>
-<li class="fragment">Fichier <a href="https://www.json.org/json-fr.html" target="_blank">json</a></li>
+<li class="fragment">Fichier <a href="https://www.json.org/json-fr.html" target="_blank">json</a>, <a href="https://anapioficeandfire.com/api/houses" target="_blank">Exemple</a></li>
 <li class="fragment">Fichier <a href="https://parquet.apache.org/" target="_blank">parquet</a></li>
 <li class="fragment">Base de données</li>
 </ul>
@@ -416,6 +416,7 @@ Ludovic Deneuville
 <li>Dans l’idéal on bosse dans le cloud et on stocke sur S3</li>
 <li>Sinon on travaille dans un espace dédié (AUS)</li>
 </ul>
+<p>Suivre sur Linkedin : Mauvière, Holtz, Blefari, Lesur, Galiana, Degorre</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -465,13 +466,31 @@ Ludovic Deneuville
 
 <section id="enjeux" class="title-slide slide level2 center">
 <h2>Enjeux</h2>
+<div>
 <ul>
-<li>Accès aux données : langage SQL</li>
-<li>Sécurité des données : seuls les utilisateurs autorisés (droits)</li>
-<li>Partage des données : facile en lecture, mais en écriture ?</li>
-<li>Non-redondance des données</li>
-<li>Cohérence des données : respect des contraintes d’intégrité</li>
+<li class="fragment">Accès aux données : langage SQL</li>
+<li class="fragment">Sécurité des données : seuls les utilisateurs autorisés (droits)</li>
+<li class="fragment">Partage des données : facile en lecture, mais en écriture ?</li>
+<li class="fragment">Non-redondance des données</li>
+<li class="fragment">Cohérence des données : respect des contraintes d’intégrité</li>
 </ul>
+</div>
+<aside class="notes">
+<ul>
+<li>Se brancher à la BDD qui est sur un serveur</li>
+<li>Règles pour la cohérence. <span class="emoji" data-emoji="warning">⚠️</span> trop de règles -&gt; bon dosage</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 
 <section>
@@ -484,7 +503,7 @@ Ludovic Deneuville
 <ul>
 <li>Données organisées comme un arbre</li>
 <li>Relations de type parent-enfant</li>
-<li>Annuaires LDAP, système de fichiers</li>
+<li>Annuaires LDAP, systèmes de fichiers</li>
 </ul>
 <div class="cell" data-reveal="true" data-layout-align="default">
 <div class="cell-output-display">
@@ -626,40 +645,60 @@ Ludovic Deneuville
 </ul></li>
 </ul>
 </section>
-<section id="exemple" class="slide level3">
-<h3>Exemple</h3>
-<p>Comment relier ces 2 tables ?</p>
-<ul>
-<li>une joueuse joue pour un seul club</li>
-<li>Un club peut avoir plusieurs joueuses</li>
-</ul>
-<div class="cell" data-reveal="true" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class=""><p></p>
-<div>
-<pre class="mermaid mermaid-js">classDiagram
-    class Joueuse {
-        id_joueuse PK
-        nom
-        prenom
-        elo
-    }
-    
-    class Club {
-        id_club PK
-        nom
-        ville
-    }
-</pre>
+<section id="clé-primaire" class="slide level3">
+<h3>Clé primaire ?</h3>
+<div class="small-table">
+<table class="caption-top">
+<caption>joueuse</caption>
+<thead>
+<tr class="header">
+<th><strong>nom</strong></th>
+<th><strong>prenom</strong></th>
+<th><strong>elo</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Guichard</td>
+<td>Pauline</td>
+<td>2357</td>
+</tr>
+<tr class="even">
+<td>Daulyte-Cornette</td>
+<td>Deimante</td>
+<td>2371</td>
+</tr>
+<tr class="odd">
+<td>Navrotescu</td>
+<td>Andreea</td>
+<td>2338</td>
+</tr>
+<tr class="even">
+<td>Sebag</td>
+<td>Marie</td>
+<td>2448</td>
+</tr>
+<tr class="odd">
+<td>Millet</td>
+<td>Sophie</td>
+<td>2366</td>
+</tr>
+<tr class="even">
+<td>Skrichempko</td>
+<td>Almira</td>
+<td>2361</td>
+</tr>
+</tbody>
+</table>
 </div>
-<p></p></figure><p></p>
-</div>
-</div>
+<p><br></p>
+<div class="fragment">
+<p>Quel champ choisir comme clé primaire ? <span class="emoji" data-emoji="neutral_face">😐</span></p>
 </div>
 </section>
-<section class="slide level3">
-
+<section id="clé-primaire-technique" class="slide level3">
+<h3>Clé primaire technique</h3>
+<p>Créons une séquence numérique. <span class="emoji" data-emoji="sunglasses">😎</span></p>
 <div class="small-table">
 <table class="caption-top">
 <caption>joueuse</caption>
@@ -712,6 +751,78 @@ Ludovic Deneuville
 </table>
 </div>
 </section>
+<section id="clé-primaire-1" class="slide level3">
+<h3>Clé primaire</h3>
+<ul>
+<li>Attribut (ou ensemble d’attributs)</li>
+<li>Unique</li>
+<li>Non nulle</li>
+<li>Immuable</li>
+</ul>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p>Sauf mention contraire, nous utiliserons une clé primaire “technique” : séquence.</p>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>Immuable :</p>
+<ul>
+<li>idéalement stable, elle ne change pas au cours du temps</li>
+<li>Pour maintenir l’intégrité des liens avec d’autres tables</li>
+</ul>
+<p>Remarque : pas obligatoire d’avoir une clé primaire</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="clé-étrangère" class="slide level3">
+<h3>Clé étrangère ?</h3>
+<p>Comment relier ces 2 tables ?</p>
+<ul>
+<li>une joueuse joue pour un seul club</li>
+<li>Un club peut avoir plusieurs joueuses</li>
+</ul>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">classDiagram
+    class Joueuse {
+        id_joueuse PK
+        nom
+        prenom
+        elo
+    }
+    
+    class Club {
+        id_club PK
+        nom
+        ville
+    }
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
 <section class="slide level3">
 
 <div class="small-table">
@@ -754,7 +865,7 @@ Ludovic Deneuville
 </table>
 </div>
 </section>
-<section id="clé-étrangère" class="slide level3">
+<section id="clé-étrangère-1" class="slide level3">
 <h3>Clé étrangère</h3>
 <p>En ajoutant une clé étrangère.</p>
 <div class="cell" data-reveal="true" data-layout-align="default">
@@ -850,50 +961,58 @@ Ludovic Deneuville
 </tbody>
 </table>
 </div>
-</section>
-<section id="clé-primaire" class="slide level3">
-<h3>Clé primaire</h3>
-<ul>
-<li>Attribut (ou ensemble d’attributs)</li>
-<li>Unique</li>
-<li>Non nulle</li>
-<li>Immuable</li>
-</ul>
-<div class="callout callout-tip callout-titled callout-style-default">
+<div class="fragment">
+<div title="Remarques">
+<div class="callout callout-caution callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
-<p><strong>Tip</strong></p>
+<p><strong>Remarques</strong></p>
 </div>
 <div class="callout-content">
-<p>Sauf mention contraire, nous utiliserons une clé primaire “technique” : séquence.</p>
+<p>Une clé étrangère peut être nulle.</p>
+<p>Une clé étrangère référence une valeur existante de clé primaire.</p>
 </div>
 </div>
 </div>
-<aside class="notes">
-<p>Immuable :</p>
-<ul>
-<li>idéalement stable, elle ne change pas au cours du temps</li>
-<li>Pour maintenir l’intégrité des liens avec d’autres tables</li>
-</ul>
-<p>Remarque : pas obligatoire d’avoir une clé primaire</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
+</div>
+</div>
 </section>
 <section id="question" class="slide level3">
 <h3>Question</h3>
+<p>Et si vous supprimez, le club de C’Chartres Echecs ? <span class="emoji" data-emoji="innocent">😇</span></p>
+<p><br></p>
+<div class="fragment">
+<div class="callout callout-warning callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Warning</strong></p>
+</div>
+<div class="callout-content">
+<pre><code>SQL Error [23503]: ERROR: UPDATE or DELETE on table "club" violates the foreign key constraint "fk_id_club" on table "joueuse". Detail: Key (id_club)=(1) is still referenced from table "joueuse".</code></pre>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="autre-question" class="slide level3">
+<h3>Autre question</h3>
 <p>Si une joueuse peut adhérer à plusieurs clubs ? <span class="emoji" data-emoji="confused">😕</span></p>
+<div>
+<ul>
+<li class="fragment"><em>id_club</em> devient une liste de clubs ?</li>
+</ul>
+</div>
+<div class="fragment">
+<div class="hide-html-render">
+<p><img data-src="https://media.giphy.com/media/Y8hzdgPnZ6Hwk/source.gif" style="width:50.0%"></p>
+</div>
+</div>
 <aside class="notes">
 <p>Par exemple si notre bdd contient aussi les clubs belges, allemands, espagnols…</p>
 <style type="text/css">
@@ -1042,7 +1161,7 @@ Ludovic Deneuville
 <section id="association-récursive" class="slide level3">
 <h3>Association récursive</h3>
 <p>Une table peut avoir des relations avec elle-même</p>
-<p>Ici la table contient une clé étrangère qui référence sa propre clé primaire.</p>
+<p>Dans ce cas, la table contient une clé étrangère qui référence <u>sa propre clé primaire</u>.</p>
 <p>Exemple :</p>
 <ul>
 <li>Un employé a un supérieur</li>
@@ -1133,6 +1252,7 @@ Ludovic Deneuville
 <li>Base de données : endroit où sont stockées les informations</li>
 <li>SGBD : logiciel qui permet de créer, gérer et manipuler les bases de données</li>
 <li>Outil de gestion du SGBD : application graphique qui facilite l’interaction avec un SGBD</li>
+<li>SQL : Langage pour donner les instructions à la base de données</li>
 </ul>
 <aside class="notes">
 <ul>

@@ -205,11 +205,14 @@ ul.task-list li input[type="checkbox"] {
   <ul class="collapse">
   <li><a href="#table" id="toc-table" class="nav-link" data-scroll-target="#table"><span class="header-section-number">5.1</span> Table</a></li>
   <li><a href="#relations-entre-les-tables" id="toc-relations-entre-les-tables" class="nav-link" data-scroll-target="#relations-entre-les-tables"><span class="header-section-number">5.2</span> Relations entre les tables</a></li>
-  <li><a href="#exemple" id="toc-exemple" class="nav-link" data-scroll-target="#exemple"><span class="header-section-number">5.3</span> Exemple</a></li>
-  <li><a href="#clé-étrangère" id="toc-clé-étrangère" class="nav-link" data-scroll-target="#clé-étrangère"><span class="header-section-number">5.4</span> Clé étrangère</a></li>
-  <li><a href="#clé-primaire" id="toc-clé-primaire" class="nav-link" data-scroll-target="#clé-primaire"><span class="header-section-number">5.5</span> Clé primaire</a></li>
-  <li><a href="#question" id="toc-question" class="nav-link" data-scroll-target="#question"><span class="header-section-number">5.6</span> Question</a></li>
-  <li><a href="#table-dassociation" id="toc-table-dassociation" class="nav-link" data-scroll-target="#table-dassociation"><span class="header-section-number">5.7</span> Table d’association</a></li>
+  <li><a href="#clé-primaire" id="toc-clé-primaire" class="nav-link" data-scroll-target="#clé-primaire"><span class="header-section-number">5.3</span> Clé primaire ?</a></li>
+  <li><a href="#clé-primaire-technique" id="toc-clé-primaire-technique" class="nav-link" data-scroll-target="#clé-primaire-technique"><span class="header-section-number">5.4</span> Clé primaire technique</a></li>
+  <li><a href="#clé-primaire-1" id="toc-clé-primaire-1" class="nav-link" data-scroll-target="#clé-primaire-1"><span class="header-section-number">5.5</span> Clé primaire</a></li>
+  <li><a href="#clé-étrangère" id="toc-clé-étrangère" class="nav-link" data-scroll-target="#clé-étrangère"><span class="header-section-number">5.6</span> Clé étrangère ?</a></li>
+  <li><a href="#clé-étrangère-1" id="toc-clé-étrangère-1" class="nav-link" data-scroll-target="#clé-étrangère-1"><span class="header-section-number">5.7</span> Clé étrangère</a></li>
+  <li><a href="#question" id="toc-question" class="nav-link" data-scroll-target="#question"><span class="header-section-number">5.8</span> Question</a></li>
+  <li><a href="#autre-question" id="toc-autre-question" class="nav-link" data-scroll-target="#autre-question"><span class="header-section-number">5.9</span> Autre question</a></li>
+  <li><a href="#table-dassociation" id="toc-table-dassociation" class="nav-link" data-scroll-target="#table-dassociation"><span class="header-section-number">5.10</span> Table d’association</a></li>
   </ul></li>
   <li><a href="#associations" id="toc-associations" class="nav-link" data-scroll-target="#associations"><span class="header-section-number">6</span> Associations</a>
   <ul class="collapse">
@@ -300,7 +303,7 @@ Définition
 <ul class="incremental">
 <li>Fichier txt</li>
 <li>Fichier csv</li>
-<li>Fichier <a href="https://www.json.org/json-fr.html" target="_blank">json</a></li>
+<li>Fichier <a href="https://www.json.org/json-fr.html" target="_blank">json</a>, <a href="https://anapioficeandfire.com/api/houses" target="_blank">Exemple</a></li>
 <li>Fichier <a href="https://parquet.apache.org/" target="_blank">parquet</a></li>
 <li>Base de données</li>
 </ul>
@@ -330,6 +333,7 @@ Articles intéressants
 <li>Dans l’idéal on bosse dans le cloud et on stocke sur S3</li>
 <li>Sinon on travaille dans un espace dédié (AUS)</li>
 </ul>
+<p>Suivre sur Linkedin : Mauvière, Holtz, Blefari, Lesur, Galiana, Degorre</p>
 </div>
 </section>
 </section>
@@ -357,13 +361,21 @@ Définition
 </section>
 <section id="enjeux" class="level2" data-number="3">
 <h2 data-number="3" class="anchored" data-anchor-id="enjeux"><span class="header-section-number">3</span> Enjeux</h2>
-<ul>
+<div class="incremental">
+<ul class="incremental">
 <li>Accès aux données : langage SQL</li>
 <li>Sécurité des données : seuls les utilisateurs autorisés (droits)</li>
 <li>Partage des données : facile en lecture, mais en écriture ?</li>
 <li>Non-redondance des données</li>
 <li>Cohérence des données : respect des contraintes d’intégrité</li>
 </ul>
+</div>
+<div class="notes">
+<ul>
+<li>Se brancher à la BDD qui est sur un serveur</li>
+<li>Règles pour la cohérence. <span class="emoji" data-emoji="warning">⚠️</span> trop de règles -&gt; bon dosage</li>
+</ul>
+</div>
 </section>
 <section id="types-de-bases-de-données" class="level2" data-number="4">
 <h2 data-number="4" class="anchored" data-anchor-id="types-de-bases-de-données"><span class="header-section-number">4</span> Types de bases de données</h2>
@@ -372,7 +384,7 @@ Définition
 <ul>
 <li>Données organisées comme un arbre</li>
 <li>Relations de type parent-enfant</li>
-<li>Annuaires LDAP, système de fichiers</li>
+<li>Annuaires LDAP, systèmes de fichiers</li>
 </ul>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
@@ -492,38 +504,60 @@ Définition
 </ul></li>
 </ul>
 </section>
-<section id="exemple" class="level3" data-number="5.3">
-<h3 data-number="5.3" class="anchored" data-anchor-id="exemple"><span class="header-section-number">5.3</span> Exemple</h3>
-<p>Comment relier ces 2 tables ?</p>
-<ul>
-<li>une joueuse joue pour un seul club</li>
-<li>Un club peut avoir plusieurs joueuses</li>
-</ul>
-<div class="cell" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class="figure"><p></p>
-<div>
-<pre class="mermaid mermaid-js">classDiagram
-    class Joueuse {
-        id_joueuse PK
-        nom
-        prenom
-        elo
-    }
-    
-    class Club {
-        id_club PK
-        nom
-        ville
-    }
-</pre>
+<section id="clé-primaire" class="level3" data-number="5.3">
+<h3 data-number="5.3" class="anchored" data-anchor-id="clé-primaire"><span class="header-section-number">5.3</span> Clé primaire ?</h3>
+<div class="small-table">
+<table class="caption-top table">
+<caption>joueuse</caption>
+<thead>
+<tr class="header">
+<th><strong>nom</strong></th>
+<th><strong>prenom</strong></th>
+<th><strong>elo</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Guichard</td>
+<td>Pauline</td>
+<td>2357</td>
+</tr>
+<tr class="even">
+<td>Daulyte-Cornette</td>
+<td>Deimante</td>
+<td>2371</td>
+</tr>
+<tr class="odd">
+<td>Navrotescu</td>
+<td>Andreea</td>
+<td>2338</td>
+</tr>
+<tr class="even">
+<td>Sebag</td>
+<td>Marie</td>
+<td>2448</td>
+</tr>
+<tr class="odd">
+<td>Millet</td>
+<td>Sophie</td>
+<td>2366</td>
+</tr>
+<tr class="even">
+<td>Skrichempko</td>
+<td>Almira</td>
+<td>2361</td>
+</tr>
+</tbody>
+</table>
 </div>
-<p></p></figure><p></p>
+<p><br></p>
+<div class="fragment">
+<p>Quel champ choisir comme clé primaire ? <span class="emoji" data-emoji="neutral_face">😐</span></p>
 </div>
-</div>
-</div>
-<hr>
+</section>
+<section id="clé-primaire-technique" class="level3" data-number="5.4">
+<h3 data-number="5.4" class="anchored" data-anchor-id="clé-primaire-technique"><span class="header-section-number">5.4</span> Clé primaire technique</h3>
+<p>Créons une séquence numérique. <span class="emoji" data-emoji="sunglasses">😎</span></p>
 <div class="small-table">
 <table class="caption-top table">
 <caption>joueuse</caption>
@@ -575,6 +609,68 @@ Définition
 </tbody>
 </table>
 </div>
+</section>
+<section id="clé-primaire-1" class="level3" data-number="5.5">
+<h3 data-number="5.5" class="anchored" data-anchor-id="clé-primaire-1"><span class="header-section-number">5.5</span> Clé primaire</h3>
+<ul>
+<li>Attribut (ou ensemble d’attributs)</li>
+<li>Unique</li>
+<li>Non nulle</li>
+<li>Immuable</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Sauf mention contraire, nous utiliserons une clé primaire “technique” : séquence.</p>
+</div>
+</div>
+<div class="notes">
+<p>Immuable :</p>
+<ul>
+<li>idéalement stable, elle ne change pas au cours du temps</li>
+<li>Pour maintenir l’intégrité des liens avec d’autres tables</li>
+</ul>
+<p>Remarque : pas obligatoire d’avoir une clé primaire</p>
+</div>
+</section>
+<section id="clé-étrangère" class="level3" data-number="5.6">
+<h3 data-number="5.6" class="anchored" data-anchor-id="clé-étrangère"><span class="header-section-number">5.6</span> Clé étrangère ?</h3>
+<p>Comment relier ces 2 tables ?</p>
+<ul>
+<li>une joueuse joue pour un seul club</li>
+<li>Un club peut avoir plusieurs joueuses</li>
+</ul>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">classDiagram
+    class Joueuse {
+        id_joueuse PK
+        nom
+        prenom
+        elo
+    }
+    
+    class Club {
+        id_club PK
+        nom
+        ville
+    }
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
 <hr>
 <div class="small-table">
 <table class="caption-top table">
@@ -616,8 +712,8 @@ Définition
 </table>
 </div>
 </section>
-<section id="clé-étrangère" class="level3" data-number="5.4">
-<h3 data-number="5.4" class="anchored" data-anchor-id="clé-étrangère"><span class="header-section-number">5.4</span> Clé étrangère</h3>
+<section id="clé-étrangère-1" class="level3" data-number="5.7">
+<h3 data-number="5.7" class="anchored" data-anchor-id="clé-étrangère-1"><span class="header-section-number">5.7</span> Clé étrangère</h3>
 <p>En ajoutant une clé étrangère.</p>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
@@ -710,46 +806,62 @@ Définition
 </tbody>
 </table>
 </div>
-</section>
-<section id="clé-primaire" class="level3" data-number="5.5">
-<h3 data-number="5.5" class="anchored" data-anchor-id="clé-primaire"><span class="header-section-number">5.5</span> Clé primaire</h3>
-<ul>
-<li>Attribut (ou ensemble d’attributs)</li>
-<li>Unique</li>
-<li>Non nulle</li>
-<li>Immuable</li>
-</ul>
-<div class="callout callout-style-default callout-tip callout-titled">
+<div class="fragment">
+<div class="callout callout-style-default callout-caution callout-titled" title="Remarques">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Tip
+Remarques
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Sauf mention contraire, nous utiliserons une clé primaire “technique” : séquence.</p>
+<p>Une clé étrangère peut être nulle.</p>
+<p>Une clé étrangère référence une valeur existante de clé primaire.</p>
 </div>
 </div>
-<div class="notes">
-<p>Immuable :</p>
-<ul>
-<li>idéalement stable, elle ne change pas au cours du temps</li>
-<li>Pour maintenir l’intégrité des liens avec d’autres tables</li>
-</ul>
-<p>Remarque : pas obligatoire d’avoir une clé primaire</p>
 </div>
 </section>
-<section id="question" class="level3" data-number="5.6">
-<h3 data-number="5.6" class="anchored" data-anchor-id="question"><span class="header-section-number">5.6</span> Question</h3>
+<section id="question" class="level3" data-number="5.8">
+<h3 data-number="5.8" class="anchored" data-anchor-id="question"><span class="header-section-number">5.8</span> Question</h3>
+<p>Et si vous supprimez, le club de C’Chartres Echecs ? <span class="emoji" data-emoji="innocent">😇</span></p>
+<p><br></p>
+<div class="fragment">
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<pre><code>SQL Error [23503]: ERROR: UPDATE or DELETE on table "club" violates the foreign key constraint "fk_id_club" on table "joueuse". Detail: Key (id_club)=(1) is still referenced from table "joueuse".</code></pre>
+</div>
+</div>
+</div>
+</section>
+<section id="autre-question" class="level3" data-number="5.9">
+<h3 data-number="5.9" class="anchored" data-anchor-id="autre-question"><span class="header-section-number">5.9</span> Autre question</h3>
 <p>Si une joueuse peut adhérer à plusieurs clubs ? <span class="emoji" data-emoji="confused">😕</span></p>
+<div class="incremental">
+<ul class="incremental">
+<li><em>id_club</em> devient une liste de clubs ?</li>
+</ul>
+</div>
+<div class="fragment">
+<div class="hide-html-render">
+<p><img src="https://media.giphy.com/media/Y8hzdgPnZ6Hwk/source.gif" class="img-fluid" style="width:50.0%"></p>
+</div>
+</div>
 <div class="notes">
 <p>Par exemple si notre bdd contient aussi les clubs belges, allemands, espagnols…</p>
 </div>
 </section>
-<section id="table-dassociation" class="level3" data-number="5.7">
-<h3 data-number="5.7" class="anchored" data-anchor-id="table-dassociation"><span class="header-section-number">5.7</span> Table d’association</h3>
+<section id="table-dassociation" class="level3" data-number="5.10">
+<h3 data-number="5.10" class="anchored" data-anchor-id="table-dassociation"><span class="header-section-number">5.10</span> Table d’association</h3>
 <p>Création d’une table d’association : <strong>adhesion</strong> <span class="emoji" data-emoji="sweat_smile">😅</span></p>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
@@ -859,7 +971,7 @@ Tip
 <section id="association-récursive" class="level3" data-number="6.4">
 <h3 data-number="6.4" class="anchored" data-anchor-id="association-récursive"><span class="header-section-number">6.4</span> Association récursive</h3>
 <p>Une table peut avoir des relations avec elle-même</p>
-<p>Ici la table contient une clé étrangère qui référence sa propre clé primaire.</p>
+<p>Dans ce cas, la table contient une clé étrangère qui référence <u>sa propre clé primaire</u>.</p>
 <p>Exemple :</p>
 <ul>
 <li>Un employé a un supérieur</li>
@@ -937,6 +1049,7 @@ Tip
 <li>Base de données : endroit où sont stockées les informations</li>
 <li>SGBD : logiciel qui permet de créer, gérer et manipuler les bases de données</li>
 <li>Outil de gestion du SGBD : application graphique qui facilite l’interaction avec un SGBD</li>
+<li>SQL : Langage pour donner les instructions à la base de données</li>
 </ul>
 <div class="notes">
 <ul>
