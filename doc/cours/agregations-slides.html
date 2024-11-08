@@ -478,7 +478,7 @@ Ludovic Deneuville
 <ul>
 <li class="fragment">Quel est le id_joueuse maximum ?</li>
 <li class="fragment">Quel est le nombre de joueuses ?</li>
-<li class="fragment">Quelle est la moyenne des elo par club ?</li>
+<li class="fragment">Quelle est la moyenne elo par club ?</li>
 </ul>
 </div>
 </section>
@@ -519,6 +519,19 @@ Ludovic Deneuville
 </tbody>
 </table>
 </div>
+<aside class="notes">
+<p>J’utilise souvent COUNT(1) -&gt; c’est pareil</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 
 <section id="somme" class="title-slide slide level2 center">
@@ -529,7 +542,7 @@ Ludovic Deneuville
 <table class="caption-top">
 <thead>
 <tr class="header">
-<th><strong>sum_elo</strong></th>
+<th><strong>sum</strong></th>
 </tr>
 </thead>
 <tbody>
@@ -566,9 +579,9 @@ Ludovic Deneuville
 <table class="caption-top">
 <thead>
 <tr class="header">
-<th><strong>max_elo</strong></th>
-<th><strong>min_elo</strong></th>
-<th><strong>avg_elo</strong></th>
+<th><strong>max</strong></th>
+<th><strong>min</strong></th>
+<th><strong>avg</strong></th>
 </tr>
 </thead>
 <tbody>
@@ -604,18 +617,20 @@ Ludovic Deneuville
 <li><code>SELECT MAX(elo) FROM joueuse</code> <span class="emoji" data-emoji="arrow_right">➡️</span> renvoie un nombre</li>
 <li>Nous pouvons ensuite tester si <em>elo</em> est égal à ce nombre</li>
 </ul>
+<div class="fragment">
 <div class="sourceCode" id="cb6"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
 <span id="cb6-2"><a aria-hidden="true" tabindex="-1"></a>       prenom,</span>
 <span id="cb6-3"><a aria-hidden="true" tabindex="-1"></a>       elo</span>
 <span id="cb6-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
 <span id="cb6-5"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> elo <span class="op">=</span> (<span class="kw">SELECT</span> <span class="fu">MAX</span>(elo) <span class="kw">FROM</span> echecs.joueuse);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section></section>
 <section>
 <section id="regroupement" class="title-slide slide level2 center">
 <h2>Regroupement</h2>
 <p>Comment obtenir la moyenne elo par club ?</p>
 <div class="fragment">
-<div class="sourceCode" id="cb7"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> club,</span>
+<div class="sourceCode" id="cb7"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> club,    <span class="co">-- Supposons ici que la table joueuse a directement un attirbut club</span></span>
 <span id="cb7-2"><a aria-hidden="true" tabindex="-1"></a>       <span class="fu">AVG</span>(elo)</span>
 <span id="cb7-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
 <span id="cb7-4"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">GROUP</span> <span class="kw">BY</span> club;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>

@@ -137,35 +137,35 @@
     "href": "doc/cours/agregations.html#questions",
     "title": "Agrégations",
     "section": "2 Questions",
-    "text": "2 Questions\nQuelques questions que l’on peut se poser :\n\n\nQuel est le id_joueuse maximum ?\nQuel est le nombre de joueuses ?\nQuelle est la moyenne des elo par club ?"
+    "text": "2 Questions\nQuelques questions que l’on peut se poser :\n\n\nQuel est le id_joueuse maximum ?\nQuel est le nombre de joueuses ?\nQuelle est la moyenne elo par club ?"
   },
   {
     "objectID": "doc/cours/agregations.html#compter-les-lignes",
     "href": "doc/cours/agregations.html#compter-les-lignes",
     "title": "Agrégations",
     "section": "3 Compter les lignes",
-    "text": "3 Compter les lignes\nSELECT COUNT(*)\n  FROM echecs.joueuse;\n\n\n\n\ncount\n\n\n\n\n6\n\n\n\n\n\nSELECT COUNT(*)\n  FROM echecs.joueuse\n WHERE elo &lt; 2400;\n\n\n\n\ncount\n\n\n\n\n5"
+    "text": "3 Compter les lignes\nSELECT COUNT(*)\n  FROM echecs.joueuse;\n\n\n\n\ncount\n\n\n\n\n6\n\n\n\n\n\nSELECT COUNT(*)\n  FROM echecs.joueuse\n WHERE elo &lt; 2400;\n\n\n\n\ncount\n\n\n\n\n5\n\n\n\n\n\nJ’utilise souvent COUNT(1) -&gt; c’est pareil"
   },
   {
     "objectID": "doc/cours/agregations.html#somme",
     "href": "doc/cours/agregations.html#somme",
     "title": "Agrégations",
     "section": "4 Somme",
-    "text": "4 Somme\nSELECT SUM(elo)\n  FROM echecs.joueuse;\n\n\n\n\nsum_elo\n\n\n\n\n14223\n\n\n\n\n\nSELECT SUM(elo) / COUNT(elo)\n  FROM echecs.joueuse;"
+    "text": "4 Somme\nSELECT SUM(elo)\n  FROM echecs.joueuse;\n\n\n\n\nsum\n\n\n\n\n14223\n\n\n\n\n\nSELECT SUM(elo) / COUNT(elo)\n  FROM echecs.joueuse;"
   },
   {
     "objectID": "doc/cours/agregations.html#stats-descriptives",
     "href": "doc/cours/agregations.html#stats-descriptives",
     "title": "Agrégations",
     "section": "5 Stats descriptives",
-    "text": "5 Stats descriptives\nSELECT MAX(elo),\n       MIN(elo),\n       AVG(elo)\n  FROM echecs.joueuse;\n\n\n\n\nmax_elo\nmin_elo\navg_elo\n\n\n\n\n2448\n2338\n2373.5\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nVous pouvez également calculer : VARIANCE, STDDEV.\n\n\n\nComment afficher la joueuse avec le plus grand elo ? 😵\n\n\nSous-requête\nEn utilisant une sous-requête :\n\nSELECT MAX(elo) FROM joueuse ➡️ renvoie un nombre\nNous pouvons ensuite tester si elo est égal à ce nombre\n\nSELECT nom,\n       prenom,\n       elo\n  FROM echecs.joueuse\n WHERE elo = (SELECT MAX(elo) FROM echecs.joueuse);"
+    "text": "5 Stats descriptives\nSELECT MAX(elo),\n       MIN(elo),\n       AVG(elo)\n  FROM echecs.joueuse;\n\n\n\n\nmax\nmin\navg\n\n\n\n\n2448\n2338\n2373.5\n\n\n\n\n\n\n\n\n\n\nTip\n\n\n\nVous pouvez également calculer : VARIANCE, STDDEV.\n\n\n\nComment afficher la joueuse avec le plus grand elo ? 😵\n\n\nSous-requête\nEn utilisant une sous-requête :\n\nSELECT MAX(elo) FROM joueuse ➡️ renvoie un nombre\nNous pouvons ensuite tester si elo est égal à ce nombre\n\n\nSELECT nom,\n       prenom,\n       elo\n  FROM echecs.joueuse\n WHERE elo = (SELECT MAX(elo) FROM echecs.joueuse);"
   },
   {
     "objectID": "doc/cours/agregations.html#regroupement",
     "href": "doc/cours/agregations.html#regroupement",
     "title": "Agrégations",
     "section": "6 Regroupement",
-    "text": "6 Regroupement\nComment obtenir la moyenne elo par club ?\n\nSELECT club,\n       AVG(elo)\n  FROM echecs.joueuse\n GROUP BY club;\n\n\n\n\nclub\navg_elo\n\n\n\n\nAsnieres\n2372.4\n\n\nChartres\n2371.0\n\n\nBischwiller\n2404.5\n\n\n\n\n\n\nVous pouvez utiliser ROUND() pour arrondir.\n\n\nColonnes du GROUP BY\nVous pouvez grouper en utilisant plusieurs colonnes.\n\n\n\n\n\n\nImportant\n\n\n\nLes colonnes présentes dans le SELECT doivent impérativement être présentes dans le GROUP BY.\nL’inverse n’est pas vrai. Vous pouvez avoir des colonnes du GROUP BY que vous n’affichez pas dans le SELECT.\n\n\n\nje dis bien colonnes et pas fonctions d’aggrégation\n\n\n\nFiltre suite au GROUP BY\nComment faire pour afficher uniquement les clubs où la moyenne élo est inférieure à 2400 ?\n\nSELECT club,\n       AVG(elo)\n  FROM echecs.joueuse\n GROUP BY club\nHAVING AVG(elo) &lt; 2400;\n\n\n\n\nclub\navg_elo\n\n\n\n\nAsnieres\n2372.4\n\n\nChartres\n2371.0"
+    "text": "6 Regroupement\nComment obtenir la moyenne elo par club ?\n\nSELECT club,    -- Supposons ici que la table joueuse a directement un attirbut club\n       AVG(elo)\n  FROM echecs.joueuse\n GROUP BY club;\n\n\n\n\nclub\navg_elo\n\n\n\n\nAsnieres\n2372.4\n\n\nChartres\n2371.0\n\n\nBischwiller\n2404.5\n\n\n\n\n\n\nVous pouvez utiliser ROUND() pour arrondir.\n\n\nColonnes du GROUP BY\nVous pouvez grouper en utilisant plusieurs colonnes.\n\n\n\n\n\n\nImportant\n\n\n\nLes colonnes présentes dans le SELECT doivent impérativement être présentes dans le GROUP BY.\nL’inverse n’est pas vrai. Vous pouvez avoir des colonnes du GROUP BY que vous n’affichez pas dans le SELECT.\n\n\n\nje dis bien colonnes et pas fonctions d’aggrégation\n\n\n\nFiltre suite au GROUP BY\nComment faire pour afficher uniquement les clubs où la moyenne élo est inférieure à 2400 ?\n\nSELECT club,\n       AVG(elo)\n  FROM echecs.joueuse\n GROUP BY club\nHAVING AVG(elo) &lt; 2400;\n\n\n\n\nclub\navg_elo\n\n\n\n\nAsnieres\n2372.4\n\n\nChartres\n2371.0"
   },
   {
     "objectID": "doc/cours/agregations-slides.html#données-utilisées",
@@ -179,35 +179,35 @@
     "href": "doc/cours/agregations-slides.html#questions",
     "title": "Agrégations",
     "section": "Questions",
-    "text": "Questions\nQuelques questions que l’on peut se poser :\n\n\nQuel est le id_joueuse maximum ?\nQuel est le nombre de joueuses ?\nQuelle est la moyenne des elo par club ?"
+    "text": "Questions\nQuelques questions que l’on peut se poser :\n\n\nQuel est le id_joueuse maximum ?\nQuel est le nombre de joueuses ?\nQuelle est la moyenne elo par club ?"
   },
   {
     "objectID": "doc/cours/agregations-slides.html#compter-les-lignes",
     "href": "doc/cours/agregations-slides.html#compter-les-lignes",
     "title": "Agrégations",
     "section": "Compter les lignes",
-    "text": "Compter les lignes\nSELECT COUNT(*)\n  FROM echecs.joueuse;\n\n\n\n\ncount\n\n\n\n\n6\n\n\n\n\n\nSELECT COUNT(*)\n  FROM echecs.joueuse\n WHERE elo &lt; 2400;\n\n\n\n\ncount\n\n\n\n\n5"
+    "text": "Compter les lignes\nSELECT COUNT(*)\n  FROM echecs.joueuse;\n\n\n\n\ncount\n\n\n\n\n6\n\n\n\n\n\nSELECT COUNT(*)\n  FROM echecs.joueuse\n WHERE elo &lt; 2400;\n\n\n\n\ncount\n\n\n\n\n5\n\n\n\n\n\nJ’utilise souvent COUNT(1) -&gt; c’est pareil"
   },
   {
     "objectID": "doc/cours/agregations-slides.html#somme",
     "href": "doc/cours/agregations-slides.html#somme",
     "title": "Agrégations",
     "section": "Somme",
-    "text": "Somme\nSELECT SUM(elo)\n  FROM echecs.joueuse;\n\n\n\n\nsum_elo\n\n\n\n\n14223\n\n\n\n\n\nSELECT SUM(elo) / COUNT(elo)\n  FROM echecs.joueuse;"
+    "text": "Somme\nSELECT SUM(elo)\n  FROM echecs.joueuse;\n\n\n\n\nsum\n\n\n\n\n14223\n\n\n\n\n\nSELECT SUM(elo) / COUNT(elo)\n  FROM echecs.joueuse;"
   },
   {
     "objectID": "doc/cours/agregations-slides.html#stats-descriptives",
     "href": "doc/cours/agregations-slides.html#stats-descriptives",
     "title": "Agrégations",
     "section": "Stats descriptives",
-    "text": "Stats descriptives\nSELECT MAX(elo),\n       MIN(elo),\n       AVG(elo)\n  FROM echecs.joueuse;\n\n\n\n\nmax_elo\nmin_elo\navg_elo\n\n\n\n\n2448\n2338\n2373.5\n\n\n\n\n\n\n\n\n\n\nTip\n\n\nVous pouvez également calculer : VARIANCE, STDDEV.\n\n\n\n\nComment afficher la joueuse avec le plus grand elo ? 😵"
+    "text": "Stats descriptives\nSELECT MAX(elo),\n       MIN(elo),\n       AVG(elo)\n  FROM echecs.joueuse;\n\n\n\n\nmax\nmin\navg\n\n\n\n\n2448\n2338\n2373.5\n\n\n\n\n\n\n\n\n\n\nTip\n\n\nVous pouvez également calculer : VARIANCE, STDDEV.\n\n\n\n\nComment afficher la joueuse avec le plus grand elo ? 😵"
   },
   {
     "objectID": "doc/cours/agregations-slides.html#regroupement",
     "href": "doc/cours/agregations-slides.html#regroupement",
     "title": "Agrégations",
     "section": "Regroupement",
-    "text": "Regroupement\nComment obtenir la moyenne elo par club ?\n\nSELECT club,\n       AVG(elo)\n  FROM echecs.joueuse\n GROUP BY club;\n\n\n\n\nclub\navg_elo\n\n\n\n\nAsnieres\n2372.4\n\n\nChartres\n2371.0\n\n\nBischwiller\n2404.5\n\n\n\n\n\n\nVous pouvez utiliser ROUND() pour arrondir."
+    "text": "Regroupement\nComment obtenir la moyenne elo par club ?\n\nSELECT club,    -- Supposons ici que la table joueuse a directement un attirbut club\n       AVG(elo)\n  FROM echecs.joueuse\n GROUP BY club;\n\n\n\n\nclub\navg_elo\n\n\n\n\nAsnieres\n2372.4\n\n\nChartres\n2371.0\n\n\nBischwiller\n2404.5\n\n\n\n\n\n\nVous pouvez utiliser ROUND() pour arrondir."
   },
   {
     "objectID": "doc/cours/intro.html",
@@ -760,7 +760,7 @@
     "href": "doc/cours/sql-intro.html#divers",
     "title": "SQL - Introduction",
     "section": "10 Divers",
-    "text": "10 Divers\n\nJouer avec les colonnes\nSELECT CONCAT(nom, ' ', prenom) AS nom_complet,\n       elo\nFROM echecs.joueuse;\n\n\n\n\n\n\nnom_complet\nelo\n\n\n\n\nGuichard Pauline\n2357\n\n\nDaulyte-Cornette Deimante\n2371\n\n\nNavrotescu Andreea\n2338\n\n\nSebag Marie\n2448\n\n\nMillet Sophie\n2366\n\n\nSkrichempko Almira\n2361\n\n\n\n\n\n\n\nSupprimer les doublons\nLe mot clé DISTINCT permet de supprimer les doublons.\nSELECT DISTINCT prenom\nFROM echecs.joueuse;"
+    "text": "10 Divers\n\nJouer avec les colonnes\nSELECT CONCAT(nom, ' ', prenom) AS nom_complet,\n       elo\nFROM echecs.joueuse;\n\n\n\n\n\n\nnom_complet\nelo\n\n\n\n\nGuichard Pauline\n2357\n\n\nDaulyte-Cornette Deimante\n2371\n\n\nNavrotescu Andreea\n2338\n\n\nSebag Marie\n2448\n\n\nMillet Sophie\n2366\n\n\nSkrichempko Almira\n2361\n\n\n\n\n\n\n\nSupprimer les doublons\nLe mot clé DISTINCT permet de supprimer les doublons.\nSELECT DISTINCT prenom\nFROM echecs.joueuse;\n\n\nEt même !?\nSELECT 1,\n       TRUE,\n       'a',\n       current_date\n  FROM echecs.joueuse;"
   },
   {
     "objectID": "doc/cours/sql-intro.html#résumé",

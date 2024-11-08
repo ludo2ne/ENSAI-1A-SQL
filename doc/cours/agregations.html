@@ -344,7 +344,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul class="incremental">
 <li>Quel est le id_joueuse maximum ?</li>
 <li>Quel est le nombre de joueuses ?</li>
-<li>Quelle est la moyenne des elo par club ?</li>
+<li>Quelle est la moyenne elo par club ?</li>
 </ul>
 </div>
 </section>
@@ -384,6 +384,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tbody>
 </table>
 </div>
+<div class="notes">
+<p>J’utilise souvent COUNT(1) -&gt; c’est pareil</p>
+</div>
 </section>
 <section id="somme" class="level2" data-number="4">
 <h2 data-number="4" class="anchored" data-anchor-id="somme"><span class="header-section-number">4</span> Somme</h2>
@@ -393,7 +396,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <table class="caption-top table">
 <thead>
 <tr class="header">
-<th><strong>sum_elo</strong></th>
+<th><strong>sum</strong></th>
 </tr>
 </thead>
 <tbody>
@@ -418,9 +421,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <table class="caption-top table">
 <thead>
 <tr class="header">
-<th><strong>max_elo</strong></th>
-<th><strong>min_elo</strong></th>
-<th><strong>avg_elo</strong></th>
+<th><strong>max</strong></th>
+<th><strong>min</strong></th>
+<th><strong>avg</strong></th>
 </tr>
 </thead>
 <tbody>
@@ -455,18 +458,20 @@ Tip
 <li><code>SELECT MAX(elo) FROM joueuse</code> <span class="emoji" data-emoji="arrow_right">➡️</span> renvoie un nombre</li>
 <li>Nous pouvons ensuite tester si <em>elo</em> est égal à ce nombre</li>
 </ul>
+<div class="fragment">
 <div class="sourceCode" id="cb6"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>       prenom,</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>       elo</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> elo <span class="op">=</span> (<span class="kw">SELECT</span> <span class="fu">MAX</span>(elo) <span class="kw">FROM</span> echecs.joueuse);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 </section>
 <section id="regroupement" class="level2" data-number="6">
 <h2 data-number="6" class="anchored" data-anchor-id="regroupement"><span class="header-section-number">6</span> Regroupement</h2>
 <p>Comment obtenir la moyenne elo par club ?</p>
 <div class="fragment">
-<div class="sourceCode" id="cb7"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> club,</span>
+<div class="sourceCode" id="cb7"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> club,    <span class="co">-- Supposons ici que la table joueuse a directement un attirbut club</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">AVG</span>(elo)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a> <span class="kw">GROUP</span> <span class="kw">BY</span> club;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
