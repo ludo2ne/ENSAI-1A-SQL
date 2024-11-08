@@ -46,7 +46,7 @@ Une **donnée** est une information brute qui possède :
 ::: {.incremental}
 - Fichier txt
 - Fichier csv
-- Fichier [json](https://www.json.org/json-fr.html){target="_blank"}
+- Fichier [json](https://www.json.org/json-fr.html){target="_blank"}, [Exemple](https://anapioficeandfire.com/api/houses){target="_blank"}
 - Fichier [parquet](https://parquet.apache.org/){target="_blank"}
 - Base de données
 :::
@@ -64,6 +64,8 @@ J'avais eu une question lors de la prez Git : où on stocke les données si on p
 - On ne garde pas les données sur sa machine (risque de fuite)
 - Dans l'idéal on bosse dans le cloud et on stocke sur S3
 - Sinon on travaille dans un espace dédié (AUS)
+
+Suivre sur Linkedin : Mauvière, Holtz, Blefari, Lesur, Galiana, Degorre
 :::
 
 
@@ -83,11 +85,18 @@ On n'utilise pas la même structure pour du texte ou des fichiers.
 
 ## Enjeux
 
+::: {.incremental}
 - Accès aux données : langage SQL
 - Sécurité des données : seuls les utilisateurs autorisés (droits)
 - Partage des données : facile en lecture, mais en écriture ?
 - Non-redondance des données
 - Cohérence des données : respect des contraintes d'intégrité
+::: 
+
+::: {.notes}
+- Se brancher à la BDD qui est sur un serveur
+- Règles pour la cohérence. :warning: trop de règles -> bon dosage
+:::
 
 ## Types de bases de données
 
@@ -95,7 +104,7 @@ On n'utilise pas la même structure pour du texte ou des fichiers.
 
 - Données organisées comme un arbre 
 - Relations de type parent-enfant
-- Annuaires LDAP, système de fichiers
+- Annuaires LDAP, systèmes de fichiers
 
 ```{mermaid}
 stateDiagram 
@@ -167,8 +176,65 @@ Not Only SQL
   - attribut d'une table A
   - correspond à la clé primaire d'une table B
 
+### Clé primaire ?
 
-### Exemple
+::: {.small-table}
+| **nom**                | **prenom**       | **elo** |
+|------------------------|------------------|---------|
+| Guichard               | Pauline          | 2357    |
+| Daulyte-Cornette       | Deimante         | 2371    |
+| Navrotescu             | Andreea          | 2338    |
+| Sebag                  | Marie            | 2448    |
+| Millet                 | Sophie           | 2366    |
+| Skrichempko            | Almira           | 2361    |
+
+: joueuse
+:::
+
+<br>
+
+::: {.fragment}
+Quel champ choisir comme clé primaire ? :neutral_face:
+:::
+
+### Clé primaire technique
+
+Créons une séquence numérique. :sunglasses:
+
+::: {.small-table}
+| **id_joueuse** | **nom**                | **prenom**       | **elo** |
+|----------------|------------------------|------------------|---------|
+| 1              | Guichard               | Pauline          | 2357    |
+| 2              | Daulyte-Cornette       | Deimante         | 2371    |
+| 3              | Navrotescu             | Andreea          | 2338    |
+| 4              | Sebag                  | Marie            | 2448    |
+| 5              | Millet                 | Sophie           | 2366    |
+| 6              | Skrichempko            | Almira           | 2361    |
+
+: joueuse
+:::
+
+### Clé primaire
+
+- Attribut (ou ensemble d'attributs)
+- Unique
+- Non nulle
+- Immuable
+
+::: {.callout-tip}
+Sauf mention contraire, nous utiliserons une clé primaire "technique" : séquence.
+:::
+
+:::{.notes}
+Immuable : 
+
+- idéalement stable, elle ne change pas au cours du temps
+- Pour maintenir l'intégrité des liens avec d'autres tables
+
+Remarque : pas obligatoire d'avoir une clé primaire
+:::
+
+### Clé étrangère ?
 
 Comment relier ces 2 tables ?
 
@@ -190,21 +256,6 @@ classDiagram
         ville
     }
 ```
-
----
-
-::: {.small-table}
-| **id_joueuse** | **nom**                | **prenom**       | **elo** |
-|----------------|------------------------|------------------|---------|
-| 1              | Guichard               | Pauline          | 2357    |
-| 2              | Daulyte-Cornette       | Deimante         | 2371    |
-| 3              | Navrotescu             | Andreea          | 2338    |
-| 4              | Sebag                  | Marie            | 2448    |
-| 5              | Millet                 | Sophie           | 2366    |
-| 6              | Skrichempko            | Almira           | 2361    |
-
-: joueuse
-:::
 
 ---
 
@@ -257,33 +308,47 @@ classDiagram
 : joueuse
 :::
 
-### Clé primaire
+::::::{.fragment}
+:::::: {.callout-caution title="Remarques"}
+Une clé étrangère peut être nulle.
 
-- Attribut (ou ensemble d'attributs)
-- Unique
-- Non nulle
-- Immuable
-
-::: {.callout-tip}
-Sauf mention contraire, nous utiliserons une clé primaire "technique" : séquence.
+Une clé étrangère référence une valeur existante de clé primaire.
 :::
-
-:::{.notes}
-Immuable : 
-
-- idéalement stable, elle ne change pas au cours du temps
-- Pour maintenir l'intégrité des liens avec d'autres tables
-
-Remarque : pas obligatoire d'avoir une clé primaire
-:::
+::::::
 
 ### Question
 
+Et si vous supprimez, le club de C'Chartres Echecs ? :innocent:
+
+<br>
+
+::::::{.fragment}
+::: {.callout-warning}
+```
+SQL Error [23503]: ERROR: UPDATE or DELETE on table "club" violates the foreign key constraint "fk_id_club" on table "joueuse". Detail: Key (id_club)=(1) is still referenced from table "joueuse".
+```
+:::
+::::::
+
+### Autre question
+
 Si une joueuse peut adhérer à plusieurs clubs ? :confused:
+
+::::::{.incremental}
+- *id_club* devient une liste de clubs ?
+::::::
+
+
+::::::{.fragment}
+::: {.hide-html-render}
+![](https://media.giphy.com/media/Y8hzdgPnZ6Hwk/source.gif){width=50%}
+:::
+::::::
 
 ::: {.notes}
 Par exemple si notre bdd contient aussi les clubs belges, allemands, espagnols...
 :::
+
 
 ### Table d'association
 
@@ -364,7 +429,7 @@ Exemple :
 
 Une table peut avoir des relations avec elle-même
 
-Ici la table contient une clé étrangère qui référence sa propre clé primaire.
+Dans ce cas, la table contient une clé étrangère qui référence [sa propre clé primaire]{.underline}.
 
 Exemple :
 
@@ -420,6 +485,7 @@ Il est nécessaire d'avoir un **outil pour gérer et administrer** une base de d
 - Base de données : endroit où sont stockées les informations
 - SGBD : logiciel qui permet de créer, gérer et manipuler les bases de données
 - Outil de gestion du SGBD : application graphique qui facilite l'interaction avec un SGBD
+- SQL : Langage pour donner les instructions à la base de données
 
 ::: {.notes}
 - BDD : bibliothèque

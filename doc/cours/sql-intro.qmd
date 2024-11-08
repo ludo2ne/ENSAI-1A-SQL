@@ -88,15 +88,15 @@ C'est comme créer les colonnes d'un tableau.
 
 ```{.sql}
 CREATE TABLE echecs.joueuse (
-    id_joueuse     SERIAL          PRIMARY KEY,   
-    nom            VARCHAR(50)     NOT NULL, 
-    prenom         VARCHAR(50)     NOT NULL, 
+    id_joueuse     SERIAL         PRIMARY KEY,   
+    nom            VARCHAR(50)    NOT NULL, 
+    prenom         VARCHAR(50)    NOT NULL, 
     date_naissance TIMESTAMP,                 
-    elo            INT             CHECK (elo > 0),  
-    mail           VARCHAR(100)    UNIQUE,         
-    est_arbitre    BOOLEAN         DEFAULT false,
+    elo            INT            CHECK (elo > 0),  
+    mail           VARCHAR(100)   UNIQUE,         
+    est_arbitre    BOOLEAN        DEFAULT false,
     code_pays      VARCHAR(2),          
-    taux_victoires FLOAT  
+    taux_victoires FLOAT          CHECK (taux_victoires BETWEEN 0 AND 1)
 );
 ```
 
@@ -131,6 +131,7 @@ CREATE SCHEMA echecs;
 ```
 
 ::: {.notes}
+- Pamplemousse -> Millésime
 - Vente de légume
 - Utiliser la même bdd pour la gestion RH, le métier et la compta
 - créer un schéma pour séparer les tables
@@ -196,7 +197,7 @@ ALTER COLUMN nom TYPE VARCHAR(80);
 Renommer :
 
 ```{.sql}
-ALTER TABLE joueuse
+ALTER TABLE echecs.joueuse
 RENAME COLUMN date_naissance TO dnais;
 ```
 
@@ -205,7 +206,7 @@ RENAME COLUMN date_naissance TO dnais;
 Ajout :
 
 ```{.sql}
-ALTER TABLE joueuse
+ALTER TABLE echecs.joueuse
 ADD COLUMN id_club INT;
 ```
 
@@ -214,7 +215,7 @@ ADD COLUMN id_club INT;
 Suppression :
 
 ```{.sql}
-ALTER TABLE joueuse
+ALTER TABLE echecs.joueuse
 DROP COLUMN taux_victoires;
 ```
 
@@ -224,10 +225,10 @@ DROP COLUMN taux_victoires;
 - Lions maintenant cette colonne à la table *club*
 
 ```{.sql}
-ALTER TABLE joueuse
+ALTER TABLE echecs.joueuse
 ADD CONSTRAINT fk_id_club
 FOREIGN KEY (id_club)
-REFERENCES club(id_club);
+REFERENCES echecs.club(id_club);
 ```
 
 :::::: {.fragment}
@@ -250,7 +251,7 @@ Dans la table joueuse, l'attribut `id_club` a pour valeur soit :
 ### Supprimer une table
 
 ```{.sql}
-DROP TABLE joueuse;
+DROP TABLE echecs.joueuse;
 ```
 
 :::::: {.fragment}
@@ -265,12 +266,16 @@ DROP TABLE joueuse;
 ::::::
 
 ```{.sql}
-DROP TABLE IF EXISTS joueuse;      -- utile pour les scripts SQL
+DROP TABLE IF EXISTS echecs.joueuse;      -- utile pour les scripts SQL
 ```
 
 
 ## Insérer des données
 
+
+:::::: {.columns}
+
+::: {.column width="30%"}
 ```{mermaid}
 classDiagram
     class Club {
@@ -280,6 +285,22 @@ classDiagram
         date_creation
     }
 ```
+:::
+
+::: {.column width="70%"}
+```{.sql}
+-- Rappel du CREATE
+CREATE TABLE echecs.club (
+    id_club          SERIAL          PRIMARY KEY,  
+    nom              VARCHAR(100)    NOT NULL,   
+    ville            VARCHAR(100)    NOT NULL, 
+    date_creation    DATE
+);
+```
+:::
+
+::::::
+
 
 :::::: {.fragment}
 ```{.sql}
@@ -332,7 +353,7 @@ DROP SEQUENCE nom_sequence;
 
 ## Lire des données
 
-`SELECT * FROM table` pour tout afficher.
+`SELECT * FROM schema.table` pour tout afficher.
 
 ```{.sql}
 SELECT *
@@ -670,6 +691,8 @@ DELETE FROM echecs.joueuse
  WHERE id_joueuse = 1;
 ```
 
+<br>
+
 Vider la table :
 
 ```{.sql}
@@ -678,9 +701,9 @@ DELETE FROM echecs.joueuse;
 
 ## Validation des opérations
 
-Et si ? :scream: 
+Et si ? Vous avez exécuté par erreur :
 
-Vous avez exécuté par erreur `DELETE FROM joueuse;` 
+`DELETE FROM echecs.joueuse;` :scream:  
 
 :::::: {.fragment}
 Il y a un système de transactions avec les mots clés :
@@ -765,7 +788,9 @@ SELECT *
  WHERE mail IS NULL; 
 ```
 
-Et inversemenent
+<br>
+
+Et inversemenent :
 
 ```{.sql}
 SELECT *
@@ -845,3 +870,11 @@ Le mot clé `DISTINCT` permet de supprimer les doublons.
 SELECT DISTINCT prenom
 FROM echecs.joueuse;
 ```
+
+
+## Résumé
+
+- CREATE / ALTER / DELETE
+- INSERT
+- SELECT
+- WHERE

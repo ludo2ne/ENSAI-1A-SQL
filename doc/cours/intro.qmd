@@ -23,7 +23,7 @@ from: markdown+emoji
 ## Bases de Données Relationnelles et SQL
 
 - 6h CM
-- 18h TP
+- 15h TP + 3h TD
 - `ludovic.deneuville@ensai.fr`
 - bureau 161
 - sur la base des cours de Benjamin Girault
@@ -96,19 +96,21 @@ Faites un effort pour vous même et pour vos relecteurs
 ## Les TP
 
 - 5 TP + 1 TD
-- Datalab
-- cloudBeaver
+- Base de données : PostgreSQL
+- Outils : Datalab, cloudBeaver, DBeaver
 
 ### Ce qu'il faut faire
 
 - Lire attentivement les consignes
 - Essayer de résoudre par soi même
-- Chercher sur internet
+- Chercher dans le cours / sur internet
 - Demander de l'aide à ses camarades
 - Demander de l'aide à l'enseignant
 
 ::: {.notes}
 ça peut paraitre un peu infentilisant mais c'est nécessaire de le rappeler !!!
+
+si je demande un setup... faites le sinon ça risque de péter plus tard.
 :::
 
 ### À ne pas faire
@@ -117,10 +119,11 @@ Faites un effort pour vous même et pour vos relecteurs
 - Copier / Coller la réponse sans rien comprendre
 
 ::: {.notes}
+Sauf si vous voulez ne rien retenir...
+
 - Je ne dis pas qu'il ne faut jamais utiliser les LLM
 - ça peut servir pour débgugger
 - ou pour des taches sans VA
-- mais pas pour apprendre et retenir
 :::
 
 ## Évaluation
@@ -133,6 +136,8 @@ Faites un effort pour vous même et pour vos relecteurs
 ::: {.notes}
 - partie QCM
 - des requêtes SQL à écrire
+- pas de pièges
+- pour vérifier que vous retenez l'essentiel
 :::
 
 ## Bibliographie {.smaller}
