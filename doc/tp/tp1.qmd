@@ -279,7 +279,7 @@ Sa syntaxe, proche de celle de Pandas, permet des transformations, agrégations 
 :::
 
 - [ ] Requêtez les données
-  - Créez une nouvelle celulle avec le bouton `+` de la barre d'outils
+  - Créez une nouvelle cellule avec le bouton `+` de la barre d'outils
   - Collez et exécutez ce code
   ```{.python}
   # Top 10 des prénoms féminins en 2021
@@ -294,8 +294,65 @@ Sa syntaxe, proche de celle de Pandas, permet des transformations, agrégations 
   
   print(top10f2021)
   ```
-- [ ] Exportez vos résultats vers MinIO
-  - En utilisant la librairie *s3fs*
+
+### Jouer avec vos données
+
+- [ ] Générez le tableau du nombre de fois où votre prénom a été donné entre 2010 et 2020
+  ```{.python}
+  prenom = "Ludovic"
+  annee_debut, annee_fin = 2010, 2020
+  
+  df_prenom_annee = df\
+      .filter((pl.col("annais") != "XXXX"))\
+      .filter((pl.col("preusuel") == prenom.upper()) & 
+              (pl.col("annais").cast(pl.Int32) >= annee_debut) & 
+              (pl.col("annais").cast(pl.Int32) <= annee_fin))\
+      .group_by("annais")\
+      .agg(pl.col("nombre").sum().alias("nombre_total"))\
+      .sort("annais")
+  
+  print(df_prenom_annee)
+  ```
+- [ ] Faites un diagramme en barres
+  ```{.python}
+  import matplotlib.pyplot as plt
+  import seaborn as sns
+  
+  # Set seaborn style for a cleaner, more appealing look
+  sns.set_theme(style="whitegrid")
+  
+  # Create the plot
+  fig, ax = plt.subplots(figsize=(10, 6))
+  
+  # Data
+  years = df_prenom_annee["annais"].to_list()         # Extracts years as a list
+  counts = df_prenom_annee["nombre_total"].to_list()  # Extracts counts as a list
+  
+  # Bar plot with custom colors and transparency for better visuals
+  ax.bar(years, 
+         counts, 
+         color="#4C72B0", 
+         edgecolor="black", 
+         alpha=0.8)
+  
+  # Set labels and title with padding for readability
+  ax.set_xlabel("Année", fontsize=12, labelpad=10)
+  ax.set_ylabel("Nombre d'occurences", fontsize=12, labelpad=10)
+  ax.set_title(f"Occurrences du prénom {prenom} par année ({annee_debut}-{annee_fin})", fontsize=14, pad=15)
+  
+  # Rotate x-axis labels, improve spacing, and format grid
+  ax.tick_params(axis='x', rotation=45)
+  plt.tight_layout()  # Adjust layout for tight fit
+  
+  # Display the plot
+  plt.show()
+  ```
+
+
+
+### Exportez vos résultats vers MinIO
+
+- [ ] En utilisant la librairie *s3fs*
   ```{.python}
   import s3fs
   
@@ -319,7 +376,7 @@ Sa syntaxe, proche de celle de Pandas, permet des transformations, agrégations 
 #### Exercice
 
 ::: {.callout-note}
-Si vous êtes en avance
+Si vous êtes en avance.
 :::
 
 Comme dans de très nombreux outils, il est possible d'encapsuler du [SQL dans Polars](https://docs.pola.rs/api/python/stable/reference/sql/index.html){target="_blank"}.
@@ -340,6 +397,7 @@ df.sql("""
 """)
 ```
 
+- [ ] Ré-écrivez en SQL la requête du nombre de fois ou votre prénom a été donné entre 2010 et 2020
 - [ ] Créez une nouvelle cellule et écrivez une requête pour afficher les 5 années où sont nées le plus de filles
 - [ ] Quels sont les prénoms masculins et féminins les plus donnés depuis 1900 ?
 - [ ] Affichez le nombres de filles et de garçons nés chaque année depuis 2010
