@@ -189,7 +189,8 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#une-donnée" id="toc-une-donnée" class="nav-link active" data-scroll-target="#une-donnée"><span class="header-section-number">1</span> Une donnée ?</a>
   <ul class="collapse">
-  <li><a href="#où-stocker-des-données" id="toc-où-stocker-des-données" class="nav-link" data-scroll-target="#où-stocker-des-données"><span class="header-section-number">1.1</span> Où stocker des données</a></li>
+  <li><a href="#définition-dune-donnée" id="toc-définition-dune-donnée" class="nav-link" data-scroll-target="#définition-dune-donnée"><span class="header-section-number">1.1</span> Définition d’une donnée</a></li>
+  <li><a href="#où-stocker-des-données" id="toc-où-stocker-des-données" class="nav-link" data-scroll-target="#où-stocker-des-données"><span class="header-section-number">1.2</span> Où stocker des données</a></li>
   </ul></li>
   <li><a href="#une-base-de-données" id="toc-une-base-de-données" class="nav-link" data-scroll-target="#une-base-de-données"><span class="header-section-number">2</span> Une base de données ?</a></li>
   <li><a href="#enjeux" id="toc-enjeux" class="nav-link" data-scroll-target="#enjeux"><span class="header-section-number">3</span> Enjeux</a></li>
@@ -220,6 +221,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#association-1n" id="toc-association-1n" class="nav-link" data-scroll-target="#association-1n"><span class="header-section-number">6.2</span> Association 1:n</a></li>
   <li><a href="#association-nn" id="toc-association-nn" class="nav-link" data-scroll-target="#association-nn"><span class="header-section-number">6.3</span> Association n:n</a></li>
   <li><a href="#association-récursive" id="toc-association-récursive" class="nav-link" data-scroll-target="#association-récursive"><span class="header-section-number">6.4</span> Association récursive</a></li>
+  <li><a href="#association-multiples" id="toc-association-multiples" class="nav-link" data-scroll-target="#association-multiples"><span class="header-section-number">6.5</span> Association multiples</a></li>
   </ul></li>
   <li><a href="#sgbd" id="toc-sgbd" class="nav-link" data-scroll-target="#sgbd"><span class="header-section-number">7</span> SGBD</a>
   <ul class="collapse">
@@ -279,7 +281,16 @@ ul.task-list li input[type="checkbox"] {
 <li>fichier</li>
 </ul>
 </div>
-<hr>
+<div class="notes">
+<ul>
+<li>types ?</li>
+<li>valeurs ?</li>
+<li>représente quelque chose</li>
+</ul>
+</div>
+<section id="définition-dune-donnée" class="level3" data-number="1.1">
+<h3 data-number="1.1" class="anchored" data-anchor-id="définition-dune-donnée"><span class="header-section-number">1.1</span> Définition d’une donnée</h3>
+<div class="fragment">
 <div class="callout callout-style-default callout-note callout-titled" title="Définition">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -290,15 +301,19 @@ Définition
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Une <strong>donnée</strong> est une information brute qui possède :</p>
+<p>Une <strong>donnée</strong> est une information brute composée de 3 éléments :</p>
 <ul>
-<li>un type</li>
-<li>une valeur</li>
+<li>un concept (exemple : hauteur d’un monument)</li>
+<li>un domaine des possibles (nombre entier positif et une unité : mètres)</li>
+<li>une valeur (pour la tour Eiffel : 324)</li>
 </ul>
 </div>
 </div>
-<section id="où-stocker-des-données" class="level3" data-number="1.1">
-<h3 data-number="1.1" class="anchored" data-anchor-id="où-stocker-des-données"><span class="header-section-number">1.1</span> Où stocker des données</h3>
+<p>Source : <a href="https://www.insee.fr/fr/information/5008707" target="_blank">Qu’est-ce qu’une donnée ?</a>, Courrier des statistiques N5, Pascal Rivière</p>
+</div>
+</section>
+<section id="où-stocker-des-données" class="level3" data-number="1.2">
+<h3 data-number="1.2" class="anchored" data-anchor-id="où-stocker-des-données"><span class="header-section-number">1.2</span> Où stocker des données</h3>
 <div class="incremental">
 <ul class="incremental">
 <li>Fichier txt</li>
@@ -333,7 +348,7 @@ Articles intéressants
 <li>Dans l’idéal on bosse dans le cloud et on stocke sur S3</li>
 <li>Sinon on travaille dans un espace dédié (AUS)</li>
 </ul>
-<p>Suivre sur Linkedin : Mauvière, Holtz, Blefari, Lesur, Galiana, Degorre</p>
+<p>Suivre sur Linkedin : Mauvière, Holtz, Blefari, Lesur, Galiana, Degorre, Natacha NJONGWA</p>
 </div>
 </section>
 </section>
@@ -485,9 +500,14 @@ Définition
 <li>Composée de lignes et de colonnes</li>
 <li>Chaque table représente une entité</li>
 <li>Chaque <u>ligne</u> est un enregistrement</li>
-<li>Chaque <u>colonne</u> représente un attribut de l’entité</li>
+<li>Chaque <u>colonne</u> représente un attribut de l’entité
+<ul>
 <li>Types de données : texte, num…</li>
+</ul></li>
 </ul>
+<div class="notes">
+<p>Imaginez un classeur Excel avec plusieurs feuilles</p>
+</div>
 </section>
 <section id="relations-entre-les-tables" class="level3" data-number="5.2">
 <h3 data-number="5.2" class="anchored" data-anchor-id="relations-entre-les-tables"><span class="header-section-number">5.2</span> Relations entre les tables</h3>
@@ -503,6 +523,9 @@ Définition
 <li>correspond à la clé primaire d’une table B</li>
 </ul></li>
 </ul>
+<div class="notes">
+<p>Exemples juste après</p>
+</div>
 </section>
 <section id="clé-primaire" class="level3" data-number="5.3">
 <h3 data-number="5.3" class="anchored" data-anchor-id="clé-primaire"><span class="header-section-number">5.3</span> Clé primaire ?</h3>
@@ -638,6 +661,7 @@ Tip
 <li>Pour maintenir l’intégrité des liens avec d’autres tables</li>
 </ul>
 <p>Remarque : pas obligatoire d’avoir une clé primaire</p>
+<p><u>Question</u> : nous voulons ajouter le club de chaque joueuse, comment faire ?</p>
 </div>
 </section>
 <section id="clé-étrangère" class="level3" data-number="5.6">
@@ -653,14 +677,14 @@ Tip
 <p></p><figure class="figure"><p></p>
 <div>
 <pre class="mermaid mermaid-js">classDiagram
-    class Joueuse {
+    class joueuse {
         id_joueuse PK
         nom
         prenom
         elo
     }
     
-    class Club {
+    class club {
         id_club PK
         nom
         ville
@@ -729,7 +753,7 @@ Tip
         id_club FK
     }
     
-    class Club {
+    class club {
         id_club PK
         nom
         ville
@@ -801,7 +825,7 @@ Tip
 <td>Skrichempko</td>
 <td>Almira</td>
 <td>2361</td>
-<td>2</td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -841,6 +865,10 @@ Warning
 <pre><code>SQL Error [23503]: ERROR: UPDATE or DELETE on table "club" violates the foreign key constraint "fk_id_club" on table "joueuse". Detail: Key (id_club)=(1) is still referenced from table "joueuse".</code></pre>
 </div>
 </div>
+</div>
+<div class="notes">
+<p>id_club = 1</p>
+<p>Erreur aussi si vous essayer d’insert une joueuse avec id_club=9</p>
 </div>
 </section>
 <section id="autre-question" class="level3" data-number="5.9">
@@ -926,6 +954,7 @@ Warning
 </table>
 </div>
 <div class="notes">
+<p>Imaginons que la Picardie devienne Belge.</p>
 <p>Clé primaire ?</p>
 <ul>
 <li>id_adhesion</li>
@@ -947,6 +976,7 @@ Warning
 </ul>
 <div class="notes">
 <p>on aurait pu tout mettre dans la même table</p>
+<p><u>Question</u> : Où met-on la clé étrangère ?</p>
 </div>
 </section>
 <section id="association-1n" class="level3" data-number="6.2">
@@ -957,6 +987,10 @@ Warning
 <li>Un club est composé de plusieurs joueuses</li>
 <li>Une joueuse adhère à un seul club</li>
 </ul>
+<div class="notes">
+<p>Supposons de nouveau qu’une joueuse ne joue que pour 1 seul club.</p>
+<p><u>Question</u> : Où met-on la clé étrangère ?</p>
+</div>
 </section>
 <section id="association-nn" class="level3" data-number="6.3">
 <h3 data-number="6.3" class="anchored" data-anchor-id="association-nn"><span class="header-section-number">6.3</span> Association n:n</h3>
@@ -967,15 +1001,41 @@ Warning
 <li>une joueuse participe à plusieurs tournois</li>
 <li>Un tournoi regroupe plusieurs joueuses</li>
 </ul>
+<div class="notes">
+<p><u>Question</u> : Comment fait-t-on ?</p>
+<ul>
+<li>Table d’association</li>
+</ul>
+</div>
 </section>
 <section id="association-récursive" class="level3" data-number="6.4">
 <h3 data-number="6.4" class="anchored" data-anchor-id="association-récursive"><span class="header-section-number">6.4</span> Association récursive</h3>
-<p>Une table peut avoir des relations avec elle-même</p>
+<p>Une table peut avoir des relations avec elle-même.</p>
 <p>Dans ce cas, la table contient une clé étrangère qui référence <u>sa propre clé primaire</u>.</p>
 <p>Exemple :</p>
 <ul>
-<li>Un employé a un supérieur</li>
+<li><em>employe (<u>id_employe</u>, nom, prenom, #id_superieur)</em></li>
+<li><em>id_superieur</em> clé étrangère qui référence <em>id_employe</em></li>
 </ul>
+<div class="notes">
+<p>Conventions</p>
+<ul>
+<li>PK soulignée</li>
+<li>FK avec #</li>
+</ul>
+</div>
+</section>
+<section id="association-multiples" class="level3" data-number="6.5">
+<h3 data-number="6.5" class="anchored" data-anchor-id="association-multiples"><span class="header-section-number">6.5</span> Association multiples</h3>
+<p>Une table A peut avoir plusieurs relations avec une table B.</p>
+<p>Exemple :</p>
+<ul>
+<li><em>equipe (<u>id_equipe</u>, nom)</em></li>
+<li><em>match (<u>id_match</u>, #id_equipe1, #id_equipe2, score)</em></li>
+</ul>
+<div class="notes">
+<p>Nous reviendrons sur les associations quand nous parlerons des jointures.</p>
+</div>
 </section>
 </section>
 <section id="sgbd" class="level2" data-number="7">

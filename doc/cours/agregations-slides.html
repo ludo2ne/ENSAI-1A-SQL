@@ -406,13 +406,13 @@ Ludovic Deneuville
 <section id="données-utilisées" class="title-slide slide level2 center">
 <h2>Données utilisées</h2>
 <div class="small-table">
-<table class="caption-top" style="width:100%;">
+<table class="caption-top">
 <colgroup>
 <col style="width: 19%">
-<col style="width: 29%">
-<col style="width: 22%">
-<col style="width: 11%">
-<col style="width: 17%">
+<col style="width: 28%">
+<col style="width: 21%">
+<col style="width: 10%">
+<col style="width: 19%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -420,7 +420,7 @@ Ludovic Deneuville
 <th><strong>nom</strong></th>
 <th><strong>prenom</strong></th>
 <th><strong>elo</strong></th>
-<th><strong>club</strong></th>
+<th><strong>ville_club</strong></th>
 </tr>
 </thead>
 <tbody>
@@ -469,6 +469,19 @@ Ludovic Deneuville
 </tbody>
 </table>
 </div>
+<aside class="notes">
+<p>j’ai intégré ici le club pour faciliter les choses</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 
 <section id="questions" class="title-slide slide level2 center">
@@ -486,25 +499,8 @@ Ludovic Deneuville
 <section id="compter-les-lignes" class="title-slide slide level2 center">
 <h2>Compter les lignes</h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">COUNT</span>(<span class="op">*</span>)</span>
-<span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="small-table">
-<table class="caption-top">
-<thead>
-<tr class="header">
-<th><strong>count</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>6</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p><br></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">COUNT</span>(<span class="op">*</span>)</span>
-<span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
-<span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> elo <span class="op">&lt;</span> <span class="dv">2400</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
+<span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> elo <span class="op">&lt;</span> <span class="dv">2400</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="small-table">
 <table class="caption-top">
 <thead>
@@ -519,8 +515,27 @@ Ludovic Deneuville
 </tbody>
 </table>
 </div>
+<p><br></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">COUNT</span>(<span class="kw">DISTINCT</span> prenom)</span>
+<span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="small-table">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th><strong>count</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>6</td>
+</tr>
+</tbody>
+</table>
+</div>
 <aside class="notes">
 <p>J’utilise souvent COUNT(1) -&gt; c’est pareil</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">FILTER</span> (<span class="kw">WHERE</span> prenom <span class="kw">LIKE</span> <span class="st">'A%'</span>)</span>
+<span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -536,8 +551,8 @@ Ludovic Deneuville
 
 <section id="somme" class="title-slide slide level2 center">
 <h2>Somme</h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">SUM</span>(elo)</span>
-<span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">SUM</span>(elo)</span>
+<span id="cb4-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="small-table">
 <table class="caption-top">
 <thead>
@@ -553,8 +568,8 @@ Ludovic Deneuville
 </table>
 </div>
 <aside class="notes">
-<div class="sourceCode" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">SUM</span>(elo) <span class="op">/</span> <span class="fu">COUNT</span>(elo)</span>
-<span id="cb4-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">SUM</span>(elo) <span class="op">/</span> <span class="fu">COUNT</span>(elo)</span>
+<span id="cb5-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -571,10 +586,10 @@ Ludovic Deneuville
 <section>
 <section id="stats-descriptives" class="title-slide slide level2 center">
 <h2>Stats descriptives</h2>
-<div class="sourceCode" id="cb5"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">MAX</span>(elo),</span>
-<span id="cb5-2"><a aria-hidden="true" tabindex="-1"></a>       <span class="fu">MIN</span>(elo),</span>
-<span id="cb5-3"><a aria-hidden="true" tabindex="-1"></a>       <span class="fu">AVG</span>(elo)</span>
-<span id="cb5-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">MAX</span>(elo),</span>
+<span id="cb6-2"><a aria-hidden="true" tabindex="-1"></a>       <span class="fu">MIN</span>(elo),</span>
+<span id="cb6-3"><a aria-hidden="true" tabindex="-1"></a>       <span class="fu">AVG</span>(elo)</span>
+<span id="cb6-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="small-table">
 <table class="caption-top">
 <thead>
@@ -614,15 +629,15 @@ Ludovic Deneuville
 <h3>Sous-requête</h3>
 <p>En utilisant une <strong>sous-requête</strong> :</p>
 <ul>
-<li><code>SELECT MAX(elo) FROM joueuse</code> <span class="emoji" data-emoji="arrow_right">➡️</span> renvoie un nombre</li>
+<li><code>SELECT MAX(elo) FROM echecs.joueuse</code> <span class="emoji" data-emoji="arrow_right">➡️</span> renvoie un nombre</li>
 <li>Nous pouvons ensuite tester si <em>elo</em> est égal à ce nombre</li>
 </ul>
 <div class="fragment">
-<div class="sourceCode" id="cb6"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
-<span id="cb6-2"><a aria-hidden="true" tabindex="-1"></a>       prenom,</span>
-<span id="cb6-3"><a aria-hidden="true" tabindex="-1"></a>       elo</span>
-<span id="cb6-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
-<span id="cb6-5"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> elo <span class="op">=</span> (<span class="kw">SELECT</span> <span class="fu">MAX</span>(elo) <span class="kw">FROM</span> echecs.joueuse);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
+<span id="cb7-2"><a aria-hidden="true" tabindex="-1"></a>       prenom,</span>
+<span id="cb7-3"><a aria-hidden="true" tabindex="-1"></a>       elo</span>
+<span id="cb7-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
+<span id="cb7-5"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> elo <span class="op">=</span> (<span class="kw">SELECT</span> <span class="fu">MAX</span>(elo) <span class="kw">FROM</span> echecs.joueuse);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section></section>
 <section>
@@ -630,10 +645,10 @@ Ludovic Deneuville
 <h2>Regroupement</h2>
 <p>Comment obtenir la moyenne elo par club ?</p>
 <div class="fragment">
-<div class="sourceCode" id="cb7"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> ville_club,    <span class="co">-- Supposons que la table joueuse a un attribut ville_club</span></span>
-<span id="cb7-2"><a aria-hidden="true" tabindex="-1"></a>       <span class="fu">AVG</span>(elo)</span>
-<span id="cb7-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
-<span id="cb7-4"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">GROUP</span> <span class="kw">BY</span> nom_club;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb8-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> ville_club,    <span class="co">-- Supposons que la table joueuse a un attribut ville_club</span></span>
+<span id="cb8-2"><a aria-hidden="true" tabindex="-1"></a>       <span class="fu">AVG</span>(elo)</span>
+<span id="cb8-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
+<span id="cb8-4"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">GROUP</span> <span class="kw">BY</span> nom_club;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="small-table">
 <table class="caption-top">
 <thead>
@@ -705,15 +720,15 @@ Ludovic Deneuville
           display:block!important;
       }</style></aside>
 </section>
-<section id="filtre-suite-au-group-by" class="slide level3">
-<h3>Filtre suite au GROUP BY</h3>
+<section id="filtrer-suite-au-group-by" class="slide level3">
+<h3>Filtrer suite au GROUP BY</h3>
 <p>Comment faire pour afficher uniquement les clubs où la moyenne élo est inférieure à 2400 ?</p>
 <div class="fragment">
-<div class="sourceCode" id="cb8"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb8-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> ville_club,</span>
-<span id="cb8-2"><a aria-hidden="true" tabindex="-1"></a>       <span class="fu">AVG</span>(elo)</span>
-<span id="cb8-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
-<span id="cb8-4"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">GROUP</span> <span class="kw">BY</span> ville_club</span>
-<span id="cb8-5"><a aria-hidden="true" tabindex="-1"></a><span class="kw">HAVING</span> <span class="fu">AVG</span>(elo) <span class="op">&lt;</span> <span class="dv">2400</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb9-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> ville_club,</span>
+<span id="cb9-2"><a aria-hidden="true" tabindex="-1"></a>       <span class="fu">AVG</span>(elo)</span>
+<span id="cb9-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
+<span id="cb9-4"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">GROUP</span> <span class="kw">BY</span> ville_club</span>
+<span id="cb9-5"><a aria-hidden="true" tabindex="-1"></a><span class="kw">HAVING</span> <span class="fu">AVG</span>(elo) <span class="op">&lt;</span> <span class="dv">2400</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><br></p>
 <div class="small-table">
 <table class="caption-top">
@@ -736,6 +751,13 @@ Ludovic Deneuville
 </table>
 </div>
 </div>
+</section>
+<section id="having-vs-where" class="slide level3">
+<h3>Having Vs Where</h3>
+<ul>
+<li><strong>WHERE</strong> - Filtre Avant l’Agrégation</li>
+<li><strong>HAVING</strong> - Filtre Après l’Agrégation</li>
+</ul>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">

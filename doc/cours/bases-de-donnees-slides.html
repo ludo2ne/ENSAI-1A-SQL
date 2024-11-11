@@ -355,9 +355,27 @@ Ludovic Deneuville
 <li>fichier</li>
 </ul>
 </div>
+<aside class="notes">
+<ul>
+<li>types ?</li>
+<li>valeurs ?</li>
+<li>représente quelque chose</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
-<section class="slide level3">
-
+<section id="définition-dune-donnée" class="slide level3">
+<h3>Définition d’une donnée</h3>
+<div class="fragment">
 <div title="Définition">
 <div class="callout callout-note callout-titled callout-style-default">
 <div class="callout-body">
@@ -368,14 +386,17 @@ Ludovic Deneuville
 <p><strong>Définition</strong></p>
 </div>
 <div class="callout-content">
-<p>Une <strong>donnée</strong> est une information brute qui possède :</p>
+<p>Une <strong>donnée</strong> est une information brute composée de 3 éléments :</p>
 <ul>
-<li>un type</li>
-<li>une valeur</li>
+<li>un concept (exemple : hauteur d’un monument)</li>
+<li>un domaine des possibles (nombre entier positif et une unité : mètres)</li>
+<li>une valeur (pour la tour Eiffel : 324)</li>
 </ul>
 </div>
 </div>
 </div>
+</div>
+<p>Source : <a href="https://www.insee.fr/fr/information/5008707" target="_blank">Qu’est-ce qu’une donnée ?</a>, Courrier des statistiques N5, Pascal Rivière</p>
 </div>
 </section>
 <section id="où-stocker-des-données" class="slide level3">
@@ -416,7 +437,7 @@ Ludovic Deneuville
 <li>Dans l’idéal on bosse dans le cloud et on stocke sur S3</li>
 <li>Sinon on travaille dans un espace dédié (AUS)</li>
 </ul>
-<p>Suivre sur Linkedin : Mauvière, Holtz, Blefari, Lesur, Galiana, Degorre</p>
+<p>Suivre sur Linkedin : Mauvière, Holtz, Blefari, Lesur, Galiana, Degorre, Natacha NJONGWA</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -626,9 +647,24 @@ Ludovic Deneuville
 <li>Composée de lignes et de colonnes</li>
 <li>Chaque table représente une entité</li>
 <li>Chaque <u>ligne</u> est un enregistrement</li>
-<li>Chaque <u>colonne</u> représente un attribut de l’entité</li>
+<li>Chaque <u>colonne</u> représente un attribut de l’entité
+<ul>
 <li>Types de données : texte, num…</li>
+</ul></li>
 </ul>
+<aside class="notes">
+<p>Imaginez un classeur Excel avec plusieurs feuilles</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="relations-entre-les-tables" class="slide level3">
 <h3>Relations entre les tables</h3>
@@ -644,6 +680,19 @@ Ludovic Deneuville
 <li>correspond à la clé primaire d’une table B</li>
 </ul></li>
 </ul>
+<aside class="notes">
+<p>Exemples juste après</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="clé-primaire" class="slide level3">
 <h3>Clé primaire ?</h3>
@@ -779,6 +828,7 @@ Ludovic Deneuville
 <li>Pour maintenir l’intégrité des liens avec d’autres tables</li>
 </ul>
 <p>Remarque : pas obligatoire d’avoir une clé primaire</p>
+<p><u>Question</u> : nous voulons ajouter le club de chaque joueuse, comment faire ?</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -804,14 +854,14 @@ Ludovic Deneuville
 <p></p><figure class=""><p></p>
 <div>
 <pre class="mermaid mermaid-js">classDiagram
-    class Joueuse {
+    class joueuse {
         id_joueuse PK
         nom
         prenom
         elo
     }
     
-    class Club {
+    class club {
         id_club PK
         nom
         ville
@@ -882,7 +932,7 @@ Ludovic Deneuville
         id_club FK
     }
     
-    class Club {
+    class club {
         id_club PK
         nom
         ville
@@ -956,7 +1006,7 @@ Ludovic Deneuville
 <td>Skrichempko</td>
 <td>Almira</td>
 <td>2361</td>
-<td>2</td>
+<td></td>
 </tr>
 </tbody>
 </table>
@@ -999,6 +1049,20 @@ Ludovic Deneuville
 </div>
 </div>
 </div>
+<aside class="notes">
+<p>id_club = 1</p>
+<p>Erreur aussi si vous essayer d’insert une joueuse avec id_club=9</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="autre-question" class="slide level3">
 <h3>Autre question</h3>
@@ -1095,6 +1159,7 @@ Ludovic Deneuville
 </table>
 </div>
 <aside class="notes">
+<p>Imaginons que la Picardie devienne Belge.</p>
 <p>Clé primaire ?</p>
 <ul>
 <li>id_adhesion</li>
@@ -1127,6 +1192,7 @@ Ludovic Deneuville
 </ul>
 <aside class="notes">
 <p>on aurait pu tout mettre dans la même table</p>
+<p><u>Question</u> : Où met-on la clé étrangère ?</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1147,6 +1213,20 @@ Ludovic Deneuville
 <li>Un club est composé de plusieurs joueuses</li>
 <li>Une joueuse adhère à un seul club</li>
 </ul>
+<aside class="notes">
+<p>Supposons de nouveau qu’une joueuse ne joue que pour 1 seul club.</p>
+<p><u>Question</u> : Où met-on la clé étrangère ?</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="association-nn" class="slide level3">
 <h3>Association n:n</h3>
@@ -1157,15 +1237,71 @@ Ludovic Deneuville
 <li>une joueuse participe à plusieurs tournois</li>
 <li>Un tournoi regroupe plusieurs joueuses</li>
 </ul>
+<aside class="notes">
+<p><u>Question</u> : Comment fait-t-on ?</p>
+<ul>
+<li>Table d’association</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="association-récursive" class="slide level3">
 <h3>Association récursive</h3>
-<p>Une table peut avoir des relations avec elle-même</p>
+<p>Une table peut avoir des relations avec elle-même.</p>
 <p>Dans ce cas, la table contient une clé étrangère qui référence <u>sa propre clé primaire</u>.</p>
 <p>Exemple :</p>
 <ul>
-<li>Un employé a un supérieur</li>
+<li><em>employe (<u>id_employe</u>, nom, prenom, #id_superieur)</em></li>
+<li><em>id_superieur</em> clé étrangère qui référence <em>id_employe</em></li>
 </ul>
+<aside class="notes">
+<p>Conventions</p>
+<ul>
+<li>PK soulignée</li>
+<li>FK avec #</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="association-multiples" class="slide level3">
+<h3>Association multiples</h3>
+<p>Une table A peut avoir plusieurs relations avec une table B.</p>
+<p>Exemple :</p>
+<ul>
+<li><em>equipe (<u>id_equipe</u>, nom)</em></li>
+<li><em>match (<u>id_match</u>, #id_equipe1, #id_equipe2, score)</em></li>
+</ul>
+<aside class="notes">
+<p>Nous reviendrons sur les associations quand nous parlerons des jointures.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="sgbd" class="title-slide slide level2 center">

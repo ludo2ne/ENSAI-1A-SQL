@@ -446,7 +446,7 @@ Ludovic Deneuville
 </ul>
 <aside class="notes">
 <ul>
-<li>c’est LA compétence à avoir</li>
+<li>Compétence indispensable du Datascientist</li>
 <li>ça s’encapsule dans plein de langages (R, Python, Julia, Stata, SAS…)</li>
 <li>utile pour Big Data</li>
 </ul>
@@ -470,7 +470,6 @@ Ludovic Deneuville
 <li><code>&lt;...&gt;</code> : texte à remplacer</li>
 <li><code>[...]</code> : élément optionnel</li>
 <li>Une requête se termine par un <code>;</code></li>
-<li>Mots clés en MAJUSCULE</li>
 <li><code>-- Ce qui vient ensuite est commenté</code></li>
 </ul>
 <aside class="notes">
@@ -495,17 +494,40 @@ Ludovic Deneuville
 <ul>
 <li>retour à la ligne</li>
 <li>mots clés alignés</li>
+<li>Mots clés en MAJUSCULE</li>
 </ul>
-<div class="fragment">
+<aside class="notes">
+<ul>
+<li>Mots clés en MAJUSCULE, reste en minuscules</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level3">
+
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>pasbien.sql</strong></pre>
 </div>
 <div class="sourceCode" id="cb1" data-filename="pasbien.sql"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> c.nom <span class="kw">AS</span> club, <span class="fu">AVG</span>(j.elo) <span class="kw">AS</span> moyenne_elo <span class="kw">FROM</span> joueuse j <span class="kw">INNER</span> <span class="kw">JOIN</span> club c <span class="kw">USING</span> (id_club) <span class="kw">WHERE</span> mail <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">GROUP</span> <span class="kw">BY</span> c.nom <span class="kw">ORDER</span> <span class="kw">BY</span> <span class="dv">2</span> <span class="kw">DESC</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-<p><br></p>
 <div class="fragment">
+<div class="hide-html-render">
+<p><img data-src="https://media.giphy.com/media/xT5LMDiHQNDcF3F1vO/source.gif" style="width:50.0%"></p>
+</div>
+</div>
+</section>
+<section class="slide level3">
+
 <div class="code-with-filename">
 <div class="code-with-filename-file">
 <pre><strong>bien.sql</strong></pre>
@@ -517,6 +539,10 @@ Ludovic Deneuville
 <span id="cb2-5"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> j.mail <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span> </span>
 <span id="cb2-6"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">GROUP</span> <span class="kw">BY</span> c.nom </span>
 <span id="cb2-7"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">ORDER</span> <span class="kw">BY</span> <span class="dv">2</span> <span class="kw">DESC</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="fragment">
+<div class="hide-html-render">
+<p><img data-src="https://media.giphy.com/media/3o7absbD7PbTFQa0c8/source.gif" style="width:50.0%"></p>
 </div>
 </div>
 <aside class="notes">
@@ -541,6 +567,26 @@ Ludovic Deneuville
 <li>Base de données : PostgreSQL</li>
 <li>Outils : Datalab, cloudBeaver, DBeaver</li>
 </ul>
+<aside class="notes">
+<ul>
+<li>BDD : PostgreSQL + DuckDB</li>
+<li>Peut-être un TP sur les VM
+<ul>
+<li>Dbeaver installé</li>
+<li>une bdd chacun sur un serveur ENSAI</li>
+</ul></li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="ce-quil-faut-faire" class="slide level3">
 <h3>Ce qu’il faut faire</h3>
@@ -626,8 +672,10 @@ Ludovic Deneuville
 <li><a href="https://upinfo.univ-cotedazur.fr/im/bases-de-donnees/" target="_blank">https://upinfo.univ-cotedazur.fr/im/bases-de-donnees/</a></li>
 <li><a href="https://oseox.fr/sql/" target="_blank">https://oseox.fr/sql/</a></li>
 <li><a href="https://learnsql.fr/blog/aide-memoire-pour-les-entretiens-sql/" target="_blank">https://learnsql.fr/blog/aide-memoire-pour-les-entretiens-sql/</a></li>
+<li><a href="https://datascientest.com/base-de-donnees-definition" target="_blank">https://datascientest.com/base-de-donnees-definition</a></li>
 </ul>
 <aside class="notes">
+<p>Importance de la biblio en projet, stage</p>
 <ul>
 <li>désolé s’il y a des fautes, j’ai écrit ce cours un peu dans l’urgence</li>
 <li>n’hésitez pas à me les notifier (pas de point bonus)</li>
