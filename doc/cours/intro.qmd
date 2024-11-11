@@ -46,7 +46,7 @@ UML pour la modélisation
 - Très utilisé
 
 :::{.notes}
-- c'est LA compétence à avoir
+- Compétence indispensable du Datascientist
 - ça s'encapsule dans plein de langages (R, Python, Julia, Stata, SAS...)
 - utile pour Big Data
 :::
@@ -56,7 +56,6 @@ UML pour la modélisation
 - `<...>` : texte à remplacer
 - `[...]` : élément optionnel
 - Une requête se termine par un `;`
-- Mots clés en MAJUSCULE
 - `-- Ce qui vient ensuite est commenté`
 
 ::: {.notes}
@@ -68,16 +67,29 @@ UML pour la modélisation
 
 - retour à la ligne
 - mots clés alignés
+- Mots clés en MAJUSCULE
 
-::: {.fragment}
+
+::: {.notes}
+- Mots clés en MAJUSCULE, reste en minuscules
+:::
+
+---
+
+
 ```{.sql filename="pasbien.sql"}
 SELECT c.nom AS club, AVG(j.elo) AS moyenne_elo FROM joueuse j INNER JOIN club c USING (id_club) WHERE mail IS NOT NULL GROUP BY c.nom ORDER BY 2 DESC;
 ```
-::: 
 
-<br>
 
-::: {.fragment}
+::::::{.fragment}
+::: {.hide-html-render}
+![](https://media.giphy.com/media/xT5LMDiHQNDcF3F1vO/source.gif){width=50%}
+:::
+::::::
+
+---
+
 ```{.sql filename="bien.sql"}
 SELECT c.nom AS club, 
        AVG(j.elo) AS moyenne_elo
@@ -87,7 +99,13 @@ SELECT c.nom AS club,
  GROUP BY c.nom 
  ORDER BY 2 DESC;
 ```
-::: 
+
+
+::::::{.fragment}
+::: {.hide-html-render}
+![](https://media.giphy.com/media/3o7absbD7PbTFQa0c8/source.gif){width=50%}
+:::
+::::::
 
 ::: {.notes}
 Faites un effort pour vous même et pour vos relecteurs
@@ -98,6 +116,13 @@ Faites un effort pour vous même et pour vos relecteurs
 - 5 TP + 1 TD
 - Base de données : PostgreSQL
 - Outils : Datalab, cloudBeaver, DBeaver
+
+::: {.notes}
+- BDD : PostgreSQL + DuckDB
+- Peut-être un TP sur les VM
+  - Dbeaver installé
+  - une bdd chacun sur un serveur ENSAI
+:::
 
 ### Ce qu'il faut faire
 
@@ -146,8 +171,11 @@ Sauf si vous voulez ne rien retenir...
 - <https://upinfo.univ-cotedazur.fr/im/bases-de-donnees/>{target="_blank"}
 - <https://oseox.fr/sql/>{target="_blank"}
 - <https://learnsql.fr/blog/aide-memoire-pour-les-entretiens-sql/>{target="_blank"}
+- <https://datascientest.com/base-de-donnees-definition>{target="_blank"}
 
 ::: {.notes}
+Importance de la biblio en projet, stage
+
 - désolé s'il y a des fautes, j'ai écrit ce cours un peu dans l'urgence
 - n'hésitez pas à me les notifier (pas de point bonus)
 - moi j'ai le droit, après je serai assez intransigent si vous laissez des fautes dans vos rapports

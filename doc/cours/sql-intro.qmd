@@ -40,6 +40,10 @@ Les SGBD ne respectent pas exactement la norme SQL.
 À un niveau avancé d'utilisation, il y a des différences entre les SGBD.
 :::
 
+::: {.notes}
+Sinon c'est très ressemblant.
+:::
+
 ### Composantes du langage
 
 - Définition de Données
@@ -48,6 +52,7 @@ Les SGBD ne respectent pas exactement la norme SQL.
 - Contrôle d'accès aux Données
 
 ::: {.notes}
+
 - Manipulation de Données
   - CRUD
 - Définition de Données
@@ -82,6 +87,8 @@ CREATE TABLE joueuse (
 
 ::: {.notes}
 C'est comme créer les colonnes d'un tableau.
+
+Tout en spécifiant les types.
 :::
 
 ### CREATE avancé
@@ -320,6 +327,11 @@ Pourquoi l'on n'insère pas la colonne *id_club* ? :confused:
 
 :::{.notes}
 Attention à bien mettre les virgules au bon endroit
+
+
+- Pas de double quotes en SQL !!!
+- '' : Pour ajouter un simple quote dans une chaine
+
 :::
 
 ### Séquence
@@ -328,6 +340,8 @@ La colonne *id_club* est une séquence gérée par le SGBD.
 
 Les valeurs sont générées automatiquement à l'insertion et la séquence est incrémentée (1, 2, 3...).
 
+
+:::::: {.fragment}
 ::: {.callout-tip title="Séquences" collapse="true"}
 Il est possible de créer et gérer ses propres séquences :
 
@@ -343,17 +357,13 @@ DROP SEQUENCE nom_sequence;
 
 ```
 :::
+::::::
 
-
-:::{.notes}
-- Pas de double quotes en SQL !!!
-- '' : Pour ajouter un simple quote dans une chaine
-:::
 
 
 ## Lire des données
 
-`SELECT * FROM schema.table` pour tout afficher.
+`SELECT * FROM <schema>.<table>` pour tout afficher.
 
 ```{.sql}
 SELECT *
@@ -461,6 +471,8 @@ SELECT nom,
 1 seul WHERE
 
 plusieurs AND
+
+LIKE 'A%' : commence par A, j'y viens dans 2 min
 :::
 
 ---
@@ -579,6 +591,14 @@ SELECT *
  WHERE est_arbitre IS TRUE;
 ```
 
+<br>
+
+```{.sql}
+SELECT *
+  FROM echecs.joueuse
+ WHERE [NOT] est_arbitre;
+```
+
 
 ### Ordonner le résultat
 
@@ -610,6 +630,7 @@ SELECT nom,
 
 ::: {.notes}
 - ORDER BY 2 : 2e colonne
+- Remarque : pas obligé de SELECT les colonnes du OBY
 :::
 
 ### Afficher n lignes

@@ -314,6 +314,7 @@ Sa syntaxe, proche de celle de Pandas, permet des transformations, agrégations 
   print(df_prenom_annee)
   ```
 - [ ] Faites un diagramme en barres
+  - avec les librairies *matplotlib* et *seaborn*
   ```{.python}
   import matplotlib.pyplot as plt
   import seaborn as sns

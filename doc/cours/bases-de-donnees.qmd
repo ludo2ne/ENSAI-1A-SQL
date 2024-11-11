@@ -32,14 +32,29 @@ from: markdown+emoji
 - fichier
 :::
 
----
+
+:::{.notes}
+- types ?
+- valeurs ?
+- représente quelque chose
+:::
+
+### Définition d'une donnée
+
+:::::: {.fragment}
 
 ::: {.callout-note title="Définition"}
-Une **donnée** est une information brute qui possède :
+Une **donnée** est une information brute composée de 3 éléments :
 
-- un type
-- une valeur
+- un concept (exemple : hauteur d'un monument)
+- un domaine des possibles (nombre entier positif et une unité : mètres)
+- une valeur (pour la tour Eiffel : 324)
 :::
+
+Source : [Qu'est-ce qu'une donnée ?](https://www.insee.fr/fr/information/5008707){target="_blank"}, Courrier des statistiques N5, Pascal Rivière
+
+::::::
+
 
 ### Où stocker des données
 
@@ -65,7 +80,7 @@ J'avais eu une question lors de la prez Git : où on stocke les données si on p
 - Dans l'idéal on bosse dans le cloud et on stocke sur S3
 - Sinon on travaille dans un espace dédié (AUS)
 
-Suivre sur Linkedin : Mauvière, Holtz, Blefari, Lesur, Galiana, Degorre
+Suivre sur Linkedin : Mauvière, Holtz, Blefari, Lesur, Galiana, Degorre, Natacha NJONGWA
 :::
 
 
@@ -164,8 +179,11 @@ Not Only SQL
 - Chaque table représente une entité
 - Chaque [ligne]{.underline} est un enregistrement
 - Chaque [colonne]{.underline} représente un attribut de l'entité
-- Types de données : texte, num...
+  - Types de données : texte, num...
 
+:::{.notes}
+Imaginez un classeur Excel avec plusieurs feuilles
+:::
 
 ### Relations entre les tables
 
@@ -175,6 +193,10 @@ Not Only SQL
 - [**Clé étrangère**]{.underline} (FK) pour créer des liens avec d'autres tables
   - attribut d'une table A
   - correspond à la clé primaire d'une table B
+
+::: {.notes}
+Exemples juste après
+:::
 
 ### Clé primaire ?
 
@@ -232,6 +254,8 @@ Immuable :
 - Pour maintenir l'intégrité des liens avec d'autres tables
 
 Remarque : pas obligatoire d'avoir une clé primaire
+
+[Question]{.underline} : nous voulons ajouter le club  de chaque joueuse, comment faire ?
 :::
 
 ### Clé étrangère ?
@@ -243,14 +267,14 @@ Comment relier ces 2 tables ?
 
 ```{mermaid}
 classDiagram
-    class Joueuse {
+    class joueuse {
         id_joueuse PK
         nom
         prenom
         elo
     }
     
-    class Club {
+    class club {
         id_club PK
         nom
         ville
@@ -284,7 +308,7 @@ classDiagram
         id_club FK
     }
     
-    class Club {
+    class club {
         id_club PK
         nom
         ville
@@ -303,7 +327,7 @@ classDiagram
 | 3              | Navrotescu             | Andreea          | 2338    | 2            |
 | 4              | Sebag                  | Marie            | 2448    | 2            |
 | 5              | Millet                 | Sophie           | 2366    | 3            |
-| 6              | Skrichempko            | Almira           | 2361    | 2            |
+| 6              | Skrichempko            | Almira           | 2361    |              |
 
 : joueuse
 :::
@@ -329,6 +353,12 @@ SQL Error [23503]: ERROR: UPDATE or DELETE on table "club" violates the foreign 
 ```
 :::
 ::::::
+
+::: {.notes}
+id_club = 1
+
+Erreur aussi si vous essayer d'insert une joueuse avec id_club=9
+:::
 
 ### Autre question
 
@@ -380,6 +410,8 @@ classDiagram
 :::
 
 ::: {.notes}
+Imaginons que la Picardie devienne Belge.
+
 Clé primaire ?
 
 - id_adhesion
@@ -402,6 +434,8 @@ Exemple :
 
 :::{.notes}
 on aurait pu tout mettre dans la même table
+
+[Question]{.underline} : Où met-on la clé étrangère ?
 :::
 
 ### Association 1:n
@@ -412,6 +446,12 @@ Exemple :
 
 - Un club est composé de plusieurs joueuses
 - Une joueuse adhère à un seul club
+
+:::{.notes}
+Supposons de nouveau qu'une joueuse ne joue que pour 1 seul club.
+
+[Question]{.underline} : Où met-on la clé étrangère ?
+:::
 
 ### Association n:n
 
@@ -424,17 +464,46 @@ Exemple :
 - une joueuse participe à plusieurs tournois
 - Un tournoi regroupe plusieurs joueuses
 
+:::{.notes}
+[Question]{.underline} : Comment fait-t-on ?
+
+- Table d'association
+:::
+
 
 ### Association récursive
 
-Une table peut avoir des relations avec elle-même
+Une table peut avoir des relations avec elle-même.
 
 Dans ce cas, la table contient une clé étrangère qui référence [sa propre clé primaire]{.underline}.
 
 Exemple :
 
-- Un employé a un supérieur
+- *employe ([id_employe]{.underline}, nom, prenom, #id_superieur)*
+- *id_superieur* clé étrangère qui référence *id_employe*
 
+
+::: {.notes}
+Conventions
+
+- PK soulignée
+- FK avec #
+:::
+
+
+### Association multiples
+
+Une table A peut avoir plusieurs relations avec une table B.
+
+Exemple :
+
+- *equipe ([id_equipe]{.underline}, nom)*
+- *match ([id_match]{.underline}, #id_equipe1, #id_equipe2, score)*
+
+
+::: {.notes}
+Nous reviendrons sur les associations quand nous parlerons des jointures.
+:::
 
 ## SGBD
 

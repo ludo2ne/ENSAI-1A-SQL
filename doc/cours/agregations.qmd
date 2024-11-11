@@ -25,14 +25,18 @@ from: markdown+emoji
 ## Données utilisées
 
 ::: {.small-table}
-| **id_joueuse** | **nom**                | **prenom**       | **elo** | **club**     |
-|----------------|------------------------|------------------|---------|--------------|
-| 1              | Guichard               | Pauline          | 2357    | Asnieres     |
-| 2              | Daulyte                | Deimante         | 2371    | Chartres     | 
-| 3              | Navrotescu             | Andreea          | 2338    | Asnieres     |
-| 4              | Sebag                  | Marie            | 2448    | Bischwiller  |
-| 5              | Millet                 | Sophie           | 2366    | Asnieres     |
-| 6              | Skrichempko            | Almira           | 2361    | Bischwiller  |
+| **id_joueuse** | **nom**                | **prenom**       | **elo** | **ville_club** |
+|----------------|------------------------|------------------|---------|----------------|
+| 1              | Guichard               | Pauline          | 2357    | Asnieres       |
+| 2              | Daulyte                | Deimante         | 2371    | Chartres       | 
+| 3              | Navrotescu             | Andreea          | 2338    | Asnieres       |
+| 4              | Sebag                  | Marie            | 2448    | Bischwiller    |
+| 5              | Millet                 | Sophie           | 2366    | Asnieres       |
+| 6              | Skrichempko            | Almira           | 2361    | Bischwiller    |
+:::
+
+::: {.notes}
+j'ai intégré ici le club pour faciliter les choses
 :::
 
 ## Questions
@@ -47,18 +51,6 @@ Quelques questions que l'on peut se poser :
 
 ## Compter les lignes
 
-```{.sql}
-SELECT COUNT(*)
-  FROM echecs.joueuse;
-```
-
-::: {.small-table}
-| **count** |
-|-----------|
-| 6         |
-:::
-
-<br>
 
 ```{.sql}
 SELECT COUNT(*)
@@ -72,8 +64,26 @@ SELECT COUNT(*)
 | 5         |
 :::
 
+<br>
+
+```{.sql}
+SELECT COUNT(DISTINCT prenom)
+  FROM echecs.joueuse;
+```
+
+::: {.small-table}
+| **count** |
+|-----------|
+| 6         |
+:::
+
 ::: {.notes}
 J'utilise souvent COUNT(1) -> c'est pareil
+
+```{.sql}
+SELECT COUNT(*) FILTER (WHERE prenom LIKE 'A%')
+  FROM echecs.joueuse;
+```
 :::
 
 ## Somme
@@ -126,7 +136,7 @@ Comment afficher la joueuse avec le plus grand elo ? :dizzy_face:
 
 En utilisant une **sous-requête** :
 
-- `SELECT MAX(elo) FROM joueuse` :arrow_right: renvoie un nombre
+- `SELECT MAX(elo) FROM echecs.joueuse` :arrow_right: renvoie un nombre
 - Nous pouvons ensuite tester si *elo* est égal à ce nombre
 
 ::: {.fragment}
@@ -183,7 +193,7 @@ je dis bien colonnes et pas fonctions d'aggrégation
 :::
 
 
-### Filtre suite au GROUP BY
+### Filtrer suite au GROUP BY
 
 Comment faire pour afficher uniquement les clubs où la moyenne élo est inférieure à 2400 ?
 
@@ -207,3 +217,8 @@ HAVING AVG(elo) < 2400;
 
 :::
 ::::::
+
+### Having Vs Where
+
+- **WHERE** - Filtre Avant l'Agrégation
+- **HAVING** - Filtre Après l'Agrégation

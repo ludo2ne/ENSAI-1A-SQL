@@ -42,6 +42,11 @@ Elle est utilisée pour établir une relation entre deux tables.
 
 ## Bases de Données
 
+- **Donnée** : information brute composée d'un concept, d'un domaine des possibles, d'une valeur.
+- **Métadonnée** : donnée qui décrit d'autres données (contenu, structure, contexte...). Par exemple, pour une photo, les métadonnées pourraient inclure la date de prise de vue, le lieu, des mots-clés décrivant le contenu...
+
+---
+
 - **Base de données (BDD)** : Un ensemble organisé de données, généralement stockées et accessibles électroniquement. Elle est utilisée pour faciliter la gestion, la récupération, l'ajout, la mise à jour et la suppression des données.
 - **Système de Gestion de Base de Données (SGBD)** : Logiciel permettant de créer, gérer et manipuler des bases de données. Il permet la gestion des données et des utilisateurs via des interfaces (commandes SQL, API, etc.).
 - **PostgreSQL** : Un système de gestion de base de données relationnelle open-source avancé. Il supporte les types de données complexes, la gestion des transactions, les index, les jointures, et d'autres fonctionnalités avancées.
