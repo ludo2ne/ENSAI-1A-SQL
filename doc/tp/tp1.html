@@ -328,14 +328,7 @@ CloudBeaver
 <p>Elle offre également des fonctionnalités de sécurité pour protéger l’accès aux données. Son interface conviviale en fait un outil accessible aussi bien aux développeurs qu’aux analystes de données.</p>
 </div>
 </div>
-<ul class="task-list">
-<li><label><input type="checkbox">Créez une nouvelle connexion <strong>DuckDB</strong></label>
-<ul>
-<li>En haut à gauche, cliquez sur le +, puis New connection</li>
-<li>Sélectionner <strong>DuckDB</strong></li>
-<li>Cliquez sur le bouton CREATE</li>
-</ul></li>
-</ul>
+<p>Pour ce premier TP, nous n’allons pas utiliser de base de données PostgreSQL. Nous allons simplement utiliser <a href="https://duckdb.org/" target="_blank">DuckDB</a> pour lire des fichiers de données.</p>
 <div class="callout callout-style-default callout-tip callout-titled" title="DuckDB">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -351,6 +344,12 @@ DuckDB
 </div>
 </div>
 <ul class="task-list">
+<li><label><input type="checkbox">Créez une nouvelle connexion <strong>DuckDB</strong></label>
+<ul>
+<li>En haut à gauche, cliquez sur le +, puis New connection</li>
+<li>Sélectionner <strong>DuckDB</strong></li>
+<li>Cliquez sur le bouton CREATE</li>
+</ul></li>
 <li><label><input type="checkbox">Ouvrez un éditeur SQL</label>
 <ul>
 <li>Dans l’explorer à gauche, clic droit sur votre connection <em>DuckDB</em> <span class="emoji" data-emoji="arrow_right">➡️</span> SQL Editor</li>
@@ -360,22 +359,42 @@ DuckDB
 </section>
 <section id="premières-requêtes" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="premières-requêtes"><span class="header-section-number">2</span> Premières requêtes</h2>
-<section id="les-prénoms" class="level3" data-number="2.1">
-<h3 data-number="2.1" class="anchored" data-anchor-id="les-prénoms"><span class="header-section-number">2.1</span> Les prénoms</h3>
-<div class="callout callout-style-default callout-note callout-titled" title="Fichier des prénoms">
+<div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Fichier des prénoms
+Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
+<p>Prenez le temps et l’habitude d’écrire de jolies requêtes bien alignées !!!</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>bien.sql</strong></pre>
+</div>
+<div class="sourceCode" id="cb1" data-filename="bien.sql"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> c.nom <span class="kw">AS</span> club, </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">AVG</span>(j.elo) <span class="kw">AS</span> moyenne_elo</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> joueuse j </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a> <span class="kw">INNER</span> <span class="kw">JOIN</span> club c <span class="kw">USING</span> (id_club) </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> j.mail <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span> </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a> <span class="kw">GROUP</span> <span class="kw">BY</span> c.nom </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a> <span class="kw">ORDER</span> <span class="kw">BY</span> <span class="dv">2</span> <span class="kw">DESC</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><br></p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>pasbien.sql</strong></pre>
+</div>
+<div class="sourceCode" id="cb2" data-filename="pasbien.sql"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> c.nom <span class="kw">AS</span> club, <span class="fu">AVG</span>(j.elo) <span class="kw">AS</span> moyenne_elo <span class="kw">FROM</span> joueuse j <span class="kw">INNER</span> <span class="kw">JOIN</span> club c <span class="kw">USING</span> (id_club) <span class="kw">WHERE</span> mail <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">GROUP</span> <span class="kw">BY</span> c.nom <span class="kw">ORDER</span> <span class="kw">BY</span> <span class="dv">2</span> <span class="kw">DESC</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<section id="les-prénoms" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="les-prénoms"><span class="header-section-number">2.1</span> Les prénoms</h3>
 <p>Le fichier des prénoms contient des données sur les prénoms attribués aux enfants nés en France depuis 1900. Ces données sont disponibles au niveau France et par département.</p>
-<p>Une version au format <a href="https://parquet.apache.org/" target="_blank">parquet</a> a été mise à disposition sur le site <a href="https://www.data.gouv.fr/fr/datasets/base-prenoms-insee-format-parquet/" target="_blank">data.gouv</a> par <a href="https://www.icem7.fr/" target="_blank">Icem7</a></p>
-</div>
-</div>
+<p>Dans ce TP, nous allons utiliser la version au format <a href="https://parquet.apache.org/" target="_blank">parquet</a>, mise à disposition sur le site <a href="https://www.data.gouv.fr/fr/datasets/base-prenoms-insee-format-parquet/" target="_blank">data.gouv</a> par <a href="https://www.icem7.fr/" target="_blank">Icem7</a></p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Fichier parquet">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -397,24 +416,89 @@ Fichier parquet
 </div>
 </div>
 <ul class="task-list">
-<li><label><input type="checkbox">Créez une vue <code>prenom</code> qui pointera vers le fichier parquet des prénoms</label>
-<ul>
-<li>vous pourrez ensuite requêter sur cette vue comme si c’était une table</li>
-</ul></li>
+<li><p><label><input type="checkbox">Créez une vue <code>prenom</code> qui pointera vers le fichier parquet des prénoms</label></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">OR</span> <span class="kw">REPLACE</span> <span class="kw">VIEW</span> prenom <span class="kw">AS</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> <span class="st">'https://static.data.gouv.fr/resources/base-prenoms-insee-format-parquet/20231121-161435/prenoms-nat2022.parquet'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">OR</span> <span class="kw">REPLACE</span> <span class="kw">VIEW</span> prenom <span class="kw">AS</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> <span class="st">'https://static.data.gouv.fr/resources/base-prenoms-insee-format-parquet/20231121-161435/prenoms-nat2022.parquet'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Vous pourrez ensuite requêter sur cette vue comme si c’était une table.</p>
 <ul class="task-list">
 <li><label><input type="checkbox">Listez tous les éléments de <code>prenom</code></label></li>
-<li><label><input type="checkbox">Listez les prénoms de l’année 2022</label></li>
-<li><label><input type="checkbox">Listez les prénoms de l’année 2022 donnés plus de 2000 fois</label></li>
-<li><label><input type="checkbox">Classez-les par sexe, puis par nombre de fois où ils ont été donné</label></li>
+<li><label><input type="checkbox">Filtrez pour ne plus afficher les <em>prénoms rares</em></label>
+<ul>
+<li>Utilisez ce filtre pour toutes les requêtes suivantes</li>
+</ul></li>
 </ul>
-<hr>
+<div class="callout callout-style-default callout-tip callout-titled" title="Secret statistique">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Secret statistique
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Les prénoms ayant un nombre d’occurrences insuffisant sont regroupés sous une appellation générique. Cela permet de protéger le secret statistique et de garantir l’anonymat.</p>
+<p>Sans cette précaution, par exemple :</p>
+<ul>
+<li>si vous vous appeliez <em>Yann-Adam LEFGRIGO</em></li>
+<li>et que vous êtes le seul à porter ce prénom</li>
+<li>n’importe qui pourrait connaître votre année de naissance</li>
+</ul>
+<p>De même, si vous êtiez 2 à porter ce prénom, l’autre <em>Yann-Adam</em> connaitrait aussi votre année de naissance. Ce n’est toujours pas satisfaisant. Il faut donc <u>à minima</u> 3 individus pour garantir l’anonymat.</p>
+</div>
+</div>
 <ul class="task-list">
-<li><label><input type="checkbox">Listez les années où votre prénom a été donné</label></li>
-<li><label><input type="checkbox">Classez par année déscroissante</label></li>
+<li><label><input type="checkbox">De quel type est le champ <em>annais</em> ? Pourquoi ?</label></li>
+<li><label><input type="checkbox">Listez les différentes années de naissance</label>
+<ul>
+<li>Classez-ces années en décroissant</li>
+<li>Que remarquez-vous ?</li>
+</ul></li>
+<li><label><input type="checkbox">Ajoutez un filtre pour exclure l’année non renseignée</label>
+<ul>
+<li>Conservez ce filtre pour toutes les prochaines requêtes</li>
+</ul></li>
+<li><label><input type="checkbox">Listez les prénoms de l’année 2022</label>
+<ul>
+<li>Classez-les en décroissant par le nombre de fois où ils sont été donnés</li>
+</ul></li>
+<li><label><input type="checkbox">Listez les prénoms de l’année 2022 donnés plus de 2000 fois</label></li>
+<li><label><input type="checkbox">Classez-les d’abord par sexe, puis par nombre décroissant d’occurrences</label></li>
 </ul>
+<p>Étudions maintenant l’évolution d’un prénom.</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Listez les années où le prénom <code>JÉRÔME</code> a été donné</label>
+<ul>
+<li>classez par année décroissante</li>
+<li>Que remarquez-vous ?</li>
+</ul></li>
+<li><label><input type="checkbox">Listez également les <code>JEROME</code> avec d’autres accents / sans accent</label>
+<ul>
+<li>voir la fonction DuckDB <em>strip_accents()</em></li>
+</ul></li>
+<li><label><input type="checkbox">Affichez pour chaque année le nombre de fois où le prénom JEROME a été donné, quelle que soit l’accentuation</label></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled" title="Aide">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Aide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Regroupez par strip_accents(preusuel) et annais</li>
+<li>Affichez strip_accents(preusuel), annais et la somme de la colonne <em>nombre</em></li>
+</ul>
+</div>
+</div>
+</div>
+<p>Prénoms composés</p>
 <p>CREATE OR REPLACE VIEW fd_indcvi_2020 AS FROM ‘https://static.data.gouv.fr/resources/recensement-de-la-population-fichiers-detail-individus-localises-au-canton-ou-ville-2020-1/20231023-122841/fd-indcvi-2020.parquet’;</p>
 <p>DESCRIBE FROM fd_indcvi_2020 ;</p>
 <p>SELECT arm, voit, ROUND(sum(ipondi/nperr::int)) AS eft FROM fd_indcvi_2020 WHERE dept = ‘75’ AND NPERR &lt;&gt; ‘Z’ GROUP BY ALL ;</p>
