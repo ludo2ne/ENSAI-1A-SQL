@@ -36,6 +36,7 @@ En cas d'indisponibilité du Datalab, DBeaver est directement installé sur les 
 Cela ouvre une fenêtre dans laquelle vous pouvez saisir du SQL.
 :::
 
+
 ## Lancement du service
 
 - [ ] Lancez le service [CloudBeaver](https://dbeaver.com/docs/cloudbeaver/){target="_blank"}
@@ -48,10 +49,8 @@ CloudBeaver est une application web légère dédiée à la gestion de bases de 
 Elle offre également des fonctionnalités de sécurité pour protéger l'accès aux données. Son interface conviviale en fait un outil accessible aussi bien aux développeurs qu'aux analystes de données.
 :::
 
-- [ ] Créez une nouvelle connexion **DuckDB**
-  - En haut à gauche, cliquez sur le +, puis New connection
-  - Sélectionner **DuckDB**
-  - Cliquez sur le bouton CREATE
+Pour ce premier TP, nous n'allons pas utiliser de base de données PostgreSQL. Nous allons simplement utiliser [DuckDB](https://duckdb.org/){target="_blank"} pour lire des fichiers de données.
+
 
 ::: {.callout-tip title="DuckDB"}
 DuckDB est un moteur de base de données relationnelle conçu pour des analyses rapides et efficaces, directement intégré dans des environnements locaux comme Python ou R. Il est optimisé pour le traitement analytique en colonnes et peut gérer des ensembles de données de grande taille sans nécessiter de serveur externe. DuckDB est léger, facile à intégrer et offre des performances élevées pour les requêtes SQL. 
@@ -59,6 +58,11 @@ DuckDB est un moteur de base de données relationnelle conçu pour des analyses 
 Il est souvent utilisé pour l'analyse de données embarquée ou dans des flux de travail de science des données. Son architecture permet d'exécuter des requêtes SQL sur des fichiers locaux sans migration préalable des données.
 :::
 
+
+- [ ] Créez une nouvelle connexion **DuckDB**
+  - En haut à gauche, cliquez sur le +, puis New connection
+  - Sélectionner **DuckDB**
+  - Cliquez sur le bouton CREATE
 - [ ] Ouvrez un éditeur SQL
   - Dans l'explorer à gauche, clic droit sur votre connection *DuckDB* :arrow_right: SQL Editor
   - vous pouvez maintenant saisir du code *SQL*
@@ -66,13 +70,36 @@ Il est souvent utilisé pour l'analyse de données embarquée ou dans des flux d
 
 ## Premières requêtes
 
+
+::: {.callout-important}
+
+Prenez le temps et l'habitude d'écrire de jolies requêtes bien alignées !!!
+
+```{.sql filename="bien.sql"}
+SELECT c.nom AS club, 
+       AVG(j.elo) AS moyenne_elo
+  FROM joueuse j 
+ INNER JOIN club c USING (id_club) 
+ WHERE j.mail IS NOT NULL 
+ GROUP BY c.nom 
+ ORDER BY 2 DESC;
+```
+
+<br>
+
+```{.sql filename="pasbien.sql"}
+SELECT c.nom AS club, AVG(j.elo) AS moyenne_elo FROM joueuse j INNER JOIN club c USING (id_club) WHERE mail IS NOT NULL GROUP BY c.nom ORDER BY 2 DESC;
+```
+
+:::
+
 ### Les prénoms
 
-::: {.callout-note title="Fichier des prénoms"}
+
 Le fichier des prénoms contient des données sur les prénoms attribués aux enfants nés en France depuis 1900. Ces données sont disponibles au niveau France et par département.
 
-Une version au format [parquet](https://parquet.apache.org/){target="_blank"} a été mise à disposition sur le site [data.gouv](https://www.data.gouv.fr/fr/datasets/base-prenoms-insee-format-parquet/){target="_blank"} par [Icem7](https://www.icem7.fr/){target="_blank"}
-:::
+Dans ce TP, nous allons utiliser la version au format [parquet](https://parquet.apache.org/){target="_blank"}, mise à disposition sur le site [data.gouv](https://www.data.gouv.fr/fr/datasets/base-prenoms-insee-format-parquet/){target="_blank"} par [Icem7](https://www.icem7.fr/){target="_blank"}
+
 
 ::: {.callout-tip title="Fichier parquet"}
 Le format **Parquet** est un format de fichier de stockage de données optimisé pour les systèmes de traitement analytique de grande échelle. Voici ses principales caractéristiques :
@@ -89,23 +116,56 @@ Le format **Parquet** est un format de fichier de stockage de données optimisé
 :::
 
 - [ ] Créez une vue `prenom` qui pointera vers le fichier parquet des prénoms
-  - vous pourrez ensuite requêter sur cette vue comme si c'était une table
+  ```{.sql}
+  CREATE OR REPLACE VIEW prenom AS
+  FROM 'https://static.data.gouv.fr/resources/base-prenoms-insee-format-parquet/20231121-161435/prenoms-nat2022.parquet'
+  ```
 
-```{.sql}
-CREATE OR REPLACE VIEW prenom AS
-FROM 'https://static.data.gouv.fr/resources/base-prenoms-insee-format-parquet/20231121-161435/prenoms-nat2022.parquet'
-```
+Vous pourrez ensuite requêter sur cette vue comme si c'était une table.
 
 - [ ] Listez tous les éléments de `prenom`
+- [ ] Filtrez pour ne plus afficher les *prénoms rares*
+  - Utilisez ce filtre pour toutes les requêtes suivantes
+
+::: {.callout-tip title="Secret statistique"}
+Les prénoms ayant un nombre d'occurrences insuffisant sont regroupés sous une appellation générique. Cela permet de protéger le secret statistique et de garantir l'anonymat.
+
+Sans cette précaution, par exemple :
+
+- si vous vous appeliez *Yann-Adam LEFGRIGO* 
+- et que vous êtes le seul à porter ce prénom
+- n'importe qui pourrait connaître votre année de naissance
+
+De même, si vous êtiez 2 à porter ce prénom, l'autre *Yann-Adam* connaitrait aussi votre année de naissance. Ce n'est toujours pas satisfaisant. Il faut donc [à minima]{.underline} 3 individus pour garantir l'anonymat.
+:::
+
+- [ ] De quel type est le champ *annais* ? Pourquoi ?
+- [ ] Listez les différentes années de naissance
+  - Classez-ces années en décroissant
+  - Que remarquez-vous ?
+- [ ] Ajoutez un filtre pour exclure l'année non renseignée
+  - Conservez ce filtre pour toutes les prochaines requêtes
 - [ ] Listez les prénoms de l'année 2022
+  - Classez-les en décroissant par le nombre de fois où ils sont été donnés
 - [ ] Listez les prénoms de l'année 2022 donnés plus de 2000 fois
-- [ ] Classez-les par sexe, puis par nombre de fois où ils ont été donné
+- [ ] Classez-les d'abord par sexe, puis par nombre décroissant d'occurrences
 
----
 
-- [ ] Listez les années où votre prénom a été donné
-- [ ] Classez par année déscroissante
+Étudions maintenant l'évolution d'un prénom.
 
+- [ ] Listez les années où le prénom `JÉRÔME` a été donné
+  - classez par année décroissante
+  - Que remarquez-vous ?
+- [ ] Listez également les `JEROME` avec d'autres accents / sans accent
+  - voir la fonction DuckDB *strip_accents()*
+- [ ] Affichez pour chaque année le nombre de fois où le prénom JEROME a été donné, quelle que soit l'accentuation
+
+::: {.callout-tip title="Aide" collapse="true"}
+- Regroupez par strip_accents(preusuel) et annais
+- Affichez strip_accents(preusuel), annais et la somme de la colonne *nombre*
+:::
+
+Prénoms composés
 
 
 

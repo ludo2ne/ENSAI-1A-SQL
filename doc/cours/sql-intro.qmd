@@ -519,8 +519,12 @@ SELECT *
 - `%` : représente entre 0 et une infinité de caractères
 - `_` : représente exactement 1 caractère
 
-::: {.callout-caution title="Attention à la Casse"}
+::: {.callout-caution title="LIKE est sensible à la Casse"}
 MAJUSCULES ≠ minuscules
+:::
+
+:::{.notes}
+ILIKE insensible à la casse
 :::
 
 
