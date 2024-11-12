@@ -217,12 +217,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#lancement-du-service" id="toc-lancement-du-service" class="nav-link" data-scroll-target="#lancement-du-service"><span class="header-section-number">1</span> Lancement du service</a></li>
-  <li><a href="#premières-requêtes" id="toc-premières-requêtes" class="nav-link" data-scroll-target="#premières-requêtes"><span class="header-section-number">2</span> Premières requêtes</a>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
   <ul class="collapse">
-  <li><a href="#les-prénoms" id="toc-les-prénoms" class="nav-link" data-scroll-target="#les-prénoms"><span class="header-section-number">2.1</span> Les prénoms</a></li>
+  <li><a href="#datalab-du-genes-ou-sspcloud" id="toc-datalab-du-genes-ou-sspcloud" class="nav-link" data-scroll-target="#datalab-du-genes-ou-sspcloud">Datalab du GENES ou SSPCloud</a></li>
+  <li><a href="#vm-ensai" id="toc-vm-ensai" class="nav-link" data-scroll-target="#vm-ensai">VM ENSAI</a></li>
   </ul></li>
+  <li><a href="#lancement-du-service" id="toc-lancement-du-service" class="nav-link" data-scroll-target="#lancement-du-service"><span class="header-section-number">1</span> Lancement du service</a></li>
+  <li><a href="#les-prénoms" id="toc-les-prénoms" class="nav-link" data-scroll-target="#les-prénoms"><span class="header-section-number">2</span> Les prénoms</a>
+  <ul class="collapse">
+  <li><a href="#premières-requêtes" id="toc-premières-requêtes" class="nav-link" data-scroll-target="#premières-requêtes"><span class="header-section-number">2.1</span> Premières requêtes</a></li>
+  <li><a href="#année-2022" id="toc-année-2022" class="nav-link" data-scroll-target="#année-2022"><span class="header-section-number">2.2</span> Année 2022</a></li>
+  <li><a href="#jérôme-cest-moi" id="toc-jérôme-cest-moi" class="nav-link" data-scroll-target="#jérôme-cest-moi"><span class="header-section-number">2.3</span> Jérôme, c’est moi</a></li>
+  <li><a href="#suivi-temporel" id="toc-suivi-temporel" class="nav-link" data-scroll-target="#suivi-temporel"><span class="header-section-number">2.4</span> Suivi temporel</a></li>
+  <li><a href="#prénoms-composés" id="toc-prénoms-composés" class="nav-link" data-scroll-target="#prénoms-composés"><span class="header-section-number">2.5</span> Prénoms composés</a></li>
+  <li><a href="#année-2016" id="toc-année-2016" class="nav-link" data-scroll-target="#année-2016"><span class="header-section-number">2.6</span> Année 2016</a></li>
+  </ul></li>
+  <li><a href="#fichier-détail-des-individus" id="toc-fichier-détail-des-individus" class="nav-link" data-scroll-target="#fichier-détail-des-individus"><span class="header-section-number">3</span> Fichier détail des individus</a></li>
   </ul>
 </nav>
 </nav>
@@ -266,26 +276,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><span class="emoji" data-emoji="construction">🚧</span></p>
 <section id="introduction" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="introduction">Introduction</h2>
-<p>Vous allez réaliser ce TP sur le <a href="https://onyxia.lab.groupe-genes.fr/" target="_blank">Datalab du GENES</a></p>
-<ul class="task-list">
-<li><label><input type="checkbox">Connectez-vous au Datalab</label>
+<p>Pour réaliser ce TP, vous pouvez choisir parmi 3 possibilités :</p>
 <ul>
-<li>Vous pouvez également utiliser le <a href="https://datalab.sspcloud.fr/" target="_blank">Datalab SSPCloud de l’INSEE</a> en créant un compte avec votre mail ENSAI.</li>
+<li><a href="https://onyxia.lab.groupe-genes.fr/" target="_blank">Datalab du GENES</a></li>
+<li><a href="https://datalab.sspcloud.fr/" target="_blank">Datalab SSPCloud</a> de l’INSEE</li>
+<li>Directement depuis la VM ENSAI</li>
+</ul>
+<section id="datalab-du-genes-ou-sspcloud" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="datalab-du-genes-ou-sspcloud">Datalab du GENES ou SSPCloud</h3>
+<p>Aux choix, connectez-vous au :</p>
+<ul class="task-list">
+<li><label><input type="checkbox"><a href="https://onyxia.lab.groupe-genes.fr/" target="_blank">Datalab du GENES</a></label></li>
+<li><label><input type="checkbox"><a href="https://datalab.sspcloud.fr/" target="_blank">Datalab SSPCloud de l’INSEE</a></label>
+<ul>
+<li>en créant un compte avec votre mail ENSAI</li>
 </ul></li>
 </ul>
-<div class="callout callout-style-default callout-caution callout-titled" title="En cas d'indisponibilité du Datalab">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-En cas d’indisponibilité du Datalab
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-1" class="callout-1-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>En cas d’indisponibilité du Datalab, DBeaver est directement installé sur les VM.</p>
+</section>
+<section id="vm-ensai" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="vm-ensai">VM ENSAI</h3>
+<p>En cas d’indisponibilité des Datalab, DBeaver est directement installé sur les VM.</p>
 <ul class="task-list">
 <li><label><input type="checkbox">Lancez DBeaver</label></li>
 <li><label><input type="checkbox">Onglet <em>Base de données</em> <span class="emoji" data-emoji="arrow_right">➡️</span> <em>Nouvelle Connexion</em></label>
@@ -301,12 +311,23 @@ En cas d’indisponibilité du Datalab
 </ul></li>
 </ul>
 <p>Cela ouvre une fenêtre dans laquelle vous pouvez saisir du SQL.</p>
-</div>
-</div>
-</div>
+</section>
 </section>
 <section id="lancement-du-service" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="lancement-du-service"><span class="header-section-number">1</span> Lancement du service</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Uniquement sur le Datalab.</p>
+</div>
+</div>
 <ul class="task-list">
 <li><label><input type="checkbox">Lancez le service <a href="https://dbeaver.com/docs/cloudbeaver/" target="_blank">CloudBeaver</a></label>
 <ul>
@@ -357,42 +378,8 @@ DuckDB
 </ul></li>
 </ul>
 </section>
-<section id="premières-requêtes" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="premières-requêtes"><span class="header-section-number">2</span> Premières requêtes</h2>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Important
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Prenez le temps et l’habitude d’écrire de jolies requêtes bien alignées !!!</p>
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>bien.sql</strong></pre>
-</div>
-<div class="sourceCode" id="cb1" data-filename="bien.sql"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> c.nom <span class="kw">AS</span> club, </span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">AVG</span>(j.elo) <span class="kw">AS</span> moyenne_elo</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> joueuse j </span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a> <span class="kw">INNER</span> <span class="kw">JOIN</span> club c <span class="kw">USING</span> (id_club) </span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> j.mail <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span> </span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a> <span class="kw">GROUP</span> <span class="kw">BY</span> c.nom </span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a> <span class="kw">ORDER</span> <span class="kw">BY</span> <span class="dv">2</span> <span class="kw">DESC</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p><br></p>
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>pasbien.sql</strong></pre>
-</div>
-<div class="sourceCode" id="cb2" data-filename="pasbien.sql"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> c.nom <span class="kw">AS</span> club, <span class="fu">AVG</span>(j.elo) <span class="kw">AS</span> moyenne_elo <span class="kw">FROM</span> joueuse j <span class="kw">INNER</span> <span class="kw">JOIN</span> club c <span class="kw">USING</span> (id_club) <span class="kw">WHERE</span> mail <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">GROUP</span> <span class="kw">BY</span> c.nom <span class="kw">ORDER</span> <span class="kw">BY</span> <span class="dv">2</span> <span class="kw">DESC</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-</div>
-<section id="les-prénoms" class="level3" data-number="2.1">
-<h3 data-number="2.1" class="anchored" data-anchor-id="les-prénoms"><span class="header-section-number">2.1</span> Les prénoms</h3>
+<section id="les-prénoms" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="les-prénoms"><span class="header-section-number">2</span> Les prénoms</h2>
 <p>Le fichier des prénoms contient des données sur les prénoms attribués aux enfants nés en France depuis 1900. Ces données sont disponibles au niveau France et par département.</p>
 <p>Dans ce TP, nous allons utiliser la version au format <a href="https://parquet.apache.org/" target="_blank">parquet</a>, mise à disposition sur le site <a href="https://www.data.gouv.fr/fr/datasets/base-prenoms-insee-format-parquet/" target="_blank">data.gouv</a> par <a href="https://www.icem7.fr/" target="_blank">Icem7</a></p>
 <div class="callout callout-style-default callout-tip callout-titled" title="Fichier parquet">
@@ -417,10 +404,44 @@ Fichier parquet
 </div>
 <ul class="task-list">
 <li><p><label><input type="checkbox">Créez une vue <code>prenom</code> qui pointera vers le fichier parquet des prénoms</label></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">OR</span> <span class="kw">REPLACE</span> <span class="kw">VIEW</span> prenom <span class="kw">AS</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> <span class="st">'https://static.data.gouv.fr/resources/base-prenoms-insee-format-parquet/20231121-161435/prenoms-nat2022.parquet'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">OR</span> <span class="kw">REPLACE</span> <span class="kw">VIEW</span> prenom <span class="kw">AS</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> <span class="st">'https://static.data.gouv.fr/resources/base-prenoms-insee-format-parquet/20231121-161435/prenoms-nat2022.parquet'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ul>
 <p>Vous pourrez ensuite requêter sur cette vue comme si c’était une table.</p>
+<section id="premières-requêtes" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="premières-requêtes"><span class="header-section-number">2.1</span> Premières requêtes</h3>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Prenez le temps et l’habitude d’écrire de jolies requêtes bien alignées !!!</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>bien.sql</strong></pre>
+</div>
+<div class="sourceCode" id="cb2" data-filename="bien.sql"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> c.nom <span class="kw">AS</span> club, </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">AVG</span>(j.elo) <span class="kw">AS</span> moyenne_elo</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> joueuse j </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a> <span class="kw">INNER</span> <span class="kw">JOIN</span> club c <span class="kw">USING</span> (id_club) </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> j.mail <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span> </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a> <span class="kw">GROUP</span> <span class="kw">BY</span> c.nom </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a> <span class="kw">ORDER</span> <span class="kw">BY</span> <span class="dv">2</span> <span class="kw">DESC</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><br></p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>pasbien.sql</strong></pre>
+</div>
+<div class="sourceCode" id="cb3" data-filename="pasbien.sql"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> c.nom <span class="kw">AS</span> club, <span class="fu">AVG</span>(j.elo) <span class="kw">AS</span> moyenne_elo <span class="kw">FROM</span> joueuse j <span class="kw">INNER</span> <span class="kw">JOIN</span> club c <span class="kw">USING</span> (id_club) <span class="kw">WHERE</span> mail <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">GROUP</span> <span class="kw">BY</span> c.nom <span class="kw">ORDER</span> <span class="kw">BY</span> <span class="dv">2</span> <span class="kw">DESC</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
 <ul class="task-list">
 <li><label><input type="checkbox">Listez tous les éléments de <code>prenom</code></label></li>
 <li><label><input type="checkbox">Filtrez pour ne plus afficher les <em>prénoms rares</em></label>
@@ -459,6 +480,11 @@ Secret statistique
 <ul>
 <li>Conservez ce filtre pour toutes les prochaines requêtes</li>
 </ul></li>
+</ul>
+</section>
+<section id="année-2022" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="année-2022"><span class="header-section-number">2.2</span> Année 2022</h3>
+<ul class="task-list">
 <li><label><input type="checkbox">Listez les prénoms de l’année 2022</label>
 <ul>
 <li>Classez-les en décroissant par le nombre de fois où ils sont été donnés</li>
@@ -466,7 +492,9 @@ Secret statistique
 <li><label><input type="checkbox">Listez les prénoms de l’année 2022 donnés plus de 2000 fois</label></li>
 <li><label><input type="checkbox">Classez-les d’abord par sexe, puis par nombre décroissant d’occurrences</label></li>
 </ul>
-<p>Étudions maintenant l’évolution d’un prénom.</p>
+</section>
+<section id="jérôme-cest-moi" class="level3" data-number="2.3">
+<h3 data-number="2.3" class="anchored" data-anchor-id="jérôme-cest-moi"><span class="header-section-number">2.3</span> Jérôme, c’est moi</h3>
 <ul class="task-list">
 <li><label><input type="checkbox">Listez les années où le prénom <code>JÉRÔME</code> a été donné</label>
 <ul>
@@ -475,7 +503,7 @@ Secret statistique
 </ul></li>
 <li><label><input type="checkbox">Listez également les <code>JEROME</code> avec d’autres accents / sans accent</label>
 <ul>
-<li>voir la fonction DuckDB <em>strip_accents()</em></li>
+<li>recherchez une fonction DuckDB qui permet de répondre à ce besoin</li>
 </ul></li>
 <li><label><input type="checkbox">Affichez pour chaque année le nombre de fois où le prénom JEROME a été donné, quelle que soit l’accentuation</label></li>
 </ul>
@@ -492,19 +520,91 @@ Aide
 <div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
+<li>voir Fontion DuckDB strip_accents()</li>
 <li>Regroupez par strip_accents(preusuel) et annais</li>
 <li>Affichez strip_accents(preusuel), annais et la somme de la colonne <em>nombre</em></li>
 </ul>
 </div>
 </div>
 </div>
-<p>Prénoms composés</p>
+</section>
+<section id="suivi-temporel" class="level3" data-number="2.4">
+<h3 data-number="2.4" class="anchored" data-anchor-id="suivi-temporel"><span class="header-section-number">2.4</span> Suivi temporel</h3>
+<ul class="task-list">
+<li><label><input type="checkbox">Créez une requête qui permet d’avoir le nombre de naissances par année depuis l’année 2000</label>
+<ul>
+<li>Vous pouvez ici retirez la restriction sur les <em>prénoms rares</em></li>
+<li>Classez par année décroissante</li>
+</ul></li>
+<li><label><input type="checkbox">Complétez la requête pour afficher le nombre de prénoms différents données chaque année</label></li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Même si le champ <em>annais</em> n’est pas de type numérique, il est possible de comparer des chaines de caractères.</p>
+<p>Le <a href="https://www.ascii-code.com/fr" target="_blank">code ASCII</a> est utilisé pour comparer le premier caractère de la chaine, puis en cas d’égalité, le 2e caractère…</p>
+</div>
+</div>
+<ul class="task-list">
+<li><label><input type="checkbox">Écrivez une requête qui donne le nombre de filles et de garçons nés chaque année depuis 2000.</label></li>
+</ul>
+</section>
+<section id="prénoms-composés" class="level3" data-number="2.5">
+<h3 data-number="2.5" class="anchored" data-anchor-id="prénoms-composés"><span class="header-section-number">2.5</span> Prénoms composés</h3>
+<p>Nous allons maintenant nous interesser aux prénoms composés entre 2000 et 2009</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Listez les prénoms composés entre les années 2000 et 2009 incluses</label></li>
+<li><label><input type="checkbox">Regroupez-les par <em>preusuel</em>, puis affichez également le nombre de fois où ils ont été donnés</label>
+<ul>
+<li>Triez en décroissant par ce nombre</li>
+</ul></li>
+<li><label><input type="checkbox">Filtrez pour ne garder que les prénoms composés contenant le prénom <code>JEAN</code></label>
+<ul>
+<li>Que remarquez-vous ? N’y a-t-il pas des intrus ?</li>
+</ul></li>
+<li><label><input type="checkbox">Trouvez une solution pour remédier à ce souci</label>
+<ul>
+<li>Par exemple avec la fonction DuckDB <code>split_part()</code></li>
+</ul></li>
+</ul>
+</section>
+<section id="année-2016" class="level3" data-number="2.6">
+<h3 data-number="2.6" class="anchored" data-anchor-id="année-2016"><span class="header-section-number">2.6</span> Année 2016</h3>
+<p>Filtrez les données sur l’année 2016 en retirant les prénoms rares et écrivez les requêtes suivantes :</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Comptez le nombre de prénoms distincts donnés</label></li>
+<li><label><input type="checkbox">Comptez le nombre de prénoms distincts donnés par sexe</label></li>
+<li><label><input type="checkbox">Calculez le total des prénoms distincts donnés, en prenant en compte la distinction entre les sexes</label>
+<ul>
+<li>exemple : ici <em>Dominique (H)</em> et <em>Dominique (F)</em> comptent pour 2 prénoms</li>
+</ul></li>
+<li><label><input type="checkbox">Donnez la liste des prénoms donnés à la fois à des filles et des garçons</label>
+<ul>
+<li>affichez le nombre de fois où ils ont été donnés à chaque sexe</li>
+</ul></li>
+<li><label><input type="checkbox">Ajoutez à la dernière requête une colonne contenant un booléen qui affiche</label>
+<ul>
+<li>True si le prénom a été donné à plus de filles que de garçons</li>
+<li>False sinon</li>
+</ul></li>
+<li><label><input type="checkbox">Au lieu d’afficher ce booléen, ajouter une condition pour n’afficher que lorsque le prénom a été plus donné à des filles</label></li>
+</ul>
+</section>
+</section>
+<section id="fichier-détail-des-individus" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="fichier-détail-des-individus"><span class="header-section-number">3</span> Fichier détail des individus</h2>
 <p>CREATE OR REPLACE VIEW fd_indcvi_2020 AS FROM ‘https://static.data.gouv.fr/resources/recensement-de-la-population-fichiers-detail-individus-localises-au-canton-ou-ville-2020-1/20231023-122841/fd-indcvi-2020.parquet’;</p>
 <p>DESCRIBE FROM fd_indcvi_2020 ;</p>
 <p>SELECT arm, voit, ROUND(sum(ipondi/nperr::int)) AS eft FROM fd_indcvi_2020 WHERE dept = ‘75’ AND NPERR &lt;&gt; ‘Z’ GROUP BY ALL ;</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

@@ -219,7 +219,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#données-utilisées" id="toc-données-utilisées" class="nav-link active" data-scroll-target="#données-utilisées"><span class="header-section-number">1</span> Données utilisées</a></li>
   <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions"><span class="header-section-number">2</span> Questions</a></li>
-  <li><a href="#compter-les-lignes" id="toc-compter-les-lignes" class="nav-link" data-scroll-target="#compter-les-lignes"><span class="header-section-number">3</span> Compter les lignes</a></li>
+  <li><a href="#compter-les-lignes" id="toc-compter-les-lignes" class="nav-link" data-scroll-target="#compter-les-lignes"><span class="header-section-number">3</span> Compter les lignes</a>
+  <ul class="collapse">
+  <li><a href="#compter-avec-un-filtre" id="toc-compter-avec-un-filtre" class="nav-link" data-scroll-target="#compter-avec-un-filtre">Compter avec un filtre</a></li>
+  </ul></li>
   <li><a href="#somme" id="toc-somme" class="nav-link" data-scroll-target="#somme"><span class="header-section-number">4</span> Somme</a></li>
   <li><a href="#stats-descriptives" id="toc-stats-descriptives" class="nav-link" data-scroll-target="#stats-descriptives"><span class="header-section-number">5</span> Stats descriptives</a>
   <ul class="collapse">
@@ -390,9 +393,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="notes">
 <p>J’utilise souvent COUNT(1) -&gt; c’est pareil</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">FILTER</span> (<span class="kw">WHERE</span> prenom <span class="kw">LIKE</span> <span class="st">'A%'</span>)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<section id="compter-avec-un-filtre" class="level3">
+<h3 class="anchored" data-anchor-id="compter-avec-un-filtre">Compter avec un filtre</h3>
+<p>L’opérateur <code>FILTER</code> permet de calculer une agrégation conditionnelle.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">FILTER</span> (<span class="kw">WHERE</span> elo <span class="kw">BETWEEN</span> <span class="dv">2300</span> <span class="kw">AND</span> <span class="dv">2399</span>) <span class="kw">AS</span> niv_fm,</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">FILTER</span> (<span class="kw">WHERE</span> elo <span class="kw">BETWEEN</span> <span class="dv">2400</span> <span class="kw">AND</span> <span class="dv">2499</span>) <span class="kw">AS</span> niv_im</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="small-table">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th><strong>niv_fm</strong></th>
+<th><strong>niv_im</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>5</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
 </section>
 <section id="somme" class="level2" data-number="4">
 <h2 data-number="4" class="anchored" data-anchor-id="somme"><span class="header-section-number">4</span> Somme</h2>

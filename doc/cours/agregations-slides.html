@@ -496,6 +496,7 @@ Ludovic Deneuville
 </div>
 </section>
 
+<section>
 <section id="compter-les-lignes" class="title-slide slide level2 center">
 <h2>Compter les lignes</h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">COUNT</span>(<span class="op">*</span>)</span>
@@ -534,8 +535,6 @@ Ludovic Deneuville
 </div>
 <aside class="notes">
 <p>J’utilise souvent COUNT(1) -&gt; c’est pareil</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">FILTER</span> (<span class="kw">WHERE</span> prenom <span class="kw">LIKE</span> <span class="st">'A%'</span>)</span>
-<span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -548,7 +547,29 @@ Ludovic Deneuville
           display:block!important;
       }</style></aside>
 </section>
-
+<section id="compter-avec-un-filtre" class="slide level3">
+<h3>Compter avec un filtre</h3>
+<p>L’opérateur <code>FILTER</code> permet de calculer une agrégation conditionnelle.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">FILTER</span> (<span class="kw">WHERE</span> elo <span class="kw">BETWEEN</span> <span class="dv">2300</span> <span class="kw">AND</span> <span class="dv">2399</span>) <span class="kw">AS</span> niv_fm,</span>
+<span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a>       <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">FILTER</span> (<span class="kw">WHERE</span> elo <span class="kw">BETWEEN</span> <span class="dv">2400</span> <span class="kw">AND</span> <span class="dv">2499</span>) <span class="kw">AS</span> niv_im</span>
+<span id="cb3-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="small-table">
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th><strong>niv_fm</strong></th>
+<th><strong>niv_im</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>5</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section></section>
 <section id="somme" class="title-slide slide level2 center">
 <h2>Somme</h2>
 <div class="sourceCode" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">SUM</span>(elo)</span>
