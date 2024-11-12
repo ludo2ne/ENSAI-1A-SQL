@@ -16,13 +16,23 @@ number-depth: 3
 
 ## Introduction {.unnumbered}
 
-Vous allez réaliser ce TP sur le [Datalab du GENES](https://onyxia.lab.groupe-genes.fr/){target="_blank"}
+Pour réaliser ce TP, vous pouvez choisir parmi 3 possibilités :
 
-- [ ] Connectez-vous au Datalab
-  - Vous pouvez également utiliser le [Datalab SSPCloud de l'INSEE](https://datalab.sspcloud.fr/){target="_blank"} en créant un compte avec votre mail ENSAI.
+- [Datalab du GENES](https://onyxia.lab.groupe-genes.fr/){target="_blank"}
+- [Datalab SSPCloud](https://datalab.sspcloud.fr/){target="_blank"} de l'INSEE
+- Directement depuis la VM ENSAI
 
-::: {.callout-caution title="En cas d'indisponibilité du Datalab" collapse="true"}
-En cas d'indisponibilité du Datalab, DBeaver est directement installé sur les VM.
+### Datalab du GENES ou SSPCloud {.unnumbered}
+
+Aux choix, connectez-vous au :
+
+- [ ] [Datalab du GENES](https://onyxia.lab.groupe-genes.fr/){target="_blank"}
+- [ ] [Datalab SSPCloud de l'INSEE](https://datalab.sspcloud.fr/){target="_blank"} 
+  - en créant un compte avec votre mail ENSAI
+
+### VM ENSAI {.unnumbered}
+
+En cas d'indisponibilité des Datalab, DBeaver est directement installé sur les VM.
 
 - [ ] Lancez DBeaver
 - [ ] Onglet *Base de données* :arrow_right: *Nouvelle Connexion*
@@ -34,10 +44,13 @@ En cas d'indisponibilité du Datalab, DBeaver est directement installé sur les 
   - *Editeur SQL* :arrow_right: *Script SQL* (raccourci : F3)
 
 Cela ouvre une fenêtre dans laquelle vous pouvez saisir du SQL.
-:::
 
 
 ## Lancement du service
+
+::: {.callout-note}
+Uniquement sur le Datalab.
+:::
 
 - [ ] Lancez le service [CloudBeaver](https://dbeaver.com/docs/cloudbeaver/){target="_blank"}
   - Allez dans **Catalogue de services**
@@ -68,32 +81,7 @@ Il est souvent utilisé pour l'analyse de données embarquée ou dans des flux d
   - vous pouvez maintenant saisir du code *SQL*
 
 
-## Premières requêtes
-
-
-::: {.callout-important}
-
-Prenez le temps et l'habitude d'écrire de jolies requêtes bien alignées !!!
-
-```{.sql filename="bien.sql"}
-SELECT c.nom AS club, 
-       AVG(j.elo) AS moyenne_elo
-  FROM joueuse j 
- INNER JOIN club c USING (id_club) 
- WHERE j.mail IS NOT NULL 
- GROUP BY c.nom 
- ORDER BY 2 DESC;
-```
-
-<br>
-
-```{.sql filename="pasbien.sql"}
-SELECT c.nom AS club, AVG(j.elo) AS moyenne_elo FROM joueuse j INNER JOIN club c USING (id_club) WHERE mail IS NOT NULL GROUP BY c.nom ORDER BY 2 DESC;
-```
-
-:::
-
-### Les prénoms
+## Les prénoms
 
 
 Le fichier des prénoms contient des données sur les prénoms attribués aux enfants nés en France depuis 1900. Ces données sont disponibles au niveau France et par département.
@@ -123,6 +111,32 @@ Le format **Parquet** est un format de fichier de stockage de données optimisé
 
 Vous pourrez ensuite requêter sur cette vue comme si c'était une table.
 
+
+### Premières requêtes
+
+
+::: {.callout-important}
+
+Prenez le temps et l'habitude d'écrire de jolies requêtes bien alignées !!!
+
+```{.sql filename="bien.sql"}
+SELECT c.nom AS club, 
+       AVG(j.elo) AS moyenne_elo
+  FROM joueuse j 
+ INNER JOIN club c USING (id_club) 
+ WHERE j.mail IS NOT NULL 
+ GROUP BY c.nom 
+ ORDER BY 2 DESC;
+```
+
+<br>
+
+```{.sql filename="pasbien.sql"}
+SELECT c.nom AS club, AVG(j.elo) AS moyenne_elo FROM joueuse j INNER JOIN club c USING (id_club) WHERE mail IS NOT NULL GROUP BY c.nom ORDER BY 2 DESC;
+```
+
+:::
+
 - [ ] Listez tous les éléments de `prenom`
 - [ ] Filtrez pour ne plus afficher les *prénoms rares*
   - Utilisez ce filtre pour toutes les requêtes suivantes
@@ -145,32 +159,81 @@ De même, si vous êtiez 2 à porter ce prénom, l'autre *Yann-Adam* connaitrait
   - Que remarquez-vous ?
 - [ ] Ajoutez un filtre pour exclure l'année non renseignée
   - Conservez ce filtre pour toutes les prochaines requêtes
+
+### Année 2022
+
 - [ ] Listez les prénoms de l'année 2022
   - Classez-les en décroissant par le nombre de fois où ils sont été donnés
 - [ ] Listez les prénoms de l'année 2022 donnés plus de 2000 fois
 - [ ] Classez-les d'abord par sexe, puis par nombre décroissant d'occurrences
 
 
-Étudions maintenant l'évolution d'un prénom.
+### Jérôme, c'est moi
 
 - [ ] Listez les années où le prénom `JÉRÔME` a été donné
   - classez par année décroissante
   - Que remarquez-vous ?
 - [ ] Listez également les `JEROME` avec d'autres accents / sans accent
-  - voir la fonction DuckDB *strip_accents()*
+  - recherchez une fonction DuckDB qui permet de répondre à ce besoin
 - [ ] Affichez pour chaque année le nombre de fois où le prénom JEROME a été donné, quelle que soit l'accentuation
 
 ::: {.callout-tip title="Aide" collapse="true"}
+- voir Fontion DuckDB strip_accents()
 - Regroupez par strip_accents(preusuel) et annais
 - Affichez strip_accents(preusuel), annais et la somme de la colonne *nombre*
 :::
 
-Prénoms composés
+### Suivi temporel
+
+- [ ] Créez une requête qui permet d'avoir le nombre de naissances par année depuis l'année 2000
+  - Vous pouvez ici retirez la restriction sur les *prénoms rares*
+  - Classez par année décroissante
+- [ ] Complétez la requête pour afficher le nombre de prénoms différents données chaque année
+
+::: {.callout-note}
+Même si le champ *annais* n'est pas de type numérique, il est possible de comparer des chaines de caractères.
+
+Le [code ASCII](https://www.ascii-code.com/fr){target="_blank"} est utilisé pour comparer le premier caractère de la chaine, puis en cas d'égalité, le 2e caractère...
+:::
+
+- [ ] Écrivez une requête qui donne le nombre de filles et de garçons nés chaque année depuis 2000.
+
+
+### Prénoms composés
+
+Nous allons maintenant nous interesser aux prénoms composés entre 2000 et 2009
+
+- [ ] Listez les prénoms composés entre les années 2000 et 2009 incluses
+- [ ] Regroupez-les par *preusuel*, puis affichez également le nombre de fois où ils ont été donnés
+  - Triez en décroissant par ce nombre
+- [ ] Filtrez pour ne garder que les prénoms composés contenant le prénom `JEAN`
+  - Que remarquez-vous ? N'y a-t-il pas des intrus ?
+- [ ] Trouvez une solution pour remédier à ce souci
+  - Par exemple avec la fonction DuckDB `split_part()`
+
+
+### Année 2016
+
+Filtrez les données sur l'année 2016 en retirant les prénoms rares et écrivez les requêtes suivantes :
+
+- [ ] Comptez le nombre de prénoms distincts donnés
+- [ ] Comptez le nombre de prénoms distincts donnés par sexe
+- [ ] Calculez le total des prénoms distincts donnés, en prenant en compte la distinction entre les sexes
+  - exemple : ici *Dominique (H)* et *Dominique (F)* comptent pour 2 prénoms
+- [ ] Donnez la liste des prénoms donnés à la fois à des filles et des garçons
+  - affichez le nombre de fois où ils ont été donnés à chaque sexe
+- [ ] Ajoutez à la dernière requête une colonne contenant un booléen qui affiche
+  - True si le prénom a été donné à plus de filles que de garçons
+  - False sinon
+- [ ] Au lieu d'afficher ce booléen, ajouter une condition pour n'afficher que lorsque le prénom a été plus donné à des filles
 
 
 
 
 
+
+
+## Fichier détail des individus
 
 CREATE OR REPLACE VIEW fd_indcvi_2020 AS
 FROM 'https://static.data.gouv.fr/resources/recensement-de-la-population-fichiers-detail-individus-localises-au-canton-ou-ville-2020-1/20231023-122841/fd-indcvi-2020.parquet'; 

@@ -51,7 +51,6 @@ Quelques questions que l'on peut se poser :
 
 ## Compter les lignes
 
-
 ```{.sql}
 SELECT COUNT(*)
   FROM echecs.joueuse
@@ -79,11 +78,22 @@ SELECT COUNT(DISTINCT prenom)
 
 ::: {.notes}
 J'utilise souvent COUNT(1) -> c'est pareil
+:::
+
+### Compter avec un filtre
+
+L'opérateur `FILTER` permet de calculer une agrégation conditionnelle. 
 
 ```{.sql}
-SELECT COUNT(*) FILTER (WHERE prenom LIKE 'A%')
+SELECT COUNT(*) FILTER (WHERE elo BETWEEN 2300 AND 2399) AS niv_fm,
+       COUNT(*) FILTER (WHERE elo BETWEEN 2400 AND 2499) AS niv_im
   FROM echecs.joueuse;
 ```
+
+::: {.small-table}
+| **niv_fm** | **niv_im** |
+|------------|------------|
+| 5          | 1          |
 :::
 
 ## Somme

@@ -417,7 +417,7 @@ SELECT nom,
 :::
 ::::::
 
-### Filter les lignes
+### Filtrer les lignes
 
 Filtrez sur les lignes avec une clause `WHERE`.
 
