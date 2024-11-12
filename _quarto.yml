@@ -36,9 +36,9 @@ website:
       - text: TP
         menu:
           - href: doc/tp/tp1.qmd
-            text: "TP1 - Datalab"
+            text: "TP1 - Premières requêtes"
           - href: doc/tp/tp2.qmd
-            text: "TP2"
+            text: "TP2 - Datalab"
     right:
       - href: doc/glossaire.qmd
         text: Glossaire
