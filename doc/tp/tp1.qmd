@@ -12,8 +12,6 @@ number-sections: true
 number-depth: 3
 ---
 
-:construction:
-
 ## Introduction {.unnumbered}
 
 Pour réaliser ce TP, vous pouvez choisir parmi 3 possibilités :
@@ -139,7 +137,6 @@ SELECT c.nom AS club, AVG(j.elo) AS moyenne_elo FROM joueuse j INNER JOIN club c
 
 - [ ] Listez tous les éléments de `prenom`
 - [ ] Filtrez pour ne plus afficher les *prénoms rares*
-  - Utilisez ce filtre pour toutes les requêtes suivantes
 
 ::: {.callout-tip title="Secret statistique"}
 Les prénoms ayant un nombre d'occurrences insuffisant sont regroupés sous une appellation générique. Cela permet de protéger le secret statistique et de garantir l'anonymat.
@@ -157,20 +154,53 @@ De même, si vous êtiez 2 à porter ce prénom, l'autre *Yann-Adam* connaitrait
 - [ ] Listez les différentes années de naissance
   - Classez-ces années en décroissant
   - Que remarquez-vous ?
-- [ ] Ajoutez un filtre pour exclure l'année non renseignée
-  - Conservez ce filtre pour toutes les prochaines requêtes
+- [ ] Ajoutez un filtre pour exclure l'année non renseignée 
+
 
 ### Année 2022
+
+::: {.callout}
+Filtrez sur l'année 2022 et excluez les prénoms rares.
+:::
 
 - [ ] Listez les prénoms de l'année 2022
   - Classez-les en décroissant par le nombre de fois où ils sont été donnés
 - [ ] Listez les prénoms de l'année 2022 donnés plus de 2000 fois
 - [ ] Classez-les d'abord par sexe, puis par nombre décroissant d'occurrences
+  - Quels sont les prénoms masculins et féminins les plus donnés ?
+- [ ] Listez les prénoms féminins commençant par la lettre *Q*
+- [ ] Compter le nombre de prénoms commençant par chaque lettre
+  - Pour extraite la première lettre d'un prénom, vous pouvez par exemple utiliser la fonction `SUBSTRING`
+  - Bonus : différenciez filles et gaçons
 
+
+### Statistiques descriptives
+
+
+- [ ] Lancez la commande `SUMMARIZE prenom;` pour avoir quelques stats sur la table
+
+::: {.callout}
+Filtrez pour exclure les prénoms rares.
+:::
+
+- [ ] Affichez pour l'année 2003, les prénoms et leurs nombres de caractères
+  - Trouvez une fonction adéquate
+- [ ] Affichez le nombres de caractères minimun, maximum et moyen parmi les prénoms de 2003
+- [ ] Listez les 3 prénoms de 2003 ayant le nombre de caractères maximum
+- [ ] Modifiez cette dernière requête pour afficher pour chaque année entre 2015 et 2022 le ou les prénoms avec le plus de caractères
+  - classez par année
+- [ ] Affichez pour chaque année la taille moyenne des prénoms
+  - classez par année
+  - utilisez la fonction `ROUND(<value>, 2)` pour arrondir les moyennes
+  - Que remarquez-vous ?
+
+::: {.callout-tip collapse="true"} 
+Dans cette partie vous allez avoir besoin d'utiliser des sous-requêtes
+:::
 
 ### Jérôme, c'est moi
 
-- [ ] Listez les années où le prénom `JÉRÔME` a été donné
+- [ ] Listez les différentes années où le prénom `JÉRÔME` a été donné
   - classez par année décroissante
   - Que remarquez-vous ?
 - [ ] Listez également les `JEROME` avec d'autres accents / sans accent
@@ -185,18 +215,21 @@ De même, si vous êtiez 2 à porter ce prénom, l'autre *Yann-Adam* connaitrait
 
 ### Suivi temporel
 
+::: {.callout}
+Filtrez pour exclure l'année *XXXX*.
+:::
+
 - [ ] Créez une requête qui permet d'avoir le nombre de naissances par année depuis l'année 2000
-  - Vous pouvez ici retirez la restriction sur les *prénoms rares*
   - Classez par année décroissante
 - [ ] Complétez la requête pour afficher le nombre de prénoms différents données chaque année
+  - Remarque : vous n'aurez pas le nombre exact car certains sont dans les prénoms rares
+- [ ] Écrivez une requête qui donne le nombre de filles et de garçons nés chaque année depuis 2000
 
 ::: {.callout-note}
 Même si le champ *annais* n'est pas de type numérique, il est possible de comparer des chaines de caractères.
 
 Le [code ASCII](https://www.ascii-code.com/fr){target="_blank"} est utilisé pour comparer le premier caractère de la chaine, puis en cas d'égalité, le 2e caractère...
 :::
-
-- [ ] Écrivez une requête qui donne le nombre de filles et de garçons nés chaque année depuis 2000.
 
 
 ### Prénoms composés
@@ -212,38 +245,74 @@ Nous allons maintenant nous interesser aux prénoms composés entre 2000 et 2009
   - Par exemple avec la fonction DuckDB `split_part()`
 
 
-### Année 2016
+### Cette année-là
 
-Filtrez les données sur l'année 2016 en retirant les prénoms rares et écrivez les requêtes suivantes :
+::: {.callout}
+Difficulty : :star: :star: :star:
+
+Filtrez sur l'année 1962 et excluez les prénoms rares.
+:::
 
 - [ ] Comptez le nombre de prénoms distincts donnés
-- [ ] Comptez le nombre de prénoms distincts donnés par sexe
-- [ ] Calculez le total des prénoms distincts donnés, en prenant en compte la distinction entre les sexes
+- [ ] Complétez en comptant le nombre de prénoms distincts donnés par sexe
+- [ ] Complétez en calculant le nombre total des prénoms distincts donnés, en prenant en compte la distinction entre les sexes
   - exemple : ici *Dominique (H)* et *Dominique (F)* comptent pour 2 prénoms
 - [ ] Donnez la liste des prénoms donnés à la fois à des filles et des garçons
   - affichez le nombre de fois où ils ont été donnés à chaque sexe
 - [ ] Ajoutez à la dernière requête une colonne contenant un booléen qui affiche
   - True si le prénom a été donné à plus de filles que de garçons
   - False sinon
-- [ ] Au lieu d'afficher ce booléen, ajouter une condition pour n'afficher que lorsque le prénom a été plus donné à des filles
+- [ ] Au lieu d'afficher ce booléen, ajoutez une condition pour n'afficher que lorsque le prénom a été plus donné à des filles
+
+
+
+## Fichier des individus
+
+- [ ] Créez une vue qui pointe vers le fichier des individus du recensement de la population 2020
+  ```{.sql}
+  CREATE OR REPLACE VIEW individus AS
+  FROM 'https://static.data.gouv.fr/resources/recensement-de-la-population-fichiers-detail-individus-localises-au-canton-ou-ville-2020-1/20231023-122841/fd-indcvi-2020.parquet';
+  ```
+- [ ] Comptez le nombre d'individus
+  - Pourquoi ce nombre d'individus vivant en France paraît faible ?
+
+::: {.callout-tip title="Poids de l'individu"}
+Dans de nombreuses bases de données de l'INSEE, la variable `ipondi` représente le poids de l'individu.
+
+i.e. Si une ligne a un IPONDI égal à 2, cela signifie qu'elle représente 2 individus.
+:::
+
+- [ ] Au lieu de compter le nombre de lignes, sommez la variable `ipondi`
+  - Vous pouvez suffixer votre somme par `::INT` pour convertir ce nombre en entier
+- [ ] Affichez 10 lignes
+  - Que remarquez-vous ?
+
+
+::: {.callout-note title="Codification"}
+Pourquoi utiliser une codification pour le fichier national individus localisés au canton-ou-ville du recensement de la population 2020 ?
+
+- **Espace de stockage réduit** : Les codes courts remplacent des chaînes de texte plus longues, ce qui diminue la taille du fichier et rend le stockage et le transfert de données plus efficaces. Même après codification, le fichier pèse plus de 500 Mo
+- **Standardisation et uniformité** : Utiliser des codes standardisés permet de garantir une structure homogène et facilite l'intégration et la comparaison des données entre différents fichiers ou études.
+- **Performances de traitement** : Les codes sont plus rapides à traiter que des textes longs, notamment pour des opérations de recherche, de tri, et de filtrage, ce qui est crucial pour les grands ensembles de données.
+:::
+
+- [ ] Pour s'y retrouver, créez une vue vers le dictionnaire des variables
+  ```{.sql}
+  CREATE OR REPLACE VIEW variables_individus AS
+  FROM 'https://static.data.gouv.fr/resources/recensement-de-la-population-fichiers-detail-individus-localises-au-canton-ou-ville-2020-1/20231025-082910/dictionnaire-variables-indcvi-2020.csv'
+  ```
+- [ ] Affichez tout le contenu de cette vue
+- [ ] Trouvez la modalité représentant le département de résidence de l'individu
+- [ ] Affichez le nombre d'habitants par départements
+  - ordonnez par numéro de département
+- [ ] Complétez la requête en :
+  - restreignant sur les individus entre 25 et 29 ans
+  -  différenciant les hommes et les femmes
+
+## Pour aller plus loin {.unnumbered}
+
+- [3 explorations bluffantes avec DuckDB](https://www.icem7.fr/pedagogie/3-explorations-bluffantes-avec-duckdb-1-interroger-des-fichiers-distants/){target="_blank"}
 
 
 
 
-
-
-
-## Fichier détail des individus
-
-CREATE OR REPLACE VIEW fd_indcvi_2020 AS
-FROM 'https://static.data.gouv.fr/resources/recensement-de-la-population-fichiers-detail-individus-localises-au-canton-ou-ville-2020-1/20231023-122841/fd-indcvi-2020.parquet'; 
-
-DESCRIBE FROM fd_indcvi_2020 ;
-
-SELECT arm, 
-       voit,
-       ROUND(sum(ipondi/nperr::int)) AS eft
-  FROM fd_indcvi_2020
- WHERE dept = '75' 
-   AND NPERR <> 'Z'
- GROUP BY ALL ; 
