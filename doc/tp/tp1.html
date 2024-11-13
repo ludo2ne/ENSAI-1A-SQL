@@ -227,12 +227,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#premières-requêtes" id="toc-premières-requêtes" class="nav-link" data-scroll-target="#premières-requêtes"><span class="header-section-number">2.1</span> Premières requêtes</a></li>
   <li><a href="#année-2022" id="toc-année-2022" class="nav-link" data-scroll-target="#année-2022"><span class="header-section-number">2.2</span> Année 2022</a></li>
-  <li><a href="#jérôme-cest-moi" id="toc-jérôme-cest-moi" class="nav-link" data-scroll-target="#jérôme-cest-moi"><span class="header-section-number">2.3</span> Jérôme, c’est moi</a></li>
-  <li><a href="#suivi-temporel" id="toc-suivi-temporel" class="nav-link" data-scroll-target="#suivi-temporel"><span class="header-section-number">2.4</span> Suivi temporel</a></li>
-  <li><a href="#prénoms-composés" id="toc-prénoms-composés" class="nav-link" data-scroll-target="#prénoms-composés"><span class="header-section-number">2.5</span> Prénoms composés</a></li>
-  <li><a href="#année-2016" id="toc-année-2016" class="nav-link" data-scroll-target="#année-2016"><span class="header-section-number">2.6</span> Année 2016</a></li>
+  <li><a href="#statistiques-descriptives" id="toc-statistiques-descriptives" class="nav-link" data-scroll-target="#statistiques-descriptives"><span class="header-section-number">2.3</span> Statistiques descriptives</a></li>
+  <li><a href="#jérôme-cest-moi" id="toc-jérôme-cest-moi" class="nav-link" data-scroll-target="#jérôme-cest-moi"><span class="header-section-number">2.4</span> Jérôme, c’est moi</a></li>
+  <li><a href="#suivi-temporel" id="toc-suivi-temporel" class="nav-link" data-scroll-target="#suivi-temporel"><span class="header-section-number">2.5</span> Suivi temporel</a></li>
+  <li><a href="#prénoms-composés" id="toc-prénoms-composés" class="nav-link" data-scroll-target="#prénoms-composés"><span class="header-section-number">2.6</span> Prénoms composés</a></li>
+  <li><a href="#cette-année-là" id="toc-cette-année-là" class="nav-link" data-scroll-target="#cette-année-là"><span class="header-section-number">2.7</span> Cette année-là</a></li>
   </ul></li>
-  <li><a href="#fichier-détail-des-individus" id="toc-fichier-détail-des-individus" class="nav-link" data-scroll-target="#fichier-détail-des-individus"><span class="header-section-number">3</span> Fichier détail des individus</a></li>
+  <li><a href="#fichier-des-individus" id="toc-fichier-des-individus" class="nav-link" data-scroll-target="#fichier-des-individus"><span class="header-section-number">3</span> Fichier des individus</a></li>
+  <li><a href="#pour-aller-plus-loin" id="toc-pour-aller-plus-loin" class="nav-link" data-scroll-target="#pour-aller-plus-loin">Pour aller plus loin</a></li>
   </ul>
 </nav>
 </nav>
@@ -273,7 +275,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p><span class="emoji" data-emoji="construction">🚧</span></p>
 <section id="introduction" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="introduction">Introduction</h2>
 <p>Pour réaliser ce TP, vous pouvez choisir parmi 3 possibilités :</p>
@@ -444,10 +445,7 @@ Important
 </div>
 <ul class="task-list">
 <li><label><input type="checkbox">Listez tous les éléments de <code>prenom</code></label></li>
-<li><label><input type="checkbox">Filtrez pour ne plus afficher les <em>prénoms rares</em></label>
-<ul>
-<li>Utilisez ce filtre pour toutes les requêtes suivantes</li>
-</ul></li>
+<li><label><input type="checkbox">Filtrez pour ne plus afficher les <em>prénoms rares</em></label></li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled" title="Secret statistique">
 <div class="callout-header d-flex align-content-center">
@@ -476,27 +474,93 @@ Secret statistique
 <li>Classez-ces années en décroissant</li>
 <li>Que remarquez-vous ?</li>
 </ul></li>
-<li><label><input type="checkbox">Ajoutez un filtre pour exclure l’année non renseignée</label>
-<ul>
-<li>Conservez ce filtre pour toutes les prochaines requêtes</li>
-</ul></li>
+<li><label><input type="checkbox">Ajoutez un filtre pour exclure l’année non renseignée</label></li>
 </ul>
 </section>
 <section id="année-2022" class="level3" data-number="2.2">
 <h3 data-number="2.2" class="anchored" data-anchor-id="année-2022"><span class="header-section-number">2.2</span> Année 2022</h3>
+<div class="callout callout-style-simple callout-none no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Filtrez sur l’année 2022 et excluez les prénoms rares.</p>
+</div>
+</div>
+</div>
 <ul class="task-list">
 <li><label><input type="checkbox">Listez les prénoms de l’année 2022</label>
 <ul>
 <li>Classez-les en décroissant par le nombre de fois où ils sont été donnés</li>
 </ul></li>
 <li><label><input type="checkbox">Listez les prénoms de l’année 2022 donnés plus de 2000 fois</label></li>
-<li><label><input type="checkbox">Classez-les d’abord par sexe, puis par nombre décroissant d’occurrences</label></li>
+<li><label><input type="checkbox">Classez-les d’abord par sexe, puis par nombre décroissant d’occurrences</label>
+<ul>
+<li>Quels sont les prénoms masculins et féminins les plus donnés ?</li>
+</ul></li>
+<li><label><input type="checkbox">Listez les prénoms féminins commençant par la lettre <em>Q</em></label></li>
+<li><label><input type="checkbox">Compter le nombre de prénoms commençant par chaque lettre</label>
+<ul>
+<li>Pour extraite la première lettre d’un prénom, vous pouvez par exemple utiliser la fonction <code>SUBSTRING</code></li>
+<li>Bonus : différenciez filles et gaçons</li>
+</ul></li>
 </ul>
 </section>
-<section id="jérôme-cest-moi" class="level3" data-number="2.3">
-<h3 data-number="2.3" class="anchored" data-anchor-id="jérôme-cest-moi"><span class="header-section-number">2.3</span> Jérôme, c’est moi</h3>
+<section id="statistiques-descriptives" class="level3" data-number="2.3">
+<h3 data-number="2.3" class="anchored" data-anchor-id="statistiques-descriptives"><span class="header-section-number">2.3</span> Statistiques descriptives</h3>
 <ul class="task-list">
-<li><label><input type="checkbox">Listez les années où le prénom <code>JÉRÔME</code> a été donné</label>
+<li><label><input type="checkbox">Lancez la commande <code>SUMMARIZE prenom;</code> pour avoir quelques stats sur la table</label></li>
+</ul>
+<div class="callout callout-style-simple callout-none no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Filtrez pour exclure les prénoms rares.</p>
+</div>
+</div>
+</div>
+<ul class="task-list">
+<li><label><input type="checkbox">Affichez pour l’année 2003, les prénoms et leurs nombres de caractères</label>
+<ul>
+<li>Trouvez une fonction adéquate</li>
+</ul></li>
+<li><label><input type="checkbox">Affichez le nombres de caractères minimun, maximum et moyen parmi les prénoms de 2003</label></li>
+<li><label><input type="checkbox">Listez les 3 prénoms de 2003 ayant le nombre de caractères maximum</label></li>
+<li><label><input type="checkbox">Modifiez cette dernière requête pour afficher pour chaque année entre 2015 et 2022 le ou les prénoms avec le plus de caractères</label>
+<ul>
+<li>classez par année</li>
+</ul></li>
+<li><label><input type="checkbox">Affichez pour chaque année la taille moyenne des prénoms</label>
+<ul>
+<li>classez par année</li>
+<li>utilisez la fonction <code>ROUND(&lt;value&gt;, 2)</code> pour arrondir les moyennes</li>
+<li>Que remarquez-vous ?</li>
+</ul></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Dans cette partie vous allez avoir besoin d’utiliser des sous-requêtes</p>
+</div>
+</div>
+</div>
+</section>
+<section id="jérôme-cest-moi" class="level3" data-number="2.4">
+<h3 data-number="2.4" class="anchored" data-anchor-id="jérôme-cest-moi"><span class="header-section-number">2.4</span> Jérôme, c’est moi</h3>
+<ul class="task-list">
+<li><label><input type="checkbox">Listez les différentes années où le prénom <code>JÉRÔME</code> a été donné</label>
 <ul>
 <li>classez par année décroissante</li>
 <li>Que remarquez-vous ?</li>
@@ -508,7 +572,7 @@ Secret statistique
 <li><label><input type="checkbox">Affichez pour chaque année le nombre de fois où le prénom JEROME a été donné, quelle que soit l’accentuation</label></li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled" title="Aide">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -517,7 +581,7 @@ Aide
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
 <li>voir Fontion DuckDB strip_accents()</li>
@@ -528,15 +592,28 @@ Aide
 </div>
 </div>
 </section>
-<section id="suivi-temporel" class="level3" data-number="2.4">
-<h3 data-number="2.4" class="anchored" data-anchor-id="suivi-temporel"><span class="header-section-number">2.4</span> Suivi temporel</h3>
+<section id="suivi-temporel" class="level3" data-number="2.5">
+<h3 data-number="2.5" class="anchored" data-anchor-id="suivi-temporel"><span class="header-section-number">2.5</span> Suivi temporel</h3>
+<div class="callout callout-style-simple callout-none no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Filtrez pour exclure l’année <em>XXXX</em>.</p>
+</div>
+</div>
+</div>
 <ul class="task-list">
 <li><label><input type="checkbox">Créez une requête qui permet d’avoir le nombre de naissances par année depuis l’année 2000</label>
 <ul>
-<li>Vous pouvez ici retirez la restriction sur les <em>prénoms rares</em></li>
 <li>Classez par année décroissante</li>
 </ul></li>
-<li><label><input type="checkbox">Complétez la requête pour afficher le nombre de prénoms différents données chaque année</label></li>
+<li><label><input type="checkbox">Complétez la requête pour afficher le nombre de prénoms différents données chaque année</label>
+<ul>
+<li>Remarque : vous n’aurez pas le nombre exact car certains sont dans les prénoms rares</li>
+</ul></li>
+<li><label><input type="checkbox">Écrivez une requête qui donne le nombre de filles et de garçons nés chaque année depuis 2000</label></li>
 </ul>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -552,12 +629,9 @@ Note
 <p>Le <a href="https://www.ascii-code.com/fr" target="_blank">code ASCII</a> est utilisé pour comparer le premier caractère de la chaine, puis en cas d’égalité, le 2e caractère…</p>
 </div>
 </div>
-<ul class="task-list">
-<li><label><input type="checkbox">Écrivez une requête qui donne le nombre de filles et de garçons nés chaque année depuis 2000.</label></li>
-</ul>
 </section>
-<section id="prénoms-composés" class="level3" data-number="2.5">
-<h3 data-number="2.5" class="anchored" data-anchor-id="prénoms-composés"><span class="header-section-number">2.5</span> Prénoms composés</h3>
+<section id="prénoms-composés" class="level3" data-number="2.6">
+<h3 data-number="2.6" class="anchored" data-anchor-id="prénoms-composés"><span class="header-section-number">2.6</span> Prénoms composés</h3>
 <p>Nous allons maintenant nous interesser aux prénoms composés entre 2000 et 2009</p>
 <ul class="task-list">
 <li><label><input type="checkbox">Listez les prénoms composés entre les années 2000 et 2009 incluses</label></li>
@@ -575,13 +649,23 @@ Note
 </ul></li>
 </ul>
 </section>
-<section id="année-2016" class="level3" data-number="2.6">
-<h3 data-number="2.6" class="anchored" data-anchor-id="année-2016"><span class="header-section-number">2.6</span> Année 2016</h3>
-<p>Filtrez les données sur l’année 2016 en retirant les prénoms rares et écrivez les requêtes suivantes :</p>
+<section id="cette-année-là" class="level3" data-number="2.7">
+<h3 data-number="2.7" class="anchored" data-anchor-id="cette-année-là"><span class="header-section-number">2.7</span> Cette année-là</h3>
+<div class="callout callout-style-simple callout-none no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Difficulty : <span class="emoji" data-emoji="star">⭐</span> <span class="emoji" data-emoji="star">⭐</span> <span class="emoji" data-emoji="star">⭐</span></p>
+<p>Filtrez sur l’année 1962 et excluez les prénoms rares.</p>
+</div>
+</div>
+</div>
 <ul class="task-list">
 <li><label><input type="checkbox">Comptez le nombre de prénoms distincts donnés</label></li>
-<li><label><input type="checkbox">Comptez le nombre de prénoms distincts donnés par sexe</label></li>
-<li><label><input type="checkbox">Calculez le total des prénoms distincts donnés, en prenant en compte la distinction entre les sexes</label>
+<li><label><input type="checkbox">Complétez en comptant le nombre de prénoms distincts donnés par sexe</label></li>
+<li><label><input type="checkbox">Complétez en calculant le nombre total des prénoms distincts donnés, en prenant en compte la distinction entre les sexes</label>
 <ul>
 <li>exemple : ici <em>Dominique (H)</em> et <em>Dominique (F)</em> comptent pour 2 prénoms</li>
 </ul></li>
@@ -594,15 +678,85 @@ Note
 <li>True si le prénom a été donné à plus de filles que de garçons</li>
 <li>False sinon</li>
 </ul></li>
-<li><label><input type="checkbox">Au lieu d’afficher ce booléen, ajouter une condition pour n’afficher que lorsque le prénom a été plus donné à des filles</label></li>
+<li><label><input type="checkbox">Au lieu d’afficher ce booléen, ajoutez une condition pour n’afficher que lorsque le prénom a été plus donné à des filles</label></li>
 </ul>
 </section>
 </section>
-<section id="fichier-détail-des-individus" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="fichier-détail-des-individus"><span class="header-section-number">3</span> Fichier détail des individus</h2>
-<p>CREATE OR REPLACE VIEW fd_indcvi_2020 AS FROM ‘https://static.data.gouv.fr/resources/recensement-de-la-population-fichiers-detail-individus-localises-au-canton-ou-ville-2020-1/20231023-122841/fd-indcvi-2020.parquet’;</p>
-<p>DESCRIBE FROM fd_indcvi_2020 ;</p>
-<p>SELECT arm, voit, ROUND(sum(ipondi/nperr::int)) AS eft FROM fd_indcvi_2020 WHERE dept = ‘75’ AND NPERR &lt;&gt; ‘Z’ GROUP BY ALL ;</p>
+<section id="fichier-des-individus" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="fichier-des-individus"><span class="header-section-number">3</span> Fichier des individus</h2>
+<ul class="task-list">
+<li><p><label><input type="checkbox">Créez une vue qui pointe vers le fichier des individus du recensement de la population 2020</label></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">OR</span> <span class="kw">REPLACE</span> <span class="kw">VIEW</span> individus <span class="kw">AS</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> <span class="st">'https://static.data.gouv.fr/resources/recensement-de-la-population-fichiers-detail-individus-localises-au-canton-ou-ville-2020-1/20231023-122841/fd-indcvi-2020.parquet'</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p><label><input type="checkbox">Comptez le nombre d’individus</label></p>
+<ul>
+<li>Pourquoi ce nombre d’individus vivant en France paraît faible ?</li>
+</ul></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled" title="Poids de l'individu">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Poids de l’individu
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Dans de nombreuses bases de données de l’INSEE, la variable <code>ipondi</code> représente le poids de l’individu.</p>
+<p>i.e.&nbsp;Si une ligne a un IPONDI égal à 2, cela signifie qu’elle représente 2 individus.</p>
+</div>
+</div>
+<ul class="task-list">
+<li><label><input type="checkbox">Au lieu de compter le nombre de lignes, sommez la variable <code>ipondi</code></label>
+<ul>
+<li>Vous pouvez suffixer votre somme par <code>::INT</code> pour convertir ce nombre en entier</li>
+</ul></li>
+<li><label><input type="checkbox">Affichez 10 lignes</label>
+<ul>
+<li>Que remarquez-vous ?</li>
+</ul></li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled" title="Codification">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Codification
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Pourquoi utiliser une codification pour le fichier national individus localisés au canton-ou-ville du recensement de la population 2020 ?</p>
+<ul>
+<li><strong>Espace de stockage réduit</strong> : Les codes courts remplacent des chaînes de texte plus longues, ce qui diminue la taille du fichier et rend le stockage et le transfert de données plus efficaces. Même après codification, le fichier pèse plus de 500 Mo</li>
+<li><strong>Standardisation et uniformité</strong> : Utiliser des codes standardisés permet de garantir une structure homogène et facilite l’intégration et la comparaison des données entre différents fichiers ou études.</li>
+<li><strong>Performances de traitement</strong> : Les codes sont plus rapides à traiter que des textes longs, notamment pour des opérations de recherche, de tri, et de filtrage, ce qui est crucial pour les grands ensembles de données.</li>
+</ul>
+</div>
+</div>
+<ul class="task-list">
+<li><p><label><input type="checkbox">Pour s’y retrouver, créez une vue vers le dictionnaire des variables</label></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">OR</span> <span class="kw">REPLACE</span> <span class="kw">VIEW</span> variables_individus <span class="kw">AS</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> <span class="st">'https://static.data.gouv.fr/resources/recensement-de-la-population-fichiers-detail-individus-localises-au-canton-ou-ville-2020-1/20231025-082910/dictionnaire-variables-indcvi-2020.csv'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p><label><input type="checkbox">Affichez tout le contenu de cette vue</label></p></li>
+<li><p><label><input type="checkbox">Trouvez la modalité représentant le département de résidence de l’individu</label></p></li>
+<li><p><label><input type="checkbox">Affichez le nombre d’habitants par départements</label></p>
+<ul>
+<li>ordonnez par numéro de département</li>
+</ul></li>
+<li><p><label><input type="checkbox">Complétez la requête en :</label></p>
+<ul>
+<li>restreignant sur les individus entre 25 et 29 ans</li>
+<li>différenciant les hommes et les femmes</li>
+</ul></li>
+</ul>
+</section>
+<section id="pour-aller-plus-loin" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="pour-aller-plus-loin">Pour aller plus loin</h2>
+<ul>
+<li><a href="https://www.icem7.fr/pedagogie/3-explorations-bluffantes-avec-duckdb-1-interroger-des-fichiers-distants/" target="_blank">3 explorations bluffantes avec DuckDB</a></li>
+</ul>
 
 
 </section>
