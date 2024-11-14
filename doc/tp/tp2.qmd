@@ -12,3 +12,93 @@ number-sections: true
 number-depth: 3
 lightbox: true
 ---
+
+
+:construction:
+
+## Lancement des services
+
+### Datalab du GENES ou SSPCloud
+
+Connectez-vous à l'une des 2 instances suivantes (elles sont quasiment identiques) :
+
+- [ ] [Datalab du GENES](https://onyxia.lab.groupe-genes.fr/){target="_blank"}
+- [ ] [Datalab SSPCloud de l'INSEE](https://datalab.sspcloud.fr/){target="_blank"} 
+  - en créant un compte avec votre mail ENSAI
+
+::: {.callout-tip}
+Pour éviter les problèmes de charges :
+
+- Les élèves fonctionnaires feront le TP sur le SSPCloud
+- Les élèves ingénieurs :arrow_right: Datalab du GENES
+:::
+
+### Base de données PostgreSQL
+
+::: {.callout-note}
+Lors du premier TP, nous avons utilisé des données de fichiers parquet lus directement avec DuckDB.
+
+Aujourd'hui, nous allons :
+
+- Créer notre propre base de données [PostgreSQL](https://www.postgresql.org/){target="_blank"}
+- Créer des schémas et des tables
+- Insérer des données
+- Requêter ces données
+:::
+
+- [ ] Lancez le service PostgreSQL
+  - Allez dans **Catalogue de services**
+  - Onglet **Databases**
+- [ ] Copiez-collez dans un fichier texte les informations de connexion PostgreSQL : Hostname, Port, Database, Username, Password
+
+### CloudBeaver
+
+- [ ] Lancez le service [CloudBeaver](https://dbeaver.com/docs/cloudbeaver/){target="_blank"}
+  - Allez dans **Catalogue de services**
+  - Onglet **Databases**
+- [ ] Copiez-collez également les informations de connexion au service *CloudBeaver*
+- [ ] Ouvrez ce service
+
+Normalement la connexion à la base de données *PostgreSQL* est détectée automatiquement.
+
+Dans le cas contraire, il faut cliquer sur le +, puis sur *New connection* et resenigné les éléments de connexion.
+
+- [ ] Dans l'explorateur à gauche, clic droit sur bdd PostgreSQL :arrow_right: SQL Editor
+
+Cela ouvre une fenêtre où vous pouvez écrire du code SQL pour interagir avec votre base de données.
+
+## Exercices
+
+### École de musique
+
+Nous allons commencer par créer les tables et insérer les données :
+
+- [ ] Copiez le contenu de ce [script sql](./data/tp2-musique-create-pop.sql){target="_blank"} 
+- [ ] Collez dans la fenêtre SQL de CloudBeaver
+- [ ] Exécutez le script
+  - Cliquez sur la petite icone sous les triangles oranges qui ressemble à :scroll:
+  - raccourci (ALT + X)
+- [ ] Vérifiez que votre schéme et vos tables sont créés
+  - Dans l'explorateur : PostgreSQL :arrow_right: Databases :arrow_right: defaultdb :arrow_right: Schemas
+  - Clic droit sur *Schemas* :arrow_right: Refresh
+
+Si tout est ok, vous n'avez plus besoin du script de création et d'insertion de données.
+
+- [ ] Supprimez le contenu du code SQL ou ouvrez un nouvel éditeur SQL
+
+Vous pouvez maintenant commencer l'exercice et écrire les requêtes permettant de répondre aux questions suivantes :
+
+- [ ] Quels sont les noms des adhérents
+- [ ] Quels sont les noms des instruments présents dans la base de données
+- [ ] Quelle est l’adresse de l’adhérent numéro 15
+- [ ] Quels sont les numéros des adhérents de nom `DUPONT`
+- [ ] Donnez le(s) nom(s) de l'instrument(s) dont joue l'adhérent numéro 15
+- [ ] Donnez le nom des adhérents inscrits au cours numéro 6
+- [ ] Donnez les noms des adhérents inscrits au cours de guitare classique (le nom du cours est `GUIT-CLASS`)
+- [ ] Quels sont les cours auxquels sont inscrits les adhérents qui jouent du piano
+- [ ] De quels instruments jouent les personnes inscrites au cours de guitare classique
+
+
+### Location de DVD
+
+:contruction:

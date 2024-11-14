@@ -14,23 +14,44 @@ number-depth: 3
 
 ## Introduction {.unnumbered}
 
-Pour réaliser ce TP, vous pouvez choisir parmi 3 possibilités :
+Vous allez réaliser ce TP su un Datalab.
 
-- [Datalab du GENES](https://onyxia.lab.groupe-genes.fr/){target="_blank"}
-- [Datalab SSPCloud](https://datalab.sspcloud.fr/){target="_blank"} de l'INSEE
-- Directement depuis la VM ENSAI
+::: {.callout-note title="Le Datalab en quelques mots"}
+Un TP dédié vous expliquera plus en détail ce qu'est le Datalab.
+
+Le Datalab permet aux utilisateurs de lancer facilement des services pour travailler avec des langages comme R ou Python, ou encore gérer des bases de données. 
+
+Il offre une grande puissance de calcul, ce qui permet de traiter de gros volumes de données et de réaliser des analyses complexes sans se soucier des limites techniques. 
+
+Avec cette plateforme :
+
+- les utilisateurs accèdent aux ressources nécessaires en quelques clics
+- sans devoir installer eux-mêmes les logiciels 
+- ni configurer les serveurs
+:::
 
 ### Datalab du GENES ou SSPCloud {.unnumbered}
 
-Aux choix, connectez-vous au :
+Connectez-vous à l'une des 2 instances suivantes (elles sont quasiment identiques) :
 
 - [ ] [Datalab du GENES](https://onyxia.lab.groupe-genes.fr/){target="_blank"}
 - [ ] [Datalab SSPCloud de l'INSEE](https://datalab.sspcloud.fr/){target="_blank"} 
   - en créant un compte avec votre mail ENSAI
 
+::: {.callout-tip}
+Pour éviter les problèmes de charges :
+
+- Les élèves fonctionnaires feront le TP sur le SSPCloud
+- Les élèves ingénieurs :arrow_right: Datalab du GENES
+:::
+
 ### VM ENSAI {.unnumbered}
 
-En cas d'indisponibilité des Datalab, DBeaver est directement installé sur les VM.
+::: {.callout-important}
+En cas d'indisponibilité des Datalab, Vous pouvez réaliser le TP directement sur votre VM.
+
+DBeaver est installé.
+:::
 
 - [ ] Lancez DBeaver
 - [ ] Onglet *Base de données* :arrow_right: *Nouvelle Connexion*
@@ -64,9 +85,18 @@ Pour ce premier TP, nous n'allons pas utiliser de base de données PostgreSQL. N
 
 
 ::: {.callout-tip title="DuckDB"}
-DuckDB est un moteur de base de données relationnelle conçu pour des analyses rapides et efficaces, directement intégré dans des environnements locaux comme Python ou R. Il est optimisé pour le traitement analytique en colonnes et peut gérer des ensembles de données de grande taille sans nécessiter de serveur externe. DuckDB est léger, facile à intégrer et offre des performances élevées pour les requêtes SQL. 
+DuckDB est un moteur de base de données relationnelle conçu pour des analyses rapides et efficaces.
 
-Il est souvent utilisé pour l'analyse de données embarquée ou dans des flux de travail de science des données. Son architecture permet d'exécuter des requêtes SQL sur des fichiers locaux sans migration préalable des données.
+DuckDB est idéal pour les charges de travail analytiques en raison de sa simplicité, de sa rapidité et de son extensibilité, surtout pour traiter des fichiers volumineux localement.
+
+| **Caractéristique**   | **Description**                                                                                                                                                 |
+|-----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Simplicité**        | Fonctionne sans serveur, intégré dans le processus hôte. Aucune dépendance externe pour la compilation ou l'exécution, simplifiant son déploiement. |
+| **Rapidité**          | Optimisé pour l'analytique (OLAP) avec un moteur d'exécution vectorisé en colonnes, réduisant le temps de traitement pour les requêtes complexes.                 |
+| **Richesse fonctionnelle** | Supporte des requêtes SQL complexes, fonctions de fenêtre, index secondaires, et assure des garanties ACID grâce au contrôle de concurrence (MVCC).         |
+| **Extensibilité**     | Permet l’ajout de types de données, fonctions et formats de fichiers via des extensions (supporte Parquet, JSON, S3, HTTP(S)).                                   |
+| **Gratuit et open-source** | Licence MIT, code source disponible et contributions ouvertes à tous.                                                                                         |
+
 :::
 
 
@@ -309,9 +339,25 @@ Pourquoi utiliser une codification pour le fichier national individus localisés
   - restreignant sur les individus entre 25 et 29 ans
   -  différenciant les hommes et les femmes
 
+
+## Arrêtez votre service {.unnumbered}
+
+C'est la fin du TP, vous pouvez maintenant sauvegarder votre travail et libérer les ressources réservées :
+
+- [ ] Copiez votre code et collez le sur votre machine dans un fichier *.sql*
+  - par exemple dans `P:/Cours1A/UE3-Bases-de-donnees-relationnelles/TP1/tp1.sql`
+- [ ] Retournez sur la page d'accueil du Datalab
+- [ ] Allez dans *Mes Services* et supprimez votre service
+
 ## Pour aller plus loin {.unnumbered}
 
 - [3 explorations bluffantes avec DuckDB](https://www.icem7.fr/pedagogie/3-explorations-bluffantes-avec-duckdb-1-interroger-des-fichiers-distants/){target="_blank"}
+
+{{< video https://www.youtube.com/watch?v=ajo0VBXT6ho >}}
+
+---
+
+{{< video https://www.youtube.com/watch?v=7nklk064IR8 >}}
 
 
 
