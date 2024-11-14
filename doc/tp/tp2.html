@@ -43,6 +43,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -342,6 +345,8 @@ Note
 <ul class="task-list">
 <li><label><input type="checkbox">Supprimez le contenu du code SQL ou ouvrez un nouvel éditeur SQL</label></li>
 </ul>
+<p>Voici le modèle de données :</p>
+<p><a href="./data/tp2-musique-modele.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="./data/tp2-musique-modele.PNG" class="img-fluid"></a></p>
 <p>Vous pouvez maintenant commencer l’exercice et écrire les requêtes permettant de répondre aux questions suivantes :</p>
 <ul class="task-list">
 <li><label><input type="checkbox">Quels sont les noms des adhérents</label></li>
@@ -357,7 +362,32 @@ Note
 </section>
 <section id="location-de-dvd" class="level3" data-number="2.2">
 <h3 data-number="2.2" class="anchored" data-anchor-id="location-de-dvd"><span class="header-section-number">2.2</span> Location de DVD</h3>
-<p>:contruction:</p>
+<p>Il fut un temps où des entreprises se spécialisaient dans la location de DVD. Dans cet exercice une telle entreprise souhaite informatiser la gestion des prêts.</p>
+<p>De la même manière que pour le premier exercice, chargez les données avec ce <a href="./data/tp2-dvd-create-pop.sql" target="_blank">script sql</a></p>
+<p>Modèle de données :</p>
+<p><a href="./data/tp2-dvd-modele.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="./data/tp2-dvd-modele.PNG" class="img-fluid"></a></p>
+<p>Donnez les requêtes pour obtenir :</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Nom et prénom des adhérents</label></li>
+<li><label><input type="checkbox">Titre des films de la base</label></li>
+<li><label><input type="checkbox">Numéro d’adhérent de <code>Pierre DUCHEMIN</code></label></li>
+<li><label><input type="checkbox">Nom, Prénom et adresse de tous les <code>DUCHEMIN</code></label></li>
+<li><label><input type="checkbox">Numéro des DVD du film <code>la guerre des etoiles</code></label></li>
+<li><label><input type="checkbox">Nom, Prénom des adhérents ayant emprunté le film `la guerre des etoiles »</label></li>
+<li><label><input type="checkbox">Nom, Prénom des adhérents ayant au moins un emprunt en cours (la date de fin de l’emprunt est nulle)</label></li>
+<li><label><input type="checkbox">Nom, Prénom du réalisateur de la <code>Guerre des étoiles</code></label></li>
+<li><label><input type="checkbox">Titre des films empruntés par pierre <code>DUCHEMIN</code></label></li>
+<li><label><input type="checkbox">Nom des réalisateurs des films empruntés par <code>pierre DUCHEMIN</code></label></li>
+<li><label><input type="checkbox">Nom des réalisateurs de films de science fiction ou policiers</label></li>
+</ul>
+<p>Les questions ci-dessous nécessitent une opération de l’algèbre relationnelle ou un concept non vu au CM1</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Nom et prénom des adhérents ayant emprunté des films de Science fiction mais pas de films policiers</label></li>
+<li><label><input type="checkbox">Nom et prénom des adhérents ayant emprunté au moins un film de Science fiction et un film policier</label></li>
+<li><label><input type="checkbox">Titre des films jamais empruntés</label></li>
+<li><label><input type="checkbox">Titre des films Science fiction jamais empruntés</label></li>
+<li><label><input type="checkbox">Titre des films empruntés par les adhérents n’ayant pas emprunté <code>les choristes</code></label></li>
+</ul>
 
 
 </section>
@@ -942,6 +972,38 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","closeEffect":"zoom","descPosition":"bottom","loop":false});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 
