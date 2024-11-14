@@ -86,6 +86,10 @@ Si tout est ok, vous n'avez plus besoin du script de création et d'insertion de
 
 - [ ] Supprimez le contenu du code SQL ou ouvrez un nouvel éditeur SQL
 
+Voici le modèle de données :
+
+![](./data/tp2-musique-modele.PNG)
+
 Vous pouvez maintenant commencer l'exercice et écrire les requêtes permettant de répondre aux questions suivantes :
 
 - [ ] Quels sont les noms des adhérents
@@ -101,4 +105,32 @@ Vous pouvez maintenant commencer l'exercice et écrire les requêtes permettant 
 
 ### Location de DVD
 
-:contruction:
+Il fut un temps où des entreprises se spécialisaient dans la location de DVD. Dans cet exercice une telle entreprise souhaite informatiser la gestion des prêts.
+
+De la même manière que pour le premier exercice, chargez les données avec ce [script sql](./data/tp2-dvd-create-pop.sql){target="_blank"} 
+
+Modèle de données :
+
+![](./data/tp2-dvd-modele.PNG)
+
+Donnez les requêtes pour obtenir :
+
+- [ ] Nom et prénom des adhérents 
+- [ ] Titre des films de la base 
+- [ ] Numéro d’adhérent de `Pierre DUCHEMIN`
+- [ ] Nom, Prénom et adresse de tous les `DUCHEMIN`
+- [ ] Numéro des DVD du film `la guerre des etoiles`
+- [ ] Nom, Prénom des adhérents ayant emprunté le film `la guerre des etoiles »
+- [ ] Nom, Prénom des adhérents ayant au moins un emprunt en cours (la date de fin de l’emprunt est nulle) 
+- [ ] Nom, Prénom du réalisateur de la `Guerre des étoiles`
+- [ ] Titre des films empruntés par pierre `DUCHEMIN`
+- [ ] Nom des réalisateurs des films empruntés par `pierre DUCHEMIN`
+- [ ] Nom des réalisateurs de films de science fiction ou policiers 
+
+Les questions ci-dessous nécessitent une opération de l'algèbre relationnelle ou un concept non vu au CM1 
+
+- [ ] Nom et prénom des adhérents ayant emprunté des films de Science fiction mais pas de films policiers 
+- [ ] Nom et prénom des adhérents ayant emprunté au moins un film de Science fiction et un film policier 
+- [ ] Titre des films jamais empruntés 
+- [ ] Titre des films Science fiction jamais empruntés 
+- [ ] Titre des films empruntés par les adhérents n’ayant pas emprunté `les choristes`
