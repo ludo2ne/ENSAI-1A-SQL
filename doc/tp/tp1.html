@@ -181,7 +181,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../../doc/tp/tp2.html">
- <span class="dropdown-text">TP2 - Datalab</span></a>
+ <span class="dropdown-text">TP2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../doc/tp/tp3.html">
+ <span class="dropdown-text">TP3 - Datalab</span></a>
   </li>  
     </ul>
   </li>
@@ -234,6 +238,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#cette-année-là" id="toc-cette-année-là" class="nav-link" data-scroll-target="#cette-année-là"><span class="header-section-number">2.7</span> Cette année-là</a></li>
   </ul></li>
   <li><a href="#fichier-des-individus" id="toc-fichier-des-individus" class="nav-link" data-scroll-target="#fichier-des-individus"><span class="header-section-number">3</span> Fichier des individus</a></li>
+  <li><a href="#arrêtez-votre-service" id="toc-arrêtez-votre-service" class="nav-link" data-scroll-target="#arrêtez-votre-service">Arrêtez votre service</a></li>
   <li><a href="#pour-aller-plus-loin" id="toc-pour-aller-plus-loin" class="nav-link" data-scroll-target="#pour-aller-plus-loin">Pour aller plus loin</a></li>
   </ul>
 </nav>
@@ -277,15 +282,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="introduction" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="introduction">Introduction</h2>
-<p>Pour réaliser ce TP, vous pouvez choisir parmi 3 possibilités :</p>
+<p>Vous allez réaliser ce TP su un Datalab.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Le Datalab en quelques mots">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Le Datalab en quelques mots
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Un TP dédié vous expliquera plus en détail ce qu’est le Datalab.</p>
+<p>Le Datalab permet aux utilisateurs de lancer facilement des services pour travailler avec des langages comme R ou Python, ou encore gérer des bases de données.</p>
+<p>Il offre une grande puissance de calcul, ce qui permet de traiter de gros volumes de données et de réaliser des analyses complexes sans se soucier des limites techniques.</p>
+<p>Avec cette plateforme :</p>
 <ul>
-<li><a href="https://onyxia.lab.groupe-genes.fr/" target="_blank">Datalab du GENES</a></li>
-<li><a href="https://datalab.sspcloud.fr/" target="_blank">Datalab SSPCloud</a> de l’INSEE</li>
-<li>Directement depuis la VM ENSAI</li>
+<li>les utilisateurs accèdent aux ressources nécessaires en quelques clics</li>
+<li>sans devoir installer eux-mêmes les logiciels</li>
+<li>ni configurer les serveurs</li>
 </ul>
+</div>
+</div>
 <section id="datalab-du-genes-ou-sspcloud" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="datalab-du-genes-ou-sspcloud">Datalab du GENES ou SSPCloud</h3>
-<p>Aux choix, connectez-vous au :</p>
+<p>Connectez-vous à l’une des 2 instances suivantes (elles sont quasiment identiques) :</p>
 <ul class="task-list">
 <li><label><input type="checkbox"><a href="https://onyxia.lab.groupe-genes.fr/" target="_blank">Datalab du GENES</a></label></li>
 <li><label><input type="checkbox"><a href="https://datalab.sspcloud.fr/" target="_blank">Datalab SSPCloud de l’INSEE</a></label>
@@ -293,10 +314,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>en créant un compte avec votre mail ENSAI</li>
 </ul></li>
 </ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Pour éviter les problèmes de charges :</p>
+<ul>
+<li>Les élèves fonctionnaires feront le TP sur le SSPCloud</li>
+<li>Les élèves ingénieurs <span class="emoji" data-emoji="arrow_right">➡️</span> Datalab du GENES</li>
+</ul>
+</div>
+</div>
 </section>
 <section id="vm-ensai" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="vm-ensai">VM ENSAI</h3>
-<p>En cas d’indisponibilité des Datalab, DBeaver est directement installé sur les VM.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>En cas d’indisponibilité des Datalab, Vous pouvez réaliser le TP directement sur votre VM.</p>
+<p>DBeaver est installé.</p>
+</div>
+</div>
 <ul class="task-list">
 <li><label><input type="checkbox">Lancez DBeaver</label></li>
 <li><label><input type="checkbox">Onglet <em>Base de données</em> <span class="emoji" data-emoji="arrow_right">➡️</span> <em>Nouvelle Connexion</em></label>
@@ -361,8 +412,42 @@ DuckDB
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>DuckDB est un moteur de base de données relationnelle conçu pour des analyses rapides et efficaces, directement intégré dans des environnements locaux comme Python ou R. Il est optimisé pour le traitement analytique en colonnes et peut gérer des ensembles de données de grande taille sans nécessiter de serveur externe. DuckDB est léger, facile à intégrer et offre des performances élevées pour les requêtes SQL.</p>
-<p>Il est souvent utilisé pour l’analyse de données embarquée ou dans des flux de travail de science des données. Son architecture permet d’exécuter des requêtes SQL sur des fichiers locaux sans migration préalable des données.</p>
+<p>DuckDB est un moteur de base de données relationnelle conçu pour des analyses rapides et efficaces.</p>
+<p>DuckDB est idéal pour les charges de travail analytiques en raison de sa simplicité, de sa rapidité et de son extensibilité, surtout pour traiter des fichiers volumineux localement.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 87%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Caractéristique</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Simplicité</strong></td>
+<td>Fonctionne sans serveur, intégré dans le processus hôte. Aucune dépendance externe pour la compilation ou l’exécution, simplifiant son déploiement.</td>
+</tr>
+<tr class="even">
+<td><strong>Rapidité</strong></td>
+<td>Optimisé pour l’analytique (OLAP) avec un moteur d’exécution vectorisé en colonnes, réduisant le temps de traitement pour les requêtes complexes.</td>
+</tr>
+<tr class="odd">
+<td><strong>Richesse fonctionnelle</strong></td>
+<td>Supporte des requêtes SQL complexes, fonctions de fenêtre, index secondaires, et assure des garanties ACID grâce au contrôle de concurrence (MVCC).</td>
+</tr>
+<tr class="even">
+<td><strong>Extensibilité</strong></td>
+<td>Permet l’ajout de types de données, fonctions et formats de fichiers via des extensions (supporte Parquet, JSON, S3, HTTP(S)).</td>
+</tr>
+<tr class="odd">
+<td><strong>Gratuit et open-source</strong></td>
+<td>Licence MIT, code source disponible et contributions ouvertes à tous.</td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <ul class="task-list">
@@ -541,7 +626,7 @@ Secret statistique
 </ul></li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -550,7 +635,7 @@ Tip
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Dans cette partie vous allez avoir besoin d’utiliser des sous-requêtes</p>
 </div>
@@ -572,7 +657,7 @@ Tip
 <li><label><input type="checkbox">Affichez pour chaque année le nombre de fois où le prénom JEROME a été donné, quelle que soit l’accentuation</label></li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled" title="Aide">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -581,7 +666,7 @@ Aide
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
 <li>voir Fontion DuckDB strip_accents()</li>
@@ -752,11 +837,26 @@ Codification
 </ul></li>
 </ul>
 </section>
+<section id="arrêtez-votre-service" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="arrêtez-votre-service">Arrêtez votre service</h2>
+<p>C’est la fin du TP, vous pouvez maintenant sauvegarder votre travail et libérer les ressources réservées :</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Copiez votre code et collez le sur votre machine dans un fichier <em>.sql</em></label>
+<ul>
+<li>par exemple dans <code>P:/Cours1A/UE3-Bases-de-donnees-relationnelles/TP1/tp1.sql</code></li>
+</ul></li>
+<li><label><input type="checkbox">Retournez sur la page d’accueil du Datalab</label></li>
+<li><label><input type="checkbox">Allez dans <em>Mes Services</em> et supprimez votre service</label></li>
+</ul>
+</section>
 <section id="pour-aller-plus-loin" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="pour-aller-plus-loin">Pour aller plus loin</h2>
 <ul>
 <li><a href="https://www.icem7.fr/pedagogie/3-explorations-bluffantes-avec-duckdb-1-interroger-des-fichiers-distants/" target="_blank">3 explorations bluffantes avec DuckDB</a></li>
 </ul>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/ajo0VBXT6ho" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<hr>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/7nklk064IR8" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 
 
 </section>
