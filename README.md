@@ -6,7 +6,13 @@
 
 ### Cours
 
-- [ ] Plan
+- CM1
+  - intro
+  - base de données
+- CM2
+  - sql-intro (select)
+  - agregations
+  - jointure
 
 ### TP
 
@@ -20,8 +26,15 @@
 #### Après
 
 - TP1 : 1eres requetes, DuckBD, WHERE, GROUP BY, not exists
-- TP2 : découverte du Datalab
-- TP3 : jointure, DATE
+- TP2 : jointure, DATE
+- TP3 : découverte du Datalab
+  - [ ] Expliquer pourquoi on a besoin de service, de stockage...
+  - [ ] Raconter une histoire
+  - [ ] Benchmark
+  - [ ] Config Git à la fin
+  - [ ] Secret -> utilisation avancée bonus
+  - [ ] Lien support Slack / Tchap
+  - [ ] DuckDB
 
 ## :rocket: Publier les pages
 
