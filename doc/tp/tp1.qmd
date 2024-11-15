@@ -114,10 +114,10 @@ DuckDB est idéal pour les charges de travail analytiques en raison de sa simpli
 
 Le fichier des prénoms contient des données sur les prénoms attribués aux enfants nés en France depuis 1900. Ces données sont disponibles au niveau France et par département.
 
-Dans ce TP, nous allons utiliser la version au format [parquet](https://parquet.apache.org/){target="_blank"}, mise à disposition sur le site [data.gouv](https://www.data.gouv.fr/fr/datasets/base-prenoms-insee-format-parquet/){target="_blank"} par [Icem7](https://www.icem7.fr/){target="_blank"}
+Dans ce TP, nous allons utiliser la version au format [parquet](https://parquet.apache.org/){target="_blank"}, mise à disposition sur le site [data.gouv](https://www.data.gouv.fr/fr/datasets/base-prenoms-insee-format-parquet/){target="_blank"} par [Icem7](https://www.icem7.fr/){target="_blank"}.
 
 
-::: {.callout-tip title="Fichier parquet"}
+::: {.callout-note title="Fichier parquet"}
 Le format **Parquet** est un format de fichier de stockage de données optimisé pour les systèmes de traitement analytique de grande échelle. Voici ses principales caractéristiques :
 
 1. **Stockage en colonnes** : Parquet stocke les données par colonnes plutôt que par lignes, ce qui améliore l'efficacité de la compression et de l'accès aux données dans les charges de travail analytiques, notamment pour les systèmes de big data comme Hadoop ou Spark.
@@ -136,8 +136,16 @@ Le format **Parquet** est un format de fichier de stockage de données optimisé
   CREATE OR REPLACE VIEW prenom AS
   FROM 'https://static.data.gouv.fr/resources/base-prenoms-insee-format-parquet/20231121-161435/prenoms-nat2022.parquet'
   ```
+  - Vous pourrez ensuite requêter sur cette vue comme si c'était une table
 
-Vous pourrez ensuite requêter sur cette vue comme si c'était une table.
+::: {.callout-tip title="Éxécuter une requête"}
+Cliquez sur la requête pour y positionner le pointeur de la souris, puis au choix :
+
+- Cliquez sur le petit triangle orange
+- CTRL + ENTREE
+:::
+
+
 
 
 ### Premières requêtes
@@ -169,7 +177,7 @@ SELECT c.nom AS club, AVG(j.elo) AS moyenne_elo FROM joueuse j INNER JOIN club c
 - [ ] Filtrez pour ne plus afficher les *prénoms rares*
 
 ::: {.callout-tip title="Secret statistique"}
-Les prénoms ayant un nombre d'occurrences insuffisant sont regroupés sous une appellation générique. Cela permet de protéger le secret statistique et de garantir l'anonymat.
+Les prénoms ayant un nombre insuffisant d'occurrences sont regroupés sous une appellation générique. Cela permet de protéger le secret statistique et de garantir l'anonymat.
 
 Sans cette précaution, par exemple :
 

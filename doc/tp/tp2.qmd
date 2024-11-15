@@ -1,5 +1,5 @@
 ---
-title: "Jointures"
+title: "Joindre des tables"
 description: "TP2"
 author: "Ludovic Deneuville"
 format: 
@@ -14,7 +14,20 @@ lightbox: true
 ---
 
 
-:construction:
+## Introdution {.unnumbered}
+
+Lors du premier TP, nous avons utilisé DuckDB pour lire les données d'un fichier parquet. Aujourd'hui nous allons créer notre propre base de données PostgreSQL et y insérer des tables et de données. Enfin nous allons requêter ces données.
+
+Lors de ce TP, vous allez :
+
+- Créer votre base de données PostgreSQL
+- Lancer des scripts de création de tables et d'insertion de données
+- Relier des tables en utilisant les jointures
+- Sélectionner et filtrer des données
+
+::: {.callout-important}
+- Écrivez des requêtes jolies !
+:::
 
 ## Lancement des services
 
@@ -46,14 +59,17 @@ Aujourd'hui, nous allons :
 - Requêter ces données
 :::
 
-- [ ] Lancez le service PostgreSQL
+- [ ] Lancez le service [PostgreSQL](https://onyxia.lab.groupe-genes.fr/launcher/databases/postgresql?name=postgresql&version=1.0.3&autoLaunch=true&postgresql.primary.persistence.size=«1Gi»&postgresql.primary.resources.limits.cpu=«250m»&postgresql.primary.resources.requests.cpu=«50m»&postgresql.primary.resources.limits.memory=«1Gi»){target="_blank"}
   - Allez dans **Catalogue de services**
   - Onglet **Databases**
+  - Configuration Postgresql :arrow_right: Primary : Mettez tous les paramètres au minimum (Persistent volume size, CPU, Memory)
 - [ ] Copiez-collez dans un fichier texte les informations de connexion PostgreSQL : Hostname, Port, Database, Username, Password
 
 ### CloudBeaver
 
-- [ ] Lancez le service [CloudBeaver](https://dbeaver.com/docs/cloudbeaver/){target="_blank"}
+Nous avons créé un SGBD, nous avons maintenant besoin d'un outil de gestion pour s'y connecter et envoyer des requêtes.
+
+- [ ] Lancez le service [CloudBeaver](https://onyxia.lab.groupe-genes.fr/launcher/databases/cloudbeaver?name=cloudbeaver&version=2.0.3&resources.requests.memory=%C2%AB1Gi%C2%BB&resources.limits.memory=%C2%AB2Gi%C2%BB){target="_blank"}
   - Allez dans **Catalogue de services**
   - Onglet **Databases**
 - [ ] Copiez-collez également les informations de connexion au service *CloudBeaver*
@@ -61,15 +77,114 @@ Aujourd'hui, nous allons :
 
 Normalement la connexion à la base de données *PostgreSQL* est détectée automatiquement.
 
-Dans le cas contraire, il faut cliquer sur le +, puis sur *New connection* et resenigné les éléments de connexion.
+Dans le cas contraire, il faut cliquer sur le +, puis sur *New connection* et renseigné les éléments de connexion.
 
 - [ ] Dans l'explorateur à gauche, clic droit sur bdd PostgreSQL :arrow_right: SQL Editor
 
 Cela ouvre une fenêtre où vous pouvez écrire du code SQL pour interagir avec votre base de données.
 
+### VM ENSAI
+
+::: {.callout-note collapse="true" title="DBeaver sur la VM"}
+#### Paramètrage
+
+- Menu `Fenêtre` > `Preference`
+  - Formatage SQL
+    - Casse des mots clefs : `UPPER`
+    - [x] Insert spaces for tabs
+    - Appliquer
+  - Metadonnées
+    - Décocher `Ouvrir une connexion séparée pour la lecture des métadonnées`
+  - Editeur SQL
+    - Décocher `Ouvrir une connexion séparée pour chaque éditeur`
+
+#### Création de la connexion PostgreSQL
+
+- Cliquer sur l'icone `Nouvelle connexion` en haut à gauche sous fichier
+- Sélectionner `PostgreSQL` puis suivant
+  - Host : `sgbd-eleves.domensai.ecole`
+  - Port : `5432`
+  - Database : `idxxxx`
+  - Nom d'utilisateur : `idxxxx`
+  - Mot de passe : `idxxxx`
+  - `Test de connexion`
+  - Acceptez les mises à jour des pilotes
+  - `Terminer`
+:::
+
+
+
+## Écrire une requête
+
+Il est parfois difficile d'écrire du premier coup la requête qui répond directement à la question posée.
+Voici une méthode qui peut vous aider à écrire vos requêtes pas à pas :
+
+::: {.callout}
+Imaginons que l'on vous demande de lister les noms et prénoms des joueuses du club de la ville de *Saint Quentin*, dont le prénom commence par un *A* classées par elo décroissant.
+
+joueuse([id_joueuse]{.underline}, nom, prenom, elo, #id_club)
+
+club([id_club]{.underline}, nom, ville)
+:::
+
+### Listez les tables nécessaires
+
+Commencez par lister les tables nécessaires, puis joignez les. Ici nous avons besoin des 2 tables.
+
+Utilisez pour l'instant `SELECT *` pour sélectionner toutes les colonnes. 
+
+```{.sql}
+SELECT *
+  FROM joueuse j
+  JOIN club c USING(id_club);
+```
+
+### Appliquez les filtres
+
+Pour ne garder que les lignes qui nous intéressent :
+
+- Ville du club : *Saint Quentin*
+- Prénom qui commence par un A**
+
+```{.sql}
+SELECT *
+  FROM joueuse j
+  JOIN club c USING(id_club)
+ WHERE c.ville = 'Saint Quentin'
+   AND j.prenom LIKE 'A%';
+```
+
+
+### Ordonnez les résultats
+
+```{.sql}
+SELECT *
+  FROM joueuse j
+  JOIN club c USING(id_club)
+ WHERE c.ville = 'Saint Quentin'
+   AND j.prenom LIKE 'A%'
+ ORDER BY j.elo DESC;
+```
+
+
+### Sélectionner les colonnes requises
+
+Il est demandé de ne garder que les noms et prénoms des joueuses
+
+```{.sql}
+SELECT j.nom,
+       j.prenom
+  FROM joueuse j
+  JOIN club c USING(id_club)
+ WHERE c.ville = 'Saint Quentin'
+   AND j.prenom LIKE 'A%'
+ ORDER BY j.elo DESC;
+```
+
+
 ## Exercices
 
-### École de musique
+### École de musique :guitar:
 
 Nous allons commencer par créer les tables et insérer les données :
 
@@ -92,45 +207,138 @@ Voici le modèle de données :
 
 Vous pouvez maintenant commencer l'exercice et écrire les requêtes permettant de répondre aux questions suivantes :
 
-- [ ] Quels sont les noms des adhérents
 - [ ] Quels sont les noms des instruments présents dans la base de données
-- [ ] Quelle est l’adresse de l’adhérent numéro 15
-- [ ] Quels sont les numéros des adhérents de nom `DUPONT`
-- [ ] Donnez le(s) nom(s) de l'instrument(s) dont joue l'adhérent numéro 15
-- [ ] Donnez le nom des adhérents inscrits au cours numéro 6
-- [ ] Donnez les noms des adhérents inscrits au cours de guitare classique (le nom du cours est `GUIT-CLASS`)
-- [ ] Quels sont les cours auxquels sont inscrits les adhérents qui jouent du piano
-- [ ] De quels instruments jouent les personnes inscrites au cours de guitare classique
+- [ ] Quels sont les noms et adresses des adhérents
+- [ ] Quelle est l'adresse de l'adhérent numéro 15
+- [ ] Quels sont les numéros des adhérents de nom *DUPONT*
+
+Réalisez les jointures qui permettent d'obtenir :
+
+- [ ] Les noms des instruments dont joue chaque adhérent
+- [ ] Le nom des adhérents inscrits au cours numéro 6
+- [ ] Les noms des cours ayant lieu le samedi et les noms des adhérents inscrits
+- [ ] Les noms des cours auxquels sont inscrits les adhérents qui jouent du piano
+- [ ] De quels instruments jouent les personnes inscrites au cours de guitare classique (`GUIT-CLASS`)
 
 
-### Location de DVD
+### Location de DVD :cd:
 
 Il fut un temps où des entreprises se spécialisaient dans la location de DVD. Dans cet exercice une telle entreprise souhaite informatiser la gestion des prêts.
 
-De la même manière que pour le premier exercice, chargez les données avec ce [script sql](./data/tp2-dvd-create-pop.sql){target="_blank"} 
-
-Modèle de données :
+Voici le Modèle de données :
 
 ![](./data/tp2-dvd-modele.PNG)
 
+#### Création de tables
+
+- [ ] Utiliser le code ci-dessous pour créer le schéma et les 3 tables de droite
+  ```{.sql}
+  DROP SCHEMA IF EXISTS dvd CASCADE;
+  
+  CREATE SCHEMA dvd;
+  
+  CREATE TABLE dvd.realisateur(
+      num_realisateur    INT PRIMARY KEY,
+      nom_realisateur    TEXT,
+      prenom_realisateur TEXT);
+  
+  CREATE TABLE dvd.film(
+      num_film       INT PRIMARY KEY,
+      titre          TEXT,
+      genre          TEXT,
+      date_sortie    DATE);
+   
+  CREATE TABLE dvd.a_realise(
+      num_film         INT REFERENCES dvd.film(num_film),
+      num_realisateur  INT REFERENCES dvd.realisateur(num_realisateur),
+      PRIMARY KEY (num_film, num_realisateur));
+  ```
+- [ ] Écrivez les requêtes qui permettent de créer les 3 autres tables
+- [ ] Chargez les données avec ce [script sql](./data/tp2-dvd-pop.sql){target="_blank"} 
+
+
+#### Requêtes
+
 Donnez les requêtes pour obtenir :
 
-- [ ] Nom et prénom des adhérents 
+- [ ] Nom et prénom des adhérents
 - [ ] Titre des films de la base 
-- [ ] Numéro d’adhérent de `Pierre DUCHEMIN`
+- [ ] Numéro d'adhérent de `Pierre DUCHEMIN`
 - [ ] Nom, Prénom et adresse de tous les `DUCHEMIN`
 - [ ] Numéro des DVD du film `la guerre des etoiles`
-- [ ] Nom, Prénom des adhérents ayant emprunté le film `la guerre des etoiles »
-- [ ] Nom, Prénom des adhérents ayant au moins un emprunt en cours (la date de fin de l’emprunt est nulle) 
-- [ ] Nom, Prénom du réalisateur de la `Guerre des étoiles`
-- [ ] Titre des films empruntés par pierre `DUCHEMIN`
-- [ ] Nom des réalisateurs des films empruntés par `pierre DUCHEMIN`
+
+Pour les 3 requêtes suivantes, vous afficherez les noms et prénoms sur une seule colonne. Utilisez le mot clé `AS` pour renommer cette colonne à l'affichage.
+
+- [ ] Nom, Prénom des adhérents ayant emprunté le film `la guerre des etoiles`
+- [ ] Nom, Prénom des adhérents ayant au moins un emprunt en cours (la date de fin de l'emprunt est nulle) 
+- [ ] Nom, Prénom du réalisateur de la *Guerre des étoiles*
+
+::: {.callout-tip collapse="true"}
+Il existe différentes manières de concaténer du texte :
+
+- fonctions PostgreSQL *CONCAT()*, *CONCAT_WS()*
+- opérateur `||`
+:::
+
+- [ ] Titre des films empruntés par Pierre DUCHEMIN, ainsi que dates de début et de fin
+- [ ] Nom des réalisateurs des films empruntés par Pierre DUCHEMIN
 - [ ] Nom des réalisateurs de films de science fiction ou policiers 
 
-Les questions ci-dessous nécessitent une opération de l'algèbre relationnelle ou un concept non vu au CM1 
+Utilisons maintenant des méthodes d'agrégation pour répondre aux questions suivantes :
 
-- [ ] Nom et prénom des adhérents ayant emprunté des films de Science fiction mais pas de films policiers 
-- [ ] Nom et prénom des adhérents ayant emprunté au moins un film de Science fiction et un film policier 
-- [ ] Titre des films jamais empruntés 
-- [ ] Titre des films Science fiction jamais empruntés 
-- [ ] Titre des films empruntés par les adhérents n’ayant pas emprunté `les choristes`
+- [ ] Nombre de DVD dont le coût de l'emprunt est inférieur ou égal à 2€
+- [ ] Nombre d'emprunts ayant été effectués par Dominique Duchemin
+- [ ] Nombre de films différents ayant été empruntés par Dominique Duchemin 
+- [ ] Numéro des DVD en ordre décroissant du nombre de fois qu'ils ont été empruntés
+- [ ] Numéro du DVD le plus récemment acheté
+
+Quelques questions sur les dates :
+
+- [ ] Quelle a été la durée d'emprunt la plus longue
+- [ ] À la date du 10 aout 2010, combien de DVD sont en cours d'emprunt
+- [ ] Combien de dvd ont été achetés chaque année
+
+
+
+Pour terminer cet exercice, nous allons rechercher les titres des films qui n'ont jamais été empruntés. Procédons par étapes et écrivez les requêtes suivantes :
+
+- [ ] Différents numéros des films empruntés
+- [ ] Titre des films ayant pour numéro 18, 19 ou 20
+- [ ] Titre des films n'ayant pas pour numéros ni 18, ni 19, ni 20
+- [ ] Titre des films n'ayant jamais été empruntés
+
+
+
+
+### Rugby World Cup :rugby_football:
+
+::: {.callout}
+Pour les plus rapides :rocket:
+:::
+
+Nous souhaitons informatiser les résultats de la coupe du monde de rugby. Pour cela nous avons créé les deux tables suivantes : *equipe* et *matches*.
+
+Commencez par créez et charger les tables avec [ce script](./data/tp2-rugby-create-pop.sql){target="_blank"}.
+
+- [ ] Donner les noms des équipes qui ont joué à Nantes. 
+- [ ] Contre quelles équipes a joué l'équipe de France ?
+- [ ] Pour tous les matchs, affichez les informations suivantes : 
+  - Date du match 
+  - Nom de la première équipe 
+  - nombre de points de la première équipe 
+  - nombre de points de la deuxième équipe 
+  - nom de la deuxième équipe et lieu du match 
+- [ ] Quels sont les noms d'équipes qui ont gagné au moins deux matchs 
+- [ ] Quels sont les noms des équipes qui ont perdu tous leurs matchs
+- [ ] Pour chaque équipe donner le nombre de matchs qu'elles ont gagné ou perdu
+- [ ] Donner le nombre total de points obtenus par équipe en classant les équipes de celle ayant marqué le plus à celle ayant marqué le moins
+
+
+## Arrêtez votre service {.unnumbered}
+
+C'est la fin du TP, vous pouvez maintenant sauvegarder votre travail et libérer les ressources réservées :
+
+- [ ] Copiez votre code et collez le sur votre machine dans un fichier *.sql*
+  - par exemple dans `P:/Cours1A/UE3-Bases-de-donnees-relationnelles/TP2/tp2.sql`
+- [ ] Retournez sur la page d'accueil du Datalab
+- [ ] Allez dans *Mes Services* et supprimez votre service

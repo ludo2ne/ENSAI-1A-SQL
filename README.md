@@ -28,7 +28,7 @@
 - TP1 : 1eres requetes, DuckBD, WHERE, GROUP BY, not exists
 - TP2 : jointure, DATE
 - TP3 : découverte du Datalab
-  - [ ] Expliquer pourquoi on a besoin de service, de stockage...
+  - [ ] Expliquer pourquoi on a besoin de service, de stockage... : https://docs.sspcloud.fr/content/principles.html
   - [ ] Raconter une histoire
   - [ ] Benchmark
   - [ ] Config Git à la fin
