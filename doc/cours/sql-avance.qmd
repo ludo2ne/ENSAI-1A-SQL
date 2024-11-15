@@ -24,10 +24,123 @@ from: markdown+emoji
 
 :construction:
 
-## VUE
+## les vues
+
+Nous disposons de cette table
+
+```{.sql}
+CREATE TABLE echecs.joueuse (
+    id_joueuse     SERIAL         PRIMARY KEY,   
+    nom            VARCHAR(50)    NOT NULL, 
+    prenom         VARCHAR(50)    NOT NULL, 
+    date_naissance TIMESTAMP,                 
+    elo            INT            CHECK (elo > 0),  
+    mail           VARCHAR(100)   UNIQUE,         
+    est_arbitre    BOOLEAN        DEFAULT false,
+    code_pays      VARCHAR(2),          
+    taux_victoires FLOAT          CHECK (taux_victoires BETWEEN 0 AND 1)
+);
+```
+
+### Joueuses Françaises
+
+Imaginons que nous avons de nombreuses requêtes à écrire sur les joueuses françaises ayant plus de 2000 elo.
+
+Et nous n'avons pas envie de nous embetter à écrire à chaque fois toutes les restrictions.
+
+### Nouvelle table
+
+Solution 1 : créons une nouvelle table
+
+```{.sql}
+CREATE TABLE echecs.joueuse_fr_2000
+AS
+SELECT *
+  FROM echecs.joueuse
+ WHERE code_pays = 'FR'
+   AND elo >= 2000
+```
+
+:::::: {.fragment}
+::: {.callout-caution title="Problèmes"}
+- Duplication des données
+- Mise à jour
+:::
+::::::
+
+
+### Common Table Expression
+
+Pour une utilisation ponctuelle, vous pouvez utiliser une CTE. Le principe :
+
+- Commencez par définir votre sous-requête *joueuses_fr_elo2000* avec `WITH`
+- Appelez *joueuses_fr_elo2000* dans la requête principale
+
+```{.sql}
+WITH joueuses_fr_elo2000 
+AS (SELECT *
+      FROM joueuse
+     WHERE code_pays = 'FR' 
+       AND elo > 2000
+)
+SELECT nom, prenom, elo
+  FROM joueuses_francaises_elo2000
+ WHERE prenom LIKE 'A%';
+```
+
+:::{.notes}
+Usage avancé
+:::
+
+### Table temporaire
+
+N'existe que le temps de la session
+
+```{.sql}
+CREATE TEMP TABLE joueuses_fr_elo2000 
+AS
+SELECT *
+  FROM joueuse
+ WHERE code_pays = 'FR' 
+   AND elo > 2000;
+```
+
+### Vue
+
+```{.sql}
+CREATE VIEW joueuses_fr_elo2000 
+AS
+SELECT *
+  FROM joueuse
+ WHERE code_pays = 'FR' 
+   AND elo > 2000;
+```
+
+### Avantages des vues
+
+- Sauvegarde de requêtes complexes
+  - jointures, filtres...
+- Sécurité et Contrôle d'Accès
+  - Masquer des colonnes sensibles
+
+Par contre une vue n'est pas plus rapide, ni performante
+
+### Vues matérialisées
+
+Photo à un instant t
+
+```{.sql}
+CREATE MATERIALIZED VIEW joueuses_fr_elo2000 
+AS
+SELECT *
+  FROM joueuse
+ WHERE code_pays = 'FR' 
+   AND elo > 2000;
+```
+
 
 ## INDEX
 
-## WITH
-
 ## GRANT
+
+## Trigger

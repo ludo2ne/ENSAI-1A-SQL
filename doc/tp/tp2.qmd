@@ -295,7 +295,7 @@ Utilisons maintenant des méthodes d'agrégation pour répondre aux questions su
 Quelques questions sur les dates :
 
 - [ ] Quelle a été la durée d'emprunt la plus longue
-- [ ] À la date du 10 aout 2010, combien de DVD sont en cours d'emprunt
+- [ ] En date du 10 août 2010, combien de DVD sont en cours d'emprunt
 - [ ] Combien de dvd ont été achetés chaque année
 
 
