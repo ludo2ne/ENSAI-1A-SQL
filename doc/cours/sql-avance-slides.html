@@ -29,6 +29,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+      }
+    pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+    div.sourceCode
+      { color: #f8f8f2;  }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #f8f8f2; } /* Normal */
+    code span.al { color: #f07178; background-color: #2a0f15; font-weight: bold; } /* Alert */
+    code span.an { color: #d4d0ab; } /* Annotation */
+    code span.at { color: #00e0e0; } /* Attribute */
+    code span.bn { color: #d4d0ab; } /* BaseN */
+    code span.bu { color: #abe338; } /* BuiltIn */
+    code span.cf { color: #ffa07a; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #abe338; } /* Char */
+    code span.cn { color: #ffd700; } /* Constant */
+    code span.co { color: #f8f8f2; font-style: italic; } /* Comment */
+    code span.cv { color: #ffd700; } /* CommentVar */
+    code span.do { color: #f8f8f2; } /* Documentation */
+    code span.dt { color: #ffa07a; } /* DataType */
+    code span.dv { color: #d4d0ab; } /* DecVal */
+    code span.er { color: #f07178; text-decoration: underline; } /* Error */
+    code span.ex { color: #00e0e0; font-weight: bold; } /* Extension */
+    code span.fl { color: #d4d0ab; } /* Float */
+    code span.fu { color: #ffa07a; } /* Function */
+    code span.im { color: #abe338; } /* Import */
+    code span.in { color: #d4d0ab; } /* Information */
+    code span.kw { color: #ffa07a; font-weight: bold; } /* Keyword */
+    code span.op { color: #ffa07a; } /* Operator */
+    code span.ot { color: #00e0e0; } /* Other */
+    code span.pp { color: #dcc6e0; } /* Preprocessor */
+    code span.re { color: #00e0e0; background-color: #f8f8f2; } /* RegionMarker */
+    code span.sc { color: #abe338; } /* SpecialChar */
+    code span.ss { color: #abe338; } /* SpecialString */
+    code span.st { color: #abe338; } /* String */
+    code span.va { color: #00e0e0; } /* Variable */
+    code span.vs { color: #abe338; } /* VerbatimString */
+    code span.wa { color: #dcc6e0; } /* Warning */
   </style>
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto.css">
   <link rel="stylesheet" href="../../styles-reveal.css">
@@ -342,23 +407,142 @@ Ludovic Deneuville
 
 <p><span class="emoji" data-emoji="construction">🚧</span></p>
 </section>
-<section id="vue" class="title-slide slide level2 center">
-<h2>VUE</h2>
-
+<section>
+<section id="les-vues" class="title-slide slide level2 center">
+<h2>les vues</h2>
+<p>Nous disposons de cette table</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> echecs.joueuse (</span>
+<span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a>    id_joueuse     SERIAL         <span class="kw">PRIMARY</span> <span class="kw">KEY</span>,   </span>
+<span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a>    nom            <span class="dt">VARCHAR</span>(<span class="dv">50</span>)    <span class="kw">NOT</span> <span class="kw">NULL</span>, </span>
+<span id="cb1-4"><a aria-hidden="true" tabindex="-1"></a>    prenom         <span class="dt">VARCHAR</span>(<span class="dv">50</span>)    <span class="kw">NOT</span> <span class="kw">NULL</span>, </span>
+<span id="cb1-5"><a aria-hidden="true" tabindex="-1"></a>    date_naissance <span class="dt">TIMESTAMP</span>,                 </span>
+<span id="cb1-6"><a aria-hidden="true" tabindex="-1"></a>    elo            <span class="dt">INT</span>            <span class="kw">CHECK</span> (elo <span class="op">&gt;</span> <span class="dv">0</span>),  </span>
+<span id="cb1-7"><a aria-hidden="true" tabindex="-1"></a>    mail           <span class="dt">VARCHAR</span>(<span class="dv">100</span>)   <span class="kw">UNIQUE</span>,         </span>
+<span id="cb1-8"><a aria-hidden="true" tabindex="-1"></a>    est_arbitre    <span class="dt">BOOLEAN</span>        <span class="kw">DEFAULT</span> <span class="kw">false</span>,</span>
+<span id="cb1-9"><a aria-hidden="true" tabindex="-1"></a>    code_pays      <span class="dt">VARCHAR</span>(<span class="dv">2</span>),          </span>
+<span id="cb1-10"><a aria-hidden="true" tabindex="-1"></a>    taux_victoires <span class="dt">FLOAT</span>          <span class="kw">CHECK</span> (taux_victoires <span class="kw">BETWEEN</span> <span class="dv">0</span> <span class="kw">AND</span> <span class="dv">1</span>)</span>
+<span id="cb1-11"><a aria-hidden="true" tabindex="-1"></a>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
-
+<section id="joueuses-françaises" class="slide level3">
+<h3>Joueuses Françaises</h3>
+<p>Imaginons que nous avons de nombreuses requêtes à écrire sur les joueuses françaises ayant plus de 2000 elo.</p>
+<p>Et nous n’avons pas envie de nous embetter à écrire à chaque fois toutes les restrictions.</p>
+</section>
+<section id="nouvelle-table" class="slide level3">
+<h3>Nouvelle table</h3>
+<p>Solution 1 : créons une nouvelle table</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> echecs.joueuse_fr_2000</span>
+<span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a><span class="kw">AS</span></span>
+<span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb2-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
+<span id="cb2-5"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> code_pays <span class="op">=</span> <span class="st">'FR'</span></span>
+<span id="cb2-6"><a aria-hidden="true" tabindex="-1"></a>   <span class="kw">AND</span> elo <span class="op">&gt;=</span> <span class="dv">2000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="fragment">
+<div title="Problèmes">
+<div class="callout callout-caution callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Problèmes</strong></p>
+</div>
+<div class="callout-content">
+<ul>
+<li>Duplication des données</li>
+<li>Mise à jour</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="common-table-expression" class="slide level3">
+<h3>Common Table Expression</h3>
+<p>Pour une utilisation ponctuelle, vous pouvez utiliser une CTE. Le principe :</p>
+<ul>
+<li>Commencez par définir votre sous-requête <em>joueuses_fr_elo2000</em> avec <code>WITH</code></li>
+<li>Appelez <em>joueuses_fr_elo2000</em> dans la requête principale</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">WITH</span> joueuses_fr_elo2000 </span>
+<span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a><span class="kw">AS</span> (<span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb3-3"><a aria-hidden="true" tabindex="-1"></a>      <span class="kw">FROM</span> joueuse</span>
+<span id="cb3-4"><a aria-hidden="true" tabindex="-1"></a>     <span class="kw">WHERE</span> code_pays <span class="op">=</span> <span class="st">'FR'</span> </span>
+<span id="cb3-5"><a aria-hidden="true" tabindex="-1"></a>       <span class="kw">AND</span> elo <span class="op">&gt;</span> <span class="dv">2000</span></span>
+<span id="cb3-6"><a aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-7"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom, prenom, elo</span>
+<span id="cb3-8"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> joueuses_francaises_elo2000</span>
+<span id="cb3-9"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> prenom <span class="kw">LIKE</span> <span class="st">'A%'</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<aside class="notes">
+<p>Usage avancé</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="table-temporaire" class="slide level3">
+<h3>Table temporaire</h3>
+<p>N’existe que le temps de la session</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> TEMP <span class="kw">TABLE</span> joueuses_fr_elo2000 </span>
+<span id="cb4-2"><a aria-hidden="true" tabindex="-1"></a><span class="kw">AS</span></span>
+<span id="cb4-3"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb4-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> joueuse</span>
+<span id="cb4-5"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> code_pays <span class="op">=</span> <span class="st">'FR'</span> </span>
+<span id="cb4-6"><a aria-hidden="true" tabindex="-1"></a>   <span class="kw">AND</span> elo <span class="op">&gt;</span> <span class="dv">2000</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="vue" class="slide level3">
+<h3>Vue</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">VIEW</span> joueuses_fr_elo2000 </span>
+<span id="cb5-2"><a aria-hidden="true" tabindex="-1"></a><span class="kw">AS</span></span>
+<span id="cb5-3"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb5-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> joueuse</span>
+<span id="cb5-5"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> code_pays <span class="op">=</span> <span class="st">'FR'</span> </span>
+<span id="cb5-6"><a aria-hidden="true" tabindex="-1"></a>   <span class="kw">AND</span> elo <span class="op">&gt;</span> <span class="dv">2000</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="avantages-des-vues" class="slide level3">
+<h3>Avantages des vues</h3>
+<ul>
+<li>Sauvegarde de requêtes complexes
+<ul>
+<li>jointures, filtres…</li>
+</ul></li>
+<li>Sécurité et Contrôle d’Accès
+<ul>
+<li>Masquer des colonnes sensibles</li>
+</ul></li>
+</ul>
+<p>Par contre une vue n’est pas plus rapide, ni performante</p>
+</section>
+<section id="vues-matérialisées" class="slide level3">
+<h3>Vues matérialisées</h3>
+<p>Photo à un instant t</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">MATERIALIZED</span> <span class="kw">VIEW</span> joueuses_fr_elo2000 </span>
+<span id="cb6-2"><a aria-hidden="true" tabindex="-1"></a><span class="kw">AS</span></span>
+<span id="cb6-3"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb6-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> joueuse</span>
+<span id="cb6-5"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> code_pays <span class="op">=</span> <span class="st">'FR'</span> </span>
+<span id="cb6-6"><a aria-hidden="true" tabindex="-1"></a>   <span class="kw">AND</span> elo <span class="op">&gt;</span> <span class="dv">2000</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section></section>
 <section id="index" class="title-slide slide level2 center">
 <h2>INDEX</h2>
 
 </section>
 
-<section id="with" class="title-slide slide level2 center">
-<h2>WITH</h2>
+<section id="grant" class="title-slide slide level2 center">
+<h2>GRANT</h2>
 
 </section>
 
-<section id="grant" class="title-slide slide level2 center">
-<h2>GRANT</h2>
+<section id="trigger" class="title-slide slide level2 center">
+<h2>Trigger</h2>
 
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">

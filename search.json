@@ -466,7 +466,7 @@
     "href": "doc/tp/tp2.html#exercices",
     "title": "Joindre des tables",
     "section": "3 Exercices",
-    "text": "3 Exercices\n\n3.1 École de musique 🎸\nNous allons commencer par créer les tables et insérer les données :\n\nCopiez le contenu de ce script sql\nCollez dans la fenêtre SQL de CloudBeaver\nExécutez le script\n\nCliquez sur la petite icone sous les triangles oranges qui ressemble à 📜\nraccourci (ALT + X)\n\nVérifiez que votre schéme et vos tables sont créés\n\nDans l’explorateur : PostgreSQL ➡️ Databases ➡️ defaultdb ➡️ Schemas\nClic droit sur Schemas ➡️ Refresh\n\n\nSi tout est ok, vous n’avez plus besoin du script de création et d’insertion de données.\n\nSupprimez le contenu du code SQL ou ouvrez un nouvel éditeur SQL\n\nVoici le modèle de données :\n\nVous pouvez maintenant commencer l’exercice et écrire les requêtes permettant de répondre aux questions suivantes :\n\nQuels sont les noms des instruments présents dans la base de données\nQuels sont les noms et adresses des adhérents\nQuelle est l’adresse de l’adhérent numéro 15\nQuels sont les numéros des adhérents de nom DUPONT\n\nRéalisez les jointures qui permettent d’obtenir :\n\nLes noms des instruments dont joue chaque adhérent\nLe nom des adhérents inscrits au cours numéro 6\nLes noms des cours ayant lieu le samedi et les noms des adhérents inscrits\nLes noms des cours auxquels sont inscrits les adhérents qui jouent du piano\nDe quels instruments jouent les personnes inscrites au cours de guitare classique (GUIT-CLASS)\n\n\n\n3.2 Location de DVD 💿\nIl fut un temps où des entreprises se spécialisaient dans la location de DVD. Dans cet exercice une telle entreprise souhaite informatiser la gestion des prêts.\nVoici le Modèle de données :\n\n\nCréation de tables\n\nUtiliser le code ci-dessous pour créer le schéma et les 3 tables de droite\nDROP SCHEMA IF EXISTS dvd CASCADE;\n\nCREATE SCHEMA dvd;\n\nCREATE TABLE dvd.realisateur(\n    num_realisateur    INT PRIMARY KEY,\n    nom_realisateur    TEXT,\n    prenom_realisateur TEXT);\n\nCREATE TABLE dvd.film(\n    num_film       INT PRIMARY KEY,\n    titre          TEXT,\n    genre          TEXT,\n    date_sortie    DATE);\n\nCREATE TABLE dvd.a_realise(\n    num_film         INT REFERENCES dvd.film(num_film),\n    num_realisateur  INT REFERENCES dvd.realisateur(num_realisateur),\n    PRIMARY KEY (num_film, num_realisateur));\nÉcrivez les requêtes qui permettent de créer les 3 autres tables\nChargez les données avec ce script sql\n\n\n\nRequêtes\nDonnez les requêtes pour obtenir :\n\nNom et prénom des adhérents\nTitre des films de la base\nNuméro d’adhérent de Pierre DUCHEMIN\nNom, Prénom et adresse de tous les DUCHEMIN\nNuméro des DVD du film la guerre des etoiles\n\nPour les 3 requêtes suivantes, vous afficherez les noms et prénoms sur une seule colonne. Utilisez le mot clé AS pour renommer cette colonne à l’affichage.\n\nNom, Prénom des adhérents ayant emprunté le film la guerre des etoiles\nNom, Prénom des adhérents ayant au moins un emprunt en cours (la date de fin de l’emprunt est nulle)\nNom, Prénom du réalisateur de la Guerre des étoiles\n\n\n\n\n\n\n\nTip\n\n\n\n\n\nIl existe différentes manières de concaténer du texte :\n\nfonctions PostgreSQL CONCAT(), CONCAT_WS()\nopérateur ||\n\n\n\n\n\nTitre des films empruntés par Pierre DUCHEMIN, ainsi que dates de début et de fin\nNom des réalisateurs des films empruntés par Pierre DUCHEMIN\nNom des réalisateurs de films de science fiction ou policiers\n\nUtilisons maintenant des méthodes d’agrégation pour répondre aux questions suivantes :\n\nNombre de DVD dont le coût de l’emprunt est inférieur ou égal à 2€\nNombre d’emprunts ayant été effectués par Dominique Duchemin\nNombre de films différents ayant été empruntés par Dominique Duchemin\nNuméro des DVD en ordre décroissant du nombre de fois qu’ils ont été empruntés\nNuméro du DVD le plus récemment acheté\n\nQuelques questions sur les dates :\n\nQuelle a été la durée d’emprunt la plus longue\nÀ la date du 10 aout 2010, combien de DVD sont en cours d’emprunt\nCombien de dvd ont été achetés chaque année\n\nPour terminer cet exercice, nous allons rechercher les titres des films qui n’ont jamais été empruntés. Procédons par étapes et écrivez les requêtes suivantes :\n\nDifférents numéros des films empruntés\nTitre des films ayant pour numéro 18, 19 ou 20\nTitre des films n’ayant pas pour numéros ni 18, ni 19, ni 20\nTitre des films n’ayant jamais été empruntés\n\n\n\n\n3.3 Rugby World Cup 🏉\n\n\n\n\n\n\nPour les plus rapides 🚀\n\n\n\nNous souhaitons informatiser les résultats de la coupe du monde de rugby. Pour cela nous avons créé les deux tables suivantes : equipe et matches.\nCommencez par créez et charger les tables avec ce script.\n\nDonner les noms des équipes qui ont joué à Nantes.\nContre quelles équipes a joué l’équipe de France ?\nPour tous les matchs, affichez les informations suivantes :\n\nDate du match\nNom de la première équipe\nnombre de points de la première équipe\nnombre de points de la deuxième équipe\nnom de la deuxième équipe et lieu du match\n\nQuels sont les noms d’équipes qui ont gagné au moins deux matchs\nQuels sont les noms des équipes qui ont perdu tous leurs matchs\nPour chaque équipe donner le nombre de matchs qu’elles ont gagné ou perdu\nDonner le nombre total de points obtenus par équipe en classant les équipes de celle ayant marqué le plus à celle ayant marqué le moins"
+    "text": "3 Exercices\n\n3.1 École de musique 🎸\nNous allons commencer par créer les tables et insérer les données :\n\nCopiez le contenu de ce script sql\nCollez dans la fenêtre SQL de CloudBeaver\nExécutez le script\n\nCliquez sur la petite icone sous les triangles oranges qui ressemble à 📜\nraccourci (ALT + X)\n\nVérifiez que votre schéme et vos tables sont créés\n\nDans l’explorateur : PostgreSQL ➡️ Databases ➡️ defaultdb ➡️ Schemas\nClic droit sur Schemas ➡️ Refresh\n\n\nSi tout est ok, vous n’avez plus besoin du script de création et d’insertion de données.\n\nSupprimez le contenu du code SQL ou ouvrez un nouvel éditeur SQL\n\nVoici le modèle de données :\n\nVous pouvez maintenant commencer l’exercice et écrire les requêtes permettant de répondre aux questions suivantes :\n\nQuels sont les noms des instruments présents dans la base de données\nQuels sont les noms et adresses des adhérents\nQuelle est l’adresse de l’adhérent numéro 15\nQuels sont les numéros des adhérents de nom DUPONT\n\nRéalisez les jointures qui permettent d’obtenir :\n\nLes noms des instruments dont joue chaque adhérent\nLe nom des adhérents inscrits au cours numéro 6\nLes noms des cours ayant lieu le samedi et les noms des adhérents inscrits\nLes noms des cours auxquels sont inscrits les adhérents qui jouent du piano\nDe quels instruments jouent les personnes inscrites au cours de guitare classique (GUIT-CLASS)\n\n\n\n3.2 Location de DVD 💿\nIl fut un temps où des entreprises se spécialisaient dans la location de DVD. Dans cet exercice une telle entreprise souhaite informatiser la gestion des prêts.\nVoici le Modèle de données :\n\n\nCréation de tables\n\nUtiliser le code ci-dessous pour créer le schéma et les 3 tables de droite\nDROP SCHEMA IF EXISTS dvd CASCADE;\n\nCREATE SCHEMA dvd;\n\nCREATE TABLE dvd.realisateur(\n    num_realisateur    INT PRIMARY KEY,\n    nom_realisateur    TEXT,\n    prenom_realisateur TEXT);\n\nCREATE TABLE dvd.film(\n    num_film       INT PRIMARY KEY,\n    titre          TEXT,\n    genre          TEXT,\n    date_sortie    DATE);\n\nCREATE TABLE dvd.a_realise(\n    num_film         INT REFERENCES dvd.film(num_film),\n    num_realisateur  INT REFERENCES dvd.realisateur(num_realisateur),\n    PRIMARY KEY (num_film, num_realisateur));\nÉcrivez les requêtes qui permettent de créer les 3 autres tables\nChargez les données avec ce script sql\n\n\n\nRequêtes\nDonnez les requêtes pour obtenir :\n\nNom et prénom des adhérents\nTitre des films de la base\nNuméro d’adhérent de Pierre DUCHEMIN\nNom, Prénom et adresse de tous les DUCHEMIN\nNuméro des DVD du film la guerre des etoiles\n\nPour les 3 requêtes suivantes, vous afficherez les noms et prénoms sur une seule colonne. Utilisez le mot clé AS pour renommer cette colonne à l’affichage.\n\nNom, Prénom des adhérents ayant emprunté le film la guerre des etoiles\nNom, Prénom des adhérents ayant au moins un emprunt en cours (la date de fin de l’emprunt est nulle)\nNom, Prénom du réalisateur de la Guerre des étoiles\n\n\n\n\n\n\n\nTip\n\n\n\n\n\nIl existe différentes manières de concaténer du texte :\n\nfonctions PostgreSQL CONCAT(), CONCAT_WS()\nopérateur ||\n\n\n\n\n\nTitre des films empruntés par Pierre DUCHEMIN, ainsi que dates de début et de fin\nNom des réalisateurs des films empruntés par Pierre DUCHEMIN\nNom des réalisateurs de films de science fiction ou policiers\n\nUtilisons maintenant des méthodes d’agrégation pour répondre aux questions suivantes :\n\nNombre de DVD dont le coût de l’emprunt est inférieur ou égal à 2€\nNombre d’emprunts ayant été effectués par Dominique Duchemin\nNombre de films différents ayant été empruntés par Dominique Duchemin\nNuméro des DVD en ordre décroissant du nombre de fois qu’ils ont été empruntés\nNuméro du DVD le plus récemment acheté\n\nQuelques questions sur les dates :\n\nQuelle a été la durée d’emprunt la plus longue\nEn date du 10 août 2010, combien de DVD sont en cours d’emprunt\nCombien de dvd ont été achetés chaque année\n\nPour terminer cet exercice, nous allons rechercher les titres des films qui n’ont jamais été empruntés. Procédons par étapes et écrivez les requêtes suivantes :\n\nDifférents numéros des films empruntés\nTitre des films ayant pour numéro 18, 19 ou 20\nTitre des films n’ayant pas pour numéros ni 18, ni 19, ni 20\nTitre des films n’ayant jamais été empruntés\n\n\n\n\n3.3 Rugby World Cup 🏉\n\n\n\n\n\n\nPour les plus rapides 🚀\n\n\n\nNous souhaitons informatiser les résultats de la coupe du monde de rugby. Pour cela nous avons créé les deux tables suivantes : equipe et matches.\nCommencez par créez et charger les tables avec ce script.\n\nDonner les noms des équipes qui ont joué à Nantes.\nContre quelles équipes a joué l’équipe de France ?\nPour tous les matchs, affichez les informations suivantes :\n\nDate du match\nNom de la première équipe\nnombre de points de la première équipe\nnombre de points de la deuxième équipe\nnom de la deuxième équipe et lieu du match\n\nQuels sont les noms d’équipes qui ont gagné au moins deux matchs\nQuels sont les noms des équipes qui ont perdu tous leurs matchs\nPour chaque équipe donner le nombre de matchs qu’elles ont gagné ou perdu\nDonner le nombre total de points obtenus par équipe en classant les équipes de celle ayant marqué le plus à celle ayant marqué le moins"
   },
   {
     "objectID": "doc/tp/tp2.html#arrêtez-votre-service",
@@ -616,11 +616,11 @@
     "text": "7 SGBD\n\n\n\n\n\n\nDéfinition\n\n\n\nUn Système de Gestion de Bases de Données est un logiciel qui permet de créer, gérer et manipuler des bases de données.\nIl fournit des outils pour stocker, récupérer, modifier et sécuriser les données.\n\n\n\nPostgreSQL\nMySQL, MariaDB\nOracle Database\nSQLite\n\n\n7.1 PostgreSQL\n\nOpen Source, Libre\nCommunauté active\nStable et performant\nBasé sur le modèle client-serveur\nExtension PostGIS (Données géographiques)\n\n\nutilisé à l’INSEE\nclient-serveur classique :\n\nle composant serveur central « postmaster » gère tous les fichiers de bdd\nainsi que toutes les connexions établies pour la communication avec le serveur de bdd.\n\nLes utilisateurs n’ont besoin que d’un programme client approprié pour établir la connexion\n\n\n\n7.2 Outil de Gestion et Administration\nIl est nécessaire d’avoir un outil pour gérer et administrer une base de données.\n\n\n\n\n\n\nTip\n\n\n\n\nPostgreSQL : Installé sur un serveur, sert de moteur de base de données\npgAdmin : Interface graphique pour interagir avec PostgreSQL\n\n\n\n\npgAdmin\nDBeaver\n\n\n\n7.3 Kesako\n\nBase de données : endroit où sont stockées les informations\nSGBD : logiciel qui permet de créer, gérer et manipuler les bases de données\nOutil de gestion du SGBD : application graphique qui facilite l’interaction avec un SGBD\nSQL : Langage pour donner les instructions à la base de données\n\n\n\nBDD : bibliothèque\nSGBD : bibliothécaire\nOutil : tableau de bord interactif pour les bibliothécaires\n\nA l’ENSAI :\n\nvous avez chacun une bdd (nom=id)\nutilisez DBeaver pour vous y connecter"
   },
   {
-    "objectID": "doc/cours/sql-avance-slides.html#vue",
-    "href": "doc/cours/sql-avance-slides.html#vue",
+    "objectID": "doc/cours/sql-avance-slides.html#les-vues",
+    "href": "doc/cours/sql-avance-slides.html#les-vues",
     "title": "SQL avancé",
-    "section": "VUE",
-    "text": "VUE"
+    "section": "les vues",
+    "text": "les vues\nNous disposons de cette table\nCREATE TABLE echecs.joueuse (\n    id_joueuse     SERIAL         PRIMARY KEY,   \n    nom            VARCHAR(50)    NOT NULL, \n    prenom         VARCHAR(50)    NOT NULL, \n    date_naissance TIMESTAMP,                 \n    elo            INT            CHECK (elo &gt; 0),  \n    mail           VARCHAR(100)   UNIQUE,         \n    est_arbitre    BOOLEAN        DEFAULT false,\n    code_pays      VARCHAR(2),          \n    taux_victoires FLOAT          CHECK (taux_victoires BETWEEN 0 AND 1)\n);"
   },
   {
     "objectID": "doc/cours/sql-avance-slides.html#index",
@@ -630,18 +630,18 @@
     "text": "INDEX"
   },
   {
-    "objectID": "doc/cours/sql-avance-slides.html#with",
-    "href": "doc/cours/sql-avance-slides.html#with",
-    "title": "SQL avancé",
-    "section": "WITH",
-    "text": "WITH"
-  },
-  {
     "objectID": "doc/cours/sql-avance-slides.html#grant",
     "href": "doc/cours/sql-avance-slides.html#grant",
     "title": "SQL avancé",
     "section": "GRANT",
-    "text": "GRANT\n\n\n\nHome — SQL avancé"
+    "text": "GRANT"
+  },
+  {
+    "objectID": "doc/cours/sql-avance-slides.html#trigger",
+    "href": "doc/cours/sql-avance-slides.html#trigger",
+    "title": "SQL avancé",
+    "section": "Trigger",
+    "text": "Trigger\n\n\n\nHome — SQL avancé"
   },
   {
     "objectID": "doc/cours/sql-avance.html",
@@ -651,11 +651,11 @@
     "text": "🚧"
   },
   {
-    "objectID": "doc/cours/sql-avance.html#vue",
-    "href": "doc/cours/sql-avance.html#vue",
+    "objectID": "doc/cours/sql-avance.html#les-vues",
+    "href": "doc/cours/sql-avance.html#les-vues",
     "title": "SQL avancé",
-    "section": "1 VUE",
-    "text": "1 VUE"
+    "section": "1 les vues",
+    "text": "1 les vues\nNous disposons de cette table\nCREATE TABLE echecs.joueuse (\n    id_joueuse     SERIAL         PRIMARY KEY,   \n    nom            VARCHAR(50)    NOT NULL, \n    prenom         VARCHAR(50)    NOT NULL, \n    date_naissance TIMESTAMP,                 \n    elo            INT            CHECK (elo &gt; 0),  \n    mail           VARCHAR(100)   UNIQUE,         \n    est_arbitre    BOOLEAN        DEFAULT false,\n    code_pays      VARCHAR(2),          \n    taux_victoires FLOAT          CHECK (taux_victoires BETWEEN 0 AND 1)\n);\n\nJoueuses Françaises\nImaginons que nous avons de nombreuses requêtes à écrire sur les joueuses françaises ayant plus de 2000 elo.\nEt nous n’avons pas envie de nous embetter à écrire à chaque fois toutes les restrictions.\n\n\nNouvelle table\nSolution 1 : créons une nouvelle table\nCREATE TABLE echecs.joueuse_fr_2000\nAS\nSELECT *\n  FROM echecs.joueuse\n WHERE code_pays = 'FR'\n   AND elo &gt;= 2000\n\n\n\n\n\n\n\nProblèmes\n\n\n\n\nDuplication des données\nMise à jour\n\n\n\n\n\n\nCommon Table Expression\nPour une utilisation ponctuelle, vous pouvez utiliser une CTE. Le principe :\n\nCommencez par définir votre sous-requête joueuses_fr_elo2000 avec WITH\nAppelez joueuses_fr_elo2000 dans la requête principale\n\nWITH joueuses_fr_elo2000 \nAS (SELECT *\n      FROM joueuse\n     WHERE code_pays = 'FR' \n       AND elo &gt; 2000\n)\nSELECT nom, prenom, elo\n  FROM joueuses_francaises_elo2000\n WHERE prenom LIKE 'A%';\n\nUsage avancé\n\n\n\nTable temporaire\nN’existe que le temps de la session\nCREATE TEMP TABLE joueuses_fr_elo2000 \nAS\nSELECT *\n  FROM joueuse\n WHERE code_pays = 'FR' \n   AND elo &gt; 2000;\n\n\nVue\nCREATE VIEW joueuses_fr_elo2000 \nAS\nSELECT *\n  FROM joueuse\n WHERE code_pays = 'FR' \n   AND elo &gt; 2000;\n\n\nAvantages des vues\n\nSauvegarde de requêtes complexes\n\njointures, filtres…\n\nSécurité et Contrôle d’Accès\n\nMasquer des colonnes sensibles\n\n\nPar contre une vue n’est pas plus rapide, ni performante\n\n\nVues matérialisées\nPhoto à un instant t\nCREATE MATERIALIZED VIEW joueuses_fr_elo2000 \nAS\nSELECT *\n  FROM joueuse\n WHERE code_pays = 'FR' \n   AND elo &gt; 2000;"
   },
   {
     "objectID": "doc/cours/sql-avance.html#index",
@@ -665,18 +665,18 @@
     "text": "2 INDEX"
   },
   {
-    "objectID": "doc/cours/sql-avance.html#with",
-    "href": "doc/cours/sql-avance.html#with",
-    "title": "SQL avancé",
-    "section": "3 WITH",
-    "text": "3 WITH"
-  },
-  {
     "objectID": "doc/cours/sql-avance.html#grant",
     "href": "doc/cours/sql-avance.html#grant",
     "title": "SQL avancé",
-    "section": "4 GRANT",
-    "text": "4 GRANT"
+    "section": "3 GRANT",
+    "text": "3 GRANT"
+  },
+  {
+    "objectID": "doc/cours/sql-avance.html#trigger",
+    "href": "doc/cours/sql-avance.html#trigger",
+    "title": "SQL avancé",
+    "section": "4 Trigger",
+    "text": "4 Trigger"
   },
   {
     "objectID": "doc/cours/sql-intro-slides.html#structured-query-language",

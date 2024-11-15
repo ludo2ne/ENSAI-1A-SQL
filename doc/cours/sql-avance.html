@@ -22,6 +22,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -187,10 +221,19 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#vue" id="toc-vue" class="nav-link active" data-scroll-target="#vue"><span class="header-section-number">1</span> VUE</a></li>
+  <li><a href="#les-vues" id="toc-les-vues" class="nav-link active" data-scroll-target="#les-vues"><span class="header-section-number">1</span> les vues</a>
+  <ul class="collapse">
+  <li><a href="#joueuses-françaises" id="toc-joueuses-françaises" class="nav-link" data-scroll-target="#joueuses-françaises">Joueuses Françaises</a></li>
+  <li><a href="#nouvelle-table" id="toc-nouvelle-table" class="nav-link" data-scroll-target="#nouvelle-table">Nouvelle table</a></li>
+  <li><a href="#common-table-expression" id="toc-common-table-expression" class="nav-link" data-scroll-target="#common-table-expression">Common Table Expression</a></li>
+  <li><a href="#table-temporaire" id="toc-table-temporaire" class="nav-link" data-scroll-target="#table-temporaire">Table temporaire</a></li>
+  <li><a href="#vue" id="toc-vue" class="nav-link" data-scroll-target="#vue">Vue</a></li>
+  <li><a href="#avantages-des-vues" id="toc-avantages-des-vues" class="nav-link" data-scroll-target="#avantages-des-vues">Avantages des vues</a></li>
+  <li><a href="#vues-matérialisées" id="toc-vues-matérialisées" class="nav-link" data-scroll-target="#vues-matérialisées">Vues matérialisées</a></li>
+  </ul></li>
   <li><a href="#index" id="toc-index" class="nav-link" data-scroll-target="#index"><span class="header-section-number">2</span> INDEX</a></li>
-  <li><a href="#with" id="toc-with" class="nav-link" data-scroll-target="#with"><span class="header-section-number">3</span> WITH</a></li>
-  <li><a href="#grant" id="toc-grant" class="nav-link" data-scroll-target="#grant"><span class="header-section-number">4</span> GRANT</a></li>
+  <li><a href="#grant" id="toc-grant" class="nav-link" data-scroll-target="#grant"><span class="header-section-number">3</span> GRANT</a></li>
+  <li><a href="#trigger" id="toc-trigger" class="nav-link" data-scroll-target="#trigger"><span class="header-section-number">4</span> Trigger</a></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="sql-avance-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
 </nav>
@@ -232,17 +275,125 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p><span class="emoji" data-emoji="construction">🚧</span></p>
-<section id="vue" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="vue"><span class="header-section-number">1</span> VUE</h2>
+<section id="les-vues" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="les-vues"><span class="header-section-number">1</span> les vues</h2>
+<p>Nous disposons de cette table</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> echecs.joueuse (</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    id_joueuse     SERIAL         <span class="kw">PRIMARY</span> <span class="kw">KEY</span>,   </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    nom            <span class="dt">VARCHAR</span>(<span class="dv">50</span>)    <span class="kw">NOT</span> <span class="kw">NULL</span>, </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    prenom         <span class="dt">VARCHAR</span>(<span class="dv">50</span>)    <span class="kw">NOT</span> <span class="kw">NULL</span>, </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    date_naissance <span class="dt">TIMESTAMP</span>,                 </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    elo            <span class="dt">INT</span>            <span class="kw">CHECK</span> (elo <span class="op">&gt;</span> <span class="dv">0</span>),  </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    mail           <span class="dt">VARCHAR</span>(<span class="dv">100</span>)   <span class="kw">UNIQUE</span>,         </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    est_arbitre    <span class="dt">BOOLEAN</span>        <span class="kw">DEFAULT</span> <span class="kw">false</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    code_pays      <span class="dt">VARCHAR</span>(<span class="dv">2</span>),          </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    taux_victoires <span class="dt">FLOAT</span>          <span class="kw">CHECK</span> (taux_victoires <span class="kw">BETWEEN</span> <span class="dv">0</span> <span class="kw">AND</span> <span class="dv">1</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="joueuses-françaises" class="level3">
+<h3 class="anchored" data-anchor-id="joueuses-françaises">Joueuses Françaises</h3>
+<p>Imaginons que nous avons de nombreuses requêtes à écrire sur les joueuses françaises ayant plus de 2000 elo.</p>
+<p>Et nous n’avons pas envie de nous embetter à écrire à chaque fois toutes les restrictions.</p>
+</section>
+<section id="nouvelle-table" class="level3">
+<h3 class="anchored" data-anchor-id="nouvelle-table">Nouvelle table</h3>
+<p>Solution 1 : créons une nouvelle table</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> echecs.joueuse_fr_2000</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">AS</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> code_pays <span class="op">=</span> <span class="st">'FR'</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>   <span class="kw">AND</span> elo <span class="op">&gt;=</span> <span class="dv">2000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="fragment">
+<div class="callout callout-style-default callout-caution callout-titled" title="Problèmes">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Problèmes
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Duplication des données</li>
+<li>Mise à jour</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="common-table-expression" class="level3">
+<h3 class="anchored" data-anchor-id="common-table-expression">Common Table Expression</h3>
+<p>Pour une utilisation ponctuelle, vous pouvez utiliser une CTE. Le principe :</p>
+<ul>
+<li>Commencez par définir votre sous-requête <em>joueuses_fr_elo2000</em> avec <code>WITH</code></li>
+<li>Appelez <em>joueuses_fr_elo2000</em> dans la requête principale</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">WITH</span> joueuses_fr_elo2000 </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">AS</span> (<span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>      <span class="kw">FROM</span> joueuse</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>     <span class="kw">WHERE</span> code_pays <span class="op">=</span> <span class="st">'FR'</span> </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>       <span class="kw">AND</span> elo <span class="op">&gt;</span> <span class="dv">2000</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom, prenom, elo</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> joueuses_francaises_elo2000</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> prenom <span class="kw">LIKE</span> <span class="st">'A%'</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="notes">
+<p>Usage avancé</p>
+</div>
+</section>
+<section id="table-temporaire" class="level3">
+<h3 class="anchored" data-anchor-id="table-temporaire">Table temporaire</h3>
+<p>N’existe que le temps de la session</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> TEMP <span class="kw">TABLE</span> joueuses_fr_elo2000 </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">AS</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> joueuse</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> code_pays <span class="op">=</span> <span class="st">'FR'</span> </span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>   <span class="kw">AND</span> elo <span class="op">&gt;</span> <span class="dv">2000</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="vue" class="level3">
+<h3 class="anchored" data-anchor-id="vue">Vue</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">VIEW</span> joueuses_fr_elo2000 </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">AS</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> joueuse</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> code_pays <span class="op">=</span> <span class="st">'FR'</span> </span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>   <span class="kw">AND</span> elo <span class="op">&gt;</span> <span class="dv">2000</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="avantages-des-vues" class="level3">
+<h3 class="anchored" data-anchor-id="avantages-des-vues">Avantages des vues</h3>
+<ul>
+<li>Sauvegarde de requêtes complexes
+<ul>
+<li>jointures, filtres…</li>
+</ul></li>
+<li>Sécurité et Contrôle d’Accès
+<ul>
+<li>Masquer des colonnes sensibles</li>
+</ul></li>
+</ul>
+<p>Par contre une vue n’est pas plus rapide, ni performante</p>
+</section>
+<section id="vues-matérialisées" class="level3">
+<h3 class="anchored" data-anchor-id="vues-matérialisées">Vues matérialisées</h3>
+<p>Photo à un instant t</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">MATERIALIZED</span> <span class="kw">VIEW</span> joueuses_fr_elo2000 </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">AS</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> joueuse</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> code_pays <span class="op">=</span> <span class="st">'FR'</span> </span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>   <span class="kw">AND</span> elo <span class="op">&gt;</span> <span class="dv">2000</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
 </section>
 <section id="index" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="index"><span class="header-section-number">2</span> INDEX</h2>
 </section>
-<section id="with" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="with"><span class="header-section-number">3</span> WITH</h2>
+<section id="grant" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="grant"><span class="header-section-number">3</span> GRANT</h2>
 </section>
-<section id="grant" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="grant"><span class="header-section-number">4</span> GRANT</h2>
+<section id="trigger" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="trigger"><span class="header-section-number">4</span> Trigger</h2>
 
 
 </section>
