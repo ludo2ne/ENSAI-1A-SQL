@@ -9,7 +9,7 @@
 <meta name="author" content="Ludovic Deneuville">
 <meta name="description" content="TP2">
 
-<title>Jointures – Base de données</title>
+<title>Joindre des tables – Base de données</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -190,17 +224,28 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#lancement-des-services" id="toc-lancement-des-services" class="nav-link active" data-scroll-target="#lancement-des-services"><span class="header-section-number">1</span> Lancement des services</a>
+  <li><a href="#introdution" id="toc-introdution" class="nav-link active" data-scroll-target="#introdution">Introdution</a></li>
+  <li><a href="#lancement-des-services" id="toc-lancement-des-services" class="nav-link" data-scroll-target="#lancement-des-services"><span class="header-section-number">1</span> Lancement des services</a>
   <ul class="collapse">
   <li><a href="#datalab-du-genes-ou-sspcloud" id="toc-datalab-du-genes-ou-sspcloud" class="nav-link" data-scroll-target="#datalab-du-genes-ou-sspcloud"><span class="header-section-number">1.1</span> Datalab du GENES ou SSPCloud</a></li>
   <li><a href="#base-de-données-postgresql" id="toc-base-de-données-postgresql" class="nav-link" data-scroll-target="#base-de-données-postgresql"><span class="header-section-number">1.2</span> Base de données PostgreSQL</a></li>
   <li><a href="#cloudbeaver" id="toc-cloudbeaver" class="nav-link" data-scroll-target="#cloudbeaver"><span class="header-section-number">1.3</span> CloudBeaver</a></li>
+  <li><a href="#vm-ensai" id="toc-vm-ensai" class="nav-link" data-scroll-target="#vm-ensai"><span class="header-section-number">1.4</span> VM ENSAI</a></li>
   </ul></li>
-  <li><a href="#exercices" id="toc-exercices" class="nav-link" data-scroll-target="#exercices"><span class="header-section-number">2</span> Exercices</a>
+  <li><a href="#écrire-une-requête" id="toc-écrire-une-requête" class="nav-link" data-scroll-target="#écrire-une-requête"><span class="header-section-number">2</span> Écrire une requête</a>
   <ul class="collapse">
-  <li><a href="#école-de-musique" id="toc-école-de-musique" class="nav-link" data-scroll-target="#école-de-musique"><span class="header-section-number">2.1</span> École de musique</a></li>
-  <li><a href="#location-de-dvd" id="toc-location-de-dvd" class="nav-link" data-scroll-target="#location-de-dvd"><span class="header-section-number">2.2</span> Location de DVD</a></li>
+  <li><a href="#listez-les-tables-nécessaires" id="toc-listez-les-tables-nécessaires" class="nav-link" data-scroll-target="#listez-les-tables-nécessaires"><span class="header-section-number">2.1</span> Listez les tables nécessaires</a></li>
+  <li><a href="#appliquez-les-filtres" id="toc-appliquez-les-filtres" class="nav-link" data-scroll-target="#appliquez-les-filtres"><span class="header-section-number">2.2</span> Appliquez les filtres</a></li>
+  <li><a href="#ordonnez-les-résultats" id="toc-ordonnez-les-résultats" class="nav-link" data-scroll-target="#ordonnez-les-résultats"><span class="header-section-number">2.3</span> Ordonnez les résultats</a></li>
+  <li><a href="#sélectionner-les-colonnes-requises" id="toc-sélectionner-les-colonnes-requises" class="nav-link" data-scroll-target="#sélectionner-les-colonnes-requises"><span class="header-section-number">2.4</span> Sélectionner les colonnes requises</a></li>
   </ul></li>
+  <li><a href="#exercices" id="toc-exercices" class="nav-link" data-scroll-target="#exercices"><span class="header-section-number">3</span> Exercices</a>
+  <ul class="collapse">
+  <li><a href="#école-de-musique" id="toc-école-de-musique" class="nav-link" data-scroll-target="#école-de-musique"><span class="header-section-number">3.1</span> École de musique <span class="emoji" data-emoji="guitar">🎸</span></a></li>
+  <li><a href="#location-de-dvd" id="toc-location-de-dvd" class="nav-link" data-scroll-target="#location-de-dvd"><span class="header-section-number">3.2</span> Location de DVD <span class="emoji" data-emoji="cd">💿</span></a></li>
+  <li><a href="#rugby-world-cup" id="toc-rugby-world-cup" class="nav-link" data-scroll-target="#rugby-world-cup"><span class="header-section-number">3.3</span> Rugby World Cup <span class="emoji" data-emoji="rugby_football">🏉</span></a></li>
+  </ul></li>
+  <li><a href="#arrêtez-votre-service" id="toc-arrêtez-votre-service" class="nav-link" data-scroll-target="#arrêtez-votre-service">Arrêtez votre service</a></li>
   </ul>
 </nav>
 </nav>
@@ -213,7 +258,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Jointures</h1>
+<h1 class="title">Joindre des tables</h1>
 </div>
 
 <div>
@@ -241,7 +286,32 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p><span class="emoji" data-emoji="construction">🚧</span></p>
+<section id="introdution" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="introdution">Introdution</h2>
+<p>Lors du premier TP, nous avons utilisé DuckDB pour lire les données d’un fichier parquet. Aujourd’hui nous allons créer notre propre base de données PostgreSQL et y insérer des tables et de données. Enfin nous allons requêter ces données.</p>
+<p>Lors de ce TP, vous allez :</p>
+<ul>
+<li>Créer votre base de données PostgreSQL</li>
+<li>Lancer des scripts de création de tables et d’insertion de données</li>
+<li>Relier des tables en utilisant les jointures</li>
+<li>Sélectionner et filtrer des données</li>
+</ul>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Écrivez des requêtes jolies !</li>
+</ul>
+</div>
+</div>
+</section>
 <section id="lancement-des-services" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="lancement-des-services"><span class="header-section-number">1</span> Lancement des services</h2>
 <section id="datalab-du-genes-ou-sspcloud" class="level3" data-number="1.1">
@@ -295,18 +365,20 @@ Note
 </div>
 </div>
 <ul class="task-list">
-<li><label><input type="checkbox">Lancez le service PostgreSQL</label>
+<li><label><input type="checkbox">Lancez le service <a href="https://onyxia.lab.groupe-genes.fr/launcher/databases/postgresql?name=postgresql&amp;version=1.0.3&amp;autoLaunch=true&amp;postgresql.primary.persistence.size=«1Gi»&amp;postgresql.primary.resources.limits.cpu=«250m»&amp;postgresql.primary.resources.requests.cpu=«50m»&amp;postgresql.primary.resources.limits.memory=«1Gi»" target="_blank">PostgreSQL</a></label>
 <ul>
 <li>Allez dans <strong>Catalogue de services</strong></li>
 <li>Onglet <strong>Databases</strong></li>
+<li>Configuration Postgresql <span class="emoji" data-emoji="arrow_right">➡️</span> Primary : Mettez tous les paramètres au minimum (Persistent volume size, CPU, Memory)</li>
 </ul></li>
 <li><label><input type="checkbox">Copiez-collez dans un fichier texte les informations de connexion PostgreSQL : Hostname, Port, Database, Username, Password</label></li>
 </ul>
 </section>
 <section id="cloudbeaver" class="level3" data-number="1.3">
 <h3 data-number="1.3" class="anchored" data-anchor-id="cloudbeaver"><span class="header-section-number">1.3</span> CloudBeaver</h3>
+<p>Nous avons créé un SGBD, nous avons maintenant besoin d’un outil de gestion pour s’y connecter et envoyer des requêtes.</p>
 <ul class="task-list">
-<li><label><input type="checkbox">Lancez le service <a href="https://dbeaver.com/docs/cloudbeaver/" target="_blank">CloudBeaver</a></label>
+<li><label><input type="checkbox">Lancez le service <a href="https://onyxia.lab.groupe-genes.fr/launcher/databases/cloudbeaver?name=cloudbeaver&amp;version=2.0.3&amp;resources.requests.memory=%C2%AB1Gi%C2%BB&amp;resources.limits.memory=%C2%AB2Gi%C2%BB" target="_blank">CloudBeaver</a></label>
 <ul>
 <li>Allez dans <strong>Catalogue de services</strong></li>
 <li>Onglet <strong>Databases</strong></li>
@@ -315,17 +387,131 @@ Note
 <li><label><input type="checkbox">Ouvrez ce service</label></li>
 </ul>
 <p>Normalement la connexion à la base de données <em>PostgreSQL</em> est détectée automatiquement.</p>
-<p>Dans le cas contraire, il faut cliquer sur le +, puis sur <em>New connection</em> et resenigné les éléments de connexion.</p>
+<p>Dans le cas contraire, il faut cliquer sur le +, puis sur <em>New connection</em> et renseigné les éléments de connexion.</p>
 <ul class="task-list">
 <li><label><input type="checkbox">Dans l’explorateur à gauche, clic droit sur bdd PostgreSQL <span class="emoji" data-emoji="arrow_right">➡️</span> SQL Editor</label></li>
 </ul>
 <p>Cela ouvre une fenêtre où vous pouvez écrire du code SQL pour interagir avec votre base de données.</p>
 </section>
+<section id="vm-ensai" class="level3" data-number="1.4">
+<h3 data-number="1.4" class="anchored" data-anchor-id="vm-ensai"><span class="header-section-number">1.4</span> VM ENSAI</h3>
+<div class="callout callout-style-default callout-note callout-titled" title="DBeaver sur la VM">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+DBeaver sur la VM
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<section id="paramètrage" class="level4">
+<h4 class="anchored" data-anchor-id="paramètrage">Paramètrage</h4>
+<ul>
+<li>Menu <code>Fenêtre</code> &gt; <code>Preference</code>
+<ul>
+<li>Formatage SQL
+<ul>
+<li>Casse des mots clefs : <code>UPPER</code></li>
+<li><label><input type="checkbox" checked="">Insert spaces for tabs</label></li>
+<li>Appliquer</li>
+</ul></li>
+<li>Metadonnées
+<ul>
+<li>Décocher <code>Ouvrir une connexion séparée pour la lecture des métadonnées</code></li>
+</ul></li>
+<li>Editeur SQL
+<ul>
+<li>Décocher <code>Ouvrir une connexion séparée pour chaque éditeur</code></li>
+</ul></li>
+</ul></li>
+</ul>
 </section>
-<section id="exercices" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="exercices"><span class="header-section-number">2</span> Exercices</h2>
-<section id="école-de-musique" class="level3" data-number="2.1">
-<h3 data-number="2.1" class="anchored" data-anchor-id="école-de-musique"><span class="header-section-number">2.1</span> École de musique</h3>
+<section id="création-de-la-connexion-postgresql" class="level4">
+<h4 class="anchored" data-anchor-id="création-de-la-connexion-postgresql">Création de la connexion PostgreSQL</h4>
+<ul>
+<li>Cliquer sur l’icone <code>Nouvelle connexion</code> en haut à gauche sous fichier</li>
+<li>Sélectionner <code>PostgreSQL</code> puis suivant
+<ul>
+<li>Host : <code>sgbd-eleves.domensai.ecole</code></li>
+<li>Port : <code>5432</code></li>
+<li>Database : <code>idxxxx</code></li>
+<li>Nom d’utilisateur : <code>idxxxx</code></li>
+<li>Mot de passe : <code>idxxxx</code></li>
+<li><code>Test de connexion</code></li>
+<li>Acceptez les mises à jour des pilotes</li>
+<li><code>Terminer</code></li>
+</ul></li>
+</ul>
+</section>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="écrire-une-requête" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="écrire-une-requête"><span class="header-section-number">2</span> Écrire une requête</h2>
+<p>Il est parfois difficile d’écrire du premier coup la requête qui répond directement à la question posée. Voici une méthode qui peut vous aider à écrire vos requêtes pas à pas :</p>
+<div class="callout callout-style-simple callout-none no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Imaginons que l’on vous demande de lister les noms et prénoms des joueuses du club de la ville de <em>Saint Quentin</em>, dont le prénom commence par un <em>A</em> classées par elo décroissant.</p>
+<p>joueuse(<u>id_joueuse</u>, nom, prenom, elo, #id_club)</p>
+<p>club(<u>id_club</u>, nom, ville)</p>
+</div>
+</div>
+</div>
+<section id="listez-les-tables-nécessaires" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="listez-les-tables-nécessaires"><span class="header-section-number">2.1</span> Listez les tables nécessaires</h3>
+<p>Commencez par lister les tables nécessaires, puis joignez les. Ici nous avons besoin des 2 tables.</p>
+<p>Utilisez pour l’instant <code>SELECT *</code> pour sélectionner toutes les colonnes.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> joueuse j</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> club c <span class="kw">USING</span>(id_club);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="appliquez-les-filtres" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="appliquez-les-filtres"><span class="header-section-number">2.2</span> Appliquez les filtres</h3>
+<p>Pour ne garder que les lignes qui nous intéressent :</p>
+<ul>
+<li>Ville du club : <em>Saint Quentin</em></li>
+<li>Prénom qui commence par un A**</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> joueuse j</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> club c <span class="kw">USING</span>(id_club)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> c.ville <span class="op">=</span> <span class="st">'Saint Quentin'</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>   <span class="kw">AND</span> j.prenom <span class="kw">LIKE</span> <span class="st">'A%'</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="ordonnez-les-résultats" class="level3" data-number="2.3">
+<h3 data-number="2.3" class="anchored" data-anchor-id="ordonnez-les-résultats"><span class="header-section-number">2.3</span> Ordonnez les résultats</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> joueuse j</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> club c <span class="kw">USING</span>(id_club)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> c.ville <span class="op">=</span> <span class="st">'Saint Quentin'</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>   <span class="kw">AND</span> j.prenom <span class="kw">LIKE</span> <span class="st">'A%'</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a> <span class="kw">ORDER</span> <span class="kw">BY</span> j.elo <span class="kw">DESC</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="sélectionner-les-colonnes-requises" class="level3" data-number="2.4">
+<h3 data-number="2.4" class="anchored" data-anchor-id="sélectionner-les-colonnes-requises"><span class="header-section-number">2.4</span> Sélectionner les colonnes requises</h3>
+<p>Il est demandé de ne garder que les noms et prénoms des joueuses</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> j.nom,</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>       j.prenom</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> joueuse j</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> club c <span class="kw">USING</span>(id_club)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> c.ville <span class="op">=</span> <span class="st">'Saint Quentin'</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>   <span class="kw">AND</span> j.prenom <span class="kw">LIKE</span> <span class="st">'A%'</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a> <span class="kw">ORDER</span> <span class="kw">BY</span> j.elo <span class="kw">DESC</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+</section>
+<section id="exercices" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="exercices"><span class="header-section-number">3</span> Exercices</h2>
+<section id="école-de-musique" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="école-de-musique"><span class="header-section-number">3.1</span> École de musique <span class="emoji" data-emoji="guitar">🎸</span></h3>
 <p>Nous allons commencer par créer les tables et insérer les données :</p>
 <ul class="task-list">
 <li><label><input type="checkbox">Copiez le contenu de ce <a href="./data/tp2-musique-create-pop.sql" target="_blank">script sql</a></label></li>
@@ -349,23 +535,54 @@ Note
 <p><a href="./data/tp2-musique-modele.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="./data/tp2-musique-modele.PNG" class="img-fluid"></a></p>
 <p>Vous pouvez maintenant commencer l’exercice et écrire les requêtes permettant de répondre aux questions suivantes :</p>
 <ul class="task-list">
-<li><label><input type="checkbox">Quels sont les noms des adhérents</label></li>
 <li><label><input type="checkbox">Quels sont les noms des instruments présents dans la base de données</label></li>
+<li><label><input type="checkbox">Quels sont les noms et adresses des adhérents</label></li>
 <li><label><input type="checkbox">Quelle est l’adresse de l’adhérent numéro 15</label></li>
-<li><label><input type="checkbox">Quels sont les numéros des adhérents de nom <code>DUPONT</code></label></li>
-<li><label><input type="checkbox">Donnez le(s) nom(s) de l’instrument(s) dont joue l’adhérent numéro 15</label></li>
-<li><label><input type="checkbox">Donnez le nom des adhérents inscrits au cours numéro 6</label></li>
-<li><label><input type="checkbox">Donnez les noms des adhérents inscrits au cours de guitare classique (le nom du cours est <code>GUIT-CLASS</code>)</label></li>
-<li><label><input type="checkbox">Quels sont les cours auxquels sont inscrits les adhérents qui jouent du piano</label></li>
-<li><label><input type="checkbox">De quels instruments jouent les personnes inscrites au cours de guitare classique</label></li>
+<li><label><input type="checkbox">Quels sont les numéros des adhérents de nom <em>DUPONT</em></label></li>
+</ul>
+<p>Réalisez les jointures qui permettent d’obtenir :</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Les noms des instruments dont joue chaque adhérent</label></li>
+<li><label><input type="checkbox">Le nom des adhérents inscrits au cours numéro 6</label></li>
+<li><label><input type="checkbox">Les noms des cours ayant lieu le samedi et les noms des adhérents inscrits</label></li>
+<li><label><input type="checkbox">Les noms des cours auxquels sont inscrits les adhérents qui jouent du piano</label></li>
+<li><label><input type="checkbox">De quels instruments jouent les personnes inscrites au cours de guitare classique (<code>GUIT-CLASS</code>)</label></li>
 </ul>
 </section>
-<section id="location-de-dvd" class="level3" data-number="2.2">
-<h3 data-number="2.2" class="anchored" data-anchor-id="location-de-dvd"><span class="header-section-number">2.2</span> Location de DVD</h3>
+<section id="location-de-dvd" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="location-de-dvd"><span class="header-section-number">3.2</span> Location de DVD <span class="emoji" data-emoji="cd">💿</span></h3>
 <p>Il fut un temps où des entreprises se spécialisaient dans la location de DVD. Dans cet exercice une telle entreprise souhaite informatiser la gestion des prêts.</p>
-<p>De la même manière que pour le premier exercice, chargez les données avec ce <a href="./data/tp2-dvd-create-pop.sql" target="_blank">script sql</a></p>
-<p>Modèle de données :</p>
+<p>Voici le Modèle de données :</p>
 <p><a href="./data/tp2-dvd-modele.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="./data/tp2-dvd-modele.PNG" class="img-fluid"></a></p>
+<section id="création-de-tables" class="level4">
+<h4 class="anchored" data-anchor-id="création-de-tables">Création de tables</h4>
+<ul class="task-list">
+<li><p><label><input type="checkbox">Utiliser le code ci-dessous pour créer le schéma et les 3 tables de droite</label></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">DROP</span> <span class="kw">SCHEMA</span> <span class="cf">IF</span> <span class="kw">EXISTS</span> dvd <span class="kw">CASCADE</span>;</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">SCHEMA</span> dvd;</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> dvd.realisateur(</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    num_realisateur    <span class="dt">INT</span> <span class="kw">PRIMARY</span> <span class="kw">KEY</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    nom_realisateur    TEXT,</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    prenom_realisateur TEXT);</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> dvd.film(</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    num_film       <span class="dt">INT</span> <span class="kw">PRIMARY</span> <span class="kw">KEY</span>,</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    titre          TEXT,</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>    genre          TEXT,</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    date_sortie    <span class="dt">DATE</span>);</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> dvd.a_realise(</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    num_film         <span class="dt">INT</span> <span class="kw">REFERENCES</span> dvd.film(num_film),</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    num_realisateur  <span class="dt">INT</span> <span class="kw">REFERENCES</span> dvd.realisateur(num_realisateur),</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    <span class="kw">PRIMARY</span> <span class="kw">KEY</span> (num_film, num_realisateur));</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p><label><input type="checkbox">Écrivez les requêtes qui permettent de créer les 3 autres tables</label></p></li>
+<li><p><label><input type="checkbox">Chargez les données avec ce <a href="./data/tp2-dvd-pop.sql" target="_blank">script sql</a></label></p></li>
+</ul>
+</section>
+<section id="requêtes" class="level4">
+<h4 class="anchored" data-anchor-id="requêtes">Requêtes</h4>
 <p>Donnez les requêtes pour obtenir :</p>
 <ul class="task-list">
 <li><label><input type="checkbox">Nom et prénom des adhérents</label></li>
@@ -373,24 +590,106 @@ Note
 <li><label><input type="checkbox">Numéro d’adhérent de <code>Pierre DUCHEMIN</code></label></li>
 <li><label><input type="checkbox">Nom, Prénom et adresse de tous les <code>DUCHEMIN</code></label></li>
 <li><label><input type="checkbox">Numéro des DVD du film <code>la guerre des etoiles</code></label></li>
-<li><label><input type="checkbox">Nom, Prénom des adhérents ayant emprunté le film `la guerre des etoiles »</label></li>
+</ul>
+<p>Pour les 3 requêtes suivantes, vous afficherez les noms et prénoms sur une seule colonne. Utilisez le mot clé <code>AS</code> pour renommer cette colonne à l’affichage.</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Nom, Prénom des adhérents ayant emprunté le film <code>la guerre des etoiles</code></label></li>
 <li><label><input type="checkbox">Nom, Prénom des adhérents ayant au moins un emprunt en cours (la date de fin de l’emprunt est nulle)</label></li>
-<li><label><input type="checkbox">Nom, Prénom du réalisateur de la <code>Guerre des étoiles</code></label></li>
-<li><label><input type="checkbox">Titre des films empruntés par pierre <code>DUCHEMIN</code></label></li>
-<li><label><input type="checkbox">Nom des réalisateurs des films empruntés par <code>pierre DUCHEMIN</code></label></li>
+<li><label><input type="checkbox">Nom, Prénom du réalisateur de la <em>Guerre des étoiles</em></label></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Il existe différentes manières de concaténer du texte :</p>
+<ul>
+<li>fonctions PostgreSQL <em>CONCAT()</em>, <em>CONCAT_WS()</em></li>
+<li>opérateur <code>||</code></li>
+</ul>
+</div>
+</div>
+</div>
+<ul class="task-list">
+<li><label><input type="checkbox">Titre des films empruntés par Pierre DUCHEMIN, ainsi que dates de début et de fin</label></li>
+<li><label><input type="checkbox">Nom des réalisateurs des films empruntés par Pierre DUCHEMIN</label></li>
 <li><label><input type="checkbox">Nom des réalisateurs de films de science fiction ou policiers</label></li>
 </ul>
-<p>Les questions ci-dessous nécessitent une opération de l’algèbre relationnelle ou un concept non vu au CM1</p>
+<p>Utilisons maintenant des méthodes d’agrégation pour répondre aux questions suivantes :</p>
 <ul class="task-list">
-<li><label><input type="checkbox">Nom et prénom des adhérents ayant emprunté des films de Science fiction mais pas de films policiers</label></li>
-<li><label><input type="checkbox">Nom et prénom des adhérents ayant emprunté au moins un film de Science fiction et un film policier</label></li>
-<li><label><input type="checkbox">Titre des films jamais empruntés</label></li>
-<li><label><input type="checkbox">Titre des films Science fiction jamais empruntés</label></li>
-<li><label><input type="checkbox">Titre des films empruntés par les adhérents n’ayant pas emprunté <code>les choristes</code></label></li>
+<li><label><input type="checkbox">Nombre de DVD dont le coût de l’emprunt est inférieur ou égal à 2€</label></li>
+<li><label><input type="checkbox">Nombre d’emprunts ayant été effectués par Dominique Duchemin</label></li>
+<li><label><input type="checkbox">Nombre de films différents ayant été empruntés par Dominique Duchemin</label></li>
+<li><label><input type="checkbox">Numéro des DVD en ordre décroissant du nombre de fois qu’ils ont été empruntés</label></li>
+<li><label><input type="checkbox">Numéro du DVD le plus récemment acheté</label></li>
+</ul>
+<p>Quelques questions sur les dates :</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Quelle a été la durée d’emprunt la plus longue</label></li>
+<li><label><input type="checkbox">À la date du 10 aout 2010, combien de DVD sont en cours d’emprunt</label></li>
+<li><label><input type="checkbox">Combien de dvd ont été achetés chaque année</label></li>
+</ul>
+<p>Pour terminer cet exercice, nous allons rechercher les titres des films qui n’ont jamais été empruntés. Procédons par étapes et écrivez les requêtes suivantes :</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Différents numéros des films empruntés</label></li>
+<li><label><input type="checkbox">Titre des films ayant pour numéro 18, 19 ou 20</label></li>
+<li><label><input type="checkbox">Titre des films n’ayant pas pour numéros ni 18, ni 19, ni 20</label></li>
+<li><label><input type="checkbox">Titre des films n’ayant jamais été empruntés</label></li>
+</ul>
+</section>
+</section>
+<section id="rugby-world-cup" class="level3" data-number="3.3">
+<h3 data-number="3.3" class="anchored" data-anchor-id="rugby-world-cup"><span class="header-section-number">3.3</span> Rugby World Cup <span class="emoji" data-emoji="rugby_football">🏉</span></h3>
+<div class="callout callout-style-simple callout-none no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Pour les plus rapides <span class="emoji" data-emoji="rocket">🚀</span></p>
+</div>
+</div>
+</div>
+<p>Nous souhaitons informatiser les résultats de la coupe du monde de rugby. Pour cela nous avons créé les deux tables suivantes : <em>equipe</em> et <em>matches</em>.</p>
+<p>Commencez par créez et charger les tables avec <a href="./data/tp2-rugby-create-pop.sql" target="_blank">ce script</a>.</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Donner les noms des équipes qui ont joué à Nantes.</label></li>
+<li><label><input type="checkbox">Contre quelles équipes a joué l’équipe de France ?</label></li>
+<li><label><input type="checkbox">Pour tous les matchs, affichez les informations suivantes :</label>
+<ul>
+<li>Date du match</li>
+<li>Nom de la première équipe</li>
+<li>nombre de points de la première équipe</li>
+<li>nombre de points de la deuxième équipe</li>
+<li>nom de la deuxième équipe et lieu du match</li>
+</ul></li>
+<li><label><input type="checkbox">Quels sont les noms d’équipes qui ont gagné au moins deux matchs</label></li>
+<li><label><input type="checkbox">Quels sont les noms des équipes qui ont perdu tous leurs matchs</label></li>
+<li><label><input type="checkbox">Pour chaque équipe donner le nombre de matchs qu’elles ont gagné ou perdu</label></li>
+<li><label><input type="checkbox">Donner le nombre total de points obtenus par équipe en classant les équipes de celle ayant marqué le plus à celle ayant marqué le moins</label></li>
+</ul>
+</section>
+</section>
+<section id="arrêtez-votre-service" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="arrêtez-votre-service">Arrêtez votre service</h2>
+<p>C’est la fin du TP, vous pouvez maintenant sauvegarder votre travail et libérer les ressources réservées :</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Copiez votre code et collez le sur votre machine dans un fichier <em>.sql</em></label>
+<ul>
+<li>par exemple dans <code>P:/Cours1A/UE3-Bases-de-donnees-relationnelles/TP2/tp2.sql</code></li>
+</ul></li>
+<li><label><input type="checkbox">Retournez sur la page d’accueil du Datalab</label></li>
+<li><label><input type="checkbox">Allez dans <em>Mes Services</em> et supprimez votre service</label></li>
 </ul>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
@@ -972,7 +1271,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"openEffect":"zoom","selector":".lightbox","closeEffect":"zoom","descPosition":"bottom","loop":false});
+<script>var lightboxQuarto = GLightbox({"selector":".lightbox","loop":false,"descPosition":"bottom","closeEffect":"zoom","openEffect":"zoom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {

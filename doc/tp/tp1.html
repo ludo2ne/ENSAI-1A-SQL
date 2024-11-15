@@ -467,8 +467,8 @@ DuckDB
 <section id="les-prénoms" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="les-prénoms"><span class="header-section-number">2</span> Les prénoms</h2>
 <p>Le fichier des prénoms contient des données sur les prénoms attribués aux enfants nés en France depuis 1900. Ces données sont disponibles au niveau France et par département.</p>
-<p>Dans ce TP, nous allons utiliser la version au format <a href="https://parquet.apache.org/" target="_blank">parquet</a>, mise à disposition sur le site <a href="https://www.data.gouv.fr/fr/datasets/base-prenoms-insee-format-parquet/" target="_blank">data.gouv</a> par <a href="https://www.icem7.fr/" target="_blank">Icem7</a></p>
-<div class="callout callout-style-default callout-tip callout-titled" title="Fichier parquet">
+<p>Dans ce TP, nous allons utiliser la version au format <a href="https://parquet.apache.org/" target="_blank">parquet</a>, mise à disposition sur le site <a href="https://www.data.gouv.fr/fr/datasets/base-prenoms-insee-format-parquet/" target="_blank">data.gouv</a> par <a href="https://www.icem7.fr/" target="_blank">Icem7</a>.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Fichier parquet">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -491,9 +491,28 @@ Fichier parquet
 <ul class="task-list">
 <li><p><label><input type="checkbox">Créez une vue <code>prenom</code> qui pointera vers le fichier parquet des prénoms</label></p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">OR</span> <span class="kw">REPLACE</span> <span class="kw">VIEW</span> prenom <span class="kw">AS</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> <span class="st">'https://static.data.gouv.fr/resources/base-prenoms-insee-format-parquet/20231121-161435/prenoms-nat2022.parquet'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> <span class="st">'https://static.data.gouv.fr/resources/base-prenoms-insee-format-parquet/20231121-161435/prenoms-nat2022.parquet'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Vous pourrez ensuite requêter sur cette vue comme si c’était une table</li>
+</ul></li>
 </ul>
-<p>Vous pourrez ensuite requêter sur cette vue comme si c’était une table.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Éxécuter une requête">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Éxécuter une requête
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Cliquez sur la requête pour y positionner le pointeur de la souris, puis au choix :</p>
+<ul>
+<li>Cliquez sur le petit triangle orange</li>
+<li>CTRL + ENTREE</li>
+</ul>
+</div>
+</div>
 <section id="premières-requêtes" class="level3" data-number="2.1">
 <h3 data-number="2.1" class="anchored" data-anchor-id="premières-requêtes"><span class="header-section-number">2.1</span> Premières requêtes</h3>
 <div class="callout callout-style-default callout-important callout-titled">
@@ -542,7 +561,7 @@ Secret statistique
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Les prénoms ayant un nombre d’occurrences insuffisant sont regroupés sous une appellation générique. Cela permet de protéger le secret statistique et de garantir l’anonymat.</p>
+<p>Les prénoms ayant un nombre insuffisant d’occurrences sont regroupés sous une appellation générique. Cela permet de protéger le secret statistique et de garantir l’anonymat.</p>
 <p>Sans cette précaution, par exemple :</p>
 <ul>
 <li>si vous vous appeliez <em>Yann-Adam LEFGRIGO</em></li>
@@ -626,7 +645,7 @@ Secret statistique
 </ul></li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -635,7 +654,7 @@ Tip
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div id="callout-11" class="callout-11-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Dans cette partie vous allez avoir besoin d’utiliser des sous-requêtes</p>
 </div>
@@ -657,7 +676,7 @@ Tip
 <li><label><input type="checkbox">Affichez pour chaque année le nombre de fois où le prénom JEROME a été donné, quelle que soit l’accentuation</label></li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled" title="Aide">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -666,7 +685,7 @@ Aide
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div id="callout-12" class="callout-12-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
 <li>voir Fontion DuckDB strip_accents()</li>
