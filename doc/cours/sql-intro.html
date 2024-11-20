@@ -1119,8 +1119,9 @@ LIKE est sensible à la Casse
 <section id="mise-à-jour-de-données" class="level2" data-number="5">
 <h2 data-number="5" class="anchored" data-anchor-id="mise-à-jour-de-données"><span class="header-section-number">5</span> Mise à jour de données</h2>
 <div class="sourceCode" id="cb28"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="kw">UPDATE</span> echecs.joueuse</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>   <span class="kw">SET</span> elo <span class="op">=</span> <span class="dv">2399</span></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> id_joueuse <span class="op">=</span> <span class="dv">1</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>   <span class="kw">SET</span> elo <span class="op">=</span> <span class="dv">2399</span>,</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>       prenom <span class="op">=</span> <span class="st">'Popo'</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> id_joueuse <span class="op">=</span> <span class="dv">1</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><br></p>
 <div class="fragment">
 <div class="small-table">
@@ -1150,7 +1151,7 @@ LIKE est sensible à la Casse
 <tr class="odd">
 <td>1</td>
 <td>Guichard</td>
-<td>Pauline</td>
+<td>Popo</td>
 <td>2399</td>
 </tr>
 </tbody>
@@ -1172,7 +1173,7 @@ Warning
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Généralement un message d’avertissement vous demande si vous êtes certains de vouloir mettre à jour toutes les lignes.</p>
+<p>Généralement un message d’avertissement vous demande si vous êtes certain de vouloir mettre à jour toutes les lignes.</p>
 </div>
 </div>
 </section>

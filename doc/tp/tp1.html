@@ -334,18 +334,17 @@ Tip
 </section>
 <section id="vm-ensai" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="vm-ensai">VM ENSAI</h3>
-<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout callout-style-default callout-important callout-titled" title="En cas d'indisponibilité des Datalabs">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Important
+En cas d’indisponibilité des Datalabs
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>En cas d’indisponibilité des Datalab, Vous pouvez réaliser le TP directement sur votre VM.</p>
-<p>DBeaver est installé.</p>
+<p>Uniquement en cas d’indisponibilité des Datalabs, vous pouvez réaliser le TP directement sur la VM. Le logiciel DBeaver est installé.</p>
 </div>
 </div>
 <ul class="task-list">
@@ -480,14 +479,20 @@ Fichier parquet
 <div class="callout-body-container callout-body">
 <p>Le format <strong>Parquet</strong> est un format de fichier de stockage de données optimisé pour les systèmes de traitement analytique de grande échelle. Voici ses principales caractéristiques :</p>
 <ol type="1">
-<li><p><strong>Stockage en colonnes</strong> : Parquet stocke les données par colonnes plutôt que par lignes, ce qui améliore l’efficacité de la compression et de l’accès aux données dans les charges de travail analytiques, notamment pour les systèmes de big data comme Hadoop ou Spark.</p></li>
-<li><p><strong>Compression efficace</strong> : Grâce à sa structure en colonnes, il permet une compression plus efficace que les formats en ligne (comme CSV), ce qui réduit la taille des fichiers et accélère le traitement.</p></li>
-<li><p><strong>Optimisé pour l’analytique</strong> : Parquet est conçu pour les requêtes en lecture intensive, car il permet de charger uniquement les colonnes nécessaires pour une analyse, ce qui améliore les performances.</p></li>
-<li><p><strong>Interopérabilité</strong> : Parquet est compatible avec plusieurs langages et outils d’analyse de données, notamment Hadoop, Spark, Hive, et divers environnements de traitement de données (Python, Java, etc.).</p></li>
-<li><p><strong>Format auto-descriptif</strong> : Il inclut des métadonnées qui décrivent la structure des données, permettant de l’utiliser facilement dans différents environnements sans nécessiter de schémas externes.</p></li>
+<li><p><strong>Stockage en colonnes</strong> : Parquet stocke les données par colonnes plutôt que par lignes, ce qui améliore l’efficacité de l’accès aux données dans les charges de travail analytiques.</p></li>
+<li><p><strong>Compression efficace</strong> : La compression par colonne permet un taux de compression moyen de 5 à 10 fois par rapport aux formats CSV, voire plus pour de gros fichiers. Cela réduit significativement la taille des données stockées et le coût de stockage.</p></li>
+<li><p><strong>Optimisé pour l’analytique</strong> : Parquet est conçu pour les requêtes en lecture intensive, car il permet de charger uniquement les colonnes nécessaires pour une analyse, ce qui améliore les performances en particulier sur les données volumineuses.</p></li>
+<li><p><strong>Métadonnées Riches et Auto-descriptives</strong> : Parquet inclut des métadonnées détaillées (schéma, types de données, statistiques min/max), permettant une lecture rapide et sans risque d’erreur. Ces métadonnées facilitent également le traitement des données par différents outils.</p></li>
+<li><p><strong>Langage Indépendant et Open Source</strong> : Le format Parquet est indépendant du langage et peut être utilisé avec divers langages de programmation (Python, R, C++, Java). Il est aussi open source et compatible avec la plupart des frameworks de big data.</p></li>
 </ol>
 </div>
 </div>
+<p>Pour en savoir plus sur le format Parquet :</p>
+<ul>
+<li><a href="https://www.databricks.com/fr/glossary/what-is-parquet" target="_blank">Parquet, qu’est-ce que c’est ?, Databricks</a></li>
+<li><a href="https://www.upsolver.com/blog/apache-parquet-why-use" target="_blank">What is the Parquet File Format?, Upsolver blog</a></li>
+</ul>
+<hr>
 <ul class="task-list">
 <li><p><label><input type="checkbox">Créez une vue <code>prenom</code> qui pointera vers le fichier parquet des prénoms</label></p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">OR</span> <span class="kw">REPLACE</span> <span class="kw">VIEW</span> prenom <span class="kw">AS</span></span>
@@ -607,7 +612,7 @@ Secret statistique
 <li><label><input type="checkbox">Compter le nombre de prénoms commençant par chaque lettre</label>
 <ul>
 <li>Pour extraite la première lettre d’un prénom, vous pouvez par exemple utiliser la fonction <code>SUBSTRING</code></li>
-<li>Bonus : différenciez filles et gaçons</li>
+<li>Bonus : différenciez filles et garçons</li>
 </ul></li>
 </ul>
 </section>
@@ -631,11 +636,12 @@ Secret statistique
 <ul>
 <li>Trouvez une fonction adéquate</li>
 </ul></li>
-<li><label><input type="checkbox">Affichez le nombres de caractères minimun, maximum et moyen parmi les prénoms de 2003</label></li>
+<li><label><input type="checkbox">Affichez le nombres de caractères minimum, maximum et moyen parmi les prénoms de 2003</label></li>
 <li><label><input type="checkbox">Listez les 3 prénoms de 2003 ayant le nombre de caractères maximum</label></li>
 <li><label><input type="checkbox">Modifiez cette dernière requête pour afficher pour chaque année entre 2015 et 2022 le ou les prénoms avec le plus de caractères</label>
 <ul>
 <li>classez par année</li>
+<li>Difficulty : <span class="emoji" data-emoji="star">⭐</span> <span class="emoji" data-emoji="star">⭐</span> <span class="emoji" data-emoji="star">⭐</span></li>
 </ul></li>
 <li><label><input type="checkbox">Affichez pour chaque année la taille moyenne des prénoms</label>
 <ul>
