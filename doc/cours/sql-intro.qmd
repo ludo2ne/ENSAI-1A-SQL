@@ -665,7 +665,8 @@ SELECT nom,
 
 ```{.sql}
 UPDATE echecs.joueuse
-   SET elo = 2399
+   SET elo = 2399,
+       prenom = 'Popo'
  WHERE id_joueuse = 1;
 ```
 
@@ -689,7 +690,7 @@ SELECT id_joueuse,
 
 | **id_joueuse**  | **nom**                | **prenom**       | **elo** |
 |-----------------|------------------------|------------------|---------|
-| 1               | Guichard               | Pauline          | 2399    |
+| 1               | Guichard               | Popo             | 2399    |
 
 :::
 ::::::
@@ -704,7 +705,7 @@ UPDATE echecs.joueuse
 ```
 
 ::: {.callout-warning}
-Généralement un message d'avertissement vous demande si vous êtes certains de vouloir mettre à jour toutes les lignes.
+Généralement un message d'avertissement vous demande si vous êtes certain de vouloir mettre à jour toutes les lignes.
 :::
 
 ## Suppression de données

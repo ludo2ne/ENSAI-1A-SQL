@@ -47,10 +47,8 @@ Pour éviter les problèmes de charges :
 
 ### VM ENSAI {.unnumbered}
 
-::: {.callout-important}
-En cas d'indisponibilité des Datalab, Vous pouvez réaliser le TP directement sur votre VM.
-
-DBeaver est installé.
+::: {.callout-important title="En cas d'indisponibilité des Datalabs"}
+Uniquement en cas d'indisponibilité des Datalabs, vous pouvez réaliser le TP directement sur la VM. Le logiciel DBeaver est installé.
 :::
 
 - [ ] Lancez DBeaver
@@ -120,16 +118,23 @@ Dans ce TP, nous allons utiliser la version au format [parquet](https://parquet.
 ::: {.callout-note title="Fichier parquet"}
 Le format **Parquet** est un format de fichier de stockage de données optimisé pour les systèmes de traitement analytique de grande échelle. Voici ses principales caractéristiques :
 
-1. **Stockage en colonnes** : Parquet stocke les données par colonnes plutôt que par lignes, ce qui améliore l'efficacité de la compression et de l'accès aux données dans les charges de travail analytiques, notamment pour les systèmes de big data comme Hadoop ou Spark.
+1. **Stockage en colonnes** : Parquet stocke les données par colonnes plutôt que par lignes, ce qui améliore l'efficacité de l'accès aux données dans les charges de travail analytiques.
    
-2. **Compression efficace** : Grâce à sa structure en colonnes, il permet une compression plus efficace que les formats en ligne (comme CSV), ce qui réduit la taille des fichiers et accélère le traitement.
+2. **Compression efficace** : La compression par colonne permet un taux de compression moyen de 5 à 10 fois par rapport aux formats CSV, voire plus pour de gros fichiers. Cela réduit significativement la taille des données stockées et le coût de stockage.
 
-3. **Optimisé pour l'analytique** : Parquet est conçu pour les requêtes en lecture intensive, car il permet de charger uniquement les colonnes nécessaires pour une analyse, ce qui améliore les performances.
+3. **Optimisé pour l'analytique** : Parquet est conçu pour les requêtes en lecture intensive, car il permet de charger uniquement les colonnes nécessaires pour une analyse, ce qui améliore les performances en particulier sur les données volumineuses.
 
-4. **Interopérabilité** : Parquet est compatible avec plusieurs langages et outils d'analyse de données, notamment Hadoop, Spark, Hive, et divers environnements de traitement de données (Python, Java, etc.).
+4. **Métadonnées Riches et Auto-descriptives** : Parquet inclut des métadonnées détaillées (schéma, types de données, statistiques min/max), permettant une lecture rapide et sans risque d'erreur. Ces métadonnées facilitent également le traitement des données par différents outils.
 
-5. **Format auto-descriptif** : Il inclut des métadonnées qui décrivent la structure des données, permettant de l'utiliser facilement dans différents environnements sans nécessiter de schémas externes.
+5. **Langage Indépendant et Open Source** : Le format Parquet est indépendant du langage et peut être utilisé avec divers langages de programmation (Python, R, C++, Java). Il est aussi open source et compatible avec la plupart des frameworks de big data.
 :::
+
+Pour en savoir plus sur le format Parquet : 
+
+- [Parquet, qu'est-ce que c'est ?, Databricks](https://www.databricks.com/fr/glossary/what-is-parquet){target="_blank"}
+- [What is the Parquet File Format?, Upsolver blog](https://www.upsolver.com/blog/apache-parquet-why-use){target="_blank"}
+
+---
 
 - [ ] Créez une vue `prenom` qui pointera vers le fichier parquet des prénoms
   ```{.sql}
@@ -209,7 +214,7 @@ Filtrez sur l'année 2022 et excluez les prénoms rares.
 - [ ] Listez les prénoms féminins commençant par la lettre *Q*
 - [ ] Compter le nombre de prénoms commençant par chaque lettre
   - Pour extraite la première lettre d'un prénom, vous pouvez par exemple utiliser la fonction `SUBSTRING`
-  - Bonus : différenciez filles et gaçons
+  - Bonus : différenciez filles et garçons
 
 
 ### Statistiques descriptives
@@ -223,10 +228,11 @@ Filtrez pour exclure les prénoms rares.
 
 - [ ] Affichez pour l'année 2003, les prénoms et leurs nombres de caractères
   - Trouvez une fonction adéquate
-- [ ] Affichez le nombres de caractères minimun, maximum et moyen parmi les prénoms de 2003
+- [ ] Affichez le nombres de caractères minimum, maximum et moyen parmi les prénoms de 2003
 - [ ] Listez les 3 prénoms de 2003 ayant le nombre de caractères maximum
 - [ ] Modifiez cette dernière requête pour afficher pour chaque année entre 2015 et 2022 le ou les prénoms avec le plus de caractères
   - classez par année
+  - Difficulty : :star: :star: :star:
 - [ ] Affichez pour chaque année la taille moyenne des prénoms
   - classez par année
   - utilisez la fonction `ROUND(<value>, 2)` pour arrondir les moyennes

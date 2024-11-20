@@ -45,6 +45,7 @@ SELECT *
  ORDER BY sexe,
           nombre DESC;
 
+-- Listez les prénoms féminins commençant par la lettre Q
 SELECT *
   FROM prenom
  WHERE preusuel <> '_PRENOMS_RARES'
@@ -53,23 +54,25 @@ SELECT *
    AND sexe = 2
    AND preusuel LIKE 'Q%';
 
+-- Compter le nombre de prénoms commençant par chaque lettre
 SELECT SUBSTRING(preusuel, 1, 1) AS lettre,
-       SUM(nombre)
+       COUNT(1)
   FROM prenom
  WHERE preusuel <> '_PRENOMS_RARES'
    AND annais <> 'XXXX'
    AND annais = '2022'
- GROUP BY SUBSTRING(preusuel, 1, 1)
+ GROUP BY lettre
  ORDER BY 1;
 
+-- Bonus : différenciez filles et gaçons
 SELECT SUBSTRING(preusuel, 1, 1) AS lettre, --preusuel[:1],
-       SUM(nombre) FILTER (WHERE sexe = 1) AS garcon,
-       SUM(nombre) FILTER (WHERE sexe = 2) AS fille
+       COUNT(1) FILTER (WHERE sexe = 1) AS garcon,
+       COUNT(1) FILTER (WHERE sexe = 2) AS fille
   FROM prenom
  WHERE preusuel <> '_PRENOMS_RARES'
    AND annais <> 'XXXX'
    AND annais = '2022'
- GROUP BY SUBSTRING(preusuel, 1, 1)
+ GROUP BY lettre
  ORDER BY 1;
 
 
@@ -77,18 +80,27 @@ SELECT SUBSTRING(preusuel, 1, 1) AS lettre, --preusuel[:1],
 -- Statistiques descriptives
 -------------------------------------------------------------------------------
 
+-- Affichez pour l'année 2003, les prénoms et leurs nombres de caractères
 SELECT preusuel,
        LENGTH(preusuel)
   FROM prenom
  WHERE preusuel <> '_PRENOMS_RARES'
    AND annais = '2003';
 
+
+-- Nombres de caractères minimum, maximum et moyen parmi les prénoms de 2003
 SELECT MIN(LENGTH(preusuel)),
        MAX(LENGTH(preusuel)),
        AVG(LENGTH(preusuel))
   FROM prenom
  WHERE preusuel <> '_PRENOMS_RARES'
    AND annais = '2003';
+
+
+-- Listez les 3 prénoms de 2003 ayant le nombre de caractères maximum
+SELECT MAX(LENGTH(preusuel))
+  FROM prenom
+ WHERE annais = '2003';
 
 SELECT preusuel
   FROM prenom
@@ -97,18 +109,29 @@ SELECT preusuel
                              FROM prenom 
                             WHERE annais = '2003');
 
-SELECT annais,
-       preusuel,
-       LENGTH(preusuel)
+
+-- afficher pour chaque année entre 2015 et 2022 le ou les prénoms avec le plus de caractères
+SELECT p2.annais,
+       MAX(LENGTH(p2.preusuel))
+  FROM prenom p2
+  WHERE p2.annais BETWEEN '2015' AND '2022'
+  GROUP BY p2.annais
+  ORDER BY 1;
+
+SELECT p1.annais,
+       p1.preusuel,
+       LENGTH(p1.preusuel)
   FROM prenom p1
- WHERE preusuel <> '_PRENOMS_RARES'
-   AND annais BETWEEN '2015' AND '2022'
-   AND LENGTH(preusuel) = (SELECT MAX(LENGTH(preusuel)) 
+ WHERE p1.preusuel <> '_PRENOMS_RARES'
+   AND p1.annais BETWEEN '2015' AND '2022'
+   AND LENGTH(preusuel) = (SELECT MAX(LENGTH(p2.preusuel)) 
                              FROM prenom p2
-                            WHERE preusuel <> '_PRENOMS_RARES'
+                            WHERE p2.preusuel <> '_PRENOMS_RARES'
                               AND p1.annais = p2.annais)
  ORDER BY annais;
 
+
+-- Affichez pour chaque année la taille moyenne des prénom
 SELECT annais,
        ROUND(AVG(LENGTH(preusuel)),1)
   FROM prenom
@@ -213,7 +236,7 @@ SELECT preusuel,
 -------------------------------------------------------------------------------
 
 -- Nombre de prénoms distincts en 2016
-SELECT COUNT(distinct preusuel) AS nb_prenoms,
+SELECT COUNT(DISTINCT preusuel) AS nb_prenoms,
        COUNT(DISTINCT preusuel) FILTER (WHERE sexe = 2) AS prenoms_filles,
        COUNT(DISTINCT preusuel) FILTER (WHERE sexe = 1) AS prenoms_garcons,
        prenoms_filles + prenoms_garcons

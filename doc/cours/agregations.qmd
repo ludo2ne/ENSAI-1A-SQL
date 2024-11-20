@@ -169,7 +169,7 @@ Comment obtenir la moyenne elo par club ?
 SELECT ville_club,    -- Supposons que la table joueuse a un attribut ville_club
        AVG(elo)
   FROM echecs.joueuse
- GROUP BY nom_club;
+ GROUP BY ville_club;
 ```
 
 ::: {.small-table}

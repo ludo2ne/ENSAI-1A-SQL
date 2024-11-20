@@ -139,8 +139,15 @@ SELECT *
 ```
 
 
-## INDEX
 
-## GRANT
 
-## Trigger
+## Todo
+
+- INDEX
+- GRANT
+- Trigger
+- Optimisation
+- EXISTS
+- Encapsuler
+- CTE
+- Transactions (ACID)
