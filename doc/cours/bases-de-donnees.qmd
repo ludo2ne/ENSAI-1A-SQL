@@ -210,7 +210,7 @@ Exemples juste après
 | Millet                 | Sophie           | 2366    |
 | Skrichempko            | Almira           | 2361    |
 
-: joueuse
+: joueuse ♕
 :::
 
 <br>

@@ -16,7 +16,7 @@ lightbox: true
 
 ## Introdution {.unnumbered}
 
-Lors du premier TP, nous avons utilisé DuckDB pour lire les données d'un fichier parquet. Aujourd'hui nous allons créer notre propre base de données PostgreSQL, puis y insérer des tables et de données. Enfin nous allons requêter ces données.
+Lors du premier TP, nous avons utilisé DuckDB pour lire les données d'un fichier parquet. Aujourd'hui nous allons créer notre propre base de données PostgreSQL, puis y déclarer des tables et insérer de données. Enfin nous allons requêter ces données.
 
 Lors de ce TP, vous allez :
 
@@ -52,7 +52,7 @@ Pour éviter les problèmes de charges, vous utiliserez selon votre profil :
 ### Base de données PostgreSQL
 
 - [ ] Lancez le service PostgreSQL
-  - Lien direct de lancement : [Datalab GENES](https://onyxia.lab.groupe-genes.fr/launcher/databases/postgresql?name=postgresql&version=1.0.3&autoLaunch=true&postgresql.primary.persistence.size=«1Gi»&postgresql.primary.resources.limits.cpu=«250m»&postgresql.primary.resources.requests.cpu=«50m»&postgresql.primary.resources.limits.memory=«1Gi»){target="_blank"} ou [SPPCloud](https://datalab.sspcloud.fr/launcher/databases/postgresql?name=postgresql&version=1.0.3&postgresql.primary.persistence.size=«1Gi»&postgresql.primary.resources.requests.cpu=«50m»&postgresql.primary.resources.limits.cpu=«250m»&postgresql.primary.resources.limits.memory=«1Gi»&autoLaunch=true){target="_blank"}
+  - Lien direct de lancement : [Datalab GENES](https://onyxia.lab.groupe-genes.fr/launcher/databases/postgresql?name=postgresql&version=1.0.3&autoLaunch=true&postgresql.primary.persistence.size=«1Gi»&postgresql.primary.resources.limits.cpu=«500m»&postgresql.primary.resources.limits.memory=«2Gi»){target="_blank"} ou [SPPCloud](https://datalab.sspcloud.fr/launcher/databases/postgresql?name=postgresql&version=1.0.3&postgresql.primary.persistence.size=«1Gi»&postgresql.primary.resources.limits.cpu=«500m»&postgresql.primary.resources.limits.memory=«2Gi»&autoLaunch=true){target="_blank"}
   - ou manuellement : **Catalogue de services** :arrow_right: **Databases** :arrow_right: `Lancer`
   - Configuration Postgresql :arrow_right: Primary : Mettez tous les paramètres au minimum (Persistent volume size, CPU, Memory)
     - Cela permettra d'éviter de réserver inutilement des ressources dont vous n'aurez pas besoin
@@ -72,7 +72,7 @@ Nous venons de créer un SGBD, nous avons maintenant besoin d'un outil de gestio
 ::: {.callout-tip}
 Normalement la connexion à la base de données *PostgreSQL* est détectée automatiquement.
 
-Dans le cas contraire, il faut cliquer sur le +, puis sur *New connection* et renseigné les éléments de connexion.
+Dans le cas contraire, il faut cliquer sur le +, puis sur *New connection* et renseigner les éléments de connexion.
 :::
 
 
@@ -81,6 +81,8 @@ Dans le cas contraire, il faut cliquer sur le +, puis sur *New connection* et re
 Cela ouvre une fenêtre où vous pouvez écrire du code SQL pour interagir avec votre base de données.
 
 ### VM ENSAI
+
+Uniquement en cas de soucis avec les Datalabs, vous pouvez faire le TP sur la VM.
 
 ::: {.callout-note collapse="true" title="DBeaver sur la VM"}
 Un serveur héberge une base de données PostgreSQL.
@@ -224,7 +226,7 @@ Réalisez les jointures qui permettent d'obtenir :
 
 ### Location de DVD :cd:
 
-Il fut un temps où des entreprises se spécialisaient dans la location de DVD. Dans cet exercice une telle entreprise souhaite informatiser la gestion des prêts.
+Il fut un temps où des entreprises se spécialisaient dans la location de DVD. Dans cet exercice, une telle entreprise souhaite informatiser la gestion des prêts.
 
 Voici le Modèle de données :
 
@@ -257,6 +259,16 @@ Voici le Modèle de données :
 - [ ] Écrivez les requêtes qui permettent de créer les 3 autres tables
 - [ ] Chargez les données avec ce [script sql](./data/tp2-dvd-pop.sql){target="_blank"} 
 
+::: {.callout-tip collapse="true"}
+Attention, ici l'ordre de création des tables a son importance.
+
+Reprenons et modifions l'exemple ci-dessus :
+
+- imaginez que vous essayez de [créer en premier]{.underline} la table `a_realise`
+- le champ *num_film* de cette table est une clé étrangère
+- il référence la clé primaire *num_film* de la table `film`
+- or si la table `film` n'existe pas, à votre avis, que va-t-il se passer ?
+:::
 
 #### Requêtes
 
@@ -321,7 +333,7 @@ Nous souhaitons informatiser les résultats de la coupe du monde de rugby. Pour 
 
 Commencez par créez et charger les tables avec [ce script](./data/tp2-rugby-create-pop.sql){target="_blank"}.
 
-- [ ] Donner les noms des équipes qui ont joué à Nantes. 
+- [ ] Donner les noms des équipes qui ont joué à Nantes
 - [ ] Contre quelles équipes a joué l'équipe de France ?
 - [ ] Pour tous les matchs, affichez les informations suivantes : 
   - Date du match 
@@ -341,5 +353,6 @@ C'est la fin du TP, vous pouvez maintenant sauvegarder votre travail et libérer
 
 - [ ] Copiez votre code et collez le sur votre machine dans un fichier *.sql*
   - par exemple dans `P:/Cours1A/UE3-Bases-de-donnees-relationnelles/TP2/tp2.sql`
+  - ou en téléchargeant depuis CloudBeaver le fichier sql (petit bouton avec un dossier et une flèche vers le bas)
 - [ ] Retournez sur la page d'accueil du Datalab
 - [ ] Allez dans *Mes Services* et supprimez votre service

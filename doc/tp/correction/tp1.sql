@@ -98,10 +98,12 @@ SELECT MIN(LENGTH(preusuel)),
 
 
 -- Listez les 3 prénoms de 2003 ayant le nombre de caractères maximum
+-- step1 : taille max en 2003
 SELECT MAX(LENGTH(preusuel))
   FROM prenom
  WHERE annais = '2003';
 
+-- step2 : utiliser ce résultat dans une sous-requête
 SELECT preusuel
   FROM prenom
  WHERE annais = '2003'
@@ -111,6 +113,7 @@ SELECT preusuel
 
 
 -- afficher pour chaque année entre 2015 et 2022 le ou les prénoms avec le plus de caractères
+-- step1 : taille max par année
 SELECT p2.annais,
        MAX(LENGTH(p2.preusuel))
   FROM prenom p2
@@ -118,6 +121,7 @@ SELECT p2.annais,
   GROUP BY p2.annais
   ORDER BY 1;
 
+-- step2 : utiliser la requête ci-dessus comme sous requête et faire le lien avec le champ annais
 SELECT p1.annais,
        p1.preusuel,
        LENGTH(p1.preusuel)
@@ -144,19 +148,21 @@ SELECT annais,
 -- Jérôme
 -------------------------------------------------------------------------------
 
+-- années où le prénom JÉRÔME a été donné
 SELECT DISTINCT annais
   FROM prenom
  WHERE annais <> 'XXXX'
    AND preusuel = 'JÉRÔME'
  ORDER BY annais DESC;
 
+-- JEROME avec d'autres accents / sans accent
 SELECT *
   FROM prenom
  WHERE annais <> 'XXXX'
    AND strip_accents(preusuel) = 'JEROME'
  ORDER BY annais DESC;
 
--- JEROME regroupés
+-- nombre de fois où le prénom JEROME a été donné, quelle que soit l'accentuation
 SELECT strip_accents(preusuel),
        annais,
        SUM(nombre)
@@ -196,11 +202,13 @@ SELECT annais,
 -- Prénoms composés
 -------------------------------------------------------------------------------
 
+-- prénoms composés entre les années 2000 et 2009 incluses
 SELECT preusuel
   FROM prenom
  WHERE preusuel LIKE '%-%'
    AND annais BETWEEN '2000' AND '2009';
 
+-- affichez également le nombre de fois où ils ont été donnés, trié en décroissant
 SELECT preusuel,
        SUM(nombre) AS nb_donnes
   FROM prenom
@@ -209,7 +217,7 @@ SELECT preusuel,
  GROUP BY preusuel
  ORDER BY nb_donnes DESC;
 
--- Jean
+-- Prénoms composés contenant JEAN
 SELECT preusuel,
        SUM(nombre) AS nb_donnes,
   FROM prenom
@@ -219,7 +227,7 @@ SELECT preusuel,
  GROUP BY preusuel
  ORDER BY nb_donnes DESC;
 
--- Jean seulement
+-- Pour retirer les JEANNE...
 SELECT preusuel,
        SUM(nombre) AS nb_donnes,
   FROM prenom
@@ -281,12 +289,16 @@ ORDER BY total DESC;
 CREATE OR REPLACE VIEW individus AS
 FROM 'https://static.data.gouv.fr/resources/recensement-de-la-population-fichiers-detail-individus-localises-au-canton-ou-ville-2020-1/20231023-122841/fd-indcvi-2020.parquet'; 
 
+
+-- nombre d'individus
 SELECT COUNT(1)
   FROM individus;
 
+-- sommer la variable ipondi
 SELECT SUM(ipondi)::INT
   FROM individus;
 
+-- Affichez 10 lignes
 SELECT *
   FROM individus
  LIMIT 10;
@@ -294,19 +306,23 @@ SELECT *
 CREATE OR REPLACE VIEW variables_individus AS
 FROM 'https://static.data.gouv.fr/resources/recensement-de-la-population-fichiers-detail-individus-localises-au-canton-ou-ville-2020-1/20231025-082910/dictionnaire-variables-indcvi-2020.csv'
 
+-- dictionnaire des variables
 SELECT *
   FROM variables_individus;
 
+-- modalité représentant le département de résidence de l'individu
 SELECT *
   FROM variables_individus
  WHERE lib_var ILIKE '%partem%';
 
+-- nombre d'habitants par départements
 SELECT dept,
        SUM(ipondi)::INT AS nb_hab
   FROM individus
  GROUP BY dept
  ORDER BY 1;
 
+-- nombre d'habitants par départements par sexe entre 25 et 29 ans
 SELECT dept,
        SUM(ipondi) FILTER(WHERE sexe = 1)::INT AS hommes,
        SUM(ipondi) FILTER(WHERE sexe = 2)::INT AS femmes

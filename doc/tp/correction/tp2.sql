@@ -26,7 +26,7 @@ SELECT num_adherent
 
 
 -- Nom des instruments dont joue chaque adhérent
-SELECT ae.nom_adherent,
+SELECT ae.*,
        i.nom_instrument
   FROM musique.instrument i
   JOIN musique.joue j USING (num_instrument)
@@ -51,7 +51,8 @@ SELECT c.nom_cours,
 
 
 -- Quels sont les cours auxquels sont inscrits les adhérents qui jouent du piano
-SELECT DISTINCT c.nom_cours,
+-- Remarque : pas besoin de passer par la table adherent_ecole
+SELECT DISTINCT c.nom_cours
   FROM musique.instrument i
   JOIN musique.joue j USING(num_instrument)
   JOIN musique.suit_cours sc USING(num_adherent)
@@ -227,7 +228,7 @@ SELECT num_dvd
  LIMIT 1;
 
 -- Durée d'emprunt la plus longue
-SELECT MAX(date_fin - date_debut)
+SELECT MAX(date_fin - date_debut) AS duree_jours
   FROM dvd.emprunte e;
 
 -- En date du 10 août 2010, combien de DVD sont en cours d'emprunt
@@ -255,7 +256,7 @@ SELECT DISTINCT d.num_film
 -- Titre des films ayant pour numéros 18, 19 ou 20
 SELECT f.titre
   FROM dvd.film f
- WHERE num_film NOT IN (18, 19, 20);
+ WHERE num_film IN (18, 19, 20);
 
 -- Titre des films n'ayant pas pour numéros 18, 19 ni 20
 SELECT f.titre
