@@ -95,5 +95,5 @@ INSERT INTO dvd.emprunte VALUES
     (22, 7, 210, TO_DATE('04-08-2012', 'DD-MM-YYYY'), TO_DATE('16-08-2012', 'DD-MM-YYYY')),
     (23, 4, 220, TO_DATE('03-11-2014', 'DD-MM-YYYY'), NULL);
 
-
+SET SEARCH_PATH TO dvd, public;
 

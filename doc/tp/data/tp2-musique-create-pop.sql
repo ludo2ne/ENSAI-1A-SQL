@@ -133,3 +133,5 @@ INSERT INTO musique.suit_cours VALUES
     (15, 10),
     (15, 11),
     (16, 6);
+
+SET SEARCH_PATH TO musique, public;

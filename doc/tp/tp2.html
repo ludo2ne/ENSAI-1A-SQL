@@ -232,7 +232,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#cloudbeaver" id="toc-cloudbeaver" class="nav-link" data-scroll-target="#cloudbeaver"><span class="header-section-number">1.3</span> CloudBeaver</a></li>
   <li><a href="#vm-ensai" id="toc-vm-ensai" class="nav-link" data-scroll-target="#vm-ensai"><span class="header-section-number">1.4</span> VM ENSAI</a></li>
   </ul></li>
-  <li><a href="#écrire-une-requête" id="toc-écrire-une-requête" class="nav-link" data-scroll-target="#écrire-une-requête"><span class="header-section-number">2</span> Écrire une requête</a>
+  <li><a href="#méthodo-écrire-une-requête" id="toc-méthodo-écrire-une-requête" class="nav-link" data-scroll-target="#méthodo-écrire-une-requête"><span class="header-section-number">2</span> Méthodo : Écrire une requête</a>
   <ul class="collapse">
   <li><a href="#listez-les-tables-nécessaires" id="toc-listez-les-tables-nécessaires" class="nav-link" data-scroll-target="#listez-les-tables-nécessaires"><span class="header-section-number">2.1</span> Listez les tables nécessaires</a></li>
   <li><a href="#appliquez-les-filtres" id="toc-appliquez-les-filtres" class="nav-link" data-scroll-target="#appliquez-les-filtres"><span class="header-section-number">2.2</span> Appliquez les filtres</a></li>
@@ -288,10 +288,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="introdution" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="introdution">Introdution</h2>
-<p>Lors du premier TP, nous avons utilisé DuckDB pour lire les données d’un fichier parquet. Aujourd’hui nous allons créer notre propre base de données PostgreSQL et y insérer des tables et de données. Enfin nous allons requêter ces données.</p>
+<p>Lors du premier TP, nous avons utilisé DuckDB pour lire les données d’un fichier parquet. Aujourd’hui nous allons créer notre propre base de données PostgreSQL, puis y insérer des tables et de données. Enfin nous allons requêter ces données.</p>
 <p>Lors de ce TP, vous allez :</p>
 <ul>
-<li>Créer votre base de données PostgreSQL</li>
+<li>Créer votre base de données <a href="https://www.postgresql.org/" target="_blank">PostgreSQL</a></li>
 <li>Lancer des scripts de création de tables et d’insertion de données</li>
 <li>Relier des tables en utilisant les jointures</li>
 <li>Sélectionner et filtrer des données</li>
@@ -316,7 +316,7 @@ Important
 <h2 data-number="1" class="anchored" data-anchor-id="lancement-des-services"><span class="header-section-number">1</span> Lancement des services</h2>
 <section id="datalab-du-genes-ou-sspcloud" class="level3" data-number="1.1">
 <h3 data-number="1.1" class="anchored" data-anchor-id="datalab-du-genes-ou-sspcloud"><span class="header-section-number">1.1</span> Datalab du GENES ou SSPCloud</h3>
-<p>Connectez-vous à l’une des 2 instances suivantes (elles sont quasiment identiques) :</p>
+<p>Connectez-vous à l’une des 2 instances suivantes d’Onyxia (elles sont quasiment identiques) :</p>
 <ul class="task-list">
 <li><label><input type="checkbox"><a href="https://onyxia.lab.groupe-genes.fr/" target="_blank">Datalab du GENES</a></label></li>
 <li><label><input type="checkbox"><a href="https://datalab.sspcloud.fr/" target="_blank">Datalab SSPCloud de l’INSEE</a></label>
@@ -334,60 +334,56 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Pour éviter les problèmes de charges :</p>
+<p>L’instance du GENES est plus récente donc encore en cours de rodage. Celle de l’INSEE est plus ancienne et donc plus robuste.</p>
+<p>Pour éviter les problèmes de charges, vous utiliserez selon votre profil :</p>
 <ul>
-<li>Les élèves fonctionnaires feront le TP sur le SSPCloud</li>
-<li>Les élèves ingénieurs <span class="emoji" data-emoji="arrow_right">➡️</span> Datalab du GENES</li>
+<li>élèves fonctionnaires <span class="emoji" data-emoji="arrow_right">➡️</span> SSPCloud</li>
+<li>élèves ingénieurs <span class="emoji" data-emoji="arrow_right">➡️</span> SSPCloud ou Datalab du GENES</li>
 </ul>
 </div>
 </div>
 </section>
 <section id="base-de-données-postgresql" class="level3" data-number="1.2">
 <h3 data-number="1.2" class="anchored" data-anchor-id="base-de-données-postgresql"><span class="header-section-number">1.2</span> Base de données PostgreSQL</h3>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Lors du premier TP, nous avons utilisé des données de fichiers parquet lus directement avec DuckDB.</p>
-<p>Aujourd’hui, nous allons :</p>
-<ul>
-<li>Créer notre propre base de données <a href="https://www.postgresql.org/" target="_blank">PostgreSQL</a></li>
-<li>Créer des schémas et des tables</li>
-<li>Insérer des données</li>
-<li>Requêter ces données</li>
-</ul>
-</div>
-</div>
 <ul class="task-list">
-<li><label><input type="checkbox">Lancez le service <a href="https://onyxia.lab.groupe-genes.fr/launcher/databases/postgresql?name=postgresql&amp;version=1.0.3&amp;autoLaunch=true&amp;postgresql.primary.persistence.size=«1Gi»&amp;postgresql.primary.resources.limits.cpu=«250m»&amp;postgresql.primary.resources.requests.cpu=«50m»&amp;postgresql.primary.resources.limits.memory=«1Gi»" target="_blank">PostgreSQL</a></label>
+<li><label><input type="checkbox">Lancez le service PostgreSQL</label>
 <ul>
-<li>Allez dans <strong>Catalogue de services</strong></li>
-<li>Onglet <strong>Databases</strong></li>
-<li>Configuration Postgresql <span class="emoji" data-emoji="arrow_right">➡️</span> Primary : Mettez tous les paramètres au minimum (Persistent volume size, CPU, Memory)</li>
+<li>Lien direct de lancement : <a href="https://onyxia.lab.groupe-genes.fr/launcher/databases/postgresql?name=postgresql&amp;version=1.0.3&amp;autoLaunch=true&amp;postgresql.primary.persistence.size=«1Gi»&amp;postgresql.primary.resources.limits.cpu=«250m»&amp;postgresql.primary.resources.requests.cpu=«50m»&amp;postgresql.primary.resources.limits.memory=«1Gi»" target="_blank">Datalab GENES</a> ou <a href="https://datalab.sspcloud.fr/launcher/databases/postgresql?name=postgresql&amp;version=1.0.3&amp;postgresql.primary.persistence.size=«1Gi»&amp;postgresql.primary.resources.requests.cpu=«50m»&amp;postgresql.primary.resources.limits.cpu=«250m»&amp;postgresql.primary.resources.limits.memory=«1Gi»&amp;autoLaunch=true" target="_blank">SPPCloud</a></li>
+<li>ou manuellement : <strong>Catalogue de services</strong> <span class="emoji" data-emoji="arrow_right">➡️</span> <strong>Databases</strong> <span class="emoji" data-emoji="arrow_right">➡️</span> <code>Lancer</code></li>
+<li>Configuration Postgresql <span class="emoji" data-emoji="arrow_right">➡️</span> Primary : Mettez tous les paramètres au minimum (Persistent volume size, CPU, Memory)
+<ul>
+<li>Cela permettra d’éviter de réserver inutilement des ressources dont vous n’aurez pas besoin</li>
+</ul></li>
+<li>Cliquez sur <code>Lancer</code></li>
 </ul></li>
 <li><label><input type="checkbox">Copiez-collez dans un fichier texte les informations de connexion PostgreSQL : Hostname, Port, Database, Username, Password</label></li>
 </ul>
 </section>
 <section id="cloudbeaver" class="level3" data-number="1.3">
 <h3 data-number="1.3" class="anchored" data-anchor-id="cloudbeaver"><span class="header-section-number">1.3</span> CloudBeaver</h3>
-<p>Nous avons créé un SGBD, nous avons maintenant besoin d’un outil de gestion pour s’y connecter et envoyer des requêtes.</p>
+<p>Nous venons de créer un SGBD, nous avons maintenant besoin d’un outil de gestion pour s’y connecter et envoyer des requêtes.</p>
 <ul class="task-list">
-<li><label><input type="checkbox">Lancez le service <a href="https://onyxia.lab.groupe-genes.fr/launcher/databases/cloudbeaver?name=cloudbeaver&amp;version=2.0.3&amp;resources.requests.memory=%C2%AB1Gi%C2%BB&amp;resources.limits.memory=%C2%AB2Gi%C2%BB" target="_blank">CloudBeaver</a></label>
+<li><label><input type="checkbox">Lancez le service CloudBeaver</label>
 <ul>
-<li>Allez dans <strong>Catalogue de services</strong></li>
-<li>Onglet <strong>Databases</strong></li>
+<li><strong>Catalogue de services</strong> <span class="emoji" data-emoji="arrow_right">➡️</span> <strong>Databases</strong></li>
 </ul></li>
 <li><label><input type="checkbox">Copiez-collez également les informations de connexion au service <em>CloudBeaver</em></label></li>
 <li><label><input type="checkbox">Ouvrez ce service</label></li>
 </ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>Normalement la connexion à la base de données <em>PostgreSQL</em> est détectée automatiquement.</p>
 <p>Dans le cas contraire, il faut cliquer sur le +, puis sur <em>New connection</em> et renseigné les éléments de connexion.</p>
+</div>
+</div>
 <ul class="task-list">
 <li><label><input type="checkbox">Dans l’explorateur à gauche, clic droit sur bdd PostgreSQL <span class="emoji" data-emoji="arrow_right">➡️</span> SQL Editor</label></li>
 </ul>
@@ -407,6 +403,8 @@ DBeaver sur la VM
 </div>
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
+<p>Un serveur héberge une base de données PostgreSQL.</p>
+<p>Pour vous connecter à votre bdd, lancez le logiciel DBeaver depuis votre VM. Ensuite, uniquement la première fois, vous devrez effectuer le paramètrage ci-dessous et créer la connexion à votre bdd.</p>
 <section id="paramètrage" class="level4">
 <h4 class="anchored" data-anchor-id="paramètrage">Paramètrage</h4>
 <ul>
@@ -451,9 +449,9 @@ DBeaver sur la VM
 </div>
 </section>
 </section>
-<section id="écrire-une-requête" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="écrire-une-requête"><span class="header-section-number">2</span> Écrire une requête</h2>
-<p>Il est parfois difficile d’écrire du premier coup la requête qui répond directement à la question posée. Voici une méthode qui peut vous aider à écrire vos requêtes pas à pas :</p>
+<section id="méthodo-écrire-une-requête" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="méthodo-écrire-une-requête"><span class="header-section-number">2</span> Méthodo : Écrire une requête</h2>
+<p>Il est parfois difficile d’écrire du premier coup LA requête qui répond directement à la question posée. Voici une méthode qui peut vous aider à écrire vos requêtes pas à pas :</p>
 <div class="callout callout-style-simple callout-none no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -521,7 +519,7 @@ DBeaver sur la VM
 <li>Cliquez sur la petite icone sous les triangles oranges qui ressemble à <span class="emoji" data-emoji="scroll">📜</span></li>
 <li>raccourci (ALT + X)</li>
 </ul></li>
-<li><label><input type="checkbox">Vérifiez que votre schéme et vos tables sont créés</label>
+<li><label><input type="checkbox">Vérifiez que votre schéma et vos tables sont créés</label>
 <ul>
 <li>Dans l’explorateur : PostgreSQL <span class="emoji" data-emoji="arrow_right">➡️</span> Databases <span class="emoji" data-emoji="arrow_right">➡️</span> defaultdb <span class="emoji" data-emoji="arrow_right">➡️</span> Schemas</li>
 <li>Clic droit sur <em>Schemas</em> <span class="emoji" data-emoji="arrow_right">➡️</span> Refresh</li>
@@ -529,7 +527,7 @@ DBeaver sur la VM
 </ul>
 <p>Si tout est ok, vous n’avez plus besoin du script de création et d’insertion de données.</p>
 <ul class="task-list">
-<li><label><input type="checkbox">Supprimez le contenu du code SQL ou ouvrez un nouvel éditeur SQL</label></li>
+<li><label><input type="checkbox">Supprimez tout le contenu du code SQL que vous venez d’exécuter ou ouvrez un nouvel éditeur SQL</label></li>
 </ul>
 <p>Voici le modèle de données :</p>
 <p><a href="./data/tp2-musique-modele.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="./data/tp2-musique-modele.PNG" class="img-fluid"></a></p>
@@ -1271,7 +1269,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","loop":false,"openEffect":"zoom","descPosition":"bottom","selector":".lightbox"});
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","loop":false,"descPosition":"bottom","openEffect":"zoom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
