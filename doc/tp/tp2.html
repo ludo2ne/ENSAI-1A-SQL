@@ -288,7 +288,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="introdution" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="introdution">Introdution</h2>
-<p>Lors du premier TP, nous avons utilisé DuckDB pour lire les données d’un fichier parquet. Aujourd’hui nous allons créer notre propre base de données PostgreSQL, puis y insérer des tables et de données. Enfin nous allons requêter ces données.</p>
+<p>Lors du premier TP, nous avons utilisé DuckDB pour lire les données d’un fichier parquet. Aujourd’hui nous allons créer notre propre base de données PostgreSQL, puis y déclarer des tables et insérer de données. Enfin nous allons requêter ces données.</p>
 <p>Lors de ce TP, vous allez :</p>
 <ul>
 <li>Créer votre base de données <a href="https://www.postgresql.org/" target="_blank">PostgreSQL</a></li>
@@ -348,7 +348,7 @@ Tip
 <ul class="task-list">
 <li><label><input type="checkbox">Lancez le service PostgreSQL</label>
 <ul>
-<li>Lien direct de lancement : <a href="https://onyxia.lab.groupe-genes.fr/launcher/databases/postgresql?name=postgresql&amp;version=1.0.3&amp;autoLaunch=true&amp;postgresql.primary.persistence.size=«1Gi»&amp;postgresql.primary.resources.limits.cpu=«250m»&amp;postgresql.primary.resources.requests.cpu=«50m»&amp;postgresql.primary.resources.limits.memory=«1Gi»" target="_blank">Datalab GENES</a> ou <a href="https://datalab.sspcloud.fr/launcher/databases/postgresql?name=postgresql&amp;version=1.0.3&amp;postgresql.primary.persistence.size=«1Gi»&amp;postgresql.primary.resources.requests.cpu=«50m»&amp;postgresql.primary.resources.limits.cpu=«250m»&amp;postgresql.primary.resources.limits.memory=«1Gi»&amp;autoLaunch=true" target="_blank">SPPCloud</a></li>
+<li>Lien direct de lancement : <a href="https://onyxia.lab.groupe-genes.fr/launcher/databases/postgresql?name=postgresql&amp;version=1.0.3&amp;autoLaunch=true&amp;postgresql.primary.persistence.size=«1Gi»&amp;postgresql.primary.resources.limits.cpu=«500m»&amp;postgresql.primary.resources.limits.memory=«2Gi»" target="_blank">Datalab GENES</a> ou <a href="https://datalab.sspcloud.fr/launcher/databases/postgresql?name=postgresql&amp;version=1.0.3&amp;postgresql.primary.persistence.size=«1Gi»&amp;postgresql.primary.resources.limits.cpu=«500m»&amp;postgresql.primary.resources.limits.memory=«2Gi»&amp;autoLaunch=true" target="_blank">SPPCloud</a></li>
 <li>ou manuellement : <strong>Catalogue de services</strong> <span class="emoji" data-emoji="arrow_right">➡️</span> <strong>Databases</strong> <span class="emoji" data-emoji="arrow_right">➡️</span> <code>Lancer</code></li>
 <li>Configuration Postgresql <span class="emoji" data-emoji="arrow_right">➡️</span> Primary : Mettez tous les paramètres au minimum (Persistent volume size, CPU, Memory)
 <ul>
@@ -381,7 +381,7 @@ Tip
 </div>
 <div class="callout-body-container callout-body">
 <p>Normalement la connexion à la base de données <em>PostgreSQL</em> est détectée automatiquement.</p>
-<p>Dans le cas contraire, il faut cliquer sur le +, puis sur <em>New connection</em> et renseigné les éléments de connexion.</p>
+<p>Dans le cas contraire, il faut cliquer sur le +, puis sur <em>New connection</em> et renseigner les éléments de connexion.</p>
 </div>
 </div>
 <ul class="task-list">
@@ -391,6 +391,7 @@ Tip
 </section>
 <section id="vm-ensai" class="level3" data-number="1.4">
 <h3 data-number="1.4" class="anchored" data-anchor-id="vm-ensai"><span class="header-section-number">1.4</span> VM ENSAI</h3>
+<p>Uniquement en cas de soucis avec les Datalabs, vous pouvez faire le TP sur la VM.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="DBeaver sur la VM">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -549,7 +550,7 @@ DBeaver sur la VM
 </section>
 <section id="location-de-dvd" class="level3" data-number="3.2">
 <h3 data-number="3.2" class="anchored" data-anchor-id="location-de-dvd"><span class="header-section-number">3.2</span> Location de DVD <span class="emoji" data-emoji="cd">💿</span></h3>
-<p>Il fut un temps où des entreprises se spécialisaient dans la location de DVD. Dans cet exercice une telle entreprise souhaite informatiser la gestion des prêts.</p>
+<p>Il fut un temps où des entreprises se spécialisaient dans la location de DVD. Dans cet exercice, une telle entreprise souhaite informatiser la gestion des prêts.</p>
 <p>Voici le Modèle de données :</p>
 <p><a href="./data/tp2-dvd-modele.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img src="./data/tp2-dvd-modele.PNG" class="img-fluid"></a></p>
 <section id="création-de-tables" class="level4">
@@ -578,6 +579,29 @@ DBeaver sur la VM
 <li><p><label><input type="checkbox">Écrivez les requêtes qui permettent de créer les 3 autres tables</label></p></li>
 <li><p><label><input type="checkbox">Chargez les données avec ce <a href="./data/tp2-dvd-pop.sql" target="_blank">script sql</a></label></p></li>
 </ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Attention, ici l’ordre de création des tables a son importance.</p>
+<p>Reprenons et modifions l’exemple ci-dessus :</p>
+<ul>
+<li>imaginez que vous essayez de <u>créer en premier</u> la table <code>a_realise</code></li>
+<li>le champ <em>num_film</em> de cette table est une clé étrangère</li>
+<li>il référence la clé primaire <em>num_film</em> de la table <code>film</code></li>
+<li>or si la table <code>film</code> n’existe pas, à votre avis, que va-t-il se passer ?</li>
+</ul>
+</div>
+</div>
+</div>
 </section>
 <section id="requêtes" class="level4">
 <h4 class="anchored" data-anchor-id="requêtes">Requêtes</h4>
@@ -596,7 +620,7 @@ DBeaver sur la VM
 <li><label><input type="checkbox">Nom, Prénom du réalisateur de la <em>Guerre des étoiles</em></label></li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -605,7 +629,7 @@ Tip
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Il existe différentes manières de concaténer du texte :</p>
 <ul>
@@ -658,7 +682,7 @@ Tip
 <p>Nous souhaitons informatiser les résultats de la coupe du monde de rugby. Pour cela nous avons créé les deux tables suivantes : <em>equipe</em> et <em>matches</em>.</p>
 <p>Commencez par créez et charger les tables avec <a href="./data/tp2-rugby-create-pop.sql" target="_blank">ce script</a>.</p>
 <ul class="task-list">
-<li><label><input type="checkbox">Donner les noms des équipes qui ont joué à Nantes.</label></li>
+<li><label><input type="checkbox">Donner les noms des équipes qui ont joué à Nantes</label></li>
 <li><label><input type="checkbox">Contre quelles équipes a joué l’équipe de France ?</label></li>
 <li><label><input type="checkbox">Pour tous les matchs, affichez les informations suivantes :</label>
 <ul>
@@ -682,6 +706,7 @@ Tip
 <li><label><input type="checkbox">Copiez votre code et collez le sur votre machine dans un fichier <em>.sql</em></label>
 <ul>
 <li>par exemple dans <code>P:/Cours1A/UE3-Bases-de-donnees-relationnelles/TP2/tp2.sql</code></li>
+<li>ou en téléchargeant depuis CloudBeaver le fichier sql (petit bouton avec un dossier et une flèche vers le bas)</li>
 </ul></li>
 <li><label><input type="checkbox">Retournez sur la page d’accueil du Datalab</label></li>
 <li><label><input type="checkbox">Allez dans <em>Mes Services</em> et supprimez votre service</label></li>
@@ -1269,7 +1294,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","selector":".lightbox","loop":false,"descPosition":"bottom","openEffect":"zoom"});
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","loop":false,"selector":".lightbox","descPosition":"bottom","openEffect":"zoom"});
 (function() {
   let previousOnload = window.onload;
   window.onload = () => {
