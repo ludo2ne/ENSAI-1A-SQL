@@ -16,14 +16,15 @@ lightbox: true
 
 ## Introdution {.unnumbered}
 
-Lors du premier TP, nous avons utilisé DuckDB pour lire les données d'un fichier parquet. Aujourd'hui nous allons créer notre propre base de données PostgreSQL et y insérer des tables et de données. Enfin nous allons requêter ces données.
+Lors du premier TP, nous avons utilisé DuckDB pour lire les données d'un fichier parquet. Aujourd'hui nous allons créer notre propre base de données PostgreSQL, puis y insérer des tables et de données. Enfin nous allons requêter ces données.
 
 Lors de ce TP, vous allez :
 
-- Créer votre base de données PostgreSQL
+- Créer votre base de données [PostgreSQL](https://www.postgresql.org/){target="_blank"}
 - Lancer des scripts de création de tables et d'insertion de données
 - Relier des tables en utilisant les jointures
 - Sélectionner et filtrer des données
+
 
 ::: {.callout-important}
 - Écrivez des requêtes jolies !
@@ -33,51 +34,47 @@ Lors de ce TP, vous allez :
 
 ### Datalab du GENES ou SSPCloud
 
-Connectez-vous à l'une des 2 instances suivantes (elles sont quasiment identiques) :
+Connectez-vous à l'une des 2 instances suivantes d'Onyxia (elles sont quasiment identiques) :
 
 - [ ] [Datalab du GENES](https://onyxia.lab.groupe-genes.fr/){target="_blank"}
 - [ ] [Datalab SSPCloud de l'INSEE](https://datalab.sspcloud.fr/){target="_blank"} 
   - en créant un compte avec votre mail ENSAI
 
 ::: {.callout-tip}
-Pour éviter les problèmes de charges :
+L'instance du GENES est plus récente donc encore en cours de rodage. Celle de l'INSEE est plus ancienne et donc plus robuste.
 
-- Les élèves fonctionnaires feront le TP sur le SSPCloud
-- Les élèves ingénieurs :arrow_right: Datalab du GENES
+Pour éviter les problèmes de charges, vous utiliserez selon votre profil :
+
+- élèves fonctionnaires :arrow_right: SSPCloud
+- élèves ingénieurs :arrow_right: SSPCloud ou Datalab du GENES
 :::
 
 ### Base de données PostgreSQL
 
-::: {.callout-note}
-Lors du premier TP, nous avons utilisé des données de fichiers parquet lus directement avec DuckDB.
-
-Aujourd'hui, nous allons :
-
-- Créer notre propre base de données [PostgreSQL](https://www.postgresql.org/){target="_blank"}
-- Créer des schémas et des tables
-- Insérer des données
-- Requêter ces données
-:::
-
-- [ ] Lancez le service [PostgreSQL](https://onyxia.lab.groupe-genes.fr/launcher/databases/postgresql?name=postgresql&version=1.0.3&autoLaunch=true&postgresql.primary.persistence.size=«1Gi»&postgresql.primary.resources.limits.cpu=«250m»&postgresql.primary.resources.requests.cpu=«50m»&postgresql.primary.resources.limits.memory=«1Gi»){target="_blank"}
-  - Allez dans **Catalogue de services**
-  - Onglet **Databases**
+- [ ] Lancez le service PostgreSQL
+  - Lien direct de lancement : [Datalab GENES](https://onyxia.lab.groupe-genes.fr/launcher/databases/postgresql?name=postgresql&version=1.0.3&autoLaunch=true&postgresql.primary.persistence.size=«1Gi»&postgresql.primary.resources.limits.cpu=«250m»&postgresql.primary.resources.requests.cpu=«50m»&postgresql.primary.resources.limits.memory=«1Gi»){target="_blank"} ou [SPPCloud](https://datalab.sspcloud.fr/launcher/databases/postgresql?name=postgresql&version=1.0.3&postgresql.primary.persistence.size=«1Gi»&postgresql.primary.resources.requests.cpu=«50m»&postgresql.primary.resources.limits.cpu=«250m»&postgresql.primary.resources.limits.memory=«1Gi»&autoLaunch=true){target="_blank"}
+  - ou manuellement : **Catalogue de services** :arrow_right: **Databases** :arrow_right: `Lancer`
   - Configuration Postgresql :arrow_right: Primary : Mettez tous les paramètres au minimum (Persistent volume size, CPU, Memory)
+    - Cela permettra d'éviter de réserver inutilement des ressources dont vous n'aurez pas besoin
+  - Cliquez sur `Lancer`
 - [ ] Copiez-collez dans un fichier texte les informations de connexion PostgreSQL : Hostname, Port, Database, Username, Password
 
 ### CloudBeaver
 
-Nous avons créé un SGBD, nous avons maintenant besoin d'un outil de gestion pour s'y connecter et envoyer des requêtes.
+Nous venons de créer un SGBD, nous avons maintenant besoin d'un outil de gestion pour s'y connecter et envoyer des requêtes.
 
-- [ ] Lancez le service [CloudBeaver](https://onyxia.lab.groupe-genes.fr/launcher/databases/cloudbeaver?name=cloudbeaver&version=2.0.3&resources.requests.memory=%C2%AB1Gi%C2%BB&resources.limits.memory=%C2%AB2Gi%C2%BB){target="_blank"}
-  - Allez dans **Catalogue de services**
-  - Onglet **Databases**
+- [ ] Lancez le service CloudBeaver
+  - **Catalogue de services** :arrow_right: **Databases**
 - [ ] Copiez-collez également les informations de connexion au service *CloudBeaver*
 - [ ] Ouvrez ce service
 
+
+::: {.callout-tip}
 Normalement la connexion à la base de données *PostgreSQL* est détectée automatiquement.
 
 Dans le cas contraire, il faut cliquer sur le +, puis sur *New connection* et renseigné les éléments de connexion.
+:::
+
 
 - [ ] Dans l'explorateur à gauche, clic droit sur bdd PostgreSQL :arrow_right: SQL Editor
 
@@ -86,6 +83,10 @@ Cela ouvre une fenêtre où vous pouvez écrire du code SQL pour interagir avec 
 ### VM ENSAI
 
 ::: {.callout-note collapse="true" title="DBeaver sur la VM"}
+Un serveur héberge une base de données PostgreSQL.
+
+Pour vous connecter à votre bdd, lancez le logiciel DBeaver depuis votre VM. Ensuite, uniquement la première fois, vous devrez effectuer le paramètrage ci-dessous et créer la connexion à votre bdd. 
+
 #### Paramètrage
 
 - Menu `Fenêtre` > `Preference`
@@ -114,9 +115,9 @@ Cela ouvre une fenêtre où vous pouvez écrire du code SQL pour interagir avec 
 
 
 
-## Écrire une requête
+## Méthodo : Écrire une requête
 
-Il est parfois difficile d'écrire du premier coup la requête qui répond directement à la question posée.
+Il est parfois difficile d'écrire du premier coup LA requête qui répond directement à la question posée.
 Voici une méthode qui peut vous aider à écrire vos requêtes pas à pas :
 
 ::: {.callout}
@@ -193,13 +194,13 @@ Nous allons commencer par créer les tables et insérer les données :
 - [ ] Exécutez le script
   - Cliquez sur la petite icone sous les triangles oranges qui ressemble à :scroll:
   - raccourci (ALT + X)
-- [ ] Vérifiez que votre schéme et vos tables sont créés
+- [ ] Vérifiez que votre schéma et vos tables sont créés
   - Dans l'explorateur : PostgreSQL :arrow_right: Databases :arrow_right: defaultdb :arrow_right: Schemas
   - Clic droit sur *Schemas* :arrow_right: Refresh
 
 Si tout est ok, vous n'avez plus besoin du script de création et d'insertion de données.
 
-- [ ] Supprimez le contenu du code SQL ou ouvrez un nouvel éditeur SQL
+- [ ] Supprimez tout le contenu du code SQL que vous venez d'exécuter ou ouvrez un nouvel éditeur SQL
 
 Voici le modèle de données :
 

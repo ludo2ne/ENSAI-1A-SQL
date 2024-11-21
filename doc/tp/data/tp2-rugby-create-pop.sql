@@ -91,3 +91,5 @@ INSERT INTO rugby.matches VALUES (NEXTVAL('rugby.seq_match'), 2,  9,  14,  9,  T
 INSERT INTO rugby.matches VALUES (NEXTVAL('rugby.seq_match'), 1,  3,  37,  13, TO_DATE('14/10/2007', 'DD/MM/YYYY'), 'Saint_Denis');
 INSERT INTO rugby.matches VALUES (NEXTVAL('rugby.seq_match'), 9,  3,  10,  34, TO_DATE('19/10/2007', 'DD/MM/YYYY'), 'Paris');
 INSERT INTO rugby.matches VALUES (NEXTVAL('rugby.seq_match'), 1,  2,  15,  6,  TO_DATE('20/10/2007', 'DD/MM/YYYY'), 'Saint_Denis');
+
+SET SEARCH_PATH TO rugby, public;
