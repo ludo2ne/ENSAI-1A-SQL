@@ -38,7 +38,7 @@ Connectez-vous à l'une des 2 instances suivantes d'Onyxia (elles sont quasiment
 
 - [ ] [Datalab du GENES](https://onyxia.lab.groupe-genes.fr/){target="_blank"}
 - [ ] [Datalab SSPCloud de l'INSEE](https://datalab.sspcloud.fr/){target="_blank"} 
-  - en créant un compte avec votre mail ENSAI
+  - si besoin de créer un compte, utilisez votre mail ENSAI
 
 ::: {.callout-tip}
 L'instance du GENES est plus récente donc encore en cours de rodage. Celle de l'INSEE est plus ancienne et donc plus robuste.

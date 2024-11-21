@@ -17,15 +17,14 @@ lightbox: true
 
 ## Introduction {.unnumbered}
 
-Vous allez effectuer une partie des TP sur le [Datalab du GENES](https://onyxia.lab.groupe-genes.fr/){target="_blank"}.
-
 Le Datalab permet aux statisticiens de découvrir, d'expérimenter, d'apprendre, de se former aux outils de la data.
 
-::: {.callout-tip title="Qu'est-ce que le Datalab ?" collapse="true"}
+### Pourquoi un Datalab ?  {.unnumbered}
+
 Dans le monde professionnel, plusieurs problèmes se posent au statisticien :
 
 - sa machine n'est pas assez puissante
-- installer des logiciels est parfois compliqué car bloqué par le système
+- installer certains logiciels est parfois interdit et bloqué par le système
 
 À l'INSEE, un projet est né pour pallier à ce besoin : [Onyxia](https://www.onyxia.sh/){target="_blank"} porté par le [lab de l'INSEE](https://github.com/InseeFrLab){target="_blank"}.
 
@@ -39,8 +38,9 @@ D'où l'idée de créer une interface graphique pour pouvoir lancer des services
 
 Onyxia est Libre et Open Source, ainsi chacun peut installer sa propre instance sur son infra. C'est ce qu'ont fait de nombreux organismes, ainsi que le GENES.
 
-Pour plus de détails, voir la section **Pour aller plus loin** à la fin.
-:::
+Pour plus de détails, vous pouvez consulter la section [Pour aller plus loin](#pour-aller-plus-loin).
+
+### Les services {.unnumbered}
 
 Le principe est d'offrir aux utilisateurs de nombreux services (Jupyter, Rstudio, VSCode, PostgreSQL...) à la demande et une puissance de calcul adaptée aux besoins.
 
@@ -49,7 +49,7 @@ Ces services sont éphémères, car si les ressources sont importantes, il faut 
 
 Le principe général est le suivant :
 
-- Vous lancez votre service en réservant des ressources (CPU, GPU, RAM)
+- Vous lancez votre service en réservant des ressources (CPU, GPU, RAM, Stockage)
 - Vous effectuez votre travail
 - Vous sauvegardez votre code (git) et vos résultats (MinIO)
 - Vous supprimez votre service et libérez les ressources 
@@ -60,9 +60,169 @@ Le principe général est le suivant :
 
 Ce TP d'initiation va vous permettre de :
 
-- Configurer votre compte sur le datalab
-- Vous familiariser avec l'espace de stockage S3
 - Lancer vos premiers services
+- Vous familiariser avec l'espace de stockage S3
+- Configurer votre compte sur le datalab
+
+::: {.callout-important icon="false" title="Fil rouge"}
+Vos collègues Josette et Félix attendent un heureux événement. Ils avaient trouvé le prénom idéal pour leur enfant à naître.
+
+Cependant, un malencontreux accident de fer à repasser les a rendu amnésiques tous les deux.
+
+Votre mission, si vous l'acceptez est de retrouver ce fameux prénom. Pour cela vous allez devoir explorer les fonctionnalités du Datalab.
+:::
+
+## Se connecter
+
+Vous pouvez réaliser ce TP soit sur le :
+
+- [Datalab du GENES](https://onyxia.lab.groupe-genes.fr/){target="_blank"}
+- [Datalab SSPCloud de l'INSEE](https://datalab.sspcloud.fr/){target="_blank"} 
+  - si besoin de créer un compte, utilisez votre mail ENSAI
+
+
+
+## Lancer un service
+
+::: {.callout-important icon="false" title="Fil rouge"}
+Avant de partir à la recherche du prénom, Josette a une envie de doubitchou.
+
+Vous retrouvez la recette mais il vous manque la quantité exacte en grammes de magarine.
+
+Vous savez simplement que la valeur recherchée correspond à combien il y a de nombres premiers entre 10 000 et 100 000.
+
+Naturellement, vous vous dites que la solution la plus simple est de créer un programme Python pour trouver la réponse. Or Python n'est pas installé sur votre machine et vous ne savez pas comment faire... Et soudain, vous avez une illumination : pourquoi ne pas lancer un service du Datalab qui permet d'exéctuer du Python.
+:::
+
+### Un premier service
+
+- [ ] Allez dans `Catalogue de services`
+- [ ] Sélectionnez le service *Jupyter-python*, puis cliquez deux fois sur `Lancer`
+
+Attendez quelques secondes le temps que le service se lance.
+
+- [ ] Cliquez pour copier le mot de passe
+- [ ] Cliquez sur `Ouvrir le service` :rocket:
+  - password : collez le mot de passe
+
+Votre service *Jupyter Python* s'ouvre.
+
+::: {.callout-note collapse="true" title="Ce qu'il se passe sous le capot"}
+
+Pour plus de détails, vous pouvez consulter la vidéo en bas de la page.
+
+Prenons l'exemple de ce qu'il se passe en arrière plan lorsque vous lancez un service `Vscode-python` :
+
+#### Construction de l'image Docker
+
+Une image [Docker](https://www.docker.com/){target="_blank"} est un paquet léger et autonome qui contient tout le nécessaire pour exécuter une application : le code, les bibliothèques, les dépendances, les variables d'environnement et les fichiers de configuration.
+
+Les images Docker permettent de créer des environnements isolés et cohérents, garantissant ainsi la portabilité et la reproductibilité des applications.
+
+1. Nous partons de l'[image de base d'Onyxia](https://github.com/InseeFrLab/images-datascience/blob/main/base/Dockerfile){target="_blank"}
+    - ubuntu:22.04 et quelques éléments de config
+2. Nous ajoutons la couche [python-minimal](https://github.com/InseeFrLab/images-datascience/blob/main/python-minimal/Dockerfile){target="_blank"}
+    - installation de python et quelques packages classiques
+3. Nous ajoutons la couche [python-datascience](https://github.com/InseeFrLab/images-datascience/blob/main/python-datascience/Dockerfile){target="_blank"}
+    - Julia, Quarto et des packages de datascience (numpy, pandas...)
+4. Nous ajoutons la couche [vscode](https://github.com/InseeFrLab/images-datascience/blob/main/vscode/Dockerfile){target="_blank"}
+    - Installation de Visual Studio Code et configuration
+
+#### DockerHub
+
+Cette image est construite et déposée sur DockerHub [onyxia-vscode-python](https://hub.docker.com/r/inseefrlab/onyxia-vscode-python){target="_blank"}.
+
+Nous allons ensuite lancer une instance de cette image : un conteneur. Le conteneur est à l'image, ce que l'objet est à la classe.
+
+Pour gérer tous les conteneurs lancés sur le datalab, nous avons besoin d'un orchestrateur : Kubernetes. 
+
+#### Chart Helm
+
+Cependant, nous allons d'abord utiliser [Helm](https://helm.sh/){target="_blank"} pour faciliter le déploiement.
+
+Helm simplifie le processus de déploiement d'applications sur Kubernetes en automatisant les tâches répétitives et en fournissant une gestion centralisée des configurations.
+
+Le [chart Helm vscode-python](https://github.com/InseeFrLab/helm-charts-interactive-services/tree/main/charts/vscode-python){target="_blank"} est un ensemble de fichiers de configuration qui facilite le déploiement d'application dans un envrionnement Kubernetes.
+
+#### Déploiement sur Kube
+
+[Kubernetes](https://kubernetes.io/){target="_blank"} (K8s) est un système open-source qui automatise le déploiement, la mise à l'échelle et la gestion d'applications conteneurisées. C'est un orchestrateur de conteneurs.
+
+K8s récupére via le chart Helm toutes les infos nécessaires et déploie le conteneur (créé à partir de l'image Docker) sur l'infra du datalab.
+
+:::
+
+- [ ] Créez un Notebook Python
+  - File :arrow_right: New :arrow_right: Notebook
+- [ ] Dans la cellule, écrivez un code Python qui permet de compter combien il y a de nombres premiers entre 10 000 et 100 000
+
+Pour vous aider, vous pouvez utiliser cette fonction qui génére une liste de booléens.
+
+```{.python}
+def crible_eratosthene(n):
+    """Génère une liste de booléens où True indique qu'un nombre est premier."""
+
+    est_premier = [True] * (n + 1)
+    est_premier[0] = est_premier[1] = False  # 0 et 1 ne sont pas premiers
+
+    for i in range(2, int(n**0.5) + 1):
+        if est_premier[i]:
+            for multiple in range(i * i, n + 1, i):
+                est_premier[multiple] = False
+
+    return est_premier
+```
+
+Comme vous êtes un as de la programmation, cela ne vous prend que quelques minutes. C'est beaucoup plus rapide que si vous aviez du installer Python ainsi qu'un environnement d'exécution.
+
+- [ ] Vous stockerez ce résultat dans une variable `a`
+- [ ] Vérifiez que `a` est lui même un nombre premier
+
+
+### Utiliser des données
+
+::: {.callout-important icon="false" title="Fil rouge"}
+Vous vous rendez compte qu'il faut beaucoup de margarine et que vous n'en avez pas assez dans le frigo.
+
+Félix propose d'aller en chercher à la superette du coin. Il entre dans l'ascenseur pour descendre les 6 étages et patatra, il se retrouve bloquer.
+
+Pour retrouver le numéro du dépanneur, vous allez devoir retrouver les chiffres en requêtant le fichier des prénoms
+:::
+
+
+:construction: appel via DuckDB
+
+
+:construction: afficher un graph
+
+
+## Stockage S3
+
+::: {.callout-important icon="false" title="Fil rouge"}
+Maintenant que Josette est repue, elle se souvient qu'une information importante se trouve dans le fichier des prénoms
+:::
+
+:construction: Aller chercher une info dans un fichier sur ludo2ne/diffusion (SSPLab)
+
+
+## Sauver votre code 
+
+:construction:
+
+
+
+## Secret (bonus)
+
+
+
+
+
+
+
+
+
+---
+
 
 
 ## Créer et configuration de compte
@@ -176,9 +336,9 @@ Avant de créer un service, nous allons créer un dépôt GitHub qui permettra d
 - [ ] Sur la page de votre repo, cliquez sur le bouton [Code]{.green-button}
 - [ ] Copiez l'adresse *https* du repo
 
-### Créer un service
 
-- [ ] Allez dans `Catalogue de services`, sélectionner le service *Jupyter-python*, puis cliquez une fois sur `Lancer`
+
+
 - [ ] Ouvrez la Configuration
   - De nombreux onglets permettent de configurer votre service
   - Service : possibilité d'utiliser une autre image Docker
@@ -186,65 +346,7 @@ Avant de créer un service, nous allons créer un dépôt GitHub qui permettra d
   - Init : script à lancer au démarrage
 - [ ] Allez dans l'onglet `Git` et collez l'adresse *https* du repo dans la case *Repository url*
 - [ ] `Lancez` le service, puis attendez quelques secondes
-- [ ] Cliquez pour copier le mot de passe
-- [ ] Cliquez sur `Ouvrir le service` :rocket:
-  - password : collez le mot de passe
 
-Votre service *Jupyter Python* s'ouvre.
-
-Vous remarquez dans l'explorateur à gauche que votre repo git a été cloné dans le dossier *work*.
-
-::: {.callout-note collapse="true" title="Ce qu'il se passe sous le capot"}
-
-Pour plus de détails, vous pouvez consulter la vidéo en bas de la page.
-
-Prenons l'exemple de ce qu'il se passe en arrière plan lorsque vous lancez un service `Vscode-python` :
-
-#### Construction de l'image Docker
-
-Une image Docker est un paquet léger et autonome qui contient tout le nécessaire pour exécuter une application : le code, les bibliothèques, les dépendances, les variables d'environnement et les fichiers de configuration.
-
-Les images Docker permettent de créer des environnements isolés et cohérents, garantissant ainsi la portabilité et la reproductibilité des applications.
-
-1. Nous partons de l'[image de base d'Onyxia](https://github.com/InseeFrLab/images-datascience/blob/main/base/Dockerfile){target="_blank"}
-    - ubuntu:22.04 et quelques éléments de config
-2. Nous ajoutons la couche [python-minimal](https://github.com/InseeFrLab/images-datascience/blob/main/python-minimal/Dockerfile){target="_blank"}
-    - installation de python et quelques packages classiques
-3. Nous ajoutons la couche [python-datascience](https://github.com/InseeFrLab/images-datascience/blob/main/python-datascience/Dockerfile){target="_blank"}
-    - Julia, Quarto et des packages de datascience (numpy, pandas...)
-4. Nous ajoutons la couche [vscode](https://github.com/InseeFrLab/images-datascience/blob/main/vscode/Dockerfile){target="_blank"}
-    - Installation de Visual Studio Code et configuration
-
-#### DockerHub
-
-Cette image est construite et déposée sur DockerHub [onyxia-vscode-python](https://hub.docker.com/r/inseefrlab/onyxia-vscode-python){target="_blank"}.
-
-Nous allons ensuite lancer une instance de cette image : un conteneur. Le conteneur est à l'image, ce que l'objet est à la classe.
-
-Pour gérer tous les conteneurs lancés sur le datalab, nous avons besoin d'un orchestrateur : Kubernetes. 
-
-#### Chart Helm
-
-Cependant, nous allons d'abord utiliser Helm pour faciliter le déploiement.
-
-Helm simplifie le processus de déploiement d'applications sur Kubernetes en automatisant les tâches répétitives et en fournissant une gestion centralisée des configurations.
-
-Le [chart Helm vscode-python](https://github.com/InseeFrLab/helm-charts-interactive-services/tree/main/charts/vscode-python){target="_blank"} est un ensemble de fichiers de configuration qui facilite le déploiement d'application dans un envrionnement Kubernetes.
-
-#### Déploiement sur Kube
-
-Kubernetes (K8s) est un système open-source qui automatise le déploiement, la mise à l'échelle et la gestion d'applications conteneurisées. C'est un orchestrateur de conteneurs.
-
-K8s récupére via le chart Helm toutes les infos nécessaires et déploie le conteneur (créé à partir de l'image Docker) sur l'infra du datalab.
-
-:::
-
-### Jouer avec votre service
-
-- [ ] Dans l'explorateur, ouvrez le dossier *work*, puis le dossier *TP3-Datalab*
-- [ ] File :arrow_right: New :arrow_right: Notebook
-  - Select Kernel
-  - Cela crée un fichier *Untitled.ipynb* que vous pouvez renommer en *ex0.ipynb*
 
 
 ### Accéder à votre stockage
@@ -512,6 +614,10 @@ Dans votre servives, les deux variables d'environnement ont été créées.
 Ce TP avait pour but de vous familiariser avec le Datalab. Vous pouvez l'utiliser pour faire du Python, du R, créer une base de données (prochain TP) ou utiliser de nombreux autres outils.
 :::
 
+
+## Besoin d'assistance ? {.unnumbered}
+
+Contactez l'équipe du SSP Lab sur [Slack](https://join.slack.com/t/3innovation/shared_invite/zt-1bo6y53oy-Y~zKzR2SRg37pq5oYgiPuA){target="_blank"}
 
 ## Pour aller plus loin {.unnumbered}
 
