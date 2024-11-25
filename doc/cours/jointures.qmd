@@ -346,3 +346,5 @@ SELECT j.nom,
 | Navrotescu     | Andreea    | Bischwiller                 |
 | Navrotescu     | Andreea    | Asnieres - le Grand Echiquier |
 | ...        | ...   | ...   |
+
+:::
