@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.6.37">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -71,12 +71,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-29e2c20b02301cfff04dc8050bf30c7e.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-43df0d6f53b733b42d37fa7808e17715.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark.min.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-da7cd120230c1b1f8c14c8d09a3b31d9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-abd5606997d76f890a405fef9ca54395.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -233,7 +233,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#un-premier-service" id="toc-un-premier-service" class="nav-link" data-scroll-target="#un-premier-service"><span class="header-section-number">2.1</span> Un premier service</a></li>
   <li><a href="#utiliser-des-données" id="toc-utiliser-des-données" class="nav-link" data-scroll-target="#utiliser-des-données"><span class="header-section-number">2.2</span> Utiliser des données</a></li>
   </ul></li>
-  <li><a href="#stockage-s3" id="toc-stockage-s3" class="nav-link" data-scroll-target="#stockage-s3"><span class="header-section-number">3</span> Stockage S3</a></li>
+  <li><a href="#stockage-s3" id="toc-stockage-s3" class="nav-link" data-scroll-target="#stockage-s3"><span class="header-section-number">3</span> Stockage S3</a>
+  <ul class="collapse">
+  <li><a href="#utiliser-des-données-1" id="toc-utiliser-des-données-1" class="nav-link" data-scroll-target="#utiliser-des-données-1"><span class="header-section-number">3.1</span> Utiliser des données</a></li>
+  <li><a href="#stocker-vos-fichiers" id="toc-stocker-vos-fichiers" class="nav-link" data-scroll-target="#stocker-vos-fichiers"><span class="header-section-number">3.2</span> Stocker vos fichiers</a></li>
+  </ul></li>
   <li><a href="#sauver-votre-code" id="toc-sauver-votre-code" class="nav-link" data-scroll-target="#sauver-votre-code"><span class="header-section-number">4</span> Sauver votre code</a></li>
   <li><a href="#secret-bonus" id="toc-secret-bonus" class="nav-link" data-scroll-target="#secret-bonus"><span class="header-section-number">5</span> Secret (bonus)</a></li>
   <li><a href="#créer-et-configuration-de-compte" id="toc-créer-et-configuration-de-compte" class="nav-link" data-scroll-target="#créer-et-configuration-de-compte"><span class="header-section-number">6</span> Créer et configuration de compte</a>
@@ -318,15 +322,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p>À l’INSEE, un projet est né pour pallier à ce besoin : <a href="https://www.onyxia.sh/" target="_blank">Onyxia</a> porté par le <a href="https://github.com/InseeFrLab" target="_blank">lab de l’INSEE</a>.</p>
 <p>La première étape fut de créer une infrastructure Cloud avec des CPUs, des GPUs, de la RAM et du stockage.</p>
-<p>Ensuite, c’est très bien d’avoir accès à tout plein de ressources, encore faut-il savoir les utiliser. Or lancer des services dans le cloud nécessite quelques compétences spécifiques (Docker, Kubernetes, Helm, S3…) qui ne sont pas à la portée de tous.</p>
-<p>D’où l’idée de créer une interface graphique pour pouvoir lancer des services en quelques clics. Onyxia s’appuie sur des technologies sous-jacentes (Kubernetes, Helm, S3…) pour proposer une IHM agréable pour le datascientist. Cependant la philosophie du projet Onyxia est d’être une brique qui facilite le travail sans se rendre indispensable.</p>
-<p>À l’INSEE, une instance de ce logiciel a été installée sur le <a href="https://datalab.sspcloud.fr/" target="_blank">Datalab SSP Cloud</a> ouverte à tous les agents publics. Vous pouvez y créer un compte car c’est également ouvert à tous les élèves de l’ENSAI (en utilisant votre mail ENSAI).</p>
+<p>Ensuite, avoir plein de ressources c’est très bien, mais encore faut-il savoir les utiliser. Or lancer des services dans le cloud nécessite quelques compétences spécifiques (Docker, Kubernetes, Helm, S3…) qui ne sont pas à la portée de tous.</p>
+<p>D’où l’idée de créer une interface graphique pour pouvoir lancer des services en quelques clics. Onyxia s’appuie sur des technologies sous-jacentes (Kubernetes, Helm, S3…) pour proposer une IHM agréable pour le datascientist. Cependant, la philosophie du projet Onyxia est d’être une brique qui facilite le travail sans se rendre indispensable. L’idée est d’éviter que les utilisateurs ne s’enferment dans un choix technologique.</p>
+<p>À l’INSEE, une instance de ce logiciel a été installée sur le <a href="https://datalab.sspcloud.fr/" target="_blank">Datalab SSP Cloud</a>, ouverte à tous les agents publics. Vous pouvez y créer un compte car c’est également ouvert à tous les élèves de l’ENSAI (en utilisant votre mail ENSAI).</p>
 <p>Onyxia est Libre et Open Source, ainsi chacun peut installer sa propre instance sur son infra. C’est ce qu’ont fait de nombreux organismes, ainsi que le GENES.</p>
 <p>Pour plus de détails, vous pouvez consulter la section <a href="#pour-aller-plus-loin">Pour aller plus loin</a>.</p>
 </section>
 <section id="les-services" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="les-services">Les services</h3>
-<p>Le principe est d’offrir aux utilisateurs de nombreux services (Jupyter, Rstudio, VSCode, PostgreSQL…) à la demande et une puissance de calcul adaptée aux besoins.</p>
+<p>Le principe est d’offrir aux utilisateurs la possibilité de lancer de nombreux services à la demande (Jupyter, Rstudio, VSCode, PostgreSQL…) et une puissance de calcul adaptée aux besoins.</p>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -375,10 +379,10 @@ Fil rouge
 </section>
 <section id="se-connecter" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="se-connecter"><span class="header-section-number">1</span> Se connecter</h2>
-<p>Vous pouvez réaliser ce TP soit sur le :</p>
+<p>Vous pouvez réaliser ce TP soit sur :</p>
 <ul>
-<li><a href="https://onyxia.lab.groupe-genes.fr/" target="_blank">Datalab du GENES</a></li>
-<li><a href="https://datalab.sspcloud.fr/" target="_blank">Datalab SSPCloud de l’INSEE</a>
+<li>Le <a href="https://onyxia.lab.groupe-genes.fr/" target="_blank">Datalab du GENES</a></li>
+<li>Le <a href="https://datalab.sspcloud.fr/" target="_blank">Datalab SSPCloud de l’INSEE</a>
 <ul>
 <li>si besoin de créer un compte, utilisez votre mail ENSAI</li>
 </ul></li>
@@ -397,9 +401,9 @@ Fil rouge
 </div>
 <div class="callout-body-container callout-body">
 <p>Avant de partir à la recherche du prénom, Josette a une envie de doubitchou.</p>
-<p>Vous retrouvez la recette mais il vous manque la quantité exacte en grammes de magarine.</p>
+<p>Vous retrouvez la recette mais il vous manque la quantité exacte en grammes de margarine.</p>
 <p>Vous savez simplement que la valeur recherchée correspond à combien il y a de nombres premiers entre 10 000 et 100 000.</p>
-<p>Naturellement, vous vous dites que la solution la plus simple est de créer un programme Python pour trouver la réponse. Or Python n’est pas installé sur votre machine et vous ne savez pas comment faire… Et soudain, vous avez une illumination : pourquoi ne pas lancer un service du Datalab qui permet d’exéctuer du Python.</p>
+<p>Naturellement, vous vous dites que la solution la plus simple est de créer un programme Python pour trouver la réponse. Or Python n’est pas installé sur votre machine et vous ne savez pas comment faire… Mais alors : pourquoi ne pas lancer un service du Datalab qui permet d’exécuter du Python.</p>
 </div>
 </div>
 <section id="un-premier-service" class="level3" data-number="2.1">
@@ -494,10 +498,9 @@ Ce qu’il se passe sous le capot
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>                est_premier[multiple] <span class="op">=</span> <span class="va">False</span></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> est_premier</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Comme vous êtes un as de la programmation, cela ne vous prend que quelques minutes. C’est beaucoup plus rapide que si vous aviez du installer Python ainsi qu’un environnement d’exécution.</p>
+<p>Comme vous êtes un as de la programmation, cela ne vous prend que trois minutes. C’est beaucoup plus rapide que si vous aviez du installer Python ainsi qu’un environnement d’exécution.</p>
 <ul class="task-list">
-<li><label><input type="checkbox">Vous stockerez ce résultat dans une variable <code>a</code></label></li>
-<li><label><input type="checkbox">Vérifiez que <code>a</code> est lui même un nombre premier</label></li>
+<li><label><input type="checkbox">Vérifiez que le résultat est lui même un nombre premier</label></li>
 </ul>
 </section>
 <section id="utiliser-des-données" class="level3" data-number="2.2">
@@ -512,17 +515,119 @@ Fil rouge
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Vous vous rendez compte qu’il faut beaucoup de margarine et que vous n’en avez pas assez dans le frigo.</p>
-<p>Félix propose d’aller en chercher à la superette du coin. Il entre dans l’ascenseur pour descendre les 6 étages et patatra, il se retrouve bloquer.</p>
-<p>Pour retrouver le numéro du dépanneur, vous allez devoir retrouver les chiffres en requêtant le fichier des prénoms</p>
+<p>Vous vous rendez compte qu’il faut plus de 8 kg de margarine et que vous n’en avez pas assez dans le frigo.</p>
+<p>Félix propose d’aller en chercher à la superette du coin. Il entre dans l’ascenseur pour descendre les 6 étages et patatra, il se retrouve bloqué.</p>
+<p>Pour retrouver les 5 chiffres du numéro du dépanneur, vous allez devoir répondre à 5 questions en requêtant fichier des communes françaises.</p>
 </div>
 </div>
-<p><span class="emoji" data-emoji="construction">🚧</span> appel via DuckDB</p>
-<p><span class="emoji" data-emoji="construction">🚧</span> afficher un graph</p>
+<div class="callout callout-style-default callout-note callout-titled" title="COG">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+COG
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Chaque année, l’INSEE publie sur son site le <a href="https://www.insee.fr/fr/information/2560452" target="_blank">Code officiel géographique</a> (COG).</p>
+<p>Ce référentiel regroupe, au 1er janvier, les codes et libellés des communes, cantons, arrondissements, départements, régions, ainsi que ceux des pays et territoires étrangers.</p>
+</div>
+</div>
+<p>Vous allez utiliser via DuckDB du SQL dans du code Python. Commencez par importer le package et créer la vue vers le fichier des communes 2024.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> duckdb</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>duckdb.sql(<span class="st">"""</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="st">CREATE OR REPLACE VIEW commune AS</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="st">FROM 'https://www.insee.fr/fr/statistiques/fichier/7766585/v_commune_2024.csv';</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Pour exécuter une requête :</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>duckdb.sql(<span class="st">"""</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT *</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="st">  FROM commune</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul class="task-list">
+<li><label><input type="checkbox">Quel est le code région de Mayotte ?</label></li>
+<li><label><input type="checkbox">Combien de communes y a-t-il en Guyane ?</label></li>
+<li><label><input type="checkbox">Parmi les 3 départements de la Picardie (Aisne, Oise, Somme), combien de communes ont au minimum 4 <em>L</em> dans leur nom ?</label></li>
+<li><label><input type="checkbox">Affichez le nombre de communes par département</label>
+<ul>
+<li>Classez par nombre de communes décroissant</li>
+<li>Quel est le numéro du département se classant au 20e rang ?</li>
+</ul></li>
+<li><label><input type="checkbox">Quel est le numéro du département dans lequel se trouve le nom de commune le plus long</label></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>La somme des 5 nombres vaut 149</li>
+<li>Les nombres sont dans l’ordre croissant</li>
+</ul>
+</div>
+</div>
+</div>
+<p>Vous venez ici d’utiliser des données disponibles sur internet. Vous pouvez également effectuer des traitements sur vos propres données en les stockant sur S3.</p>
 </section>
 </section>
 <section id="stockage-s3" class="level2" data-number="3">
 <h2 data-number="3" class="anchored" data-anchor-id="stockage-s3"><span class="header-section-number">3</span> Stockage S3</h2>
+<p><span class="emoji" data-emoji="construction">🚧</span> Pourquoi S3 ? Bucket ? Connexion ?</p>
+<ul>
+<li>facilite la gestion des données -&gt; permet de créer un DataLake</li>
+<li>avantages techniques</li>
+<li>Interdiction de manipuler de la donnée sur son ordinateur perso</li>
+</ul>
+<section id="utiliser-des-données-1" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="utiliser-des-données-1"><span class="header-section-number">3.1</span> Utiliser des données</h3>
+<div class="callout callout-style-default callout-important no-icon callout-titled" title="Fil rouge">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Fil rouge
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Félix est sauvé, il peut maintenant aller chercher de la margarine et du papier cadeau pour emballer quelques bricoles suite à un malheureux accident.</p>
+<p>En attendant, Josette s’occupe en confectionnant un superbe gilet.</p>
+<p>Elle se souviens qu’elle a noté la longeur de fil nécessaire mais ne la retrouve plus. L’info se cache dans un fichier stocké sur S3.</p>
+</div>
+</div>
+<p><span class="emoji" data-emoji="construction">🚧</span> Aller chercher l’info dans s3://ludo/diffusion/INSEE/prenoms-nat2022.parquet (attention username différent sur les datalabs)</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Entre 2005 et 2020, en quelle année le prénom <em>Katia</em> a-t-il été le plus donné ?</label></li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled" title="Diffusion">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Diffusion
+</div>
+</div>
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
+</section>
+<section id="stocker-vos-fichiers" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="stocker-vos-fichiers"><span class="header-section-number">3.2</span> Stocker vos fichiers</h3>
+</section>
+</section>
+<section id="sauver-votre-code" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="sauver-votre-code"><span class="header-section-number">4</span> Sauver votre code</h2>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Fil rouge">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -536,10 +641,6 @@ Fil rouge
 <p>Maintenant que Josette est repue, elle se souvient qu’une information importante se trouve dans le fichier des prénoms</p>
 </div>
 </div>
-<p><span class="emoji" data-emoji="construction">🚧</span> Aller chercher une info dans un fichier sur ludo2ne/diffusion (SSPLab)</p>
-</section>
-<section id="sauver-votre-code" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="sauver-votre-code"><span class="header-section-number">4</span> Sauver votre code</h2>
 <p><span class="emoji" data-emoji="construction">🚧</span></p>
 </section>
 <section id="secret-bonus" class="level2" data-number="5">
@@ -740,21 +841,21 @@ Note
 <ul>
 <li>Collez le code ci-dessous dans la première cellule, puis CTRL+ENTREE pour exécuter</li>
 </ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>storage_options <span class="op">=</span> {</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"aws_endpoint"</span>:  <span class="st">'https://'</span><span class="op">+</span><span class="st">'minio-simple.lab.groupe-genes.fr'</span>,</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"aws_access_key_id"</span>: os.environ[<span class="st">"AWS_ACCESS_KEY_ID"</span>],</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"aws_secret_access_key"</span>: os.environ[<span class="st">"AWS_SECRET_ACCESS_KEY"</span>],</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"aws_region"</span>: os.environ[<span class="st">"AWS_DEFAULT_REGION"</span>],</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"aws_token"</span>: os.environ[<span class="st">"AWS_SESSION_TOKEN"</span>]</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>username <span class="op">=</span> os.environ[<span class="st">"VAULT_TOP_DIR"</span>] <span class="co"># un peu bancal pour avoir le username</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pl.read_parquet(source<span class="op">=</span><span class="ss">f"s3://</span><span class="sc">{</span>username<span class="sc">}</span><span class="ss">/diffusion/INSEE/prenoms-nat2022.parquet"</span>, </span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>                     storage_options<span class="op">=</span>storage_options)</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>storage_options <span class="op">=</span> {</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"aws_endpoint"</span>:  <span class="st">'https://'</span><span class="op">+</span><span class="st">'minio-simple.lab.groupe-genes.fr'</span>,</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"aws_access_key_id"</span>: os.environ[<span class="st">"AWS_ACCESS_KEY_ID"</span>],</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"aws_secret_access_key"</span>: os.environ[<span class="st">"AWS_SECRET_ACCESS_KEY"</span>],</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"aws_region"</span>: os.environ[<span class="st">"AWS_DEFAULT_REGION"</span>],</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"aws_token"</span>: os.environ[<span class="st">"AWS_SESSION_TOKEN"</span>]</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>username <span class="op">=</span> os.environ[<span class="st">"VAULT_TOP_DIR"</span>] <span class="co"># un peu bancal pour avoir le username</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pl.read_parquet(source<span class="op">=</span><span class="ss">f"s3://</span><span class="sc">{</span>username<span class="sc">}</span><span class="ss">/diffusion/INSEE/prenoms-nat2022.parquet"</span>, </span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>                     storage_options<span class="op">=</span>storage_options)</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ul>
 <div class="callout callout-style-default callout-note callout-titled" title="Polars">
 <div class="callout-header d-flex align-content-center">
@@ -777,89 +878,89 @@ Polars
 <li>Créez une nouvelle cellule avec le bouton <code>+</code> de la barre d’outils</li>
 <li>Collez et exécutez ce code</li>
 </ul>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Top 10 des prénoms féminins en 2021</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>top10f2021 <span class="op">=</span> df<span class="op">\</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">filter</span>((pl.col(<span class="st">"sexe"</span>) <span class="op">==</span> <span class="dv">2</span>) <span class="op">&amp;</span> </span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>            (pl.col(<span class="st">"annais"</span>) <span class="op">==</span> <span class="st">"2021"</span>) <span class="op">&amp;</span> </span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>            (pl.col(<span class="st">"preusuel"</span>) <span class="op">!=</span> <span class="st">"_PRENOMS_RARES"</span>))<span class="op">\</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    .group_by(<span class="st">"preusuel"</span>)<span class="op">\</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    .agg(pl.col(<span class="st">"nombre"</span>).<span class="bu">sum</span>().alias(<span class="st">"nombre_total"</span>))<span class="op">\</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    .sort(<span class="st">"nombre_total"</span>, descending<span class="op">=</span><span class="va">True</span>)<span class="op">\</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    .limit(<span class="dv">10</span>)</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(top10f2021)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Top 10 des prénoms féminins en 2021</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>top10f2021 <span class="op">=</span> df<span class="op">\</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">filter</span>((pl.col(<span class="st">"sexe"</span>) <span class="op">==</span> <span class="dv">2</span>) <span class="op">&amp;</span> </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>            (pl.col(<span class="st">"annais"</span>) <span class="op">==</span> <span class="st">"2021"</span>) <span class="op">&amp;</span> </span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>            (pl.col(<span class="st">"preusuel"</span>) <span class="op">!=</span> <span class="st">"_PRENOMS_RARES"</span>))<span class="op">\</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    .group_by(<span class="st">"preusuel"</span>)<span class="op">\</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    .agg(pl.col(<span class="st">"nombre"</span>).<span class="bu">sum</span>().alias(<span class="st">"nombre_total"</span>))<span class="op">\</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    .sort(<span class="st">"nombre_total"</span>, descending<span class="op">=</span><span class="va">True</span>)<span class="op">\</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    .limit(<span class="dv">10</span>)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(top10f2021)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ul>
 </section>
 <section id="jouer-avec-vos-données" class="level3" data-number="8.3">
 <h3 data-number="8.3" class="anchored" data-anchor-id="jouer-avec-vos-données"><span class="header-section-number">8.3</span> Jouer avec vos données</h3>
 <ul class="task-list">
 <li><p><label><input type="checkbox">Générez le tableau du nombre de fois où votre prénom a été donné entre 2010 et 2020</label></p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>prenom <span class="op">=</span> <span class="st">"Ludovic"</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>annee_debut, annee_fin <span class="op">=</span> <span class="dv">2010</span>, <span class="dv">2020</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>df_prenom_annee <span class="op">=</span> df<span class="op">\</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">filter</span>((pl.col(<span class="st">"annais"</span>) <span class="op">!=</span> <span class="st">"XXXX"</span>))<span class="op">\</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">filter</span>((pl.col(<span class="st">"preusuel"</span>) <span class="op">==</span> prenom.upper()) <span class="op">&amp;</span> </span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>            (pl.col(<span class="st">"annais"</span>).cast(pl.Int32) <span class="op">&gt;=</span> annee_debut) <span class="op">&amp;</span> </span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>            (pl.col(<span class="st">"annais"</span>).cast(pl.Int32) <span class="op">&lt;=</span> annee_fin))<span class="op">\</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    .group_by(<span class="st">"annais"</span>)<span class="op">\</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    .agg(pl.col(<span class="st">"nombre"</span>).<span class="bu">sum</span>().alias(<span class="st">"nombre_total"</span>))<span class="op">\</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    .sort(<span class="st">"annais"</span>)</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_prenom_annee)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>prenom <span class="op">=</span> <span class="st">"Ludovic"</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>annee_debut, annee_fin <span class="op">=</span> <span class="dv">2010</span>, <span class="dv">2020</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>df_prenom_annee <span class="op">=</span> df<span class="op">\</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">filter</span>((pl.col(<span class="st">"annais"</span>) <span class="op">!=</span> <span class="st">"XXXX"</span>))<span class="op">\</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">filter</span>((pl.col(<span class="st">"preusuel"</span>) <span class="op">==</span> prenom.upper()) <span class="op">&amp;</span> </span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>            (pl.col(<span class="st">"annais"</span>).cast(pl.Int32) <span class="op">&gt;=</span> annee_debut) <span class="op">&amp;</span> </span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>            (pl.col(<span class="st">"annais"</span>).cast(pl.Int32) <span class="op">&lt;=</span> annee_fin))<span class="op">\</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    .group_by(<span class="st">"annais"</span>)<span class="op">\</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    .agg(pl.col(<span class="st">"nombre"</span>).<span class="bu">sum</span>().alias(<span class="st">"nombre_total"</span>))<span class="op">\</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    .sort(<span class="st">"annais"</span>)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_prenom_annee)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p><label><input type="checkbox">Faites un diagramme en barres</label></p>
 <ul>
 <li>avec les librairies <em>matplotlib</em> et <em>seaborn</em></li>
 </ul>
-<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Set seaborn style for a cleaner, more appealing look</span></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>sns.set_theme(style<span class="op">=</span><span class="st">"whitegrid"</span>)</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the plot</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Data</span></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>years <span class="op">=</span> df_prenom_annee[<span class="st">"annais"</span>].to_list()         <span class="co"># Extracts years as a list</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>counts <span class="op">=</span> df_prenom_annee[<span class="st">"nombre_total"</span>].to_list()  <span class="co"># Extracts counts as a list</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Bar plot with custom colors and transparency for better visuals</span></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>ax.bar(years, </span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>       counts, </span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>       color<span class="op">=</span><span class="st">"#4C72B0"</span>, </span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>       edgecolor<span class="op">=</span><span class="st">"black"</span>, </span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>       alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Set labels and title with padding for readability</span></span>
-<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Année"</span>, fontsize<span class="op">=</span><span class="dv">12</span>, labelpad<span class="op">=</span><span class="dv">10</span>)</span>
-<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Nombre d'occurences"</span>, fontsize<span class="op">=</span><span class="dv">12</span>, labelpad<span class="op">=</span><span class="dv">10</span>)</span>
-<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="ss">f"Occurrences du prénom </span><span class="sc">{</span>prenom<span class="sc">}</span><span class="ss"> par année (</span><span class="sc">{</span>annee_debut<span class="sc">}</span><span class="ss">-</span><span class="sc">{</span>annee_fin<span class="sc">}</span><span class="ss">)"</span>, fontsize<span class="op">=</span><span class="dv">14</span>, pad<span class="op">=</span><span class="dv">15</span>)</span>
-<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Rotate x-axis labels, improve spacing, and format grid</span></span>
-<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>ax.tick_params(axis<span class="op">=</span><span class="st">'x'</span>, rotation<span class="op">=</span><span class="dv">45</span>)</span>
-<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()  <span class="co"># Adjust layout for tight fit</span></span>
-<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the plot</span></span>
-<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Set seaborn style for a cleaner, more appealing look</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>sns.set_theme(style<span class="op">=</span><span class="st">"whitegrid"</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the plot</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Data</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>years <span class="op">=</span> df_prenom_annee[<span class="st">"annais"</span>].to_list()         <span class="co"># Extracts years as a list</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>counts <span class="op">=</span> df_prenom_annee[<span class="st">"nombre_total"</span>].to_list()  <span class="co"># Extracts counts as a list</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Bar plot with custom colors and transparency for better visuals</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>ax.bar(years, </span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>       counts, </span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>       color<span class="op">=</span><span class="st">"#4C72B0"</span>, </span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>       edgecolor<span class="op">=</span><span class="st">"black"</span>, </span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>       alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Set labels and title with padding for readability</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Année"</span>, fontsize<span class="op">=</span><span class="dv">12</span>, labelpad<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Nombre d'occurences"</span>, fontsize<span class="op">=</span><span class="dv">12</span>, labelpad<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="ss">f"Occurrences du prénom </span><span class="sc">{</span>prenom<span class="sc">}</span><span class="ss"> par année (</span><span class="sc">{</span>annee_debut<span class="sc">}</span><span class="ss">-</span><span class="sc">{</span>annee_fin<span class="sc">}</span><span class="ss">)"</span>, fontsize<span class="op">=</span><span class="dv">14</span>, pad<span class="op">=</span><span class="dv">15</span>)</span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Rotate x-axis labels, improve spacing, and format grid</span></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>ax.tick_params(axis<span class="op">=</span><span class="st">'x'</span>, rotation<span class="op">=</span><span class="dv">45</span>)</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()  <span class="co"># Adjust layout for tight fit</span></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the plot</span></span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 </ul>
 </section>
 <section id="exportez-vos-résultats-vers-minio" class="level3" data-number="8.4">
 <h3 data-number="8.4" class="anchored" data-anchor-id="exportez-vos-résultats-vers-minio"><span class="header-section-number">8.4</span> Exportez vos résultats vers MinIO</h3>
 <ul class="task-list">
 <li><p><label><input type="checkbox">En utilisant la librairie <em>s3fs</em></label></p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> s3fs</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>fs <span class="op">=</span> s3fs.S3FileSystem(</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    client_kwargs<span class="op">=</span>{<span class="st">'endpoint_url'</span>: <span class="st">'https://'</span><span class="op">+</span><span class="st">'minio-simple.lab.groupe-genes.fr'</span>},</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    key <span class="op">=</span> os.environ[<span class="st">"AWS_ACCESS_KEY_ID"</span>], </span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    secret <span class="op">=</span> os.environ[<span class="st">"AWS_SECRET_ACCESS_KEY"</span>], </span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    token <span class="op">=</span> os.environ[<span class="st">"AWS_SESSION_TOKEN"</span>])</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>destination <span class="op">=</span> <span class="ss">f"s3://</span><span class="sc">{</span>username<span class="sc">}</span><span class="ss">/diffusion/INSEE/output.csv"</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> fs.<span class="bu">open</span>(destination, mode<span class="op">=</span><span class="st">'wb'</span>) <span class="im">as</span> f:</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    top10f2021.write_csv(f)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> s3fs</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>fs <span class="op">=</span> s3fs.S3FileSystem(</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    client_kwargs<span class="op">=</span>{<span class="st">'endpoint_url'</span>: <span class="st">'https://'</span><span class="op">+</span><span class="st">'minio-simple.lab.groupe-genes.fr'</span>},</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    key <span class="op">=</span> os.environ[<span class="st">"AWS_ACCESS_KEY_ID"</span>], </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    secret <span class="op">=</span> os.environ[<span class="st">"AWS_SECRET_ACCESS_KEY"</span>], </span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    token <span class="op">=</span> os.environ[<span class="st">"AWS_SESSION_TOKEN"</span>])</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>destination <span class="op">=</span> <span class="ss">f"s3://</span><span class="sc">{</span>username<span class="sc">}</span><span class="ss">/diffusion/INSEE/output.csv"</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> fs.<span class="bu">open</span>(destination, mode<span class="op">=</span><span class="st">'wb'</span>) <span class="im">as</span> f:</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    top10f2021.write_csv(f)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p><label><input type="checkbox">Sur le Datalab, allez dans Mes fichiers <span class="emoji" data-emoji="arrow_right">➡️</span> diffusion <span class="emoji" data-emoji="arrow_right">➡️</span> INSEE</label></p>
 <ul>
 <li>le fichier <em>output.csv</em> a été généré</li>
@@ -884,17 +985,17 @@ Note
 </div>
 <p>Comme dans de très nombreux outils, il est possible d’encapsuler du <a href="https://docs.pola.rs/api/python/stable/reference/sql/index.html" target="_blank">SQL dans Polars</a>.</p>
 <p>Par exemple la requête du top10 féminin 2021 donne en SQL :</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df.sql(<span class="st">"""</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="st">  SELECT preusuel, </span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="st">         SUM(nombre) AS nombre_total</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM self</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="st">   WHERE preusuel &lt;&gt; '_PRENOMS_RARES'</span></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="st">     AND annais = '2021'</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="st">     AND sexe = 2</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="st">   GROUP BY preusuel</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="st">   ORDER BY 2 DESC</span></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="st">   LIMIT 10</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df.sql(<span class="st">"""</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="st">  SELECT preusuel, </span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="st">         SUM(nombre) AS nombre_total</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM self</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="st">   WHERE preusuel &lt;&gt; '_PRENOMS_RARES'</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="st">     AND annais = '2021'</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="st">     AND sexe = 2</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="st">   GROUP BY preusuel</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="st">   ORDER BY 2 DESC</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="st">   LIMIT 10</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul class="task-list">
 <li><label><input type="checkbox">Ré-écrivez en SQL la requête du nombre de fois ou votre prénom a été donné entre 2010 et 2020</label></li>
 <li><label><input type="checkbox">Créez une nouvelle cellule et écrivez une requête pour afficher les 5 années où sont nées le plus de filles</label></li>
@@ -968,7 +1069,7 @@ Tip
 </ul></li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -977,7 +1078,7 @@ Tip
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-17" class="callout-17-contents callout-collapse collapse">
+<div id="callout-21" class="callout-21-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
 <li><code>git add .</code></li>
@@ -1060,10 +1161,10 @@ Caution
 <ul class="task-list">
 <li><p><label><input type="checkbox">Vérifiez leur présence via le terminal : <code>env | grep PATATE</code> ou <code>echo $PATATE_TOKEN</code></label></p></li>
 <li><p><label><input type="checkbox">Ouvrez un notebook et récupérez la valeur de <em>PATATE_TOKEN</em></label></p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>token <span class="op">=</span> os.environ[<span class="st">"PATATE_TOKEN"</span>]</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(token)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>token <span class="op">=</span> os.environ[<span class="st">"PATATE_TOKEN"</span>]</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(token)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p><label><input type="checkbox">Une fois que vous avez fini de jouer, supprimez votre service</label></p></li>
 </ul>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -1335,8 +1436,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -1447,7 +1546,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
