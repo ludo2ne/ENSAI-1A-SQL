@@ -30,11 +30,11 @@ Dans le monde professionnel, plusieurs problèmes se posent au statisticien :
 
 La première étape fut de créer une infrastructure Cloud avec des CPUs, des GPUs, de la RAM et du stockage.
 
-Ensuite, c'est très bien d'avoir accès à tout plein de ressources, encore faut-il savoir les utiliser. Or lancer des services dans le cloud nécessite quelques compétences spécifiques (Docker, Kubernetes, Helm, S3...) qui ne sont pas à la portée de tous.
+Ensuite, avoir plein de ressources c'est très bien, mais encore faut-il savoir les utiliser. Or lancer des services dans le cloud nécessite quelques compétences spécifiques (Docker, Kubernetes, Helm, S3...) qui ne sont pas à la portée de tous.
 
-D'où l'idée de créer une interface graphique pour pouvoir lancer des services en quelques clics. Onyxia s'appuie sur des technologies sous-jacentes (Kubernetes, Helm, S3...) pour proposer une IHM agréable pour le datascientist. Cependant la philosophie du projet Onyxia est d'être une brique qui facilite le travail sans se rendre indispensable.
+D'où l'idée de créer une interface graphique pour pouvoir lancer des services en quelques clics. Onyxia s'appuie sur des technologies sous-jacentes (Kubernetes, Helm, S3...) pour proposer une IHM agréable pour le datascientist. Cependant, la philosophie du projet Onyxia est d'être une brique qui facilite le travail sans se rendre indispensable. L'idée est d'éviter que les utilisateurs ne s'enferment dans un choix technologique.
 
-À l'INSEE, une instance de ce logiciel a été installée sur le [Datalab SSP Cloud](https://datalab.sspcloud.fr/){target="_blank"} ouverte à tous les agents publics. Vous pouvez y créer un compte car c'est également ouvert à tous les élèves de l'ENSAI (en utilisant votre mail ENSAI).
+À l'INSEE, une instance de ce logiciel a été installée sur le [Datalab SSP Cloud](https://datalab.sspcloud.fr/){target="_blank"}, ouverte à tous les agents publics. Vous pouvez y créer un compte car c'est également ouvert à tous les élèves de l'ENSAI (en utilisant votre mail ENSAI).
 
 Onyxia est Libre et Open Source, ainsi chacun peut installer sa propre instance sur son infra. C'est ce qu'ont fait de nombreux organismes, ainsi que le GENES.
 
@@ -42,7 +42,7 @@ Pour plus de détails, vous pouvez consulter la section [Pour aller plus loin](#
 
 ### Les services {.unnumbered}
 
-Le principe est d'offrir aux utilisateurs de nombreux services (Jupyter, Rstudio, VSCode, PostgreSQL...) à la demande et une puissance de calcul adaptée aux besoins.
+Le principe est d'offrir aux utilisateurs la possibilité de lancer de nombreux services à la demande (Jupyter, Rstudio, VSCode, PostgreSQL...) et une puissance de calcul adaptée aux besoins.
 
 ::: {.callout-caution}
 Ces services sont éphémères, car si les ressources sont importantes, il faut savoir les partager !
@@ -74,10 +74,10 @@ Votre mission, si vous l'acceptez est de retrouver ce fameux prénom. Pour cela 
 
 ## Se connecter
 
-Vous pouvez réaliser ce TP soit sur le :
+Vous pouvez réaliser ce TP soit sur :
 
-- [Datalab du GENES](https://onyxia.lab.groupe-genes.fr/){target="_blank"}
-- [Datalab SSPCloud de l'INSEE](https://datalab.sspcloud.fr/){target="_blank"} 
+- Le [Datalab du GENES](https://onyxia.lab.groupe-genes.fr/){target="_blank"}
+- Le [Datalab SSPCloud de l'INSEE](https://datalab.sspcloud.fr/){target="_blank"} 
   - si besoin de créer un compte, utilisez votre mail ENSAI
 
 
@@ -87,11 +87,11 @@ Vous pouvez réaliser ce TP soit sur le :
 ::: {.callout-important icon="false" title="Fil rouge"}
 Avant de partir à la recherche du prénom, Josette a une envie de doubitchou.
 
-Vous retrouvez la recette mais il vous manque la quantité exacte en grammes de magarine.
+Vous retrouvez la recette mais il vous manque la quantité exacte en grammes de margarine.
 
 Vous savez simplement que la valeur recherchée correspond à combien il y a de nombres premiers entre 10 000 et 100 000.
 
-Naturellement, vous vous dites que la solution la plus simple est de créer un programme Python pour trouver la réponse. Or Python n'est pas installé sur votre machine et vous ne savez pas comment faire... Et soudain, vous avez une illumination : pourquoi ne pas lancer un service du Datalab qui permet d'exéctuer du Python.
+Naturellement, vous vous dites que la solution la plus simple est de créer un programme Python pour trouver la réponse. Or Python n'est pas installé sur votre machine et vous ne savez pas comment faire... Mais alors : pourquoi ne pas lancer un service du Datalab qui permet d'exécuter du Python.
 :::
 
 ### Un premier service
@@ -173,39 +173,106 @@ def crible_eratosthene(n):
     return est_premier
 ```
 
-Comme vous êtes un as de la programmation, cela ne vous prend que quelques minutes. C'est beaucoup plus rapide que si vous aviez du installer Python ainsi qu'un environnement d'exécution.
+Comme vous êtes un as de la programmation, cela ne vous prend que trois minutes. C'est beaucoup plus rapide que si vous aviez du installer Python ainsi qu'un environnement d'exécution.
 
-- [ ] Vous stockerez ce résultat dans une variable `a`
-- [ ] Vérifiez que `a` est lui même un nombre premier
+- [ ] Vérifiez que le résultat est lui même un nombre premier
 
 
 ### Utiliser des données
 
 ::: {.callout-important icon="false" title="Fil rouge"}
-Vous vous rendez compte qu'il faut beaucoup de margarine et que vous n'en avez pas assez dans le frigo.
+Vous vous rendez compte qu'il faut plus de 8 kg de margarine et que vous n'en avez pas assez dans le frigo.
 
-Félix propose d'aller en chercher à la superette du coin. Il entre dans l'ascenseur pour descendre les 6 étages et patatra, il se retrouve bloquer.
+Félix propose d'aller en chercher à la superette du coin. Il entre dans l'ascenseur pour descendre les 6 étages et patatra, il se retrouve bloqué.
 
-Pour retrouver le numéro du dépanneur, vous allez devoir retrouver les chiffres en requêtant le fichier des prénoms
+Pour retrouver les 5 chiffres du numéro du dépanneur, vous allez devoir répondre à 5 questions en requêtant fichier des communes françaises.
 :::
 
 
-:construction: appel via DuckDB
+::: {.callout-note title="COG"}
+Chaque année, l'INSEE publie sur son site le [Code officiel géographique](https://www.insee.fr/fr/information/2560452){target="_blank"} (COG). 
 
+Ce référentiel regroupe, au 1er janvier, les codes et libellés des communes, cantons, arrondissements, départements, régions, ainsi que ceux des pays et territoires étrangers.
+:::
 
-:construction: afficher un graph
+Vous allez utiliser via DuckDB du SQL dans du code Python. Commencez par importer le package et créer la vue vers le fichier des communes 2024.
 
+```{.python}
+import duckdb
+
+duckdb.sql("""
+CREATE OR REPLACE VIEW commune AS
+FROM 'https://www.insee.fr/fr/statistiques/fichier/7766585/v_commune_2024.csv';
+""")
+```
+
+Pour exécuter une requête :
+
+```{.python}
+duckdb.sql("""
+SELECT *
+  FROM commune
+""")
+```
+
+- [ ] Quel est le code région de Mayotte ?
+- [ ] Combien de communes y a-t-il en Guyane ?
+- [ ] Parmi les 3 départements de la Picardie (Aisne, Oise, Somme), combien de communes ont au minimum 4 *L* dans leur nom ?
+- [ ] Affichez le nombre de communes par département
+  - Classez par nombre de communes décroissant
+  - Quel est le numéro du département se classant au 20e rang ?
+- [ ] Quel est le numéro du département dans lequel se trouve le nom de commune le plus long
+
+::: {.callout-tip collapse="true"}
+- La somme des 5 nombres vaut 149
+- Les nombres sont dans l'ordre croissant
+:::
+
+Vous venez ici d'utiliser des données disponibles sur internet. Vous pouvez également effectuer des traitements sur vos propres données en les stockant sur S3.
 
 ## Stockage S3
+
+:construction: Pourquoi S3 ? Bucket ? Connexion ?
+
+- facilite la gestion des données -> permet de créer un DataLake
+- avantages techniques
+- Interdiction de manipuler de la donnée sur son ordinateur perso
+
+
+### Utiliser des données
+
+::: {.callout-important icon="false" title="Fil rouge"}
+Félix est sauvé, il peut maintenant aller chercher de la margarine et du papier cadeau pour emballer quelques bricoles suite à un malheureux accident.
+
+En attendant, Josette s'occupe en confectionnant un superbe gilet.
+
+Elle se souviens qu'elle a noté la longeur de fil nécessaire mais ne la retrouve plus. L'info se cache dans un fichier stocké sur S3.
+:::
+
+:construction: Aller chercher l'info dans s3://ludo/diffusion/INSEE/prenoms-nat2022.parquet (attention username différent sur les datalabs)
+
+
+- [ ] Entre 2005 et 2020, en quelle année le prénom *Katia* a-t-il été le plus donné ?
+
+
+::: {.callout-note title="Diffusion"}
+
+:::
+
+
+### Stocker vos fichiers
+
+
+
+
+
+
+
+## Sauver votre code 
 
 ::: {.callout-important icon="false" title="Fil rouge"}
 Maintenant que Josette est repue, elle se souvient qu'une information importante se trouve dans le fichier des prénoms
 :::
-
-:construction: Aller chercher une info dans un fichier sur ludo2ne/diffusion (SSPLab)
-
-
-## Sauver votre code 
 
 :construction:
 
