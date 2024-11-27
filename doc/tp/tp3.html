@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.37">
+<meta name="generator" content="quarto-1.6.39">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -71,12 +71,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-29e2c20b02301cfff04dc8050bf30c7e.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-43df0d6f53b733b42d37fa7808e17715.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-d166b450ba5a8e9f7a0ab969bf6592c1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-da7cd120230c1b1f8c14c8d09a3b31d9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-abd5606997d76f890a405fef9ca54395.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-a2a0e12bb60fe246e2e9f081b0cc26f8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-786175bc03f08c9c0cfecc4767a07620.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -235,36 +235,28 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#stockage-s3" id="toc-stockage-s3" class="nav-link" data-scroll-target="#stockage-s3"><span class="header-section-number">3</span> Stockage S3</a>
   <ul class="collapse">
-  <li><a href="#utiliser-des-données-1" id="toc-utiliser-des-données-1" class="nav-link" data-scroll-target="#utiliser-des-données-1"><span class="header-section-number">3.1</span> Utiliser des données</a></li>
+  <li><a href="#votre-bucket" id="toc-votre-bucket" class="nav-link" data-scroll-target="#votre-bucket"><span class="header-section-number">3.1</span> Votre bucket</a></li>
   <li><a href="#stocker-vos-fichiers" id="toc-stocker-vos-fichiers" class="nav-link" data-scroll-target="#stocker-vos-fichiers"><span class="header-section-number">3.2</span> Stocker vos fichiers</a></li>
+  <li><a href="#utiliser-des-données-1" id="toc-utiliser-des-données-1" class="nav-link" data-scroll-target="#utiliser-des-données-1"><span class="header-section-number">3.3</span> Utiliser des données</a></li>
+  <li><a href="#données-dautres-utilisateurs" id="toc-données-dautres-utilisateurs" class="nav-link" data-scroll-target="#données-dautres-utilisateurs"><span class="header-section-number">3.4</span> Données d’autres utilisateurs</a></li>
+  <li><a href="#exportez-vos-résultats-vers-minio" id="toc-exportez-vos-résultats-vers-minio" class="nav-link" data-scroll-target="#exportez-vos-résultats-vers-minio"><span class="header-section-number">3.5</span> Exportez vos résultats vers MinIO</a></li>
+  <li><a href="#client-minio" id="toc-client-minio" class="nav-link" data-scroll-target="#client-minio"><span class="header-section-number">3.6</span> Client MinIO</a></li>
+  <li><a href="#console-minio" id="toc-console-minio" class="nav-link" data-scroll-target="#console-minio"><span class="header-section-number">3.7</span> Console Minio</a></li>
   </ul></li>
-  <li><a href="#sauver-votre-code" id="toc-sauver-votre-code" class="nav-link" data-scroll-target="#sauver-votre-code"><span class="header-section-number">4</span> Sauver votre code</a></li>
-  <li><a href="#secret-bonus" id="toc-secret-bonus" class="nav-link" data-scroll-target="#secret-bonus"><span class="header-section-number">5</span> Secret (bonus)</a></li>
-  <li><a href="#créer-et-configuration-de-compte" id="toc-créer-et-configuration-de-compte" class="nav-link" data-scroll-target="#créer-et-configuration-de-compte"><span class="header-section-number">6</span> Créer et configuration de compte</a>
+  <li><a href="#libérer-les-ressources" id="toc-libérer-les-ressources" class="nav-link" data-scroll-target="#libérer-les-ressources"><span class="header-section-number">4</span> Libérer les ressources</a></li>
+  <li><a href="#travailler-avec-git" id="toc-travailler-avec-git" class="nav-link" data-scroll-target="#travailler-avec-git"><span class="header-section-number">5</span> Travailler avec Git</a>
   <ul class="collapse">
-  <li><a href="#générer-un-token-github" id="toc-générer-un-token-github" class="nav-link" data-scroll-target="#générer-un-token-github"><span class="header-section-number">6.1</span> Générer un token GitHub</a></li>
-  <li><a href="#déclarer-votre-jeton" id="toc-déclarer-votre-jeton" class="nav-link" data-scroll-target="#déclarer-votre-jeton"><span class="header-section-number">6.2</span> Déclarer votre jeton</a></li>
+  <li><a href="#générer-un-token-github" id="toc-générer-un-token-github" class="nav-link" data-scroll-target="#générer-un-token-github"><span class="header-section-number">5.1</span> Générer un token GitHub</a></li>
+  <li><a href="#déclarer-votre-jeton" id="toc-déclarer-votre-jeton" class="nav-link" data-scroll-target="#déclarer-votre-jeton"><span class="header-section-number">5.2</span> Déclarer votre jeton</a></li>
+  <li><a href="#dépôt-pour-le-code" id="toc-dépôt-pour-le-code" class="nav-link" data-scroll-target="#dépôt-pour-le-code"><span class="header-section-number">5.3</span> Dépôt pour le code</a></li>
+  <li><a href="#branchez-votre-service-sur-un-répo" id="toc-branchez-votre-service-sur-un-répo" class="nav-link" data-scroll-target="#branchez-votre-service-sur-un-répo"><span class="header-section-number">5.4</span> Branchez votre service sur un répo</a></li>
+  <li><a href="#sauver-son-code" id="toc-sauver-son-code" class="nav-link" data-scroll-target="#sauver-son-code"><span class="header-section-number">5.5</span> Sauver son code</a></li>
   </ul></li>
-  <li><a href="#le-stockage" id="toc-le-stockage" class="nav-link" data-scroll-target="#le-stockage"><span class="header-section-number">7</span> Le stockage</a>
+  <li><a href="#surveiller-son-service" id="toc-surveiller-son-service" class="nav-link" data-scroll-target="#surveiller-son-service"><span class="header-section-number">6</span> Surveiller son service</a></li>
+  <li><a href="#les-secrets" id="toc-les-secrets" class="nav-link" data-scroll-target="#les-secrets"><span class="header-section-number">7</span> Les secrets</a>
   <ul class="collapse">
-  <li><a href="#votre-bucket" id="toc-votre-bucket" class="nav-link" data-scroll-target="#votre-bucket"><span class="header-section-number">7.1</span> Votre bucket</a></li>
-  <li><a href="#stocker-des-fichiers" id="toc-stocker-des-fichiers" class="nav-link" data-scroll-target="#stocker-des-fichiers"><span class="header-section-number">7.2</span> Stocker des fichiers</a></li>
-  </ul></li>
-  <li><a href="#les-services-1" id="toc-les-services-1" class="nav-link" data-scroll-target="#les-services-1"><span class="header-section-number">8</span> Les services</a>
-  <ul class="collapse">
-  <li><a href="#dépôt-pour-le-code" id="toc-dépôt-pour-le-code" class="nav-link" data-scroll-target="#dépôt-pour-le-code"><span class="header-section-number">8.1</span> Dépôt pour le code</a></li>
-  <li><a href="#accéder-à-votre-stockage" id="toc-accéder-à-votre-stockage" class="nav-link" data-scroll-target="#accéder-à-votre-stockage"><span class="header-section-number">8.2</span> Accéder à votre stockage</a></li>
-  <li><a href="#jouer-avec-vos-données" id="toc-jouer-avec-vos-données" class="nav-link" data-scroll-target="#jouer-avec-vos-données"><span class="header-section-number">8.3</span> Jouer avec vos données</a></li>
-  <li><a href="#exportez-vos-résultats-vers-minio" id="toc-exportez-vos-résultats-vers-minio" class="nav-link" data-scroll-target="#exportez-vos-résultats-vers-minio"><span class="header-section-number">8.4</span> Exportez vos résultats vers MinIO</a></li>
-  <li><a href="#client-minio" id="toc-client-minio" class="nav-link" data-scroll-target="#client-minio"><span class="header-section-number">8.5</span> Client MinIO</a></li>
-  <li><a href="#sauver-son-code" id="toc-sauver-son-code" class="nav-link" data-scroll-target="#sauver-son-code"><span class="header-section-number">8.6</span> Sauver son code</a></li>
-  <li><a href="#surveiller-son-service" id="toc-surveiller-son-service" class="nav-link" data-scroll-target="#surveiller-son-service"><span class="header-section-number">8.7</span> Surveiller son service</a></li>
-  <li><a href="#terminer-son-service" id="toc-terminer-son-service" class="nav-link" data-scroll-target="#terminer-son-service"><span class="header-section-number">8.8</span> Terminer son service</a></li>
-  </ul></li>
-  <li><a href="#les-secrets" id="toc-les-secrets" class="nav-link" data-scroll-target="#les-secrets"><span class="header-section-number">9</span> Les secrets</a>
-  <ul class="collapse">
-  <li><a href="#créer-un-secret" id="toc-créer-un-secret" class="nav-link" data-scroll-target="#créer-un-secret"><span class="header-section-number">9.1</span> Créer un secret</a></li>
-  <li><a href="#utiliser-dans-un-service" id="toc-utiliser-dans-un-service" class="nav-link" data-scroll-target="#utiliser-dans-un-service"><span class="header-section-number">9.2</span> Utiliser dans un service</a></li>
+  <li><a href="#créer-un-secret" id="toc-créer-un-secret" class="nav-link" data-scroll-target="#créer-un-secret"><span class="header-section-number">7.1</span> Créer un secret</a></li>
+  <li><a href="#utiliser-dans-un-service" id="toc-utiliser-dans-un-service" class="nav-link" data-scroll-target="#utiliser-dans-un-service"><span class="header-section-number">7.2</span> Utiliser dans un service</a></li>
   </ul></li>
   <li><a href="#besoin-dassistance" id="toc-besoin-dassistance" class="nav-link" data-scroll-target="#besoin-dassistance">Besoin d’assistance ?</a></li>
   <li><a href="#pour-aller-plus-loin" id="toc-pour-aller-plus-loin" class="nav-link" data-scroll-target="#pour-aller-plus-loin">Pour aller plus loin</a></li>
@@ -319,12 +311,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>sa machine n’est pas assez puissante</li>
 <li>installer certains logiciels est parfois interdit et bloqué par le système</li>
+<li>il doit analyser des données sensibles en toute sécurité</li>
 </ul>
 <p>À l’INSEE, un projet est né pour pallier à ce besoin : <a href="https://www.onyxia.sh/" target="_blank">Onyxia</a> porté par le <a href="https://github.com/InseeFrLab" target="_blank">lab de l’INSEE</a>.</p>
 <p>La première étape fut de créer une infrastructure Cloud avec des CPUs, des GPUs, de la RAM et du stockage.</p>
 <p>Ensuite, avoir plein de ressources c’est très bien, mais encore faut-il savoir les utiliser. Or lancer des services dans le cloud nécessite quelques compétences spécifiques (Docker, Kubernetes, Helm, S3…) qui ne sont pas à la portée de tous.</p>
 <p>D’où l’idée de créer une interface graphique pour pouvoir lancer des services en quelques clics. Onyxia s’appuie sur des technologies sous-jacentes (Kubernetes, Helm, S3…) pour proposer une IHM agréable pour le datascientist. Cependant, la philosophie du projet Onyxia est d’être une brique qui facilite le travail sans se rendre indispensable. L’idée est d’éviter que les utilisateurs ne s’enferment dans un choix technologique.</p>
 <p>À l’INSEE, une instance de ce logiciel a été installée sur le <a href="https://datalab.sspcloud.fr/" target="_blank">Datalab SSP Cloud</a>, ouverte à tous les agents publics. Vous pouvez y créer un compte car c’est également ouvert à tous les élèves de l’ENSAI (en utilisant votre mail ENSAI).</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Ne déposez pas de données sensibles sur cette instance, ni sur celle du GENES.</p>
+<p>Pour celles et ceux qui iront à l’INSEE, une autre instance nommée LS3 n’est accessible qu’en interne et autorise l’utilisation de données sensibles.</p>
+</div>
+</div>
 <p>Onyxia est Libre et Open Source, ainsi chacun peut installer sa propre instance sur son infra. C’est ce qu’ont fait de nombreux organismes, ainsi que le GENES.</p>
 <p>Pour plus de détails, vous pouvez consulter la section <a href="#pour-aller-plus-loin">Pour aller plus loin</a>.</p>
 </section>
@@ -422,7 +429,7 @@ Fil rouge
 </ul>
 <p>Votre service <em>Jupyter Python</em> s’ouvre.</p>
 <div class="callout callout-style-default callout-note callout-titled" title="Ce qu'il se passe sous le capot">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -431,7 +438,7 @@ Ce qu’il se passe sous le capot
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Pour plus de détails, vous pouvez consulter la vidéo en bas de la page.</p>
 <p>Prenons l’exemple de ce qu’il se passe en arrière plan lorsque vous lancez un service <code>Vscode-python</code> :</p>
@@ -498,9 +505,12 @@ Ce qu’il se passe sous le capot
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>                est_premier[multiple] <span class="op">=</span> <span class="va">False</span></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> est_premier</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Comme vous êtes un as de la programmation, cela ne vous prend que trois minutes. C’est beaucoup plus rapide que si vous aviez du installer Python ainsi qu’un environnement d’exécution.</p>
+<p>Comme vous êtes un as de la programmation, cela ne vous prend que trois minutes. C’est beaucoup plus rapide que si vous aviez du installer Python, ainsi qu’un environnement d’exécution.</p>
 <ul class="task-list">
-<li><label><input type="checkbox">Vérifiez que le résultat est lui même un nombre premier</label></li>
+<li><label><input type="checkbox">Vérifiez que le résultat est lui même un nombre premier</label>
+<ul>
+<li>Notez le vous en aurez besoin à la fin</li>
+</ul></li>
 </ul>
 </section>
 <section id="utiliser-des-données" class="level3" data-number="2.2">
@@ -534,7 +544,7 @@ COG
 <p>Ce référentiel regroupe, au 1er janvier, les codes et libellés des communes, cantons, arrondissements, départements, régions, ainsi que ceux des pays et territoires étrangers.</p>
 </div>
 </div>
-<p>Vous allez utiliser via DuckDB du SQL dans du code Python. Commencez par importer le package et créer la vue vers le fichier des communes 2024.</p>
+<p>Vous allez utiliser via <em>DuckDB</em> du <em>SQL</em> dans du code <em>Python</em>. Commencez par importer le package et créer la vue vers le fichier des communes 2024.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> duckdb</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>duckdb.sql(<span class="st">"""</span></span>
@@ -558,7 +568,7 @@ COG
 <li><label><input type="checkbox">Quel est le numéro du département dans lequel se trouve le nom de commune le plus long</label></li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -567,7 +577,7 @@ Tip
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
 <li>La somme des 5 nombres vaut 149</li>
@@ -581,14 +591,52 @@ Tip
 </section>
 <section id="stockage-s3" class="level2" data-number="3">
 <h2 data-number="3" class="anchored" data-anchor-id="stockage-s3"><span class="header-section-number">3</span> Stockage S3</h2>
-<p><span class="emoji" data-emoji="construction">🚧</span> Pourquoi S3 ? Bucket ? Connexion ?</p>
+<p>Lorsque l’on travaille dans le cloud, il est essentiel de <u>séparer les données des programmes</u> pour :</p>
 <ul>
-<li>facilite la gestion des données -&gt; permet de créer un DataLake</li>
-<li>avantages techniques</li>
-<li>Interdiction de manipuler de la donnée sur son ordinateur perso</li>
+<li>mieux gérer les ressources</li>
+<li>renforcer la sécurité en limitant les accès et les permissions</li>
+<li>permettre une scalabilité indépendante des composants</li>
 </ul>
-<section id="utiliser-des-données-1" class="level3" data-number="3.1">
-<h3 data-number="3.1" class="anchored" data-anchor-id="utiliser-des-données-1"><span class="header-section-number">3.1</span> Utiliser des données</h3>
+<p><a href="https://min.io/" target="_blank">MinIO</a> est une solution de stockage d’objets open-source qui permet de déployer facilement un stockage évolutif et performant. Elle est compatible avec l’API <a href="https://aws.amazon.com/fr/s3/" target="_blank">S3 d’Amazon</a>, ce qui facilite l’intégration avec les applications existantes.</p>
+<p>MinIO offre :</p>
+<ul>
+<li>une haute disponibilité</li>
+<li>une sécurité renforcée grâce au chiffrement des données et des contrôles d’accès</li>
+<li>des performances élevées, particulièrement adaptées aux environnements nécessitant un accès rapide aux données, comme le Big Data et l’intelligence artificielle</li>
+</ul>
+<section id="votre-bucket" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="votre-bucket"><span class="header-section-number">3.1</span> Votre bucket</h3>
+<div class="callout callout-style-default callout-note callout-titled" title="Définition">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Définition
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Un <strong>bucket</strong> est un conteneur de stockage utilisé pour regrouper des objets (fichiers et métadonnées) dans des systèmes de stockage de type cloud. Il facilite l’organisation, la gestion des permissions et l’accès aux données dans un espace de stockage structuré.</p>
+</div>
+</div>
+<p>Lors de votre création de compte, un bucket est créé avec votre nom d’utilisateur. Dans ce bucket, vous pouvez :</p>
+<ul>
+<li>créer / supprimer des dossiers</li>
+<li>importer / supprimer des fichiers</li>
+</ul>
+<p>Pour accéder à votre stockage :</p>
+<ul>
+<li>Depuis le Datalab, allez dans <code>Mes fichiers</code></li>
+<li>Depuis la console MinIO :
+<ul>
+<li><a href="https://minio-console.lab.sspcloud.fr/" target="_blank">https://minio-console.lab.sspcloud.fr/</a></li>
+<li><a href="https://minio-simple.lab.groupe-genes.fr" target="_blank">https://minio-simple.lab.groupe-genes.fr</a></li>
+</ul></li>
+<li>Depuis un terminal avec le client Minio</li>
+</ul>
+</section>
+<section id="stocker-vos-fichiers" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="stocker-vos-fichiers"><span class="header-section-number">3.2</span> Stocker vos fichiers</h3>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Fil rouge">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -599,14 +647,168 @@ Fil rouge
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Félix est sauvé, il peut maintenant aller chercher de la margarine et du papier cadeau pour emballer quelques bricoles suite à un malheureux accident.</p>
-<p>En attendant, Josette s’occupe en confectionnant un superbe gilet.</p>
-<p>Elle se souviens qu’elle a noté la longeur de fil nécessaire mais ne la retrouve plus. L’info se cache dans un fichier stocké sur S3.</p>
+<p>Félix est sauvé, il peut maintenant aller chercher de la margarine et du papier cadeau (ça peut toujours servir).</p>
+<p>En attendant, Josette s’occupe en confectionnant un superbe gilet gris avec son amie Thérèse.</p>
+<p>Elle se souvient qu’elle a noté quelque part la longueur de fil nécessaire dans un fichier csv.</p>
 </div>
 </div>
-<p><span class="emoji" data-emoji="construction">🚧</span> Aller chercher l’info dans s3://ludo/diffusion/INSEE/prenoms-nat2022.parquet (attention username différent sur les datalabs)</p>
 <ul class="task-list">
-<li><label><input type="checkbox">Entre 2005 et 2020, en quelle année le prénom <em>Katia</em> a-t-il été le plus donné ?</label></li>
+<li><label><input type="checkbox">Téléchargez ce fichier <a href="data/tp3-longueur-fil.parquet" target="_blank">parquet</a></label></li>
+</ul>
+<p>Ensuite, allez sur la page d’accueil du Datalab :</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Allez dans <code>Mes fichiers</code></label></li>
+<li><label><input type="checkbox">Créez un dossier <code>ENSAI</code> puis à l’intérieur un dossier <code>SQL</code></label></li>
+<li><label><input type="checkbox">Téléversez votre fichier <em>parquet</em> dans le dossier <em>SQL</em></label></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled" title="Chemin vers mes fichiers">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Chemin vers mes fichiers
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Vous remarquerez à droite, des lignes de commande du type <code>mc cp tp3-longueur-fil.parquet s3/&lt;username&gt;/ENSAI/SQL/tp3-longueur-fil.parquet</code>.</p>
+<p>Ce sont des commandes pour interragir avec voter stockage depuis un termial (voir ci-après).</p>
+<p>Cependant, vous pouvez extraire de ces commandes une information intéressante : le chemin vers votre fichier : <code>s3/&lt;username&gt;/ENSAI/SQL/tp3-longueur-fil.parquet</code>.</p>
+</div>
+</div>
+<p>Vous venez de charger un fichier, voyons maintenant comment y accéder dans un <em>Service</em>, par exemple le notebook que vous aviez lancé.</p>
+</section>
+<section id="utiliser-des-données-1" class="level3" data-number="3.3">
+<h3 data-number="3.3" class="anchored" data-anchor-id="utiliser-des-données-1"><span class="header-section-number">3.3</span> Utiliser des données</h3>
+<p>Sur la page d’accueil du Datalab :</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Allez dans <code>Mon Compte</code>, puis dans l’onglet <code>Connexion au Stockage</code></label></li>
+</ul>
+<p>Vous trouverez ici des informations pour vous connecter au stockage selon le language que vous utilisez : Python, R…</p>
+<p>D’ailleurs pour chaque langage, il y a même plusieurs packages qui font le job. Par exemple <em>s3fs</em> ou <em>boto3</em> pour Python.</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Retournez dans votre service Notebook Jupyter</label></li>
+<li><label><input type="checkbox">Créez un nouveau Notebook</label>
+<ul>
+<li>vous pouvez par exemple le nommer <code>S3.ipynb</code></li>
+</ul></li>
+<li><label><input type="checkbox">Créer 2 cellules, puis collez et exécutez les 2 blocs de code ci-dessous</label>
+<ul>
+<li>Utilisez par exemple le bouton <code>+</code> de la barre d’outils pour créer une cellule</li>
+</ul></li>
+</ul>
+<p>Commencez par importer les packages nécessaires et récupérer les valeurs des variables d’environnement pour pouvoir se connecter à votre stockage.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>s3_endpoint <span class="op">=</span> <span class="ss">f'https://</span><span class="sc">{</span>os<span class="sc">.</span>environ[<span class="st">"AWS_S3_ENDPOINT"</span>]<span class="sc">}</span><span class="ss">'</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>s3_access_key <span class="op">=</span> os.environ[<span class="st">"AWS_ACCESS_KEY_ID"</span>]</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>s3_secret_access_key <span class="op">=</span> os.environ[<span class="st">"AWS_SECRET_ACCESS_KEY"</span>]</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>s3_session_token <span class="op">=</span> os.environ[<span class="st">"AWS_SESSION_TOKEN"</span>]</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>s3_region <span class="op">=</span> os.environ[<span class="st">"AWS_DEFAULT_REGION"</span>]</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>s3_username <span class="op">=</span> os.environ[<span class="st">"VAULT_TOP_DIR"</span>] <span class="co"># un peu bancal pour avoir le username</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Définissez le chemin où se trouve votre fichier et lisez le avec Polars.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>s3_file_path <span class="op">=</span> <span class="ss">f"s3://</span><span class="sc">{</span>s3_username<span class="sc">}</span><span class="ss">/ENSAI/SQL/tp3-longueur-fil.parquet"</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>storage_options <span class="op">=</span> {</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"aws_endpoint"</span>:  s3_endpoint,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"aws_access_key_id"</span>: s3_access_key,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"aws_secret_access_key"</span>: s3_secret_access_key,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"aws_token"</span>: s3_session_token,</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"aws_region"</span>: s3_region</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="bu">file</span> <span class="op">=</span> pl.scan_parquet(source<span class="op">=</span>s3_file_path, </span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>                     storage_options<span class="op">=</span>storage_options)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-note callout-titled" title="Polars">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Polars
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><a href="https://pola.rs/" target="_blank">Polars</a> est une bibliothèque rapide et performante pour la manipulation de données en Python et Rust, optimisée pour les grands volumes de données.</p>
+<p>Contrairement à <a href="https://pandas.pydata.org/" target="_blank">Pandas</a>, Polars utilise une approche orientée colonnes (columnar) et tire parti du traitement parallèle, ce qui le rend particulièrement adapté pour les opérations analytiques lourdes.</p>
+<p>Sa syntaxe, proche de celle de Pandas, permet des transformations, agrégations et manipulations de données avec des méthodes performantes et expressives.</p>
+<p>Pour plus de détails : <a href="https://ssphub.netlify.app/post/polars/" target="_blank">https://ssphub.netlify.app/post/polars/</a></p>
+</div>
+</div>
+<ul class="task-list">
+<li><label><input type="checkbox">Créez une 3e cellule et affichez le fichier chargé</label>
+<ul>
+<li>Que se passe-t-il ?</li>
+</ul></li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled" title="Mode Lazy">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Mode Lazy
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Vous avez appelé la méthode <code>scan_parquet()</code> qui correspond au mode <em>Lazy</em> de Polars.</p>
+<p>Le mode <em>Lazy</em> signifie que Polars va accumuler toutes les instructions que vous lui donner sans pour autant les exécuter tout de suite.</p>
+<p>Mais quel est l’intérêt ?</p>
+<p>Imaginons que vous analisez un trés gros fichier et que vous enchainez à la suite diverses opérations (filtres, sélections de colonnes, regroupements, agrégations, tri…), deux choix s’offrent à vous :</p>
+<p>Option 1 (mode Eager : <code>pl.read_parquet()</code>):</p>
+<ul>
+<li>vous chargez tout le fichier en mémoire</li>
+<li>vous appliquez des opérations dans n’importe quel ordre</li>
+<li>vous lancez, c’est long et ça rame…</li>
+</ul>
+<p>Option 2 (mode Lazy : <code>pl.scan_parquet()</code>):</p>
+<ul>
+<li>vous scannez le fichier, i.e.&nbsp;analyser sa structure (types de colonnes) et ses métadonnées</li>
+<li>vous donnez vos opérations dans n’importe quel ordre</li>
+<li>à la fin, vous demandez à Polars de vous fournir le résultat</li>
+<li>à ce moment, Polars va optimiser l’ordre des traitement en utilisant son propre <u>plan d’exécution</u> et vous donner une réponse beaucoup plus rapide</li>
+</ul>
+<p>En résumé, en mode Eager, à chaque étape la machine effectue bêtement tous les calculs que vous lui demandez. En mode Lazy, la machine liste les opérations que vous demandez. Puis lorsque vous exigez un résultat, l’ordre des opérations est optimisé et la réponse est beaucoup plus rapide.</p>
+</div>
+</div>
+</div>
+<ul class="task-list">
+<li><label><input type="checkbox">Pour forcer le chargement du fichier, appelez la méthode <code>collect()</code></label>
+<ul>
+<li>stockez le résultat dans une variable <em>df</em></li>
+</ul></li>
+<li><label><input type="checkbox">Vous pouvez maintenant afficher le contenu de <em>df</em> avec un print</label></li>
+<li><label><input type="checkbox">Filtrez le fichier pour trouver la longueur de fil du gilet</label>
+<ul>
+<li><code>filter(pl.col("&lt;column_name&gt;") == "&lt;value&gt;")</code></li>
+</ul></li>
+</ul>
+</section>
+<section id="données-dautres-utilisateurs" class="level3" data-number="3.4">
+<h3 data-number="3.4" class="anchored" data-anchor-id="données-dautres-utilisateurs"><span class="header-section-number">3.4</span> Données d’autres utilisateurs</h3>
+<div class="callout callout-style-default callout-important no-icon callout-titled" title="Fil rouge">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Fil rouge
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Pendant que Josette confectionne son gilet, Félix revient avec la margarine.</p>
+<p>Or Josette n’a finalement plus faim. Félix se met alors à bouder et va s’enfermer dans les toilettes pour avaler des pilules qu’il a pris au passage à la pharmacie. Soudain la mémoire lui revient !</p>
+<p>Il se rappelle qu’ils avaient trouvé le prénom en parcourant… le fichier des prénoms !</p>
+</div>
+</div>
+<p>Ce fichier est stocké sur le bucket d’un autre utilisateur à l’une des adresses suivante :</p>
+<ul>
+<li>Datalab du GENES : <code>s3/ldeneuville-ensai/diffusion/ENSAI/TP-SQL/prenoms-nat2022.parquet</code></li>
+<li>SSP Cloud : <code>s3/ludo2ne/diffusion/ENSAI/TP-SQL/prenoms-nat2022.parquet</code></li>
 </ul>
 <div class="callout callout-style-default callout-note callout-titled" title="Diffusion">
 <div class="callout-header d-flex align-content-center">
@@ -618,16 +820,39 @@ Diffusion
 </div>
 </div>
 <div class="callout-body-container callout-body">
-
+<p>À la racine de votre Bucket, vous pouvez créer un dossier nommé <code>diffusion</code>.</p>
+<p>Vous pourrez alors stocker à l’intérieur les dossiers et fichiers que vous souhaitez partager aux autres utilisateurs. Ils auront un droit d’accès en lecture sur votre dossier <em>diffusion</em>.</p>
 </div>
 </div>
-</section>
-<section id="stocker-vos-fichiers" class="level3" data-number="3.2">
-<h3 data-number="3.2" class="anchored" data-anchor-id="stocker-vos-fichiers"><span class="header-section-number">3.2</span> Stocker vos fichiers</h3>
-</section>
-</section>
-<section id="sauver-votre-code" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="sauver-votre-code"><span class="header-section-number">4</span> Sauver votre code</h2>
+<ul class="task-list">
+<li><label><input type="checkbox">Scannez ce fichier avec Polars</label></li>
+<li><label><input type="checkbox">Utilisez le code ci-dessous pour afficher le top10 des prénoms féminins en 2022</label></li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>top10f2021 <span class="op">=</span> <span class="bu">file</span><span class="op">\</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">filter</span>((pl.col(<span class="st">"sexe"</span>) <span class="op">==</span> <span class="dv">2</span>) <span class="op">&amp;</span> </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>            (pl.col(<span class="st">"annais"</span>) <span class="op">==</span> <span class="st">"2021"</span>) <span class="op">&amp;</span> </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>            (pl.col(<span class="st">"preusuel"</span>) <span class="op">!=</span> <span class="st">"_PRENOMS_RARES"</span>))<span class="op">\</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    .group_by(<span class="st">"preusuel"</span>)<span class="op">\</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    .agg(pl.col(<span class="st">"nombre"</span>).<span class="bu">sum</span>().alias(<span class="st">"nombre_total"</span>))<span class="op">\</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    .sort(<span class="st">"nombre_total"</span>, descending<span class="op">=</span><span class="va">True</span>)<span class="op">\</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    .limit(<span class="dv">10</span>)<span class="op">\</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    .collect()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul class="task-list">
+<li><label><input type="checkbox">Vous pouvez effectuez les mêmes traitements en encapsulant du sql :</label></li>
+</ul>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>top10f2021_sql <span class="op">=</span> <span class="bu">file</span><span class="op">\</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    .sql(<span class="st">"""</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="st">      SELECT preusuel, </span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="st">             SUM(nombre) AS nombre_total</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="st">        FROM self</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="st">       WHERE preusuel &lt;&gt; '_PRENOMS_RARES'</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="st">         AND annais = '2021'</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="st">         AND sexe = 2</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="st">       GROUP BY preusuel</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="st">       ORDER BY nombre_total DESC</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="st">       LIMIT 10</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="st">    """</span>)<span class="op">\</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    .collect()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-style-default callout-important no-icon callout-titled" title="Fil rouge">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -638,17 +863,202 @@ Fil rouge
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Maintenant que Josette est repue, elle se souvient qu’une information importante se trouve dans le fichier des prénoms</p>
+<p>Alors que vous alliez chercher le prénom, votre cammarade Katia vous demande en quelle année son prénom a été le plus donné entre 1960 et 1980.</p>
 </div>
 </div>
-<p><span class="emoji" data-emoji="construction">🚧</span></p>
+<ul class="task-list">
+<li><label><input type="checkbox">Écrivez la requête SQL qui fait le même travail que ces instructions</label></li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>prenom <span class="op">=</span> <span class="st">"Katia"</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>annee_debut, annee_fin <span class="op">=</span> <span class="dv">1960</span>, <span class="dv">1980</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>df_prenom_annee <span class="op">=</span> df<span class="op">\</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">filter</span>((pl.col(<span class="st">"annais"</span>) <span class="op">!=</span> <span class="st">"XXXX"</span>))<span class="op">\</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">filter</span>((pl.col(<span class="st">"preusuel"</span>) <span class="op">==</span> prenom.upper()) <span class="op">&amp;</span> </span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>            (pl.col(<span class="st">"annais"</span>).cast(pl.Int32) <span class="op">&gt;=</span> annee_debut) <span class="op">&amp;</span> </span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>            (pl.col(<span class="st">"annais"</span>).cast(pl.Int32) <span class="op">&lt;=</span> annee_fin))<span class="op">\</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    .group_by(<span class="st">"annais"</span>)<span class="op">\</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>    .agg(pl.col(<span class="st">"nombre"</span>).<span class="bu">sum</span>().alias(<span class="st">"nombre_total"</span>))<span class="op">\</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    .sort(<span class="st">"annais"</span>)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_prenom_annee)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Diagramme en barre">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Diagramme en barre
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-17" class="callout-17-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Vous pouvez également tracer un graphique avec ces données :</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Set seaborn style for a cleaner, more appealing look</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>sns.set_theme(style<span class="op">=</span><span class="st">"whitegrid"</span>)</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the plot</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Data</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>years <span class="op">=</span> df_prenom_annee[<span class="st">"annais"</span>].to_list()         <span class="co"># Extracts years as a list</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>counts <span class="op">=</span> df_prenom_annee[<span class="st">"nombre_total"</span>].to_list()  <span class="co"># Extracts counts as a list</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Bar plot with custom colors and transparency for better visuals</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>ax.bar(years, </span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>       counts, </span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>       color<span class="op">=</span><span class="st">"#4C72B0"</span>, </span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>       edgecolor<span class="op">=</span><span class="st">"black"</span>, </span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>       alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Set labels and title with padding for readability</span></span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Année"</span>, fontsize<span class="op">=</span><span class="dv">12</span>, labelpad<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Nombre d'occurences"</span>, fontsize<span class="op">=</span><span class="dv">12</span>, labelpad<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="ss">f"Occurrences du prénom </span><span class="sc">{</span>prenom<span class="sc">}</span><span class="ss"> par année (</span><span class="sc">{</span>annee_debut<span class="sc">}</span><span class="ss">-</span><span class="sc">{</span>annee_fin<span class="sc">}</span><span class="ss">)"</span>, fontsize<span class="op">=</span><span class="dv">14</span>, pad<span class="op">=</span><span class="dv">15</span>)</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Rotate x-axis labels, improve spacing, and format grid</span></span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>ax.tick_params(axis<span class="op">=</span><span class="st">'x'</span>, rotation<span class="op">=</span><span class="dv">45</span>)</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()  <span class="co"># Adjust layout for tight fit</span></span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the plot</span></span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<p>Nous y sommes presque ! Pour trouver le fameux prénom :</p>
+<ul>
+<li>Reprenez le résultat du nombre de nombres premiers entre 10 000 et 100 000</li>
+<li>Otez 3</li>
+<li>Divisez par 5</li>
+</ul>
+<p>Le prénom recherché est à ce rang de classement pour les prénoms féminins donnés en France entre 1970 et 2000.</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Écrivez la requête</label>
+<ul>
+<li>Filtrez les prénoms féminins donnés entre 1970 et 2000</li>
+<li>Classez-les par le nombre de fois où ils ont été donné</li>
+<li>Créez une colonne de rang avec <code>RANK() OVER (ORDER BY SUM(nombre) DESC) AS rang</code></li>
+</ul></li>
+<li><label><input type="checkbox">Trouvez le prénom classé au rang demandé</label></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-18" class="callout-18-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Vous pouvez stocker le résultat de la 1ère requête dans une vue</li>
+<li>Puis effectuer une recherche sur le rang</li>
+</ul>
+<p>La réponse commence par un <em>S</em></p>
+</div>
+</div>
+</div>
 </section>
-<section id="secret-bonus" class="level2" data-number="5">
-<h2 data-number="5" class="anchored" data-anchor-id="secret-bonus"><span class="header-section-number">5</span> Secret (bonus)</h2>
+<section id="exportez-vos-résultats-vers-minio" class="level3" data-number="3.5">
+<h3 data-number="3.5" class="anchored" data-anchor-id="exportez-vos-résultats-vers-minio"><span class="header-section-number">3.5</span> Exportez vos résultats vers MinIO</h3>
+<ul class="task-list">
+<li><p><label><input type="checkbox">En utilisant la librairie <em>s3fs</em></label></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> s3fs</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>fs <span class="op">=</span> s3fs.S3FileSystem(</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    client_kwargs<span class="op">=</span>{<span class="st">'endpoint_url'</span>: <span class="st">'https://'</span><span class="op">+</span><span class="st">'minio-simple.lab.groupe-genes.fr'</span>},</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    key <span class="op">=</span> os.environ[<span class="st">"AWS_ACCESS_KEY_ID"</span>], </span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    secret <span class="op">=</span> os.environ[<span class="st">"AWS_SECRET_ACCESS_KEY"</span>], </span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    token <span class="op">=</span> os.environ[<span class="st">"AWS_SESSION_TOKEN"</span>])</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>destination <span class="op">=</span> <span class="ss">f"s3://</span><span class="sc">{</span>username<span class="sc">}</span><span class="ss">/ENSAI/SQL/output.csv"</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> fs.<span class="bu">open</span>(destination, mode<span class="op">=</span><span class="st">'wb'</span>) <span class="im">as</span> f:</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>    top10f2021.write_csv(f)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<li><p><label><input type="checkbox">Sur le Datalab, allez dans Mes fichiers <span class="emoji" data-emoji="arrow_right">➡️</span> diffusion <span class="emoji" data-emoji="arrow_right">➡️</span> ENSAI</label></p>
+<ul>
+<li>le fichier <em>output.csv</em> a été généré</li>
+<li>rafraichissez la page si besoin</li>
+</ul></li>
+<li><p><label><input type="checkbox">Double-cliquez sur ce fichier pour en avoir un aperçu</label></p></li>
+</ul>
+</section>
+<section id="client-minio" class="level3" data-number="3.6">
+<h3 data-number="3.6" class="anchored" data-anchor-id="client-minio"><span class="header-section-number">3.6</span> Client MinIO</h3>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Ne pas faire cette partie.</p>
+</div>
+</div>
+<p>Le <a href="https://min.io/docs/minio/linux/reference/minio-mc.html" target="_blank">client MinIO</a> installé et <u>utilisable depuis le terminal</u> permet également d’interagir avec vos fichiers.</p>
+<p>Ouvrez un terminal (File <span class="emoji" data-emoji="arrow_right">➡️</span> New <span class="emoji" data-emoji="arrow_right">➡️</span> Terminal):</p>
+<ul class="task-list">
+<li><label><input type="checkbox"><code>mc ls s3/&lt;username&gt;/ENSAI/SQL</code> : pour lister le contenu de votre dossier</label></li>
+<li><label><input type="checkbox"><code>mc cp s3/&lt;username&gt;/ENSAI/SQL/output.csv .</code> : pour copier le fichier depuis s3 dans votre dossier courant</label>
+<ul>
+<li>le fichier apparait dans votre explorer</li>
+</ul></li>
+<li><label><input type="checkbox">Supprimez ce fichier : <code>rm output.csv</code></label>
+<ul>
+<li>Car importer les fichiers de données dans son espace de travail n’est pas une bonne pratique</li>
+</ul></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>La commande <code>mc --help</code> liste toutes les commandes possibles (ESPACE pour défiler, CTRL+C pour sortir)</p>
+</div>
+</div>
+</section>
+<section id="console-minio" class="level3" data-number="3.7">
+<h3 data-number="3.7" class="anchored" data-anchor-id="console-minio"><span class="header-section-number">3.7</span> Console Minio</h3>
+<p>Vous pouvez également accéder à votre stockage avec la console Minio :</p>
+<ul>
+<li><a href="https://minio-console.lab.sspcloud.fr/" target="_blank">https://minio-console.lab.sspcloud.fr/</a></li>
+<li><a href="https://minio-simple.lab.groupe-genes.fr" target="_blank">https://minio-simple.lab.groupe-genes.fr</a></li>
+</ul>
+</section>
+</section>
+<section id="libérer-les-ressources" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="libérer-les-ressources"><span class="header-section-number">4</span> Libérer les ressources</h2>
+<p>Une fois vos travaux terminés, il est temps de libérer les ressources réservées.</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Si besoin, sauvegardez vos notebooks</label>
+<ul>
+<li>clic droit sur le nom du fichier <span class="emoji" data-emoji="arrow_right">➡️</span> Download</li>
+</ul></li>
+<li><label><input type="checkbox">Puis sur la page d’accueil, allez dans <em>Mes services</em>, mettez votre service à la poubelle</label></li>
+</ul>
+<p>Vous pouvez aisément reproduire votre travail plus tard :</p>
+<ul>
+<li>Votre code est téléchargé</li>
+<li>Vos données sont toujours sur MinIO</li>
+<li>Il suffit de relancer un nouveau service et de relancer les calculs</li>
+</ul>
+<p>Une manière plus propre de travailler est d’utiliser git pour versionner son code.</p>
 <hr>
-</section>
-<section id="créer-et-configuration-de-compte" class="level2" data-number="6">
-<h2 data-number="6" class="anchored" data-anchor-id="créer-et-configuration-de-compte"><span class="header-section-number">6</span> Créer et configuration de compte</h2>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -659,13 +1069,31 @@ Important
 </div>
 </div>
 <div class="callout-body-container callout-body">
+<p>La suite du TP est optionnelle.</p>
+<p>Elle est simplement donnée pour celles et ceux qui souhaient aller plus loin et profiter de toutes les fonctionnalités du Datalab.</p>
+</div>
+</div>
+<hr>
+</section>
+<section id="travailler-avec-git" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="travailler-avec-git"><span class="header-section-number">5</span> Travailler avec Git</h2>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <p>Sur le datalab, vos services ont une <u><strong>durée de vie limitée</strong></u>.</p>
 <p>Pour sauvegarder vos programmes, la bonne pratique est d’utiliser un dépôt git. Nous allons donc créer et utiliser un jeton pour communiquer avec GitHub.</p>
 <p>Pour suivre la démarche, il faut disposer d’un compte <a href="https://github.com/" target="_blank">GitHub</a>. Il est possible de suivre une démarche similaire avec <a href="https://about.gitlab.com/" target="_blank">GitLab</a>.</p>
 </div>
 </div>
-<section id="générer-un-token-github" class="level3" data-number="6.1">
-<h3 data-number="6.1" class="anchored" data-anchor-id="générer-un-token-github"><span class="header-section-number">6.1</span> Générer un token GitHub</h3>
+<section id="générer-un-token-github" class="level3" data-number="5.1">
+<h3 data-number="5.1" class="anchored" data-anchor-id="générer-un-token-github"><span class="header-section-number">5.1</span> Générer un token GitHub</h3>
 <div class="callout callout-style-default callout-tip callout-titled" title="Déjà fait ?">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -711,9 +1139,9 @@ Warning
 </div>
 </div>
 </section>
-<section id="déclarer-votre-jeton" class="level3" data-number="6.2">
-<h3 data-number="6.2" class="anchored" data-anchor-id="déclarer-votre-jeton"><span class="header-section-number">6.2</span> Déclarer votre jeton</h3>
-<p>GitHub vous a fournit un jeton. Il faut maintenant le déclarer sur le <a href="https://onyxia.lab.groupe-genes.fr/account/git" target="_blank">Datalab</a> :</p>
+<section id="déclarer-votre-jeton" class="level3" data-number="5.2">
+<h3 data-number="5.2" class="anchored" data-anchor-id="déclarer-votre-jeton"><span class="header-section-number">5.2</span> Déclarer votre jeton</h3>
+<p>GitHub vous a fournit un jeton. Il faut maintenant le déclarer sur le Datalab :</p>
 <ul class="task-list">
 <li><label><input type="checkbox">Allez dans <code>Mon Compte</code> <span class="emoji" data-emoji="arrow_right">➡️</span> Onglet <code>Git</code></label></li>
 <li><label><input type="checkbox">Renseignez les informations suivantes</label>
@@ -737,320 +1165,42 @@ Config Git
 </div>
 </div>
 </section>
-</section>
-<section id="le-stockage" class="level2" data-number="7">
-<h2 data-number="7" class="anchored" data-anchor-id="le-stockage"><span class="header-section-number">7</span> Le stockage</h2>
-<p>Lorsque l’on travaille dans le cloud, il est essentiel de <u>séparer les données des programmes</u> pour :</p>
-<ul>
-<li>mieux gérer les ressources,</li>
-<li>renforcer la sécurité en limitant les accès et les permissions,</li>
-<li>permettre une scalabilité indépendante des composants.</li>
-</ul>
-<p><a href="https://min.io/" target="_blank">MinIO</a> est une solution de stockage d’objets open-source qui permet de déployer facilement un stockage évolutif et performant. Elle est compatible avec l’API <a href="https://aws.amazon.com/fr/s3/" target="_blank">S3 d’Amazon</a>, ce qui facilite l’intégration avec les applications existantes.</p>
-<p>MinIO offre :</p>
-<ul>
-<li>une haute disponibilité,</li>
-<li>une sécurité renforcée grâce au chiffrement des données et des contrôles d’accès,</li>
-<li>des performances élevées, particulièrement adaptées aux environnements nécessitant un accès rapide aux données, comme le Big Data et l’intelligence artificielle.</li>
-</ul>
-<section id="votre-bucket" class="level3" data-number="7.1">
-<h3 data-number="7.1" class="anchored" data-anchor-id="votre-bucket"><span class="header-section-number">7.1</span> Votre bucket</h3>
-<div class="callout callout-style-default callout-note callout-titled" title="Définition">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Définition
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Un <strong>bucket</strong> est un conteneur de stockage utilisé pour regrouper des objets (fichiers et métadonnées) dans des systèmes de stockage de type cloud. Il facilite l’organisation, la gestion des permissions et l’accès aux données dans un espace de stockage structuré.</p>
-</div>
-</div>
-<p>Lors de votre création de compte, un bucket est créé avec votre nom d’utilisateur. Dans ce bucket, vous pouvez :</p>
-<ul>
-<li>créer / supprimer des dossiers</li>
-<li>importer / supprimer des fichiers</li>
-<li>créer un dossier nommé <em>diffusion</em> à la racine de votre bucket
-<ul>
-<li>celui-ci sera accessible en lecture à tous les utilisateurs du datalab</li>
-</ul></li>
-</ul>
-<p>Pour accéder à votre stockage :</p>
-<ul>
-<li>Depuis le Datalab, allez dans <code>Mes fichiers</code></li>
-<li>Depuis la <a href="https://minio-console.lab.sspcloud.fr/" target="_blank">console MinIO</a></li>
-<li>Depuis le terminal d’un service (voir <a href="#Accéder-à-votre-stockage">section ci-après</a>)</li>
-</ul>
-</section>
-<section id="stocker-des-fichiers" class="level3" data-number="7.2">
-<h3 data-number="7.2" class="anchored" data-anchor-id="stocker-des-fichiers"><span class="header-section-number">7.2</span> Stocker des fichiers</h3>
-<ul class="task-list">
-<li><label><input type="checkbox">Téléchargez le <a href="https://www.data.gouv.fr/fr/datasets/base-prenoms-insee-format-parquet/" target="_blank">fichier des prénoms par département de naissance</a> en 2022 au format parquet</label></li>
-<li><label><input type="checkbox">Dans votre bucket, créez un dossier <code>diffusion</code>, puis à l’intérieur un dossier <code>INSEE</code></label></li>
-<li><label><input type="checkbox">Dans ce dossier, importez le fichier des prénoms</label></li>
-</ul>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Nous allons ensuite utiliser ce fichier dans un service.</p>
-</div>
-</div>
-</section>
-</section>
-<section id="les-services-1" class="level2" data-number="8">
-<h2 data-number="8" class="anchored" data-anchor-id="les-services-1"><span class="header-section-number">8</span> Les services</h2>
-<section id="dépôt-pour-le-code" class="level3" data-number="8.1">
-<h3 data-number="8.1" class="anchored" data-anchor-id="dépôt-pour-le-code"><span class="header-section-number">8.1</span> Dépôt pour le code</h3>
+<section id="dépôt-pour-le-code" class="level3" data-number="5.3">
+<h3 data-number="5.3" class="anchored" data-anchor-id="dépôt-pour-le-code"><span class="header-section-number">5.3</span> Dépôt pour le code</h3>
 <p>Avant de créer un service, nous allons créer un dépôt GitHub qui permettra de sauvegarder votre code.</p>
 <ul class="task-list">
-<li><p><label><input type="checkbox">Dans GitHub, créer un <a href="https://github.com/new" target="_blank">nouveau Repository</a></label></p>
+<li><label><input type="checkbox">Dans GitHub, créer un <a href="https://github.com/new" target="_blank">nouveau Repository</a></label>
 <ul>
 <li>Repository name : TP3-datalab</li>
-<li>Public</li>
+<li>Private</li>
 <li><span class="emoji" data-emoji="white_check_mark">✅</span> Cochez <em>Add a README file</em></li>
 <li>.gitignore template : Python</li>
 <li>Choose a license : Apache Licence 2.0</li>
 <li><span class="green-button">Create Repository</span></li>
 </ul></li>
-<li><p><label><input type="checkbox">Sur la page de votre repo, cliquez sur le bouton <span class="green-button">Code</span></label></p></li>
-<li><p><label><input type="checkbox">Copiez l’adresse <em>https</em> du repo</label></p></li>
-<li><p><label><input type="checkbox">Ouvrez la Configuration</label></p>
+<li><label><input type="checkbox">Sur la page de votre repo, cliquez sur le bouton <span class="green-button">Code</span></label></li>
+<li><label><input type="checkbox">Copiez l’adresse <em>https</em> du repo</label></li>
+</ul>
+</section>
+<section id="branchez-votre-service-sur-un-répo" class="level3" data-number="5.4">
+<h3 data-number="5.4" class="anchored" data-anchor-id="branchez-votre-service-sur-un-répo"><span class="header-section-number">5.4</span> Branchez votre service sur un répo</h3>
+<p>Lors du lancement d’un <em>Service</em>, vous pouvez vous brancher sur un répo git. Ainsi le contenu de votre dépôt sera importé dans votre service.</p>
+<p>Vous pourrez alors utiliser le code de votre dépôt et éventuellement le mettre à jour en effectuant un <em>push</em>.</p>
+<p>Lancez un service <em>Jupyter Notebook</em></p>
+<ul class="task-list">
+<li><label><input type="checkbox">Ouvrez la Configuration</label>
 <ul>
 <li>De nombreux onglets permettent de configurer votre service</li>
 <li>Service : possibilité d’utiliser une autre image Docker</li>
 <li>Resources : choisir CPU et RAM</li>
 <li>Init : script à lancer au démarrage</li>
 </ul></li>
-<li><p><label><input type="checkbox">Allez dans l’onglet <code>Git</code> et collez l’adresse <em>https</em> du repo dans la case <em>Repository url</em></label></p></li>
-<li><p><label><input type="checkbox"><code>Lancez</code> le service, puis attendez quelques secondes</label></p></li>
+<li><label><input type="checkbox">Allez dans l’onglet <code>Git</code> et collez l’adresse <em>https</em> du repo dans la case <em>Repository url</em></label></li>
+<li><label><input type="checkbox"><code>Lancez</code> le service, puis attendez quelques secondes</label></li>
 </ul>
 </section>
-<section id="accéder-à-votre-stockage" class="level3" data-number="8.2">
-<h3 data-number="8.2" class="anchored" data-anchor-id="accéder-à-votre-stockage"><span class="header-section-number">8.2</span> Accéder à votre stockage</h3>
-<ul class="task-list">
-<li><label><input type="checkbox">Créez un dataframe Polars en important les données de votre fichier</label>
-<ul>
-<li>Collez le code ci-dessous dans la première cellule, puis CTRL+ENTREE pour exécuter</li>
-</ul>
-<div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>storage_options <span class="op">=</span> {</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"aws_endpoint"</span>:  <span class="st">'https://'</span><span class="op">+</span><span class="st">'minio-simple.lab.groupe-genes.fr'</span>,</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"aws_access_key_id"</span>: os.environ[<span class="st">"AWS_ACCESS_KEY_ID"</span>],</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"aws_secret_access_key"</span>: os.environ[<span class="st">"AWS_SECRET_ACCESS_KEY"</span>],</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"aws_region"</span>: os.environ[<span class="st">"AWS_DEFAULT_REGION"</span>],</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">"aws_token"</span>: os.environ[<span class="st">"AWS_SESSION_TOKEN"</span>]</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>username <span class="op">=</span> os.environ[<span class="st">"VAULT_TOP_DIR"</span>] <span class="co"># un peu bancal pour avoir le username</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pl.read_parquet(source<span class="op">=</span><span class="ss">f"s3://</span><span class="sc">{</span>username<span class="sc">}</span><span class="ss">/diffusion/INSEE/prenoms-nat2022.parquet"</span>, </span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>                     storage_options<span class="op">=</span>storage_options)</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-</ul>
-<div class="callout callout-style-default callout-note callout-titled" title="Polars">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Polars
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><a href="https://pola.rs/" target="_blank">Polars</a> est une bibliothèque rapide et performante pour la manipulation de données en Python et Rust, optimisée pour les grands volumes de données.</p>
-<p>Contrairement à <a href="https://pandas.pydata.org/" target="_blank">Pandas</a>, Polars utilise une approche orientée colonnes (columnar) et tire parti du traitement parallèle, ce qui le rend particulièrement adapté pour les opérations analytiques lourdes.</p>
-<p>Sa syntaxe, proche de celle de Pandas, permet des transformations, agrégations et manipulations de données avec des méthodes performantes et expressives.</p>
-</div>
-</div>
-<ul class="task-list">
-<li><label><input type="checkbox">Requêtez les données</label>
-<ul>
-<li>Créez une nouvelle cellule avec le bouton <code>+</code> de la barre d’outils</li>
-<li>Collez et exécutez ce code</li>
-</ul>
-<div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Top 10 des prénoms féminins en 2021</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>top10f2021 <span class="op">=</span> df<span class="op">\</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">filter</span>((pl.col(<span class="st">"sexe"</span>) <span class="op">==</span> <span class="dv">2</span>) <span class="op">&amp;</span> </span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>            (pl.col(<span class="st">"annais"</span>) <span class="op">==</span> <span class="st">"2021"</span>) <span class="op">&amp;</span> </span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>            (pl.col(<span class="st">"preusuel"</span>) <span class="op">!=</span> <span class="st">"_PRENOMS_RARES"</span>))<span class="op">\</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    .group_by(<span class="st">"preusuel"</span>)<span class="op">\</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    .agg(pl.col(<span class="st">"nombre"</span>).<span class="bu">sum</span>().alias(<span class="st">"nombre_total"</span>))<span class="op">\</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    .sort(<span class="st">"nombre_total"</span>, descending<span class="op">=</span><span class="va">True</span>)<span class="op">\</span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    .limit(<span class="dv">10</span>)</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(top10f2021)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-</ul>
-</section>
-<section id="jouer-avec-vos-données" class="level3" data-number="8.3">
-<h3 data-number="8.3" class="anchored" data-anchor-id="jouer-avec-vos-données"><span class="header-section-number">8.3</span> Jouer avec vos données</h3>
-<ul class="task-list">
-<li><p><label><input type="checkbox">Générez le tableau du nombre de fois où votre prénom a été donné entre 2010 et 2020</label></p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>prenom <span class="op">=</span> <span class="st">"Ludovic"</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>annee_debut, annee_fin <span class="op">=</span> <span class="dv">2010</span>, <span class="dv">2020</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>df_prenom_annee <span class="op">=</span> df<span class="op">\</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">filter</span>((pl.col(<span class="st">"annais"</span>) <span class="op">!=</span> <span class="st">"XXXX"</span>))<span class="op">\</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">filter</span>((pl.col(<span class="st">"preusuel"</span>) <span class="op">==</span> prenom.upper()) <span class="op">&amp;</span> </span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>            (pl.col(<span class="st">"annais"</span>).cast(pl.Int32) <span class="op">&gt;=</span> annee_debut) <span class="op">&amp;</span> </span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>            (pl.col(<span class="st">"annais"</span>).cast(pl.Int32) <span class="op">&lt;=</span> annee_fin))<span class="op">\</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    .group_by(<span class="st">"annais"</span>)<span class="op">\</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    .agg(pl.col(<span class="st">"nombre"</span>).<span class="bu">sum</span>().alias(<span class="st">"nombre_total"</span>))<span class="op">\</span></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    .sort(<span class="st">"annais"</span>)</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_prenom_annee)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-<li><p><label><input type="checkbox">Faites un diagramme en barres</label></p>
-<ul>
-<li>avec les librairies <em>matplotlib</em> et <em>seaborn</em></li>
-</ul>
-<div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Set seaborn style for a cleaner, more appealing look</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>sns.set_theme(style<span class="op">=</span><span class="st">"whitegrid"</span>)</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the plot</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Data</span></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>years <span class="op">=</span> df_prenom_annee[<span class="st">"annais"</span>].to_list()         <span class="co"># Extracts years as a list</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>counts <span class="op">=</span> df_prenom_annee[<span class="st">"nombre_total"</span>].to_list()  <span class="co"># Extracts counts as a list</span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Bar plot with custom colors and transparency for better visuals</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>ax.bar(years, </span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>       counts, </span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>       color<span class="op">=</span><span class="st">"#4C72B0"</span>, </span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>       edgecolor<span class="op">=</span><span class="st">"black"</span>, </span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>       alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Set labels and title with padding for readability</span></span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Année"</span>, fontsize<span class="op">=</span><span class="dv">12</span>, labelpad<span class="op">=</span><span class="dv">10</span>)</span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Nombre d'occurences"</span>, fontsize<span class="op">=</span><span class="dv">12</span>, labelpad<span class="op">=</span><span class="dv">10</span>)</span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="ss">f"Occurrences du prénom </span><span class="sc">{</span>prenom<span class="sc">}</span><span class="ss"> par année (</span><span class="sc">{</span>annee_debut<span class="sc">}</span><span class="ss">-</span><span class="sc">{</span>annee_fin<span class="sc">}</span><span class="ss">)"</span>, fontsize<span class="op">=</span><span class="dv">14</span>, pad<span class="op">=</span><span class="dv">15</span>)</span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Rotate x-axis labels, improve spacing, and format grid</span></span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>ax.tick_params(axis<span class="op">=</span><span class="st">'x'</span>, rotation<span class="op">=</span><span class="dv">45</span>)</span>
-<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()  <span class="co"># Adjust layout for tight fit</span></span>
-<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the plot</span></span>
-<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-</ul>
-</section>
-<section id="exportez-vos-résultats-vers-minio" class="level3" data-number="8.4">
-<h3 data-number="8.4" class="anchored" data-anchor-id="exportez-vos-résultats-vers-minio"><span class="header-section-number">8.4</span> Exportez vos résultats vers MinIO</h3>
-<ul class="task-list">
-<li><p><label><input type="checkbox">En utilisant la librairie <em>s3fs</em></label></p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> s3fs</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>fs <span class="op">=</span> s3fs.S3FileSystem(</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    client_kwargs<span class="op">=</span>{<span class="st">'endpoint_url'</span>: <span class="st">'https://'</span><span class="op">+</span><span class="st">'minio-simple.lab.groupe-genes.fr'</span>},</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    key <span class="op">=</span> os.environ[<span class="st">"AWS_ACCESS_KEY_ID"</span>], </span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    secret <span class="op">=</span> os.environ[<span class="st">"AWS_SECRET_ACCESS_KEY"</span>], </span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    token <span class="op">=</span> os.environ[<span class="st">"AWS_SESSION_TOKEN"</span>])</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>destination <span class="op">=</span> <span class="ss">f"s3://</span><span class="sc">{</span>username<span class="sc">}</span><span class="ss">/diffusion/INSEE/output.csv"</span></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> fs.<span class="bu">open</span>(destination, mode<span class="op">=</span><span class="st">'wb'</span>) <span class="im">as</span> f:</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>    top10f2021.write_csv(f)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-<li><p><label><input type="checkbox">Sur le Datalab, allez dans Mes fichiers <span class="emoji" data-emoji="arrow_right">➡️</span> diffusion <span class="emoji" data-emoji="arrow_right">➡️</span> INSEE</label></p>
-<ul>
-<li>le fichier <em>output.csv</em> a été généré</li>
-<li>rafraichissez la page si besoin</li>
-</ul></li>
-<li><p><label><input type="checkbox">Double-cliquez sur ce fichier pour en avoir un aperçu</label></p></li>
-</ul>
-<section id="exercice" class="level4">
-<h4 class="anchored" data-anchor-id="exercice">Exercice</h4>
-<div class="callout callout-style-default callout-note callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Note
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Si vous êtes en avance.</p>
-</div>
-</div>
-<p>Comme dans de très nombreux outils, il est possible d’encapsuler du <a href="https://docs.pola.rs/api/python/stable/reference/sql/index.html" target="_blank">SQL dans Polars</a>.</p>
-<p>Par exemple la requête du top10 féminin 2021 donne en SQL :</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>df.sql(<span class="st">"""</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="st">  SELECT preusuel, </span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="st">         SUM(nombre) AS nombre_total</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM self</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="st">   WHERE preusuel &lt;&gt; '_PRENOMS_RARES'</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="st">     AND annais = '2021'</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="st">     AND sexe = 2</span></span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="st">   GROUP BY preusuel</span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="st">   ORDER BY 2 DESC</span></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="st">   LIMIT 10</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul class="task-list">
-<li><label><input type="checkbox">Ré-écrivez en SQL la requête du nombre de fois ou votre prénom a été donné entre 2010 et 2020</label></li>
-<li><label><input type="checkbox">Créez une nouvelle cellule et écrivez une requête pour afficher les 5 années où sont nées le plus de filles</label></li>
-<li><label><input type="checkbox">Quels sont les prénoms masculins et féminins les plus donnés depuis 1900 ?</label></li>
-<li><label><input type="checkbox">Affichez le nombres de filles et de garçons nés chaque année depuis 2010</label>
-<ul>
-<li><span class="emoji" data-emoji="bulb">💡</span> Aide : <code>SUM(CASE WHEN ? THEN ? ELSE ? END)</code></li>
-</ul></li>
-</ul>
-</section>
-</section>
-<section id="client-minio" class="level3" data-number="8.5">
-<h3 data-number="8.5" class="anchored" data-anchor-id="client-minio"><span class="header-section-number">8.5</span> Client MinIO</h3>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Caution
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Ne pas faire cette partie.</p>
-</div>
-</div>
-<p>Le <a href="https://min.io/docs/minio/linux/reference/minio-mc.html" target="_blank">client MinIO</a> installé et <u>utilisable depuis le terminal</u> permet également d’interagir avec vos fichiers.</p>
-<p>Ouvrez un terminal :</p>
-<ul class="task-list">
-<li><label><input type="checkbox"><code>mc ls s3/&lt;username&gt;/diffusion</code> : pour lister le contenu de votre dossier diffusion</label></li>
-<li><label><input type="checkbox"><code>mc cp s3/&lt;username&gt;/diffusion/INSEE/prenoms-nat2022.parquet .</code> : pour copier le fichier depuis s3 dans votre dossier courant</label>
-<ul>
-<li>le fichier apparait dans votre explorer</li>
-</ul></li>
-<li><label><input type="checkbox">Supprimez ce fichier : <code>rm prenoms-nat2022.parquet</code></label>
-<ul>
-<li>Car importer les fichiers de données dans son espace de travail n’est pas une bonne pratique</li>
-</ul></li>
-</ul>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>La commande <code>mc --help</code> liste toutes les commandes possibles (ESPACE pour défiler, CTRL+C pour sortir)</p>
-</div>
-</div>
-</section>
-<section id="sauver-son-code" class="level3" data-number="8.6">
-<h3 data-number="8.6" class="anchored" data-anchor-id="sauver-son-code"><span class="header-section-number">8.6</span> Sauver son code</h3>
+<section id="sauver-son-code" class="level3" data-number="5.5">
+<h3 data-number="5.5" class="anchored" data-anchor-id="sauver-son-code"><span class="header-section-number">5.5</span> Sauver son code</h3>
 <ul class="task-list">
 <li><label><input type="checkbox">Sur Jupyter, ouvrez un terminal</label>
 <ul>
@@ -1069,7 +1219,7 @@ Tip
 </ul></li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-26-contents" aria-controls="callout-26" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1078,7 +1228,7 @@ Tip
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-21" class="callout-21-contents callout-collapse collapse">
+<div id="callout-26" class="callout-26-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
 <li><code>git add .</code></li>
@@ -1088,22 +1238,23 @@ Tip
 </div>
 </div>
 </div>
+<section id="exercice" class="level4">
+<h4 class="anchored" data-anchor-id="exercice">Exercice</h4>
+<p>Par exemple en important le fichier des prénoms avec Polars et en encapsulant du SQL :</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Écrivez la requête du nombre de fois ou votre prénom a été donné entre 2010 et 2020</label></li>
+<li><label><input type="checkbox">Créez une nouvelle cellule et écrivez une requête pour afficher les 5 années où sont nées le plus de filles</label></li>
+<li><label><input type="checkbox">Quels sont les prénoms masculins et féminins les plus donnés depuis 1900 ?</label></li>
+<li><label><input type="checkbox">Affichez le nombres de filles et de garçons nés chaque année depuis 2010</label>
+<ul>
+<li><span class="emoji" data-emoji="bulb">💡</span> Aide : <code>SUM(CASE WHEN ? THEN ? ELSE ? END)</code></li>
+</ul></li>
+</ul>
 </section>
-<section id="surveiller-son-service" class="level3" data-number="8.7">
-<h3 data-number="8.7" class="anchored" data-anchor-id="surveiller-son-service"><span class="header-section-number">8.7</span> Surveiller son service</h3>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Caution
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Ne pas faire cette partie.</p>
-</div>
-</div>
+</section>
+</section>
+<section id="surveiller-son-service" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="surveiller-son-service"><span class="header-section-number">6</span> Surveiller son service</h2>
 <ul class="task-list">
 <li><label><input type="checkbox">Sur la page du Datalab, allez dans <code>Mes services</code></label></li>
 <li><label><input type="checkbox">Cliquez sur le nom du service (Jupyter-python)</label></li>
@@ -1111,26 +1262,12 @@ Caution
 </ul>
 <p>Vous arrivez sur la page de l’outil <strong>Grafana</strong> qui permet d’observer les métriques de votre service.</p>
 </section>
-<section id="terminer-son-service" class="level3" data-number="8.8">
-<h3 data-number="8.8" class="anchored" data-anchor-id="terminer-son-service"><span class="header-section-number">8.8</span> Terminer son service</h3>
-<p>Une fois vos travaux terminés, il est temps de libérer les ressources réservées.</p>
-<ul class="task-list">
-<li><label><input type="checkbox">Dans <em>Mes services</em>, mettez votre service à la poubelle</label></li>
-</ul>
-<p>De toute manière, vous pouvez aisément reproduire votre travail plus tard :</p>
-<ul>
-<li>Votre code est sur GitHub</li>
-<li>Vos données sont sur MinIO</li>
-<li>Il suffit de relancer un nouveau service et d’y brancher votre répo</li>
-</ul>
-</section>
-</section>
-<section id="les-secrets" class="level2" data-number="9">
-<h2 data-number="9" class="anchored" data-anchor-id="les-secrets"><span class="header-section-number">9</span> Les secrets</h2>
+<section id="les-secrets" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="les-secrets"><span class="header-section-number">7</span> Les secrets</h2>
 <p>Certains éléments ne doivent pas être diffusés dans votre code (jetons d’accès, mots de passe…).</p>
 <p>Pour éviter d’avoir à nettoyer votre code à chaque fois que vous le poussez sur GitHub, le datalab propose de gérer vos secrets.</p>
-<section id="créer-un-secret" class="level3" data-number="9.1">
-<h3 data-number="9.1" class="anchored" data-anchor-id="créer-un-secret"><span class="header-section-number">9.1</span> Créer un secret</h3>
+<section id="créer-un-secret" class="level3" data-number="7.1">
+<h3 data-number="7.1" class="anchored" data-anchor-id="créer-un-secret"><span class="header-section-number">7.1</span> Créer un secret</h3>
 <ul class="task-list">
 <li><label><input type="checkbox">Allez dans <em>Mes secrets</em></label></li>
 <li><label><input type="checkbox">Créez un <code>Nouveau secret</code> nommé <em>projet_patate</em></label></li>
@@ -1149,8 +1286,8 @@ Caution
 </ul></li>
 </ul>
 </section>
-<section id="utiliser-dans-un-service" class="level3" data-number="9.2">
-<h3 data-number="9.2" class="anchored" data-anchor-id="utiliser-dans-un-service"><span class="header-section-number">9.2</span> Utiliser dans un service</h3>
+<section id="utiliser-dans-un-service" class="level3" data-number="7.2">
+<h3 data-number="7.2" class="anchored" data-anchor-id="utiliser-dans-un-service"><span class="header-section-number">7.2</span> Utiliser dans un service</h3>
 <ul class="task-list">
 <li><label><input type="checkbox">Préparez le lancement d’un service Rstudio</label></li>
 <li><label><input type="checkbox">Dans la configuration, allez dans l’onglet <code>Vault</code></label></li>
@@ -1161,10 +1298,10 @@ Caution
 <ul class="task-list">
 <li><p><label><input type="checkbox">Vérifiez leur présence via le terminal : <code>env | grep PATATE</code> ou <code>echo $PATATE_TOKEN</code></label></p></li>
 <li><p><label><input type="checkbox">Ouvrez un notebook et récupérez la valeur de <em>PATATE_TOKEN</em></label></p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>token <span class="op">=</span> os.environ[<span class="st">"PATATE_TOKEN"</span>]</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(token)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>token <span class="op">=</span> os.environ[<span class="st">"PATATE_TOKEN"</span>]</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(token)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p><label><input type="checkbox">Une fois que vous avez fini de jouer, supprimez votre service</label></p></li>
 </ul>
 <div class="callout callout-style-default callout-note callout-titled">
