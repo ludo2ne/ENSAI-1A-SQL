@@ -25,6 +25,7 @@ Dans le monde professionnel, plusieurs problèmes se posent au statisticien :
 
 - sa machine n'est pas assez puissante
 - installer certains logiciels est parfois interdit et bloqué par le système
+- il doit analyser des données sensibles en toute sécurité
 
 À l'INSEE, un projet est né pour pallier à ce besoin : [Onyxia](https://www.onyxia.sh/){target="_blank"} porté par le [lab de l'INSEE](https://github.com/InseeFrLab){target="_blank"}.
 
@@ -35,6 +36,12 @@ Ensuite, avoir plein de ressources c'est très bien, mais encore faut-il savoir 
 D'où l'idée de créer une interface graphique pour pouvoir lancer des services en quelques clics. Onyxia s'appuie sur des technologies sous-jacentes (Kubernetes, Helm, S3...) pour proposer une IHM agréable pour le datascientist. Cependant, la philosophie du projet Onyxia est d'être une brique qui facilite le travail sans se rendre indispensable. L'idée est d'éviter que les utilisateurs ne s'enferment dans un choix technologique.
 
 À l'INSEE, une instance de ce logiciel a été installée sur le [Datalab SSP Cloud](https://datalab.sspcloud.fr/){target="_blank"}, ouverte à tous les agents publics. Vous pouvez y créer un compte car c'est également ouvert à tous les élèves de l'ENSAI (en utilisant votre mail ENSAI).
+
+::: {.callout-warning}
+Ne déposez pas de données sensibles sur cette instance, ni sur celle du GENES.
+
+Pour celles et ceux qui iront à l'INSEE, une autre instance nommée LS3 n'est accessible qu'en interne et autorise l'utilisation de données sensibles.
+:::
 
 Onyxia est Libre et Open Source, ainsi chacun peut installer sa propre instance sur son infra. C'est ce qu'ont fait de nombreux organismes, ainsi que le GENES.
 
@@ -173,9 +180,10 @@ def crible_eratosthene(n):
     return est_premier
 ```
 
-Comme vous êtes un as de la programmation, cela ne vous prend que trois minutes. C'est beaucoup plus rapide que si vous aviez du installer Python ainsi qu'un environnement d'exécution.
+Comme vous êtes un as de la programmation, cela ne vous prend que trois minutes. C'est beaucoup plus rapide que si vous aviez du installer Python, ainsi qu'un environnement d'exécution.
 
 - [ ] Vérifiez que le résultat est lui même un nombre premier
+  - Notez le vous en aurez besoin à la fin
 
 
 ### Utiliser des données
@@ -195,7 +203,7 @@ Chaque année, l'INSEE publie sur son site le [Code officiel géographique](http
 Ce référentiel regroupe, au 1er janvier, les codes et libellés des communes, cantons, arrondissements, départements, régions, ainsi que ceux des pays et territoires étrangers.
 :::
 
-Vous allez utiliser via DuckDB du SQL dans du code Python. Commencez par importer le package et créer la vue vers le fichier des communes 2024.
+Vous allez utiliser via *DuckDB* du *SQL* dans du code *Python*. Commencez par importer le package et créer la vue vers le fichier des communes 2024.
 
 ```{.python}
 import duckdb
@@ -230,71 +238,387 @@ SELECT *
 
 Vous venez ici d'utiliser des données disponibles sur internet. Vous pouvez également effectuer des traitements sur vos propres données en les stockant sur S3.
 
+
+
 ## Stockage S3
 
-:construction: Pourquoi S3 ? Bucket ? Connexion ?
+Lorsque l'on travaille dans le cloud, il est essentiel de [séparer les données des programmes]{.underline} pour :
 
-- facilite la gestion des données -> permet de créer un DataLake
-- avantages techniques
-- Interdiction de manipuler de la donnée sur son ordinateur perso
+- mieux gérer les ressources
+- renforcer la sécurité en limitant les accès et les permissions
+- permettre une scalabilité indépendante des composants
 
+[MinIO](https://min.io/){target="_blank"} est une solution de stockage d'objets open-source qui permet de déployer facilement un stockage évolutif et performant. Elle est compatible avec l'API [S3 d'Amazon](https://aws.amazon.com/fr/s3/){target="_blank"}, ce qui facilite l'intégration avec les applications existantes. 
 
-### Utiliser des données
+MinIO offre :
 
-::: {.callout-important icon="false" title="Fil rouge"}
-Félix est sauvé, il peut maintenant aller chercher de la margarine et du papier cadeau pour emballer quelques bricoles suite à un malheureux accident.
+- une haute disponibilité
+- une sécurité renforcée grâce au chiffrement des données et des contrôles d'accès
+- des performances élevées, particulièrement adaptées aux environnements nécessitant un accès rapide aux données, comme le Big Data et l'intelligence artificielle
 
-En attendant, Josette s'occupe en confectionnant un superbe gilet.
+### Votre bucket
 
-Elle se souviens qu'elle a noté la longeur de fil nécessaire mais ne la retrouve plus. L'info se cache dans un fichier stocké sur S3.
+::: {.callout-note title="Définition"}
+Un **bucket** est un conteneur de stockage utilisé pour regrouper des objets (fichiers et métadonnées) dans des systèmes de stockage de type cloud. Il facilite l'organisation, la gestion des permissions et l'accès aux données dans un espace de stockage structuré.
 :::
 
-:construction: Aller chercher l'info dans s3://ludo/diffusion/INSEE/prenoms-nat2022.parquet (attention username différent sur les datalabs)
+Lors de votre création de compte, un bucket est créé avec votre nom d'utilisateur. Dans ce bucket, vous pouvez :
+
+- créer / supprimer des dossiers
+- importer / supprimer des fichiers
 
 
-- [ ] Entre 2005 et 2020, en quelle année le prénom *Katia* a-t-il été le plus donné ?
+Pour accéder à votre stockage :
 
-
-::: {.callout-note title="Diffusion"}
-
-:::
+- Depuis le Datalab, allez dans `Mes fichiers`
+- Depuis la console MinIO :
+  - <https://minio-console.lab.sspcloud.fr/>{target="_blank"}
+  - <https://minio-simple.lab.groupe-genes.fr>{target="_blank"}
+- Depuis un terminal avec le client Minio
 
 
 ### Stocker vos fichiers
 
-
-
-
-
-
-
-## Sauver votre code 
-
 ::: {.callout-important icon="false" title="Fil rouge"}
-Maintenant que Josette est repue, elle se souvient qu'une information importante se trouve dans le fichier des prénoms
+Félix est sauvé, il peut maintenant aller chercher de la margarine et du papier cadeau (ça peut toujours servir).
+
+En attendant, Josette s'occupe en confectionnant un superbe gilet gris avec son amie Thérèse.
+
+Elle se souvient qu'elle a noté quelque part la longueur de fil nécessaire dans un fichier csv.
 :::
 
-:construction:
+- [ ] Téléchargez ce fichier [parquet](data/tp3-longueur-fil.parquet){target="_blank"}
+
+Ensuite, allez sur la page d'accueil du Datalab :
+
+- [ ] Allez dans `Mes fichiers`
+- [ ] Créez un dossier `ENSAI` puis à l'intérieur un dossier `SQL`
+- [ ] Téléversez votre fichier *parquet* dans le dossier *SQL*
+
+::: {.callout-tip title="Chemin vers mes fichiers"}
+Vous remarquerez à droite, des lignes de commande du type `mc cp tp3-longueur-fil.parquet s3/<username>/ENSAI/SQL/tp3-longueur-fil.parquet`.
+
+Ce sont des commandes pour interragir avec voter stockage depuis un termial (voir ci-après).
+
+Cependant, vous pouvez extraire de ces commandes une information intéressante : le chemin vers votre fichier : `s3/<username>/ENSAI/SQL/tp3-longueur-fil.parquet`.
+:::
+
+Vous venez de charger un fichier, voyons maintenant comment y accéder dans un *Service*, par exemple le notebook que vous aviez lancé.
 
 
+### Utiliser des données
 
-## Secret (bonus)
+Sur la page d'accueil du Datalab :
+
+- [ ] Allez dans `Mon Compte`, puis dans l'onglet `Connexion au Stockage`
+
+Vous trouverez ici des informations pour vous connecter au stockage selon le language que vous utilisez : Python, R...
+
+D'ailleurs pour chaque langage, il y a même plusieurs packages qui font le job. Par exemple *s3fs* ou *boto3* pour Python.
+
+- [ ] Retournez dans votre service Notebook Jupyter
+- [ ] Créez un nouveau Notebook
+  - vous pouvez par exemple le nommer `S3.ipynb`
+- [ ] Créer 2 cellules, puis collez et exécutez les 2 blocs de code ci-dessous
+  - Utilisez par exemple le bouton `+` de la barre d'outils pour créer une cellule
+
+Commencez par importer les packages nécessaires et récupérer les valeurs des variables d'environnement pour pouvoir se connecter à votre stockage.
+
+```{.python}
+import os
+import polars as pl
+
+s3_endpoint = f'https://{os.environ["AWS_S3_ENDPOINT"]}'
+s3_access_key = os.environ["AWS_ACCESS_KEY_ID"]
+s3_secret_access_key = os.environ["AWS_SECRET_ACCESS_KEY"]
+s3_session_token = os.environ["AWS_SESSION_TOKEN"]
+s3_region = os.environ["AWS_DEFAULT_REGION"]
+
+s3_username = os.environ["VAULT_TOP_DIR"] # un peu bancal pour avoir le username
+```
+
+Définissez le chemin où se trouve votre fichier et lisez le avec Polars.
+
+```{.python}
+s3_file_path = f"s3://{s3_username}/ENSAI/SQL/tp3-longueur-fil.parquet"
+
+storage_options = {
+    "aws_endpoint":  s3_endpoint,
+    "aws_access_key_id": s3_access_key,
+    "aws_secret_access_key": s3_secret_access_key,
+    "aws_token": s3_session_token,
+    "aws_region": s3_region
+  }
+
+file = pl.scan_parquet(source=s3_file_path, 
+                     storage_options=storage_options)
+```
+
+::: {.callout-note title="Polars"}
+[Polars](https://pola.rs/){target="_blank"} est une bibliothèque rapide et performante pour la manipulation de données en Python et Rust, optimisée pour les grands volumes de données. 
+
+Contrairement à [Pandas](https://pandas.pydata.org/){target="_blank"}, Polars utilise une approche orientée colonnes (columnar) et tire parti du traitement parallèle, ce qui le rend particulièrement adapté pour les opérations analytiques lourdes. 
+
+Sa syntaxe, proche de celle de Pandas, permet des transformations, agrégations et manipulations de données avec des méthodes performantes et expressives.
+
+Pour plus de détails : <https://ssphub.netlify.app/post/polars/>{target="_blank"}
+:::
+
+- [ ] Créez une 3e cellule et affichez le fichier chargé
+  - Que se passe-t-il ?
+
+::: {.callout-note title="Mode Lazy" collapse="true"}
+Vous avez appelé la méthode `scan_parquet()` qui correspond au mode *Lazy* de Polars.
+
+Le mode *Lazy* signifie que Polars va accumuler toutes les instructions que vous lui donner sans pour autant les exécuter tout de suite.
+
+Mais quel est l'intérêt ?
+
+Imaginons que vous analisez un trés gros fichier et que vous enchainez à la suite diverses opérations (filtres, sélections de colonnes, regroupements, agrégations, tri...), deux choix s'offrent à vous :
+
+Option 1 (mode Eager : `pl.read_parquet()`):
+
+- vous chargez tout le fichier en mémoire
+- vous appliquez des opérations dans n'importe quel ordre
+- vous lancez, c'est long et ça rame...
+
+Option 2 (mode Lazy : `pl.scan_parquet()`):
+
+- vous scannez le fichier, i.e. analyser sa structure (types de colonnes) et ses métadonnées
+- vous donnez vos opérations dans n'importe quel ordre
+- à la fin, vous demandez à Polars de vous fournir le résultat
+- à ce moment, Polars va optimiser l'ordre des traitement en utilisant son propre [plan d'exécution]{.underline} et vous donner une réponse beaucoup plus rapide
+
+En résumé, en mode Eager, à chaque étape la machine effectue bêtement tous les calculs que vous lui demandez. En mode Lazy, la machine liste les opérations que vous demandez. Puis lorsque vous exigez un résultat, l'ordre des opérations est optimisé et la réponse est beaucoup plus rapide.
+
+:::
+
+- [ ] Pour forcer le chargement du fichier, appelez la méthode `collect()`
+  - stockez le résultat dans une variable *df*
+- [ ] Vous pouvez maintenant afficher le contenu de *df* avec un print
+- [ ] Filtrez le fichier pour trouver la longueur de fil du gilet
+  - `filter(pl.col("<column_name>") == "<value>")`
+
+### Données d'autres utilisateurs
+
+::: {.callout-important icon="false" title="Fil rouge"}
+Pendant que Josette confectionne son gilet, Félix revient avec la margarine.
+
+Or Josette n'a finalement plus faim. Félix se met alors à bouder et va s'enfermer dans les toilettes pour avaler des pilules qu'il a pris au passage à la pharmacie. Soudain la mémoire lui revient !
+
+Il se rappelle qu'ils avaient trouvé le prénom en parcourant... le fichier des prénoms !
+:::
+
+Ce fichier est stocké sur le bucket d'un autre utilisateur à l'une des adresses suivante :
+
+- Datalab du GENES : `s3/ldeneuville-ensai/diffusion/ENSAI/TP-SQL/prenoms-nat2022.parquet`
+- SSP Cloud : `s3/ludo2ne/diffusion/ENSAI/TP-SQL/prenoms-nat2022.parquet`
 
 
+::: {.callout-note title="Diffusion"}
+À la racine de votre Bucket, vous pouvez créer un dossier nommé `diffusion`.
+
+Vous pourrez alors stocker à l'intérieur les dossiers et fichiers que vous souhaitez partager aux autres utilisateurs. Ils auront un droit d'accès en lecture sur votre dossier *diffusion*.
+:::
+
+- [ ] Scannez ce fichier avec Polars
+- [ ] Utilisez le code ci-dessous pour afficher le top10 des prénoms féminins en 2022
+
+```{.python}
+top10f2021 = file\
+    .filter((pl.col("sexe") == 2) & 
+            (pl.col("annais") == "2021") & 
+            (pl.col("preusuel") != "_PRENOMS_RARES"))\
+    .group_by("preusuel")\
+    .agg(pl.col("nombre").sum().alias("nombre_total"))\
+    .sort("nombre_total", descending=True)\
+    .limit(10)\
+    .collect()
+```
+
+- [ ] Vous pouvez effectuez les mêmes traitements en encapsulant du sql :
+
+```{.python}
+top10f2021_sql = file\
+    .sql("""
+      SELECT preusuel, 
+             SUM(nombre) AS nombre_total
+        FROM self
+       WHERE preusuel <> '_PRENOMS_RARES'
+         AND annais = '2021'
+         AND sexe = 2
+       GROUP BY preusuel
+       ORDER BY nombre_total DESC
+       LIMIT 10
+    """)\
+    .collect()
+```
+
+::: {.callout-important icon="false" title="Fil rouge"}
+Alors que vous alliez chercher le prénom, votre cammarade Katia vous demande en quelle année son prénom a été le plus donné entre 1960 et 1980.
+:::
+
+- [ ] Écrivez la requête SQL qui fait le même travail que ces instructions
+
+```{.python}
+prenom = "Katia"
+annee_debut, annee_fin = 1960, 1980
+
+df_prenom_annee = df\
+    .filter((pl.col("annais") != "XXXX"))\
+    .filter((pl.col("preusuel") == prenom.upper()) & 
+            (pl.col("annais").cast(pl.Int32) >= annee_debut) & 
+            (pl.col("annais").cast(pl.Int32) <= annee_fin))\
+    .group_by("annais")\
+    .agg(pl.col("nombre").sum().alias("nombre_total"))\
+    .sort("annais")
+
+print(df_prenom_annee)
+```
+
+::: {.callout-tip title="Diagramme en barre" collapse="true"}
+Vous pouvez également tracer un graphique avec ces données :
+
+```{.python}
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Set seaborn style for a cleaner, more appealing look
+sns.set_theme(style="whitegrid")
+
+# Create the plot
+fig, ax = plt.subplots(figsize=(10, 6))
+
+# Data
+years = df_prenom_annee["annais"].to_list()         # Extracts years as a list
+counts = df_prenom_annee["nombre_total"].to_list()  # Extracts counts as a list
+
+# Bar plot with custom colors and transparency for better visuals
+ax.bar(years, 
+       counts, 
+       color="#4C72B0", 
+       edgecolor="black", 
+       alpha=0.8)
+
+# Set labels and title with padding for readability
+ax.set_xlabel("Année", fontsize=12, labelpad=10)
+ax.set_ylabel("Nombre d'occurences", fontsize=12, labelpad=10)
+ax.set_title(f"Occurrences du prénom {prenom} par année ({annee_debut}-{annee_fin})", fontsize=14, pad=15)
+
+# Rotate x-axis labels, improve spacing, and format grid
+ax.tick_params(axis='x', rotation=45)
+plt.tight_layout()  # Adjust layout for tight fit
+
+# Display the plot
+plt.show()
+```
+:::
+
+Nous y sommes presque ! Pour trouver le fameux prénom : 
+
+- Reprenez le résultat du nombre de nombres premiers entre 10 000 et 100 000
+- Otez 3
+- Divisez par 5
+
+Le prénom recherché est à ce rang de classement pour les prénoms féminins donnés en France entre 1970 et 2000.
+
+- [ ] Écrivez la requête
+  - Filtrez les prénoms féminins donnés entre 1970 et 2000
+  - Classez-les par le nombre de fois où ils ont été donné
+  - Créez une colonne de rang avec `RANK() OVER (ORDER BY SUM(nombre) DESC) AS rang`
+- [ ] Trouvez le prénom classé au rang demandé
+
+::: {.callout-tip collapse="true"}
+- Vous pouvez stocker le résultat de la 1ère requête dans une vue
+- Puis effectuer une recherche sur le rang
+
+La réponse commence par un *S*
+:::
 
 
+### Exportez vos résultats vers MinIO
+
+- [ ] En utilisant la librairie *s3fs*
+  ```{.python}
+  import s3fs
+  
+  fs = s3fs.S3FileSystem(
+      client_kwargs={'endpoint_url': 'https://'+'minio-simple.lab.groupe-genes.fr'},
+      key = os.environ["AWS_ACCESS_KEY_ID"], 
+      secret = os.environ["AWS_SECRET_ACCESS_KEY"], 
+      token = os.environ["AWS_SESSION_TOKEN"])
+  
+  destination = f"s3://{username}/ENSAI/SQL/output.csv"
+  
+  with fs.open(destination, mode='wb') as f:
+      top10f2021.write_csv(f)
+  ```
+- [ ] Sur le Datalab, allez dans Mes fichiers :arrow_right: diffusion :arrow_right: ENSAI
+  - le fichier *output.csv* a été généré
+  - rafraichissez la page si besoin
+- [ ] Double-cliquez sur ce fichier pour en avoir un aperçu
 
 
+### Client MinIO
 
+::: {.callout-caution}
+Ne pas faire cette partie.
+:::
+
+Le [client MinIO](https://min.io/docs/minio/linux/reference/minio-mc.html){target="_blank"} installé et [utilisable depuis le terminal]{.underline} permet également d'interagir avec vos fichiers.
+
+Ouvrez un terminal (File :arrow_right: New :arrow_right: Terminal):
+
+- [ ] `mc ls s3/<username>/ENSAI/SQL` : pour lister le contenu de votre dossier
+- [ ] `mc cp s3/<username>/ENSAI/SQL/output.csv .` : pour copier le fichier depuis s3 dans votre dossier courant
+  - le fichier apparait dans votre explorer
+- [ ] Supprimez ce fichier : `rm output.csv`
+  - Car importer les fichiers de données dans son espace de travail n'est pas une bonne pratique
+
+::: {.callout-tip}
+La commande `mc --help` liste toutes les commandes possibles (ESPACE pour défiler, CTRL+C pour sortir)
+:::
+
+
+### Console Minio
+
+Vous pouvez également accéder à votre stockage avec la console Minio :
+
+- <https://minio-console.lab.sspcloud.fr/>{target="_blank"}
+- <https://minio-simple.lab.groupe-genes.fr>{target="_blank"}
+
+
+## Libérer les ressources
+
+Une fois vos travaux terminés, il est temps de libérer les ressources réservées.
+
+- [ ] Si besoin, sauvegardez vos notebooks
+  - clic droit sur le nom du fichier :arrow_right: Download
+- [ ] Puis sur la page d'accueil, allez dans *Mes services*, mettez votre service à la poubelle
+
+Vous pouvez aisément reproduire votre travail plus tard :
+
+- Votre code est téléchargé
+- Vos données sont toujours sur MinIO
+- Il suffit de relancer un nouveau service et de relancer les calculs
+
+Une manière plus propre de travailler est d'utiliser git pour versionner son code.
 
 
 ---
 
-
-
-## Créer et configuration de compte
-
 ::: {.callout-important}
+La suite du TP est optionnelle.
+
+Elle est simplement donnée pour celles et ceux qui souhaient aller plus loin et profiter de toutes les fonctionnalités du Datalab.
+:::
+
+---
+
+
+## Travailler avec Git
+
+::: {.callout-caution}
 Sur le datalab, vos services ont une [**durée de vie limitée**]{.underline}.
 
 Pour sauvegarder vos programmes, la bonne pratique est d'utiliser un dépôt git. Nous allons donc créer et utiliser un jeton pour communiquer avec GitHub.
@@ -328,7 +652,7 @@ Si vous avez déjà généré et déclaré un jeton GitHub, inutile de refaire c
 
 ### Déclarer votre jeton
 
-GitHub vous a fournit un jeton. Il faut maintenant le déclarer sur le [Datalab](https://onyxia.lab.groupe-genes.fr/account/git){target="_blank"} :
+GitHub vous a fournit un jeton. Il faut maintenant le déclarer sur le Datalab :
 
 - [ ] Allez dans `Mon Compte` :arrow_right: Onglet `Git`
 - [ ] Renseignez les informations suivantes 
@@ -340,54 +664,6 @@ GitHub vous a fournit un jeton. Il faut maintenant le déclarer sur le [Datalab]
 Vous pouvez maintenant échanger du code entre les services du Datalab et vos dépôts GitHub. :tada:
 :::
 
-## Le stockage
-
-Lorsque l'on travaille dans le cloud, il est essentiel de [séparer les données des programmes]{.underline} pour :
-
-- mieux gérer les ressources, 
-- renforcer la sécurité en limitant les accès et les permissions,
-- permettre une scalabilité indépendante des composants.
-
-[MinIO](https://min.io/){target="_blank"} est une solution de stockage d'objets open-source qui permet de déployer facilement un stockage évolutif et performant. Elle est compatible avec l'API [S3 d'Amazon](https://aws.amazon.com/fr/s3/){target="_blank"}, ce qui facilite l'intégration avec les applications existantes. 
-
-MinIO offre :
-
-- une haute disponibilité, 
-- une sécurité renforcée grâce au chiffrement des données et des contrôles d'accès,
-- des performances élevées, particulièrement adaptées aux environnements nécessitant un accès rapide aux données, comme le Big Data et l'intelligence artificielle.
-
-### Votre bucket
-
-::: {.callout-note title="Définition"}
-Un **bucket** est un conteneur de stockage utilisé pour regrouper des objets (fichiers et métadonnées) dans des systèmes de stockage de type cloud. Il facilite l'organisation, la gestion des permissions et l'accès aux données dans un espace de stockage structuré.
-:::
-
-Lors de votre création de compte, un bucket est créé avec votre nom d'utilisateur. Dans ce bucket, vous pouvez :
-
-- créer / supprimer des dossiers
-- importer / supprimer des fichiers
-- créer un dossier nommé *diffusion* à la racine de votre bucket
-  - celui-ci sera accessible en lecture à tous les utilisateurs du datalab
-
-
-Pour accéder à votre stockage :
-
-- Depuis le Datalab, allez dans `Mes fichiers`
-- Depuis la [console MinIO](https://minio-console.lab.sspcloud.fr/){target="_blank"}
-- Depuis le terminal d'un service (voir [section ci-après](#Accéder-à-votre-stockage))
-
-
-### Stocker des fichiers
-
-- [ ] Téléchargez le [fichier des prénoms par département de naissance](https://www.data.gouv.fr/fr/datasets/base-prenoms-insee-format-parquet/){target="_blank"} en 2022 au format parquet
-- [ ] Dans votre bucket, créez un dossier `diffusion`, puis à l'intérieur un dossier `INSEE`
-- [ ] Dans ce dossier, importez le fichier des prénoms
-
-::: {.callout-note}
-Nous allons ensuite utiliser ce fichier dans un service.
-:::
-
-## Les services
 
 ### Dépôt pour le code
 
@@ -395,7 +671,7 @@ Avant de créer un service, nous allons créer un dépôt GitHub qui permettra d
 
 - [ ] Dans GitHub, créer un [nouveau Repository](https://github.com/new){target="_blank"}
   - Repository name : TP3-datalab
-  - Public
+  - Private
   - :white_check_mark: Cochez *Add a README file*
   - .gitignore template : Python
   - Choose a license : Apache Licence 2.0
@@ -404,7 +680,13 @@ Avant de créer un service, nous allons créer un dépôt GitHub qui permettra d
 - [ ] Copiez l'adresse *https* du repo
 
 
+### Branchez votre service sur un répo
 
+Lors du lancement d'un *Service*, vous pouvez vous brancher sur un répo git. Ainsi le contenu de votre dépôt sera importé dans votre service.
+
+Vous pourrez alors utiliser le code de votre dépôt et éventuellement le mettre à jour en effectuant un *push*.
+
+Lancez un service *Jupyter Notebook*
 
 - [ ] Ouvrez la Configuration
   - De nombreux onglets permettent de configurer votre service
@@ -413,185 +695,6 @@ Avant de créer un service, nous allons créer un dépôt GitHub qui permettra d
   - Init : script à lancer au démarrage
 - [ ] Allez dans l'onglet `Git` et collez l'adresse *https* du repo dans la case *Repository url*
 - [ ] `Lancez` le service, puis attendez quelques secondes
-
-
-
-### Accéder à votre stockage
-
-- [ ] Créez un dataframe Polars en important les données de votre fichier
-  - Collez le code ci-dessous dans la première cellule, puis CTRL+ENTREE pour exécuter
-  ```{.python}
-  import os
-  import polars as pl
-  
-  storage_options = {
-      "aws_endpoint":  'https://'+'minio-simple.lab.groupe-genes.fr',
-      "aws_access_key_id": os.environ["AWS_ACCESS_KEY_ID"],
-      "aws_secret_access_key": os.environ["AWS_SECRET_ACCESS_KEY"],
-      "aws_region": os.environ["AWS_DEFAULT_REGION"],
-      "aws_token": os.environ["AWS_SESSION_TOKEN"]
-    }
-  username = os.environ["VAULT_TOP_DIR"] # un peu bancal pour avoir le username
-  
-  df = pl.read_parquet(source=f"s3://{username}/diffusion/INSEE/prenoms-nat2022.parquet", 
-                       storage_options=storage_options)
-  print(df)
-  ```
-
-::: {.callout-note title="Polars"}
-[Polars](https://pola.rs/){target="_blank"} est une bibliothèque rapide et performante pour la manipulation de données en Python et Rust, optimisée pour les grands volumes de données. 
-
-Contrairement à [Pandas](https://pandas.pydata.org/){target="_blank"}, Polars utilise une approche orientée colonnes (columnar) et tire parti du traitement parallèle, ce qui le rend particulièrement adapté pour les opérations analytiques lourdes. 
-
-Sa syntaxe, proche de celle de Pandas, permet des transformations, agrégations et manipulations de données avec des méthodes performantes et expressives.
-:::
-
-- [ ] Requêtez les données
-  - Créez une nouvelle cellule avec le bouton `+` de la barre d'outils
-  - Collez et exécutez ce code
-  ```{.python}
-  # Top 10 des prénoms féminins en 2021
-  top10f2021 = df\
-      .filter((pl.col("sexe") == 2) & 
-              (pl.col("annais") == "2021") & 
-              (pl.col("preusuel") != "_PRENOMS_RARES"))\
-      .group_by("preusuel")\
-      .agg(pl.col("nombre").sum().alias("nombre_total"))\
-      .sort("nombre_total", descending=True)\
-      .limit(10)
-  
-  print(top10f2021)
-  ```
-
-### Jouer avec vos données
-
-- [ ] Générez le tableau du nombre de fois où votre prénom a été donné entre 2010 et 2020
-  ```{.python}
-  prenom = "Ludovic"
-  annee_debut, annee_fin = 2010, 2020
-  
-  df_prenom_annee = df\
-      .filter((pl.col("annais") != "XXXX"))\
-      .filter((pl.col("preusuel") == prenom.upper()) & 
-              (pl.col("annais").cast(pl.Int32) >= annee_debut) & 
-              (pl.col("annais").cast(pl.Int32) <= annee_fin))\
-      .group_by("annais")\
-      .agg(pl.col("nombre").sum().alias("nombre_total"))\
-      .sort("annais")
-  
-  print(df_prenom_annee)
-  ```
-- [ ] Faites un diagramme en barres
-  - avec les librairies *matplotlib* et *seaborn*
-  ```{.python}
-  import matplotlib.pyplot as plt
-  import seaborn as sns
-  
-  # Set seaborn style for a cleaner, more appealing look
-  sns.set_theme(style="whitegrid")
-  
-  # Create the plot
-  fig, ax = plt.subplots(figsize=(10, 6))
-  
-  # Data
-  years = df_prenom_annee["annais"].to_list()         # Extracts years as a list
-  counts = df_prenom_annee["nombre_total"].to_list()  # Extracts counts as a list
-  
-  # Bar plot with custom colors and transparency for better visuals
-  ax.bar(years, 
-         counts, 
-         color="#4C72B0", 
-         edgecolor="black", 
-         alpha=0.8)
-  
-  # Set labels and title with padding for readability
-  ax.set_xlabel("Année", fontsize=12, labelpad=10)
-  ax.set_ylabel("Nombre d'occurences", fontsize=12, labelpad=10)
-  ax.set_title(f"Occurrences du prénom {prenom} par année ({annee_debut}-{annee_fin})", fontsize=14, pad=15)
-  
-  # Rotate x-axis labels, improve spacing, and format grid
-  ax.tick_params(axis='x', rotation=45)
-  plt.tight_layout()  # Adjust layout for tight fit
-  
-  # Display the plot
-  plt.show()
-  ```
-
-
-
-### Exportez vos résultats vers MinIO
-
-- [ ] En utilisant la librairie *s3fs*
-  ```{.python}
-  import s3fs
-  
-  fs = s3fs.S3FileSystem(
-      client_kwargs={'endpoint_url': 'https://'+'minio-simple.lab.groupe-genes.fr'},
-      key = os.environ["AWS_ACCESS_KEY_ID"], 
-      secret = os.environ["AWS_SECRET_ACCESS_KEY"], 
-      token = os.environ["AWS_SESSION_TOKEN"])
-  
-  destination = f"s3://{username}/diffusion/INSEE/output.csv"
-  
-  with fs.open(destination, mode='wb') as f:
-      top10f2021.write_csv(f)
-  ```
-- [ ] Sur le Datalab, allez dans Mes fichiers :arrow_right: diffusion :arrow_right: INSEE
-  - le fichier *output.csv* a été généré
-  - rafraichissez la page si besoin
-- [ ] Double-cliquez sur ce fichier pour en avoir un aperçu
-
-
-#### Exercice
-
-::: {.callout-note}
-Si vous êtes en avance.
-:::
-
-Comme dans de très nombreux outils, il est possible d'encapsuler du [SQL dans Polars](https://docs.pola.rs/api/python/stable/reference/sql/index.html){target="_blank"}.
-
-Par exemple la requête du top10 féminin 2021 donne en SQL :
-
-```{.python}
-df.sql("""
-  SELECT preusuel, 
-         SUM(nombre) AS nombre_total
-    FROM self
-   WHERE preusuel <> '_PRENOMS_RARES'
-     AND annais = '2021'
-     AND sexe = 2
-   GROUP BY preusuel
-   ORDER BY 2 DESC
-   LIMIT 10
-""")
-```
-
-- [ ] Ré-écrivez en SQL la requête du nombre de fois ou votre prénom a été donné entre 2010 et 2020
-- [ ] Créez une nouvelle cellule et écrivez une requête pour afficher les 5 années où sont nées le plus de filles
-- [ ] Quels sont les prénoms masculins et féminins les plus donnés depuis 1900 ?
-- [ ] Affichez le nombres de filles et de garçons nés chaque année depuis 2010
-  - :bulb: Aide : `SUM(CASE WHEN ? THEN ? ELSE ? END)`
-
-
-### Client MinIO
-
-::: {.callout-caution}
-Ne pas faire cette partie.
-:::
-
-Le [client MinIO](https://min.io/docs/minio/linux/reference/minio-mc.html){target="_blank"} installé et [utilisable depuis le terminal]{.underline} permet également d'interagir avec vos fichiers.
-
-Ouvrez un terminal :
-
-- [ ] `mc ls s3/<username>/diffusion` : pour lister le contenu de votre dossier diffusion
-- [ ] `mc cp s3/<username>/diffusion/INSEE/prenoms-nat2022.parquet .` : pour copier le fichier depuis s3 dans votre dossier courant
-  - le fichier apparait dans votre explorer
-- [ ] Supprimez ce fichier : `rm prenoms-nat2022.parquet`
-  - Car importer les fichiers de données dans son espace de travail n'est pas une bonne pratique
-
-::: {.callout-tip}
-La commande `mc --help` liste toutes les commandes possibles (ESPACE pour défiler, CTRL+C pour sortir)
-:::
 
 
 ### Sauver son code
@@ -612,30 +715,28 @@ La commande `mc --help` liste toutes les commandes possibles (ESPACE pour défil
 - `git push`
 :::
 
-### Surveiller son service
 
 
-::: {.callout-caution}
-Ne pas faire cette partie.
-:::
+#### Exercice
+
+Par exemple en important le fichier des prénoms avec Polars et en encapsulant du SQL :
+
+- [ ] Écrivez la requête du nombre de fois ou votre prénom a été donné entre 2010 et 2020
+- [ ] Créez une nouvelle cellule et écrivez une requête pour afficher les 5 années où sont nées le plus de filles
+- [ ] Quels sont les prénoms masculins et féminins les plus donnés depuis 1900 ?
+- [ ] Affichez le nombres de filles et de garçons nés chaque année depuis 2010
+  - :bulb: Aide : `SUM(CASE WHEN ? THEN ? ELSE ? END)`
+
+
+
+
+## Surveiller son service
 
 - [ ] Sur la page du Datalab, allez dans `Mes services`
 - [ ] Cliquez sur le nom du service (Jupyter-python)
 - [ ] Cliquez sur `Surveillance externe`
 
 Vous arrivez sur la page de l'outil **Grafana** qui permet d'observer les métriques de votre service.
-
-### Terminer son service
-
-Une fois vos travaux terminés, il est temps de libérer les ressources réservées.
-
-- [ ] Dans *Mes services*, mettez votre service à la poubelle
-
-De toute manière, vous pouvez aisément reproduire votre travail plus tard :
-
-- Votre code est sur GitHub
-- Vos données sont sur MinIO
-- Il suffit de relancer un nouveau service et d'y brancher votre répo
 
 
 ## Les secrets
