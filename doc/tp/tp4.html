@@ -9,7 +9,7 @@
 <meta name="author" content="Ludovic Deneuville">
 <meta name="description" content="TP4">
 
-<title>? – Base de données</title>
+<title>Welcome to the chess federation – Base de données</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -153,6 +187,10 @@ ul.task-list li input[type="checkbox"] {
     <a class="dropdown-item" href="../../doc/tp/tp3.html">
  <span class="dropdown-text">TP3 - Datalab</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../../doc/tp/tp3.html">
+ <span class="dropdown-text">TP4 - Chess</span></a>
+  </li>  
     </ul>
   </li>
 </ul>
@@ -183,7 +221,24 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    
+    <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="3">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#lancement-des-services" id="toc-lancement-des-services" class="nav-link" data-scroll-target="#lancement-des-services"><span class="header-section-number">1</span> Lancement des services</a></li>
+  <li><a href="#les-données" id="toc-les-données" class="nav-link" data-scroll-target="#les-données"><span class="header-section-number">2</span> Les données</a>
+  <ul class="collapse">
+  <li><a href="#chargez-les-données" id="toc-chargez-les-données" class="nav-link" data-scroll-target="#chargez-les-données"><span class="header-section-number">2.1</span> Chargez les données</a></li>
+  <li><a href="#description" id="toc-description" class="nav-link" data-scroll-target="#description"><span class="header-section-number">2.2</span> Description</a></li>
+  </ul></li>
+  <li><a href="#recherche-de-fausses-données" id="toc-recherche-de-fausses-données" class="nav-link" data-scroll-target="#recherche-de-fausses-données"><span class="header-section-number">3</span> Recherche de fausses données</a></li>
+  <li><a href="#quelques-statistiques" id="toc-quelques-statistiques" class="nav-link" data-scroll-target="#quelques-statistiques"><span class="header-section-number">4</span> Quelques statistiques</a></li>
+  <li><a href="#afficher-les-résultat-de-parties" id="toc-afficher-les-résultat-de-parties" class="nav-link" data-scroll-target="#afficher-les-résultat-de-parties"><span class="header-section-number">5</span> Afficher les résultat de parties</a></li>
+  <li><a href="#qui-est-la-meilleure" id="toc-qui-est-la-meilleure" class="nav-link" data-scroll-target="#qui-est-la-meilleure"><span class="header-section-number">6</span> Qui est la meilleure ?</a></li>
+  <li><a href="#arrêtez-votre-service" id="toc-arrêtez-votre-service" class="nav-link" data-scroll-target="#arrêtez-votre-service">Arrêtez votre service</a></li>
+  </ul>
+</nav>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -194,7 +249,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">?</h1>
+<h1 class="title">Welcome to the chess federation</h1>
 </div>
 
 <div>
@@ -223,8 +278,353 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p><span class="emoji" data-emoji="construction">🚧</span></p>
+<section id="introduction" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="introduction">Introduction</h2>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Écrivez des requêtes jolies !</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="lancement-des-services" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="lancement-des-services"><span class="header-section-number">1</span> Lancement des services</h2>
+<p>Connectez-vous à l’une des 2 instances suivantes d’Onyxia (elles sont quasiment identiques) :</p>
+<ul>
+<li><a href="https://onyxia.lab.groupe-genes.fr/" target="_blank">Datalab du GENES</a></li>
+<li><a href="https://datalab.sspcloud.fr/" target="_blank">Datalab SSPCloud de l’INSEE</a>
+<ul>
+<li>si besoin de créer un compte, utilisez votre mail ENSAI</li>
+</ul></li>
+</ul>
+<p>Et ensuite lancez les services suivants (voir TP2 si besoin de plus de détails)</p>
+<ul class="task-list">
+<li><label><input type="checkbox">PostgreSQL : <a href="https://onyxia.lab.groupe-genes.fr/launcher/databases/postgresql?name=postgresql&amp;version=1.0.3&amp;autoLaunch=true&amp;postgresql.primary.persistence.size=«1Gi»&amp;postgresql.primary.resources.limits.cpu=«500m»&amp;postgresql.primary.resources.limits.memory=«2Gi»" target="_blank">Datalab GENES</a> ou <a href="https://datalab.sspcloud.fr/launcher/databases/postgresql?name=postgresql&amp;version=1.0.3&amp;postgresql.primary.persistence.size=«1Gi»&amp;postgresql.primary.resources.limits.cpu=«500m»&amp;postgresql.primary.resources.limits.memory=«2Gi»&amp;autoLaunch=true" target="_blank">SPPCloud</a></label></li>
+<li><label><input type="checkbox">CloudBeaver</label></li>
+</ul>
+</section>
+<section id="les-données" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="les-données"><span class="header-section-number">2</span> Les données</h2>
+<section id="chargez-les-données" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="chargez-les-données"><span class="header-section-number">2.1</span> Chargez les données</h3>
+<p><span class="emoji" data-emoji="construction">🚧</span></p>
+</section>
+<section id="description" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="description"><span class="header-section-number">2.2</span> Description</h3>
+<p>Les données de ce TP représentent le système d’information de la fédération des joueuses d’echecs.</p>
+<p>Les tables sont les suivantes :</p>
+<ul>
+<li><strong>joueuse</strong>(<u>id_joueuse</u>, code_titre, nom, prenom, elo, date_naissance, #id_club, arbitre)</li>
+<li><strong>titre</strong>(#code, nom, description)</li>
+<li><strong>club</strong>(<u>id_club</u>, nom, ville, #id_presidente)</li>
+<li><strong>partie</strong>(<u>id_partie</u>, #id_blanc, #id_noir, date_partie, #id_resultat, #id_ouverture, #id_tournoi)</li>
+<li><strong>resultat_partie</strong>(<u>id_resultat</u>, resultat, description)</li>
+<li><strong>ouverture</strong>(<u>id_ouverture</u>, eco, nom, coups)</li>
+<li><strong>tournoi</strong>(<u>id_tournoi</u>, nom, ville, date_debut, date_fin, #id_cadence, nb_rondes, nb_participantes, #id_arbitre)</li>
+<li><strong>participante</strong>(<u>#id_tournoi, #id_joueuse</u>)</li>
+<li><strong>cadence</strong>(<u>id_cadence</u>, nom, description)</li>
+</ul>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 16%">
+<col style="width: 83%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Catégorie</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Joueuse</strong></td>
+<td>Liste des joueuses</td>
+</tr>
+<tr class="even">
+<td><strong>Titre</strong></td>
+<td>Liste des titres, certains attribués aux fortes joueuses</td>
+</tr>
+<tr class="odd">
+<td><strong>Club</strong></td>
+<td>Liste des clubs</td>
+</tr>
+<tr class="even">
+<td><strong>Partie</strong></td>
+<td>Partie entre 2 joueuses</td>
+</tr>
+<tr class="odd">
+<td><strong>Résultat_partie</strong></td>
+<td>Différents résultats possibles dans une partie (par exemple : victoire des blancs, match nul, etc.)</td>
+</tr>
+<tr class="even">
+<td><strong>Ouverture</strong></td>
+<td>Désignation de l’ouverture (comment débute une partie)</td>
+</tr>
+<tr class="odd">
+<td><strong>Tournoi</strong></td>
+<td>Liste des tournois</td>
+</tr>
+<tr class="even">
+<td><strong>Participante</strong></td>
+<td>Liste des participantes et des tournois auxquels elles participent</td>
+</tr>
+<tr class="odd">
+<td><strong>Cadence</strong></td>
+<td>Rythme de jeu lors d’un tournoi (blitz, rapide, lent)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p><span class="emoji" data-emoji="construction">🚧</span> diag</p>
+</section>
+</section>
+<section id="recherche-de-fausses-données" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="recherche-de-fausses-données"><span class="header-section-number">3</span> Recherche de fausses données</h2>
+<div class="callout callout-style-simple callout-none no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>À la fédération des joueuses d’échecs, il y a malheureusement de nombreuses rumeurs de corruption, et même de dopage !</p>
+<p>Votre première mission sera de vérifier l’intégrité des données de la base.</p>
+</div>
+</div>
+</div>
+<p>Il paraitrait que certaines joueuses aient truquées leurs classement elo. Vérifiez et corrigez cela :</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Listez la table des joueuses</label></li>
+<li><label><input type="checkbox">Classez par elo décroissant</label></li>
+<li><label><input type="checkbox">Écrivez une requête qui permet d’afficher les joueuses avec un elo suspect (elo &gt; 2600 et non titrée)</label>
+<ul>
+<li>Notez leurs <em>id_joueuse</em></li>
+</ul></li>
+<li><label><input type="checkbox">Pour chacune de ces joueuses, diminuez leur elo de 1200</label></li>
+<li><label><input type="checkbox">Vérifier à partir de leurs <em>id_joueuse</em> que la mise à jour a bien été effectuée</label></li>
+</ul>
+<p>Une autre erreur concernerait les dates de naissances des joueuses</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Affichez l’année de naissance des joueuses</label></li>
+<li><label><input type="checkbox">Regroupez par année et comptez le nombre d’occurences</label></li>
+<li><label><input type="checkbox">Écrivez une requête pour ne garder que les joueuses avec des années de naissances étranges</label></li>
+<li><label><input type="checkbox">Apportez une correction adaptée</label></li>
+</ul>
+<p>Toujours sur la tables des joueuses, vous avez peut-être remarqué qu’une puissante technique d’anonymisation a été utilisée.</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Commencez par afficher dans un <em>SELECT</em> une version plus propre</label></li>
+<li><label><input type="checkbox">Une fois que le résultat est assez correct,</label></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Vous pouvez utiliser la fonction <em>REPLACE()</em>
+<ul>
+<li>et même les enchainer : REPLACE(REPLACE(REPLACE()))</li>
+</ul></li>
+<li>Attention : les noms des joueuses titrées n’ont pas été anonymisées</li>
+</ul>
+<p>Si vous souhaitez utiliser des techniques d’anonymisation un peu plus efficaces, rendez-vous en 3A pour les Master ID et STD.</p>
+</div>
+</div>
+</div>
+<p>Passons maintenant à la table des parties. À votre avis, est-ce normal de jouer des parties contre soi-même ?</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Détectez les parties suspectes</label></li>
+<li><label><input type="checkbox">À partir de ces données, créez une table <em>tricheuse</em> pour pouvoir surveiller leurs agissements par la suite</label></li>
+<li><label><input type="checkbox">Supprimez les parties suspectes</label></li>
+</ul>
+</section>
+<section id="quelques-statistiques" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="quelques-statistiques"><span class="header-section-number">4</span> Quelques statistiques</h2>
+<div class="callout callout-style-simple callout-none no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Maintenant que vous avez fait un peu de ménage, regardons quelques statistiques sur ces données</p>
+</div>
+</div>
+</div>
+<ul class="task-list">
+<li><label><input type="checkbox">Comptez le nombre de parties jouées</label></li>
+<li><label><input type="checkbox">Affichez le nombre de parties jouées par tournoi</label>
+<ul>
+<li>affichez le nom du tournoi</li>
+<li>incluez les parties jouées hors tournoi</li>
+</ul></li>
+<li><label><input type="checkbox">Pour chaque tournoi, calculez également les taux de victoire des blancs et des noirs, ainsi que celui de matchs nuls</label></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>Commencez par exemple par calculer le nombre de victoires des blancs</li>
+<li>Divisez par le bon nombre</li>
+<li>Pour avoir un float, vous pouvez multiplier par <em>1.0</em></li>
+<li>Utilisez <em>ROUND()</em> pour arrondir à 2 chiffres significatifs</li>
+</ul>
+</div>
+</div>
+</div>
+<ul class="task-list">
+<li><label><input type="checkbox">Complétez pour ne conserver que les tournois avec 20 % ou moins de matchs nuls</label></li>
+</ul>
+<p>Jetons maintenant un oeil aux ouvertures qui permettent de gagenr plus souvent</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Ouvertures">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Ouvertures
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>En début de partie, le nombre de coup reste assez limité. Les différentes possibilités de commencer une partie sont catégorisées et appelées Ouvertures.</p>
+<p>Vient ensuite le milieu de jeu lorsque toutes les pièces sont développées.</p>
+<p>Et enfin (si personne ne s’est pris un échec et mat) la finale, i.e.&nbsp;lorsque les Dames ont été échangé et qu’il reste peu de pièces.</p>
+</div>
+</div>
+<ul class="task-list">
+<li><label><input type="checkbox">Une des ouvertures n’existe pas, elle n’a été jouée dans aucune partie</label>
+<ul>
+<li>Trouvez et supprimez cette ouverture</li>
+</ul></li>
+<li><label><input type="checkbox">Comme fait précédemment pour les tournois, calculez pour chaque ouverture :</label>
+<ul>
+<li>nombre de parties jouées</li>
+<li>taux de victoire des blancs</li>
+<li>taux de victoire des noirs</li>
+<li>taux de matchs nuls</li>
+</ul></li>
+</ul>
+</section>
+<section id="afficher-les-résultat-de-parties" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="afficher-les-résultat-de-parties"><span class="header-section-number">5</span> Afficher les résultat de parties</h2>
+<p><span class="emoji" data-emoji="construction">🚧</span></p>
+</section>
+<section id="qui-est-la-meilleure" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="qui-est-la-meilleure"><span class="header-section-number">6</span> Qui est la meilleure ?</h2>
+<div class="callout callout-style-simple callout-none no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Une célébre citation dit « Je ne perds jamais, soit je gagne, soit j’apprends ».</p>
+<p>Aux échecs, la victoire rapporte 1 point, le match nul 0.5 et la défaite 0.</p>
+<p>Nous voulons calculer quelle joueuse est la plus performante i.e.&nbsp;marque le plus de points rapporté au nombre de parties</p>
+</div>
+</div>
+</div>
+<ul class="task-list">
+<li><label><input type="checkbox">Ajoutez 2 colonnes de float à la table <em>resultat_partie</em> : <code>score_blanc</code> et <code>score_noir</code></label></li>
+<li><label><input type="checkbox">Renseignez les valeurs 0, 0.5 ou 1 selon les cas</label></li>
+</ul>
+<p>Pour y a ller pas à pas, choisissez une joueuse, par exemple <em>HOU Yifan</em>.</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Complétez la requête ci-dessous pour obtenir son nombre de points marqués</label></li>
+</ul>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="cf">CASE</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>           <span class="op">&lt;</span>à compléter<span class="op">&gt;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>       <span class="cf">END</span> <span class="kw">AS</span> nb_points,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>       p.id_blanc,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>       p.id_noir,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>       rp.resultat</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.partie p </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> echecs.resultat_partie rp <span class="kw">USING</span>(id_resultat)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> echecs.joueuse j <span class="kw">ON</span> (p.id_noir <span class="op">=</span> j.id_joueuse <span class="kw">OR</span> p.id_blanc <span class="op">=</span> j.id_joueuse)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> j.nom <span class="op">=</span> <span class="st">'HOU'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul class="task-list">
+<li><label><input type="checkbox">Modifiez la requête pour calculer son nombre de points marqués et son nombre de parties jouées</label></li>
+<li><label><input type="checkbox">Calculez ensuite son pourcentage de points marqués</label></li>
+<li><label><input type="checkbox">Enfin retirez le filtre sur le nom de la joueuse pour afficher les performances de toutes les joueuses</label>
+<ul>
+<li>classez par ordre de performance décroissant</li>
+</ul></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Ou sinon pour calculer de manière un peu plus brutale :</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">WITH</span> points_joueuse <span class="kw">AS</span> (</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> CONCAT_WS(<span class="st">' '</span>, <span class="fu">LOWER</span>(j.code_titre), j.nom, j.prenom) <span class="kw">AS</span> joueuse,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">SUM</span>(</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>            <span class="cf">CASE</span> </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>                <span class="cf">WHEN</span> p.id_noir <span class="op">=</span> j.id_joueuse <span class="kw">AND</span> p.id_resultat <span class="op">=</span> <span class="dv">2</span> <span class="cf">THEN</span> <span class="dv">1</span> </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>                <span class="cf">WHEN</span> p.id_blanc <span class="op">=</span> j.id_joueuse <span class="kw">AND</span> p.id_resultat <span class="op">=</span> <span class="dv">1</span> <span class="cf">THEN</span> <span class="dv">1</span> </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                <span class="cf">WHEN</span> p.id_resultat <span class="op">=</span> <span class="dv">3</span> <span class="cf">THEN</span> <span class="fl">0.5</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>                <span class="cf">ELSE</span> <span class="dv">0</span> </span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>            <span class="cf">END</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        ) <span class="kw">AS</span> total_points,</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> total_games</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FROM</span> echecs.partie p</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">JOIN</span> echecs.joueuse j <span class="kw">ON</span> (p.id_noir <span class="op">=</span> j.id_joueuse <span class="kw">OR</span> p.id_blanc <span class="op">=</span> j.id_joueuse)</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">GROUP</span> <span class="kw">BY</span> <span class="dv">1</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> joueuse,</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>       total_points,</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>       total_games,</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>       <span class="fu">ROUND</span>((total_points <span class="op">/</span> total_games) <span class="op">*</span> <span class="dv">100</span>, <span class="dv">2</span>) <span class="kw">AS</span> percentage_points</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> points_joueuse</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a> <span class="kw">ORDER</span> <span class="kw">BY</span> percentage_points <span class="kw">DESC</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="arrêtez-votre-service" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="arrêtez-votre-service">Arrêtez votre service</h2>
+<p>C’est la fin du TP, vous pouvez maintenant sauvegarder votre travail et libérer les ressources réservées :</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Copiez votre code et collez le sur votre machine dans un fichier <em>.sql</em></label>
+<ul>
+<li>par exemple dans <code>P:/Cours1A/UE3-Bases-de-donnees-relationnelles/TP4/tp4.sql</code></li>
+<li>ou en téléchargeant depuis CloudBeaver le fichier sql (petit bouton avec un dossier et une flèche vers le bas)</li>
+</ul></li>
+<li><label><input type="checkbox">Retournez sur la page d’accueil du Datalab</label></li>
+<li><label><input type="checkbox">Allez dans <em>Mes Services</em> et supprimez votre service</label></li>
+</ul>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
