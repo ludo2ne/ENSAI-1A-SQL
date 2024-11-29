@@ -14,7 +14,7 @@ lightbox: true
 ---
 
 
-## Introdution {.unnumbered}
+## Introduction {.unnumbered}
 
 Lors du premier TP, nous avons utilisé DuckDB pour lire les données d'un fichier parquet. Aujourd'hui nous allons créer notre propre base de données PostgreSQL, puis y déclarer des tables et insérer de données. Enfin nous allons requêter ces données.
 

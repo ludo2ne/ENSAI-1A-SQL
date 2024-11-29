@@ -1,5 +1,5 @@
 ---
-title: "?"
+title: "Welcome to the chess federation"
 description: "TP4"
 author: "Ludovic Deneuville"
 format: 
@@ -15,3 +15,248 @@ lightbox: true
 
 :construction:
 
+## Introduction {.unnumbered}
+
+::: {.callout-important}
+- Écrivez des requêtes jolies !
+:::
+
+
+## Lancement des services
+
+Connectez-vous à l'une des 2 instances suivantes d'Onyxia (elles sont quasiment identiques) :
+
+- [Datalab du GENES](https://onyxia.lab.groupe-genes.fr/){target="_blank"}
+- [Datalab SSPCloud de l'INSEE](https://datalab.sspcloud.fr/){target="_blank"} 
+  - si besoin de créer un compte, utilisez votre mail ENSAI
+
+Et ensuite lancez les services suivants (voir TP2 si besoin de plus de détails)
+
+- [ ] PostgreSQL : [Datalab GENES](https://onyxia.lab.groupe-genes.fr/launcher/databases/postgresql?name=postgresql&version=1.0.3&autoLaunch=true&postgresql.primary.persistence.size=«1Gi»&postgresql.primary.resources.limits.cpu=«500m»&postgresql.primary.resources.limits.memory=«2Gi»){target="_blank"} ou [SPPCloud](https://datalab.sspcloud.fr/launcher/databases/postgresql?name=postgresql&version=1.0.3&postgresql.primary.persistence.size=«1Gi»&postgresql.primary.resources.limits.cpu=«500m»&postgresql.primary.resources.limits.memory=«2Gi»&autoLaunch=true){target="_blank"}
+- [ ] CloudBeaver
+
+
+## Les données
+
+### Chargez les données
+
+:construction:
+
+### Description
+
+Les données de ce TP représentent le système d'information de la fédération des joueuses d'echecs.
+
+Les tables sont les suivantes :
+
+- **joueuse**([id_joueuse]{.underline}, code_titre, nom, prenom, elo, date_naissance, #id_club, arbitre)
+- **titre**(#code, nom, description)
+- **club**([id_club]{.underline}, nom, ville, #id_presidente)
+- **partie**([id_partie]{.underline}, #id_blanc, #id_noir, date_partie, #id_resultat, #id_ouverture, #id_tournoi)
+- **resultat_partie**([id_resultat]{.underline}, resultat, description)
+- **ouverture**([id_ouverture]{.underline}, eco, nom, coups)
+- **tournoi**([id_tournoi]{.underline}, nom, ville, date_debut, date_fin, #id_cadence, nb_rondes, nb_participantes, #id_arbitre)
+- **participante**([#id_tournoi, #id_joueuse]{.underline})
+- **cadence**([id_cadence]{.underline}, nom, description)
+
+| **Catégorie**       | **Description**                                                                                          |
+|---------------------|----------------------------------------------------------------------------------------------------------|
+| **Joueuse**          | Liste des joueuses                                                                                        |
+| **Titre**            | Liste des titres, certains attribués aux fortes joueuses                                                |
+| **Club**             | Liste des clubs                                                                                           |
+| **Partie**           | Partie entre 2 joueuses                                                                                  |
+| **Résultat_partie**  | Différents résultats possibles dans une partie (par exemple : victoire des blancs, match nul, etc.)     |
+| **Ouverture**        | Désignation de l'ouverture (comment débute une partie)                                                 |
+| **Tournoi**          | Liste des tournois                                                                                       |
+| **Participante**     | Liste des participantes et des tournois auxquels elles participent                                     |
+| **Cadence**          | Rythme de jeu lors d'un tournoi (blitz, rapide, lent)                                                  |
+
+---
+
+:construction: diag
+
+## Recherche de fausses données
+
+::: {.callout}
+À la fédération des joueuses d'échecs, il y a malheureusement de nombreuses rumeurs de corruption, et même de dopage !
+
+Votre première mission sera de vérifier l'intégrité des données de la base.
+:::
+
+Il paraitrait que certaines joueuses aient truquées leurs classement elo. Vérifiez et corrigez cela :
+
+- [ ] Listez la table des joueuses
+- [ ] Classez par elo décroissant
+- [ ] Écrivez une requête qui permet d'afficher les joueuses avec un elo suspect (elo > 2600 et non titrée)
+  - Notez leurs *id_joueuse*
+- [ ] Pour chacune de ces joueuses, diminuez leur elo de 1200
+- [ ] Vérifier à partir de leurs *id_joueuse* que la mise à jour a bien été effectuée
+
+Une autre erreur concernerait les dates de naissances des joueuses
+
+- [ ] Affichez l'année de naissance des joueuses
+- [ ] Regroupez par année et comptez le nombre d'occurences
+- [ ] Écrivez une requête pour ne garder que les joueuses avec des années de naissances étranges
+- [ ] Apportez une correction adaptée
+
+Toujours sur la tables des joueuses, vous avez peut-être remarqué qu'une puissante technique d'anonymisation a été utilisée.
+
+- [ ] Commencez par afficher dans un *SELECT* une version plus propre
+- [ ] Une fois que le résultat est assez correct, 
+
+::: {.callout-tip collapse="true"}
+- Vous pouvez utiliser la fonction *REPLACE()*
+  - et même les enchainer : REPLACE(REPLACE(REPLACE())) 
+- Attention : les noms des joueuses titrées n'ont pas été anonymisées
+
+Si vous souhaitez utiliser des techniques d'anonymisation un peu plus efficaces, rendez-vous en 3A pour les Master ID et STD.
+:::
+
+Passons maintenant à la table des parties. À votre avis, est-ce normal de jouer des parties contre soi-même ?
+
+- [ ] Détectez les parties suspectes
+- [ ] À partir de ces données, créez une table *tricheuse* pour pouvoir surveiller leurs agissements par la suite
+- [ ] Supprimez les parties suspectes
+
+
+## Quelques statistiques
+
+::: {.callout}
+Maintenant que vous avez fait un peu de ménage, regardons quelques statistiques sur ces données
+:::
+
+- [ ] Comptez le nombre de parties jouées
+- [ ] Affichez le nombre de parties jouées par tournoi
+  - affichez le nom du tournoi
+  - incluez les parties jouées hors tournoi
+- [ ] Pour chaque tournoi, calculez également les taux de victoire des blancs et des noirs, ainsi que celui de matchs nuls
+
+::: {.callout-tip collapse="true"}
+- Commencez par exemple par calculer le nombre de victoires des blancs
+- Divisez par le bon nombre
+- Pour avoir un float, vous pouvez multiplier par *1.0*
+- Utilisez *ROUND()* pour arrondir à 2 chiffres significatifs
+:::
+
+- [ ] Complétez pour ne conserver que les tournois avec 20 % ou moins de matchs nuls
+
+Jetons maintenant un oeil aux ouvertures qui permettent de gagenr plus souvent
+
+::: {.callout-note title="Ouvertures"}
+En début de partie, le nombre de coup reste assez limité. Les différentes possibilités de commencer une partie sont catégorisées et appelées Ouvertures.
+
+Vient ensuite le milieu de jeu lorsque toutes les pièces sont développées.
+
+Et enfin (si personne ne s'est pris un échec et mat) la finale, i.e. lorsque les Dames ont été échangé et qu'il reste peu de pièces.
+:::
+
+- [ ] Une des ouvertures n'existe pas, elle n'a été jouée dans aucune partie
+  - Trouvez et supprimez cette ouverture
+- [ ] Comme fait précédemment pour les tournois, calculez pour chaque ouverture :
+  - nombre de parties jouées
+  - taux de victoire des blancs
+  - taux de victoire des noirs
+  - taux de matchs nuls
+
+## Afficher les résultat de parties
+
+:construction:
+
+
+## Qui est la meilleure ?
+
+::: {.callout}
+Une célébre citation dit « Je ne perds jamais, soit je gagne, soit j'apprends ».
+
+Aux échecs, la victoire rapporte 1 point, le match nul 0.5 et la défaite 0.
+
+Nous voulons calculer quelle joueuse est la plus performante i.e. marque le plus de points rapporté au nombre de parties
+:::
+
+- [ ] Ajoutez 2 colonnes de float à la table *resultat_partie* : `score_blanc` et `score_noir`
+- [ ] Renseignez les valeurs 0, 0.5 ou 1 selon les cas
+
+Pour y a ller pas à pas, choisissez une joueuse, par exemple *HOU Yifan*.
+
+- [ ] Complétez la requête ci-dessous pour obtenir son nombre de points marqués
+
+```{.sql}
+SELECT CASE
+           <à compléter>
+       END AS nb_points,
+       p.id_blanc,
+       p.id_noir,
+       rp.resultat
+  FROM echecs.partie p 
+  JOIN echecs.resultat_partie rp USING(id_resultat)
+  JOIN echecs.joueuse j ON (p.id_noir = j.id_joueuse OR p.id_blanc = j.id_joueuse)
+ WHERE j.nom = 'HOU'
+```
+
+- [ ] Modifiez la requête pour calculer son nombre de points marqués et son nombre de parties jouées
+- [ ] Calculez ensuite son pourcentage de points marqués
+- [ ] Enfin retirez le filtre sur le nom de la joueuse pour afficher les performances de toutes les joueuses
+  - classez par ordre de performance décroissant
+
+::: {.callout-tip collapse="true"}
+Ou sinon pour calculer de manière un peu plus brutale :
+
+```{.sql}
+WITH points_joueuse AS (
+    SELECT CONCAT_WS(' ', LOWER(j.code_titre), j.nom, j.prenom) AS joueuse,
+        SUM(
+            CASE 
+                WHEN p.id_noir = j.id_joueuse AND p.id_resultat = 2 THEN 1 
+                WHEN p.id_blanc = j.id_joueuse AND p.id_resultat = 1 THEN 1 
+                WHEN p.id_resultat = 3 THEN 0.5
+                ELSE 0 
+            END
+        ) AS total_points,
+        COUNT(*) AS total_games
+    FROM echecs.partie p
+    JOIN echecs.joueuse j ON (p.id_noir = j.id_joueuse OR p.id_blanc = j.id_joueuse)
+    GROUP BY 1
+)
+SELECT joueuse,
+       total_points,
+       total_games,
+       ROUND((total_points / total_games) * 100, 2) AS percentage_points
+  FROM points_joueuse
+ ORDER BY percentage_points DESC;
+```
+:::
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## Arrêtez votre service {.unnumbered}
+
+C'est la fin du TP, vous pouvez maintenant sauvegarder votre travail et libérer les ressources réservées :
+
+- [ ] Copiez votre code et collez le sur votre machine dans un fichier *.sql*
+  - par exemple dans `P:/Cours1A/UE3-Bases-de-donnees-relationnelles/TP4/tp4.sql`
+  - ou en téléchargeant depuis CloudBeaver le fichier sql (petit bouton avec un dossier et une flèche vers le bas)
+- [ ] Retournez sur la page d'accueil du Datalab
+- [ ] Allez dans *Mes Services* et supprimez votre service

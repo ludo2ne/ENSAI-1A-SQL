@@ -41,6 +41,8 @@ website:
             text: "TP2"
           - href: doc/tp/tp3.qmd
             text: "TP3 - Datalab"
+          - href: doc/tp/tp3.qmd
+            text: "TP4 - Chess"
     right:
       - href: doc/glossaire.qmd
         text: Glossaire
