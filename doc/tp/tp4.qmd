@@ -76,7 +76,7 @@ Les tables sont les suivantes :
 
 ## Recherche de fausses données
 
-::: {.callout}
+::: {.callout-important icon="false" appearance="simple"}
 À la fédération des joueuses d'échecs, il y a malheureusement de nombreuses rumeurs de corruption, et même de dopage !
 
 Votre première mission sera de vérifier l'intégrité des données de la base.
@@ -120,7 +120,7 @@ Passons maintenant à la table des parties. À votre avis, est-ce normal de joue
 
 ## Quelques statistiques
 
-::: {.callout}
+::: {.callout-important icon="false" appearance="simple"}
 Maintenant que vous avez fait un peu de ménage, regardons quelques statistiques sur ces données
 :::
 
@@ -162,9 +162,15 @@ Et enfin (si personne ne s'est pris un échec et mat) la finale, i.e. lorsque le
 :construction:
 
 
+## Créer la table participante
+
+:construction:
+
+participante([#id_tournoi, #id_joueuse]{.underline})
+
 ## Qui est la meilleure ?
 
-::: {.callout}
+::: {.callout-important icon="false" appearance="simple"}
 Une célébre citation dit « Je ne perds jamais, soit je gagne, soit j'apprends ».
 
 Aux échecs, la victoire rapporte 1 point, le match nul 0.5 et la défaite 0.
