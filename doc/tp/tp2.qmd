@@ -1,5 +1,5 @@
 ---
-title: "Joindre des tables"
+title: "Exercices vintages"
 description: "TP2"
 author: "Ludovic Deneuville"
 format: 

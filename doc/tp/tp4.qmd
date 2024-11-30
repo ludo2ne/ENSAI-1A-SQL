@@ -38,13 +38,23 @@ Et ensuite lancez les services suivants (voir TP2 si besoin de plus de détails)
 
 ## Les données
 
+::: {.callout-important icon="false" appearance="simple"}
+Votre mission du jour sera d'aider la nouvellement créée *Fédération Française des Échecs Sincéres et Sans Subterfuges* à corriger les erreurs dans sa base de données pour ensuite récompenser ses meilleures joueuses.
+:::
+
 ### Chargez les données
 
-:construction:
+
+- [ ] Copiez le contenu de ces 2 scripts sql 
+  - [création des tables](./data/tp4-create-table.sql){target="_blank"} 
+  - [insertion des données](./data/tp4-pop-table.sql){target="_blank"} 
+- [ ] Collez-les dans la fenêtre SQL de CloudBeaver
+- [ ] Exécutez les scripts
+  - Cliquez sur la petite icone sous les triangles oranges qui ressemble à :scroll:
+  - raccourci (ALT + X)
+
 
 ### Description
-
-Les données de ce TP représentent le système d'information de la fédération des joueuses d'echecs.
 
 Les tables sont les suivantes :
 
@@ -55,7 +65,6 @@ Les tables sont les suivantes :
 - **resultat_partie**([id_resultat]{.underline}, resultat, description)
 - **ouverture**([id_ouverture]{.underline}, eco, nom, coups)
 - **tournoi**([id_tournoi]{.underline}, nom, ville, date_debut, date_fin, #id_cadence, nb_rondes, nb_participantes, #id_arbitre)
-- **participante**([#id_tournoi, #id_joueuse]{.underline})
 - **cadence**([id_cadence]{.underline}, nom, description)
 
 | **Catégorie**       | **Description**                                                                                          |
@@ -63,21 +72,29 @@ Les tables sont les suivantes :
 | **Joueuse**          | Liste des joueuses                                                                                        |
 | **Titre**            | Liste des titres, certains attribués aux fortes joueuses                                                |
 | **Club**             | Liste des clubs                                                                                           |
-| **Partie**           | Partie entre 2 joueuses                                                                                  |
+| **Partie**           | Partie entre 2 joueuses, soit libre, soit dans le cadre d'un tournoi                                      |
 | **Résultat_partie**  | Différents résultats possibles dans une partie (par exemple : victoire des blancs, match nul, etc.)     |
 | **Ouverture**        | Désignation de l'ouverture (comment débute une partie)                                                 |
 | **Tournoi**          | Liste des tournois                                                                                       |
-| **Participante**     | Liste des participantes et des tournois auxquels elles participent                                     |
 | **Cadence**          | Rythme de jeu lors d'un tournoi (blitz, rapide, lent)                                                  |
 
----
+### Modèle de données
 
-:construction: diag
+::: {.callout-caution}
+Dans le modèle de données, certaines tables sont reliées 2 fois entre elles :
+
+- *joueuse* et *partie* : car lors d'une partie une joueuse a les blancs et l'autre, les noirs
+- *joueuse* et *club* :
+  - *id_club* est une clé étrangère dans la table *joueuse* car une joueuse est membre d'un seul club
+  - *id_presidente* est une clé étrangère de la table *club* référençant l'*id_joueuse* de la présidente
+:::
+
+![](./data/tp4-modele.PNG)
 
 ## Recherche de fausses données
 
 ::: {.callout-important icon="false" appearance="simple"}
-À la fédération des joueuses d'échecs, il y a malheureusement de nombreuses rumeurs de corruption, et même de dopage !
+À la fédération, il y a malheureusement de nombreuses rumeurs de corruption, et même de dopage !
 
 Votre première mission sera de vérifier l'intégrité des données de la base.
 :::
@@ -118,6 +135,26 @@ Passons maintenant à la table des parties. À votre avis, est-ce normal de joue
 - [ ] Supprimez les parties suspectes
 
 
+## Élection des présidentes
+
+::: {.callout-important icon="false" appearance="simple"}
+Vous avez peut-être remarqué que les clubs n'ont pas de présidentes, nous allons donc organiser des élections sans triche !
+
+Mais pour faire plus simple, la fédé a décidé de nommer comme présidente de chaque club, sa joueuse ayant le plus faible elo.
+:::
+
+- [ ] Listez pour chaque club ses joueuses
+  - affichez le nom du club, ainsi que tout le contenu de la table joueuse
+- [ ] Pour chaque club, trouvez le *elo* minimum
+- [ ] Stockez dans une table temporaire tous les couples (id_club, elo_minimum)
+- [ ] Trouvez pour chaque club, la joueuse avec le plus petit *elo*
+  - en cas d'égalité, prenez ensuite le plus petit *id_joueuse*
+- [ ] Stockez dans une table temporaire les couples (id_club, id_joueuse de la future présidente)
+- [ ] Mettez à jour la table *club* avec leurs nouvelles présidentes
+- [ ] Listez les clubs et leurs présidentes
+
+
+
 ## Quelques statistiques
 
 ::: {.callout-important icon="false" appearance="simple"}
@@ -156,6 +193,7 @@ Et enfin (si personne ne s'est pris un échec et mat) la finale, i.e. lorsque le
   - taux de victoire des blancs
   - taux de victoire des noirs
   - taux de matchs nuls
+- [ ] Affichez les joueuses ayant joué plus de 5 fois avec les pièces noires la *Défense Sicilienne*
 
 ## Afficher les résultat de parties
 
@@ -176,12 +214,12 @@ Les résultats de parties sont généralement affichés sous ce format :
 ::: {.callout-important icon="false" appearance="simple"}
 L'objectif de cette partie est d'aboutir à ce résultat.
 
-Vous noterez le *f* à la première ligne qui est l'éventuel titre de la joueuse en minuscule.
+Vous noterez le `f` à la première ligne qui est l'éventuel titre de la joueuse en minuscule.
 :::
 
 - [ ] Commencez par joindre les tables contenant les éléments à afficher
 - [ ] Ensuite, gardez uniquement les colonnes nécessaires
-- [ ] Concaténez titre, noms et prénoms, et renommez les colonnes pour obtenir l'affichage demandé
+- [ ] Concaténez titre, nom et prénom, et renommez les colonnes pour obtenir l'affichage demandé
 - [ ] Affichez les résultat du *Blitz à Rennes* (tournoi)
 
 
@@ -195,12 +233,11 @@ Une performance est une victoire contre une joueuse ayant au moins 400 points el
 - [ ] Classez-les par différence de elo décroissante
 
 ::: {.callout-important icon="false" appearance="simple"}
-Un parquet de :cookie: est à retirer dans le bureau du professeur pour l'heureuse gagnante !
+Un parquet de :cookie: est à retirer dans le bureau du professeur pour la joueuse détentrice de la meilleure perf !
 :::
 
 ## Gagnante des tournois
 
-:construction:
 
 Via la table *partie*, il est possible de retrouver quelle joueuse a participé à quel tournoi.
 
@@ -210,9 +247,9 @@ Nous allons donc commencer par créer une vue des participantes
 
 - [ ] Listez les différents tournois auquels a participé *HOU Yifan*
 - [ ] Listez tous les différents couples (id_joueuse, id_tournoi) possibles et existants dans la table *partie*
-- [ ] Créez la vue `participante([#id_tournoi, #id_joueuse]{.underline})`
+- [ ] Créez la vue `participante(id_tournoi, id_joueuse)`
   - en y insérant les données de la dernière requête
-- [ ] Déclarez les différentes clés de cette table
+- [ ] Vérifiez que cette vue contient 960 enregistrements
 
 ::: {.callout-important icon="false" appearance="simple"}
 Pour trouver les gagnantes des tournois, il faut trouver leurs nombres de points marqués.
@@ -258,7 +295,7 @@ SELECT <?>,
 ```
 :::
 
-- [ ] Vérifiez que pour toutes les parties, le score cumulé des 2 joueuses vaut 1
+- [ ] Vérifiez que pour toutes les parties, le score cumulé des deux joueuses vaut 1
 - [ ] Affichez le classement par points de l'*Open de Guingamp*
 
 Vous remarquez qu'il y a des égalités au nombre de points.
@@ -269,7 +306,7 @@ Vous remarquez qu'il y a des égalités au nombre de points.
 
 
 ::: {.callout-note collapse="true" title="Vérification"}
-Pour vérifier vos résultats :
+Une petite requête basique pour vérifier vos résultats :
 
 ```{.sql}
 WITH resultat_score AS (
@@ -313,90 +350,27 @@ SELECT CONCAT_WS(' ', LOWER(j.code_titre), j.nom, j.prenom) AS joueuse,
 ```
 :::
 
-
-
-
-
-
-- [ ] Ajoutez 2 colonnes de float à la table *resultat_partie* : `score_blanc` et `score_noir`
-- [ ] Renseignez les valeurs *0*, *0.5* ou *1* selon les cas
-
-
+- [ ] Créez une vue contenant le classement de chaque joueuse dans chaque tournoi
+  - incluez le nom du tournoi, de la joueuse, son nombre de points, la moyenne elo des adversaire
+  - calculez son classement dans le tournoi (:bulb: voir RANK OVER PARTITION BY)
+- [ ] Affichez la liste de toutes les gagnantes des tournois
 
 
 
 ## Qui est la meilleure ?
 
 
-
-- [ ] Complétez la requête ci-dessous pour obtenir son nombre de points marqués
-
-```{.sql}
-SELECT CASE
-           <à compléter>
-       END AS nb_points,
-       p.id_blanc,
-       p.id_noir,
-       rp.resultat
-  FROM echecs.partie p 
-  JOIN echecs.resultat_partie rp USING(id_resultat)
-  JOIN echecs.joueuse j ON (p.id_noir = j.id_joueuse OR p.id_blanc = j.id_joueuse)
- WHERE j.nom = 'HOU'
-```
-
-- [ ] Modifiez la requête pour calculer son nombre de points marqués et son nombre de parties jouées
-- [ ] Calculez ensuite son pourcentage de points marqués
-- [ ] Enfin retirez le filtre sur le nom de la joueuse pour afficher les performances de toutes les joueuses
-  - classez par ordre de performance décroissant
-
-::: {.callout-tip collapse="true"}
-Ou sinon pour calculer de manière un peu plus brutale :
-
-```{.sql}
-WITH points_joueuse AS (
-    SELECT CONCAT_WS(' ', LOWER(j.code_titre), j.nom, j.prenom) AS joueuse,
-        SUM(
-            CASE 
-                WHEN p.id_noir = j.id_joueuse AND p.id_resultat = 2 THEN 1 
-                WHEN p.id_blanc = j.id_joueuse AND p.id_resultat = 1 THEN 1 
-                WHEN p.id_resultat = 3 THEN 0.5
-                ELSE 0 
-            END
-        ) AS total_points,
-        COUNT(*) AS total_games
-    FROM echecs.partie p
-    JOIN echecs.joueuse j ON (p.id_noir = j.id_joueuse OR p.id_blanc = j.id_joueuse)
-    GROUP BY 1
-)
-SELECT joueuse,
-       total_points,
-       total_games,
-       ROUND((total_points / total_games) * 100, 2) AS percentage_points
-  FROM points_joueuse
- ORDER BY percentage_points DESC;
-```
+::: {.callout-important icon="false" appearance="simple"}
+Nous souhaitons calculer le pourcentage de points marqués par chaque joueuse, ainsi que ses taux de victoires, matchs nuls et défaites.
 :::
 
+Choisissez une joueuse, par exemple *Judith POLGAR*
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+- [ ] En utilisant une vue déjà créée, calculez son nombre de parties jouées et son nombre de points marqués
+- [ ] Calculez le ratio pour avoir son ratio de points par partie
+- [ ] Calculez ses taux de victoires, matchs nuls et défaites
+- [ ] Adaptez la requête pour faire ces calculs pour toutes les joueuses
+  - classez par ratio de points par partie déscroissant
 
 
 

@@ -38,7 +38,7 @@ website:
           - href: doc/tp/tp1.qmd
             text: "TP1 - Premières requêtes"
           - href: doc/tp/tp2.qmd
-            text: "TP2"
+            text: "TP2 - Vintage"
           - href: doc/tp/tp3.qmd
             text: "TP3 - Datalab"
           - href: doc/tp/tp4.qmd
