@@ -1,5 +1,5 @@
 ---
-title: "Welcome to the chess federation"
+title: "Chess Unofficial Federation"
 description: "TP4"
 author: "Ludovic Deneuville"
 format: 
@@ -159,29 +159,175 @@ Et enfin (si personne ne s'est pris un échec et mat) la finale, i.e. lorsque le
 
 ## Afficher les résultat de parties
 
-:construction:
+Les résultats de parties sont généralement affichés sous ce format :
 
+| Blancs                     |        | Rés   | Noirs               |       |
+|----------------------------|--------|-------|---------------------|-------|
+| PRZYMUSINSKI Nicolas       | 2043   | 0 - 1 | f GREGOIRE Sylvain  | 2268  |
+| MEYNARD Thibault           | 2256   | 1 - 0 | ZERMICHE Cherif	    | 2035  |	
+| HOUARD Yannick             | 2010   | X - X | PEREZ Flavio        | 2230  |
+| COULON Guillaume           | 2001   | 0 - 1 | JOLLY Jean-Francois | 2211  |
+| FISCHER Marc               | 2185   | X - X | DENEUVILLE Ludovic  | 2003  |
+| MATHIS Julien              | 1951   | 0 - 1 | PIERONI Guillaume   | 2170  |
+| BOIZANTE Yvain             | 2148   | X - X | SAEZ Nicolas        | 1998  |
 
-## Créer la table participante
-
-:construction:
-
-participante([#id_tournoi, #id_joueuse]{.underline})
-
-## Qui est la meilleure ?
+: Aix-les-Bains 2006
 
 ::: {.callout-important icon="false" appearance="simple"}
+L'objectif de cette partie est d'aboutir à ce résultat.
+
+Vous noterez le *f* à la première ligne qui est l'éventuel titre de la joueuse en minuscule.
+:::
+
+- [ ] Commencez par joindre les tables contenant les éléments à afficher
+- [ ] Ensuite, gardez uniquement les colonnes nécessaires
+- [ ] Concaténez titre, noms et prénoms, et renommez les colonnes pour obtenir l'affichage demandé
+- [ ] Affichez les résultat du *Blitz à Rennes* (tournoi)
+
+
+::: {.callout-important icon="false" appearance="simple"}
+Enfin nous souhaitons récompenser la meilleure performance.
+
+Une performance est une victoire contre une joueuse ayant au moins 400 points elo de plus.
+:::
+
+- [ ] Affichez toutes les performances
+- [ ] Classez-les par différence de elo décroissante
+
+::: {.callout-important icon="false" appearance="simple"}
+Un parquet de :cookie: est à retirer dans le bureau du professeur pour l'heureuse gagnante !
+:::
+
+## Gagnante des tournois
+
+:construction:
+
+Via la table *partie*, il est possible de retrouver quelle joueuse a participé à quel tournoi.
+
+Cependant ce n'est pas très intuitif, ni pratique.
+
+Nous allons donc commencer par créer une vue des participantes
+
+- [ ] Listez les différents tournois auquels a participé *HOU Yifan*
+- [ ] Listez tous les différents couples (id_joueuse, id_tournoi) possibles et existants dans la table *partie*
+- [ ] Créez la vue `participante([#id_tournoi, #id_joueuse]{.underline})`
+  - en y insérant les données de la dernière requête
+- [ ] Déclarez les différentes clés de cette table
+
+::: {.callout-important icon="false" appearance="simple"}
+Pour trouver les gagnantes des tournois, il faut trouver leurs nombres de points marqués.
+
 Une célébre citation dit « Je ne perds jamais, soit je gagne, soit j'apprends ».
 
 Aux échecs, la victoire rapporte 1 point, le match nul 0.5 et la défaite 0.
-
-Nous voulons calculer quelle joueuse est la plus performante i.e. marque le plus de points rapporté au nombre de parties
 :::
 
-- [ ] Ajoutez 2 colonnes de float à la table *resultat_partie* : `score_blanc` et `score_noir`
-- [ ] Renseignez les valeurs 0, 0.5 ou 1 selon les cas
+Cependant un problème se pose : une seule ligne de la *partie* contient le nombre de points marqués de 2 joueuses. 
 
-Pour y a ller pas à pas, choisissez une joueuse, par exemple *HOU Yifan*.
+| id_partie | id_blanc | id_noir | resultat |
+|-----------|----------|---------|----------|
+| 1         | 11       | 22      | 1 - 0    |
+| 2         | 123      | 99      | X - X    |
+
+Pour calculer les points de chaque joueuse, ce serait plus pratique de dupliquer chaque ligne pour avoir :
+
+| id_partie | id_joueuse | score |
+|-----------|------------|-------|
+| 1         | 11         | 1     |
+| 1         | 22         | 0     |
+| 2         | 123        | 0.5   |
+| 2         | 99         | 0.5   |
+
+- [ ] Listez pour toutes les parties, le score des blancs (comme sur le tableau ci-dessus)
+- [ ] Incluez également pour la suite, les colonnes :
+  - *id_tournoi*
+  - le *elo* de l'adversaire
+- [ ] Faites de même pour les noirs et stockez le tout dans une vue *partie_score*
+
+::: {.callout-tip collapse="true"}
+- Vous pouvez utiliser une structure *CASE WHEN THEN*
+
+```{.sql}
+SELECT <?>,
+       CASE
+           WHEN <?> THEN <?> 
+           WHEN <?> THEN <?>
+           ELSE <?>          
+       END AS score
+  FROM <?>
+```
+:::
+
+- [ ] Vérifiez que pour toutes les parties, le score cumulé des 2 joueuses vaut 1
+- [ ] Affichez le classement par points de l'*Open de Guingamp*
+
+Vous remarquez qu'il y a des égalités au nombre de points.
+
+- [ ] Utilisez la moyenne elo des adversaires pour départager les ex æquo
+  - Plus la joueuse a affronté d'autres joueuses fortes, mieux elle sera classée
+
+
+
+::: {.callout-note collapse="true" title="Vérification"}
+Pour vérifier vos résultats :
+
+```{.sql}
+WITH resultat_score AS (
+    SELECT rp.*,
+           CASE
+               WHEN rp.resultat IN ('1 - 0', '1 - F') THEN 1 
+               WHEN rp.resultat = 'X - X'             THEN 0.5
+               ELSE 0
+           END AS score_blanc,
+           CASE
+               WHEN rp.resultat IN ('0 - 1', 'F - 1') THEN 1 
+               WHEN rp.resultat = 'X - X'             THEN 0.5
+               ELSE 0
+           END AS score_noir
+      FROM echecs.resultat_partie rp
+    ),
+partie_score AS (
+    SELECT p.id_partie,
+           p.id_tournoi,
+           UNNEST(ARRAY[id_blanc, id_noir]) AS id_joueuse,
+           UNNEST(ARRAY[score_blanc, score_noir]) AS score,
+           UNNEST(ARRAY[jn.elo, jb.elo]) AS elo_adversaire
+      FROM echecs.partie p
+      JOIN resultat_score USING(id_resultat)
+      JOIN echecs.joueuse jb ON (jb.id_joueuse = p.id_blanc)
+      JOIN echecs.joueuse jn ON (jn.id_joueuse = p.id_noir)
+    )
+SELECT CONCAT_WS(' ', LOWER(j.code_titre), j.nom, j.prenom) AS joueuse,
+       j.elo,
+       SUM(ps.score) AS points,
+       ROUND(AVG(ps.elo_adversaire)) AS moyenne_elo_adversaire
+  FROM echecs.joueuse j
+  JOIN partie_score ps USING(id_joueuse)
+  JOIN echecs.tournoi t USING(id_tournoi)
+ WHERE t.nom = 'Open de Guingamp'
+ GROUP BY j.id_joueuse,
+          joueuse,
+          j.elo
+ ORDER BY points DESC,
+          moyenne_elo_adversaire DESC;
+```
+:::
+
+
+
+
+
+
+- [ ] Ajoutez 2 colonnes de float à la table *resultat_partie* : `score_blanc` et `score_noir`
+- [ ] Renseignez les valeurs *0*, *0.5* ou *1* selon les cas
+
+
+
+
+
+## Qui est la meilleure ?
+
+
 
 - [ ] Complétez la requête ci-dessous pour obtenir son nombre de points marqués
 

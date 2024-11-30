@@ -242,13 +242,20 @@ Vous venez ici d'utiliser des données disponibles sur internet. Vous pouvez ég
 
 ## Stockage S3
 
+::: {.callout-note title="Définitions"}
+S3 : Simple Storage System.
+
+Inventé par Amazon, ce système de stockage est devenu l'outil standard du marché pour le stockage en ligne.
+
+[MinIO](https://min.io/){target="_blank"} est une solution alternative de stockage d'objets open-source qui permet de déployer facilement un stockage évolutif et performant. Elle est compatible avec l'API [S3 d'Amazon](https://aws.amazon.com/fr/s3/){target="_blank"}, ce qui facilite l'intégration avec les applications existantes.
+:::
+
 Lorsque l'on travaille dans le cloud, il est essentiel de [séparer les données des programmes]{.underline} pour :
 
 - mieux gérer les ressources
 - renforcer la sécurité en limitant les accès et les permissions
 - permettre une scalabilité indépendante des composants
 
-[MinIO](https://min.io/){target="_blank"} est une solution de stockage d'objets open-source qui permet de déployer facilement un stockage évolutif et performant. Elle est compatible avec l'API [S3 d'Amazon](https://aws.amazon.com/fr/s3/){target="_blank"}, ce qui facilite l'intégration avec les applications existantes. 
 
 MinIO offre :
 
@@ -586,6 +593,13 @@ Vous pouvez également accéder à votre stockage avec la console Minio :
 
 - <https://minio-console.lab.sspcloud.fr/>{target="_blank"}
 - <https://minio-simple.lab.groupe-genes.fr>{target="_blank"}
+
+---
+
+Pour plus de détails sur le stockage des fichiers sur S3 :
+
+- [Les données sur le cloud](https://pythonds.linogaliana.fr/content/modern-ds/s3.html#les-donn%C3%A9es-sur-le-cloud){target="_blank"} , Python pour la data science, Lino Galiana
+
 
 
 ## Libérer les ressources
