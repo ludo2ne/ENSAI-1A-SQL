@@ -347,7 +347,7 @@ Problèmes
 <section id="table-temporaire" class="level3">
 <h3 class="anchored" data-anchor-id="table-temporaire">Table temporaire</h3>
 <p>N’existe que le temps de la session</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> TEMP <span class="kw">TABLE</span> joueuses_fr_elo2000 </span>
+<div class="sourceCode" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TEMPORARY</span> <span class="kw">TABLE</span> joueuses_fr_elo2000 </span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">AS</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> joueuse</span>
@@ -391,6 +391,7 @@ Problèmes
 <section id="todo" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="todo"><span class="header-section-number">2</span> Todo</h2>
 <ul>
+<li>CASE</li>
 <li>INDEX</li>
 <li>GRANT</li>
 <li>Trigger</li>

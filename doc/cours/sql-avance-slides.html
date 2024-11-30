@@ -292,7 +292,7 @@ Ludovic Deneuville
 <section id="table-temporaire" class="slide level3">
 <h3>Table temporaire</h3>
 <p>N’existe que le temps de la session</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> TEMP <span class="kw">TABLE</span> joueuses_fr_elo2000 </span>
+<div class="sourceCode" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TEMPORARY</span> <span class="kw">TABLE</span> joueuses_fr_elo2000 </span>
 <span id="cb4-2"><a aria-hidden="true" tabindex="-1"></a><span class="kw">AS</span></span>
 <span id="cb4-3"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
 <span id="cb4-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> joueuse</span>
@@ -335,6 +335,7 @@ Ludovic Deneuville
 <section id="todo" class="title-slide slide level2 center">
 <h2>Todo</h2>
 <ul>
+<li>CASE</li>
 <li>INDEX</li>
 <li>GRANT</li>
 <li>Trigger</li>
