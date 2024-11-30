@@ -195,7 +195,7 @@ Et enfin (si personne ne s'est pris un échec et mat) la finale, i.e. lorsque le
   - taux de matchs nuls
 - [ ] Affichez les joueuses ayant joué plus de 5 fois avec les pièces noires la *Défense Sicilienne*
 
-## Afficher les résultat de parties
+## Afficher les résultats de parties
 
 Les résultats de parties sont généralement affichés sous ce format :
 
@@ -236,7 +236,7 @@ Une performance est une victoire contre une joueuse ayant au moins 400 points el
 Un parquet de :cookie: est à retirer dans le bureau du professeur pour la joueuse détentrice de la meilleure perf !
 :::
 
-## Gagnante des tournois
+## Gagnantes des tournois
 
 
 Via la table *partie*, il est possible de retrouver quelle joueuse a participé à quel tournoi.

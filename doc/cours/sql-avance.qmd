@@ -97,7 +97,7 @@ Usage avancé
 N'existe que le temps de la session
 
 ```{.sql}
-CREATE TEMP TABLE joueuses_fr_elo2000 
+CREATE TEMPORARY TABLE joueuses_fr_elo2000 
 AS
 SELECT *
   FROM joueuse
@@ -143,6 +143,8 @@ SELECT *
 
 ## Todo
 
+
+- CASE
 - INDEX
 - GRANT
 - Trigger
