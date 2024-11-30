@@ -77,6 +77,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap-a2a0e12bb60fe246e2e9f081b0cc26f8.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../../site_libs/bootstrap/bootstrap-dark-786175bc03f08c9c0cfecc4767a07620.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -181,7 +184,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
         <li>
     <a class="dropdown-item" href="../../doc/tp/tp2.html">
- <span class="dropdown-text">TP2</span></a>
+ <span class="dropdown-text">TP2 - Vintage</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="../../doc/tp/tp3.html">
@@ -231,12 +234,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul class="collapse">
   <li><a href="#chargez-les-données" id="toc-chargez-les-données" class="nav-link" data-scroll-target="#chargez-les-données"><span class="header-section-number">2.1</span> Chargez les données</a></li>
   <li><a href="#description" id="toc-description" class="nav-link" data-scroll-target="#description"><span class="header-section-number">2.2</span> Description</a></li>
+  <li><a href="#modèle-de-données" id="toc-modèle-de-données" class="nav-link" data-scroll-target="#modèle-de-données"><span class="header-section-number">2.3</span> Modèle de données</a></li>
   </ul></li>
   <li><a href="#recherche-de-fausses-données" id="toc-recherche-de-fausses-données" class="nav-link" data-scroll-target="#recherche-de-fausses-données"><span class="header-section-number">3</span> Recherche de fausses données</a></li>
-  <li><a href="#quelques-statistiques" id="toc-quelques-statistiques" class="nav-link" data-scroll-target="#quelques-statistiques"><span class="header-section-number">4</span> Quelques statistiques</a></li>
-  <li><a href="#afficher-les-résultat-de-parties" id="toc-afficher-les-résultat-de-parties" class="nav-link" data-scroll-target="#afficher-les-résultat-de-parties"><span class="header-section-number">5</span> Afficher les résultat de parties</a></li>
-  <li><a href="#gagnante-des-tournois" id="toc-gagnante-des-tournois" class="nav-link" data-scroll-target="#gagnante-des-tournois"><span class="header-section-number">6</span> Gagnante des tournois</a></li>
-  <li><a href="#qui-est-la-meilleure" id="toc-qui-est-la-meilleure" class="nav-link" data-scroll-target="#qui-est-la-meilleure"><span class="header-section-number">7</span> Qui est la meilleure ?</a></li>
+  <li><a href="#élection-des-présidentes" id="toc-élection-des-présidentes" class="nav-link" data-scroll-target="#élection-des-présidentes"><span class="header-section-number">4</span> Élection des présidentes</a></li>
+  <li><a href="#quelques-statistiques" id="toc-quelques-statistiques" class="nav-link" data-scroll-target="#quelques-statistiques"><span class="header-section-number">5</span> Quelques statistiques</a></li>
+  <li><a href="#afficher-les-résultat-de-parties" id="toc-afficher-les-résultat-de-parties" class="nav-link" data-scroll-target="#afficher-les-résultat-de-parties"><span class="header-section-number">6</span> Afficher les résultat de parties</a></li>
+  <li><a href="#gagnante-des-tournois" id="toc-gagnante-des-tournois" class="nav-link" data-scroll-target="#gagnante-des-tournois"><span class="header-section-number">7</span> Gagnante des tournois</a></li>
+  <li><a href="#qui-est-la-meilleure" id="toc-qui-est-la-meilleure" class="nav-link" data-scroll-target="#qui-est-la-meilleure"><span class="header-section-number">8</span> Qui est la meilleure ?</a></li>
   <li><a href="#arrêtez-votre-service" id="toc-arrêtez-votre-service" class="nav-link" data-scroll-target="#arrêtez-votre-service">Arrêtez votre service</a></li>
   </ul>
 </nav>
@@ -315,13 +320,34 @@ Important
 </section>
 <section id="les-données" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="les-données"><span class="header-section-number">2</span> Les données</h2>
+<div class="callout callout-style-simple callout-important no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Votre mission du jour sera d’aider la nouvellement créée <em>Fédération Française des Échecs Sincéres et Sans Subterfuges</em> à corriger les erreurs dans sa base de données pour ensuite récompenser ses meilleures joueuses.</p>
+</div>
+</div>
+</div>
 <section id="chargez-les-données" class="level3" data-number="2.1">
 <h3 data-number="2.1" class="anchored" data-anchor-id="chargez-les-données"><span class="header-section-number">2.1</span> Chargez les données</h3>
-<p><span class="emoji" data-emoji="construction">🚧</span></p>
+<ul class="task-list">
+<li><label><input type="checkbox">Copiez le contenu de ces 2 scripts sql</label>
+<ul>
+<li><a href="./data/tp4-create-table.sql" target="_blank">création des tables</a></li>
+<li><a href="./data/tp4-pop-table.sql" target="_blank">insertion des données</a></li>
+</ul></li>
+<li><label><input type="checkbox">Collez-les dans la fenêtre SQL de CloudBeaver</label></li>
+<li><label><input type="checkbox">Exécutez les scripts</label>
+<ul>
+<li>Cliquez sur la petite icone sous les triangles oranges qui ressemble à <span class="emoji" data-emoji="scroll">📜</span></li>
+<li>raccourci (ALT + X)</li>
+</ul></li>
+</ul>
 </section>
 <section id="description" class="level3" data-number="2.2">
 <h3 data-number="2.2" class="anchored" data-anchor-id="description"><span class="header-section-number">2.2</span> Description</h3>
-<p>Les données de ce TP représentent le système d’information de la fédération des joueuses d’echecs.</p>
 <p>Les tables sont les suivantes :</p>
 <ul>
 <li><strong>joueuse</strong>(<u>id_joueuse</u>, code_titre, nom, prenom, elo, date_naissance, #id_club, arbitre)</li>
@@ -331,7 +357,6 @@ Important
 <li><strong>resultat_partie</strong>(<u>id_resultat</u>, resultat, description)</li>
 <li><strong>ouverture</strong>(<u>id_ouverture</u>, eco, nom, coups)</li>
 <li><strong>tournoi</strong>(<u>id_tournoi</u>, nom, ville, date_debut, date_fin, #id_cadence, nb_rondes, nb_participantes, #id_arbitre)</li>
-<li><strong>participante</strong>(<u>#id_tournoi, #id_joueuse</u>)</li>
 <li><strong>cadence</strong>(<u>id_cadence</u>, nom, description)</li>
 </ul>
 <table class="caption-top table">
@@ -360,7 +385,7 @@ Important
 </tr>
 <tr class="even">
 <td><strong>Partie</strong></td>
-<td>Partie entre 2 joueuses</td>
+<td>Partie entre 2 joueuses, soit libre, soit dans le cadre d’un tournoi</td>
 </tr>
 <tr class="odd">
 <td><strong>Résultat_partie</strong></td>
@@ -375,17 +400,36 @@ Important
 <td>Liste des tournois</td>
 </tr>
 <tr class="even">
-<td><strong>Participante</strong></td>
-<td>Liste des participantes et des tournois auxquels elles participent</td>
-</tr>
-<tr class="odd">
 <td><strong>Cadence</strong></td>
 <td>Rythme de jeu lors d’un tournoi (blitz, rapide, lent)</td>
 </tr>
 </tbody>
 </table>
-<hr>
-<p><span class="emoji" data-emoji="construction">🚧</span> diag</p>
+</section>
+<section id="modèle-de-données" class="level3" data-number="2.3">
+<h3 data-number="2.3" class="anchored" data-anchor-id="modèle-de-données"><span class="header-section-number">2.3</span> Modèle de données</h3>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Dans le modèle de données, certaines tables sont reliées 2 fois entre elles :</p>
+<ul>
+<li><em>joueuse</em> et <em>partie</em> : car lors d’une partie une joueuse a les blancs et l’autre, les noirs</li>
+<li><em>joueuse</em> et <em>club</em> :
+<ul>
+<li><em>id_club</em> est une clé étrangère dans la table <em>joueuse</em> car une joueuse est membre d’un seul club</li>
+<li><em>id_presidente</em> est une clé étrangère de la table <em>club</em> référençant l’<em>id_joueuse</em> de la présidente</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<p><a href="./data/tp4-modele.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="./data/tp4-modele.PNG" class="img-fluid"></a></p>
 </section>
 </section>
 <section id="recherche-de-fausses-données" class="level2" data-number="3">
@@ -396,7 +440,7 @@ Important
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>À la fédération des joueuses d’échecs, il y a malheureusement de nombreuses rumeurs de corruption, et même de dopage !</p>
+<p>À la fédération, il y a malheureusement de nombreuses rumeurs de corruption, et même de dopage !</p>
 <p>Votre première mission sera de vérifier l’intégrité des données de la base.</p>
 </div>
 </div>
@@ -425,7 +469,7 @@ Important
 <li><label><input type="checkbox">Une fois que le résultat est assez correct,</label></li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -434,7 +478,7 @@ Tip
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
 <li>Vous pouvez utiliser la fonction <em>REPLACE()</em>
@@ -454,8 +498,37 @@ Tip
 <li><label><input type="checkbox">Supprimez les parties suspectes</label></li>
 </ul>
 </section>
-<section id="quelques-statistiques" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="quelques-statistiques"><span class="header-section-number">4</span> Quelques statistiques</h2>
+<section id="élection-des-présidentes" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="élection-des-présidentes"><span class="header-section-number">4</span> Élection des présidentes</h2>
+<div class="callout callout-style-simple callout-important no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Vous avez peut-être remarqué que les clubs n’ont pas de présidentes, nous allons donc organiser des élections sans triche !</p>
+<p>Mais pour faire plus simple, la fédé a décidé de nommer comme présidente de chaque club, sa joueuse ayant le plus faible elo.</p>
+</div>
+</div>
+</div>
+<ul class="task-list">
+<li><label><input type="checkbox">Listez pour chaque club ses joueuses</label>
+<ul>
+<li>affichez le nom du club, ainsi que tout le contenu de la table joueuse</li>
+</ul></li>
+<li><label><input type="checkbox">Pour chaque club, trouvez le <em>elo</em> minimum</label></li>
+<li><label><input type="checkbox">Stockez dans une table temporaire tous les couples (id_club, elo_minimum)</label></li>
+<li><label><input type="checkbox">Trouvez pour chaque club, la joueuse avec le plus petit <em>elo</em></label>
+<ul>
+<li>en cas d’égalité, prenez ensuite le plus petit <em>id_joueuse</em></li>
+</ul></li>
+<li><label><input type="checkbox">Stockez dans une table temporaire les couples (id_club, id_joueuse de la future présidente)</label></li>
+<li><label><input type="checkbox">Mettez à jour la table <em>club</em> avec leurs nouvelles présidentes</label></li>
+<li><label><input type="checkbox">Listez les clubs et leurs présidentes</label></li>
+</ul>
+</section>
+<section id="quelques-statistiques" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="quelques-statistiques"><span class="header-section-number">5</span> Quelques statistiques</h2>
 <div class="callout callout-style-simple callout-important no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -476,7 +549,7 @@ Tip
 <li><label><input type="checkbox">Pour chaque tournoi, calculez également les taux de victoire des blancs et des noirs, ainsi que celui de matchs nuls</label></li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -485,7 +558,7 @@ Tip
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
 <li>Commencez par exemple par calculer le nombre de victoires des blancs</li>
@@ -527,10 +600,11 @@ Ouvertures
 <li>taux de victoire des noirs</li>
 <li>taux de matchs nuls</li>
 </ul></li>
+<li><label><input type="checkbox">Affichez les joueuses ayant joué plus de 5 fois avec les pièces noires la <em>Défense Sicilienne</em></label></li>
 </ul>
 </section>
-<section id="afficher-les-résultat-de-parties" class="level2" data-number="5">
-<h2 data-number="5" class="anchored" data-anchor-id="afficher-les-résultat-de-parties"><span class="header-section-number">5</span> Afficher les résultat de parties</h2>
+<section id="afficher-les-résultat-de-parties" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="afficher-les-résultat-de-parties"><span class="header-section-number">6</span> Afficher les résultat de parties</h2>
 <p>Les résultats de parties sont généralement affichés sous ce format :</p>
 <table class="caption-top table">
 <caption>Aix-les-Bains 2006</caption>
@@ -609,14 +683,14 @@ Ouvertures
 </div>
 <div class="callout-body-container">
 <p>L’objectif de cette partie est d’aboutir à ce résultat.</p>
-<p>Vous noterez le <em>f</em> à la première ligne qui est l’éventuel titre de la joueuse en minuscule.</p>
+<p>Vous noterez le <code>f</code> à la première ligne qui est l’éventuel titre de la joueuse en minuscule.</p>
 </div>
 </div>
 </div>
 <ul class="task-list">
 <li><label><input type="checkbox">Commencez par joindre les tables contenant les éléments à afficher</label></li>
 <li><label><input type="checkbox">Ensuite, gardez uniquement les colonnes nécessaires</label></li>
-<li><label><input type="checkbox">Concaténez titre, noms et prénoms, et renommez les colonnes pour obtenir l’affichage demandé</label></li>
+<li><label><input type="checkbox">Concaténez titre, nom et prénom, et renommez les colonnes pour obtenir l’affichage demandé</label></li>
 <li><label><input type="checkbox">Affichez les résultat du <em>Blitz à Rennes</em> (tournoi)</label></li>
 </ul>
 <div class="callout callout-style-simple callout-important no-icon">
@@ -640,25 +714,24 @@ Ouvertures
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-body-container">
-<p>Un parquet de <span class="emoji" data-emoji="cookie">🍪</span> est à retirer dans le bureau du professeur pour l’heureuse gagnante !</p>
+<p>Un parquet de <span class="emoji" data-emoji="cookie">🍪</span> est à retirer dans le bureau du professeur pour la joueuse détentrice de la meilleure perf !</p>
 </div>
 </div>
 </div>
 </section>
-<section id="gagnante-des-tournois" class="level2" data-number="6">
-<h2 data-number="6" class="anchored" data-anchor-id="gagnante-des-tournois"><span class="header-section-number">6</span> Gagnante des tournois</h2>
-<p><span class="emoji" data-emoji="construction">🚧</span></p>
+<section id="gagnante-des-tournois" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="gagnante-des-tournois"><span class="header-section-number">7</span> Gagnante des tournois</h2>
 <p>Via la table <em>partie</em>, il est possible de retrouver quelle joueuse a participé à quel tournoi.</p>
 <p>Cependant ce n’est pas très intuitif, ni pratique.</p>
 <p>Nous allons donc commencer par créer une vue des participantes</p>
 <ul class="task-list">
 <li><label><input type="checkbox">Listez les différents tournois auquels a participé <em>HOU Yifan</em></label></li>
 <li><label><input type="checkbox">Listez tous les différents couples (id_joueuse, id_tournoi) possibles et existants dans la table <em>partie</em></label></li>
-<li><label><input type="checkbox">Créez la vue <code>participante([#id_tournoi, #id_joueuse]{.underline})</code></label>
+<li><label><input type="checkbox">Créez la vue <code>participante(id_tournoi, id_joueuse)</code></label>
 <ul>
 <li>en y insérant les données de la dernière requête</li>
 </ul></li>
-<li><label><input type="checkbox">Déclarez les différentes clés de cette table</label></li>
+<li><label><input type="checkbox">Vérifiez que cette vue contient 960 enregistrements</label></li>
 </ul>
 <div class="callout callout-style-simple callout-important no-icon">
 <div class="callout-body d-flex">
@@ -739,7 +812,7 @@ Ouvertures
 <li><label><input type="checkbox">Faites de même pour les noirs et stockez le tout dans une vue <em>partie_score</em></label></li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -748,7 +821,7 @@ Tip
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
 <li>Vous pouvez utiliser une structure <em>CASE WHEN THEN</em></li>
@@ -764,7 +837,7 @@ Tip
 </div>
 </div>
 <ul class="task-list">
-<li><label><input type="checkbox">Vérifiez que pour toutes les parties, le score cumulé des 2 joueuses vaut 1</label></li>
+<li><label><input type="checkbox">Vérifiez que pour toutes les parties, le score cumulé des deux joueuses vaut 1</label></li>
 <li><label><input type="checkbox">Affichez le classement par points de l’<em>Open de Guingamp</em></label></li>
 </ul>
 <p>Vous remarquez qu’il y a des égalités au nombre de points.</p>
@@ -775,7 +848,7 @@ Tip
 </ul></li>
 </ul>
 <div class="callout callout-style-default callout-note callout-titled" title="Vérification">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -784,9 +857,9 @@ Vérification
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>Pour vérifier vos résultats :</p>
+<p>Une petite requête basique pour vérifier vos résultats :</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">WITH</span> resultat_score <span class="kw">AS</span> (</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> rp.<span class="op">*</span>,</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>           <span class="cf">CASE</span></span>
@@ -829,70 +902,36 @@ Vérification
 </div>
 </div>
 <ul class="task-list">
-<li><label><input type="checkbox">Ajoutez 2 colonnes de float à la table <em>resultat_partie</em> : <code>score_blanc</code> et <code>score_noir</code></label></li>
-<li><label><input type="checkbox">Renseignez les valeurs <em>0</em>, <em>0.5</em> ou <em>1</em> selon les cas</label></li>
+<li><label><input type="checkbox">Créez une vue contenant le classement de chaque joueuse dans chaque tournoi</label>
+<ul>
+<li>incluez le nom du tournoi, de la joueuse, son nombre de points, la moyenne elo des adversaire</li>
+<li>calculez son classement dans le tournoi (<span class="emoji" data-emoji="bulb">💡</span> voir RANK OVER PARTITION BY)</li>
+</ul></li>
+<li><label><input type="checkbox">Affichez la liste de toutes les gagnantes des tournois</label></li>
 </ul>
 </section>
-<section id="qui-est-la-meilleure" class="level2" data-number="7">
-<h2 data-number="7" class="anchored" data-anchor-id="qui-est-la-meilleure"><span class="header-section-number">7</span> Qui est la meilleure ?</h2>
+<section id="qui-est-la-meilleure" class="level2" data-number="8">
+<h2 data-number="8" class="anchored" data-anchor-id="qui-est-la-meilleure"><span class="header-section-number">8</span> Qui est la meilleure ?</h2>
+<div class="callout callout-style-simple callout-important no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Nous souhaitons calculer le pourcentage de points marqués par chaque joueuse, ainsi que ses taux de victoires, matchs nuls et défaites.</p>
+</div>
+</div>
+</div>
+<p>Choisissez une joueuse, par exemple <em>Judith POLGAR</em></p>
 <ul class="task-list">
-<li><label><input type="checkbox">Complétez la requête ci-dessous pour obtenir son nombre de points marqués</label></li>
-</ul>
-<div class="sourceCode" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="cf">CASE</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>           <span class="op">&lt;</span>à compléter<span class="op">&gt;</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>       <span class="cf">END</span> <span class="kw">AS</span> nb_points,</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>       p.id_blanc,</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>       p.id_noir,</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>       rp.resultat</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.partie p </span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> echecs.resultat_partie rp <span class="kw">USING</span>(id_resultat)</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> echecs.joueuse j <span class="kw">ON</span> (p.id_noir <span class="op">=</span> j.id_joueuse <span class="kw">OR</span> p.id_blanc <span class="op">=</span> j.id_joueuse)</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> j.nom <span class="op">=</span> <span class="st">'HOU'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<ul class="task-list">
-<li><label><input type="checkbox">Modifiez la requête pour calculer son nombre de points marqués et son nombre de parties jouées</label></li>
-<li><label><input type="checkbox">Calculez ensuite son pourcentage de points marqués</label></li>
-<li><label><input type="checkbox">Enfin retirez le filtre sur le nom de la joueuse pour afficher les performances de toutes les joueuses</label>
+<li><label><input type="checkbox">En utilisant une vue déjà créée, calculez son nombre de parties jouées et son nombre de points marqués</label></li>
+<li><label><input type="checkbox">Calculez le ratio pour avoir son ratio de points par partie</label></li>
+<li><label><input type="checkbox">Calculez ses taux de victoires, matchs nuls et défaites</label></li>
+<li><label><input type="checkbox">Adaptez la requête pour faire ces calculs pour toutes les joueuses</label>
 <ul>
-<li>classez par ordre de performance décroissant</li>
+<li>classez par ratio de points par partie déscroissant</li>
 </ul></li>
 </ul>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Ou sinon pour calculer de manière un peu plus brutale :</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">WITH</span> points_joueuse <span class="kw">AS</span> (</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> CONCAT_WS(<span class="st">' '</span>, <span class="fu">LOWER</span>(j.code_titre), j.nom, j.prenom) <span class="kw">AS</span> joueuse,</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>        <span class="fu">SUM</span>(</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>            <span class="cf">CASE</span> </span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>                <span class="cf">WHEN</span> p.id_noir <span class="op">=</span> j.id_joueuse <span class="kw">AND</span> p.id_resultat <span class="op">=</span> <span class="dv">2</span> <span class="cf">THEN</span> <span class="dv">1</span> </span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>                <span class="cf">WHEN</span> p.id_blanc <span class="op">=</span> j.id_joueuse <span class="kw">AND</span> p.id_resultat <span class="op">=</span> <span class="dv">1</span> <span class="cf">THEN</span> <span class="dv">1</span> </span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>                <span class="cf">WHEN</span> p.id_resultat <span class="op">=</span> <span class="dv">3</span> <span class="cf">THEN</span> <span class="fl">0.5</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>                <span class="cf">ELSE</span> <span class="dv">0</span> </span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>            <span class="cf">END</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>        ) <span class="kw">AS</span> total_points,</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>        <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> total_games</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FROM</span> echecs.partie p</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">JOIN</span> echecs.joueuse j <span class="kw">ON</span> (p.id_noir <span class="op">=</span> j.id_joueuse <span class="kw">OR</span> p.id_blanc <span class="op">=</span> j.id_joueuse)</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    <span class="kw">GROUP</span> <span class="kw">BY</span> <span class="dv">1</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> joueuse,</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>       total_points,</span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>       total_games,</span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>       <span class="fu">ROUND</span>((total_points <span class="op">/</span> total_games) <span class="op">*</span> <span class="dv">100</span>, <span class="dv">2</span>) <span class="kw">AS</span> percentage_points</span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> points_joueuse</span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a> <span class="kw">ORDER</span> <span class="kw">BY</span> percentage_points <span class="kw">DESC</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-</div>
 </section>
 <section id="arrêtez-votre-service" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="arrêtez-votre-service">Arrêtez votre service</h2>
@@ -1486,6 +1525,38 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 
