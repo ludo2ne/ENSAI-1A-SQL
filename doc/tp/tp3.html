@@ -188,8 +188,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">TP3 - Datalab</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../doc/tp/tp3.html">
- <span class="dropdown-text">TP4 - Chess</span></a>
+    <a class="dropdown-item" href="../../doc/tp/tp4.html">
+ <span class="dropdown-text">TP4 - Chess Unofficial Fed</span></a>
   </li>  
     </ul>
   </li>
@@ -595,13 +595,27 @@ Tip
 </section>
 <section id="stockage-s3" class="level2" data-number="3">
 <h2 data-number="3" class="anchored" data-anchor-id="stockage-s3"><span class="header-section-number">3</span> Stockage S3</h2>
+<div class="callout callout-style-default callout-note callout-titled" title="Définitions">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Définitions
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>S3 : Simple Storage System.</p>
+<p>Inventé par Amazon, ce système de stockage est devenu l’outil standard du marché pour le stockage en ligne.</p>
+<p><a href="https://min.io/" target="_blank">MinIO</a> est une solution alternative de stockage d’objets open-source qui permet de déployer facilement un stockage évolutif et performant. Elle est compatible avec l’API <a href="https://aws.amazon.com/fr/s3/" target="_blank">S3 d’Amazon</a>, ce qui facilite l’intégration avec les applications existantes.</p>
+</div>
+</div>
 <p>Lorsque l’on travaille dans le cloud, il est essentiel de <u>séparer les données des programmes</u> pour :</p>
 <ul>
 <li>mieux gérer les ressources</li>
 <li>renforcer la sécurité en limitant les accès et les permissions</li>
 <li>permettre une scalabilité indépendante des composants</li>
 </ul>
-<p><a href="https://min.io/" target="_blank">MinIO</a> est une solution de stockage d’objets open-source qui permet de déployer facilement un stockage évolutif et performant. Elle est compatible avec l’API <a href="https://aws.amazon.com/fr/s3/" target="_blank">S3 d’Amazon</a>, ce qui facilite l’intégration avec les applications existantes.</p>
 <p>MinIO offre :</p>
 <ul>
 <li>une haute disponibilité</li>
@@ -748,7 +762,7 @@ Polars
 </ul></li>
 </ul>
 <div class="callout callout-style-default callout-note callout-titled" title="Mode Lazy">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-14-contents" aria-controls="callout-14" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -757,7 +771,7 @@ Mode Lazy
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-13" class="callout-13-contents callout-collapse collapse">
+<div id="callout-14" class="callout-14-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Vous avez appelé la méthode <code>scan_parquet()</code> qui correspond au mode <em>Lazy</em> de Polars.</p>
 <p>Le mode <em>Lazy</em> signifie que Polars va accumuler toutes les instructions que vous lui donner sans pour autant les exécuter tout de suite.</p>
@@ -887,7 +901,7 @@ Fil rouge
 <span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_prenom_annee)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Diagramme en barre">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-17-contents" aria-controls="callout-17" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -896,7 +910,7 @@ Diagramme en barre
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-17" class="callout-17-contents callout-collapse collapse">
+<div id="callout-18" class="callout-18-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Vous pouvez également tracer un graphique avec ces données :</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -950,7 +964,7 @@ Diagramme en barre
 <li><label><input type="checkbox">Trouvez le prénom classé au rang demandé</label></li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-18-contents" aria-controls="callout-18" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-19-contents" aria-controls="callout-19" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -959,7 +973,7 @@ Tip
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-18" class="callout-18-contents callout-collapse collapse">
+<div id="callout-19" class="callout-19-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
 <li>Vous pouvez stocker le résultat de la 1ère requête dans une vue</li>
@@ -1042,6 +1056,11 @@ Tip
 <ul>
 <li><a href="https://minio-console.lab.sspcloud.fr/" target="_blank">https://minio-console.lab.sspcloud.fr/</a></li>
 <li><a href="https://minio-simple.lab.groupe-genes.fr" target="_blank">https://minio-simple.lab.groupe-genes.fr</a></li>
+</ul>
+<hr>
+<p>Pour plus de détails sur le stockage des fichiers sur S3 :</p>
+<ul>
+<li><a href="https://pythonds.linogaliana.fr/content/modern-ds/s3.html#les-donn%C3%A9es-sur-le-cloud" target="_blank">Les données sur le cloud</a> , Python pour la data science, Lino Galiana</li>
 </ul>
 </section>
 </section>
@@ -1223,7 +1242,7 @@ Config Git
 </ul></li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-26-contents" aria-controls="callout-26" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-27-contents" aria-controls="callout-27" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1232,7 +1251,7 @@ Tip
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-26" class="callout-26-contents callout-collapse collapse">
+<div id="callout-27" class="callout-27-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
 <li><code>git add .</code></li>
