@@ -13,7 +13,6 @@ number-depth: 3
 lightbox: true
 ---
 
-:construction:
 
 ## Introduction {.unnumbered}
 
@@ -45,7 +44,7 @@ Pour celles et ceux qui iront à l'INSEE, une autre instance nommée LS3 n'est a
 
 Onyxia est un logiciel Libre et Open Source. Chacun peut installer sa propre instance sur son infra. C'est ce qu'ont fait de nombreux organismes, ainsi que le GENES.
 
-Pour plus de détails, vous pouvez consulter la section [Pour aller plus loin](#pour-aller-plus-loin).
+{{< video https://www.youtube.com/watch?v=FvpNfVrxBFM >}}
 
 ### Les services {.unnumbered}
 
@@ -452,8 +451,20 @@ Il se rappelle qu'ils avaient trouvé le prénom en parcourant... Le fichier des
 
 Ce fichier est stocké sur le bucket d'un autre utilisateur à l'une des adresses suivante :
 
+- SSP Cloud : `s3://ludo2ne/diffusion/ENSAI/SQL-TP/prenoms-nat2022.parquet`
 - Datalab du GENES : `s3://ldeneuville-ensai/diffusion/ENSAI/SQL-TP/prenoms-nat2022.parquet`
-- SSP Cloud : `s3://ludo2ne/diffusion/ENSAI/TP-SQL/prenoms-nat2022.parquet`
+
+::: {.callout-important}
+Malheureusement sur le Datalab du GENES, la fonctionnalité n'est pas encore implémentée sur le Datalab du GENES.
+
+Les dossiers *diffusion* de chaque utilisateur ne sont pas accessibles en lecture.
+
+Ce n'est plus trop dans la philosophie de l'exercice, mais pour contourner le problème : 
+
+- Téléchargez le [fichier des prenoms](https://static.data.gouv.fr/resources/base-prenoms-insee-format-parquet/20231121-161435/prenoms-nat2022.parquet){target="_blank"}
+- Stockez le sur votre S3
+- Utilisez ce fichier pour la suite
+:::
 
 
 ::: {.callout-note title="Diffusion"}
@@ -585,7 +596,9 @@ La réponse :
 
 Vous pouvez également exporter vos fichiers vers S3.
 
-- [ ] En utilisant la librairie *s3fs*
+Nous allons utiliser ici la librairie [s3fs](https://s3fs.readthedocs.io/){target="_blank"}.
+
+- [ ] Collez et lancez ce code :
   ```{.python}
   import s3fs
   
@@ -600,39 +613,11 @@ Vous pouvez également exporter vos fichiers vers S3.
   with fs.open(destination, mode='wb') as f:
       top10f2021.write_csv(f)
   ```
-- [ ] Sur le Datalab, allez dans Mes fichiers :arrow_right: diffusion :arrow_right: ENSAI
+- [ ] Sur le Datalab, allez dans `Mes fichiers` :arrow_right: ENSAI :arrow_right: SQL
   - le fichier *output.csv* a été généré
   - rafraichissez la page si besoin
 - [ ] Double-cliquez sur ce fichier pour en avoir un aperçu
 
-
-### Client MinIO
-
-::: {.callout-caution}
-Ne pas faire cette partie.
-:::
-
-Le [client MinIO](https://min.io/docs/minio/linux/reference/minio-mc.html){target="_blank"} installé et [utilisable depuis le terminal]{.underline} permet également d'interagir avec vos fichiers.
-
-Ouvrez un terminal (File :arrow_right: New :arrow_right: Terminal):
-
-- [ ] `mc ls s3/<username>/ENSAI/SQL` : pour lister le contenu de votre dossier
-- [ ] `mc cp s3/<username>/ENSAI/SQL/output.csv .` : pour copier le fichier depuis s3 dans votre dossier courant
-  - le fichier apparait dans votre explorer
-- [ ] Supprimez ce fichier : `rm output.csv`
-  - Car importer les fichiers de données dans son espace de travail n'est pas une bonne pratique
-
-::: {.callout-tip}
-La commande `mc --help` liste toutes les commandes possibles (ESPACE pour défiler, CTRL+C pour sortir)
-:::
-
-
-### Console Minio
-
-Vous pouvez également accéder à votre stockage avec la console Minio :
-
-- <https://minio-console.lab.sspcloud.fr/>{target="_blank"}
-- <https://minio-simple.lab.groupe-genes.fr>{target="_blank"}
 
 ---
 
@@ -642,7 +627,7 @@ Pour plus de détails sur le stockage des fichiers sur S3 :
 
 
 
-## Libérer les ressources
+## Libérer les ressources {.unnumbered}
 
 Une fois vos travaux terminés, il est temps de libérer les ressources réservées.
 
@@ -659,7 +644,9 @@ Vous pouvez aisément reproduire votre travail plus tard :
 Une manière plus propre de travailler est d'utiliser git pour versionner son code.
 
 
----
+## Fin du TP {.unnumbered}
+
+Le but de ce TP était de vous faire découvrir les fonctionnalités de base du Datalab et les bonnes pratiques de travail dans un environnement Cloud.
 
 ::: {.callout-important}
 La suite du TP est optionnelle.
@@ -667,8 +654,31 @@ La suite du TP est optionnelle.
 Elle est simplement donnée pour celles et ceux qui souhaient aller plus loin et profiter de toutes les fonctionnalités du Datalab.
 :::
 
----
 
+### Besoin d'assistance ? {.unnumbered}
+
+Contactez l'équipe du SSP Lab sur [Slack](https://join.slack.com/t/3innovation/shared_invite/zt-1bo6y53oy-Y~zKzR2SRg37pq5oYgiPuA){target="_blank"}
+
+### Pour aller plus loin {.unnumbered}
+
+Une présentation complète du projet Onyxia au Devoxx 2023, de sa philosophie et de son fonctionnement par Olivier LEVITT, Joseph GARRONE et Frédéric COMTE.
+
+{{< video https://www.youtube.com/watch?v=GXINfnVB21E >}}
+
+Une présentation plus courte
+
+{{< video https://www.youtube.com/watch?v=sOOVg4I19BI >}}
+
+D'autres videos sur la [page GitHub du projet](https://github.com/InseeFrLab/onyxia){target="_blank"}
+
+### Bibliographie {.unnumbered}
+
+- [Utiliser RStudio sur l’environnement SSP Cloud](https://book.utilitr.org/01_R_Insee/Fiche_utiliser_Rstudio_SSPCloud.html){target="_blank"}, UtilitR
+- [Découverte du Datalab](https://www.sspcloud.fr/formation){target="_blank"}, Plateforme SSP Cloud
+- [Découverte d'Onyxia et de son datalab SSP Cloud](https://github.com/TheAIWizard/Hands-on-Spark-Lab/blob/main/First-steps-with-cloud-computing/First-steps-with-cloud-computing.md){target="_blank"}, Nathan Randriamanana
+
+
+---
 
 ## Travailler avec Git
 
@@ -783,6 +793,96 @@ Par exemple en important le fichier des prénoms avec Polars et en encapsulant d
 
 
 
+## MinIO
+
+D'autres possibilités pour accéder à votre stockage
+
+### Client MinIO
+
+Le [client MinIO](https://min.io/docs/minio/linux/reference/minio-mc.html){target="_blank"} installé et [utilisable depuis le terminal]{.underline} permet également d'interagir avec vos fichiers.
+
+Ouvrez un terminal (File :arrow_right: New :arrow_right: Terminal):
+
+- [ ] `mc ls s3/<username>/ENSAI/SQL` : pour lister le contenu de votre dossier
+- [ ] `mc cp s3/<username>/ENSAI/SQL/output.csv .` : pour copier le fichier depuis s3 dans votre dossier courant
+  - le fichier apparait dans votre explorer
+- [ ] Supprimez ce fichier : `rm output.csv`
+  - Car importer les fichiers de données dans son espace de travail n'est pas une bonne pratique
+
+::: {.callout-tip}
+La commande `mc --help` liste toutes les commandes possibles (ESPACE pour défiler, CTRL+C pour sortir)
+:::
+
+
+### Console Minio
+
+Vous pouvez également accéder à votre stockage avec la console Minio :
+
+- <https://minio-console.lab.sspcloud.fr/>{target="_blank"}
+- <https://minio-simple.lab.groupe-genes.fr>{target="_blank"}
+
+
+### Python et s3fs
+
+```{.python}
+import os
+import s3fs
+import polars as pl
+
+fs = s3fs.S3FileSystem(
+    client_kwargs={"endpoint_url": f"https://{os.environ['AWS_S3_ENDPOINT']}"},
+    key = os.environ["AWS_ACCESS_KEY_ID"], 
+    secret = os.environ["AWS_SECRET_ACCESS_KEY"], 
+    token = os.environ["AWS_SESSION_TOKEN"])
+
+s3_username = os.environ["VAULT_TOP_DIR"] # un peu bancal pour avoir le username
+
+bucket_name = f"{s3_username}/diffusion/"
+
+files = fs.ls(bucket_name)
+
+for file in files:
+    print(file)
+```
+
+::: {.callout-tip title="Affichage plus joli" collapse="true"}
+```{.python}
+!pip install humanize
+import humanize
+
+data = []
+
+for file in fs.ls(bucket_name, detail=True):
+
+    if file['type'] == 'directory':
+        subfolder_files = fs.find(file['name'])
+        file_count = len(subfolder_files)
+        file_type = "Folder"
+        size = None
+    else:
+        file_count = ""
+        file_type = "File"
+        size = file['size']
+    
+    data.append({
+        "Name": os.path.basename(file['name']),
+        "Type": file_type,
+        "Size": size or 0,
+        "Nb Files": file_count
+    })
+
+df = pl.DataFrame(sorted(
+         data,
+         key=lambda x: (
+             0 if x["Type"] == "Folder" else 1,
+             -x["Nb Files"] if x["Nb Files"] else 0,
+             -x["Size"])
+        ))\
+        .with_columns(pl.col('Size').map_elements(lambda x: humanize.naturalsize(x, binary=True) if x else "", return_dtype=pl.String).alias('Size'))
+
+print(f"Bucket : {bucket_name}", df, sep = "\n")
+```
+:::
 
 ## Surveiller son service
 
@@ -837,28 +937,10 @@ Ce TP avait pour but de vous familiariser avec le Datalab. Vous pouvez l'utilise
 :::
 
 
-## Besoin d'assistance ? {.unnumbered}
+## Personnaliser son service
 
-Contactez l'équipe du SSP Lab sur [Slack](https://join.slack.com/t/3innovation/shared_invite/zt-1bo6y53oy-Y~zKzR2SRg37pq5oYgiPuA){target="_blank"}
+:construction:
 
-## Pour aller plus loin {.unnumbered}
+- Utiliser un script d'initiation
+- Utilser sa propre image Docker
 
-### Le projet Onyxia de A à Z {.unnumbered  .unlisted}
-
-Une présentation complète du projet Onyxia au Devoxx 2023, de sa philosophie et de son fonctionnement par Olivier LEVITT, Joseph GARRONE et Frédéric COMTE.
-
-{{< video https://www.youtube.com/watch?v=GXINfnVB21E 
-    title="Construisons un cloud opensource pour le datascientist"
->}}
-
-### Le projet Onyxia (version courte) {.unnumbered .unlisted}
-
-{{< video https://www.youtube.com/watch?v=sOOVg4I19BI >}}
-
-
-
-## Bibliographie {.unnumbered}
-
-- [Utiliser RStudio sur l’environnement SSP Cloud](https://book.utilitr.org/01_R_Insee/Fiche_utiliser_Rstudio_SSPCloud.html){target="_blank"}, UtilitR
-- [Découverte du Datalab](https://www.sspcloud.fr/formation){target="_blank"}, Plateforme SSP Cloud
-- [Découverte d'Onyxia et de son datalab SSP Cloud](https://github.com/TheAIWizard/Hands-on-Spark-Lab/blob/main/First-steps-with-cloud-computing/First-steps-with-cloud-computing.md){target="_blank"}, Nathan Randriamanana
