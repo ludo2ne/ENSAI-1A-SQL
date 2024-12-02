@@ -244,17 +244,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#utiliser-des-données-1" id="toc-utiliser-des-données-1" class="nav-link" data-scroll-target="#utiliser-des-données-1"><span class="header-section-number">3.3</span> Utiliser des données</a></li>
   <li><a href="#données-dautres-utilisateurs" id="toc-données-dautres-utilisateurs" class="nav-link" data-scroll-target="#données-dautres-utilisateurs"><span class="header-section-number">3.4</span> Données d’autres utilisateurs</a></li>
   <li><a href="#exportez-vos-résultats-vers-minio" id="toc-exportez-vos-résultats-vers-minio" class="nav-link" data-scroll-target="#exportez-vos-résultats-vers-minio"><span class="header-section-number">3.5</span> Exportez vos résultats vers MinIO</a></li>
-  <li><a href="#client-minio" id="toc-client-minio" class="nav-link" data-scroll-target="#client-minio"><span class="header-section-number">3.6</span> Client MinIO</a></li>
-  <li><a href="#console-minio" id="toc-console-minio" class="nav-link" data-scroll-target="#console-minio"><span class="header-section-number">3.7</span> Console Minio</a></li>
   </ul></li>
-  <li><a href="#libérer-les-ressources" id="toc-libérer-les-ressources" class="nav-link" data-scroll-target="#libérer-les-ressources"><span class="header-section-number">4</span> Libérer les ressources</a></li>
-  <li><a href="#travailler-avec-git" id="toc-travailler-avec-git" class="nav-link" data-scroll-target="#travailler-avec-git"><span class="header-section-number">5</span> Travailler avec Git</a>
+  <li><a href="#libérer-les-ressources" id="toc-libérer-les-ressources" class="nav-link" data-scroll-target="#libérer-les-ressources">Libérer les ressources</a></li>
+  <li><a href="#fin-du-tp" id="toc-fin-du-tp" class="nav-link" data-scroll-target="#fin-du-tp">Fin du TP</a>
   <ul class="collapse">
-  <li><a href="#générer-un-token-github" id="toc-générer-un-token-github" class="nav-link" data-scroll-target="#générer-un-token-github"><span class="header-section-number">5.1</span> Générer un token GitHub</a></li>
-  <li><a href="#déclarer-votre-jeton" id="toc-déclarer-votre-jeton" class="nav-link" data-scroll-target="#déclarer-votre-jeton"><span class="header-section-number">5.2</span> Déclarer votre jeton</a></li>
-  <li><a href="#dépôt-pour-le-code" id="toc-dépôt-pour-le-code" class="nav-link" data-scroll-target="#dépôt-pour-le-code"><span class="header-section-number">5.3</span> Dépôt pour le code</a></li>
-  <li><a href="#branchez-votre-service-sur-un-répo" id="toc-branchez-votre-service-sur-un-répo" class="nav-link" data-scroll-target="#branchez-votre-service-sur-un-répo"><span class="header-section-number">5.4</span> Branchez votre service sur un répo</a></li>
-  <li><a href="#sauver-son-code" id="toc-sauver-son-code" class="nav-link" data-scroll-target="#sauver-son-code"><span class="header-section-number">5.5</span> Sauver son code</a></li>
+  <li><a href="#besoin-dassistance" id="toc-besoin-dassistance" class="nav-link" data-scroll-target="#besoin-dassistance">Besoin d’assistance ?</a></li>
+  <li><a href="#pour-aller-plus-loin" id="toc-pour-aller-plus-loin" class="nav-link" data-scroll-target="#pour-aller-plus-loin">Pour aller plus loin</a></li>
+  <li><a href="#bibliographie" id="toc-bibliographie" class="nav-link" data-scroll-target="#bibliographie">Bibliographie</a></li>
+  </ul></li>
+  <li><a href="#travailler-avec-git" id="toc-travailler-avec-git" class="nav-link" data-scroll-target="#travailler-avec-git"><span class="header-section-number">4</span> Travailler avec Git</a>
+  <ul class="collapse">
+  <li><a href="#générer-un-token-github" id="toc-générer-un-token-github" class="nav-link" data-scroll-target="#générer-un-token-github"><span class="header-section-number">4.1</span> Générer un token GitHub</a></li>
+  <li><a href="#déclarer-votre-jeton" id="toc-déclarer-votre-jeton" class="nav-link" data-scroll-target="#déclarer-votre-jeton"><span class="header-section-number">4.2</span> Déclarer votre jeton</a></li>
+  <li><a href="#dépôt-pour-le-code" id="toc-dépôt-pour-le-code" class="nav-link" data-scroll-target="#dépôt-pour-le-code"><span class="header-section-number">4.3</span> Dépôt pour le code</a></li>
+  <li><a href="#branchez-votre-service-sur-un-répo" id="toc-branchez-votre-service-sur-un-répo" class="nav-link" data-scroll-target="#branchez-votre-service-sur-un-répo"><span class="header-section-number">4.4</span> Branchez votre service sur un répo</a></li>
+  <li><a href="#sauver-son-code" id="toc-sauver-son-code" class="nav-link" data-scroll-target="#sauver-son-code"><span class="header-section-number">4.5</span> Sauver son code</a></li>
+  </ul></li>
+  <li><a href="#minio" id="toc-minio" class="nav-link" data-scroll-target="#minio"><span class="header-section-number">5</span> MinIO</a>
+  <ul class="collapse">
+  <li><a href="#client-minio" id="toc-client-minio" class="nav-link" data-scroll-target="#client-minio"><span class="header-section-number">5.1</span> Client MinIO</a></li>
+  <li><a href="#console-minio" id="toc-console-minio" class="nav-link" data-scroll-target="#console-minio"><span class="header-section-number">5.2</span> Console Minio</a></li>
+  <li><a href="#python-et-s3fs" id="toc-python-et-s3fs" class="nav-link" data-scroll-target="#python-et-s3fs"><span class="header-section-number">5.3</span> Python et s3fs</a></li>
   </ul></li>
   <li><a href="#surveiller-son-service" id="toc-surveiller-son-service" class="nav-link" data-scroll-target="#surveiller-son-service"><span class="header-section-number">6</span> Surveiller son service</a></li>
   <li><a href="#les-secrets" id="toc-les-secrets" class="nav-link" data-scroll-target="#les-secrets"><span class="header-section-number">7</span> Les secrets</a>
@@ -262,9 +272,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#créer-un-secret" id="toc-créer-un-secret" class="nav-link" data-scroll-target="#créer-un-secret"><span class="header-section-number">7.1</span> Créer un secret</a></li>
   <li><a href="#utiliser-dans-un-service" id="toc-utiliser-dans-un-service" class="nav-link" data-scroll-target="#utiliser-dans-un-service"><span class="header-section-number">7.2</span> Utiliser dans un service</a></li>
   </ul></li>
-  <li><a href="#besoin-dassistance" id="toc-besoin-dassistance" class="nav-link" data-scroll-target="#besoin-dassistance">Besoin d’assistance ?</a></li>
-  <li><a href="#pour-aller-plus-loin" id="toc-pour-aller-plus-loin" class="nav-link" data-scroll-target="#pour-aller-plus-loin">Pour aller plus loin</a></li>
-  <li><a href="#bibliographie" id="toc-bibliographie" class="nav-link" data-scroll-target="#bibliographie">Bibliographie</a></li>
+  <li><a href="#personnaliser-son-service" id="toc-personnaliser-son-service" class="nav-link" data-scroll-target="#personnaliser-son-service"><span class="header-section-number">8</span> Personnaliser son service</a></li>
   </ul>
 </nav>
 </nav>
@@ -305,7 +313,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p><span class="emoji" data-emoji="construction">🚧</span></p>
 <section id="introduction" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="introduction">Introduction</h2>
 <p>Le Datalab permet aux statisticiens de découvrir, d’expérimenter, d’apprendre, de se former aux outils de la data.</p>
@@ -337,7 +344,7 @@ Warning
 </div>
 </div>
 <p>Onyxia est un logiciel Libre et Open Source. Chacun peut installer sa propre instance sur son infra. C’est ce qu’ont fait de nombreux organismes, ainsi que le GENES.</p>
-<p>Pour plus de détails, vous pouvez consulter la section <a href="#pour-aller-plus-loin">Pour aller plus loin</a>.</p>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/FvpNfVrxBFM" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
 </section>
 <section id="les-services" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="les-services">Les services</h3>
@@ -872,9 +879,29 @@ Fil rouge
 </div>
 <p>Ce fichier est stocké sur le bucket d’un autre utilisateur à l’une des adresses suivante :</p>
 <ul>
+<li>SSP Cloud : <code>s3://ludo2ne/diffusion/ENSAI/SQL-TP/prenoms-nat2022.parquet</code></li>
 <li>Datalab du GENES : <code>s3://ldeneuville-ensai/diffusion/ENSAI/SQL-TP/prenoms-nat2022.parquet</code></li>
-<li>SSP Cloud : <code>s3://ludo2ne/diffusion/ENSAI/TP-SQL/prenoms-nat2022.parquet</code></li>
 </ul>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Malheureusement sur le Datalab du GENES, la fonctionnalité n’est pas encore implémentée sur le Datalab du GENES.</p>
+<p>Les dossiers <em>diffusion</em> de chaque utilisateur ne sont pas accessibles en lecture.</p>
+<p>Ce n’est plus trop dans la philosophie de l’exercice, mais pour contourner le problème :</p>
+<ul>
+<li>Téléchargez le <a href="https://static.data.gouv.fr/resources/base-prenoms-insee-format-parquet/20231121-161435/prenoms-nat2022.parquet" target="_blank">fichier des prenoms</a></li>
+<li>Stockez le sur votre S3</li>
+<li>Utilisez ce fichier pour la suite</li>
+</ul>
+</div>
+</div>
 <div class="callout callout-style-default callout-note callout-titled" title="Diffusion">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -952,7 +979,7 @@ Fil rouge
 <span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_prenom_annee)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Diagramme en barre">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-21-contents" aria-controls="callout-21" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -961,7 +988,7 @@ Diagramme en barre
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-21" class="callout-21-contents callout-collapse collapse">
+<div id="callout-22" class="callout-22-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Vous pouvez également tracer un graphique avec ces données :</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -1017,7 +1044,7 @@ Diagramme en barre
 </ul></li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-23-contents" aria-controls="callout-23" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1026,7 +1053,7 @@ Tip
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-22" class="callout-22-contents callout-collapse collapse">
+<div id="callout-23" class="callout-23-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Ce n’est pas encore implémenté dans Polars, mais il est possible en SQL de générer les rangs : <code>RANK() OVER (ORDER BY SUM(nombre) DESC) AS rang</code>.</p>
 <p>La réponse :</p>
@@ -1041,8 +1068,9 @@ Tip
 <section id="exportez-vos-résultats-vers-minio" class="level3" data-number="3.5">
 <h3 data-number="3.5" class="anchored" data-anchor-id="exportez-vos-résultats-vers-minio"><span class="header-section-number">3.5</span> Exportez vos résultats vers MinIO</h3>
 <p>Vous pouvez également exporter vos fichiers vers S3.</p>
+<p>Nous allons utiliser ici la librairie <a href="https://s3fs.readthedocs.io/" target="_blank">s3fs</a>.</p>
 <ul class="task-list">
-<li><p><label><input type="checkbox">En utilisant la librairie <em>s3fs</em></label></p>
+<li><p><label><input type="checkbox">Collez et lancez ce code :</label></p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> s3fs</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>fs <span class="op">=</span> s3fs.S3FileSystem(</span>
@@ -1055,62 +1083,12 @@ Tip
 <span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> fs.<span class="bu">open</span>(destination, mode<span class="op">=</span><span class="st">'wb'</span>) <span class="im">as</span> f:</span>
 <span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    top10f2021.write_csv(f)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-<li><p><label><input type="checkbox">Sur le Datalab, allez dans Mes fichiers <span class="emoji" data-emoji="arrow_right">➡️</span> diffusion <span class="emoji" data-emoji="arrow_right">➡️</span> ENSAI</label></p>
+<li><p><label><input type="checkbox">Sur le Datalab, allez dans <code>Mes fichiers</code> <span class="emoji" data-emoji="arrow_right">➡️</span> ENSAI <span class="emoji" data-emoji="arrow_right">➡️</span> SQL</label></p>
 <ul>
 <li>le fichier <em>output.csv</em> a été généré</li>
 <li>rafraichissez la page si besoin</li>
 </ul></li>
 <li><p><label><input type="checkbox">Double-cliquez sur ce fichier pour en avoir un aperçu</label></p></li>
-</ul>
-</section>
-<section id="client-minio" class="level3" data-number="3.6">
-<h3 data-number="3.6" class="anchored" data-anchor-id="client-minio"><span class="header-section-number">3.6</span> Client MinIO</h3>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Caution
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Ne pas faire cette partie.</p>
-</div>
-</div>
-<p>Le <a href="https://min.io/docs/minio/linux/reference/minio-mc.html" target="_blank">client MinIO</a> installé et <u>utilisable depuis le terminal</u> permet également d’interagir avec vos fichiers.</p>
-<p>Ouvrez un terminal (File <span class="emoji" data-emoji="arrow_right">➡️</span> New <span class="emoji" data-emoji="arrow_right">➡️</span> Terminal):</p>
-<ul class="task-list">
-<li><label><input type="checkbox"><code>mc ls s3/&lt;username&gt;/ENSAI/SQL</code> : pour lister le contenu de votre dossier</label></li>
-<li><label><input type="checkbox"><code>mc cp s3/&lt;username&gt;/ENSAI/SQL/output.csv .</code> : pour copier le fichier depuis s3 dans votre dossier courant</label>
-<ul>
-<li>le fichier apparait dans votre explorer</li>
-</ul></li>
-<li><label><input type="checkbox">Supprimez ce fichier : <code>rm output.csv</code></label>
-<ul>
-<li>Car importer les fichiers de données dans son espace de travail n’est pas une bonne pratique</li>
-</ul></li>
-</ul>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>La commande <code>mc --help</code> liste toutes les commandes possibles (ESPACE pour défiler, CTRL+C pour sortir)</p>
-</div>
-</div>
-</section>
-<section id="console-minio" class="level3" data-number="3.7">
-<h3 data-number="3.7" class="anchored" data-anchor-id="console-minio"><span class="header-section-number">3.7</span> Console Minio</h3>
-<p>Vous pouvez également accéder à votre stockage avec la console Minio :</p>
-<ul>
-<li><a href="https://minio-console.lab.sspcloud.fr/" target="_blank">https://minio-console.lab.sspcloud.fr/</a></li>
-<li><a href="https://minio-simple.lab.groupe-genes.fr" target="_blank">https://minio-simple.lab.groupe-genes.fr</a></li>
 </ul>
 <hr>
 <p>Pour plus de détails sur le stockage des fichiers sur S3 :</p>
@@ -1119,8 +1097,8 @@ Tip
 </ul>
 </section>
 </section>
-<section id="libérer-les-ressources" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="libérer-les-ressources"><span class="header-section-number">4</span> Libérer les ressources</h2>
+<section id="libérer-les-ressources" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="libérer-les-ressources">Libérer les ressources</h2>
 <p>Une fois vos travaux terminés, il est temps de libérer les ressources réservées.</p>
 <ul class="task-list">
 <li><label><input type="checkbox">Si besoin, sauvegardez vos notebooks</label>
@@ -1136,7 +1114,10 @@ Tip
 <li>Il suffit de relancer un nouveau service et de relancer les calculs</li>
 </ul>
 <p>Une manière plus propre de travailler est d’utiliser git pour versionner son code.</p>
-<hr>
+</section>
+<section id="fin-du-tp" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="fin-du-tp">Fin du TP</h2>
+<p>Le but de ce TP était de vous faire découvrir les fonctionnalités de base du Datalab et les bonnes pratiques de travail dans un environnement Cloud.</p>
 <div class="callout callout-style-default callout-important callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1151,10 +1132,34 @@ Important
 <p>Elle est simplement donnée pour celles et ceux qui souhaient aller plus loin et profiter de toutes les fonctionnalités du Datalab.</p>
 </div>
 </div>
+<section id="besoin-dassistance" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="besoin-dassistance">Besoin d’assistance ?</h3>
+<p>Contactez l’équipe du SSP Lab sur <a href="https://join.slack.com/t/3innovation/shared_invite/zt-1bo6y53oy-Y~zKzR2SRg37pq5oYgiPuA" target="_blank">Slack</a></p>
+</section>
+<section id="pour-aller-plus-loin" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="pour-aller-plus-loin">Pour aller plus loin</h3>
+<p>Une présentation complète du projet Onyxia au Devoxx 2023, de sa philosophie et de son fonctionnement par Olivier LEVITT, Joseph GARRONE et Frédéric COMTE.</p>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/GXINfnVB21E" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<p>Une présentation plus courte</p>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/sOOVg4I19BI" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<p>D’autres videos sur la <a href="https://github.com/InseeFrLab/onyxia" target="_blank">page GitHub du projet</a></p>
+</section>
+<section id="bibliographie" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="bibliographie">Bibliographie</h3>
+<ul>
+<li><a href="https://book.utilitr.org/01_R_Insee/Fiche_utiliser_Rstudio_SSPCloud.html" target="_blank">Utiliser RStudio sur l’environnement SSP Cloud</a>, UtilitR</li>
+<li><a href="https://www.sspcloud.fr/formation" target="_blank">Formations et tutoriels du SSP Cloud</a>
+<ul>
+<li>Nombreux tutos : Python, R, ML, Spark, Cartographie</li>
+</ul></li>
+<li><a href="https://docs.sspcloud.fr/" target="_blank">Doc SSP Cloud</a></li>
+<li><a href="https://github.com/TheAIWizard/Hands-on-Spark-Lab/blob/main/First-steps-with-cloud-computing/First-steps-with-cloud-computing.md" target="_blank">Découverte d’Onyxia et de son datalab SSP Cloud</a>, Nathan Randriamanana</li>
+</ul>
 <hr>
 </section>
-<section id="travailler-avec-git" class="level2" data-number="5">
-<h2 data-number="5" class="anchored" data-anchor-id="travailler-avec-git"><span class="header-section-number">5</span> Travailler avec Git</h2>
+</section>
+<section id="travailler-avec-git" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="travailler-avec-git"><span class="header-section-number">4</span> Travailler avec Git</h2>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1170,8 +1175,8 @@ Caution
 <p>Pour suivre la démarche, il faut disposer d’un compte <a href="https://github.com/" target="_blank">GitHub</a>. Il est possible de suivre une démarche similaire avec <a href="https://about.gitlab.com/" target="_blank">GitLab</a>.</p>
 </div>
 </div>
-<section id="générer-un-token-github" class="level3" data-number="5.1">
-<h3 data-number="5.1" class="anchored" data-anchor-id="générer-un-token-github"><span class="header-section-number">5.1</span> Générer un token GitHub</h3>
+<section id="générer-un-token-github" class="level3" data-number="4.1">
+<h3 data-number="4.1" class="anchored" data-anchor-id="générer-un-token-github"><span class="header-section-number">4.1</span> Générer un token GitHub</h3>
 <div class="callout callout-style-default callout-tip callout-titled" title="Déjà fait ?">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1217,8 +1222,8 @@ Warning
 </div>
 </div>
 </section>
-<section id="déclarer-votre-jeton" class="level3" data-number="5.2">
-<h3 data-number="5.2" class="anchored" data-anchor-id="déclarer-votre-jeton"><span class="header-section-number">5.2</span> Déclarer votre jeton</h3>
+<section id="déclarer-votre-jeton" class="level3" data-number="4.2">
+<h3 data-number="4.2" class="anchored" data-anchor-id="déclarer-votre-jeton"><span class="header-section-number">4.2</span> Déclarer votre jeton</h3>
 <p>GitHub vous a fournit un jeton. Il faut maintenant le déclarer sur le Datalab :</p>
 <ul class="task-list">
 <li><label><input type="checkbox">Allez dans <code>Mon Compte</code> <span class="emoji" data-emoji="arrow_right">➡️</span> Onglet <code>Git</code></label></li>
@@ -1243,8 +1248,8 @@ Config Git
 </div>
 </div>
 </section>
-<section id="dépôt-pour-le-code" class="level3" data-number="5.3">
-<h3 data-number="5.3" class="anchored" data-anchor-id="dépôt-pour-le-code"><span class="header-section-number">5.3</span> Dépôt pour le code</h3>
+<section id="dépôt-pour-le-code" class="level3" data-number="4.3">
+<h3 data-number="4.3" class="anchored" data-anchor-id="dépôt-pour-le-code"><span class="header-section-number">4.3</span> Dépôt pour le code</h3>
 <p>Avant de créer un service, nous allons créer un dépôt GitHub qui permettra de sauvegarder votre code.</p>
 <ul class="task-list">
 <li><label><input type="checkbox">Dans GitHub, créer un <a href="https://github.com/new" target="_blank">nouveau Repository</a></label>
@@ -1260,8 +1265,8 @@ Config Git
 <li><label><input type="checkbox">Copiez l’adresse <em>https</em> du repo</label></li>
 </ul>
 </section>
-<section id="branchez-votre-service-sur-un-répo" class="level3" data-number="5.4">
-<h3 data-number="5.4" class="anchored" data-anchor-id="branchez-votre-service-sur-un-répo"><span class="header-section-number">5.4</span> Branchez votre service sur un répo</h3>
+<section id="branchez-votre-service-sur-un-répo" class="level3" data-number="4.4">
+<h3 data-number="4.4" class="anchored" data-anchor-id="branchez-votre-service-sur-un-répo"><span class="header-section-number">4.4</span> Branchez votre service sur un répo</h3>
 <p>Lors du lancement d’un <em>Service</em>, vous pouvez vous brancher sur un répo git. Ainsi le contenu de votre dépôt sera importé dans votre service.</p>
 <p>Vous pourrez alors utiliser le code de votre dépôt et éventuellement le mettre à jour en effectuant un <em>push</em>.</p>
 <p>Lancez un service <em>Jupyter Notebook</em></p>
@@ -1277,8 +1282,8 @@ Config Git
 <li><label><input type="checkbox"><code>Lancez</code> le service, puis attendez quelques secondes</label></li>
 </ul>
 </section>
-<section id="sauver-son-code" class="level3" data-number="5.5">
-<h3 data-number="5.5" class="anchored" data-anchor-id="sauver-son-code"><span class="header-section-number">5.5</span> Sauver son code</h3>
+<section id="sauver-son-code" class="level3" data-number="4.5">
+<h3 data-number="4.5" class="anchored" data-anchor-id="sauver-son-code"><span class="header-section-number">4.5</span> Sauver son code</h3>
 <ul class="task-list">
 <li><label><input type="checkbox">Sur Jupyter, ouvrez un terminal</label>
 <ul>
@@ -1297,7 +1302,7 @@ Config Git
 </ul></li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-30-contents" aria-controls="callout-30" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-29-contents" aria-controls="callout-29" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1306,7 +1311,7 @@ Tip
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-30" class="callout-30-contents callout-collapse collapse">
+<div id="callout-29" class="callout-29-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
 <li><code>git add .</code></li>
@@ -1329,6 +1334,117 @@ Tip
 </ul></li>
 </ul>
 </section>
+</section>
+</section>
+<section id="minio" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="minio"><span class="header-section-number">5</span> MinIO</h2>
+<p>D’autres possibilités pour accéder à votre stockage</p>
+<section id="client-minio" class="level3" data-number="5.1">
+<h3 data-number="5.1" class="anchored" data-anchor-id="client-minio"><span class="header-section-number">5.1</span> Client MinIO</h3>
+<p>Le <a href="https://min.io/docs/minio/linux/reference/minio-mc.html" target="_blank">client MinIO</a> installé et <u>utilisable depuis le terminal</u> permet également d’interagir avec vos fichiers.</p>
+<p>Ouvrez un terminal (File <span class="emoji" data-emoji="arrow_right">➡️</span> New <span class="emoji" data-emoji="arrow_right">➡️</span> Terminal):</p>
+<ul class="task-list">
+<li><label><input type="checkbox"><code>mc ls s3/&lt;username&gt;/ENSAI/SQL</code> : pour lister le contenu de votre dossier</label></li>
+<li><label><input type="checkbox"><code>mc cp s3/&lt;username&gt;/ENSAI/SQL/output.csv .</code> : pour copier le fichier depuis s3 dans votre dossier courant</label>
+<ul>
+<li>le fichier apparait dans votre explorer</li>
+</ul></li>
+<li><label><input type="checkbox">Supprimez ce fichier : <code>rm output.csv</code></label>
+<ul>
+<li>Car importer les fichiers de données dans son espace de travail n’est pas une bonne pratique</li>
+</ul></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>La commande <code>mc --help</code> liste toutes les commandes possibles (ESPACE pour défiler, CTRL+C pour sortir)</p>
+</div>
+</div>
+</section>
+<section id="console-minio" class="level3" data-number="5.2">
+<h3 data-number="5.2" class="anchored" data-anchor-id="console-minio"><span class="header-section-number">5.2</span> Console Minio</h3>
+<p>Vous pouvez également accéder à votre stockage avec la console Minio :</p>
+<ul>
+<li><a href="https://minio-console.lab.sspcloud.fr/" target="_blank">https://minio-console.lab.sspcloud.fr/</a></li>
+<li><a href="https://minio-simple.lab.groupe-genes.fr" target="_blank">https://minio-simple.lab.groupe-genes.fr</a></li>
+</ul>
+</section>
+<section id="python-et-s3fs" class="level3" data-number="5.3">
+<h3 data-number="5.3" class="anchored" data-anchor-id="python-et-s3fs"><span class="header-section-number">5.3</span> Python et s3fs</h3>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> s3fs</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>fs <span class="op">=</span> s3fs.S3FileSystem(</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    client_kwargs<span class="op">=</span>{<span class="st">"endpoint_url"</span>: <span class="ss">f"https://</span><span class="sc">{</span>os<span class="sc">.</span>environ[<span class="st">'AWS_S3_ENDPOINT'</span>]<span class="sc">}</span><span class="ss">"</span>},</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    key <span class="op">=</span> os.environ[<span class="st">"AWS_ACCESS_KEY_ID"</span>], </span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    secret <span class="op">=</span> os.environ[<span class="st">"AWS_SECRET_ACCESS_KEY"</span>], </span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    token <span class="op">=</span> os.environ[<span class="st">"AWS_SESSION_TOKEN"</span>])</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>s3_username <span class="op">=</span> os.environ[<span class="st">"VAULT_TOP_DIR"</span>] <span class="co"># un peu bancal pour avoir le username</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>bucket_name <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>s3_username<span class="sc">}</span><span class="ss">/diffusion/"</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>files <span class="op">=</span> fs.ls(bucket_name)</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="bu">file</span> <span class="kw">in</span> files:</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="bu">file</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Affichage plus joli">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-31-contents" aria-controls="callout-31" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Affichage plus joli
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-31" class="callout-31-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install humanize</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> humanize</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> []</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="bu">file</span> <span class="kw">in</span> fs.ls(bucket_name, detail<span class="op">=</span><span class="va">True</span>):</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">file</span>[<span class="st">'type'</span>] <span class="op">==</span> <span class="st">'directory'</span>:</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>        subfolder_files <span class="op">=</span> fs.find(<span class="bu">file</span>[<span class="st">'name'</span>])</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>        file_count <span class="op">=</span> <span class="bu">len</span>(subfolder_files)</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>        file_type <span class="op">=</span> <span class="st">"Folder"</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>        size <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>        file_count <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>        file_type <span class="op">=</span> <span class="st">"File"</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>        size <span class="op">=</span> <span class="bu">file</span>[<span class="st">'size'</span>]</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>    data.append({</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Name"</span>: os.path.basename(<span class="bu">file</span>[<span class="st">'name'</span>]),</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Type"</span>: file_type,</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Size"</span>: size <span class="kw">or</span> <span class="dv">0</span>,</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Nb Files"</span>: file_count</span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pl.DataFrame(<span class="bu">sorted</span>(</span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>         data,</span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>         key<span class="op">=</span><span class="kw">lambda</span> x: (</span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>             <span class="dv">0</span> <span class="cf">if</span> x[<span class="st">"Type"</span>] <span class="op">==</span> <span class="st">"Folder"</span> <span class="cf">else</span> <span class="dv">1</span>,</span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>             <span class="op">-</span>x[<span class="st">"Nb Files"</span>] <span class="cf">if</span> x[<span class="st">"Nb Files"</span>] <span class="cf">else</span> <span class="dv">0</span>,</span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>             <span class="op">-</span>x[<span class="st">"Size"</span>])</span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>        ))<span class="op">\</span></span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>        .with_columns(pl.col(<span class="st">'Size'</span>).map_elements(<span class="kw">lambda</span> x: humanize.naturalsize(x, binary<span class="op">=</span><span class="va">True</span>) <span class="cf">if</span> x <span class="cf">else</span> <span class="st">""</span>, return_dtype<span class="op">=</span>pl.String).alias(<span class="st">'Size'</span>))</span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Bucket : </span><span class="sc">{</span>bucket_name<span class="sc">}</span><span class="ss">"</span>, df, sep <span class="op">=</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 <section id="surveiller-son-service" class="level2" data-number="6">
@@ -1376,10 +1492,10 @@ Tip
 <ul class="task-list">
 <li><p><label><input type="checkbox">Vérifiez leur présence via le terminal : <code>env | grep PATATE</code> ou <code>echo $PATATE_TOKEN</code></label></p></li>
 <li><p><label><input type="checkbox">Ouvrez un notebook et récupérez la valeur de <em>PATATE_TOKEN</em></label></p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>token <span class="op">=</span> os.environ[<span class="st">"PATATE_TOKEN"</span>]</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(token)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>token <span class="op">=</span> os.environ[<span class="st">"PATATE_TOKEN"</span>]</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(token)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p><label><input type="checkbox">Une fois que vous avez fini de jouer, supprimez votre service</label></p></li>
 </ul>
 <div class="callout callout-style-default callout-note callout-titled">
@@ -1397,28 +1513,12 @@ Note
 </div>
 </section>
 </section>
-<section id="besoin-dassistance" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="besoin-dassistance">Besoin d’assistance ?</h2>
-<p>Contactez l’équipe du SSP Lab sur <a href="https://join.slack.com/t/3innovation/shared_invite/zt-1bo6y53oy-Y~zKzR2SRg37pq5oYgiPuA" target="_blank">Slack</a></p>
-</section>
-<section id="pour-aller-plus-loin" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="pour-aller-plus-loin">Pour aller plus loin</h2>
-<section id="le-projet-onyxia-de-a-à-z" class="level3 unnumbered unlisted">
-<h3 class="unnumbered unlisted anchored" data-anchor-id="le-projet-onyxia-de-a-à-z">Le projet Onyxia de A à Z</h3>
-<p>Une présentation complète du projet Onyxia au Devoxx 2023, de sa philosophie et de son fonctionnement par Olivier LEVITT, Joseph GARRONE et Frédéric COMTE.</p>
-<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/GXINfnVB21E" title="Construisons un cloud opensource pour le datascientist" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
-</section>
-<section id="le-projet-onyxia-version-courte" class="level3 unnumbered unlisted">
-<h3 class="unnumbered unlisted anchored" data-anchor-id="le-projet-onyxia-version-courte">Le projet Onyxia (version courte)</h3>
-<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/sOOVg4I19BI" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
-</section>
-</section>
-<section id="bibliographie" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="bibliographie">Bibliographie</h2>
+<section id="personnaliser-son-service" class="level2" data-number="8">
+<h2 data-number="8" class="anchored" data-anchor-id="personnaliser-son-service"><span class="header-section-number">8</span> Personnaliser son service</h2>
+<p><span class="emoji" data-emoji="construction">🚧</span></p>
 <ul>
-<li><a href="https://book.utilitr.org/01_R_Insee/Fiche_utiliser_Rstudio_SSPCloud.html" target="_blank">Utiliser RStudio sur l’environnement SSP Cloud</a>, UtilitR</li>
-<li><a href="https://www.sspcloud.fr/formation" target="_blank">Découverte du Datalab</a>, Plateforme SSP Cloud</li>
-<li><a href="https://github.com/TheAIWizard/Hands-on-Spark-Lab/blob/main/First-steps-with-cloud-computing/First-steps-with-cloud-computing.md" target="_blank">Découverte d’Onyxia et de son datalab SSP Cloud</a>, Nathan Randriamanana</li>
+<li>Utiliser un script d’initiation</li>
+<li>Utilser sa propre image Docker</li>
 </ul>
 
 
