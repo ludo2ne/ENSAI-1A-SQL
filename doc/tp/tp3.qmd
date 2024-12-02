@@ -674,8 +674,12 @@ D'autres videos sur la [page GitHub du projet](https://github.com/InseeFrLab/ony
 ### Bibliographie {.unnumbered}
 
 - [Utiliser RStudio sur l’environnement SSP Cloud](https://book.utilitr.org/01_R_Insee/Fiche_utiliser_Rstudio_SSPCloud.html){target="_blank"}, UtilitR
-- [Découverte du Datalab](https://www.sspcloud.fr/formation){target="_blank"}, Plateforme SSP Cloud
+- [Formations et tutoriels du SSP Cloud](https://www.sspcloud.fr/formation){target="_blank"}
+  - Nombreux tutos : Python, R, ML, Spark, Cartographie 
+- [Doc SSP Cloud](https://docs.sspcloud.fr/){target="_blank"}
 - [Découverte d'Onyxia et de son datalab SSP Cloud](https://github.com/TheAIWizard/Hands-on-Spark-Lab/blob/main/First-steps-with-cloud-computing/First-steps-with-cloud-computing.md){target="_blank"}, Nathan Randriamanana
+
+
 
 
 ---
