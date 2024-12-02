@@ -657,7 +657,7 @@ Elle est simplement donnée pour celles et ceux qui souhaient aller plus loin et
 
 ### Besoin d'assistance ? {.unnumbered}
 
-Contactez l'équipe du SSP Lab sur [Slack](https://join.slack.com/t/3innovation/shared_invite/zt-1bo6y53oy-Y~zKzR2SRg37pq5oYgiPuA){target="_blank"}
+Contactez l'équipe du SSP Cloud sur [Slack](https://join.slack.com/t/3innovation/shared_invite/zt-1bo6y53oy-Y~zKzR2SRg37pq5oYgiPuA){target="_blank"}
 
 ### Pour aller plus loin {.unnumbered}
 
