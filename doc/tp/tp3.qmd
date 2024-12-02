@@ -33,7 +33,7 @@ La première étape fut de créer une infrastructure Cloud avec des CPUs, des GP
 
 Ensuite, avoir plein de ressources c'est très bien, mais encore faut-il savoir les utiliser. Or lancer des services dans le cloud nécessite quelques compétences spécifiques (Docker, Kubernetes, Helm, S3...) qui ne sont pas à la portée de tous.
 
-D'où l'idée de créer une interface graphique pour pouvoir lancer des services en quelques clics. Onyxia s'appuie sur des technologies sous-jacentes (Kubernetes, Helm, S3...) pour proposer une IHM agréable pour le datascientist. Cependant, la philosophie du projet Onyxia est d'être une brique qui facilite le travail sans se rendre indispensable. L'idée est d'éviter que les utilisateurs ne s'enferment dans un choix technologique.
+D'où l'idée de créer une interface graphique pour pouvoir lancer des services en quelques clics. Onyxia s'appuie sur des technologies sous-jacentes (Kubernetes, Helm, S3...) pour proposer une IHM agréable pour le datascientist. Cependant, la philosophie du projet Onyxia est d'être une brique qui facilite le travail sans se rendre indispensable. L'idée est d'éviter que les utilisateurs ne s'enferment dans un choix technologique et qu'il soit couteux d'en sortir.
 
 À l'INSEE, une instance de ce logiciel a été installée sur le [Datalab SSP Cloud](https://datalab.sspcloud.fr/){target="_blank"}, ouverte à tous les agents publics. Vous pouvez y créer un compte car c'est également ouvert à tous les élèves de l'ENSAI (en utilisant votre mail ENSAI).
 
@@ -43,13 +43,13 @@ Ne déposez pas de données sensibles sur cette instance, ni sur celle du GENES.
 Pour celles et ceux qui iront à l'INSEE, une autre instance nommée LS3 n'est accessible qu'en interne et autorise l'utilisation de données sensibles.
 :::
 
-Onyxia est Libre et Open Source, ainsi chacun peut installer sa propre instance sur son infra. C'est ce qu'ont fait de nombreux organismes, ainsi que le GENES.
+Onyxia est un logiciel Libre et Open Source. Chacun peut installer sa propre instance sur son infra. C'est ce qu'ont fait de nombreux organismes, ainsi que le GENES.
 
 Pour plus de détails, vous pouvez consulter la section [Pour aller plus loin](#pour-aller-plus-loin).
 
 ### Les services {.unnumbered}
 
-Le principe est d'offrir aux utilisateurs la possibilité de lancer de nombreux services à la demande (Jupyter, Rstudio, VSCode, PostgreSQL...) et une puissance de calcul adaptée aux besoins.
+Le principe est d'offrir aux utilisateurs la possibilité de lancer de nombreux services à la demande (Jupyter, Rstudio, VSCode, PostgreSQL...) avec une puissance de calcul adaptée aux besoins.
 
 ::: {.callout-caution}
 Ces services sont éphémères, car si les ressources sont importantes, il faut savoir les partager !
@@ -76,7 +76,7 @@ Vos collègues Josette et Félix attendent un heureux événement. Ils avaient t
 
 Cependant, un malencontreux accident de fer à repasser les a rendu amnésiques tous les deux.
 
-Votre mission, si vous l'acceptez est de retrouver ce fameux prénom. Pour cela vous allez devoir explorer les fonctionnalités du Datalab.
+Votre mission, si vous l'acceptez, est de retrouver ce fameux prénom. Pour cela, vous allez devoir explorer les fonctionnalités du Datalab.
 :::
 
 ## Se connecter
@@ -94,11 +94,11 @@ Vous pouvez réaliser ce TP soit sur :
 ::: {.callout-important icon="false" title="Fil rouge"}
 Avant de partir à la recherche du prénom, Josette a une envie de doubitchou.
 
-Vous retrouvez la recette mais il vous manque la quantité exacte en grammes de margarine.
+Vous retrouvez la recette, mais il vous manque la quantité exacte en grammes de margarine.
 
 Vous savez simplement que la valeur recherchée correspond à combien il y a de nombres premiers entre 10 000 et 100 000.
 
-Naturellement, vous vous dites que la solution la plus simple est de créer un programme Python pour trouver la réponse. Or Python n'est pas installé sur votre machine et vous ne savez pas comment faire... Mais alors : pourquoi ne pas lancer un service du Datalab qui permet d'exécuter du Python.
+Naturellement, vous vous dites que la solution la plus simple est de créer un programme Python pour trouver la réponse. Or, Python n'est pas installé sur votre machine et vous ne savez pas comment faire... Mais alors : pourquoi ne pas lancer un service du Datalab qui permet d'exécuter du Python.
 :::
 
 ### Un premier service
@@ -135,11 +135,15 @@ Les images Docker permettent de créer des environnements isolés et cohérents,
 4. Nous ajoutons la couche [vscode](https://github.com/InseeFrLab/images-datascience/blob/main/vscode/Dockerfile){target="_blank"}
     - Installation de Visual Studio Code et configuration
 
+Vous avez maintenant une image Docker avec tout ce qu'il faut pour bien travailler.
+
 #### DockerHub
 
 Cette image est construite et déposée sur DockerHub [onyxia-vscode-python](https://hub.docker.com/r/inseefrlab/onyxia-vscode-python){target="_blank"}.
 
-Nous allons ensuite lancer une instance de cette image : un conteneur. Le conteneur est à l'image, ce que l'objet est à la classe.
+Nous allons ensuite lancer une instance de cette image : un conteneur. 
+
+Une image est comme un moule, et un conteneur est un objet fabriqué à partir de ce moule. L'image contient les instructions, et le conteneur est l'instance concrète créée à partir de ce modèle. Vous verrez le même principe dans le cours de POO avec les classes (modèles) et les objets (instances)
 
 Pour gérer tous les conteneurs lancés sur le datalab, nous avons besoin d'un orchestrateur : Kubernetes. 
 
@@ -166,7 +170,7 @@ K8s récupére via le chart Helm toutes les infos nécessaires et déploie le co
 Pour vous aider, vous pouvez utiliser cette fonction qui génére une liste de booléens.
 
 ```{.python}
-def crible_eratosthene(n):
+def crible_eratosthene(n) -> list[bool]:
     """Génère une liste de booléens où True indique qu'un nombre est premier."""
 
     est_premier = [True] * (n + 1)
@@ -179,6 +183,10 @@ def crible_eratosthene(n):
 
     return est_premier
 ```
+
+::: {.callout-tip}
+N'hésitez pas à créer plusieurs cellules pour découper votre code (petites icones avec des `+`)
+:::
 
 Comme vous êtes un as de la programmation, cela ne vous prend que trois minutes. C'est beaucoup plus rapide que si vous aviez du installer Python, ainsi qu'un environnement d'exécution.
 
@@ -193,7 +201,7 @@ Vous vous rendez compte qu'il faut plus de 8 kg de margarine et que vous n'en av
 
 Félix propose d'aller en chercher à la superette du coin. Il entre dans l'ascenseur pour descendre les 6 étages et patatra, il se retrouve bloqué.
 
-Pour retrouver les 5 chiffres du numéro du dépanneur, vous allez devoir répondre à 5 questions en requêtant fichier des communes françaises.
+Pour retrouver les 5 chiffres du numéro du dépanneur, vous allez devoir répondre à 5 questions en requêtant le fichier des communes françaises.
 :::
 
 
@@ -223,6 +231,19 @@ SELECT *
 """)
 ```
 
+::: {.callout-tip}
+Pour avoir un affichage plus joli, vous pouvez convertir la sortie en du dataframe pandas avec la méthode `to_df()`.
+
+```{.python}
+import pandas as pd
+
+duckdb.sql("""
+SELECT *
+  FROM commune
+""").to_df()
+```
+:::
+
 - [ ] Quel est le code région de Mayotte ?
 - [ ] Combien de communes y a-t-il en Guyane ?
 - [ ] Parmi les 3 départements de la Picardie (Aisne, Oise, Somme), combien de communes ont au minimum 4 *L* dans leur nom ?
@@ -242,12 +263,14 @@ Vous venez ici d'utiliser des données disponibles sur internet. Vous pouvez ég
 
 ## Stockage S3
 
-::: {.callout-note title="Définitions"}
+::: {.callout-note title="Définition"}
 S3 : Simple Storage System.
 
 Inventé par Amazon, ce système de stockage est devenu l'outil standard du marché pour le stockage en ligne.
 
 [MinIO](https://min.io/){target="_blank"} est une solution alternative de stockage d'objets open-source qui permet de déployer facilement un stockage évolutif et performant. Elle est compatible avec l'API [S3 d'Amazon](https://aws.amazon.com/fr/s3/){target="_blank"}, ce qui facilite l'intégration avec les applications existantes.
+
+Pour faire simple, vous pouvez vous dire que c'est comme si vous allez stocker vos fichiers dans un Drive.
 :::
 
 Lorsque l'on travaille dans le cloud, il est essentiel de [séparer les données des programmes]{.underline} pour :
@@ -275,9 +298,9 @@ Lors de votre création de compte, un bucket est créé avec votre nom d'utilisa
 - importer / supprimer des fichiers
 
 
-Pour accéder à votre stockage :
+Vous avez plusieurs possibilités pour gérer à votre stockage :
 
-- Depuis le Datalab, allez dans `Mes fichiers`
+- Depuis le Datalab, onglet *Mes fichiers*
 - Depuis la console MinIO :
   - <https://minio-console.lab.sspcloud.fr/>{target="_blank"}
   - <https://minio-simple.lab.groupe-genes.fr>{target="_blank"}
@@ -305,12 +328,12 @@ Ensuite, allez sur la page d'accueil du Datalab :
 ::: {.callout-tip title="Chemin vers mes fichiers"}
 Vous remarquerez à droite, des lignes de commande du type `mc cp tp3-longueur-fil.parquet s3/<username>/ENSAI/SQL/tp3-longueur-fil.parquet`.
 
-Ce sont des commandes pour interragir avec voter stockage depuis un termial (voir ci-après).
+Ce sont des commandes pour interagir avec votre stockage depuis un terminal (voir ci-après).
 
 Cependant, vous pouvez extraire de ces commandes une information intéressante : le chemin vers votre fichier : `s3/<username>/ENSAI/SQL/tp3-longueur-fil.parquet`.
 :::
 
-Vous venez de charger un fichier, voyons maintenant comment y accéder dans un *Service*, par exemple le notebook que vous aviez lancé.
+Vous venez de charger un fichier, voyons maintenant comment y accéder dans un *Service*, en utilisant par exemple le notebook que vous avez déjà lancé.
 
 
 ### Utiliser des données
@@ -323,11 +346,11 @@ Vous trouverez ici des informations pour vous connecter au stockage selon le lan
 
 D'ailleurs pour chaque langage, il y a même plusieurs packages qui font le job. Par exemple *s3fs* ou *boto3* pour Python.
 
-- [ ] Retournez dans votre service Notebook Jupyter
+Retournez dans votre service Notebook Jupyter :
+
 - [ ] Créez un nouveau Notebook
   - vous pouvez par exemple le nommer `S3.ipynb`
 - [ ] Créer 2 cellules, puis collez et exécutez les 2 blocs de code ci-dessous
-  - Utilisez par exemple le bouton `+` de la barre d'outils pour créer une cellule
 
 Commencez par importer les packages nécessaires et récupérer les valeurs des variables d'environnement pour pouvoir se connecter à votre stockage.
 
@@ -343,6 +366,14 @@ s3_region = os.environ["AWS_DEFAULT_REGION"]
 
 s3_username = os.environ["VAULT_TOP_DIR"] # un peu bancal pour avoir le username
 ```
+
+::: {.callout-warning}
+Les clés et les jetons ont une durée de vie limitée.
+
+Si vous laissez votre service ouvert trop longtemps (pas bien !), vos clés et jetons pourraient être expirés.
+
+Dans ce cas, vous pouvez recharger en dur les nouvelles valeurs (voir Mon Compte > Connexion au Stockage).
+:::
 
 Définissez le chemin où se trouve votre fichier et lisez le avec Polars.
 
@@ -371,21 +402,21 @@ Sa syntaxe, proche de celle de Pandas, permet des transformations, agrégations 
 Pour plus de détails : <https://ssphub.netlify.app/post/polars/>{target="_blank"}
 :::
 
-- [ ] Créez une 3e cellule et affichez le fichier chargé
+- [ ] Créez une troisième cellule et affichez le fichier chargé
   - Que se passe-t-il ?
 
-::: {.callout-note title="Mode Lazy" collapse="true"}
+::: {.callout-important title="Mode Lazy"}
 Vous avez appelé la méthode `scan_parquet()` qui correspond au mode *Lazy* de Polars.
 
-Le mode *Lazy* signifie que Polars va accumuler toutes les instructions que vous lui donner sans pour autant les exécuter tout de suite.
+Le mode *Lazy* signifie que Polars va accumuler toutes les instructions que vous lui donnez sans pour autant les exécuter tout de suite.
 
 Mais quel est l'intérêt ?
 
-Imaginons que vous analisez un trés gros fichier et que vous enchainez à la suite diverses opérations (filtres, sélections de colonnes, regroupements, agrégations, tri...), deux choix s'offrent à vous :
+Imaginons que vous êtes en train d'analiser un trés gros fichier et que vous enchainez à la suite diverses opérations (filtres, sélections de colonnes, regroupements, agrégations, tri...), deux choix s'offrent à vous :
 
 Option 1 (mode Eager : `pl.read_parquet()`):
 
-- vous chargez tout le fichier en mémoire
+- vous chargez tout le fichier en RAM (dans la mémoire de votre machine)
 - vous appliquez des opérations dans n'importe quel ordre
 - vous lancez, c'est long et ça rame...
 
@@ -394,32 +425,35 @@ Option 2 (mode Lazy : `pl.scan_parquet()`):
 - vous scannez le fichier, i.e. analyser sa structure (types de colonnes) et ses métadonnées
 - vous donnez vos opérations dans n'importe quel ordre
 - à la fin, vous demandez à Polars de vous fournir le résultat
-- à ce moment, Polars va optimiser l'ordre des traitement en utilisant son propre [plan d'exécution]{.underline} et vous donner une réponse beaucoup plus rapide
+- à ce moment, Polars va optimiser l'ordre des traitements en utilisant son propre [plan d'exécution]{.underline} et vous donnez une réponse beaucoup plus rapide
 
 En résumé, en mode Eager, à chaque étape la machine effectue bêtement tous les calculs que vous lui demandez. En mode Lazy, la machine liste les opérations que vous demandez. Puis lorsque vous exigez un résultat, l'ordre des opérations est optimisé et la réponse est beaucoup plus rapide.
 
 :::
 
-- [ ] Pour forcer le chargement du fichier, appelez la méthode `collect()`
+- [ ] Pour demander le chargement du fichier, appelez la méthode `collect()`
   - stockez le résultat dans une variable *df*
 - [ ] Vous pouvez maintenant afficher le contenu de *df* avec un print
-- [ ] Filtrez le fichier pour trouver la longueur de fil du gilet
-  - `filter(pl.col("<column_name>") == "<value>")`
+
+En appelant la méthode `collect()`, vous avez « forcé » Polars à charger les données en mémoire.
+
+- [ ] Appliquez au dataframe la méthode `filter()` pour trouver la longueur de fil du gilet
+  - `df.filter(pl.col("<column_name>") == "<value>")`
 
 ### Données d'autres utilisateurs
 
 ::: {.callout-important icon="false" title="Fil rouge"}
 Pendant que Josette confectionne son gilet, Félix revient avec la margarine.
 
-Or Josette n'a finalement plus faim. Félix se met alors à bouder et va s'enfermer dans les toilettes pour avaler des pilules qu'il a pris au passage à la pharmacie. Soudain la mémoire lui revient !
+Or, Josette n'a finalement plus faim. Félix se met alors à bouder et va s'enfermer dans les toilettes pour avaler des pilules qu'il a prises au passage à la pharmacie. Soudain, la mémoire lui revient !
 
-Il se rappelle qu'ils avaient trouvé le prénom en parcourant... le fichier des prénoms !
+Il se rappelle qu'ils avaient trouvé le prénom en parcourant... Le fichier des prénoms !
 :::
 
 Ce fichier est stocké sur le bucket d'un autre utilisateur à l'une des adresses suivante :
 
-- Datalab du GENES : `s3/ldeneuville-ensai/diffusion/ENSAI/TP-SQL/prenoms-nat2022.parquet`
-- SSP Cloud : `s3/ludo2ne/diffusion/ENSAI/TP-SQL/prenoms-nat2022.parquet`
+- Datalab du GENES : `s3://ldeneuville-ensai/diffusion/ENSAI/SQL-TP/prenoms-nat2022.parquet`
+- SSP Cloud : `s3://ludo2ne/diffusion/ENSAI/TP-SQL/prenoms-nat2022.parquet`
 
 
 ::: {.callout-note title="Diffusion"}
@@ -429,10 +463,11 @@ Vous pourrez alors stocker à l'intérieur les dossiers et fichiers que vous sou
 :::
 
 - [ ] Scannez ce fichier avec Polars
+  - stockez-le dans une variable nommée *fichier_prenoms*
 - [ ] Utilisez le code ci-dessous pour afficher le top10 des prénoms féminins en 2022
 
 ```{.python}
-top10f2021 = file\
+top10f2021 = fichier_prenoms\
     .filter((pl.col("sexe") == 2) & 
             (pl.col("annais") == "2021") & 
             (pl.col("preusuel") != "_PRENOMS_RARES"))\
@@ -446,7 +481,7 @@ top10f2021 = file\
 - [ ] Vous pouvez effectuez les mêmes traitements en encapsulant du sql :
 
 ```{.python}
-top10f2021_sql = file\
+top10f2021_sql = fichier_prenoms\
     .sql("""
       SELECT preusuel, 
              SUM(nombre) AS nombre_total
@@ -462,23 +497,24 @@ top10f2021_sql = file\
 ```
 
 ::: {.callout-important icon="false" title="Fil rouge"}
-Alors que vous alliez chercher le prénom, votre cammarade Katia vous demande en quelle année son prénom a été le plus donné entre 1960 et 1980.
+Alors que vous alliez chercher le prénom, votre camarade Katia vous demande en quelle année son prénom a été le plus donné entre 1960 et 1980.
 :::
 
-- [ ] Écrivez la requête SQL qui fait le même travail que ces instructions
+- [ ] Écrivez la requête SQL qui fait le même travail que les instructions ci-dessous
 
 ```{.python}
 prenom = "Katia"
 annee_debut, annee_fin = 1960, 1980
 
-df_prenom_annee = df\
-    .filter((pl.col("annais") != "XXXX"))\
+df_prenom_annee = file_prenoms\
     .filter((pl.col("preusuel") == prenom.upper()) & 
-            (pl.col("annais").cast(pl.Int32) >= annee_debut) & 
-            (pl.col("annais").cast(pl.Int32) <= annee_fin))\
+            (pl.col("annais").str.to_integer(strict=False).is_not_null()) & 
+            (pl.col("annais").str.to_integer(strict=False) >= annee_debut) & 
+            (pl.col("annais").str.to_integer(strict=False) <= annee_fin))\
     .group_by("annais")\
     .agg(pl.col("nombre").sum().alias("nombre_total"))\
-    .sort("annais")
+    .sort("annais")\
+    .collect()
 
 print(df_prenom_annee)
 ```
@@ -531,19 +567,23 @@ Le prénom recherché est à ce rang de classement pour les prénoms féminins d
 
 - [ ] Écrivez la requête
   - Filtrez les prénoms féminins donnés entre 1970 et 2000
-  - Classez-les par le nombre de fois où ils ont été donné
-  - Créez une colonne de rang avec `RANK() OVER (ORDER BY SUM(nombre) DESC) AS rang`
+  - Classez-les par le nombre de fois où ils ont été donné décroissant et prénom décroissant
 - [ ] Trouvez le prénom classé au rang demandé
+  - Vous pouvez utiliser ce code : `<df>.with_row_index()[<index_inf>:<index_sup>]`
 
 ::: {.callout-tip collapse="true"}
-- Vous pouvez stocker le résultat de la 1ère requête dans une vue
-- Puis effectuer une recherche sur le rang
+Ce n'est pas encore implémenté dans Polars, mais il est possible en SQL de générer les rangs : `RANK() OVER (ORDER BY SUM(nombre) DESC) AS rang`.
 
-La réponse commence par un *S*
+La réponse :
+
+- Commence par un *S*
+- Monsieur et Madame Hier ont une fille, comment s'appelle-t-elle ?
 :::
 
 
 ### Exportez vos résultats vers MinIO
+
+Vous pouvez également exporter vos fichiers vers S3.
 
 - [ ] En utilisant la librairie *s3fs*
   ```{.python}
@@ -555,7 +595,7 @@ La réponse commence par un *S*
       secret = os.environ["AWS_SECRET_ACCESS_KEY"], 
       token = os.environ["AWS_SESSION_TOKEN"])
   
-  destination = f"s3://{username}/ENSAI/SQL/output.csv"
+  destination = f"s3://{s3_username}/ENSAI/SQL/output.csv"
   
   with fs.open(destination, mode='wb') as f:
       top10f2021.write_csv(f)
