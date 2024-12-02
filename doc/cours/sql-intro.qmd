@@ -861,6 +861,16 @@ La requête ci-dessus va afficher :
   - Sinon :arrow_right: `pas de contact`
 
 
+### NULLIF
+
+```{.sql}
+SELECT NULLIF(tel, '00.00.00.00.00') 
+  FROM echecs.joueuse;
+```
+
+- Si tel = `00.00.00.00.00`
+  - Renvoie *NULL*
+
 ## Divers
 
 ### Jouer avec les colonnes
@@ -895,6 +905,26 @@ Le mot clé `DISTINCT` permet de supprimer les doublons.
 ```{.sql}
 SELECT DISTINCT prenom
 FROM echecs.joueuse;
+```
+
+### Choix
+
+```{.sql}
+SELECT CASE WHEN elo > 2400 THEN 'Niveau MI'
+            WHEN elo > 2200 THEN 'Joueuse très forte'
+            ELSE 'Joueuse de niveau normal'
+       END
+  FROM echecs.joueuse;
+```
+
+### Échantillon
+
+Afficher un échnaitllon aléatoire de 10 % des lignes
+
+```{.sql}
+SELECT *
+  FROM purchases
+TABLESAMPLE BERNOUILLI(10);
 ```
 
 ### Et même !?

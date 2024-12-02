@@ -24,7 +24,44 @@ from: markdown+emoji
 
 :construction:
 
-## les vues
+
+## Sous-requête
+
+### Imbriquer les SELECT
+
+```{.sql}
+SELECT nom, prenom, elo
+  FROM (SELECT *
+          FROM joueuse
+         WHERE code_pays = 'FR' 
+           AND elo > 2000)
+ WHERE prenom LIKE 'A%';
+```
+
+### EXISTS
+
+Principe assez similaire au `IN`
+
+```{.sql}
+SELECT *
+  FROM echecs.club c
+ WHERE EXISTS (SELECT 1
+                 FROM echecs.joueuse j
+                WHERE c.id_club = j.id_joueuse
+                  AND j.elo > 2400);
+```
+
+:::{.notes}
+```{.sql}
+SELECT *
+  FROM echecs.club c
+ WHERE c.id_club IN (SELECT j.id_joueuse
+                       FROM echecs.joueuse j
+                      WHERE j.elo > 2400);
+```
+:::
+
+## Les vues
 
 Nous disposons de cette table
 
@@ -90,7 +127,10 @@ SELECT nom, prenom, elo
 
 :::{.notes}
 Usage avancé
+
+Comme une sous-requête
 :::
+
 
 ### Table temporaire
 
@@ -138,18 +178,70 @@ SELECT *
    AND elo > 2000;
 ```
 
+## Gérer les droits
 
+L'utilisateur qui crée une table peut distribuer des droits aux autres.
 
+Voir section *priviléges* de la doc PostgreSQL
+
+### Donner des droits
+
+Lecture / écriture sur des tables
+
+```{.sql}
+-- Lecture pour tous
+GRANT SELECT ON echecs.joueuse TO PUBLIC;
+
+-- Tous les droits
+GRANT ALL PRIVILEGES ON echecs.joueuse TO chantal;
+```
+
+Suffixe `WITH GRANT OPTION` pour donner le droit de transmettre ce droit.
+
+### Retirer des droits
+
+```{.sql}
+-- Lecture
+REVOKE SELECT ON echecs.joueuse TO chantal;
+
+-- Tous les droits
+REVOKE ALL PRIVILEGES ON echecs.joueuse TO chantal;
+```
+
+Suffixe `CASCADE` pour retirer les droits à ceux qui ont reçu les droits de la part de...
+
+### Rôle
+
+Pour une gestion simplifiée des droits
+
+```{.sql}
+CREATE ROLE eleve;
+
+GRANT SELECT, INSERT ON echecs.joueuse TO eleve;
+
+GRANT eleve TO chantal;
+```
+
+### Droits sur un schéma
+
+```{.sql}
+GRANT USAGE ON SCHEMA echecs TO PUBLIC;
+
+REVOKE CREATE ON SCHEMA echecs FROM chantal;
+
+GRANT SELECT ON ALL TABLES IN SCHEMA echecs TO PUBLIC;
+```
+
+- CREATE : Autorise la création d'objets dans le schéma
+- USAGE : Autorise uniquement l'accès au schéma (nécessaire pour utiliser les objets du schéma)
+
+---
 
 ## Todo
 
-
-- CASE
 - INDEX
 - GRANT
 - Trigger
 - Optimisation
-- EXISTS
 - Encapsuler
-- CTE
 - Transactions (ACID)
