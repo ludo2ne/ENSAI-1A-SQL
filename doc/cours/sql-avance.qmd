@@ -24,18 +24,52 @@ from: markdown+emoji
 
 :construction: WIP
 
+## Données
+
+```{.sql}
+CREATE TABLE echecs.joueuse (
+    id_joueuse     SERIAL         PRIMARY KEY,   
+    nom            VARCHAR(50)    NOT NULL, 
+    prenom         VARCHAR(50)    NOT NULL, 
+    date_naissance TIMESTAMP,                 
+    elo            INT            CHECK (elo > 0),  
+    mail           VARCHAR(100)   UNIQUE,         
+    est_arbitre    BOOLEAN        DEFAULT false,
+    code_pays      VARCHAR(2),          
+    taux_victoires FLOAT          CHECK (taux_victoires BETWEEN 0 AND 1)
+);
+```
+
 
 ## Sous-requête
+
+### Dans un filtre
+
+Vous souhaitez lister les joueuses avec un elo supérieur à la moyenne.
+
+::: {.fragment}
+```{.sql}
+SELECT nom, 
+       prenom,
+       elo
+FROM echecs.joueuse
+WHERE elo >= (SELECT AVG(elo) 
+                FROM echecs.joueuse);
+```
+:::
 
 ### Imbriquer les SELECT
 
 ```{.sql}
-SELECT nom, prenom, elo
-  FROM (SELECT *
+SELECT j.nom, 
+       j.prenom, 
+       j.elo,
+       mec.max_elo_club
+  FROM (SELECT id_club,
+               MAX(elo) AS max_elo_club
           FROM joueuse
-         WHERE code_pays = 'FR' 
-           AND elo > 2000)
- WHERE prenom LIKE 'A%';
+         GROUP BY id_club) mec
+  JOIN joueuse j USING(id_club);
 ```
 
 ### EXISTS
@@ -62,22 +96,6 @@ SELECT *
 :::
 
 ## Les vues
-
-Nous disposons de cette table
-
-```{.sql}
-CREATE TABLE echecs.joueuse (
-    id_joueuse     SERIAL         PRIMARY KEY,   
-    nom            VARCHAR(50)    NOT NULL, 
-    prenom         VARCHAR(50)    NOT NULL, 
-    date_naissance TIMESTAMP,                 
-    elo            INT            CHECK (elo > 0),  
-    mail           VARCHAR(100)   UNIQUE,         
-    est_arbitre    BOOLEAN        DEFAULT false,
-    code_pays      VARCHAR(2),          
-    taux_victoires FLOAT          CHECK (taux_victoires BETWEEN 0 AND 1)
-);
-```
 
 ### Joueuses Françaises
 
@@ -193,7 +211,7 @@ Lecture / écriture sur des tables
 GRANT SELECT ON echecs.joueuse TO PUBLIC;
 
 -- Tous les droits
-GRANT ALL PRIVILEGES ON echecs.joueuse TO chantal;
+GRANT ALL PRIVILEGES ON echecs.joueuse TO chantal WITH GRANT OPTION;
 ```
 
 Suffixe `WITH GRANT OPTION` pour donner le droit de transmettre ce droit.
@@ -235,12 +253,81 @@ GRANT SELECT ON ALL TABLES IN SCHEMA echecs TO PUBLIC;
 - CREATE : Autorise la création d'objets dans le schéma
 - USAGE : Autorise uniquement l'accès au schéma (nécessaire pour utiliser les objets du schéma)
 
----
 
-## Todo
+## Transactions
 
-- INDEX
-- Trigger
-- Optimisation
-- Encapsuler
-- Transactions (ACID)
+### Exemple
+
+```{.sql}
+BEGIN; -- Démarrer la transaction
+
+UPDATE comptes SET solde = solde - 100 WHERE id = 1; -- Débiter le compte 1
+UPDATE comptes SET solde = solde + 100 WHERE id = 2; -- Créditer le compte 2
+
+COMMIT; -- Valider les modifications si tout s'est bien passé
+```
+
+<br>
+
+```{.sql}
+ROLLBACK; -- en cas d'erreur
+```
+
+
+### Propriétés ACID
+
+Pour définir la fiabilité des transactions :
+
+- **Atomicité** : Une transaction est "tout ou rien"
+- **Cohérence** : La base reste dans un état valide avant et après la transaction
+- **Isolation** : Les transactions concurrentes n'interfèrent pas entre elles
+- **Durabilité** : Une transaction validée est enregistrée de manière permanente, même en cas de panne
+
+:::{.notes}
+- Soit toutes les opérations réussissent, soit elles sont annulées (rollback)
+:::
+
+
+## Divers
+
+### Index
+
+```{.sql}
+CREATE INDEX idx_nom_joueuse ON joueuse (nom);
+```
+
+Permet une lecture plus rapide sur une colonne utilisée fréquemment dans *WHERE*, *JOIN*, *GROUP BY*, *ORDER BY*
+
+
+### Index + et -
+
+- :heavy_check_mark: Haute cardinalité
+- :heavy_check_mark: Peu de valeurs nulles
+- :x: Créations, mises à jour
+- :x: Prend de la place
+
+:::{.notes}
+- si Haute cardinalité : beaucoup de valeurs distinctes
+- Si une colonne est souvent modifiée, l'index associé doit être mis à jour
+- Index sous jacent sur colonnes UNIQUE (PK incluse)
+:::
+
+
+### Trigger
+
+Fonction qui s'exécute automatiquement en réponse à une mise à jour d'une table
+
+Un trigger permet de :
+
+- Garantir l'intégrité des données
+- Implémenter des règles métier
+- Synchroniser des données
+
+:::{.notes}
+Peut se déclencher avant ou arpès une maj
+
+Garantir l'intégrité des données : Valider ou corriger les données avant leur enregistrement.
+Implémenter des règles métier : Empêcher des suppressions ou modifications non autorisées.
+Synchroniser des données : Mettre à jour des tables liées automatiquement.
+:::
+

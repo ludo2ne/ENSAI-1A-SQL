@@ -161,12 +161,12 @@ df.filter(pl.col("vetement") == "gilet")
 ## Diffusion
 
 ```{python}
-file_prenoms = pl.scan_parquet(source="s3://ldeneuville-ensai/diffusion/ENSAI/SQL-TP/prenoms-nat2022.parquet", 
+fichier_prenoms = pl.scan_parquet(source="s3://ldeneuville-ensai/diffusion/ENSAI/SQL-TP/prenoms-nat2022.parquet", 
                                storage_options=storage_options)
 ```
 
 ```{python}
-top10f2021 = file_prenoms\
+top10f2021 = fichier_prenoms\
     .filter((pl.col("sexe") == 2) & 
             (pl.col("annais") == "2021") & 
             (pl.col("preusuel") != "_PRENOMS_RARES"))\
@@ -183,7 +183,7 @@ top10f2021
 ```
 
 ```{python}
-top10f2021_sql = file_prenoms\
+top10f2021_sql = fichier_prenoms\
     .sql("""
       SELECT preusuel, 
              SUM(nombre) AS nombre_total
@@ -204,7 +204,7 @@ top10f2021_sql
 prenom = "Katia"
 annee_debut, annee_fin = 1960, 1980
 
-df_prenom_annee = file_prenoms\
+df_prenom_annee = fichier_prenoms\
     .filter((pl.col("preusuel") == prenom.upper()) & 
             (pl.col("annais").str.to_integer(strict=False).is_not_null()) &  # Convertir et exclure les nulls
             (pl.col("annais").str.to_integer(strict=False) >= annee_debut) & 
@@ -218,7 +218,7 @@ print(df_prenom_annee)
 ```
 
 ```{python}
-file_prenoms.sql(f"""
+fichier_prenoms.sql(f"""
 SELECT annais, 
        SUM(nombre) AS nombre_total
   FROM self
@@ -267,7 +267,7 @@ plt.show()
 ## Le prénom
 
 ```{python}
-prenoms_feminins = file_prenoms.sql(f"""
+prenoms_feminins = fichier_prenoms.sql(f"""
 SELECT preusuel, 
        SUM(nombre) AS nombre_total
   FROM self
