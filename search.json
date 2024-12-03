@@ -536,7 +536,7 @@
     "href": "doc/tp/tp3.html#fin-du-tp",
     "title": "Découverte du Datalab",
     "section": "Fin du TP",
-    "text": "Fin du TP\nLe but de ce TP était de vous faire découvrir les fonctionnalités de base du Datalab et les bonnes pratiques de travail dans un environnement Cloud.\n\n\n\n\n\n\nImportant\n\n\n\nLa suite du TP est optionnelle.\nElle est simplement donnée pour celles et ceux qui souhaient aller plus loin et profiter de toutes les fonctionnalités du Datalab.\n\n\n\nBesoin d’assistance ?\nContactez l’équipe du SSP Cloud sur Slack\n\n\nPour aller plus loin\nUne présentation complète du projet Onyxia au Devoxx 2023, de sa philosophie et de son fonctionnement par Olivier LEVITT, Joseph GARRONE et Frédéric COMTE.\n\nUne présentation plus courte\n\nD’autres videos sur la page GitHub du projet\n\n\nBibliographie\n\nUtiliser RStudio sur l’environnement SSP Cloud, UtilitR\nFormations et tutoriels du SSP Cloud\n\nNombreux tutos : Python, R, ML, Spark, Cartographie\n\nDoc SSP Cloud\nDécouverte d’Onyxia et de son datalab SSP Cloud, Nathan Randriamanana"
+    "text": "Fin du TP\nLe but de ce TP était de vous faire découvrir les fonctionnalités de base du Datalab et les bonnes pratiques de travail dans un environnement Cloud.\n\n\n\n\n\n\nImportant\n\n\n\nLa suite du TP est optionnelle.\nElle est simplement donnée pour celles et ceux qui souhaient aller plus loin et profiter de toutes les fonctionnalités du Datalab.\n\n\n\nBesoin d’assistance ?\n\nContactez l’équipe du SSP Cloud sur Slack\nPour le Datalab du GENES, vous trouverez sur la page d’accueil un lien pour rejoindre le canal Teams\n\n\n\nPour aller plus loin\nUne présentation complète du projet Onyxia au Devoxx 2023, de sa philosophie et de son fonctionnement par Olivier LEVITT, Joseph GARRONE et Frédéric COMTE.\n\nUne présentation plus courte\n\nD’autres videos sur la page GitHub du projet\n\n\nBibliographie\n\nUtiliser RStudio sur l’environnement SSP Cloud, UtilitR\nFormations et tutoriels du SSP Cloud\n\nNombreux tutos : Python, R, ML, Spark, Cartographie\n\nDoc SSP Cloud\nDécouverte d’Onyxia et de son datalab SSP Cloud, Nathan Randriamanana"
   },
   {
     "objectID": "doc/tp/tp3.html#travailler-avec-git",
@@ -634,7 +634,7 @@
     "href": "doc/cours/modelisation.html",
     "title": "Modélisation avec UML",
     "section": "",
-    "text": "🚧"
+    "text": "🚧 WIP"
   },
   {
     "objectID": "doc/cours/modelisation.html#dépendances-fonctionnelles",
@@ -781,14 +781,14 @@
     "href": "doc/cours/sql-avance-slides.html#todo",
     "title": "SQL avancé",
     "section": "Todo",
-    "text": "Todo\n\nINDEX\nGRANT\nTrigger\nOptimisation\nEncapsuler\nTransactions (ACID)"
+    "text": "Todo\n\nINDEX\nTrigger\nOptimisation\nEncapsuler\nTransactions (ACID)"
   },
   {
     "objectID": "doc/cours/sql-avance.html",
     "href": "doc/cours/sql-avance.html",
     "title": "SQL avancé",
     "section": "",
-    "text": "🚧"
+    "text": "🚧 WIP"
   },
   {
     "objectID": "doc/cours/sql-avance.html#sous-requête",
@@ -816,7 +816,7 @@
     "href": "doc/cours/sql-avance.html#todo",
     "title": "SQL avancé",
     "section": "4 Todo",
-    "text": "4 Todo\n\nINDEX\nGRANT\nTrigger\nOptimisation\nEncapsuler\nTransactions (ACID)"
+    "text": "4 Todo\n\nINDEX\nTrigger\nOptimisation\nEncapsuler\nTransactions (ACID)"
   },
   {
     "objectID": "doc/cours/sql-intro-slides.html#structured-query-language",
