@@ -756,18 +756,32 @@
     "text": "7 SGBD\n\n\n\n\n\n\nDéfinition\n\n\n\nUn Système de Gestion de Bases de Données est un logiciel qui permet de créer, gérer et manipuler des bases de données.\nIl fournit des outils pour stocker, récupérer, modifier et sécuriser les données.\n\n\n\nPostgreSQL\nMySQL, MariaDB\nOracle Database\nSQLite\n\n\n7.1 PostgreSQL\n\nOpen Source, Libre\nCommunauté active\nStable et performant\nBasé sur le modèle client-serveur\nExtension PostGIS (Données géographiques)\n\n\nutilisé à l’INSEE\nclient-serveur classique :\n\nle composant serveur central « postmaster » gère tous les fichiers de bdd\nainsi que toutes les connexions établies pour la communication avec le serveur de bdd.\n\nLes utilisateurs n’ont besoin que d’un programme client approprié pour établir la connexion\n\n\n\n7.2 Outil de Gestion et Administration\nIl est nécessaire d’avoir un outil pour gérer et administrer une base de données.\n\n\n\n\n\n\nTip\n\n\n\n\nPostgreSQL : Installé sur un serveur, sert de moteur de base de données\npgAdmin : Interface graphique pour interagir avec PostgreSQL\n\n\n\n\npgAdmin\nDBeaver\n\n\n\n7.3 Kesako\n\nBase de données : endroit où sont stockées les informations\nSGBD : logiciel qui permet de créer, gérer et manipuler les bases de données\nOutil de gestion du SGBD : application graphique qui facilite l’interaction avec un SGBD\nSQL : Langage pour donner les instructions à la base de données\n\n\n\nBDD : bibliothèque\nSGBD : bibliothécaire\nOutil : tableau de bord interactif pour les bibliothécaires\n\nA l’ENSAI :\n\nvous avez chacun une bdd (nom=id)\nutilisez DBeaver pour vous y connecter"
   },
   {
+    "objectID": "doc/cours/sql-avance-slides.html#sous-requête",
+    "href": "doc/cours/sql-avance-slides.html#sous-requête",
+    "title": "SQL avancé",
+    "section": "Sous-requête",
+    "text": "Sous-requête"
+  },
+  {
     "objectID": "doc/cours/sql-avance-slides.html#les-vues",
     "href": "doc/cours/sql-avance-slides.html#les-vues",
     "title": "SQL avancé",
-    "section": "les vues",
-    "text": "les vues\nNous disposons de cette table\nCREATE TABLE echecs.joueuse (\n    id_joueuse     SERIAL         PRIMARY KEY,   \n    nom            VARCHAR(50)    NOT NULL, \n    prenom         VARCHAR(50)    NOT NULL, \n    date_naissance TIMESTAMP,                 \n    elo            INT            CHECK (elo &gt; 0),  \n    mail           VARCHAR(100)   UNIQUE,         \n    est_arbitre    BOOLEAN        DEFAULT false,\n    code_pays      VARCHAR(2),          \n    taux_victoires FLOAT          CHECK (taux_victoires BETWEEN 0 AND 1)\n);"
+    "section": "Les vues",
+    "text": "Les vues\nNous disposons de cette table\nCREATE TABLE echecs.joueuse (\n    id_joueuse     SERIAL         PRIMARY KEY,   \n    nom            VARCHAR(50)    NOT NULL, \n    prenom         VARCHAR(50)    NOT NULL, \n    date_naissance TIMESTAMP,                 \n    elo            INT            CHECK (elo &gt; 0),  \n    mail           VARCHAR(100)   UNIQUE,         \n    est_arbitre    BOOLEAN        DEFAULT false,\n    code_pays      VARCHAR(2),          \n    taux_victoires FLOAT          CHECK (taux_victoires BETWEEN 0 AND 1)\n);"
+  },
+  {
+    "objectID": "doc/cours/sql-avance-slides.html#gérer-les-droits",
+    "href": "doc/cours/sql-avance-slides.html#gérer-les-droits",
+    "title": "SQL avancé",
+    "section": "Gérer les droits",
+    "text": "Gérer les droits\nL’utilisateur qui crée une table peut distribuer des droits aux autres.\nVoir section priviléges de la doc PostgreSQL"
   },
   {
     "objectID": "doc/cours/sql-avance-slides.html#todo",
     "href": "doc/cours/sql-avance-slides.html#todo",
     "title": "SQL avancé",
     "section": "Todo",
-    "text": "Todo\n\nCASE\nINDEX\nGRANT\nTrigger\nOptimisation\nEXISTS\nEncapsuler\nCTE\nTransactions (ACID)"
+    "text": "Todo\n\nINDEX\nGRANT\nTrigger\nOptimisation\nEncapsuler\nTransactions (ACID)"
   },
   {
     "objectID": "doc/cours/sql-avance.html",
@@ -777,18 +791,32 @@
     "text": "🚧"
   },
   {
+    "objectID": "doc/cours/sql-avance.html#sous-requête",
+    "href": "doc/cours/sql-avance.html#sous-requête",
+    "title": "SQL avancé",
+    "section": "1 Sous-requête",
+    "text": "1 Sous-requête\n\nImbriquer les SELECT\nSELECT nom, prenom, elo\n  FROM (SELECT *\n          FROM joueuse\n         WHERE code_pays = 'FR' \n           AND elo &gt; 2000)\n WHERE prenom LIKE 'A%';\n\n\nEXISTS\nPrincipe assez similaire au IN\nSELECT *\n  FROM echecs.club c\n WHERE EXISTS (SELECT 1\n                 FROM echecs.joueuse j\n                WHERE c.id_club = j.id_joueuse\n                  AND j.elo &gt; 2400);\n\nSELECT *\n  FROM echecs.club c\n WHERE c.id_club IN (SELECT j.id_joueuse\n                       FROM echecs.joueuse j\n                      WHERE j.elo &gt; 2400);"
+  },
+  {
     "objectID": "doc/cours/sql-avance.html#les-vues",
     "href": "doc/cours/sql-avance.html#les-vues",
     "title": "SQL avancé",
-    "section": "1 les vues",
-    "text": "1 les vues\nNous disposons de cette table\nCREATE TABLE echecs.joueuse (\n    id_joueuse     SERIAL         PRIMARY KEY,   \n    nom            VARCHAR(50)    NOT NULL, \n    prenom         VARCHAR(50)    NOT NULL, \n    date_naissance TIMESTAMP,                 \n    elo            INT            CHECK (elo &gt; 0),  \n    mail           VARCHAR(100)   UNIQUE,         \n    est_arbitre    BOOLEAN        DEFAULT false,\n    code_pays      VARCHAR(2),          \n    taux_victoires FLOAT          CHECK (taux_victoires BETWEEN 0 AND 1)\n);\n\nJoueuses Françaises\nImaginons que nous avons de nombreuses requêtes à écrire sur les joueuses françaises ayant plus de 2000 elo.\nEt nous n’avons pas envie de nous embetter à écrire à chaque fois toutes les restrictions.\n\n\nNouvelle table\nSolution 1 : créons une nouvelle table\nCREATE TABLE echecs.joueuse_fr_2000\nAS\nSELECT *\n  FROM echecs.joueuse\n WHERE code_pays = 'FR'\n   AND elo &gt;= 2000\n\n\n\n\n\n\n\nProblèmes\n\n\n\n\nDuplication des données\nMise à jour\n\n\n\n\n\n\nCommon Table Expression\nPour une utilisation ponctuelle, vous pouvez utiliser une CTE. Le principe :\n\nCommencez par définir votre sous-requête joueuses_fr_elo2000 avec WITH\nAppelez joueuses_fr_elo2000 dans la requête principale\n\nWITH joueuses_fr_elo2000 \nAS (SELECT *\n      FROM joueuse\n     WHERE code_pays = 'FR' \n       AND elo &gt; 2000\n)\nSELECT nom, prenom, elo\n  FROM joueuses_francaises_elo2000\n WHERE prenom LIKE 'A%';\n\nUsage avancé\n\n\n\nTable temporaire\nN’existe que le temps de la session\nCREATE TEMPORARY TABLE joueuses_fr_elo2000 \nAS\nSELECT *\n  FROM joueuse\n WHERE code_pays = 'FR' \n   AND elo &gt; 2000;\n\n\nVue\nCREATE VIEW joueuses_fr_elo2000 \nAS\nSELECT *\n  FROM joueuse\n WHERE code_pays = 'FR' \n   AND elo &gt; 2000;\n\n\nAvantages des vues\n\nSauvegarde de requêtes complexes\n\njointures, filtres…\n\nSécurité et Contrôle d’Accès\n\nMasquer des colonnes sensibles\n\n\nPar contre une vue n’est pas plus rapide, ni performante\n\n\nVues matérialisées\nPhoto à un instant t\nCREATE MATERIALIZED VIEW joueuses_fr_elo2000 \nAS\nSELECT *\n  FROM joueuse\n WHERE code_pays = 'FR' \n   AND elo &gt; 2000;"
+    "section": "2 Les vues",
+    "text": "2 Les vues\nNous disposons de cette table\nCREATE TABLE echecs.joueuse (\n    id_joueuse     SERIAL         PRIMARY KEY,   \n    nom            VARCHAR(50)    NOT NULL, \n    prenom         VARCHAR(50)    NOT NULL, \n    date_naissance TIMESTAMP,                 \n    elo            INT            CHECK (elo &gt; 0),  \n    mail           VARCHAR(100)   UNIQUE,         \n    est_arbitre    BOOLEAN        DEFAULT false,\n    code_pays      VARCHAR(2),          \n    taux_victoires FLOAT          CHECK (taux_victoires BETWEEN 0 AND 1)\n);\n\nJoueuses Françaises\nImaginons que nous avons de nombreuses requêtes à écrire sur les joueuses françaises ayant plus de 2000 elo.\nEt nous n’avons pas envie de nous embetter à écrire à chaque fois toutes les restrictions.\n\n\nNouvelle table\nSolution 1 : créons une nouvelle table\nCREATE TABLE echecs.joueuse_fr_2000\nAS\nSELECT *\n  FROM echecs.joueuse\n WHERE code_pays = 'FR'\n   AND elo &gt;= 2000\n\n\n\n\n\n\n\nProblèmes\n\n\n\n\nDuplication des données\nMise à jour\n\n\n\n\n\n\nCommon Table Expression\nPour une utilisation ponctuelle, vous pouvez utiliser une CTE. Le principe :\n\nCommencez par définir votre sous-requête joueuses_fr_elo2000 avec WITH\nAppelez joueuses_fr_elo2000 dans la requête principale\n\nWITH joueuses_fr_elo2000 \nAS (SELECT *\n      FROM joueuse\n     WHERE code_pays = 'FR' \n       AND elo &gt; 2000\n)\nSELECT nom, prenom, elo\n  FROM joueuses_francaises_elo2000\n WHERE prenom LIKE 'A%';\n\nUsage avancé\nComme une sous-requête\n\n\n\nTable temporaire\nN’existe que le temps de la session\nCREATE TEMPORARY TABLE joueuses_fr_elo2000 \nAS\nSELECT *\n  FROM joueuse\n WHERE code_pays = 'FR' \n   AND elo &gt; 2000;\n\n\nVue\nCREATE VIEW joueuses_fr_elo2000 \nAS\nSELECT *\n  FROM joueuse\n WHERE code_pays = 'FR' \n   AND elo &gt; 2000;\n\n\nAvantages des vues\n\nSauvegarde de requêtes complexes\n\njointures, filtres…\n\nSécurité et Contrôle d’Accès\n\nMasquer des colonnes sensibles\n\n\nPar contre une vue n’est pas plus rapide, ni performante\n\n\nVues matérialisées\nPhoto à un instant t\nCREATE MATERIALIZED VIEW joueuses_fr_elo2000 \nAS\nSELECT *\n  FROM joueuse\n WHERE code_pays = 'FR' \n   AND elo &gt; 2000;"
+  },
+  {
+    "objectID": "doc/cours/sql-avance.html#gérer-les-droits",
+    "href": "doc/cours/sql-avance.html#gérer-les-droits",
+    "title": "SQL avancé",
+    "section": "3 Gérer les droits",
+    "text": "3 Gérer les droits\nL’utilisateur qui crée une table peut distribuer des droits aux autres.\nVoir section priviléges de la doc PostgreSQL\n\nDonner des droits\nLecture / écriture sur des tables\n-- Lecture pour tous\nGRANT SELECT ON echecs.joueuse TO PUBLIC;\n\n-- Tous les droits\nGRANT ALL PRIVILEGES ON echecs.joueuse TO chantal;\nSuffixe WITH GRANT OPTION pour donner le droit de transmettre ce droit.\n\n\nRetirer des droits\n-- Lecture\nREVOKE SELECT ON echecs.joueuse TO chantal;\n\n-- Tous les droits\nREVOKE ALL PRIVILEGES ON echecs.joueuse TO chantal;\nSuffixe CASCADE pour retirer les droits à ceux qui ont reçu les droits de la part de…\n\n\nRôle\nPour une gestion simplifiée des droits\nCREATE ROLE eleve;\n\nGRANT SELECT, INSERT ON echecs.joueuse TO eleve;\n\nGRANT eleve TO chantal;\n\n\nDroits sur un schéma\nGRANT USAGE ON SCHEMA echecs TO PUBLIC;\n\nREVOKE CREATE ON SCHEMA echecs FROM chantal;\n\nGRANT SELECT ON ALL TABLES IN SCHEMA echecs TO PUBLIC;\n\nCREATE : Autorise la création d’objets dans le schéma\nUSAGE : Autorise uniquement l’accès au schéma (nécessaire pour utiliser les objets du schéma)"
   },
   {
     "objectID": "doc/cours/sql-avance.html#todo",
     "href": "doc/cours/sql-avance.html#todo",
     "title": "SQL avancé",
-    "section": "2 Todo",
-    "text": "2 Todo\n\nCASE\nINDEX\nGRANT\nTrigger\nOptimisation\nEXISTS\nEncapsuler\nCTE\nTransactions (ACID)"
+    "section": "4 Todo",
+    "text": "4 Todo\n\nINDEX\nGRANT\nTrigger\nOptimisation\nEncapsuler\nTransactions (ACID)"
   },
   {
     "objectID": "doc/cours/sql-intro-slides.html#structured-query-language",
@@ -935,14 +963,14 @@
     "href": "doc/cours/sql-intro.html#valeurs-nulles",
     "title": "SQL - Introduction",
     "section": "9 Valeurs nulles",
-    "text": "9 Valeurs nulles\n\nTester si un attribut est NULL\nJoueuses dont le mail n’est pas renseigné :\nSELECT *\n  FROM echecs.joueuse\n WHERE mail IS NULL; \n\nEt inversemenent :\nSELECT *\n  FROM echecs.joueuse\n WHERE mail IS NOT NULL;\n\n\nCOALESCE\n\n\n\n\n\n\nLa fonction COALESCE\n\n\n\nEn PostgreSQL, la fonction COALESCE :\n\nprend un nombre quelconque de paramètres\nretourne le 1er paramètre dont la valeur est NON NULLE\n\n\n\n\nc(x1, x2, ... xn):\n  if x1:\n    return x1\n  else:\n    return c(x2, ... xn)\nNVL pour Oracle (à ne pas confondre avec MVL)\n\n\n\nCOALESCE - Exemple\nSELECT COALESCE(mail, tel, 'pas de contact')\n  FROM echecs.joueuse\n WHERE id_joueuse = 1\nLa requête ci-dessus va afficher :\n\nSi mail est NON NULL ➡️ mail\nSinon\n\nSi tel NON NULL ➡️ tel\nSinon ➡️ pas de contact"
+    "text": "9 Valeurs nulles\n\nTester si un attribut est NULL\nJoueuses dont le mail n’est pas renseigné :\nSELECT *\n  FROM echecs.joueuse\n WHERE mail IS NULL; \n\nEt inversemenent :\nSELECT *\n  FROM echecs.joueuse\n WHERE mail IS NOT NULL;\n\n\nCOALESCE\n\n\n\n\n\n\nLa fonction COALESCE\n\n\n\nEn PostgreSQL, la fonction COALESCE :\n\nprend un nombre quelconque de paramètres\nretourne le 1er paramètre dont la valeur est NON NULLE\n\n\n\n\nc(x1, x2, ... xn):\n  if x1:\n    return x1\n  else:\n    return c(x2, ... xn)\nNVL pour Oracle (à ne pas confondre avec MVL)\n\n\n\nCOALESCE - Exemple\nSELECT COALESCE(mail, tel, 'pas de contact')\n  FROM echecs.joueuse\n WHERE id_joueuse = 1\nLa requête ci-dessus va afficher :\n\nSi mail est NON NULL ➡️ mail\nSinon\n\nSi tel NON NULL ➡️ tel\nSinon ➡️ pas de contact\n\n\n\n\nNULLIF\nSELECT NULLIF(tel, '00.00.00.00.00') \n  FROM echecs.joueuse;\n\nSi tel = 00.00.00.00.00\n\nRenvoie NULL"
   },
   {
     "objectID": "doc/cours/sql-intro.html#divers",
     "href": "doc/cours/sql-intro.html#divers",
     "title": "SQL - Introduction",
     "section": "10 Divers",
-    "text": "10 Divers\n\nJouer avec les colonnes\nSELECT CONCAT(nom, ' ', prenom) AS nom_complet,\n       elo\nFROM echecs.joueuse;\n\n\n\n\n\n\nnom_complet\nelo\n\n\n\n\nGuichard Pauline\n2357\n\n\nDaulyte-Cornette Deimante\n2371\n\n\nNavrotescu Andreea\n2338\n\n\nSebag Marie\n2448\n\n\nMillet Sophie\n2366\n\n\nSkrichempko Almira\n2361\n\n\n\n\n\n\n\nSupprimer les doublons\nLe mot clé DISTINCT permet de supprimer les doublons.\nSELECT DISTINCT prenom\nFROM echecs.joueuse;\n\n\nEt même !?\nSELECT 1,\n       TRUE,\n       'a',\n       current_date\n  FROM echecs.joueuse;"
+    "text": "10 Divers\n\nJouer avec les colonnes\nSELECT CONCAT(nom, ' ', prenom) AS nom_complet,\n       elo\nFROM echecs.joueuse;\n\n\n\n\n\n\nnom_complet\nelo\n\n\n\n\nGuichard Pauline\n2357\n\n\nDaulyte-Cornette Deimante\n2371\n\n\nNavrotescu Andreea\n2338\n\n\nSebag Marie\n2448\n\n\nMillet Sophie\n2366\n\n\nSkrichempko Almira\n2361\n\n\n\n\n\n\n\nSupprimer les doublons\nLe mot clé DISTINCT permet de supprimer les doublons.\nSELECT DISTINCT prenom\nFROM echecs.joueuse;\n\n\nChoix\nSELECT CASE WHEN elo &gt; 2400 THEN 'Niveau MI'\n            WHEN elo &gt; 2200 THEN 'Joueuse très forte'\n            ELSE 'Joueuse de niveau normal'\n       END\n  FROM echecs.joueuse;\n\n\nÉchantillon\nAfficher un échnaitllon aléatoire de 10 % des lignes\nSELECT *\n  FROM purchases\nTABLESAMPLE BERNOUILLI(10);\n\n\nEt même !?\nSELECT 1,\n       TRUE,\n       'a',\n       current_date\n  FROM echecs.joueuse;"
   },
   {
     "objectID": "doc/cours/sql-intro.html#résumé",

@@ -1384,6 +1384,17 @@ Ludovic Deneuville
 <li>Sinon <span class="emoji" data-emoji="arrow_right">➡️</span> <code>pas de contact</code></li>
 </ul></li>
 </ul>
+</section>
+<section id="nullif" class="slide level3">
+<h3>NULLIF</h3>
+<div class="sourceCode" id="cb41"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb41-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">NULLIF</span>(tel, <span class="st">'00.00.00.00.00'</span>) </span>
+<span id="cb41-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul>
+<li>Si tel = <code>00.00.00.00.00</code>
+<ul>
+<li>Renvoie <em>NULL</em></li>
+</ul></li>
+</ul>
 </section></section>
 <section>
 <section id="divers" class="title-slide slide level2 center">
@@ -1392,9 +1403,9 @@ Ludovic Deneuville
 </section>
 <section id="jouer-avec-les-colonnes" class="slide level3">
 <h3>Jouer avec les colonnes</h3>
-<div class="sourceCode" id="cb41"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb41-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">CONCAT</span>(nom, <span class="st">' '</span>, prenom) <span class="kw">AS</span> nom_complet,</span>
-<span id="cb41-2"><a aria-hidden="true" tabindex="-1"></a>       elo</span>
-<span id="cb41-3"><a aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> echecs.joueuse;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb42-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">CONCAT</span>(nom, <span class="st">' '</span>, prenom) <span class="kw">AS</span> nom_complet,</span>
+<span id="cb42-2"><a aria-hidden="true" tabindex="-1"></a>       elo</span>
+<span id="cb42-3"><a aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> echecs.joueuse;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><br></p>
 <div class="fragment">
 <div class="small-table">
@@ -1438,16 +1449,31 @@ Ludovic Deneuville
 <section id="supprimer-les-doublons" class="slide level3">
 <h3>Supprimer les doublons</h3>
 <p>Le mot clé <code>DISTINCT</code> permet de supprimer les doublons.</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb42-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="kw">DISTINCT</span> prenom</span>
-<span id="cb42-2"><a aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> echecs.joueuse;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb43-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="kw">DISTINCT</span> prenom</span>
+<span id="cb43-2"><a aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> echecs.joueuse;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="choix" class="slide level3">
+<h3>Choix</h3>
+<div class="sourceCode" id="cb44"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb44-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="cf">CASE</span> <span class="cf">WHEN</span> elo <span class="op">&gt;</span> <span class="dv">2400</span> <span class="cf">THEN</span> <span class="st">'Niveau MI'</span></span>
+<span id="cb44-2"><a aria-hidden="true" tabindex="-1"></a>            <span class="cf">WHEN</span> elo <span class="op">&gt;</span> <span class="dv">2200</span> <span class="cf">THEN</span> <span class="st">'Joueuse très forte'</span></span>
+<span id="cb44-3"><a aria-hidden="true" tabindex="-1"></a>            <span class="cf">ELSE</span> <span class="st">'Joueuse de niveau normal'</span></span>
+<span id="cb44-4"><a aria-hidden="true" tabindex="-1"></a>       <span class="cf">END</span></span>
+<span id="cb44-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="échantillon" class="slide level3">
+<h3>Échantillon</h3>
+<p>Afficher un échnaitllon aléatoire de 10 % des lignes</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb45-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb45-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> purchases</span>
+<span id="cb45-3"><a aria-hidden="true" tabindex="-1"></a>TABLESAMPLE BERNOUILLI(<span class="dv">10</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="et-même" class="slide level3">
 <h3>Et même !?</h3>
-<div class="sourceCode" id="cb43"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb43-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="dv">1</span>,</span>
-<span id="cb43-2"><a aria-hidden="true" tabindex="-1"></a>       <span class="kw">TRUE</span>,</span>
-<span id="cb43-3"><a aria-hidden="true" tabindex="-1"></a>       <span class="st">'a'</span>,</span>
-<span id="cb43-4"><a aria-hidden="true" tabindex="-1"></a>       <span class="fu">current_date</span></span>
-<span id="cb43-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb46-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="dv">1</span>,</span>
+<span id="cb46-2"><a aria-hidden="true" tabindex="-1"></a>       <span class="kw">TRUE</span>,</span>
+<span id="cb46-3"><a aria-hidden="true" tabindex="-1"></a>       <span class="st">'a'</span>,</span>
+<span id="cb46-4"><a aria-hidden="true" tabindex="-1"></a>       <span class="fu">current_date</span></span>
+<span id="cb46-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section></section>
 <section id="résumé" class="title-slide slide level2 center">
 <h2>Résumé</h2>
