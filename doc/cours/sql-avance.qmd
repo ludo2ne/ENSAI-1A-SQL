@@ -22,7 +22,7 @@ code-line-numbers: false
 from: markdown+emoji
 ---
 
-:construction:
+:construction: WIP
 
 
 ## Sous-requête
@@ -240,7 +240,6 @@ GRANT SELECT ON ALL TABLES IN SCHEMA echecs TO PUBLIC;
 ## Todo
 
 - INDEX
-- GRANT
 - Trigger
 - Optimisation
 - Encapsuler
