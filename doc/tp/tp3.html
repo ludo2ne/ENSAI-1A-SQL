@@ -840,7 +840,7 @@ Mode Lazy
 <li>vous scannez le fichier, i.e.&nbsp;analyser sa structure (types de colonnes) et ses métadonnées</li>
 <li>vous donnez vos opérations dans n’importe quel ordre</li>
 <li>à la fin, vous demandez à Polars de vous fournir le résultat</li>
-<li>à ce moment, Polars va optimiser l’ordre des traitements en utilisant son propre <u>plan d’exécution</u> et vous donnez une réponse beaucoup plus rapide</li>
+<li>à ce moment, Polars va optimiser l’ordre des traitements en utilisant son propre <u>plan d’exécution</u> et vous donner une réponse beaucoup plus rapide</li>
 </ul>
 <p>En résumé, en mode Eager, à chaque étape la machine effectue bêtement tous les calculs que vous lui demandez. En mode Lazy, la machine liste les opérations que vous demandez. Puis lorsque vous exigez un résultat, l’ordre des opérations est optimisé et la réponse est beaucoup plus rapide.</p>
 </div>
@@ -967,7 +967,7 @@ Fil rouge
 <div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>prenom <span class="op">=</span> <span class="st">"Katia"</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>annee_debut, annee_fin <span class="op">=</span> <span class="dv">1960</span>, <span class="dv">1980</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>df_prenom_annee <span class="op">=</span> file_prenoms<span class="op">\</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>df_prenom_annee <span class="op">=</span> fichier_prenoms<span class="op">\</span></span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">filter</span>((pl.col(<span class="st">"preusuel"</span>) <span class="op">==</span> prenom.upper()) <span class="op">&amp;</span> </span>
 <span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>            (pl.col(<span class="st">"annais"</span>).<span class="bu">str</span>.to_integer(strict<span class="op">=</span><span class="va">False</span>).is_not_null()) <span class="op">&amp;</span> </span>
 <span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>            (pl.col(<span class="st">"annais"</span>).<span class="bu">str</span>.to_integer(strict<span class="op">=</span><span class="va">False</span>) <span class="op">&gt;=</span> annee_debut) <span class="op">&amp;</span> </span>

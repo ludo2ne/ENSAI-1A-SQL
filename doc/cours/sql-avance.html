@@ -225,12 +225,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#sous-requête" id="toc-sous-requête" class="nav-link active" data-scroll-target="#sous-requête"><span class="header-section-number">1</span> Sous-requête</a>
+  <li><a href="#données" id="toc-données" class="nav-link active" data-scroll-target="#données"><span class="header-section-number">1</span> Données</a></li>
+  <li><a href="#sous-requête" id="toc-sous-requête" class="nav-link" data-scroll-target="#sous-requête"><span class="header-section-number">2</span> Sous-requête</a>
   <ul class="collapse">
+  <li><a href="#dans-un-filtre" id="toc-dans-un-filtre" class="nav-link" data-scroll-target="#dans-un-filtre">Dans un filtre</a></li>
   <li><a href="#imbriquer-les-select" id="toc-imbriquer-les-select" class="nav-link" data-scroll-target="#imbriquer-les-select">Imbriquer les SELECT</a></li>
   <li><a href="#exists" id="toc-exists" class="nav-link" data-scroll-target="#exists">EXISTS</a></li>
   </ul></li>
-  <li><a href="#les-vues" id="toc-les-vues" class="nav-link" data-scroll-target="#les-vues"><span class="header-section-number">2</span> Les vues</a>
+  <li><a href="#les-vues" id="toc-les-vues" class="nav-link" data-scroll-target="#les-vues"><span class="header-section-number">3</span> Les vues</a>
   <ul class="collapse">
   <li><a href="#joueuses-françaises" id="toc-joueuses-françaises" class="nav-link" data-scroll-target="#joueuses-françaises">Joueuses Françaises</a></li>
   <li><a href="#nouvelle-table" id="toc-nouvelle-table" class="nav-link" data-scroll-target="#nouvelle-table">Nouvelle table</a></li>
@@ -240,14 +242,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#avantages-des-vues" id="toc-avantages-des-vues" class="nav-link" data-scroll-target="#avantages-des-vues">Avantages des vues</a></li>
   <li><a href="#vues-matérialisées" id="toc-vues-matérialisées" class="nav-link" data-scroll-target="#vues-matérialisées">Vues matérialisées</a></li>
   </ul></li>
-  <li><a href="#gérer-les-droits" id="toc-gérer-les-droits" class="nav-link" data-scroll-target="#gérer-les-droits"><span class="header-section-number">3</span> Gérer les droits</a>
+  <li><a href="#gérer-les-droits" id="toc-gérer-les-droits" class="nav-link" data-scroll-target="#gérer-les-droits"><span class="header-section-number">4</span> Gérer les droits</a>
   <ul class="collapse">
   <li><a href="#donner-des-droits" id="toc-donner-des-droits" class="nav-link" data-scroll-target="#donner-des-droits">Donner des droits</a></li>
   <li><a href="#retirer-des-droits" id="toc-retirer-des-droits" class="nav-link" data-scroll-target="#retirer-des-droits">Retirer des droits</a></li>
   <li><a href="#rôle" id="toc-rôle" class="nav-link" data-scroll-target="#rôle">Rôle</a></li>
   <li><a href="#droits-sur-un-schéma" id="toc-droits-sur-un-schéma" class="nav-link" data-scroll-target="#droits-sur-un-schéma">Droits sur un schéma</a></li>
   </ul></li>
-  <li><a href="#todo" id="toc-todo" class="nav-link" data-scroll-target="#todo"><span class="header-section-number">4</span> Todo</a></li>
+  <li><a href="#transactions" id="toc-transactions" class="nav-link" data-scroll-target="#transactions"><span class="header-section-number">5</span> Transactions</a>
+  <ul class="collapse">
+  <li><a href="#exemple" id="toc-exemple" class="nav-link" data-scroll-target="#exemple">Exemple</a></li>
+  <li><a href="#propriétés-acid" id="toc-propriétés-acid" class="nav-link" data-scroll-target="#propriétés-acid">Propriétés ACID</a></li>
+  </ul></li>
+  <li><a href="#divers" id="toc-divers" class="nav-link" data-scroll-target="#divers"><span class="header-section-number">6</span> Divers</a>
+  <ul class="collapse">
+  <li><a href="#index" id="toc-index" class="nav-link" data-scroll-target="#index">Index</a></li>
+  <li><a href="#index-et--" id="toc-index-et--" class="nav-link" data-scroll-target="#index-et--">Index + et -</a></li>
+  <li><a href="#trigger" id="toc-trigger" class="nav-link" data-scroll-target="#trigger">Trigger</a></li>
+  </ul></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="sql-avance-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
 </nav>
@@ -289,49 +301,66 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 <p><span class="emoji" data-emoji="construction">🚧</span> WIP</p>
-<section id="sous-requête" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="sous-requête"><span class="header-section-number">1</span> Sous-requête</h2>
+<section id="données" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="données"><span class="header-section-number">1</span> Données</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> echecs.joueuse (</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    id_joueuse     SERIAL         <span class="kw">PRIMARY</span> <span class="kw">KEY</span>,   </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    nom            <span class="dt">VARCHAR</span>(<span class="dv">50</span>)    <span class="kw">NOT</span> <span class="kw">NULL</span>, </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    prenom         <span class="dt">VARCHAR</span>(<span class="dv">50</span>)    <span class="kw">NOT</span> <span class="kw">NULL</span>, </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    date_naissance <span class="dt">TIMESTAMP</span>,                 </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    elo            <span class="dt">INT</span>            <span class="kw">CHECK</span> (elo <span class="op">&gt;</span> <span class="dv">0</span>),  </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    mail           <span class="dt">VARCHAR</span>(<span class="dv">100</span>)   <span class="kw">UNIQUE</span>,         </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    est_arbitre    <span class="dt">BOOLEAN</span>        <span class="kw">DEFAULT</span> <span class="kw">false</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    code_pays      <span class="dt">VARCHAR</span>(<span class="dv">2</span>),          </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    taux_victoires <span class="dt">FLOAT</span>          <span class="kw">CHECK</span> (taux_victoires <span class="kw">BETWEEN</span> <span class="dv">0</span> <span class="kw">AND</span> <span class="dv">1</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="sous-requête" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="sous-requête"><span class="header-section-number">2</span> Sous-requête</h2>
+<section id="dans-un-filtre" class="level3">
+<h3 class="anchored" data-anchor-id="dans-un-filtre">Dans un filtre</h3>
+<p>Vous souhaitez lister les joueuses avec un elo supérieur à la moyenne.</p>
+<div class="fragment">
+<div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom, </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>       prenom,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>       elo</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> echecs.joueuse</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> elo <span class="op">&gt;=</span> (<span class="kw">SELECT</span> <span class="fu">AVG</span>(elo) </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>                <span class="kw">FROM</span> echecs.joueuse);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
 <section id="imbriquer-les-select" class="level3">
 <h3 class="anchored" data-anchor-id="imbriquer-les-select">Imbriquer les SELECT</h3>
-<div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom, prenom, elo</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> (<span class="kw">SELECT</span> <span class="op">*</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>          <span class="kw">FROM</span> joueuse</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>         <span class="kw">WHERE</span> code_pays <span class="op">=</span> <span class="st">'FR'</span> </span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>           <span class="kw">AND</span> elo <span class="op">&gt;</span> <span class="dv">2000</span>)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> prenom <span class="kw">LIKE</span> <span class="st">'A%'</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> j.nom, </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>       j.prenom, </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>       j.elo,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>       mec.max_elo_club</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> (<span class="kw">SELECT</span> id_club,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>               <span class="fu">MAX</span>(elo) <span class="kw">AS</span> max_elo_club</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>          <span class="kw">FROM</span> joueuse</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>         <span class="kw">GROUP</span> <span class="kw">BY</span> id_club) mec</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> joueuse j <span class="kw">USING</span>(id_club);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="exists" class="level3">
 <h3 class="anchored" data-anchor-id="exists">EXISTS</h3>
 <p>Principe assez similaire au <code>IN</code></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.club c</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> <span class="kw">EXISTS</span> (<span class="kw">SELECT</span> <span class="dv">1</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                 <span class="kw">FROM</span> echecs.joueuse j</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>                <span class="kw">WHERE</span> c.id_club <span class="op">=</span> j.id_joueuse</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>                  <span class="kw">AND</span> j.elo <span class="op">&gt;</span> <span class="dv">2400</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.club c</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> <span class="kw">EXISTS</span> (<span class="kw">SELECT</span> <span class="dv">1</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                 <span class="kw">FROM</span> echecs.joueuse j</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>                <span class="kw">WHERE</span> c.id_club <span class="op">=</span> j.id_joueuse</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>                  <span class="kw">AND</span> j.elo <span class="op">&gt;</span> <span class="dv">2400</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="notes">
-<div class="sourceCode" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.club c</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> c.id_club <span class="kw">IN</span> (<span class="kw">SELECT</span> j.id_joueuse</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>                       <span class="kw">FROM</span> echecs.joueuse j</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>                      <span class="kw">WHERE</span> j.elo <span class="op">&gt;</span> <span class="dv">2400</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.club c</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> c.id_club <span class="kw">IN</span> (<span class="kw">SELECT</span> j.id_joueuse</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>                       <span class="kw">FROM</span> echecs.joueuse j</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>                      <span class="kw">WHERE</span> j.elo <span class="op">&gt;</span> <span class="dv">2400</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
-<section id="les-vues" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="les-vues"><span class="header-section-number">2</span> Les vues</h2>
-<p>Nous disposons de cette table</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> echecs.joueuse (</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    id_joueuse     SERIAL         <span class="kw">PRIMARY</span> <span class="kw">KEY</span>,   </span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    nom            <span class="dt">VARCHAR</span>(<span class="dv">50</span>)    <span class="kw">NOT</span> <span class="kw">NULL</span>, </span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    prenom         <span class="dt">VARCHAR</span>(<span class="dv">50</span>)    <span class="kw">NOT</span> <span class="kw">NULL</span>, </span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    date_naissance <span class="dt">TIMESTAMP</span>,                 </span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    elo            <span class="dt">INT</span>            <span class="kw">CHECK</span> (elo <span class="op">&gt;</span> <span class="dv">0</span>),  </span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    mail           <span class="dt">VARCHAR</span>(<span class="dv">100</span>)   <span class="kw">UNIQUE</span>,         </span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    est_arbitre    <span class="dt">BOOLEAN</span>        <span class="kw">DEFAULT</span> <span class="kw">false</span>,</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    code_pays      <span class="dt">VARCHAR</span>(<span class="dv">2</span>),          </span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>    taux_victoires <span class="dt">FLOAT</span>          <span class="kw">CHECK</span> (taux_victoires <span class="kw">BETWEEN</span> <span class="dv">0</span> <span class="kw">AND</span> <span class="dv">1</span>)</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<section id="les-vues" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="les-vues"><span class="header-section-number">3</span> Les vues</h2>
 <section id="joueuses-françaises" class="level3">
 <h3 class="anchored" data-anchor-id="joueuses-françaises">Joueuses Françaises</h3>
 <p>Imaginons que nous avons de nombreuses requêtes à écrire sur les joueuses françaises ayant plus de 2000 elo.</p>
@@ -340,12 +369,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="nouvelle-table" class="level3">
 <h3 class="anchored" data-anchor-id="nouvelle-table">Nouvelle table</h3>
 <p>Solution 1 : créons une nouvelle table</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> echecs.joueuse_fr_2000</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">AS</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> code_pays <span class="op">=</span> <span class="st">'FR'</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>   <span class="kw">AND</span> elo <span class="op">&gt;=</span> <span class="dv">2000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> echecs.joueuse_fr_2000</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">AS</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> code_pays <span class="op">=</span> <span class="st">'FR'</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>   <span class="kw">AND</span> elo <span class="op">&gt;=</span> <span class="dv">2000</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="fragment">
 <div class="callout callout-style-default callout-caution callout-titled" title="Problèmes">
 <div class="callout-header d-flex align-content-center">
@@ -372,15 +401,15 @@ Problèmes
 <li>Commencez par définir votre sous-requête <em>joueuses_fr_elo2000</em> avec <code>WITH</code></li>
 <li>Appelez <em>joueuses_fr_elo2000</em> dans la requête principale</li>
 </ul>
-<div class="sourceCode" id="cb6"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">WITH</span> joueuses_fr_elo2000 </span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">AS</span> (<span class="kw">SELECT</span> <span class="op">*</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>      <span class="kw">FROM</span> joueuse</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>     <span class="kw">WHERE</span> code_pays <span class="op">=</span> <span class="st">'FR'</span> </span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>       <span class="kw">AND</span> elo <span class="op">&gt;</span> <span class="dv">2000</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom, prenom, elo</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> joueuses_francaises_elo2000</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> prenom <span class="kw">LIKE</span> <span class="st">'A%'</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">WITH</span> joueuses_fr_elo2000 </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">AS</span> (<span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>      <span class="kw">FROM</span> joueuse</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>     <span class="kw">WHERE</span> code_pays <span class="op">=</span> <span class="st">'FR'</span> </span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>       <span class="kw">AND</span> elo <span class="op">&gt;</span> <span class="dv">2000</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom, prenom, elo</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> joueuses_francaises_elo2000</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> prenom <span class="kw">LIKE</span> <span class="st">'A%'</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="notes">
 <p>Usage avancé</p>
 <p>Comme une sous-requête</p>
@@ -389,21 +418,21 @@ Problèmes
 <section id="table-temporaire" class="level3">
 <h3 class="anchored" data-anchor-id="table-temporaire">Table temporaire</h3>
 <p>N’existe que le temps de la session</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TEMPORARY</span> <span class="kw">TABLE</span> joueuses_fr_elo2000 </span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">AS</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> joueuse</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> code_pays <span class="op">=</span> <span class="st">'FR'</span> </span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>   <span class="kw">AND</span> elo <span class="op">&gt;</span> <span class="dv">2000</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</section>
-<section id="vue" class="level3">
-<h3 class="anchored" data-anchor-id="vue">Vue</h3>
-<div class="sourceCode" id="cb8"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">VIEW</span> joueuses_fr_elo2000 </span>
+<div class="sourceCode" id="cb8"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TEMPORARY</span> <span class="kw">TABLE</span> joueuses_fr_elo2000 </span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">AS</span></span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> joueuse</span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> code_pays <span class="op">=</span> <span class="st">'FR'</span> </span>
 <span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>   <span class="kw">AND</span> elo <span class="op">&gt;</span> <span class="dv">2000</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="vue" class="level3">
+<h3 class="anchored" data-anchor-id="vue">Vue</h3>
+<div class="sourceCode" id="cb9"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">VIEW</span> joueuses_fr_elo2000 </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">AS</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> joueuse</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> code_pays <span class="op">=</span> <span class="st">'FR'</span> </span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>   <span class="kw">AND</span> elo <span class="op">&gt;</span> <span class="dv">2000</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="avantages-des-vues" class="level3">
 <h3 class="anchored" data-anchor-id="avantages-des-vues">Avantages des vues</h3>
@@ -422,71 +451,127 @@ Problèmes
 <section id="vues-matérialisées" class="level3">
 <h3 class="anchored" data-anchor-id="vues-matérialisées">Vues matérialisées</h3>
 <p>Photo à un instant t</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">MATERIALIZED</span> <span class="kw">VIEW</span> joueuses_fr_elo2000 </span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">AS</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> joueuse</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> code_pays <span class="op">=</span> <span class="st">'FR'</span> </span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>   <span class="kw">AND</span> elo <span class="op">&gt;</span> <span class="dv">2000</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">MATERIALIZED</span> <span class="kw">VIEW</span> joueuses_fr_elo2000 </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="kw">AS</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> joueuse</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> code_pays <span class="op">=</span> <span class="st">'FR'</span> </span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>   <span class="kw">AND</span> elo <span class="op">&gt;</span> <span class="dv">2000</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
-<section id="gérer-les-droits" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="gérer-les-droits"><span class="header-section-number">3</span> Gérer les droits</h2>
+<section id="gérer-les-droits" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="gérer-les-droits"><span class="header-section-number">4</span> Gérer les droits</h2>
 <p>L’utilisateur qui crée une table peut distribuer des droits aux autres.</p>
 <p>Voir section <em>priviléges</em> de la doc PostgreSQL</p>
 <section id="donner-des-droits" class="level3">
 <h3 class="anchored" data-anchor-id="donner-des-droits">Donner des droits</h3>
 <p>Lecture / écriture sur des tables</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Lecture pour tous</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="kw">GRANT</span> <span class="kw">SELECT</span> <span class="kw">ON</span> echecs.joueuse <span class="kw">TO</span> <span class="kw">PUBLIC</span>;</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co">-- Tous les droits</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="kw">GRANT</span> <span class="kw">ALL</span> <span class="kw">PRIVILEGES</span> <span class="kw">ON</span> echecs.joueuse <span class="kw">TO</span> chantal;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Lecture pour tous</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">GRANT</span> <span class="kw">SELECT</span> <span class="kw">ON</span> echecs.joueuse <span class="kw">TO</span> <span class="kw">PUBLIC</span>;</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co">-- Tous les droits</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="kw">GRANT</span> <span class="kw">ALL</span> <span class="kw">PRIVILEGES</span> <span class="kw">ON</span> echecs.joueuse <span class="kw">TO</span> chantal <span class="kw">WITH</span> <span class="kw">GRANT</span> <span class="kw">OPTION</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Suffixe <code>WITH GRANT OPTION</code> pour donner le droit de transmettre ce droit.</p>
 </section>
 <section id="retirer-des-droits" class="level3">
 <h3 class="anchored" data-anchor-id="retirer-des-droits">Retirer des droits</h3>
-<div class="sourceCode" id="cb11"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Lecture</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">REVOKE</span> <span class="kw">SELECT</span> <span class="kw">ON</span> echecs.joueuse <span class="kw">TO</span> chantal;</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co">-- Tous les droits</span></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="kw">REVOKE</span> <span class="kw">ALL</span> <span class="kw">PRIVILEGES</span> <span class="kw">ON</span> echecs.joueuse <span class="kw">TO</span> chantal;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Lecture</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="kw">REVOKE</span> <span class="kw">SELECT</span> <span class="kw">ON</span> echecs.joueuse <span class="kw">TO</span> chantal;</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">-- Tous les droits</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="kw">REVOKE</span> <span class="kw">ALL</span> <span class="kw">PRIVILEGES</span> <span class="kw">ON</span> echecs.joueuse <span class="kw">TO</span> chantal;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Suffixe <code>CASCADE</code> pour retirer les droits à ceux qui ont reçu les droits de la part de…</p>
 </section>
 <section id="rôle" class="level3">
 <h3 class="anchored" data-anchor-id="rôle">Rôle</h3>
 <p>Pour une gestion simplifiée des droits</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">ROLE</span> eleve;</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="kw">GRANT</span> <span class="kw">SELECT</span>, <span class="kw">INSERT</span> <span class="kw">ON</span> echecs.joueuse <span class="kw">TO</span> eleve;</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="kw">GRANT</span> eleve <span class="kw">TO</span> chantal;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">ROLE</span> eleve;</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="kw">GRANT</span> <span class="kw">SELECT</span>, <span class="kw">INSERT</span> <span class="kw">ON</span> echecs.joueuse <span class="kw">TO</span> eleve;</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="kw">GRANT</span> eleve <span class="kw">TO</span> chantal;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="droits-sur-un-schéma" class="level3">
 <h3 class="anchored" data-anchor-id="droits-sur-un-schéma">Droits sur un schéma</h3>
-<div class="sourceCode" id="cb13"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">GRANT</span> <span class="kw">USAGE</span> <span class="kw">ON</span> <span class="kw">SCHEMA</span> echecs <span class="kw">TO</span> <span class="kw">PUBLIC</span>;</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="kw">REVOKE</span> <span class="kw">CREATE</span> <span class="kw">ON</span> <span class="kw">SCHEMA</span> echecs <span class="kw">FROM</span> chantal;</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="kw">GRANT</span> <span class="kw">SELECT</span> <span class="kw">ON</span> <span class="kw">ALL</span> <span class="kw">TABLES</span> <span class="kw">IN</span> <span class="kw">SCHEMA</span> echecs <span class="kw">TO</span> <span class="kw">PUBLIC</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">GRANT</span> <span class="kw">USAGE</span> <span class="kw">ON</span> <span class="kw">SCHEMA</span> echecs <span class="kw">TO</span> <span class="kw">PUBLIC</span>;</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="kw">REVOKE</span> <span class="kw">CREATE</span> <span class="kw">ON</span> <span class="kw">SCHEMA</span> echecs <span class="kw">FROM</span> chantal;</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="kw">GRANT</span> <span class="kw">SELECT</span> <span class="kw">ON</span> <span class="kw">ALL</span> <span class="kw">TABLES</span> <span class="kw">IN</span> <span class="kw">SCHEMA</span> echecs <span class="kw">TO</span> <span class="kw">PUBLIC</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>CREATE : Autorise la création d’objets dans le schéma</li>
 <li>USAGE : Autorise uniquement l’accès au schéma (nécessaire pour utiliser les objets du schéma)</li>
 </ul>
-<hr>
 </section>
 </section>
-<section id="todo" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="todo"><span class="header-section-number">4</span> Todo</h2>
+<section id="transactions" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="transactions"><span class="header-section-number">5</span> Transactions</h2>
+<section id="exemple" class="level3">
+<h3 class="anchored" data-anchor-id="exemple">Exemple</h3>
+<div class="sourceCode" id="cb15"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="cf">BEGIN</span>; <span class="co">-- Démarrer la transaction</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="kw">UPDATE</span> comptes <span class="kw">SET</span> solde <span class="op">=</span> solde <span class="op">-</span> <span class="dv">100</span> <span class="kw">WHERE</span> <span class="kw">id</span> <span class="op">=</span> <span class="dv">1</span>; <span class="co">-- Débiter le compte 1</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="kw">UPDATE</span> comptes <span class="kw">SET</span> solde <span class="op">=</span> solde <span class="op">+</span> <span class="dv">100</span> <span class="kw">WHERE</span> <span class="kw">id</span> <span class="op">=</span> <span class="dv">2</span>; <span class="co">-- Créditer le compte 2</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="kw">COMMIT</span>; <span class="co">-- Valider les modifications si tout s'est bien passé</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><br></p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ROLLBACK</span>; <span class="co">-- en cas d'erreur</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="propriétés-acid" class="level3">
+<h3 class="anchored" data-anchor-id="propriétés-acid">Propriétés ACID</h3>
+<p>Pour définir la fiabilité des transactions :</p>
 <ul>
-<li>INDEX</li>
-<li>Trigger</li>
-<li>Optimisation</li>
-<li>Encapsuler</li>
-<li>Transactions (ACID)</li>
+<li><strong>Atomicité</strong> : Une transaction est “tout ou rien”</li>
+<li><strong>Cohérence</strong> : La base reste dans un état valide avant et après la transaction</li>
+<li><strong>Isolation</strong> : Les transactions concurrentes n’interfèrent pas entre elles</li>
+<li><strong>Durabilité</strong> : Une transaction validée est enregistrée de manière permanente, même en cas de panne</li>
 </ul>
+<div class="notes">
+<ul>
+<li>Soit toutes les opérations réussissent, soit elles sont annulées (rollback)</li>
+</ul>
+</div>
+</section>
+</section>
+<section id="divers" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="divers"><span class="header-section-number">6</span> Divers</h2>
+<section id="index" class="level3">
+<h3 class="anchored" data-anchor-id="index">Index</h3>
+<div class="sourceCode" id="cb17"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">INDEX</span> idx_nom_joueuse <span class="kw">ON</span> joueuse (nom);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Permet une lecture plus rapide sur une colonne utilisée fréquemment dans <em>WHERE</em>, <em>JOIN</em>, <em>GROUP BY</em>, <em>ORDER BY</em></p>
+</section>
+<section id="index-et--" class="level3">
+<h3 class="anchored" data-anchor-id="index-et--">Index + et -</h3>
+<ul>
+<li><span class="emoji" data-emoji="heavy_check_mark">✔️</span> Haute cardinalité</li>
+<li><span class="emoji" data-emoji="heavy_check_mark">✔️</span> Peu de valeurs nulles</li>
+<li><span class="emoji" data-emoji="x">❌</span> Créations, mises à jour</li>
+<li><span class="emoji" data-emoji="x">❌</span> Prend de la place</li>
+</ul>
+<div class="notes">
+<ul>
+<li>si Haute cardinalité : beaucoup de valeurs distinctes</li>
+<li>Si une colonne est souvent modifiée, l’index associé doit être mis à jour</li>
+<li>Index sous jacent sur colonnes UNIQUE (PK incluse)</li>
+</ul>
+</div>
+</section>
+<section id="trigger" class="level3">
+<h3 class="anchored" data-anchor-id="trigger">Trigger</h3>
+<p>Fonction qui s’exécute automatiquement en réponse à une mise à jour d’une table</p>
+<p>Un trigger permet de :</p>
+<ul>
+<li>Garantir l’intégrité des données</li>
+<li>Implémenter des règles métier</li>
+<li>Synchroniser des données</li>
+</ul>
+<div class="notes">
+<p>Peut se déclencher avant ou arpès une maj</p>
+<p>Garantir l’intégrité des données : Valider ou corriger les données avant leur enregistrement. Implémenter des règles métier : Empêcher des suppressions ou modifications non autorisées. Synchroniser des données : Mettre à jour des tables liées automatiquement.</p>
+</div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
