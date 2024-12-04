@@ -31,8 +31,8 @@ website:
             text: "Jointures"
           - href: doc/cours/sql-avance.qmd
             text: "SQL avancé"
-          - href: doc/cours/modelisation.qmd
-            text: "Modélisation"
+          - href: doc/cours/formalisation.qmd
+            text: "Formalisation des BDD"
       - text: TP
         menu:
           - href: doc/tp/tp1.qmd

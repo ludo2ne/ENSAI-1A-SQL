@@ -40,8 +40,12 @@ Les SGBD ne respectent pas exactement la norme SQL.
 À un niveau avancé d'utilisation, il y a des différences entre les SGBD.
 :::
 
+- [PostgreSQL SQL](https://www.postgresql.org/docs/current/sql.html){target="_blank"}
+- [DuckDB SQL](https://duckdb.org/docs/sql/introduction.html){target="_blank"}
+
 ::: {.notes}
-Sinon c'est très ressemblant.
+- Sinon c'est très ressemblant.
+- DuckDB's SQL dialect closely follows the conventions of the PostgreSQL dialect. few exceptions
 :::
 
 ### Composantes du langage
@@ -502,6 +506,20 @@ SELECT nom,
 :::
 ::::::
 
+### Opérations booléennes
+
+- Utilisation des mots-clés `AND`, `OR` et `NOT`
+- *AND* prioritaire sur le *OR*
+
+
+```{.sql}
+SELECT nom,
+       prenom,
+       elo
+  FROM echecs.joueuse
+ WHERE elo > 2400 OR (prenom LIKE 'A%' AND nom NOT LIKE 'N%') ;
+```
+
 
 ### LIKE
 
@@ -525,6 +543,15 @@ MAJUSCULES ≠ minuscules
 
 :::{.notes}
 ILIKE insensible à la casse
+
+```{.sql}
+'abc' SIMILAR TO 'abc'          true
+'abc' SIMILAR TO 'a'            false
+'abc' SIMILAR TO '%(b|d)%'      true
+'abc' SIMILAR TO '(b|c)%'       false
+'-abc-' SIMILAR TO '%\mabc\M%'  true
+'xabcy' SIMILAR TO '%\mabc\M%'  false
+```
 :::
 
 

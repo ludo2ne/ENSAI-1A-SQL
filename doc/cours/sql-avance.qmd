@@ -259,12 +259,12 @@ GRANT SELECT ON ALL TABLES IN SCHEMA echecs TO PUBLIC;
 ### Exemple
 
 ```{.sql}
-BEGIN; -- Démarrer la transaction
+BEGIN; -- Début de la transaction
 
-UPDATE comptes SET solde = solde - 100 WHERE id = 1; -- Débiter le compte 1
-UPDATE comptes SET solde = solde + 100 WHERE id = 2; -- Créditer le compte 2
+UPDATE compte SET solde = solde - 100 WHERE id = 1;
+UPDATE compte SET solde = solde + 100 WHERE id = 2;
 
-COMMIT; -- Valider les modifications si tout s'est bien passé
+COMMIT; -- Valider si ok
 ```
 
 <br>
@@ -272,6 +272,13 @@ COMMIT; -- Valider les modifications si tout s'est bien passé
 ```{.sql}
 ROLLBACK; -- en cas d'erreur
 ```
+
+:::{.notes}
+- Plusieurs utilisateurs peuvent faire des requêtes en même temps
+- LOCK
+- SAVEPOINT my_savepoint;
+- ROLLBACK TO my_savepoint;
+:::
 
 
 ### Propriétés ACID
@@ -292,11 +299,20 @@ Pour définir la fiabilité des transactions :
 
 ### Index
 
+::: {.callout-note title="Définition"}
+Un index est une structure de données qui améliore la vitesse des opérations de lecture sur une table en facilitant la recherche des données.
+
+Il permet une lecture plus rapide sur une colonne utilisée fréquemment dans *WHERE*, *JOIN*, *GROUP BY*, *ORDER BY*
+:::
+
 ```{.sql}
 CREATE INDEX idx_nom_joueuse ON joueuse (nom);
 ```
 
-Permet une lecture plus rapide sur une colonne utilisée fréquemment dans *WHERE*, *JOIN*, *GROUP BY*, *ORDER BY*
+:::{.notes}
+- Recherche longue si beaucoup de lignes
+- Système clé-valeur (index -> ligne)
+:::
 
 
 ### Index + et -
@@ -315,13 +331,15 @@ Permet une lecture plus rapide sur une colonne utilisée fréquemment dans *WHER
 
 ### Trigger
 
-Fonction qui s'exécute automatiquement en réponse à une mise à jour d'une table
+::: {.callout-note title="Définition"}
+Un trigger est une fonction qui s'exécute automatiquement en réponse à une mise à jour d'une table
 
-Un trigger permet de :
+Il permet par exemple de :
 
 - Garantir l'intégrité des données
 - Implémenter des règles métier
 - Synchroniser des données
+:::
 
 :::{.notes}
 Peut se déclencher avant ou arpès une maj

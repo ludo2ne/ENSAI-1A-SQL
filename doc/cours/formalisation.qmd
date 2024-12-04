@@ -1,0 +1,269 @@
+---
+title: "Formalisation"
+description: "[Slides](formalisation-slides.html)"
+author: "Ludovic Deneuville"
+format: 
+  html:
+    toc: true
+    toc-location: left
+    toc-depth: 3
+    number-sections: true
+    number-depth: 2
+  revealjs:
+    theme: moon
+    footer: "[Home](../../index.html) --- [Modélisation](formalisation.html)"
+    slide-number: c/t                    # collapsed/total
+    slide-level: 3
+    controls: true
+    output-file: formalisation-slides.html
+mermaid:
+  theme: forest
+code-line-numbers: false
+from: markdown+emoji
+---
+
+:construction: WIP
+
+## Objectifs
+
+Structurer une base de données pour qu'elle soit :
+
+- efficace
+- propre
+- légère
+- facile à maintenir
+
+:::{.notes}
+- pas de doublons et de redondances
+- Moins de risques d'incohérences entre différentes parties de la base
+- Stockage réduit, car les informations répétées sont éliminées.
+:::
+
+## Dépendances fonctionnelles
+
+::: {.callout-note title="Définition"}
+Une dépendance fonctionnelle indique qu'une colonne (ou un ensemble de colonnes) détermine de manière unique une autre colonne :
+
+- X → Y
+- X détermine Y
+- Y dépend fonctionnellement de X
+:::
+
+:::{.notes}
+Si on connait X, on peut en déduire Y
+:::
+
+### Les axiomes d'Armstrong
+
+- Réflexivité (X, Y) → X
+- Augmentation Si X → Y alors XZ → YZ
+- Transitivité Si X → Y et Y → Z alors X → Z
+
+| **Nom**            | **Description**                                       |
+|--------------------|-------------------------------------------------------|
+| Réflexivité        | (X, Y) → X                                            |
+| Augmentation       | Si X → Y, alors XZ → YZ                               |
+| Transitivité       | Si X → Y et Y → Z alors, X → Z                        |
+
+:::{.notes}
+- (nom, prenom) → nom
+- id_joueuse → nom alors (id_joueuse, id_partie) → (id_joueuse, nom)
+:::
+
+### Règles dérivées
+
+| **Nom**             | **Description**                 |
+|---------------------|---------------------------------|
+| Union               | Si X → Y et X → Z, alors X → YZ |
+| Décomposition       | Si X → YZ, alors X → Z et X → Y |
+| Pseudo-transitivité | Si X → Y et WY → Z alors WX → Z |
+
+
+### Deux Propriétés
+
+::: {.callout-note title="Dépendance Fonctionnelle Élémentaire"}
+X → Y est élémentaire si il n'existe aucun sous-ensemble strict Z inclus dans X tel que Z → Y
+:::
+
+::: {.callout-note title="Dépendance Fonctionnelle Directe"}
+X → Y est directe si il n'existe pas de Z tel que X → Z et Z → Y
+:::
+
+:::{.notes}
+- pas élémenaire : num_client, nom → adresse
+:::
+
+## Formes normales
+
+### Normalisation
+
+::: {.callout-note title="Définition"}
+La normalisation vise à organiser les données :
+
+- en éliminant les redondances et les incohérences
+- en préservant les dépendances fonctionnelles
+- sans perdre d'informations
+:::
+
+### 1ère forme normale
+
+::: {.callout-note title="Définition"}
+Une relation est 1NF si tous ses attributs sont atomiques.
+:::
+
+- Une *date* est atomique
+- Un *nom* est atomique
+- Une *liste de prénoms* n'est pas atomique
+- Est-ce qu'un *adresse* est atomique ?
+
+
+:::{.notes}
+- atomique : représente une seule information
+- non atomique : plusieurs informations combinées
+- assez subjectif
+- dépend du cas d'utilisation
+  - si vous n'utilisez pas le champ adresse -> atomique
+  - si vous avez utiliser par exemple la ville -> pas atomique
+:::
+
+### 2e forme normale
+
+::: {.callout-note title="Définition"}
+Une relation est 2NF si :
+
+- elle est 1NF
+- tout attribut non clé est en DF élémentaire avec la clé
+
+Autrement dit, tous les attributs sont déterminés par la clé complète.
+:::
+
+
+---
+
+Exemple de relation non 2NF :
+
+- joueuse([nom, prenom, dnais]{.underline}) → elo
+- si par exemple (nom, dnais) → elo
+  - si *nom* et *dnais* suffisent pour déterminer le *elo*
+
+
+### 3e forme normale
+
+::: {.callout-note title="Définition"}
+Une relation est 3NF si :
+
+- elle est 2NF
+- tout attribut non clé est en DF directe avec la clé
+
+Autrement dit, tous les attributs sont déterminés par la clé complète.
+:::
+
+---
+
+Exemple de relation non 3NF :
+
+- joueuse([id_joueuse]{.underline}, code_pays, capitale)
+- id_joueuse → (code_pays, capitale)
+- or code_pays → capitale donc DF non directe
+
+
+::: {.callout-tip title="Passer en 3NF"}
+Créer une table *pays*
+
+- joueuse(([id_joueuse]{.underline}, code_pays)
+- pays([code_pays]{.underline}, capitale)
+
+:::
+
+
+
+## Modélisation UML
+
+### Modèles
+
+::::::{.columns}
+:::{.column}
+Modèle conceptuel
+
+```{mermaid}
+classDiagram
+    class Joueuse {
+        identifiant
+        nom
+        prenom
+        elo
+        identifiant du club
+    }
+```
+:::
+
+:::{.column}
+Modèle physique
+
+```{mermaid}
+classDiagram
+    class joueuse {
+        id_joueuse SERIAL PK
+        nom        VARCHAR(50)
+        prenom     VARCHAR(50)
+        elo        INT
+        #id_club   INT
+    }
+```
+:::
+::::::
+
+:::{.notes}
+- Conceptuel : niveau utilisateur (accents, espaces)
+- Physique : niveau développeur (transposable directement en SQL)
+:::
+
+### Associations
+
+```{mermaid}
+classDiagram
+    direction LR
+    class joueuse {
+        id_joueuse SERIAL PK
+        nom        VARCHAR(50)
+        prenom     VARCHAR(50)
+        elo        INT
+        #id_club   INT
+    }
+    
+    class club {
+        id_club   SERIAL PK
+        nom       VARCHAR(50)
+        ville     VARCHAR(50)
+    }
+
+    joueuse --> club
+```
+
+
+[cf. Cours BDD, partie associations](./bases-de-donnees.qmd#associations)
+
+
+
+### Exemple
+
+Site de vente de légumes
+
+- Client
+  - id_client
+  - nom
+  - prenom
+  - mail
+- Produit
+  - id_produit
+  - nom
+  - description
+  - prix
+- Commande
+  - id_commande
+  - id_client
+- LigneCommande
+  - id_ligne_commande
+  - id_commande
+  - id_produit
+  - quantite

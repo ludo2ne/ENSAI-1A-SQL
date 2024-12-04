@@ -172,6 +172,7 @@ Sauf si vous voulez ne rien retenir...
 - <https://oseox.fr/sql/>{target="_blank"}
 - <https://learnsql.fr/blog/aide-memoire-pour-les-entretiens-sql/>{target="_blank"}
 - <https://datascientest.com/base-de-donnees-definition>{target="_blank"}
+- <https://www.postgresql.org/docs/current/sql.html>{target="_blank"}
 
 ::: {.notes}
 Importance de la biblio en projet, stage

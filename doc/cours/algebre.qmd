@@ -40,6 +40,7 @@ from: markdown+emoji
 | **− (Différence)**   | Retourner les lignes présentes dans une relation mais pas dans l'autre |
 | **∩ (Intersection)** | Trouver les lignes communes aux deux relations |
 | **⨝ (Jointure)**    | Combiner deux relations basées sur une condition |
+| **x (Produit Cartésien)** | Combinaison des colonnes                | 
 :::
 
 ### Sélection
@@ -71,7 +72,7 @@ SELECT nom,
 
 ### Union
 
-- Combine les lignes de deux tables ayant le même nombre de colonnes et des types compatibles
+- Combine les lignes de deux tables ayant le [même nombre de colonnes et des types compatibles]{.underline}
 
 ```{.sql}
 SELECT nom,
@@ -88,6 +89,12 @@ SELECT nom,
 ::: {.callout-tip}
 - **UNION** : Combine les résultats des requêtes et supprime les doublons
 - **UNION ALL** : Combine les résultats des requêtes et garde tous les doublons
+:::
+
+:::{.notes}
+- En général, on prend les mêmes colonnes des 2 côtés
+- Possible de faire plusieurs UNION
+- ORDER BY à la fin : ordonne le tout
 :::
 
 ### Différence
@@ -135,7 +142,7 @@ SELECT nom,
 
 ### Jointure
 
-- Permet de combiner deux tables basées sur une correspondance entre les colonnes
+- Permet de combiner deux tables en se basant sur une correspondance entre les colonnes
 
 ```{.sql}
 SELECT j.nom,
@@ -144,3 +151,16 @@ SELECT j.nom,
   FROM echecs.joueuse j
   JOIN echecs.club c USING (id_club);
 ```
+
+### Produit Cartésien
+
+```{.sql}
+SELECT *
+  FROM echecs.joueuse j,
+       echecs.club c;
+-- WHERE j.id_club = c.id_club
+```
+
+::: {.notes}
+Ancienne pratique : utilisé avant à la place des jointures
+:::
