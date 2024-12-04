@@ -58,7 +58,7 @@ Votre mission du jour sera d'aider la nouvellement créée *Fédération França
 Les tables sont les suivantes :
 
 - **joueuse**([id_joueuse]{.underline}, code_titre, nom, prenom, elo, date_naissance, #id_club, arbitre)
-- **titre**(#code, nom, description)
+- **titre**([code]{.underline}, nom, description)
 - **club**([id_club]{.underline}, nom, ville, #id_presidente)
 - **partie**([id_partie]{.underline}, #id_blanc, #id_noir, date_partie, #id_resultat, #id_ouverture, #id_tournoi)
 - **resultat_partie**([id_resultat]{.underline}, resultat, description)
@@ -98,7 +98,7 @@ Dans le modèle de données, certaines tables sont reliées 2 fois entre elles :
 Votre première mission sera de vérifier l'intégrité des données de la base.
 :::
 
-Il paraitrait que certaines joueuses aient truquées leurs classement elo. Vérifiez et corrigez cela :
+Il paraîtrait que certaines joueuses aient truquées leurs classements elo. Vérifiez et corrigez cela :
 
 - [ ] Listez la table des joueuses
 - [ ] Classez par elo décroissant
@@ -233,6 +233,8 @@ Une performance est une victoire contre une joueuse ayant au moins 400 points el
 
 ::: {.callout-important icon="false" appearance="simple"}
 Un parquet de :cookie: est à retirer dans le bureau du professeur pour la joueuse détentrice de la meilleure perf !
+
+Et un bel article sur le site de notre partenaire premium, la [Fédération Française de la Lose](https://fflose.com/){target="_blank"} pour l'autrice de la contre-perf.
 :::
 
 ## Gagnantes des tournois

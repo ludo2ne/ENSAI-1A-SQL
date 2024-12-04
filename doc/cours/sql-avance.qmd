@@ -22,9 +22,8 @@ code-line-numbers: false
 from: markdown+emoji
 ---
 
-:construction: WIP
 
-## Données
+**Données utilisées**
 
 ```{.sql}
 CREATE TABLE echecs.joueuse (
@@ -47,6 +46,8 @@ CREATE TABLE echecs.joueuse (
 
 Vous souhaitez lister les joueuses avec un elo supérieur à la moyenne.
 
+<br>
+
 ::: {.fragment}
 ```{.sql}
 SELECT nom, 
@@ -56,6 +57,13 @@ FROM echecs.joueuse
 WHERE elo >= (SELECT AVG(elo) 
                 FROM echecs.joueuse);
 ```
+:::
+
+:::{.notes}
+Vu dans les 1er TP :
+
+- `SELECT AVG(elo) FROM echecs.joueuse` renvoie un nombre
+- on peut le comparer à un autre nombre
 :::
 
 ### Imbriquer les SELECT
@@ -72,9 +80,18 @@ SELECT j.nom,
   JOIN joueuse j USING(id_club);
 ```
 
-### EXISTS
+:::{.notes}
+Ceci est également une table et peut être requêtée par la suite
 
-Principe assez similaire au `IN`
+```{.sql}
+SELECT id_club,
+       MAX(elo) AS max_elo_club
+  FROM joueuse
+ GROUP BY id_club
+```
+:::
+
+### EXISTS
 
 ```{.sql}
 SELECT *
@@ -85,7 +102,8 @@ SELECT *
                   AND j.elo > 2400);
 ```
 
-:::{.notes}
+La syntaxe ressemble à celle du `IN` mais le `EXISTS` est plus performant.
+
 ```{.sql}
 SELECT *
   FROM echecs.club c
@@ -93,15 +111,21 @@ SELECT *
                        FROM echecs.joueuse j
                       WHERE j.elo > 2400);
 ```
+
+:::{.notes}
+- EXISTS : dès qu'une correspondance est trouvée, c'est gagné
+- IN : génére l'intégralité de la sous-table
 :::
 
 ## Les vues
 
 ### Joueuses Françaises
 
+::: {.callout-note title="Question"}
 Imaginons que nous avons de nombreuses requêtes à écrire sur les joueuses françaises ayant plus de 2000 elo.
 
-Et nous n'avons pas envie de nous embetter à écrire à chaque fois toutes les restrictions.
+Et nous n'avons pas envie de nous embêter à écrire à chaque fois toutes les restrictions.
+:::
 
 ### Nouvelle table
 
@@ -126,7 +150,7 @@ SELECT *
 
 ### Common Table Expression
 
-Pour une utilisation ponctuelle, vous pouvez utiliser une CTE. Le principe :
+Pour une utilisation ponctuelle, utilisez une CTE :sunglasses:
 
 - Commencez par définir votre sous-requête *joueuses_fr_elo2000* avec `WITH`
 - Appelez *joueuses_fr_elo2000* dans la requête principale
@@ -134,7 +158,7 @@ Pour une utilisation ponctuelle, vous pouvez utiliser une CTE. Le principe :
 ```{.sql}
 WITH joueuses_fr_elo2000 
 AS (SELECT *
-      FROM joueuse
+      FROM echecs.joueuse
      WHERE code_pays = 'FR' 
        AND elo > 2000
 )
@@ -144,54 +168,84 @@ SELECT nom, prenom, elo
 ```
 
 :::{.notes}
-Usage avancé
-
-Comme une sous-requête
+- Usage avancé
+- Assez classe
+- Comme une sous-requête
+- Ou comme si vous avez créé une vue temporaire
 :::
 
 
 ### Table temporaire
 
-N'existe que le temps de la session
+N'existe que le temps de la session.
+
+<br> 
 
 ```{.sql}
 CREATE TEMPORARY TABLE joueuses_fr_elo2000 
 AS
 SELECT *
-  FROM joueuse
+  FROM echecs.joueuse
  WHERE code_pays = 'FR' 
    AND elo > 2000;
 ```
+
+::: {.callout-caution title="Remarque"}
+Une table temporaire n'est pas définie dans un schéma.
+:::
 
 ### Vue
 
+::: {.callout-note title="Définition"}
+Une vue représente une table virtuelle, dont la structure et les données proviennent du résultat d'une requête SQL prédéfinie. 
+
+Elle ne stocke pas directement les données, mais la requête elle-même, et s'exécute à chaque utilisation.
+:::
+
+<br>
+
 ```{.sql}
-CREATE VIEW joueuses_fr_elo2000 
+CREATE VIEW echecs.joueuses_fr_elo2000 
 AS
 SELECT *
-  FROM joueuse
+  FROM echecs.joueuse
  WHERE code_pays = 'FR' 
    AND elo > 2000;
 ```
 
-### Avantages des vues
+:::{.notes}
+- Se requête comme si c'est une table
+- SELECT only
+- PAS de UPDATE, DELETE, INSERT
+:::
 
+### Avantages et inconvénients
+
+- :heavy_check_mark: Simplicité d'accès aux données
+- :heavy_check_mark: Meilleure organisation des données
+- :heavy_check_mark: Contrôle des accès aux données
+- :x: Performance
+
+:::{.notes}
+- Interroger sans se soucier des structures complexes des tables
 - Sauvegarde de requêtes complexes
-  - jointures, filtres...
-- Sécurité et Contrôle d'Accès
-  - Masquer des colonnes sensibles
+- Structurer logiquement les données
+- Masquer des colonnes / lignes sensibles
+- :x: s'exécutent dynamiquement à chaque appel 
+:::
 
-Par contre une vue n'est pas plus rapide, ni performante
 
 ### Vues matérialisées
 
-Photo à un instant t
+Photo à un instant t (snapshot) :camera:
+
+<br>
 
 ```{.sql}
 CREATE MATERIALIZED VIEW joueuses_fr_elo2000 
 AS
 SELECT *
-  FROM joueuse
+  FROM echecs.joueuse
  WHERE code_pays = 'FR' 
    AND elo > 2000;
 ```
@@ -202,9 +256,7 @@ L'utilisateur qui crée une table peut distribuer des droits aux autres.
 
 Voir section *priviléges* de la doc PostgreSQL
 
-### Donner des droits
-
-Lecture / écriture sur des tables
+### Donner des droits sur une table
 
 ```{.sql}
 -- Lecture pour tous
@@ -214,7 +266,11 @@ GRANT SELECT ON echecs.joueuse TO PUBLIC;
 GRANT ALL PRIVILEGES ON echecs.joueuse TO chantal WITH GRANT OPTION;
 ```
 
-Suffixe `WITH GRANT OPTION` pour donner le droit de transmettre ce droit.
+<br>
+
+- `PUBLIC` : tous les utilisateurs
+- Suffixe `WITH GRANT OPTION` pour donner le droit de transmettre ce droit
+
 
 ### Retirer des droits
 
@@ -226,6 +282,8 @@ REVOKE SELECT ON echecs.joueuse TO chantal;
 REVOKE ALL PRIVILEGES ON echecs.joueuse TO chantal;
 ```
 
+<br>
+
 Suffixe `CASCADE` pour retirer les droits à ceux qui ont reçu les droits de la part de...
 
 ### Rôle
@@ -233,36 +291,58 @@ Suffixe `CASCADE` pour retirer les droits à ceux qui ont reçu les droits de la
 Pour une gestion simplifiée des droits
 
 ```{.sql}
+-- créer un rôle
 CREATE ROLE eleve;
 
+-- ajouter des droits au rôle
 GRANT SELECT, INSERT ON echecs.joueuse TO eleve;
 
+-- donner le rôle à Chantal
 GRANT eleve TO chantal;
 ```
+
+::: {.notes}
+Imaginons que pour chaque nouvel élève, il faut donner les droits sur 20 tables.
+
+Plus pratique avec les rôles.
+:::
 
 ### Droits sur un schéma
 
 ```{.sql}
+-- droit d'accès au schéma i.e. de consulter les objets du schéma
 GRANT USAGE ON SCHEMA echecs TO PUBLIC;
 
+-- retire à Chantal le droit de créer de nouveaux objets (tables, vues, etc.) dans le schéma
 REVOKE CREATE ON SCHEMA echecs FROM chantal;
 
+-- Autorise à effectuer des requêtes SELECT sur toutes les tables du schéma
 GRANT SELECT ON ALL TABLES IN SCHEMA echecs TO PUBLIC;
 ```
 
-- CREATE : Autorise la création d'objets dans le schéma
-- USAGE : Autorise uniquement l'accès au schéma (nécessaire pour utiliser les objets du schéma)
-
+::: {.notes}
+pas de question à l'exam sur les droits de schéma
+:::
 
 ## Transactions
 
-### Exemple
+### Exemple classique
+
+::: {.callout-important title="Mission"}
+Vous devez transférer discrétement et sans vous tromper 10 millions entre les comptes de Shakira et Cristiano.
+
+Malheureusement l'opération est assez longue et vous devez vous prémunir contre le risque d'une interruption.
+
+Comment faire ? :confused:
+:::
+
+### Transfert de fonds
 
 ```{.sql}
 BEGIN; -- Début de la transaction
 
-UPDATE compte SET solde = solde - 100 WHERE id = 1;
-UPDATE compte SET solde = solde + 100 WHERE id = 2;
+UPDATE compte SET solde = solde - 10000000 WHERE id = 1;
+UPDATE compte SET solde = solde + 10000000 WHERE id = 2;
 
 COMMIT; -- Valider si ok
 ```
@@ -278,6 +358,7 @@ ROLLBACK; -- en cas d'erreur
 - LOCK
 - SAVEPOINT my_savepoint;
 - ROLLBACK TO my_savepoint;
+- mode AUTOCOMMIT 
 :::
 
 
@@ -295,9 +376,9 @@ Pour définir la fiabilité des transactions :
 :::
 
 
-## Divers
+## Index
 
-### Index
+### Créer un index
 
 ::: {.callout-note title="Définition"}
 Un index est une structure de données qui améliore la vitesse des opérations de lecture sur une table en facilitant la recherche des données.
@@ -306,7 +387,7 @@ Il permet une lecture plus rapide sur une colonne utilisée fréquemment dans *W
 :::
 
 ```{.sql}
-CREATE INDEX idx_nom_joueuse ON joueuse (nom);
+CREATE INDEX echecs.idx_nom_joueuse ON echecs.joueuse (nom);
 ```
 
 :::{.notes}
@@ -315,7 +396,7 @@ CREATE INDEX idx_nom_joueuse ON joueuse (nom);
 :::
 
 
-### Index + et -
+### Avantages et inconvénients
 
 - :heavy_check_mark: Haute cardinalité
 - :heavy_check_mark: Peu de valeurs nulles
@@ -329,7 +410,7 @@ CREATE INDEX idx_nom_joueuse ON joueuse (nom);
 :::
 
 
-### Trigger
+## Trigger
 
 ::: {.callout-note title="Définition"}
 Un trigger est une fonction qui s'exécute automatiquement en réponse à une mise à jour d'une table
@@ -342,10 +423,10 @@ Il permet par exemple de :
 :::
 
 :::{.notes}
-Peut se déclencher avant ou arpès une maj
+Peut se déclencher avant ou après une maj
 
-Garantir l'intégrité des données : Valider ou corriger les données avant leur enregistrement.
-Implémenter des règles métier : Empêcher des suppressions ou modifications non autorisées.
-Synchroniser des données : Mettre à jour des tables liées automatiquement.
+- Garantir l'intégrité des données : Valider ou corriger les données avant leur enregistrement.
+- Implémenter des règles métier : Empêcher des suppressions ou modifications non autorisées.
+- Synchroniser des données : Mettre à jour des tables liées automatiquement.
 :::
 

@@ -135,7 +135,7 @@ SELECT c.id_club,
 SELECT j.id_club,
        j.*       
   FROM echecs.joueuse j
-  JOIN echecs.club_min_elo cme ON (j.id_club = cme.id_club AND j.elo = cme.elo_min)
+  JOIN club_min_elo cme ON (j.id_club = cme.id_club AND j.elo = cme.elo_min)
  ORDER BY 1;
 
 
