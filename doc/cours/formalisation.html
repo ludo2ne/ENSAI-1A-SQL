@@ -9,7 +9,7 @@
 <meta name="author" content="Ludovic Deneuville">
 <meta name="description" content="Slides">
 
-<title>Formalisation – Base de données</title>
+<title>Formalisation des bases de données – Base de données</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -195,25 +195,25 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#objectifs" id="toc-objectifs" class="nav-link active" data-scroll-target="#objectifs"><span class="header-section-number">1</span> Objectifs</a></li>
-  <li><a href="#dépendances-fonctionnelles" id="toc-dépendances-fonctionnelles" class="nav-link" data-scroll-target="#dépendances-fonctionnelles"><span class="header-section-number">2</span> Dépendances fonctionnelles</a>
+  <li><a href="#objectifs" id="toc-objectifs" class="nav-link active" data-scroll-target="#objectifs">Objectifs</a></li>
+  <li><a href="#dépendances-fonctionnelles" id="toc-dépendances-fonctionnelles" class="nav-link" data-scroll-target="#dépendances-fonctionnelles"><span class="header-section-number">1</span> Dépendances fonctionnelles</a>
   <ul class="collapse">
   <li><a href="#les-axiomes-darmstrong" id="toc-les-axiomes-darmstrong" class="nav-link" data-scroll-target="#les-axiomes-darmstrong">Les axiomes d’Armstrong</a></li>
   <li><a href="#règles-dérivées" id="toc-règles-dérivées" class="nav-link" data-scroll-target="#règles-dérivées">Règles dérivées</a></li>
   <li><a href="#deux-propriétés" id="toc-deux-propriétés" class="nav-link" data-scroll-target="#deux-propriétés">Deux Propriétés</a></li>
   </ul></li>
-  <li><a href="#formes-normales" id="toc-formes-normales" class="nav-link" data-scroll-target="#formes-normales"><span class="header-section-number">3</span> Formes normales</a>
+  <li><a href="#formes-normales" id="toc-formes-normales" class="nav-link" data-scroll-target="#formes-normales"><span class="header-section-number">2</span> Formes normales</a>
   <ul class="collapse">
   <li><a href="#normalisation" id="toc-normalisation" class="nav-link" data-scroll-target="#normalisation">Normalisation</a></li>
   <li><a href="#ère-forme-normale" id="toc-ère-forme-normale" class="nav-link" data-scroll-target="#ère-forme-normale">1ère forme normale</a></li>
   <li><a href="#e-forme-normale" id="toc-e-forme-normale" class="nav-link" data-scroll-target="#e-forme-normale">2e forme normale</a></li>
   <li><a href="#e-forme-normale-1" id="toc-e-forme-normale-1" class="nav-link" data-scroll-target="#e-forme-normale-1">3e forme normale</a></li>
   </ul></li>
-  <li><a href="#modélisation-uml" id="toc-modélisation-uml" class="nav-link" data-scroll-target="#modélisation-uml"><span class="header-section-number">4</span> Modélisation UML</a>
+  <li><a href="#modélisation-uml" id="toc-modélisation-uml" class="nav-link" data-scroll-target="#modélisation-uml"><span class="header-section-number">3</span> Modélisation UML</a>
   <ul class="collapse">
+  <li><a href="#unified-modeling-language" id="toc-unified-modeling-language" class="nav-link" data-scroll-target="#unified-modeling-language">Unified Modeling Language</a></li>
   <li><a href="#modèles" id="toc-modèles" class="nav-link" data-scroll-target="#modèles">Modèles</a></li>
   <li><a href="#associations" id="toc-associations" class="nav-link" data-scroll-target="#associations">Associations</a></li>
-  <li><a href="#exemple" id="toc-exemple" class="nav-link" data-scroll-target="#exemple">Exemple</a></li>
   </ul></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="formalisation-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
@@ -227,7 +227,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Formalisation</h1>
+<h1 class="title">Formalisation des bases de données</h1>
 </div>
 
 <div>
@@ -255,9 +255,8 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p><span class="emoji" data-emoji="construction">🚧</span> WIP</p>
-<section id="objectifs" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="objectifs"><span class="header-section-number">1</span> Objectifs</h2>
+<section id="objectifs" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="objectifs">Objectifs</h2>
 <p>Structurer une base de données pour qu’elle soit :</p>
 <ul>
 <li>efficace</li>
@@ -273,8 +272,8 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 </div>
 </section>
-<section id="dépendances-fonctionnelles" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="dépendances-fonctionnelles"><span class="header-section-number">2</span> Dépendances fonctionnelles</h2>
+<section id="dépendances-fonctionnelles" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="dépendances-fonctionnelles"><span class="header-section-number">1</span> Dépendances fonctionnelles</h2>
 <div class="callout callout-style-default callout-note callout-titled" title="Définition">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -298,11 +297,6 @@ Définition
 </div>
 <section id="les-axiomes-darmstrong" class="level3">
 <h3 class="anchored" data-anchor-id="les-axiomes-darmstrong">Les axiomes d’Armstrong</h3>
-<ul>
-<li>Réflexivité (X, Y) → X</li>
-<li>Augmentation Si X → Y alors XZ → YZ</li>
-<li>Transitivité Si X → Y et Y → Z alors X → Z</li>
-</ul>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 26%">
@@ -373,7 +367,7 @@ Dépendance Fonctionnelle Élémentaire
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>X → Y est élémentaire si il n’existe aucun sous-ensemble strict Z inclus dans X tel que Z → Y</p>
+<p>X → Y est élémentaire s’il n’existe aucun sous-ensemble strict Z inclus dans X tel que Z → Y</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-note callout-titled" title="Dépendance Fonctionnelle Directe">
@@ -386,7 +380,7 @@ Dépendance Fonctionnelle Directe
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>X → Y est directe si il n’existe pas de Z tel que X → Z et Z → Y</p>
+<p>X → Y est directe s’il n’existe pas de Z tel que X → Z et Z → Y</p>
 </div>
 </div>
 <div class="notes">
@@ -396,8 +390,8 @@ Dépendance Fonctionnelle Directe
 </div>
 </section>
 </section>
-<section id="formes-normales" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="formes-normales"><span class="header-section-number">3</span> Formes normales</h2>
+<section id="formes-normales" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="formes-normales"><span class="header-section-number">2</span> Formes normales</h2>
 <section id="normalisation" class="level3">
 <h3 class="anchored" data-anchor-id="normalisation">Normalisation</h3>
 <div class="callout callout-style-default callout-note callout-titled" title="Définition">
@@ -500,7 +494,7 @@ Définition
 <li>elle est 2NF</li>
 <li>tout attribut non clé est en DF directe avec la clé</li>
 </ul>
-<p>Autrement dit, tous les attributs sont déterminés par la clé complète.</p>
+<p>Autrement dit, un attribut ne peut pas dépendre fonctionnellement d’un autre attribut non clé.</p>
 </div>
 </div>
 <hr>
@@ -522,17 +516,34 @@ Passer en 3NF
 <div class="callout-body-container callout-body">
 <p>Créer une table <em>pays</em></p>
 <ul>
-<li>joueuse((<u>id_joueuse</u>, code_pays)</li>
+<li>joueuse(<u>id_joueuse</u>, code_pays)</li>
 <li>pays(<u>code_pays</u>, capitale)</li>
 </ul>
 </div>
 </div>
 </section>
 </section>
-<section id="modélisation-uml" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="modélisation-uml"><span class="header-section-number">4</span> Modélisation UML</h2>
-<section id="modèles" class="level3">
-<h3 class="anchored" data-anchor-id="modèles">Modèles</h3>
+<section id="modélisation-uml" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="modélisation-uml"><span class="header-section-number">3</span> Modélisation UML</h2>
+<section id="unified-modeling-language" class="level3">
+<h3 class="anchored" data-anchor-id="unified-modeling-language">Unified Modeling Language</h3>
+<div class="callout callout-style-default callout-note callout-titled" title="Définition">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Définition
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>UML est un langage de modélisation graphique standardisé utilisé pour spécifier, visualiser, concevoir et documenter différents aspects des systèmes logiciels.</p>
+<p>Il offre une série de diagrammes pour représenter différents aspects d’un système.</p>
+</div>
+</div>
+</section>
+<section id="modèles" class="level3" data-background-color="beige">
+<h3 data-background-color="beige" class="anchored" data-anchor-id="modèles">Modèles</h3>
 <div class="columns">
 <div class="column">
 <p>Modèle conceptuel</p>
@@ -585,8 +596,8 @@ Passer en 3NF
 </ul>
 </div>
 </section>
-<section id="associations" class="level3">
-<h3 class="anchored" data-anchor-id="associations">Associations</h3>
+<section id="associations" class="level3" data-background-color="beige">
+<h3 data-background-color="beige" class="anchored" data-anchor-id="associations">Associations</h3>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -596,19 +607,19 @@ Passer en 3NF
     direction LR
     class joueuse {
         id_joueuse SERIAL PK
-        nom        VARCHAR(50)
-        prenom     VARCHAR(50)
+        nom        VARCHAR50
+        prenom     VARCHAR50
         elo        INT
         #id_club   INT
     }
     
     class club {
         id_club   SERIAL PK
-        nom       VARCHAR(50)
-        ville     VARCHAR(50)
+        nom       VARCHAR50
+        ville     VARCHAR50
     }
 
-    joueuse --&gt; club
+    joueuse "*" --&gt; "0..1" club
 </pre>
 </div>
 <p></p></figure><p></p>
@@ -616,16 +627,6 @@ Passer en 3NF
 </div>
 </div>
 <p><a href="../../doc/cours/bases-de-donnees.html#associations">cf.&nbsp;Cours BDD, partie associations</a></p>
-</section>
-<section id="exemple" class="level3">
-<h3 class="anchored" data-anchor-id="exemple">Exemple</h3>
-<p>Site de vente de légumes</p>
-<ul>
-<li>Client &nbsp; - id_client &nbsp; - nom &nbsp; - prenom &nbsp; - mail</li>
-<li>Produit &nbsp; - id_produit &nbsp; - nom &nbsp; - description &nbsp; - prix</li>
-<li>Commande &nbsp; - id_commande &nbsp; - id_client</li>
-<li>LigneCommande &nbsp; - id_ligne_commande &nbsp; - id_commande &nbsp; - id_produit &nbsp; - quantite</li>
-</ul>
 
 
 </section>

@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.6.39">
 
   <meta name="author" content="Ludovic Deneuville">
-  <title>Base de données – Formalisation</title>
+  <title>Base de données – Formalisation des bases de données</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -132,7 +132,7 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Formalisation</h1>
+  <h1 class="title">Formalisation des bases de données</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -143,11 +143,7 @@ Ludovic Deneuville
 </div>
 
 </section>
-<section class="slide level3">
-
-<p><span class="emoji" data-emoji="construction">🚧</span> WIP</p>
-</section>
-<section id="objectifs" class="title-slide slide level2 center">
+<section id="objectifs" class="title-slide slide level2 unnumbered center">
 <h2>Objectifs</h2>
 <p>Structurer une base de données pour qu’elle soit :</p>
 <ul>
@@ -214,11 +210,6 @@ Ludovic Deneuville
 </section>
 <section id="les-axiomes-darmstrong" class="slide level3">
 <h3>Les axiomes d’Armstrong</h3>
-<ul>
-<li>Réflexivité (X, Y) → X</li>
-<li>Augmentation Si X → Y alors XZ → YZ</li>
-<li>Transitivité Si X → Y et Y → Z alors X → Z</li>
-</ul>
 <table class="caption-top">
 <colgroup>
 <col style="width: 26%">
@@ -299,7 +290,7 @@ Ludovic Deneuville
 <p><strong>Dépendance Fonctionnelle Élémentaire</strong></p>
 </div>
 <div class="callout-content">
-<p>X → Y est élémentaire si il n’existe aucun sous-ensemble strict Z inclus dans X tel que Z → Y</p>
+<p>X → Y est élémentaire s’il n’existe aucun sous-ensemble strict Z inclus dans X tel que Z → Y</p>
 </div>
 </div>
 </div>
@@ -314,7 +305,7 @@ Ludovic Deneuville
 <p><strong>Dépendance Fonctionnelle Directe</strong></p>
 </div>
 <div class="callout-content">
-<p>X → Y est directe si il n’existe pas de Z tel que X → Z et Z → Y</p>
+<p>X → Y est directe s’il n’existe pas de Z tel que X → Z et Z → Y</p>
 </div>
 </div>
 </div>
@@ -460,7 +451,7 @@ Ludovic Deneuville
 <li>elle est 2NF</li>
 <li>tout attribut non clé est en DF directe avec la clé</li>
 </ul>
-<p>Autrement dit, tous les attributs sont déterminés par la clé complète.</p>
+<p>Autrement dit, un attribut ne peut pas dépendre fonctionnellement d’un autre attribut non clé.</p>
 </div>
 </div>
 </div>
@@ -486,7 +477,7 @@ Ludovic Deneuville
 <div class="callout-content">
 <p>Créer une table <em>pays</em></p>
 <ul>
-<li>joueuse((<u>id_joueuse</u>, code_pays)</li>
+<li>joueuse(<u>id_joueuse</u>, code_pays)</li>
 <li>pays(<u>code_pays</u>, capitale)</li>
 </ul>
 </div>
@@ -499,7 +490,26 @@ Ludovic Deneuville
 <h2>Modélisation UML</h2>
 
 </section>
-<section id="modèles" class="slide level3">
+<section id="unified-modeling-language" class="slide level3">
+<h3>Unified Modeling Language</h3>
+<div title="Définition">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Définition</strong></p>
+</div>
+<div class="callout-content">
+<p>UML est un langage de modélisation graphique standardisé utilisé pour spécifier, visualiser, concevoir et documenter différents aspects des systèmes logiciels.</p>
+<p>Il offre une série de diagrammes pour représenter différents aspects d’un système.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="modèles" class="slide level3" data-background-color="beige">
 <h3>Modèles</h3>
 <div class="columns">
 <div class="column">
@@ -562,7 +572,7 @@ Ludovic Deneuville
           display:block!important;
       }</style></aside>
 </section>
-<section id="associations" class="slide level3">
+<section id="associations" class="slide level3" data-background-color="beige">
 <h3>Associations</h3>
 <div class="cell" data-reveal="true" data-layout-align="default">
 <div class="cell-output-display">
@@ -573,19 +583,19 @@ Ludovic Deneuville
     direction LR
     class joueuse {
         id_joueuse SERIAL PK
-        nom        VARCHAR(50)
-        prenom     VARCHAR(50)
+        nom        VARCHAR50
+        prenom     VARCHAR50
         elo        INT
         #id_club   INT
     }
     
     class club {
         id_club   SERIAL PK
-        nom       VARCHAR(50)
-        ville     VARCHAR(50)
+        nom       VARCHAR50
+        ville     VARCHAR50
     }
 
-    joueuse --&gt; club
+    joueuse "*" --&gt; "0..1" club
 </pre>
 </div>
 <p></p></figure><p></p>
@@ -593,16 +603,6 @@ Ludovic Deneuville
 </div>
 </div>
 <p><a href="../../doc/cours/bases-de-donnees.html#associations">cf.&nbsp;Cours BDD, partie associations</a></p>
-</section>
-<section id="exemple" class="slide level3">
-<h3>Exemple</h3>
-<p>Site de vente de légumes</p>
-<ul>
-<li>Client &nbsp; - id_client &nbsp; - nom &nbsp; - prenom &nbsp; - mail</li>
-<li>Produit &nbsp; - id_produit &nbsp; - nom &nbsp; - description &nbsp; - prix</li>
-<li>Commande &nbsp; - id_commande &nbsp; - id_client</li>
-<li>LigneCommande &nbsp; - id_ligne_commande &nbsp; - id_commande &nbsp; - id_produit &nbsp; - quantite</li>
-</ul>
 
 
 </section></section>
