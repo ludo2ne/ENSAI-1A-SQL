@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.6.39">
 
   <meta name="author" content="Ludovic Deneuville">
-  <title>Base de données – Modélisation avec UML</title>
+  <title>Base de données – Formalisation</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -122,13 +122,17 @@
       margin-right: 0; 
     }
   </style>
+  <meta name="mermaid-theme" content="forest">
+  <script src="../../site_libs/quarto-diagram/mermaid.min.js"></script>
+  <script src="../../site_libs/quarto-diagram/mermaid-init.js"></script>
+  <link href="../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 </head>
 <body class="quarto-dark">
   <div class="reveal">
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Modélisation avec UML</h1>
+  <h1 class="title">Formalisation</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -143,15 +147,452 @@ Ludovic Deneuville
 
 <p><span class="emoji" data-emoji="construction">🚧</span> WIP</p>
 </section>
-<section id="dépendances-fonctionnelles" class="title-slide slide level2 center">
-<h2>Dépendances fonctionnelles</h2>
-
+<section id="objectifs" class="title-slide slide level2 center">
+<h2>Objectifs</h2>
+<p>Structurer une base de données pour qu’elle soit :</p>
+<ul>
+<li>efficace</li>
+<li>propre</li>
+<li>légère</li>
+<li>facile à maintenir</li>
+</ul>
+<aside class="notes">
+<ul>
+<li>pas de doublons et de redondances</li>
+<li>Moins de risques d’incohérences entre différentes parties de la base</li>
+<li>Stockage réduit, car les informations répétées sont éliminées.</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 
+<section>
+<section id="dépendances-fonctionnelles" class="title-slide slide level2 center">
+<h2>Dépendances fonctionnelles</h2>
+<div title="Définition">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Définition</strong></p>
+</div>
+<div class="callout-content">
+<p>Une dépendance fonctionnelle indique qu’une colonne (ou un ensemble de colonnes) détermine de manière unique une autre colonne :</p>
+<ul>
+<li>X → Y</li>
+<li>X détermine Y</li>
+<li>Y dépend fonctionnellement de X</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<aside class="notes">
+<p>Si on connait X, on peut en déduire Y</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="les-axiomes-darmstrong" class="slide level3">
+<h3>Les axiomes d’Armstrong</h3>
+<ul>
+<li>Réflexivité (X, Y) → X</li>
+<li>Augmentation Si X → Y alors XZ → YZ</li>
+<li>Transitivité Si X → Y et Y → Z alors X → Z</li>
+</ul>
+<table class="caption-top">
+<colgroup>
+<col style="width: 26%">
+<col style="width: 73%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Nom</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Réflexivité</td>
+<td>(X, Y) → X</td>
+</tr>
+<tr class="even">
+<td>Augmentation</td>
+<td>Si X → Y, alors XZ → YZ</td>
+</tr>
+<tr class="odd">
+<td>Transitivité</td>
+<td>Si X → Y et Y → Z alors, X → Z</td>
+</tr>
+</tbody>
+</table>
+<aside class="notes">
+<ul>
+<li>(nom, prenom) → nom</li>
+<li>id_joueuse → nom alors (id_joueuse, id_partie) → (id_joueuse, nom)</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="règles-dérivées" class="slide level3">
+<h3>Règles dérivées</h3>
+<table class="caption-top">
+<thead>
+<tr class="header">
+<th><strong>Nom</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Union</td>
+<td>Si X → Y et X → Z, alors X → YZ</td>
+</tr>
+<tr class="even">
+<td>Décomposition</td>
+<td>Si X → YZ, alors X → Z et X → Y</td>
+</tr>
+<tr class="odd">
+<td>Pseudo-transitivité</td>
+<td>Si X → Y et WY → Z alors WX → Z</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="deux-propriétés" class="slide level3">
+<h3>Deux Propriétés</h3>
+<div title="Dépendance Fonctionnelle Élémentaire">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Dépendance Fonctionnelle Élémentaire</strong></p>
+</div>
+<div class="callout-content">
+<p>X → Y est élémentaire si il n’existe aucun sous-ensemble strict Z inclus dans X tel que Z → Y</p>
+</div>
+</div>
+</div>
+</div>
+<div title="Dépendance Fonctionnelle Directe">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Dépendance Fonctionnelle Directe</strong></p>
+</div>
+<div class="callout-content">
+<p>X → Y est directe si il n’existe pas de Z tel que X → Z et Z → Y</p>
+</div>
+</div>
+</div>
+</div>
+<aside class="notes">
+<ul>
+<li>pas élémenaire : num_client, nom → adresse</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
 <section>
 <section id="formes-normales" class="title-slide slide level2 center">
 <h2>Formes normales</h2>
 
+</section>
+<section id="normalisation" class="slide level3">
+<h3>Normalisation</h3>
+<div title="Définition">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Définition</strong></p>
+</div>
+<div class="callout-content">
+<p>La normalisation vise à organiser les données :</p>
+<ul>
+<li>en éliminant les redondances et les incohérences</li>
+<li>en préservant les dépendances fonctionnelles</li>
+<li>sans perdre d’informations</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="ère-forme-normale" class="slide level3">
+<h3>1ère forme normale</h3>
+<div title="Définition">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Définition</strong></p>
+</div>
+<div class="callout-content">
+<p>Une relation est 1NF si tous ses attributs sont atomiques.</p>
+</div>
+</div>
+</div>
+</div>
+<ul>
+<li>Une <em>date</em> est atomique</li>
+<li>Un <em>nom</em> est atomique</li>
+<li>Une <em>liste de prénoms</em> n’est pas atomique</li>
+<li>Est-ce qu’un <em>adresse</em> est atomique ?</li>
+</ul>
+<aside class="notes">
+<ul>
+<li>atomique : représente une seule information</li>
+<li>non atomique : plusieurs informations combinées</li>
+<li>assez subjectif</li>
+<li>dépend du cas d’utilisation
+<ul>
+<li>si vous n’utilisez pas le champ adresse -&gt; atomique</li>
+<li>si vous avez utiliser par exemple la ville -&gt; pas atomique</li>
+</ul></li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="e-forme-normale" class="slide level3">
+<h3>2e forme normale</h3>
+<div title="Définition">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Définition</strong></p>
+</div>
+<div class="callout-content">
+<p>Une relation est 2NF si :</p>
+<ul>
+<li>elle est 1NF</li>
+<li>tout attribut non clé est en DF élémentaire avec la clé</li>
+</ul>
+<p>Autrement dit, tous les attributs sont déterminés par la clé complète.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3">
+
+<p>Exemple de relation non 2NF :</p>
+<ul>
+<li>joueuse(<u>nom, prenom, dnais</u>) → elo</li>
+<li>si par exemple (nom, dnais) → elo
+<ul>
+<li>si <em>nom</em> et <em>dnais</em> suffisent pour déterminer le <em>elo</em></li>
+</ul></li>
+</ul>
+</section>
+<section id="e-forme-normale-1" class="slide level3">
+<h3>3e forme normale</h3>
+<div title="Définition">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Définition</strong></p>
+</div>
+<div class="callout-content">
+<p>Une relation est 3NF si :</p>
+<ul>
+<li>elle est 2NF</li>
+<li>tout attribut non clé est en DF directe avec la clé</li>
+</ul>
+<p>Autrement dit, tous les attributs sont déterminés par la clé complète.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level3">
+
+<p>Exemple de relation non 3NF :</p>
+<ul>
+<li>joueuse(<u>id_joueuse</u>, code_pays, capitale)</li>
+<li>id_joueuse → (code_pays, capitale)</li>
+<li>or code_pays → capitale donc DF non directe</li>
+</ul>
+<div title="Passer en 3NF">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Passer en 3NF</strong></p>
+</div>
+<div class="callout-content">
+<p>Créer une table <em>pays</em></p>
+<ul>
+<li>joueuse((<u>id_joueuse</u>, code_pays)</li>
+<li>pays(<u>code_pays</u>, capitale)</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</section></section>
+<section>
+<section id="modélisation-uml" class="title-slide slide level2 center">
+<h2>Modélisation UML</h2>
+
+</section>
+<section id="modèles" class="slide level3">
+<h3>Modèles</h3>
+<div class="columns">
+<div class="column">
+<p>Modèle conceptuel</p>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">classDiagram
+    class Joueuse {
+        identifiant
+        nom
+        prenom
+        elo
+        identifiant du club
+    }
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</div><div class="column">
+<p>Modèle physique</p>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">classDiagram
+    class joueuse {
+        id_joueuse SERIAL PK
+        nom        VARCHAR(50)
+        prenom     VARCHAR(50)
+        elo        INT
+        #id_club   INT
+    }
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</div></div>
+<aside class="notes">
+<ul>
+<li>Conceptuel : niveau utilisateur (accents, espaces)</li>
+<li>Physique : niveau développeur (transposable directement en SQL)</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="associations" class="slide level3">
+<h3>Associations</h3>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">classDiagram
+    direction LR
+    class joueuse {
+        id_joueuse SERIAL PK
+        nom        VARCHAR(50)
+        prenom     VARCHAR(50)
+        elo        INT
+        #id_club   INT
+    }
+    
+    class club {
+        id_club   SERIAL PK
+        nom       VARCHAR(50)
+        ville     VARCHAR(50)
+    }
+
+    joueuse --&gt; club
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p><a href="../../doc/cours/bases-de-donnees.html#associations">cf.&nbsp;Cours BDD, partie associations</a></p>
 </section>
 <section id="exemple" class="slide level3">
 <h3>Exemple</h3>
@@ -168,7 +609,7 @@ Ludovic Deneuville
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
-<p><a href="../../index.html">Home</a> — <a href="modelisation.html">Modélisation</a></p>
+<p><a href="../../index.html">Home</a> — <a href="formalisation.html">Modélisation</a></p>
 </div>
 </div></div>
 

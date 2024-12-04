@@ -165,8 +165,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">SQL avancé</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../doc/cours/modelisation.html">
- <span class="dropdown-text">Modélisation</span></a>
+    <a class="dropdown-item" href="../../doc/cours/formalisation.html">
+ <span class="dropdown-text">Formalisation des BDD</span></a>
   </li>  
     </ul>
   </li>
@@ -234,6 +234,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#différence" id="toc-différence" class="nav-link" data-scroll-target="#différence">Différence</a></li>
   <li><a href="#intersection" id="toc-intersection" class="nav-link" data-scroll-target="#intersection">Intersection</a></li>
   <li><a href="#jointure" id="toc-jointure" class="nav-link" data-scroll-target="#jointure">Jointure</a></li>
+  <li><a href="#produit-cartésien" id="toc-produit-cartésien" class="nav-link" data-scroll-target="#produit-cartésien">Produit Cartésien</a></li>
   </ul></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="algebre-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
@@ -322,6 +323,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <td><strong>⨝ (Jointure)</strong></td>
 <td>Combiner deux relations basées sur une condition</td>
 </tr>
+<tr class="odd">
+<td><strong>x (Produit Cartésien)</strong></td>
+<td>Combinaison des colonnes</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -352,7 +357,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="union" class="level3">
 <h3 class="anchored" data-anchor-id="union">Union</h3>
 <ul>
-<li>Combine les lignes de deux tables ayant le même nombre de colonnes et des types compatibles</li>
+<li>Combine les lignes de deux tables ayant le <u>même nombre de colonnes et des types compatibles</u></li>
 </ul>
 <div class="sourceCode" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>       prenom</span>
@@ -378,6 +383,13 @@ Tip
 <li><strong>UNION ALL</strong> : Combine les résultats des requêtes et garde tous les doublons</li>
 </ul>
 </div>
+</div>
+<div class="notes">
+<ul>
+<li>En général, on prend les mêmes colonnes des 2 côtés</li>
+<li>Possible de faire plusieurs UNION</li>
+<li>ORDER BY à la fin : ordonne le tout</li>
+</ul>
 </div>
 </section>
 <section id="différence" class="level3">
@@ -422,13 +434,23 @@ Tip
 <section id="jointure" class="level3">
 <h3 class="anchored" data-anchor-id="jointure">Jointure</h3>
 <ul>
-<li>Permet de combiner deux tables basées sur une correspondance entre les colonnes</li>
+<li>Permet de combiner deux tables en se basant sur une correspondance entre les colonnes</li>
 </ul>
 <div class="sourceCode" id="cb6"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> j.nom,</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>       j.prenom,</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>       c.nom <span class="kw">AS</span> club</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse j</span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> echecs.club c <span class="kw">USING</span> (id_club);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="produit-cartésien" class="level3">
+<h3 class="anchored" data-anchor-id="produit-cartésien">Produit Cartésien</h3>
+<div class="sourceCode" id="cb7"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse j,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>       echecs.club c;</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">-- WHERE j.id_club = c.id_club</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="notes">
+<p>Ancienne pratique : utilisé avant à la place des jointures</p>
+</div>
 
 
 </section>

@@ -446,14 +446,32 @@ Ludovic Deneuville
 </section>
 <section id="exemple" class="slide level3">
 <h3>Exemple</h3>
-<div class="sourceCode" id="cb15"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb15-1"><a aria-hidden="true" tabindex="-1"></a><span class="cf">BEGIN</span>; <span class="co">-- Démarrer la transaction</span></span>
+<div class="sourceCode" id="cb15"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb15-1"><a aria-hidden="true" tabindex="-1"></a><span class="cf">BEGIN</span>; <span class="co">-- Début de la transaction</span></span>
 <span id="cb15-2"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-3"><a aria-hidden="true" tabindex="-1"></a><span class="kw">UPDATE</span> comptes <span class="kw">SET</span> solde <span class="op">=</span> solde <span class="op">-</span> <span class="dv">100</span> <span class="kw">WHERE</span> <span class="kw">id</span> <span class="op">=</span> <span class="dv">1</span>; <span class="co">-- Débiter le compte 1</span></span>
-<span id="cb15-4"><a aria-hidden="true" tabindex="-1"></a><span class="kw">UPDATE</span> comptes <span class="kw">SET</span> solde <span class="op">=</span> solde <span class="op">+</span> <span class="dv">100</span> <span class="kw">WHERE</span> <span class="kw">id</span> <span class="op">=</span> <span class="dv">2</span>; <span class="co">-- Créditer le compte 2</span></span>
+<span id="cb15-3"><a aria-hidden="true" tabindex="-1"></a><span class="kw">UPDATE</span> compte <span class="kw">SET</span> solde <span class="op">=</span> solde <span class="op">-</span> <span class="dv">100</span> <span class="kw">WHERE</span> <span class="kw">id</span> <span class="op">=</span> <span class="dv">1</span>;</span>
+<span id="cb15-4"><a aria-hidden="true" tabindex="-1"></a><span class="kw">UPDATE</span> compte <span class="kw">SET</span> solde <span class="op">=</span> solde <span class="op">+</span> <span class="dv">100</span> <span class="kw">WHERE</span> <span class="kw">id</span> <span class="op">=</span> <span class="dv">2</span>;</span>
 <span id="cb15-5"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-6"><a aria-hidden="true" tabindex="-1"></a><span class="kw">COMMIT</span>; <span class="co">-- Valider les modifications si tout s'est bien passé</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-6"><a aria-hidden="true" tabindex="-1"></a><span class="kw">COMMIT</span>; <span class="co">-- Valider si ok</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><br></p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb16-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">ROLLBACK</span>; <span class="co">-- en cas d'erreur</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<aside class="notes">
+<ul>
+<li>Plusieurs utilisateurs peuvent faire des requêtes en même temps</li>
+<li>LOCK</li>
+<li>SAVEPOINT my_savepoint;</li>
+<li>ROLLBACK TO my_savepoint;</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="propriétés-acid" class="slide level3">
 <h3>Propriétés ACID</h3>
@@ -487,8 +505,39 @@ Ludovic Deneuville
 </section>
 <section id="index" class="slide level3">
 <h3>Index</h3>
+<div title="Définition">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Définition</strong></p>
+</div>
+<div class="callout-content">
+<p>Un index est une structure de données qui améliore la vitesse des opérations de lecture sur une table en facilitant la recherche des données.</p>
+<p>Il permet une lecture plus rapide sur une colonne utilisée fréquemment dans <em>WHERE</em>, <em>JOIN</em>, <em>GROUP BY</em>, <em>ORDER BY</em></p>
+</div>
+</div>
+</div>
+</div>
 <div class="sourceCode" id="cb17"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb17-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">INDEX</span> idx_nom_joueuse <span class="kw">ON</span> joueuse (nom);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Permet une lecture plus rapide sur une colonne utilisée fréquemment dans <em>WHERE</em>, <em>JOIN</em>, <em>GROUP BY</em>, <em>ORDER BY</em></p>
+<aside class="notes">
+<ul>
+<li>Recherche longue si beaucoup de lignes</li>
+<li>Système clé-valeur (index -&gt; ligne)</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="index-et--" class="slide level3">
 <h3>Index + et -</h3>
@@ -518,13 +567,27 @@ Ludovic Deneuville
 </section>
 <section id="trigger" class="slide level3">
 <h3>Trigger</h3>
-<p>Fonction qui s’exécute automatiquement en réponse à une mise à jour d’une table</p>
-<p>Un trigger permet de :</p>
+<div title="Définition">
+<div class="callout callout-note callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Définition</strong></p>
+</div>
+<div class="callout-content">
+<p>Un trigger est une fonction qui s’exécute automatiquement en réponse à une mise à jour d’une table</p>
+<p>Il permet par exemple de :</p>
 <ul>
 <li>Garantir l’intégrité des données</li>
 <li>Implémenter des règles métier</li>
 <li>Synchroniser des données</li>
 </ul>
+</div>
+</div>
+</div>
+</div>
 <aside class="notes">
 <p>Peut se déclencher avant ou arpès une maj</p>
 <p>Garantir l’intégrité des données : Valider ou corriger les données avant leur enregistrement. Implémenter des règles métier : Empêcher des suppressions ou modifications non autorisées. Synchroniser des données : Mettre à jour des tables liées automatiquement.</p>

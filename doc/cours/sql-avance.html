@@ -165,8 +165,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">SQL avancé</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../doc/cours/modelisation.html">
- <span class="dropdown-text">Modélisation</span></a>
+    <a class="dropdown-item" href="../../doc/cours/formalisation.html">
+ <span class="dropdown-text">Formalisation des BDD</span></a>
   </li>  
     </ul>
   </li>
@@ -508,14 +508,22 @@ Problèmes
 <h2 data-number="5" class="anchored" data-anchor-id="transactions"><span class="header-section-number">5</span> Transactions</h2>
 <section id="exemple" class="level3">
 <h3 class="anchored" data-anchor-id="exemple">Exemple</h3>
-<div class="sourceCode" id="cb15"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="cf">BEGIN</span>; <span class="co">-- Démarrer la transaction</span></span>
+<div class="sourceCode" id="cb15"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="cf">BEGIN</span>; <span class="co">-- Début de la transaction</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="kw">UPDATE</span> comptes <span class="kw">SET</span> solde <span class="op">=</span> solde <span class="op">-</span> <span class="dv">100</span> <span class="kw">WHERE</span> <span class="kw">id</span> <span class="op">=</span> <span class="dv">1</span>; <span class="co">-- Débiter le compte 1</span></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="kw">UPDATE</span> comptes <span class="kw">SET</span> solde <span class="op">=</span> solde <span class="op">+</span> <span class="dv">100</span> <span class="kw">WHERE</span> <span class="kw">id</span> <span class="op">=</span> <span class="dv">2</span>; <span class="co">-- Créditer le compte 2</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="kw">UPDATE</span> compte <span class="kw">SET</span> solde <span class="op">=</span> solde <span class="op">-</span> <span class="dv">100</span> <span class="kw">WHERE</span> <span class="kw">id</span> <span class="op">=</span> <span class="dv">1</span>;</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="kw">UPDATE</span> compte <span class="kw">SET</span> solde <span class="op">=</span> solde <span class="op">+</span> <span class="dv">100</span> <span class="kw">WHERE</span> <span class="kw">id</span> <span class="op">=</span> <span class="dv">2</span>;</span>
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="kw">COMMIT</span>; <span class="co">-- Valider les modifications si tout s'est bien passé</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="kw">COMMIT</span>; <span class="co">-- Valider si ok</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><br></p>
 <div class="sourceCode" id="cb16"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ROLLBACK</span>; <span class="co">-- en cas d'erreur</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="notes">
+<ul>
+<li>Plusieurs utilisateurs peuvent faire des requêtes en même temps</li>
+<li>LOCK</li>
+<li>SAVEPOINT my_savepoint;</li>
+<li>ROLLBACK TO my_savepoint;</li>
+</ul>
+</div>
 </section>
 <section id="propriétés-acid" class="level3">
 <h3 class="anchored" data-anchor-id="propriétés-acid">Propriétés ACID</h3>
@@ -537,8 +545,27 @@ Problèmes
 <h2 data-number="6" class="anchored" data-anchor-id="divers"><span class="header-section-number">6</span> Divers</h2>
 <section id="index" class="level3">
 <h3 class="anchored" data-anchor-id="index">Index</h3>
+<div class="callout callout-style-default callout-note callout-titled" title="Définition">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Définition
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Un index est une structure de données qui améliore la vitesse des opérations de lecture sur une table en facilitant la recherche des données.</p>
+<p>Il permet une lecture plus rapide sur une colonne utilisée fréquemment dans <em>WHERE</em>, <em>JOIN</em>, <em>GROUP BY</em>, <em>ORDER BY</em></p>
+</div>
+</div>
 <div class="sourceCode" id="cb17"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">INDEX</span> idx_nom_joueuse <span class="kw">ON</span> joueuse (nom);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Permet une lecture plus rapide sur une colonne utilisée fréquemment dans <em>WHERE</em>, <em>JOIN</em>, <em>GROUP BY</em>, <em>ORDER BY</em></p>
+<div class="notes">
+<ul>
+<li>Recherche longue si beaucoup de lignes</li>
+<li>Système clé-valeur (index -&gt; ligne)</li>
+</ul>
+</div>
 </section>
 <section id="index-et--" class="level3">
 <h3 class="anchored" data-anchor-id="index-et--">Index + et -</h3>
@@ -558,13 +585,25 @@ Problèmes
 </section>
 <section id="trigger" class="level3">
 <h3 class="anchored" data-anchor-id="trigger">Trigger</h3>
-<p>Fonction qui s’exécute automatiquement en réponse à une mise à jour d’une table</p>
-<p>Un trigger permet de :</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Définition">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Définition
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Un trigger est une fonction qui s’exécute automatiquement en réponse à une mise à jour d’une table</p>
+<p>Il permet par exemple de :</p>
 <ul>
 <li>Garantir l’intégrité des données</li>
 <li>Implémenter des règles métier</li>
 <li>Synchroniser des données</li>
 </ul>
+</div>
+</div>
 <div class="notes">
 <p>Peut se déclencher avant ou arpès une maj</p>
 <p>Garantir l’intégrité des données : Valider ou corriger les données avant leur enregistrement. Implémenter des règles métier : Empêcher des suppressions ou modifications non autorisées. Synchroniser des données : Mettre à jour des tables liées automatiquement.</p>

@@ -245,8 +245,15 @@ Ludovic Deneuville
 </div>
 </div>
 </div>
+<ul>
+<li><a href="https://www.postgresql.org/docs/current/sql.html" target="_blank">PostgreSQL SQL</a></li>
+<li><a href="https://duckdb.org/docs/sql/introduction.html" target="_blank">DuckDB SQL</a></li>
+</ul>
 <aside class="notes">
-<p>Sinon c’est très ressemblant.</p>
+<ul>
+<li>Sinon c’est très ressemblant.</li>
+<li>DuckDB’s SQL dialect closely follows the conventions of the PostgreSQL dialect. few exceptions</li>
+</ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -900,15 +907,27 @@ Ludovic Deneuville
 </div>
 </div>
 </section>
+<section id="opérations-booléennes" class="slide level3">
+<h3>Opérations booléennes</h3>
+<ul>
+<li>Utilisation des mots-clés <code>AND</code>, <code>OR</code> et <code>NOT</code></li>
+<li><em>AND</em> prioritaire sur le <em>OR</em></li>
+</ul>
+<div class="sourceCode" id="cb21"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb21-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
+<span id="cb21-2"><a aria-hidden="true" tabindex="-1"></a>       prenom,</span>
+<span id="cb21-3"><a aria-hidden="true" tabindex="-1"></a>       elo</span>
+<span id="cb21-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
+<span id="cb21-5"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> elo <span class="op">&gt;</span> <span class="dv">2400</span> <span class="kw">OR</span> (prenom <span class="kw">LIKE</span> <span class="st">'A%'</span> <span class="kw">AND</span> nom <span class="kw">NOT</span> <span class="kw">LIKE</span> <span class="st">'N%'</span>) ;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
 <section id="like" class="slide level3">
 <h3>LIKE</h3>
-<div class="sourceCode" id="cb21"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb21-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
-<span id="cb21-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
-<span id="cb21-3"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> prenom <span class="kw">LIKE</span> <span class="st">'A%'</span>         <span class="co">-- commence par A</span></span>
-<span id="cb21-4"><a aria-hidden="true" tabindex="-1"></a>    <span class="kw">OR</span> prenom <span class="kw">LIKE</span> <span class="st">'%A'</span>         <span class="co">-- termine par A</span></span>
-<span id="cb21-5"><a aria-hidden="true" tabindex="-1"></a>    <span class="kw">OR</span> prenom <span class="kw">LIKE</span> <span class="st">'%A%'</span>        <span class="co">-- contient au moins un A</span></span>
-<span id="cb21-6"><a aria-hidden="true" tabindex="-1"></a>    <span class="kw">OR</span> <span class="fu">UPPER</span>(prenom) <span class="kw">LIKE</span> <span class="st">'%A%'</span> <span class="co">-- contient au moins un A ou un a</span></span>
-<span id="cb21-7"><a aria-hidden="true" tabindex="-1"></a>    <span class="kw">OR</span> prenom <span class="kw">LIKE</span> <span class="st">'A__'</span>        <span class="co">-- commence par A suivi de 2 autres caractères</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb22-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb22-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
+<span id="cb22-3"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> prenom <span class="kw">LIKE</span> <span class="st">'A%'</span>         <span class="co">-- commence par A</span></span>
+<span id="cb22-4"><a aria-hidden="true" tabindex="-1"></a>    <span class="kw">OR</span> prenom <span class="kw">LIKE</span> <span class="st">'%A'</span>         <span class="co">-- termine par A</span></span>
+<span id="cb22-5"><a aria-hidden="true" tabindex="-1"></a>    <span class="kw">OR</span> prenom <span class="kw">LIKE</span> <span class="st">'%A%'</span>        <span class="co">-- contient au moins un A</span></span>
+<span id="cb22-6"><a aria-hidden="true" tabindex="-1"></a>    <span class="kw">OR</span> <span class="fu">UPPER</span>(prenom) <span class="kw">LIKE</span> <span class="st">'%A%'</span> <span class="co">-- contient au moins un A ou un a</span></span>
+<span id="cb22-7"><a aria-hidden="true" tabindex="-1"></a>    <span class="kw">OR</span> prenom <span class="kw">LIKE</span> <span class="st">'A__'</span>        <span class="co">-- commence par A suivi de 2 autres caractères</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li><code>%</code> : représente entre 0 et une infinité de caractères</li>
 <li><code>_</code> : représente exactement 1 caractère</li>
@@ -930,6 +949,12 @@ Ludovic Deneuville
 </div>
 <aside class="notes">
 <p>ILIKE insensible à la casse</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb23-1"><a aria-hidden="true" tabindex="-1"></a><span class="st">'abc'</span> SIMILAR <span class="kw">TO</span> <span class="st">'abc'</span>          <span class="kw">true</span></span>
+<span id="cb23-2"><a aria-hidden="true" tabindex="-1"></a><span class="st">'abc'</span> SIMILAR <span class="kw">TO</span> <span class="st">'a'</span>            <span class="kw">false</span></span>
+<span id="cb23-3"><a aria-hidden="true" tabindex="-1"></a><span class="st">'abc'</span> SIMILAR <span class="kw">TO</span> <span class="st">'%(b|d)%'</span>      <span class="kw">true</span></span>
+<span id="cb23-4"><a aria-hidden="true" tabindex="-1"></a><span class="st">'abc'</span> SIMILAR <span class="kw">TO</span> <span class="st">'(b|c)%'</span>       <span class="kw">false</span></span>
+<span id="cb23-5"><a aria-hidden="true" tabindex="-1"></a><span class="st">'-abc-'</span> SIMILAR <span class="kw">TO</span> <span class="st">'%\mabc\M%'</span>  <span class="kw">true</span></span>
+<span id="cb23-6"><a aria-hidden="true" tabindex="-1"></a><span class="st">'xabcy'</span> SIMILAR <span class="kw">TO</span> <span class="st">'%\mabc\M%'</span>  <span class="kw">false</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -945,11 +970,11 @@ Ludovic Deneuville
 <section id="plage-de-valeurs" class="slide level3">
 <h3>Plage de valeurs</h3>
 <p><code>BETWEEN</code> permet de spécifier une plage de valeurs numériques.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb22-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
-<span id="cb22-2"><a aria-hidden="true" tabindex="-1"></a>       prenom,</span>
-<span id="cb22-3"><a aria-hidden="true" tabindex="-1"></a>       elo</span>
-<span id="cb22-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
-<span id="cb22-5"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> elo <span class="kw">BETWEEN</span> <span class="dv">2350</span> <span class="kw">AND</span> <span class="dv">2400</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb24-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
+<span id="cb24-2"><a aria-hidden="true" tabindex="-1"></a>       prenom,</span>
+<span id="cb24-3"><a aria-hidden="true" tabindex="-1"></a>       elo</span>
+<span id="cb24-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
+<span id="cb24-5"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> elo <span class="kw">BETWEEN</span> <span class="dv">2350</span> <span class="kw">AND</span> <span class="dv">2400</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><br></p>
 <div class="fragment">
 <div class="small-table">
@@ -991,11 +1016,11 @@ Ludovic Deneuville
 <h3>Valeurs dans une liste</h3>
 <p>Vous pouvez spécifier qu’un attribut doit appartenir à un liste avec <code>IN</code>.</p>
 <p>Ou inversement avec <code>NOT IN</code>.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb23-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
-<span id="cb23-2"><a aria-hidden="true" tabindex="-1"></a>       prenom,</span>
-<span id="cb23-3"><a aria-hidden="true" tabindex="-1"></a>       elo</span>
-<span id="cb23-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
-<span id="cb23-5"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> prenom <span class="kw">IN</span> (<span class="st">'Deimante'</span>, <span class="st">'Sophie'</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb25-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
+<span id="cb25-2"><a aria-hidden="true" tabindex="-1"></a>       prenom,</span>
+<span id="cb25-3"><a aria-hidden="true" tabindex="-1"></a>       elo</span>
+<span id="cb25-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
+<span id="cb25-5"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> prenom <span class="kw">IN</span> (<span class="st">'Deimante'</span>, <span class="st">'Sophie'</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><br></p>
 <div class="fragment">
 <div class="small-table">
@@ -1038,23 +1063,23 @@ Ludovic Deneuville
 </section>
 <section id="filtre-sur-les-attributs-booléens" class="slide level3">
 <h3>Filtre sur les attributs booléens</h3>
-<div class="sourceCode" id="cb24"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb24-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
-<span id="cb24-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
-<span id="cb24-3"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> est_arbitre <span class="kw">IS</span> <span class="kw">TRUE</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb26-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb26-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
+<span id="cb26-3"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> est_arbitre <span class="kw">IS</span> <span class="kw">TRUE</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><br></p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb25-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
-<span id="cb25-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
-<span id="cb25-3"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> [<span class="kw">NOT</span>] est_arbitre;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb27-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb27-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
+<span id="cb27-3"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> [<span class="kw">NOT</span>] est_arbitre;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="ordonner-le-résultat" class="slide level3">
 <h3>Ordonner le résultat</h3>
 <p><code>ORDER BY</code> pour ordonner selon plusieurs colonnes.</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb26-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
-<span id="cb26-2"><a aria-hidden="true" tabindex="-1"></a>       prenom,</span>
-<span id="cb26-3"><a aria-hidden="true" tabindex="-1"></a>       elo</span>
-<span id="cb26-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
-<span id="cb26-5"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">ORDER</span> <span class="kw">BY</span> elo,</span>
-<span id="cb26-6"><a aria-hidden="true" tabindex="-1"></a>          taux_victoires <span class="kw">DESC</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb28-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
+<span id="cb28-2"><a aria-hidden="true" tabindex="-1"></a>       prenom,</span>
+<span id="cb28-3"><a aria-hidden="true" tabindex="-1"></a>       elo</span>
+<span id="cb28-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
+<span id="cb28-5"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">ORDER</span> <span class="kw">BY</span> elo,</span>
+<span id="cb28-6"><a aria-hidden="true" tabindex="-1"></a>          taux_victoires <span class="kw">DESC</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="fragment">
 <div class="small-table">
 <table class="caption-top">
@@ -1119,11 +1144,11 @@ Ludovic Deneuville
 </section>
 <section id="afficher-n-lignes" class="slide level3">
 <h3>Afficher n lignes</h3>
-<div class="sourceCode" id="cb27"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb27-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
-<span id="cb27-2"><a aria-hidden="true" tabindex="-1"></a>       prenom,</span>
-<span id="cb27-3"><a aria-hidden="true" tabindex="-1"></a>       elo</span>
-<span id="cb27-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
-<span id="cb27-5"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">LIMIT</span> <span class="dv">3</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb29-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
+<span id="cb29-2"><a aria-hidden="true" tabindex="-1"></a>       prenom,</span>
+<span id="cb29-3"><a aria-hidden="true" tabindex="-1"></a>       elo</span>
+<span id="cb29-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
+<span id="cb29-5"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">LIMIT</span> <span class="dv">3</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><br></p>
 <div class="fragment">
 <div class="small-table">
@@ -1159,19 +1184,19 @@ Ludovic Deneuville
 <section>
 <section id="mise-à-jour-de-données" class="title-slide slide level2 center">
 <h2>Mise à jour de données</h2>
-<div class="sourceCode" id="cb28"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb28-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">UPDATE</span> echecs.joueuse</span>
-<span id="cb28-2"><a aria-hidden="true" tabindex="-1"></a>   <span class="kw">SET</span> elo <span class="op">=</span> <span class="dv">2399</span>,</span>
-<span id="cb28-3"><a aria-hidden="true" tabindex="-1"></a>       prenom <span class="op">=</span> <span class="st">'Popo'</span></span>
-<span id="cb28-4"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> id_joueuse <span class="op">=</span> <span class="dv">1</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb30-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">UPDATE</span> echecs.joueuse</span>
+<span id="cb30-2"><a aria-hidden="true" tabindex="-1"></a>   <span class="kw">SET</span> elo <span class="op">=</span> <span class="dv">2399</span>,</span>
+<span id="cb30-3"><a aria-hidden="true" tabindex="-1"></a>       prenom <span class="op">=</span> <span class="st">'Popo'</span></span>
+<span id="cb30-4"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> id_joueuse <span class="op">=</span> <span class="dv">1</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><br></p>
 <div class="fragment">
 <div class="small-table">
-<div class="sourceCode" id="cb29"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb29-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> id_joueuse,</span>
-<span id="cb29-2"><a aria-hidden="true" tabindex="-1"></a>       nom,</span>
-<span id="cb29-3"><a aria-hidden="true" tabindex="-1"></a>       prenom,</span>
-<span id="cb29-4"><a aria-hidden="true" tabindex="-1"></a>       elo</span>
-<span id="cb29-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
-<span id="cb29-6"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> id_joueuse <span class="op">=</span> <span class="dv">1</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb31-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> id_joueuse,</span>
+<span id="cb31-2"><a aria-hidden="true" tabindex="-1"></a>       nom,</span>
+<span id="cb31-3"><a aria-hidden="true" tabindex="-1"></a>       prenom,</span>
+<span id="cb31-4"><a aria-hidden="true" tabindex="-1"></a>       elo</span>
+<span id="cb31-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
+<span id="cb31-6"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> id_joueuse <span class="op">=</span> <span class="dv">1</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><br></p>
 <table class="caption-top">
 <colgroup>
@@ -1203,8 +1228,8 @@ Ludovic Deneuville
 <section id="màj-globale" class="slide level3">
 <h3>Màj globale</h3>
 <p>Imaginons que vous souhaitez modifier le <code>elo</code> de toutes les joueuses.</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb30-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">UPDATE</span> echecs.joueuse</span>
-<span id="cb30-2"><a aria-hidden="true" tabindex="-1"></a>   <span class="kw">SET</span> elo <span class="op">=</span> elo <span class="op">+</span> <span class="dv">100</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb32-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">UPDATE</span> echecs.joueuse</span>
+<span id="cb32-2"><a aria-hidden="true" tabindex="-1"></a>   <span class="kw">SET</span> elo <span class="op">=</span> elo <span class="op">+</span> <span class="dv">100</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="callout callout-warning callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -1222,11 +1247,11 @@ Ludovic Deneuville
 <section id="suppression-de-données" class="title-slide slide level2 center">
 <h2>Suppression de données</h2>
 <p>Supprimer une joueuse :</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb31-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">DELETE</span> <span class="kw">FROM</span> echecs.joueuse</span>
-<span id="cb31-2"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> id_joueuse <span class="op">=</span> <span class="dv">1</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb33-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">DELETE</span> <span class="kw">FROM</span> echecs.joueuse</span>
+<span id="cb33-2"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> id_joueuse <span class="op">=</span> <span class="dv">1</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><br></p>
 <p>Vider la table :</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb32-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">DELETE</span> <span class="kw">FROM</span> echecs.joueuse;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb34-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">DELETE</span> <span class="kw">FROM</span> echecs.joueuse;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 
 <section id="validation-des-opérations" class="title-slide slide level2 center">
@@ -1279,33 +1304,33 @@ Ludovic Deneuville
 <section id="type-date" class="slide level3">
 <h3>Type DATE</h3>
 <p>Quelques opérations avec le type <code>DATE</code>.</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb33-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
-<span id="cb33-2"><a aria-hidden="true" tabindex="-1"></a>       prenom,</span>
-<span id="cb33-3"><a aria-hidden="true" tabindex="-1"></a>       <span class="fu">EXTRACT</span>(<span class="dt">YEAR</span> <span class="kw">FROM</span> date_naissance) <span class="kw">AS</span> annee_naissance,</span>
-<span id="cb33-4"><a aria-hidden="true" tabindex="-1"></a>       AGE(<span class="fu">CURRENT_DATE</span>, date_naissance) <span class="kw">AS</span> age</span>
-<span id="cb33-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
-<span id="cb33-6"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> date_naissance <span class="op">&gt;=</span> <span class="st">'1991-04-20'</span></span>
-<span id="cb33-7"><a aria-hidden="true" tabindex="-1"></a>    <span class="kw">OR</span> date_naissance <span class="kw">BETWEEN</span> <span class="st">'1991-04-20'</span> <span class="kw">AND</span> <span class="st">'1992-12-31'</span></span>
-<span id="cb33-8"><a aria-hidden="true" tabindex="-1"></a>    <span class="kw">OR</span> <span class="fu">EXTRACT</span>(<span class="dt">MONTH</span> <span class="kw">FROM</span> date_naissance) <span class="op">=</span> <span class="dv">4</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb35-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
+<span id="cb35-2"><a aria-hidden="true" tabindex="-1"></a>       prenom,</span>
+<span id="cb35-3"><a aria-hidden="true" tabindex="-1"></a>       <span class="fu">EXTRACT</span>(<span class="dt">YEAR</span> <span class="kw">FROM</span> date_naissance) <span class="kw">AS</span> annee_naissance,</span>
+<span id="cb35-4"><a aria-hidden="true" tabindex="-1"></a>       AGE(<span class="fu">CURRENT_DATE</span>, date_naissance) <span class="kw">AS</span> age</span>
+<span id="cb35-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
+<span id="cb35-6"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> date_naissance <span class="op">&gt;=</span> <span class="st">'1991-04-20'</span></span>
+<span id="cb35-7"><a aria-hidden="true" tabindex="-1"></a>    <span class="kw">OR</span> date_naissance <span class="kw">BETWEEN</span> <span class="st">'1991-04-20'</span> <span class="kw">AND</span> <span class="st">'1992-12-31'</span></span>
+<span id="cb35-8"><a aria-hidden="true" tabindex="-1"></a>    <span class="kw">OR</span> <span class="fu">EXTRACT</span>(<span class="dt">MONTH</span> <span class="kw">FROM</span> date_naissance) <span class="op">=</span> <span class="dv">4</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="type-timestamp" class="slide level3">
 <h3>Type TIMESTAMP</h3>
 <p>Pour stocker la date et l’heure</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb34-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> echecs.club (</span>
-<span id="cb34-2"><a aria-hidden="true" tabindex="-1"></a>    id_club          SERIAL          <span class="kw">PRIMARY</span> <span class="kw">KEY</span>,  </span>
-<span id="cb34-3"><a aria-hidden="true" tabindex="-1"></a>    nom              <span class="dt">VARCHAR</span>(<span class="dv">100</span>)    <span class="kw">NOT</span> <span class="kw">NULL</span>,   </span>
-<span id="cb34-4"><a aria-hidden="true" tabindex="-1"></a>    ville            <span class="dt">VARCHAR</span>(<span class="dv">100</span>)    <span class="kw">NOT</span> <span class="kw">NULL</span>, </span>
-<span id="cb34-5"><a aria-hidden="true" tabindex="-1"></a>    date_creation    <span class="dt">TIMESTAMP</span></span>
-<span id="cb34-6"><a aria-hidden="true" tabindex="-1"></a>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb36-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> echecs.club (</span>
+<span id="cb36-2"><a aria-hidden="true" tabindex="-1"></a>    id_club          SERIAL          <span class="kw">PRIMARY</span> <span class="kw">KEY</span>,  </span>
+<span id="cb36-3"><a aria-hidden="true" tabindex="-1"></a>    nom              <span class="dt">VARCHAR</span>(<span class="dv">100</span>)    <span class="kw">NOT</span> <span class="kw">NULL</span>,   </span>
+<span id="cb36-4"><a aria-hidden="true" tabindex="-1"></a>    ville            <span class="dt">VARCHAR</span>(<span class="dv">100</span>)    <span class="kw">NOT</span> <span class="kw">NULL</span>, </span>
+<span id="cb36-5"><a aria-hidden="true" tabindex="-1"></a>    date_creation    <span class="dt">TIMESTAMP</span></span>
+<span id="cb36-6"><a aria-hidden="true" tabindex="-1"></a>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section class="slide level3">
 
 <h4 id="utilisations">Utilisations</h4>
-<div class="sourceCode" id="cb35"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb35-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> echecs.club (nom, ville, date_creation)</span>
-<span id="cb35-2"><a aria-hidden="true" tabindex="-1"></a><span class="kw">VALUES</span> (<span class="st">'C</span><span class="ch">''</span><span class="st">Chartres Echecs'</span>, <span class="st">'Chartres'</span>, <span class="st">'1991-09-01 20:00:00'</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb37-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> echecs.club (nom, ville, date_creation)</span>
+<span id="cb37-2"><a aria-hidden="true" tabindex="-1"></a><span class="kw">VALUES</span> (<span class="st">'C</span><span class="ch">''</span><span class="st">Chartres Echecs'</span>, <span class="st">'Chartres'</span>, <span class="st">'1991-09-01 20:00:00'</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><br></p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb36-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> echecs.club (nom, ville, date_creation)</span>
-<span id="cb36-2"><a aria-hidden="true" tabindex="-1"></a><span class="kw">VALUES</span> (<span class="st">'Bischwiller'</span>, <span class="st">'Bischwiller'</span>, <span class="fu">CURRENT_TIMESTAMP</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb38-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> echecs.club (nom, ville, date_creation)</span>
+<span id="cb38-2"><a aria-hidden="true" tabindex="-1"></a><span class="kw">VALUES</span> (<span class="st">'Bischwiller'</span>, <span class="st">'Bischwiller'</span>, <span class="fu">CURRENT_TIMESTAMP</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Vous pouvez utiliser également sur le type <em>TIMESTAMP</em> :</p>
 <ul>
 <li><code>EXTRACT</code>,</li>
@@ -1321,14 +1346,14 @@ Ludovic Deneuville
 <section id="tester-si-un-attribut-est-null" class="slide level3">
 <h3>Tester si un attribut est NULL</h3>
 <p>Joueuses dont le mail n’est pas renseigné :</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb37-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
-<span id="cb37-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
-<span id="cb37-3"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> mail <span class="kw">IS</span> <span class="kw">NULL</span>; </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb39-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb39-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
+<span id="cb39-3"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> mail <span class="kw">IS</span> <span class="kw">NULL</span>; </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><br></p>
 <p>Et inversemenent :</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb38-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
-<span id="cb38-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
-<span id="cb38-3"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> mail <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb40-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb40-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
+<span id="cb40-3"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> mail <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="coalesce" class="slide level3">
 <h3>COALESCE</h3>
@@ -1352,11 +1377,11 @@ Ludovic Deneuville
 </div>
 </div>
 <aside class="notes">
-<div class="sourceCode" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a aria-hidden="true" tabindex="-1"></a>c(x1, x2, ... xn):</span>
-<span id="cb39-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> x1:</span>
-<span id="cb39-3"><a aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x1</span>
-<span id="cb39-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span>:</span>
-<span id="cb39-5"><a aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> c(x2, ... xn)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a aria-hidden="true" tabindex="-1"></a>c(x1, x2, ... xn):</span>
+<span id="cb41-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> x1:</span>
+<span id="cb41-3"><a aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> x1</span>
+<span id="cb41-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span>:</span>
+<span id="cb41-5"><a aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> c(x2, ... xn)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>NVL pour Oracle (à ne pas confondre avec MVL)</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -1372,9 +1397,9 @@ Ludovic Deneuville
 </section>
 <section id="coalesce---exemple" class="slide level3">
 <h3>COALESCE - Exemple</h3>
-<div class="sourceCode" id="cb40"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb40-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">COALESCE</span>(mail, tel, <span class="st">'pas de contact'</span>)</span>
-<span id="cb40-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
-<span id="cb40-3"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> id_joueuse <span class="op">=</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb42-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">COALESCE</span>(mail, tel, <span class="st">'pas de contact'</span>)</span>
+<span id="cb42-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
+<span id="cb42-3"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> id_joueuse <span class="op">=</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>La requête ci-dessus va afficher :</p>
 <ul>
 <li>Si mail est NON NULL <span class="emoji" data-emoji="arrow_right">➡️</span> mail</li>
@@ -1387,8 +1412,8 @@ Ludovic Deneuville
 </section>
 <section id="nullif" class="slide level3">
 <h3>NULLIF</h3>
-<div class="sourceCode" id="cb41"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb41-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">NULLIF</span>(tel, <span class="st">'00.00.00.00.00'</span>) </span>
-<span id="cb41-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb43-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">NULLIF</span>(tel, <span class="st">'00.00.00.00.00'</span>) </span>
+<span id="cb43-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <ul>
 <li>Si tel = <code>00.00.00.00.00</code>
 <ul>
@@ -1403,9 +1428,9 @@ Ludovic Deneuville
 </section>
 <section id="jouer-avec-les-colonnes" class="slide level3">
 <h3>Jouer avec les colonnes</h3>
-<div class="sourceCode" id="cb42"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb42-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">CONCAT</span>(nom, <span class="st">' '</span>, prenom) <span class="kw">AS</span> nom_complet,</span>
-<span id="cb42-2"><a aria-hidden="true" tabindex="-1"></a>       elo</span>
-<span id="cb42-3"><a aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> echecs.joueuse;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb44-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">CONCAT</span>(nom, <span class="st">' '</span>, prenom) <span class="kw">AS</span> nom_complet,</span>
+<span id="cb44-2"><a aria-hidden="true" tabindex="-1"></a>       elo</span>
+<span id="cb44-3"><a aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> echecs.joueuse;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><br></p>
 <div class="fragment">
 <div class="small-table">
@@ -1449,31 +1474,31 @@ Ludovic Deneuville
 <section id="supprimer-les-doublons" class="slide level3">
 <h3>Supprimer les doublons</h3>
 <p>Le mot clé <code>DISTINCT</code> permet de supprimer les doublons.</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb43-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="kw">DISTINCT</span> prenom</span>
-<span id="cb43-2"><a aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> echecs.joueuse;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb45-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="kw">DISTINCT</span> prenom</span>
+<span id="cb45-2"><a aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> echecs.joueuse;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="choix" class="slide level3">
 <h3>Choix</h3>
-<div class="sourceCode" id="cb44"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb44-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="cf">CASE</span> <span class="cf">WHEN</span> elo <span class="op">&gt;</span> <span class="dv">2400</span> <span class="cf">THEN</span> <span class="st">'Niveau MI'</span></span>
-<span id="cb44-2"><a aria-hidden="true" tabindex="-1"></a>            <span class="cf">WHEN</span> elo <span class="op">&gt;</span> <span class="dv">2200</span> <span class="cf">THEN</span> <span class="st">'Joueuse très forte'</span></span>
-<span id="cb44-3"><a aria-hidden="true" tabindex="-1"></a>            <span class="cf">ELSE</span> <span class="st">'Joueuse de niveau normal'</span></span>
-<span id="cb44-4"><a aria-hidden="true" tabindex="-1"></a>       <span class="cf">END</span></span>
-<span id="cb44-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb46-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="cf">CASE</span> <span class="cf">WHEN</span> elo <span class="op">&gt;</span> <span class="dv">2400</span> <span class="cf">THEN</span> <span class="st">'Niveau MI'</span></span>
+<span id="cb46-2"><a aria-hidden="true" tabindex="-1"></a>            <span class="cf">WHEN</span> elo <span class="op">&gt;</span> <span class="dv">2200</span> <span class="cf">THEN</span> <span class="st">'Joueuse très forte'</span></span>
+<span id="cb46-3"><a aria-hidden="true" tabindex="-1"></a>            <span class="cf">ELSE</span> <span class="st">'Joueuse de niveau normal'</span></span>
+<span id="cb46-4"><a aria-hidden="true" tabindex="-1"></a>       <span class="cf">END</span></span>
+<span id="cb46-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="échantillon" class="slide level3">
 <h3>Échantillon</h3>
 <p>Afficher un échnaitllon aléatoire de 10 % des lignes</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb45-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
-<span id="cb45-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> purchases</span>
-<span id="cb45-3"><a aria-hidden="true" tabindex="-1"></a>TABLESAMPLE BERNOUILLI(<span class="dv">10</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb47-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb47-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> purchases</span>
+<span id="cb47-3"><a aria-hidden="true" tabindex="-1"></a>TABLESAMPLE BERNOUILLI(<span class="dv">10</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="et-même" class="slide level3">
 <h3>Et même !?</h3>
-<div class="sourceCode" id="cb46"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb46-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="dv">1</span>,</span>
-<span id="cb46-2"><a aria-hidden="true" tabindex="-1"></a>       <span class="kw">TRUE</span>,</span>
-<span id="cb46-3"><a aria-hidden="true" tabindex="-1"></a>       <span class="st">'a'</span>,</span>
-<span id="cb46-4"><a aria-hidden="true" tabindex="-1"></a>       <span class="fu">current_date</span></span>
-<span id="cb46-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb48-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="dv">1</span>,</span>
+<span id="cb48-2"><a aria-hidden="true" tabindex="-1"></a>       <span class="kw">TRUE</span>,</span>
+<span id="cb48-3"><a aria-hidden="true" tabindex="-1"></a>       <span class="st">'a'</span>,</span>
+<span id="cb48-4"><a aria-hidden="true" tabindex="-1"></a>       <span class="fu">current_date</span></span>
+<span id="cb48-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section></section>
 <section id="résumé" class="title-slide slide level2 center">
 <h2>Résumé</h2>
