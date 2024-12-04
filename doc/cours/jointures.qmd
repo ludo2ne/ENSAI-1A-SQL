@@ -96,6 +96,10 @@ classDiagram
 
 L'**INNER JOIN** renvoie uniquement les lignes qui ont des [correspondances dans les deux tables]{.underline}.
 
+::: {.notes}
+Au max, vous avez le nombre de lignes de la table la plus grande
+:::
+
 ### 1ere tentative
 
 ```{.sql}

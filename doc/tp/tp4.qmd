@@ -90,7 +90,7 @@ Dans le modèle de données, certaines tables sont reliées 2 fois entre elles :
 
 ![](./data/tp4-modele.PNG)
 
-## Recherche de fausses données
+## Recherche des irrégularités
 
 ::: {.callout-important icon="false" appearance="simple"}
 À la fédération, il y a malheureusement de nombreuses rumeurs de corruption, et même de dopage !
@@ -117,7 +117,7 @@ Une autre erreur concernerait les dates de naissances des joueuses
 Toujours sur la tables des joueuses, vous avez peut-être remarqué qu'une puissante technique d'anonymisation a été utilisée.
 
 - [ ] Commencez par afficher dans un *SELECT* une version plus propre
-- [ ] Une fois que le résultat est assez correct, 
+- [ ] Une fois que le résultat est assez correct, mettez à jour la table *joueuse*
 
 ::: {.callout-tip collapse="true"}
 - Vous pouvez utiliser la fonction *REPLACE()*
@@ -142,7 +142,7 @@ Vous avez peut-être remarqué que les clubs n'ont pas de présidentes, nous all
 Mais pour faire plus simple, la fédé a décidé de nommer comme présidente de chaque club, sa joueuse ayant le plus faible elo.
 :::
 
-- [ ] Listez pour chaque club ses joueuses
+- [ ] Listez pour chaque club, ses joueuses
   - affichez le nom du club, ainsi que tout le contenu de la table joueuse
 - [ ] Pour chaque club, trouvez le *elo* minimum
 - [ ] Stockez dans une table temporaire tous les couples (id_club, elo_minimum)
@@ -157,7 +157,7 @@ Mais pour faire plus simple, la fédé a décidé de nommer comme présidente de
 ## Quelques statistiques
 
 ::: {.callout-important icon="false" appearance="simple"}
-Maintenant que vous avez fait un peu de ménage, regardons quelques statistiques sur ces données
+Regardons maintenant quelques statistiques sur ces données.
 :::
 
 - [ ] Comptez le nombre de parties jouées
@@ -182,7 +182,7 @@ En début de partie, le nombre de coup reste assez limité. Les différentes pos
 
 Vient ensuite le milieu de jeu lorsque toutes les pièces sont développées.
 
-Et enfin (si personne ne s'est pris un échec et mat) la finale, i.e. lorsque les Dames ont été échangé et qu'il reste peu de pièces.
+Et enfin (si personne ne s'est pris un échec et mat) la finale, i.e. lorsque les Dames ont été échangées et qu'il reste peu de pièces.
 :::
 
 - [ ] Une des ouvertures n'existe pas, elle n'a été jouée dans aucune partie
@@ -234,7 +234,7 @@ Une performance est une victoire contre une joueuse ayant au moins 400 points el
 ::: {.callout-important icon="false" appearance="simple"}
 Un parquet de :cookie: est à retirer dans le bureau du professeur pour la joueuse détentrice de la meilleure perf !
 
-Et un bel article sur le site de notre partenaire premium, la [Fédération Française de la Lose](https://fflose.com/){target="_blank"} pour l'autrice de la contre-perf.
+Et pour l'autrice de la plus belle contre-perf, notre partenaire premium, la [Fédération Française de la Lose](https://fflose.com/){target="_blank"} offre un magnifique tee-shirt floqué *Reine des Mazettes*, *J'ai raté un mat en 1*, *Je suis passé de +10 à -10* ou encore "J'ai fait pat avec Roi et Dame contre Roi".
 :::
 
 ## Gagnantes des tournois

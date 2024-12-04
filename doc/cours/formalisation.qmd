@@ -1,5 +1,5 @@
 ---
-title: "Formalisation"
+title: "Formalisation des bases de données"
 description: "[Slides](formalisation-slides.html)"
 author: "Ludovic Deneuville"
 format: 
@@ -22,9 +22,8 @@ code-line-numbers: false
 from: markdown+emoji
 ---
 
-:construction: WIP
 
-## Objectifs
+## Objectifs {.unnumbered}
 
 Structurer une base de données pour qu'elle soit :
 
@@ -55,10 +54,6 @@ Si on connait X, on peut en déduire Y
 
 ### Les axiomes d'Armstrong
 
-- Réflexivité (X, Y) → X
-- Augmentation Si X → Y alors XZ → YZ
-- Transitivité Si X → Y et Y → Z alors X → Z
-
 | **Nom**            | **Description**                                       |
 |--------------------|-------------------------------------------------------|
 | Réflexivité        | (X, Y) → X                                            |
@@ -82,11 +77,11 @@ Si on connait X, on peut en déduire Y
 ### Deux Propriétés
 
 ::: {.callout-note title="Dépendance Fonctionnelle Élémentaire"}
-X → Y est élémentaire si il n'existe aucun sous-ensemble strict Z inclus dans X tel que Z → Y
+X → Y est élémentaire s'il n'existe aucun sous-ensemble strict Z inclus dans X tel que Z → Y
 :::
 
 ::: {.callout-note title="Dépendance Fonctionnelle Directe"}
-X → Y est directe si il n'existe pas de Z tel que X → Z et Z → Y
+X → Y est directe s'il n'existe pas de Z tel que X → Z et Z → Y
 :::
 
 :::{.notes}
@@ -155,7 +150,7 @@ Une relation est 3NF si :
 - elle est 2NF
 - tout attribut non clé est en DF directe avec la clé
 
-Autrement dit, tous les attributs sont déterminés par la clé complète.
+Autrement dit, un attribut ne peut pas dépendre fonctionnellement d'un autre attribut non clé.
 :::
 
 ---
@@ -170,7 +165,7 @@ Exemple de relation non 3NF :
 ::: {.callout-tip title="Passer en 3NF"}
 Créer une table *pays*
 
-- joueuse(([id_joueuse]{.underline}, code_pays)
+- joueuse([id_joueuse]{.underline}, code_pays)
 - pays([code_pays]{.underline}, capitale)
 
 :::
@@ -179,7 +174,15 @@ Créer une table *pays*
 
 ## Modélisation UML
 
-### Modèles
+### Unified Modeling Language
+
+::: {.callout-note title="Définition"}
+UML est un langage de modélisation graphique standardisé utilisé pour spécifier, visualiser, concevoir et documenter différents aspects des systèmes logiciels. 
+
+Il offre une série de diagrammes pour représenter différents aspects d'un système.
+:::
+
+### Modèles {background-color="beige"}
 
 ::::::{.columns}
 :::{.column}
@@ -218,52 +221,29 @@ classDiagram
 - Physique : niveau développeur (transposable directement en SQL)
 :::
 
-### Associations
+### Associations {background-color="beige"}
 
 ```{mermaid}
 classDiagram
     direction LR
     class joueuse {
         id_joueuse SERIAL PK
-        nom        VARCHAR(50)
-        prenom     VARCHAR(50)
+        nom        VARCHAR50
+        prenom     VARCHAR50
         elo        INT
         #id_club   INT
     }
     
     class club {
         id_club   SERIAL PK
-        nom       VARCHAR(50)
-        ville     VARCHAR(50)
+        nom       VARCHAR50
+        ville     VARCHAR50
     }
 
-    joueuse --> club
+    joueuse "*" --> "0..1" club
 ```
 
 
 [cf. Cours BDD, partie associations](./bases-de-donnees.qmd#associations)
 
 
-
-### Exemple
-
-Site de vente de légumes
-
-- Client
-  - id_client
-  - nom
-  - prenom
-  - mail
-- Produit
-  - id_produit
-  - nom
-  - description
-  - prix
-- Commande
-  - id_commande
-  - id_client
-- LigneCommande
-  - id_ligne_commande
-  - id_commande
-  - id_produit
-  - quantite
