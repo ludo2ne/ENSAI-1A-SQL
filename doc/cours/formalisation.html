@@ -213,7 +213,9 @@ ul.task-list li input[type="checkbox"] {
   <ul class="collapse">
   <li><a href="#unified-modeling-language" id="toc-unified-modeling-language" class="nav-link" data-scroll-target="#unified-modeling-language">Unified Modeling Language</a></li>
   <li><a href="#modèles" id="toc-modèles" class="nav-link" data-scroll-target="#modèles">Modèles</a></li>
-  <li><a href="#associations" id="toc-associations" class="nav-link" data-scroll-target="#associations">Associations</a></li>
+  <li><a href="#associations-1n" id="toc-associations-1n" class="nav-link" data-scroll-target="#associations-1n">Associations 1:n</a></li>
+  <li><a href="#associations-multiples" id="toc-associations-multiples" class="nav-link" data-scroll-target="#associations-multiples">Associations multiples</a></li>
+  <li><a href="#associations-nn" id="toc-associations-nn" class="nav-link" data-scroll-target="#associations-nn">Associations n:n</a></li>
   </ul></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="formalisation-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
@@ -576,8 +578,8 @@ Définition
 <pre class="mermaid mermaid-js">classDiagram
     class joueuse {
         id_joueuse SERIAL PK
-        nom        VARCHAR(50)
-        prenom     VARCHAR(50)
+        nom        VARCHAR50
+        prenom     VARCHAR50
         elo        INT
         #id_club   INT
     }
@@ -596,8 +598,8 @@ Définition
 </ul>
 </div>
 </section>
-<section id="associations" class="level3" data-background-color="beige">
-<h3 data-background-color="beige" class="anchored" data-anchor-id="associations">Associations</h3>
+<section id="associations-1n" class="level3" data-background-color="beige">
+<h3 data-background-color="beige" class="anchored" data-anchor-id="associations-1n">Associations 1:n</h3>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -619,7 +621,7 @@ Définition
         ville     VARCHAR50
     }
 
-    joueuse "*" --&gt; "0..1" club
+    joueuse "*" -- "0..1" club
 </pre>
 </div>
 <p></p></figure><p></p>
@@ -627,6 +629,74 @@ Définition
 </div>
 </div>
 <p><a href="../../doc/cours/bases-de-donnees.html#associations">cf.&nbsp;Cours BDD, partie associations</a></p>
+</section>
+<section id="associations-multiples" class="level3" data-background-color="beige">
+<h3 data-background-color="beige" class="anchored" data-anchor-id="associations-multiples">Associations multiples</h3>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">classDiagram
+    direction LR
+    class joueuse {
+        id_joueuse SERIAL PK
+        nom        VARCHAR50
+        prenom     VARCHAR50
+        elo        INT
+        #id_club   INT
+    }
+    
+    class partie {
+        #id_blanc     INT
+        #id_noir      INT
+        #id_resultat  INT
+    }
+
+    partie "*" --&gt; "1" joueuse : jouée avec les blancs par ▶
+    partie "*" --&gt; "1" joueuse : jouée avec les noirs par ▶
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="associations-nn" class="level3" data-background-color="beige">
+<h3 data-background-color="beige" class="anchored" data-anchor-id="associations-nn">Associations n:n</h3>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">classDiagram
+    direction LR
+    class joueuse {
+        id_joueuse SERIAL PK
+        nom        VARCHAR50
+        prenom     VARCHAR50
+        elo        INT
+        #id_club   INT
+    }
+    
+    class participe {
+        #id_joueuse     INT
+        #id_tournoi     INT
+    }
+
+    class tournoi {
+        #id_tournoi     INT
+        nom             INT
+    }
+
+    joueuse "1" -- "*" participe
+    participe "*" -- "1" tournoi
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
 
 
 </section>

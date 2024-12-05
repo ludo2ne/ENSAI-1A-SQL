@@ -543,8 +543,8 @@ Ludovic Deneuville
 <pre class="mermaid mermaid-js">classDiagram
     class joueuse {
         id_joueuse SERIAL PK
-        nom        VARCHAR(50)
-        prenom     VARCHAR(50)
+        nom        VARCHAR50
+        prenom     VARCHAR50
         elo        INT
         #id_club   INT
     }
@@ -572,8 +572,8 @@ Ludovic Deneuville
           display:block!important;
       }</style></aside>
 </section>
-<section id="associations" class="slide level3" data-background-color="beige">
-<h3>Associations</h3>
+<section id="associations-1n" class="slide level3" data-background-color="beige">
+<h3>Associations 1:n</h3>
 <div class="cell" data-reveal="true" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -595,7 +595,7 @@ Ludovic Deneuville
         ville     VARCHAR50
     }
 
-    joueuse "*" --&gt; "0..1" club
+    joueuse "*" -- "0..1" club
 </pre>
 </div>
 <p></p></figure><p></p>
@@ -603,6 +603,74 @@ Ludovic Deneuville
 </div>
 </div>
 <p><a href="../../doc/cours/bases-de-donnees.html#associations">cf.&nbsp;Cours BDD, partie associations</a></p>
+</section>
+<section id="associations-multiples" class="slide level3" data-background-color="beige">
+<h3>Associations multiples</h3>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">classDiagram
+    direction LR
+    class joueuse {
+        id_joueuse SERIAL PK
+        nom        VARCHAR50
+        prenom     VARCHAR50
+        elo        INT
+        #id_club   INT
+    }
+    
+    class partie {
+        #id_blanc     INT
+        #id_noir      INT
+        #id_resultat  INT
+    }
+
+    partie "*" --&gt; "1" joueuse : jouée avec les blancs par ▶
+    partie "*" --&gt; "1" joueuse : jouée avec les noirs par ▶
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="associations-nn" class="slide level3" data-background-color="beige">
+<h3>Associations n:n</h3>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">classDiagram
+    direction LR
+    class joueuse {
+        id_joueuse SERIAL PK
+        nom        VARCHAR50
+        prenom     VARCHAR50
+        elo        INT
+        #id_club   INT
+    }
+    
+    class participe {
+        #id_joueuse     INT
+        #id_tournoi     INT
+    }
+
+    class tournoi {
+        #id_tournoi     INT
+        nom             INT
+    }
+
+    joueuse "1" -- "*" participe
+    participe "*" -- "1" tournoi
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
 
 
 </section></section>
