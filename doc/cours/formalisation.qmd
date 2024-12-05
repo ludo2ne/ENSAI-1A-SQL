@@ -207,8 +207,8 @@ Modèle physique
 classDiagram
     class joueuse {
         id_joueuse SERIAL PK
-        nom        VARCHAR(50)
-        prenom     VARCHAR(50)
+        nom        VARCHAR50
+        prenom     VARCHAR50
         elo        INT
         #id_club   INT
     }
@@ -221,7 +221,7 @@ classDiagram
 - Physique : niveau développeur (transposable directement en SQL)
 :::
 
-### Associations {background-color="beige"}
+### Associations 1:n {background-color="beige"}
 
 ```{mermaid}
 classDiagram
@@ -240,10 +240,61 @@ classDiagram
         ville     VARCHAR50
     }
 
-    joueuse "*" --> "0..1" club
+    joueuse "*" -- "0..1" club
 ```
 
 
 [cf. Cours BDD, partie associations](./bases-de-donnees.qmd#associations)
 
 
+### Associations multiples {background-color="beige"}
+
+```{mermaid}
+classDiagram
+    direction LR
+    class joueuse {
+        id_joueuse SERIAL PK
+        nom        VARCHAR50
+        prenom     VARCHAR50
+        elo        INT
+        #id_club   INT
+    }
+    
+    class partie {
+        #id_blanc     INT
+        #id_noir      INT
+        #id_resultat  INT
+    }
+
+    partie "*" --> "1" joueuse : jouée avec les blancs par ▶
+    partie "*" --> "1" joueuse : jouée avec les noirs par ▶
+```
+
+
+### Associations n:n {background-color="beige"}
+
+
+```{mermaid}
+classDiagram
+    direction LR
+    class joueuse {
+        id_joueuse SERIAL PK
+        nom        VARCHAR50
+        prenom     VARCHAR50
+        elo        INT
+        #id_club   INT
+    }
+    
+    class participe {
+        #id_joueuse     INT
+        #id_tournoi     INT
+    }
+
+    class tournoi {
+        #id_tournoi     INT
+        nom             INT
+    }
+
+    joueuse "1" -- "*" participe
+    participe "*" -- "1" tournoi
+```

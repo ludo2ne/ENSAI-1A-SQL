@@ -98,7 +98,7 @@ SELECT *
   FROM echecs.club c
  WHERE EXISTS (SELECT 1
                  FROM echecs.joueuse j
-                WHERE c.id_club = j.id_joueuse
+                WHERE c.id_club = j.id_club
                   AND j.elo > 2400);
 ```
 
@@ -107,7 +107,7 @@ La syntaxe ressemble à celle du `IN` mais le `EXISTS` est plus performant.
 ```{.sql}
 SELECT *
   FROM echecs.club c
- WHERE c.id_club IN (SELECT j.id_joueuse
+ WHERE c.id_club IN (SELECT j.id_club
                        FROM echecs.joueuse j
                       WHERE j.elo > 2400);
 ```
@@ -163,7 +163,7 @@ AS (SELECT *
        AND elo > 2000
 )
 SELECT nom, prenom, elo
-  FROM joueuses_francaises_elo2000
+  FROM joueuses_fr_elo2000
  WHERE prenom LIKE 'A%';
 ```
 
