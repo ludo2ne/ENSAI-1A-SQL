@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Ludovic Deneuville">
-<meta name="description" content="TP4">
+<meta name="description" content="TP4 et TP5">
 
 <title>Chess Unofficial Federation – Base de données</title>
 <style>
@@ -260,7 +260,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div>
   <div class="description">
-    TP4
+    TP4 et TP5
   </div>
 </div>
 
@@ -298,6 +298,42 @@ Important
 <ul>
 <li>Écrivez des requêtes jolies !</li>
 </ul>
+</div>
+</div>
+<p>Ce sujet vous occupera pour les TP4 et 5.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Reprise TP5">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Reprise TP5
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Après avoir chargé les données pour le TP5, veuillez appliquer ces corrections vues lors d’un exercice du TP4 :</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">UPDATE</span> echecs.joueuse</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>   <span class="kw">SET</span> elo <span class="op">=</span> elo <span class="op">-</span> <span class="dv">1200</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> elo <span class="op">&gt;</span> <span class="dv">2600</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>   <span class="kw">AND</span> code_titre <span class="kw">IS</span> <span class="kw">NULL</span>;</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="kw">UPDATE</span> echecs.joueuse</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>   <span class="kw">SET</span> date_naissance <span class="op">=</span> date_naissance <span class="op">+</span> <span class="dt">INTERVAL</span> <span class="st">'100 years'</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> id_joueuse <span class="kw">IN</span> (<span class="dv">111</span>, <span class="dv">122</span>, <span class="dv">133</span>, <span class="dv">144</span>);</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="kw">UPDATE</span> echecs.joueuse</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>   <span class="kw">SET</span> date_naissance <span class="op">=</span> date_naissance <span class="op">-</span> <span class="dt">INTERVAL</span> <span class="st">'100 years'</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> id_joueuse <span class="kw">IN</span> (<span class="dv">155</span>, <span class="dv">166</span>, <span class="dv">177</span>, <span class="dv">188</span>);</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="kw">UPDATE</span> echecs.joueuse</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>   <span class="kw">SET</span> nom <span class="op">=</span> <span class="kw">REPLACE</span>(<span class="kw">REPLACE</span>(<span class="kw">REPLACE</span>(nom, <span class="st">'EUH'</span>, <span class="st">'E'</span>), <span class="st">'AO'</span>, <span class="st">'A'</span>), <span class="st">'OU'</span>, <span class="st">'U'</span>)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> code_titre <span class="kw">IS</span> <span class="kw">NULL</span>;</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="kw">DELETE</span> <span class="kw">FROM</span> echecs.partie</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> id_blanc <span class="op">=</span> id_noir;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </div>
 </div>
 </section>
@@ -462,13 +498,13 @@ Caution
 <li><label><input type="checkbox">Écrivez une requête pour ne garder que les joueuses avec des années de naissances étranges</label></li>
 <li><label><input type="checkbox">Apportez une correction adaptée</label></li>
 </ul>
-<p>Toujours sur la tables des joueuses, vous avez peut-être remarqué qu’une puissante technique d’anonymisation a été utilisée.</p>
+<p>Toujours sur la table des joueuses, vous avez peut-être remarqué qu’une puissante technique d’anonymisation a été utilisée.</p>
 <ul class="task-list">
 <li><label><input type="checkbox">Commencez par afficher dans un <em>SELECT</em> une version plus propre</label></li>
 <li><label><input type="checkbox">Une fois que le résultat est assez correct, mettez à jour la table <em>joueuse</em></label></li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -477,7 +513,7 @@ Tip
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
 <li>Vous pouvez utiliser la fonction <em>REPLACE()</em>
@@ -548,7 +584,7 @@ Tip
 <li><label><input type="checkbox">Pour chaque tournoi, calculez également les taux de victoire des blancs et des noirs, ainsi que celui de matchs nuls</label></li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -557,7 +593,7 @@ Tip
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
 <li>Commencez par exemple par calculer le nombre de victoires des blancs</li>
@@ -714,7 +750,7 @@ Ouvertures
 </div>
 <div class="callout-body-container">
 <p>Un parquet de <span class="emoji" data-emoji="cookie">🍪</span> est à retirer dans le bureau du professeur pour la joueuse détentrice de la meilleure perf !</p>
-<p>Et pour l’autrice de la plus belle contre-perf, notre partenaire premium, la <a href="https://fflose.com/" target="_blank">Fédération Française de la Lose</a> offre un magnifique tee-shirt floqué <em>Reine des Mazettes</em>, <em>J’ai raté un mat en 1</em>, <em>Je suis passé de +10 à -10</em> ou encore “J’ai fait pat avec Roi et Dame contre Roi”.</p>
+<p>Et pour l’autrice de la plus belle contre-perf, notre partenaire premium, la <a href="https://fflose.com/" target="_blank">Fédération Française de la Lose</a> offre un magnifique tee-shirt floqué <em>Reine des Mazettes</em>, <em>J’ai raté un mat en 1</em>, <em>Je suis passé de +10 à -10</em> ou encore <em>J’ai fait pat avec Roi et Dame contre Roi</em>.</p>
 </div>
 </div>
 </div>
@@ -812,7 +848,7 @@ Ouvertures
 <li><label><input type="checkbox">Faites de même pour les noirs et stockez le tout dans une vue <em>partie_score</em></label></li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -821,18 +857,18 @@ Tip
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
 <li>Vous pouvez utiliser une structure <em>CASE WHEN THEN</em></li>
 </ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">&lt;</span>?<span class="op">&gt;</span>,</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>       <span class="cf">CASE</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>           <span class="cf">WHEN</span> <span class="op">&lt;</span>?<span class="op">&gt;</span> <span class="cf">THEN</span> <span class="op">&lt;</span>?<span class="op">&gt;</span> </span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>           <span class="cf">WHEN</span> <span class="op">&lt;</span>?<span class="op">&gt;</span> <span class="cf">THEN</span> <span class="op">&lt;</span>?<span class="op">&gt;</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>           <span class="cf">ELSE</span> <span class="op">&lt;</span>?<span class="op">&gt;</span>          </span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>       <span class="cf">END</span> <span class="kw">AS</span> score</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> <span class="op">&lt;</span>?<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">&lt;</span>?<span class="op">&gt;</span>,</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>       <span class="cf">CASE</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>           <span class="cf">WHEN</span> <span class="op">&lt;</span>?<span class="op">&gt;</span> <span class="cf">THEN</span> <span class="op">&lt;</span>?<span class="op">&gt;</span> </span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>           <span class="cf">WHEN</span> <span class="op">&lt;</span>?<span class="op">&gt;</span> <span class="cf">THEN</span> <span class="op">&lt;</span>?<span class="op">&gt;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>           <span class="cf">ELSE</span> <span class="op">&lt;</span>?<span class="op">&gt;</span>          </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>       <span class="cf">END</span> <span class="kw">AS</span> score</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> <span class="op">&lt;</span>?<span class="op">&gt;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -848,7 +884,7 @@ Tip
 </ul></li>
 </ul>
 <div class="callout callout-style-default callout-note callout-titled" title="Vérification">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -857,47 +893,47 @@ Vérification
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Une petite requête basique pour vérifier vos résultats :</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">WITH</span> resultat_score <span class="kw">AS</span> (</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> rp.<span class="op">*</span>,</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>           <span class="cf">CASE</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>               <span class="cf">WHEN</span> rp.resultat <span class="kw">IN</span> (<span class="st">'1 - 0'</span>, <span class="st">'1 - F'</span>) <span class="cf">THEN</span> <span class="dv">1</span> </span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>               <span class="cf">WHEN</span> rp.resultat <span class="op">=</span> <span class="st">'X - X'</span>             <span class="cf">THEN</span> <span class="fl">0.5</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>               <span class="cf">ELSE</span> <span class="dv">0</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>           <span class="cf">END</span> <span class="kw">AS</span> score_blanc,</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>           <span class="cf">CASE</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>               <span class="cf">WHEN</span> rp.resultat <span class="kw">IN</span> (<span class="st">'0 - 1'</span>, <span class="st">'F - 1'</span>) <span class="cf">THEN</span> <span class="dv">1</span> </span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>               <span class="cf">WHEN</span> rp.resultat <span class="op">=</span> <span class="st">'X - X'</span>             <span class="cf">THEN</span> <span class="fl">0.5</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>               <span class="cf">ELSE</span> <span class="dv">0</span></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>           <span class="cf">END</span> <span class="kw">AS</span> score_noir</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>      <span class="kw">FROM</span> echecs.resultat_partie rp</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>partie_score <span class="kw">AS</span> (</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> p.id_partie,</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>           p.id_tournoi,</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>           UNNEST(<span class="dt">ARRAY</span>[id_blanc, id_noir]) <span class="kw">AS</span> id_joueuse,</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>           UNNEST(<span class="dt">ARRAY</span>[score_blanc, score_noir]) <span class="kw">AS</span> score,</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>           UNNEST(<span class="dt">ARRAY</span>[jn.elo, jb.elo]) <span class="kw">AS</span> elo_adversaire</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>      <span class="kw">FROM</span> echecs.partie p</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>      <span class="kw">JOIN</span> resultat_score <span class="kw">USING</span>(id_resultat)</span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>      <span class="kw">JOIN</span> echecs.joueuse jb <span class="kw">ON</span> (jb.id_joueuse <span class="op">=</span> p.id_blanc)</span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>      <span class="kw">JOIN</span> echecs.joueuse jn <span class="kw">ON</span> (jn.id_joueuse <span class="op">=</span> p.id_noir)</span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> CONCAT_WS(<span class="st">' '</span>, <span class="fu">LOWER</span>(j.code_titre), j.nom, j.prenom) <span class="kw">AS</span> joueuse,</span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>       j.elo,</span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>       <span class="fu">SUM</span>(ps.score) <span class="kw">AS</span> points,</span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>       <span class="fu">ROUND</span>(<span class="fu">AVG</span>(ps.elo_adversaire)) <span class="kw">AS</span> moyenne_elo_adversaire</span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse j</span>
-<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> partie_score ps <span class="kw">USING</span>(id_joueuse)</span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> echecs.tournoi t <span class="kw">USING</span>(id_tournoi)</span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> t.nom <span class="op">=</span> <span class="st">'Open de Guingamp'</span></span>
-<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a> <span class="kw">GROUP</span> <span class="kw">BY</span> j.id_joueuse,</span>
-<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>          joueuse,</span>
-<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>          j.elo</span>
-<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a> <span class="kw">ORDER</span> <span class="kw">BY</span> points <span class="kw">DESC</span>,</span>
-<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>          moyenne_elo_adversaire <span class="kw">DESC</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">WITH</span> resultat_score <span class="kw">AS</span> (</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> rp.<span class="op">*</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>           <span class="cf">CASE</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>               <span class="cf">WHEN</span> rp.resultat <span class="kw">IN</span> (<span class="st">'1 - 0'</span>, <span class="st">'1 - F'</span>) <span class="cf">THEN</span> <span class="dv">1</span> </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>               <span class="cf">WHEN</span> rp.resultat <span class="op">=</span> <span class="st">'X - X'</span>             <span class="cf">THEN</span> <span class="fl">0.5</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>               <span class="cf">ELSE</span> <span class="dv">0</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>           <span class="cf">END</span> <span class="kw">AS</span> score_blanc,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>           <span class="cf">CASE</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>               <span class="cf">WHEN</span> rp.resultat <span class="kw">IN</span> (<span class="st">'0 - 1'</span>, <span class="st">'F - 1'</span>) <span class="cf">THEN</span> <span class="dv">1</span> </span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>               <span class="cf">WHEN</span> rp.resultat <span class="op">=</span> <span class="st">'X - X'</span>             <span class="cf">THEN</span> <span class="fl">0.5</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>               <span class="cf">ELSE</span> <span class="dv">0</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>           <span class="cf">END</span> <span class="kw">AS</span> score_noir</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>      <span class="kw">FROM</span> echecs.resultat_partie rp</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>partie_score <span class="kw">AS</span> (</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> p.id_partie,</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>           p.id_tournoi,</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>           UNNEST(<span class="dt">ARRAY</span>[id_blanc, id_noir]) <span class="kw">AS</span> id_joueuse,</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>           UNNEST(<span class="dt">ARRAY</span>[score_blanc, score_noir]) <span class="kw">AS</span> score,</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>           UNNEST(<span class="dt">ARRAY</span>[jn.elo, jb.elo]) <span class="kw">AS</span> elo_adversaire</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>      <span class="kw">FROM</span> echecs.partie p</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>      <span class="kw">JOIN</span> resultat_score <span class="kw">USING</span>(id_resultat)</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>      <span class="kw">JOIN</span> echecs.joueuse jb <span class="kw">ON</span> (jb.id_joueuse <span class="op">=</span> p.id_blanc)</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>      <span class="kw">JOIN</span> echecs.joueuse jn <span class="kw">ON</span> (jn.id_joueuse <span class="op">=</span> p.id_noir)</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> CONCAT_WS(<span class="st">' '</span>, <span class="fu">LOWER</span>(j.code_titre), j.nom, j.prenom) <span class="kw">AS</span> joueuse,</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>       j.elo,</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>       <span class="fu">SUM</span>(ps.score) <span class="kw">AS</span> points,</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>       <span class="fu">ROUND</span>(<span class="fu">AVG</span>(ps.elo_adversaire)) <span class="kw">AS</span> moyenne_elo_adversaire</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse j</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> partie_score ps <span class="kw">USING</span>(id_joueuse)</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> echecs.tournoi t <span class="kw">USING</span>(id_tournoi)</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> t.nom <span class="op">=</span> <span class="st">'Open de Guingamp'</span></span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a> <span class="kw">GROUP</span> <span class="kw">BY</span> j.id_joueuse,</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>          joueuse,</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>          j.elo</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a> <span class="kw">ORDER</span> <span class="kw">BY</span> points <span class="kw">DESC</span>,</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>          moyenne_elo_adversaire <span class="kw">DESC</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>

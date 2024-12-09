@@ -211,7 +211,33 @@ Ludovic Deneuville
 <li class="fragment">Base de données</li>
 </ul>
 </div>
-<div class="fragment">
+<aside class="notes">
+<p>J’avais eu une question lors de la prez Git : où on stocke les données si on peut pas les mettre sur GitHub.</p>
+<ul>
+<li>On ne garde pas les données sur sa machine (risque de fuite)</li>
+<li>Dans l’idéal on bosse dans le cloud et on stocke sur S3</li>
+<li>Sinon on travaille dans un espace dédié (AUS)</li>
+</ul>
+<p>Suivre sur Linkedin : Mauvière, Holtz, Blefari, Lesur, Galiana, Degorre, Natacha NJONGWA</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="format-parquet" class="slide level3">
+<h3>Format Parquet</h3>
+<ul>
+<li>Stockage orienté colonne</li>
+<li>Contient des métadonnées</li>
+<li>Adapté pour le stockage de données figées</li>
+</ul>
 <div title="Articles intéressants">
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
@@ -225,20 +251,18 @@ Ludovic Deneuville
 <ul>
 <li><a href="https://www.icem7.fr/outils/parquet-devrait-remplacer-le-format-csv/" target="_blank">Parquet pour remplacer csv</a>, Éric Mauvière, Icem7</li>
 <li><a href="https://www.icem7.fr/outils/comment-bien-preparer-son-parquet/" target="_blank">Comment bien préparer son Parquet</a>, Éric Mauvière, Icem7</li>
+<li><a href="https://book.utilitr.org/03_Fiches_thematiques/Fiche_import_fichiers_parquet.html" target="_blank">Lire et écrire des fichiers Parquet</a>, UtilitR</li>
 </ul>
-</div>
 </div>
 </div>
 </div>
 </div>
 <aside class="notes">
-<p>J’avais eu une question lors de la prez Git : où on stocke les données si on peut pas les mettre sur GitHub.</p>
 <ul>
-<li>On ne garde pas les données sur sa machine (risque de fuite)</li>
-<li>Dans l’idéal on bosse dans le cloud et on stocke sur S3</li>
-<li>Sinon on travaille dans un espace dédié (AUS)</li>
+<li>Données figées -&gt; parquet</li>
+<li>Données mouvantes -&gt; bdd PostgreSQL</li>
+<li>Tad Viewer pour afficher le contenu d’un parquet</li>
 </ul>
-<p>Suivre sur Linkedin : Mauvière, Holtz, Blefari, Lesur, Galiana, Degorre, Natacha NJONGWA</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

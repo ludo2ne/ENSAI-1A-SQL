@@ -1257,11 +1257,12 @@ Auto-commit
 <div class="sourceCode" id="cb35"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
 <span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>       prenom,</span>
 <span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">EXTRACT</span>(<span class="dt">YEAR</span> <span class="kw">FROM</span> date_naissance) <span class="kw">AS</span> annee_naissance,</span>
-<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>       AGE(<span class="fu">CURRENT_DATE</span>, date_naissance) <span class="kw">AS</span> age</span>
-<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
-<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> date_naissance <span class="op">&gt;=</span> <span class="st">'1991-04-20'</span></span>
-<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">OR</span> date_naissance <span class="kw">BETWEEN</span> <span class="st">'1991-04-20'</span> <span class="kw">AND</span> <span class="st">'1992-12-31'</span></span>
-<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">OR</span> <span class="fu">EXTRACT</span>(<span class="dt">MONTH</span> <span class="kw">FROM</span> date_naissance) <span class="op">=</span> <span class="dv">4</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>       date_naissance <span class="op">+</span> <span class="dt">INTERVAL</span> <span class="st">'10 years'</span> <span class="kw">AS</span> anniv_dix_ans,</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>       AGE(<span class="fu">CURRENT_DATE</span>, date_naissance) <span class="kw">AS</span> age</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> date_naissance <span class="op">&gt;=</span> <span class="st">'1991-04-20'</span></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">OR</span> date_naissance <span class="kw">BETWEEN</span> <span class="st">'1991-04-20'</span> <span class="kw">AND</span> <span class="st">'1992-12-31'</span></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">OR</span> <span class="fu">EXTRACT</span>(<span class="dt">MONTH</span> <span class="kw">FROM</span> date_naissance) <span class="op">=</span> <span class="dv">4</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="type-timestamp" class="level3">
 <h3 class="anchored" data-anchor-id="type-timestamp">Type TIMESTAMP</h3>
@@ -1364,7 +1365,7 @@ La fonction COALESCE
 <h3 class="anchored" data-anchor-id="jouer-avec-les-colonnes">Jouer avec les colonnes</h3>
 <div class="sourceCode" id="cb44"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">CONCAT</span>(nom, <span class="st">' '</span>, prenom) <span class="kw">AS</span> nom_complet,</span>
 <span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>       elo</span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> echecs.joueuse;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p><br></p>
 <div class="fragment">
 <div class="small-table">
@@ -1409,7 +1410,7 @@ La fonction COALESCE
 <h3 class="anchored" data-anchor-id="supprimer-les-doublons">Supprimer les doublons</h3>
 <p>Le mot clé <code>DISTINCT</code> permet de supprimer les doublons.</p>
 <div class="sourceCode" id="cb45"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="kw">DISTINCT</span> prenom</span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> echecs.joueuse;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="choix" class="level3">
 <h3 class="anchored" data-anchor-id="choix">Choix</h3>
@@ -1421,18 +1422,19 @@ La fonction COALESCE
 </section>
 <section id="échantillon" class="level3">
 <h3 class="anchored" data-anchor-id="échantillon">Échantillon</h3>
-<p>Afficher un échnaitllon aléatoire de 10 % des lignes</p>
+<p>Afficher un échantillon aléatoire de 10 % des lignes</p>
 <div class="sourceCode" id="cb47"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> purchases</span>
-<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>TABLESAMPLE BERNOUILLI(<span class="dv">10</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>TABLESAMPLE BERNOULLI(<span class="dv">10</span>);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 <section id="et-même" class="level3">
 <h3 class="anchored" data-anchor-id="et-même">Et même !?</h3>
 <div class="sourceCode" id="cb48"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="dv">1</span>,</span>
 <span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>       <span class="kw">TRUE</span>,</span>
 <span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>       <span class="st">'a'</span>,</span>
-<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>       <span class="fu">current_date</span></span>
-<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>       <span class="fu">current_date</span>,</span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>       NOW()</span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
 <section id="résumé" class="level2" data-number="11">

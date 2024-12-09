@@ -199,6 +199,7 @@ ul.task-list li input[type="checkbox"] {
   <ul class="collapse">
   <li><a href="#définition-dune-donnée" id="toc-définition-dune-donnée" class="nav-link" data-scroll-target="#définition-dune-donnée"><span class="header-section-number">1.1</span> Définition d’une donnée</a></li>
   <li><a href="#où-stocker-des-données" id="toc-où-stocker-des-données" class="nav-link" data-scroll-target="#où-stocker-des-données"><span class="header-section-number">1.2</span> Où stocker des données</a></li>
+  <li><a href="#format-parquet" id="toc-format-parquet" class="nav-link" data-scroll-target="#format-parquet"><span class="header-section-number">1.3</span> Format Parquet</a></li>
   </ul></li>
   <li><a href="#une-base-de-données" id="toc-une-base-de-données" class="nav-link" data-scroll-target="#une-base-de-données"><span class="header-section-number">2</span> Une base de données ?</a></li>
   <li><a href="#enjeux" id="toc-enjeux" class="nav-link" data-scroll-target="#enjeux"><span class="header-section-number">3</span> Enjeux</a></li>
@@ -331,7 +332,23 @@ Définition
 <li>Base de données</li>
 </ul>
 </div>
-<div class="fragment">
+<div class="notes">
+<p>J’avais eu une question lors de la prez Git : où on stocke les données si on peut pas les mettre sur GitHub.</p>
+<ul>
+<li>On ne garde pas les données sur sa machine (risque de fuite)</li>
+<li>Dans l’idéal on bosse dans le cloud et on stocke sur S3</li>
+<li>Sinon on travaille dans un espace dédié (AUS)</li>
+</ul>
+<p>Suivre sur Linkedin : Mauvière, Holtz, Blefari, Lesur, Galiana, Degorre, Natacha NJONGWA</p>
+</div>
+</section>
+<section id="format-parquet" class="level3" data-number="1.3">
+<h3 data-number="1.3" class="anchored" data-anchor-id="format-parquet"><span class="header-section-number">1.3</span> Format Parquet</h3>
+<ul>
+<li>Stockage orienté colonne</li>
+<li>Contient des métadonnées</li>
+<li>Adapté pour le stockage de données figées</li>
+</ul>
 <div class="callout callout-style-default callout-tip callout-titled" title="Articles intéressants">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -345,18 +362,16 @@ Articles intéressants
 <ul>
 <li><a href="https://www.icem7.fr/outils/parquet-devrait-remplacer-le-format-csv/" target="_blank">Parquet pour remplacer csv</a>, Éric Mauvière, Icem7</li>
 <li><a href="https://www.icem7.fr/outils/comment-bien-preparer-son-parquet/" target="_blank">Comment bien préparer son Parquet</a>, Éric Mauvière, Icem7</li>
+<li><a href="https://book.utilitr.org/03_Fiches_thematiques/Fiche_import_fichiers_parquet.html" target="_blank">Lire et écrire des fichiers Parquet</a>, UtilitR</li>
 </ul>
-</div>
 </div>
 </div>
 <div class="notes">
-<p>J’avais eu une question lors de la prez Git : où on stocke les données si on peut pas les mettre sur GitHub.</p>
 <ul>
-<li>On ne garde pas les données sur sa machine (risque de fuite)</li>
-<li>Dans l’idéal on bosse dans le cloud et on stocke sur S3</li>
-<li>Sinon on travaille dans un espace dédié (AUS)</li>
+<li>Données figées -&gt; parquet</li>
+<li>Données mouvantes -&gt; bdd PostgreSQL</li>
+<li>Tad Viewer pour afficher le contenu d’un parquet</li>
 </ul>
-<p>Suivre sur Linkedin : Mauvière, Holtz, Blefari, Lesur, Galiana, Degorre, Natacha NJONGWA</p>
 </div>
 </section>
 </section>
