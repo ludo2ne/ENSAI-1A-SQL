@@ -66,13 +66,6 @@ Source : [Qu'est-ce qu'une donnée ?](https://www.insee.fr/fr/information/500870
 - Base de données
 :::
 
-:::::: {.fragment}
-::: {.callout-tip title="Articles intéressants"}
-- [Parquet pour remplacer csv](https://www.icem7.fr/outils/parquet-devrait-remplacer-le-format-csv/){target="_blank"}, Éric Mauvière, Icem7
-- [Comment bien préparer son Parquet](https://www.icem7.fr/outils/comment-bien-preparer-son-parquet/){target="_blank"}, Éric Mauvière, Icem7
-:::
-::::::
-
 ::: {.notes}
 J'avais eu une question lors de la prez Git : où on stocke les données si on peut pas les mettre sur GitHub.
 
@@ -81,6 +74,24 @@ J'avais eu une question lors de la prez Git : où on stocke les données si on p
 - Sinon on travaille dans un espace dédié (AUS)
 
 Suivre sur Linkedin : Mauvière, Holtz, Blefari, Lesur, Galiana, Degorre, Natacha NJONGWA
+:::
+
+### Format Parquet
+
+- Stockage orienté colonne
+- Contient des métadonnées
+- Adapté pour le stockage de données figées
+
+::: {.callout-tip title="Articles intéressants"}
+- [Parquet pour remplacer csv](https://www.icem7.fr/outils/parquet-devrait-remplacer-le-format-csv/){target="_blank"}, Éric Mauvière, Icem7
+- [Comment bien préparer son Parquet](https://www.icem7.fr/outils/comment-bien-preparer-son-parquet/){target="_blank"}, Éric Mauvière, Icem7
+- [Lire et écrire des fichiers Parquet](https://book.utilitr.org/03_Fiches_thematiques/Fiche_import_fichiers_parquet.html){target="_blank"}, UtilitR
+:::
+
+:::{.notes}
+- Données figées -> parquet
+- Données mouvantes -> bdd PostgreSQL
+- Tad Viewer pour afficher le contenu d'un parquet
 :::
 
 

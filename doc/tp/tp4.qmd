@@ -1,6 +1,6 @@
 ---
 title: "Chess Unofficial Federation"
-description: "TP4"
+description: "TP4 et TP5"
 author: "Ludovic Deneuville"
 format: 
   html:
@@ -18,6 +18,35 @@ lightbox: true
 
 ::: {.callout-important}
 - Écrivez des requêtes jolies !
+:::
+
+Ce sujet vous occupera pour les TP4 et 5.
+
+::: {.callout-note collapse="true" title="Reprise TP5"}
+Après avoir chargé les données pour le TP5, veuillez appliquer ces corrections vues lors d'un exercice du TP4 :
+
+```{.sql}
+UPDATE echecs.joueuse
+   SET elo = elo - 1200
+ WHERE elo > 2600
+   AND code_titre IS NULL;
+
+UPDATE echecs.joueuse
+   SET date_naissance = date_naissance + INTERVAL '100 years'
+ WHERE id_joueuse IN (111, 122, 133, 144);
+
+UPDATE echecs.joueuse
+   SET date_naissance = date_naissance - INTERVAL '100 years'
+ WHERE id_joueuse IN (155, 166, 177, 188);
+
+UPDATE echecs.joueuse
+   SET nom = REPLACE(REPLACE(REPLACE(nom, 'EUH', 'E'), 'AO', 'A'), 'OU', 'U')
+ WHERE code_titre IS NULL;
+
+DELETE FROM echecs.partie
+ WHERE id_blanc = id_noir;
+```
+
 :::
 
 
@@ -114,7 +143,7 @@ Une autre erreur concernerait les dates de naissances des joueuses
 - [ ] Écrivez une requête pour ne garder que les joueuses avec des années de naissances étranges
 - [ ] Apportez une correction adaptée
 
-Toujours sur la tables des joueuses, vous avez peut-être remarqué qu'une puissante technique d'anonymisation a été utilisée.
+Toujours sur la table des joueuses, vous avez peut-être remarqué qu'une puissante technique d'anonymisation a été utilisée.
 
 - [ ] Commencez par afficher dans un *SELECT* une version plus propre
 - [ ] Une fois que le résultat est assez correct, mettez à jour la table *joueuse*
@@ -234,7 +263,7 @@ Une performance est une victoire contre une joueuse ayant au moins 400 points el
 ::: {.callout-important icon="false" appearance="simple"}
 Un parquet de :cookie: est à retirer dans le bureau du professeur pour la joueuse détentrice de la meilleure perf !
 
-Et pour l'autrice de la plus belle contre-perf, notre partenaire premium, la [Fédération Française de la Lose](https://fflose.com/){target="_blank"} offre un magnifique tee-shirt floqué *Reine des Mazettes*, *J'ai raté un mat en 1*, *Je suis passé de +10 à -10* ou encore "J'ai fait pat avec Roi et Dame contre Roi".
+Et pour l'autrice de la plus belle contre-perf, notre partenaire premium, la [Fédération Française de la Lose](https://fflose.com/){target="_blank"} offre un magnifique tee-shirt floqué *Reine des Mazettes*, *J'ai raté un mat en 1*, *Je suis passé de +10 à -10* ou encore *J'ai fait pat avec Roi et Dame contre Roi*.
 :::
 
 ## Gagnantes des tournois

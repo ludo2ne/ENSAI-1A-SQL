@@ -2,17 +2,25 @@
 
 ## :construction: TODO
 
-- parquet
+- [ ] dire de creer compte ssp cloud avec mail prenom.nom@eleve.ensai.fr avant le 1er TP
+- [ ] Soucis pour lancer cloudBeaver avec le wifi ENSAI
+- [ ] callout block -> couleurs moches dans les diapos lors du deploy sur github
 
-### Cours
+### Cours 2024
 
 - CM1
   - intro
   - base de données
 - CM2
-  - sql-intro (select)
+  - sql-intro
   - agregations
-  - jointure
+  - jointures INNER
+- CM3
+  - jointures
+  - algébre
+  - sql-avancé
+- CM4
+  - formalisation
 
 ### TP
 
@@ -28,13 +36,7 @@
 - TP1 : 1eres requetes, DuckBD, WHERE, GROUP BY, not exists
 - TP2 : jointure, DATE
 - TP3 : découverte du Datalab
-  - [ ] Expliquer pourquoi on a besoin de service, de stockage... : https://docs.sspcloud.fr/content/principles.html
-  - [ ] Raconter une histoire
   - [ ] Benchmark
-  - [ ] Config Git à la fin
-  - [ ] Secret -> utilisation avancée bonus
-  - [ ] Lien support Slack / Tchap
-  - [ ] DuckDB
 
 ## :rocket: Publier les pages
 

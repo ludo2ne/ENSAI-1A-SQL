@@ -785,6 +785,7 @@ Quelques opérations avec le type `DATE`.
 SELECT nom,
        prenom,
        EXTRACT(YEAR FROM date_naissance) AS annee_naissance,
+       date_naissance + INTERVAL '10 years' AS anniv_dix_ans,
        AGE(CURRENT_DATE, date_naissance) AS age
   FROM echecs.joueuse
  WHERE date_naissance >= '1991-04-20'
@@ -905,7 +906,7 @@ SELECT NULLIF(tel, '00.00.00.00.00')
 ```{.sql}
 SELECT CONCAT(nom, ' ', prenom) AS nom_complet,
        elo
-FROM echecs.joueuse;
+  FROM echecs.joueuse;
 ```
 
 <br>
@@ -931,7 +932,7 @@ Le mot clé `DISTINCT` permet de supprimer les doublons.
 
 ```{.sql}
 SELECT DISTINCT prenom
-FROM echecs.joueuse;
+  FROM echecs.joueuse;
 ```
 
 ### Choix
@@ -946,12 +947,12 @@ SELECT CASE WHEN elo > 2400 THEN 'Niveau MI'
 
 ### Échantillon
 
-Afficher un échnaitllon aléatoire de 10 % des lignes
+Afficher un échantillon aléatoire de 10 % des lignes
 
 ```{.sql}
 SELECT *
-  FROM purchases
-TABLESAMPLE BERNOUILLI(10);
+  FROM echecs.joueuse
+TABLESAMPLE BERNOULLI(10);
 ```
 
 ### Et même !?
@@ -960,7 +961,8 @@ TABLESAMPLE BERNOUILLI(10);
 SELECT 1,
        TRUE,
        'a',
-       current_date
+       current_date,
+       NOW()
   FROM echecs.joueuse;
 ```
 

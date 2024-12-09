@@ -95,3 +95,6 @@ Elle est utilisée pour établir une relation entre deux tables.
 - REVOKE
 
 
+### Formes Normales
+
+- <https://formations.imt-atlantique.fr/bd_ihm/fr/normalisation/normal_forms/>{target="_blank"}

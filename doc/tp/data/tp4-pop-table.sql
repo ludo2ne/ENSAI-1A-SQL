@@ -30,11 +30,11 @@ INSERT INTO echecs.ouverture (id_ouverture,eco,nom,coups) VALUES
 	 (24,'I35','Partie Bretonne','1.Nf3 Nf6 2.Ng1 Ng8');
 
 INSERT INTO echecs.resultat_partie (id_resultat,resultat,description) VALUES
-	 (1,'1-0','Victoire des blancs'),
-	 (2,'0-1','Victoire des noirs'),
-	 (3,'1/2','Match nul'),
-	 (4,'1-F','Victoire des blancs par forfait'),
-	 (5,'F-1','Victoire des noirs par forfait');
+	 (1,'1 - 0','Victoire des blancs'),
+	 (2,'0 - 1','Victoire des noirs'),
+	 (3,'X - X','Match nul'),
+	 (4,'1 - F','Victoire des blancs par forfait'),
+	 (5,'F - 1','Victoire des noirs par forfait');
 
 INSERT INTO echecs.titre (code,nom,description) VALUES
 	 ('GM ','Grand Maître','Le titre le plus élevé aux échecs'),

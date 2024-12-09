@@ -901,6 +901,14 @@ Vous arrivez sur la page de l'outil **Grafana** qui permet d'observer les métri
 
 ## Les secrets
 
+::: {.callout-important title="Enigme du Père Fouras" icon="false"}
+Plus j'ai de gardiens, moins je suis gardé.
+
+Moins j'ai de gardiens, plus je suis gardé.
+
+Qui suis-je ?
+:::
+
 Certains éléments ne doivent pas être diffusés dans votre code (jetons d'accès, mots de passe...).
 
 Pour éviter d'avoir à nettoyer votre code à chaque fois que vous le poussez sur GitHub, le datalab propose de gérer vos secrets.
