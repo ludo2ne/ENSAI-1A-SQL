@@ -22,34 +22,6 @@ lightbox: true
 
 Ce sujet vous occupera pour les TP4 et 5.
 
-::: {.callout-note collapse="true" title="Reprise TP5"}
-Après avoir chargé les données pour le TP5, veuillez appliquer ces corrections vues lors d'un exercice du TP4 :
-
-```{.sql}
-UPDATE echecs.joueuse
-   SET elo = elo - 1200
- WHERE elo > 2600
-   AND code_titre IS NULL;
-
-UPDATE echecs.joueuse
-   SET date_naissance = date_naissance + INTERVAL '100 years'
- WHERE id_joueuse IN (111, 122, 133, 144);
-
-UPDATE echecs.joueuse
-   SET date_naissance = date_naissance - INTERVAL '100 years'
- WHERE id_joueuse IN (155, 166, 177, 188);
-
-UPDATE echecs.joueuse
-   SET nom = REPLACE(REPLACE(REPLACE(nom, 'EUH', 'E'), 'AO', 'A'), 'OU', 'U')
- WHERE code_titre IS NULL;
-
-DELETE FROM echecs.partie
- WHERE id_blanc = id_noir;
-```
-
-:::
-
-
 ## Lancement des services
 
 Connectez-vous à l'une des 2 instances suivantes d'Onyxia (elles sont quasiment identiques) :
@@ -81,6 +53,33 @@ Votre mission du jour sera d'aider la nouvellement créée *Fédération França
   - Cliquez sur la petite icone sous les triangles oranges qui ressemble à :scroll:
   - raccourci (ALT + X)
 
+
+::: {.callout-note title="Reprise TP5"}
+Après avoir chargé les données pour le TP5, veuillez appliquer ces corrections vues lors d'un exercice du TP4 :
+
+```{.sql}
+UPDATE echecs.joueuse
+   SET elo = elo - 1200
+ WHERE elo > 2600
+   AND code_titre IS NULL;
+
+UPDATE echecs.joueuse
+   SET date_naissance = date_naissance + INTERVAL '100 years'
+ WHERE id_joueuse IN (111, 122, 133, 144);
+
+UPDATE echecs.joueuse
+   SET date_naissance = date_naissance - INTERVAL '100 years'
+ WHERE id_joueuse IN (155, 166, 177, 188);
+
+UPDATE echecs.joueuse
+   SET nom = REPLACE(REPLACE(REPLACE(nom, 'EUH', 'E'), 'AO', 'A'), 'OU', 'U')
+ WHERE code_titre IS NULL;
+
+DELETE FROM echecs.partie
+ WHERE id_blanc = id_noir;
+```
+
+:::
 
 ### Description
 
@@ -183,6 +182,15 @@ Mais pour faire plus simple, la fédé a décidé de nommer comme présidente de
 
 
 
+## Remise en route TP5
+
+- [ ] Affichez noms, prénoms, elo des joueuses ainsi que le nom de leur club. Ordonnez par elo décroissant
+  - Combien avez-vous de lignes ?
+  - Combien de lignes compte la table *joueuse* ?
+- [ ] Affichez tous les noms, prénoms, elo des joueuses ainsi que leur éventuel nom de club
+- [ ] Ajoutez à la précédente requête l'éventuel nom du titre de la joueuse
+
+
 ## Quelques statistiques
 
 ::: {.callout-important icon="false" appearance="simple"}
@@ -204,10 +212,10 @@ Regardons maintenant quelques statistiques sur ces données.
 
 - [ ] Complétez pour ne conserver que les tournois avec 20 % ou moins de matchs nuls
 
-Jetons maintenant un oeil aux ouvertures qui permettent de gagenr plus souvent
+Jetons maintenant un oeil aux ouvertures qui permettent de gagner plus souvent
 
 ::: {.callout-note title="Ouvertures"}
-En début de partie, le nombre de coup reste assez limité. Les différentes possibilités de commencer une partie sont catégorisées et appelées Ouvertures.
+En début de partie, le nombre de coups possibles et corrects reste assez limité. Les différentes possibilités de commencer une partie sont catégorisées et appelées Ouvertures.
 
 Vient ensuite le milieu de jeu lorsque toutes les pièces sont développées.
 
@@ -261,7 +269,7 @@ Une performance est une victoire contre une joueuse ayant au moins 400 points el
 - [ ] Classez-les par différence de elo décroissante
 
 ::: {.callout-important icon="false" appearance="simple"}
-Un parquet de :cookie: est à retirer dans le bureau du professeur pour la joueuse détentrice de la meilleure perf !
+Un paquet de :cookie: est à retirer dans le bureau du professeur pour la joueuse détentrice de la meilleure perf !
 
 Et pour l'autrice de la plus belle contre-perf, notre partenaire premium, la [Fédération Française de la Lose](https://fflose.com/){target="_blank"} offre un magnifique tee-shirt floqué *Reine des Mazettes*, *J'ai raté un mat en 1*, *Je suis passé de +10 à -10* ou encore *J'ai fait pat avec Roi et Dame contre Roi*.
 :::

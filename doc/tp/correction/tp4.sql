@@ -164,6 +164,39 @@ SELECT c.nom,
 
 
 ----------------------------------------------------------------------
+-- Remise en route TP5
+----------------------------------------------------------------------
+
+SELECT j.nom,
+       j.prenom,
+       j.elo,
+       c.nom AS "Nom club"
+  FROM echecs.joueuse j
+  JOIN echecs.club c USING(id_club)
+ ORDER BY elo DESC;
+  
+SELECT j.nom,
+       j.prenom,
+       j.elo,
+       c.nom AS "Nom club"
+  FROM echecs.joueuse j
+  LEFT JOIN echecs.club c USING(id_club)
+ ORDER BY elo DESC;
+ 
+   
+SELECT j.nom,
+       j.prenom,
+       j.elo,
+       t.nom AS "Titre",
+       c.nom AS "Nom club"
+  FROM echecs.joueuse j
+  LEFT JOIN echecs.club c USING(id_club)
+  LEFT JOIN echecs.titre t ON j.code_titre = t.code
+ ORDER BY elo DESC;
+ 
+
+
+----------------------------------------------------------------------
 -- Statistiques sur les parties
 ----------------------------------------------------------------------
 
