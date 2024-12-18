@@ -4,7 +4,21 @@
     "href": "index.html",
     "title": "Base de données relationnelles",
     "section": "",
-    "text": "6h de cours\n18h de TP/TD\n\nContenu du cours :\n\nLes bases de données\n\nLes bases de données relationnelles\n\nIntroduction au langage SQL\n\nCréer des tables\nLire des tables\n\nLes Agrégations\nL’Algébre relationnelle\nLes jointures\nSQL avancé (Vues, Index, Droits, CTE)\nModélisation UML\n\nFormes normales"
+    "text": "6h de cours\n18h de TP/TD"
+  },
+  {
+    "objectID": "index.html#contenu-du-cours",
+    "href": "index.html#contenu-du-cours",
+    "title": "Base de données relationnelles",
+    "section": "Contenu du cours",
+    "text": "Contenu du cours\n\nLes bases de données\n\nLes bases de données relationnelles\n\nIntroduction au langage SQL\n\nCréer des tables\nLire des tables\n\nLes Agrégations\nL’Algébre relationnelle\nLes jointures\nSQL avancé (Vues, Index, Droits, CTE)\nModélisation UML\n\nFormes normales"
+  },
+  {
+    "objectID": "index.html#correction-des-tp",
+    "href": "index.html#correction-des-tp",
+    "title": "Base de données relationnelles",
+    "section": "Correction des TP",
+    "text": "Correction des TP\n\nTP1\nTP2\nTP3\nTP4"
   },
   {
     "objectID": "doc/cours/jointures.html",
@@ -410,7 +424,7 @@
     "href": "doc/tp/tp4.html#remise-en-route-tp5",
     "title": "Chess Unofficial Federation",
     "section": "5 Remise en route TP5",
-    "text": "5 Remise en route TP5\n\nAffichez noms, prénoms, elo des joueuses ainsi que le nom de leur club. Ordonnez par elo décroissant\n\nCombien avez-vous de lignes ?\nCombien de lignes compte la table joueuse ?\n\nAffichez tous les noms, prénoms, elo des joueuses ainsi que leur éventuel nom de club\nAjoutez à la précédente requête l’éventuel nom du titre de la joueuse"
+    "text": "5 Remise en route TP5\nQuelques questions faciles pour se remettre en route.\n\nAffichez noms, prénoms, elo des joueuses ainsi que le nom de leur club. Ordonnez par elo décroissant\n\nCombien avez-vous de lignes ?\nCombien de lignes compte la table joueuse ?\n\nAffichez tous les noms, prénoms, elo des joueuses ainsi que leur éventuel nom de club\nAjoutez à la précédente requête l’éventuel nom du titre de la joueuse"
   },
   {
     "objectID": "doc/tp/tp4.html#quelques-statistiques",
