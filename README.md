@@ -5,6 +5,7 @@
 - [ ] dire de creer compte ssp cloud avec mail prenom.nom@eleve.ensai.fr avant le 1er TP
 - [ ] Soucis pour lancer cloudBeaver avec le wifi ENSAI
 - [ ] callout block -> couleurs moches dans les diapos lors du deploy sur github
+- [ ] Ajouter un UPDATE FROM dans les diapos
 
 ### Cours 2024
 

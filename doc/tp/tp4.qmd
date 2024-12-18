@@ -184,6 +184,8 @@ Mais pour faire plus simple, la fédé a décidé de nommer comme présidente de
 
 ## Remise en route TP5
 
+Quelques questions faciles pour se remettre en route.
+
 - [ ] Affichez noms, prénoms, elo des joueuses ainsi que le nom de leur club. Ordonnez par elo décroissant
   - Combien avez-vous de lignes ?
   - Combien de lignes compte la table *joueuse* ?

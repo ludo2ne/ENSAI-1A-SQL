@@ -89,9 +89,9 @@ CREATE TABLE echecs.Tricheuse
 AS
 SELECT * 
   FROM echecs.joueuse
- WHERE id_joueuse IN(SELECT id_blanc
-                       FROM echecs.partie
-                      WHERE id_blanc = id_noir);
+ WHERE id_joueuse IN (SELECT id_blanc
+                        FROM echecs.partie
+                       WHERE id_blanc = id_noir);
 
 
 -- suppression des parties suspectes
@@ -174,7 +174,8 @@ SELECT j.nom,
   FROM echecs.joueuse j
   JOIN echecs.club c USING(id_club)
  ORDER BY elo DESC;
-  
+
+
 SELECT j.nom,
        j.prenom,
        j.elo,
@@ -183,7 +184,7 @@ SELECT j.nom,
   LEFT JOIN echecs.club c USING(id_club)
  ORDER BY elo DESC;
  
-   
+
 SELECT j.nom,
        j.prenom,
        j.elo,
@@ -193,7 +194,6 @@ SELECT j.nom,
   LEFT JOIN echecs.club c USING(id_club)
   LEFT JOIN echecs.titre t ON j.code_titre = t.code
  ORDER BY elo DESC;
- 
 
 
 ----------------------------------------------------------------------
@@ -215,10 +215,11 @@ SELECT t.nom AS tournoi,
 -- Taux de victoire blanches, noires et matchs nuls
 SELECT t.nom AS tournoi,
        COUNT(*) AS nb_parties,
-       ROUND(1.0 * COUNT(*) FILTER (WHERE id_resultat = 1) / COUNT(*), 2) AS tx_victoire_blancs,
-       ROUND(1.0 * COUNT(*) FILTER (WHERE id_resultat = 3) / COUNT(*), 2) AS tx_match_nul,
-       ROUND(1.0 * COUNT(*) FILTER (WHERE id_resultat = 2) / COUNT(*), 2) AS tx_victoire_noirs
+       ROUND(1.0 * COUNT(*) FILTER (WHERE rp.description = 'Victoire des blancs') / COUNT(*), 2) AS tx_victoire_blancs,
+       ROUND(1.0 * COUNT(*) FILTER (WHERE rp.description = 'Victoire des noirs') / COUNT(*), 2) AS tx_match_nul,
+       ROUND(1.0 * COUNT(*) FILTER (WHERE rp.description = 'Match nul') / COUNT(*), 2) AS tx_victoire_noirs
   FROM echecs.partie p
+  JOIN echecs.resultat_partie rp USING(id_resultat)
   LEFT JOIN echecs.tournoi t USING(id_tournoi)
  GROUP BY t.nom;
 
@@ -226,10 +227,11 @@ SELECT t.nom AS tournoi,
 -- Taux de matchs nuls inférieur à 0.2
 SELECT t.nom AS tournoi,
        COUNT(*) AS nb_parties,
-       ROUND(1.0 * COUNT(*) FILTER (WHERE id_resultat = 1) / COUNT(*), 2) AS tx_victoire_blancs,
-       ROUND(1.0 * COUNT(*) FILTER (WHERE id_resultat = 3) / COUNT(*), 2) AS tx_match_nul,
-       ROUND(1.0 * COUNT(*) FILTER (WHERE id_resultat = 2) / COUNT(*), 2) AS tx_victoire_noirs
+       ROUND(1.0 * COUNT(*) FILTER (WHERE rp.description = 'Victoire des blancs') / COUNT(*), 2) AS tx_victoire_blancs,
+       ROUND(1.0 * COUNT(*) FILTER (WHERE rp.description = 'Victoire des noirs') / COUNT(*), 2) AS tx_match_nul,
+       ROUND(1.0 * COUNT(*) FILTER (WHERE rp.description = 'Match nul') / COUNT(*), 2) AS tx_victoire_noirs
   FROM echecs.partie p
+  JOIN echecs.resultat_partie rp USING(id_resultat)
   LEFT JOIN echecs.tournoi t USING(id_tournoi)
  GROUP BY t.nom
 HAVING ROUND(1.0 * COUNT(*) FILTER (WHERE id_resultat = 3) / COUNT(*), 2) <= 0.2;
@@ -245,6 +247,11 @@ SELECT *
                     FROM echecs.partie p
                    WHERE p.id_ouverture = o.id_ouverture);
 
+SELECT *
+  FROM echecs.ouverture o
+ WHERE id_ouverture NOT IN (SELECT id_ouverture
+                              FROM echecs.partie p);
+
 
 -- Suppression de la partie Bretonne
 DELETE FROM echecs.ouverture
@@ -254,9 +261,9 @@ DELETE FROM echecs.ouverture
 -- Stat sur les ouvertures
 SELECT o.nom AS Ouverture,
        COUNT(*) AS nb_parties,
-       ROUND(1.0 * COUNT(*) FILTER (WHERE id_resultat = 1) / COUNT(*),2) AS tx_victoire_blancs,
-       ROUND(1.0 * COUNT(*) FILTER (WHERE id_resultat = 3) / COUNT(*),2) AS tx_match_nul,
-       ROUND(1.0 * COUNT(*) FILTER (WHERE id_resultat = 2) / COUNT(*),2) AS tx_victoire_noirs
+       ROUND(1.0 * COUNT(*) FILTER (WHERE rp.description = 'Victoire des blancs') / COUNT(*), 2) AS tx_victoire_blancs,
+       ROUND(1.0 * COUNT(*) FILTER (WHERE rp.description = 'Victoire des noirs') / COUNT(*), 2) AS tx_match_nul,
+       ROUND(1.0 * COUNT(*) FILTER (WHERE rp.description = 'Match nul') / COUNT(*), 2) AS tx_victoire_noirs
   FROM echecs.ouverture o
   JOIN echecs.partie p USING(id_ouverture)
   JOIN echecs.resultat_partie rp USING(id_resultat)

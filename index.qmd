@@ -9,7 +9,7 @@ from: markdown+emoji
 - 6h de cours
 - 18h de TP/TD
 
-Contenu du cours :
+## Contenu du cours
 
 - Les bases de données
   - Les bases de données relationnelles
@@ -22,3 +22,11 @@ Contenu du cours :
 - SQL avancé (Vues, Index, Droits, CTE)
 - Modélisation UML
   - Formes normales
+
+
+## Correction des TP
+
+- [TP1](./doc/tp/correction/tp1.sql)
+- [TP2](./doc/tp/correction/tp2.sql)
+- [TP3](./doc/tp/correction/tp3.qmd)
+- [TP4](./doc/tp/correction/tp4.sql)
