@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Ludovic Deneuville">
-<meta name="description" content="Slides">
+<meta name="description" content="Explorer des données avec SQL">
 
-<title>Bases de Données Relationnelles et SQL – Base de données</title>
+<title>Découverte du SQL – Base de données</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -59,24 +59,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
-<script src="../../site_libs/quarto-html/quarto.js"></script>
-<script src="../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b53751a350365c71b6c909e95f209ed1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-bd706bf7cc79ec682822fd2bf903aab3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-903665f6a46130ffbaec3b80528a79ef.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b53751a350365c71b6c909e95f209ed1.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-bd706bf7cc79ec682822fd2bf903aab3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-903665f6a46130ffbaec3b80528a79ef.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -106,7 +106,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
 
-<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="floating nav-fixed">
@@ -116,7 +116,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../../index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Base de données</span>
     </a>
   </div>
@@ -127,7 +127,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html"> <i class="bi bi-house" role="img">
+    <a class="nav-link" href="../index.html"> <i class="bi bi-house" role="img">
 </i> 
 <span class="menu-text">Home</span></a>
   </li>  
@@ -137,35 +137,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-cours">    
         <li>
-    <a class="dropdown-item" href="../../doc/cours/intro.html">
+    <a class="dropdown-item" href="../doc/cours/intro.html">
  <span class="dropdown-text">Introduction</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../doc/cours/bases-de-donnees.html">
+    <a class="dropdown-item" href="../doc/cours/bases-de-donnees.html">
  <span class="dropdown-text">Base de données</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../doc/cours/sql-intro.html">
+    <a class="dropdown-item" href="../doc/cours/sql-intro.html">
  <span class="dropdown-text">Introduction à SQL</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../doc/cours/agregations.html">
+    <a class="dropdown-item" href="../doc/cours/agregations.html">
  <span class="dropdown-text">Agrégations</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../doc/cours/algebre.html">
+    <a class="dropdown-item" href="../doc/cours/algebre.html">
  <span class="dropdown-text">Algèbre Relationnelle</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../doc/cours/jointures.html">
+    <a class="dropdown-item" href="../doc/cours/jointures.html">
  <span class="dropdown-text">Jointures</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../doc/cours/sql-avance.html">
+    <a class="dropdown-item" href="../doc/cours/sql-avance.html">
  <span class="dropdown-text">SQL avancé</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../doc/cours/formalisation.html">
+    <a class="dropdown-item" href="../doc/cours/formalisation.html">
  <span class="dropdown-text">Formalisation des BDD</span></a>
   </li>  
     </ul>
@@ -176,19 +176,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-tp">    
         <li>
-    <a class="dropdown-item" href="../../doc/tp/tp1.html">
+    <a class="dropdown-item" href="../doc/tp/tp1.html">
  <span class="dropdown-text">TP1 - Premières requêtes</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../doc/tp/tp2.html">
+    <a class="dropdown-item" href="../doc/tp/tp2.html">
  <span class="dropdown-text">TP2 - Vintage</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../doc/tp/tp3.html">
+    <a class="dropdown-item" href="../doc/tp/tp3.html">
  <span class="dropdown-text">TP3 - Datalab</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../doc/tp/tp4.html">
+    <a class="dropdown-item" href="../doc/tp/tp4.html">
  <span class="dropdown-text">TP4 - Chess Unofficial Fed</span></a>
   </li>  
     </ul>
@@ -196,7 +196,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../doc/glossaire.html"> 
+    <a class="nav-link" href="../doc/glossaire.html"> 
 <span class="menu-text">Glossaire</span></a>
   </li>  
   <li class="nav-item compact">
@@ -221,19 +221,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <nav id="TOC" role="doc-toc" class="toc-active">
+    <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="3">
     <h2 id="toc-title">On this page</h2>
    
+  <ul>
+  <li><a href="#définitions" id="toc-définitions" class="nav-link active" data-scroll-target="#définitions"><span class="header-section-number">1</span> Définitions</a></li>
+  <li><a href="#fichier-des-prénoms" id="toc-fichier-des-prénoms" class="nav-link" data-scroll-target="#fichier-des-prénoms"><span class="header-section-number">2</span> Fichier des prénoms</a>
   <ul class="collapse">
-  <li><a href="#bases-de-données-relationnelles-et-sql" id="toc-bases-de-données-relationnelles-et-sql" class="nav-link active" data-scroll-target="#bases-de-données-relationnelles-et-sql">Bases de Données Relationnelles et SQL</a></li>
-  <li><a href="#objectifs" id="toc-objectifs" class="nav-link" data-scroll-target="#objectifs">Objectifs</a></li>
-  <li><a href="#sql" id="toc-sql" class="nav-link" data-scroll-target="#sql">SQL</a></li>
-  <li><a href="#conventions" id="toc-conventions" class="nav-link" data-scroll-target="#conventions">Conventions</a></li>
-  <li><a href="#les-tp" id="toc-les-tp" class="nav-link" data-scroll-target="#les-tp">Les TP</a></li>
-  <li><a href="#évaluation" id="toc-évaluation" class="nav-link" data-scroll-target="#évaluation">Évaluation</a></li>
-  <li><a href="#bibliographie" id="toc-bibliographie" class="nav-link" data-scroll-target="#bibliographie">Bibliographie</a></li>
+  <li><a href="#aperçu-du-fichier-national" id="toc-aperçu-du-fichier-national" class="nav-link" data-scroll-target="#aperçu-du-fichier-national"><span class="header-section-number">2.1</span> Aperçu du fichier national</a></li>
+  </ul></li>
+  <li><a href="#lancement" id="toc-lancement" class="nav-link" data-scroll-target="#lancement"><span class="header-section-number">3</span> Lancement</a></li>
+  <li><a href="#exercice" id="toc-exercice" class="nav-link" data-scroll-target="#exercice"><span class="header-section-number">4</span> Exercice</a>
+  <ul class="collapse">
+  <li><a href="#initialisation" id="toc-initialisation" class="nav-link" data-scroll-target="#initialisation"><span class="header-section-number">4.1</span> Initialisation</a></li>
+  <li><a href="#top-10-féminin-2023" id="toc-top-10-féminin-2023" class="nav-link" data-scroll-target="#top-10-féminin-2023"><span class="header-section-number">4.2</span> Top 10 féminin 2023</a></li>
+  <li><a href="#par-départements" id="toc-par-départements" class="nav-link" data-scroll-target="#par-départements"><span class="header-section-number">4.3</span> Par départements</a></li>
+  </ul></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="intro-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+</nav>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -244,12 +249,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Bases de Données Relationnelles et SQL</h1>
+<h1 class="title">Découverte du SQL</h1>
 </div>
 
 <div>
   <div class="description">
-    <a href="intro-slides.html">Slides</a>
+    Explorer des données avec SQL
   </div>
 </div>
 
@@ -272,188 +277,299 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="bases-de-données-relationnelles-et-sql" class="level2">
-<h2 class="anchored" data-anchor-id="bases-de-données-relationnelles-et-sql">Bases de Données Relationnelles et SQL</h2>
+<section id="définitions" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="définitions"><span class="header-section-number">1</span> Définitions</h2>
 <ul>
-<li>6h CM</li>
-<li>15h TP + 3h TD</li>
-<li><code>ludovic.deneuville@ensai.fr</code></li>
-<li>bureau 161</li>
-<li>sur la base des cours de Benjamin Girault</li>
-</ul>
-</section>
-<section id="objectifs" class="level2">
-<h2 class="anchored" data-anchor-id="objectifs">Objectifs</h2>
+<li>Base de données : Ensemble de tableaux</li>
+<li>Table :
 <ul>
-<li>Interrogation</li>
-<li>Création</li>
-<li>Modélisation</li>
-<li>Savoir utiliser le langage SQL</li>
-</ul>
-<div class="notes">
-<p>UML pour la modélisation</p>
-</div>
-</section>
-<section id="sql" class="level2">
-<h2 class="anchored" data-anchor-id="sql">SQL</h2>
+<li>Lignes (individus)</li>
+<li>Colonnes (attributs)</li>
+</ul></li>
+<li>Types de Données :
 <ul>
-<li>Syntaxe simple</li>
-<li>Efficace</li>
-<li>Très utilisé</li>
-</ul>
-<div class="notes">
-<ul>
-<li>Compétence indispensable du Datascientist</li>
-<li>ça s’encapsule dans plein de langages (R, Python, Julia, Stata, SAS…)</li>
-<li>utile pour Big Data</li>
-</ul>
-</div>
-</section>
-<section id="conventions" class="level2">
-<h2 class="anchored" data-anchor-id="conventions">Conventions</h2>
-<ul>
-<li><code>&lt;...&gt;</code> : texte à remplacer</li>
-<li><code>[...]</code> : élément optionnel</li>
-<li>Une requête se termine par un <code>;</code></li>
-<li><code>-- Ce qui vient ensuite est commenté</code></li>
-</ul>
-<div class="notes">
-<ul>
-<li>Parfois possible d’utiliser <code>/* commentaire */</code></li>
-<li><code>;</code> : même si les logiciels souvent s’en moquent</li>
-</ul>
-</div>
-<section id="requêtes-sql-jolies" class="level3">
-<h3 class="anchored" data-anchor-id="requêtes-sql-jolies">Requêtes SQL jolies</h3>
-<ul>
-<li>retour à la ligne</li>
-<li>mots clés alignés</li>
-<li>Mots clés en MAJUSCULE</li>
-</ul>
-<div class="notes">
-<ul>
-<li>Mots clés en MAJUSCULE, reste en minuscules</li>
-</ul>
-</div>
-<hr>
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>pasbien.sql</strong></pre>
-</div>
-<div class="sourceCode" id="cb1" data-filename="pasbien.sql"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> c.nom <span class="kw">AS</span> club, <span class="fu">AVG</span>(j.elo) <span class="kw">AS</span> moyenne_elo <span class="kw">FROM</span> joueuse j <span class="kw">INNER</span> <span class="kw">JOIN</span> club c <span class="kw">USING</span> (id_club) <span class="kw">WHERE</span> mail <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">GROUP</span> <span class="kw">BY</span> c.nom <span class="kw">ORDER</span> <span class="kw">BY</span> <span class="dv">2</span> <span class="kw">DESC</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="fragment">
-<div class="hide-html-render">
-<p><img src="https://media.giphy.com/media/xT5LMDiHQNDcF3F1vO/source.gif" class="img-fluid" style="width:50.0%"></p>
-</div>
-</div>
-<hr>
-<div class="code-with-filename">
-<div class="code-with-filename-file">
-<pre><strong>bien.sql</strong></pre>
-</div>
-<div class="sourceCode" id="cb2" data-filename="bien.sql"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> c.nom <span class="kw">AS</span> club, </span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">AVG</span>(j.elo) <span class="kw">AS</span> moyenne_elo</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> joueuse j </span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a> <span class="kw">INNER</span> <span class="kw">JOIN</span> club c <span class="kw">USING</span> (id_club) </span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> j.mail <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span> </span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a> <span class="kw">GROUP</span> <span class="kw">BY</span> c.nom </span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a> <span class="kw">ORDER</span> <span class="kw">BY</span> <span class="dv">2</span> <span class="kw">DESC</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="fragment">
-<div class="hide-html-render">
-<p><img src="https://media.giphy.com/media/3o7absbD7PbTFQa0c8/source.gif" class="img-fluid" style="width:50.0%"></p>
-</div>
-</div>
-<div class="notes">
-<p>Faites un effort pour vous même et pour vos relecteurs</p>
-</div>
-</section>
-</section>
-<section id="les-tp" class="level2">
-<h2 class="anchored" data-anchor-id="les-tp">Les TP</h2>
-<ul>
-<li>5 TP + 1 TD</li>
-<li>Base de données : PostgreSQL</li>
-<li>Outils : Datalab, cloudBeaver, DBeaver</li>
-</ul>
-<div class="notes">
-<ul>
-<li>BDD : PostgreSQL + DuckDB</li>
-<li>Peut-être un TP sur les VM
-<ul>
-<li>Dbeaver installé</li>
-<li>une bdd chacun sur un serveur ENSAI</li>
+<li>Texte (comme un nom, une adresse)</li>
+<li>Nombre (comme l’âge, le prix)</li>
+<li>Date</li>
+<li>Booléen</li>
 </ul></li>
 </ul>
-</div>
-<section id="ce-quil-faut-faire" class="level3">
-<h3 class="anchored" data-anchor-id="ce-quil-faut-faire">Ce qu’il faut faire</h3>
+<p>Pourquoi Utiliser une Base de Données ?</p>
 <ul>
-<li>Lire attentivement les consignes</li>
-<li>Essayer de résoudre par soi même</li>
-<li>Chercher dans le cours / sur internet</li>
-<li>Demander de l’aide à ses camarades</li>
-<li>Demander de l’aide à l’enseignant</li>
+<li>Parce que c’est mieux que d’utiliser du papier</li>
+<li>Permet de gérer de grandes quantités d’informations</li>
 </ul>
-<div class="notes">
-<p>ça peut paraitre un peu infentilisant mais c’est nécessaire de le rappeler !!!</p>
-<p>si je demande un setup… faites le sinon ça risque de péter plus tard.</p>
-</div>
 </section>
-<section id="à-ne-pas-faire" class="level3">
-<h3 class="anchored" data-anchor-id="à-ne-pas-faire">À ne pas faire</h3>
+<section id="fichier-des-prénoms" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="fichier-des-prénoms"><span class="header-section-number">2</span> Fichier des prénoms</h2>
+<p><a href="https://www.insee.fr/fr/statistiques/8205621?sommaire=8205628" class="uri">https://www.insee.fr/fr/statistiques/8205621?sommaire=8205628</a></p>
 <ul>
-<li>Poster l’énoncé sur ChatGPT</li>
-<li>Copier / Coller la réponse sans rien comprendre</li>
+<li>Fichier France</li>
+<li>Fichier par département de naissance</li>
 </ul>
-<div class="notes">
-<p>Sauf si vous voulez ne rien retenir…</p>
-<ul>
-<li>Je ne dis pas qu’il ne faut jamais utiliser les LLM</li>
-<li>ça peut servir pour débgugger</li>
-<li>ou pour des taches sans VA</li>
-</ul>
-</div>
+<section id="aperçu-du-fichier-national" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="aperçu-du-fichier-national"><span class="header-section-number">2.1</span> Aperçu du fichier national</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>sexe</th>
+<th>preusuel</th>
+<th>annais</th>
+<th>nombre</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>ANDRÉ</td>
+<td>1960</td>
+<td>4006</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>DENIS</td>
+<td>1960</td>
+<td>4658</td>
+</tr>
+<tr class="odd">
+<td>1</td>
+<td>FRÉDÉRIC</td>
+<td>1960</td>
+<td>4314</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>HERVÉ</td>
+<td>1960</td>
+<td>4326</td>
+</tr>
+<tr class="odd">
+<td>1</td>
+<td>JEAN-CLAUDE</td>
+<td>1960</td>
+<td>4030</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>JOËL</td>
+<td>1960</td>
+<td>4888</td>
+</tr>
+<tr class="odd">
+<td>1</td>
+<td>LAURENT</td>
+<td>1960</td>
+<td>4275</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>YVES</td>
+<td>1960</td>
+<td>4485</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>ANNE</td>
+<td>1960</td>
+<td>4813</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>CLAUDINE</td>
+<td>1960</td>
+<td>4194</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>ELISABETH</td>
+<td>1960</td>
+<td>4106</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>EVELYNE</td>
+<td>1960</td>
+<td>4888</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>LAURENCE</td>
+<td>1960</td>
+<td>4375</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>MARIE-CHRISTINE</td>
+<td>1960</td>
+<td>4096</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>MONIQUE</td>
+<td>1960</td>
+<td>4590</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>NICOLE</td>
+<td>1960</td>
+<td>4602</td>
+</tr>
+</tbody>
+</table>
 </section>
 </section>
-<section id="évaluation" class="level2">
-<h2 class="anchored" data-anchor-id="évaluation">Évaluation</h2>
-<ul>
-<li>Lundi 6 Janvier 10h</li>
-<li>Durée : 2h</li>
-<li>Sur papier</li>
-<li>Sans documents</li>
+<section id="lancement" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="lancement"><span class="header-section-number">3</span> Lancement</h2>
+<ul class="task-list">
+<li><label><input type="checkbox">Se connecter au SSPCloud</label></li>
+<li><label><input type="checkbox">Ouvrir un service CloudBeaver</label></li>
 </ul>
-<div class="notes">
-<ul>
-<li>partie QCM</li>
-<li>des requêtes SQL à écrire</li>
-<li>pas de pièges</li>
-<li>pour vérifier que vous retenez l’essentiel</li>
-</ul>
-</div>
 </section>
-<section id="bibliographie" class="level2 smaller">
-<h2 class="smaller anchored" data-anchor-id="bibliographie">Bibliographie</h2>
-<ul>
-<li><a href="https://laurent-audibert.developpez.com/Cours-BD/" target="_blank">https://laurent-audibert.developpez.com/Cours-BD/</a></li>
-<li><a href="https://upinfo.univ-cotedazur.fr/im/bases-de-donnees/" target="_blank">https://upinfo.univ-cotedazur.fr/im/bases-de-donnees/</a></li>
-<li><a href="https://oseox.fr/sql/" target="_blank">https://oseox.fr/sql/</a></li>
-<li><a href="https://learnsql.fr/blog/aide-memoire-pour-les-entretiens-sql/" target="_blank">https://learnsql.fr/blog/aide-memoire-pour-les-entretiens-sql/</a></li>
-<li><a href="https://datascientest.com/base-de-donnees-definition" target="_blank">https://datascientest.com/base-de-donnees-definition</a></li>
-<li><a href="https://www.postgresql.org/docs/current/sql.html" target="_blank">https://www.postgresql.org/docs/current/sql.html</a></li>
+<section id="exercice" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="exercice"><span class="header-section-number">4</span> Exercice</h2>
+<section id="initialisation" class="level3" data-number="4.1">
+<h3 data-number="4.1" class="anchored" data-anchor-id="initialisation"><span class="header-section-number">4.1</span> Initialisation</h3>
+<ul class="task-list">
+<li><label><input type="checkbox">Créons une vue pointant vers le fichier</label></li>
 </ul>
-<div class="notes">
-<p>Importance de la biblio en projet, stage</p>
-<ul>
-<li>désolé s’il y a des fautes, j’ai écrit ce cours un peu dans l’urgence</li>
-<li>n’hésitez pas à me les notifier (pas de point bonus)</li>
-<li>moi j’ai le droit, après je serai assez intransigent si vous laissez des fautes dans vos rapports</li>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">OR</span> <span class="kw">REPLACE</span> <span class="kw">VIEW</span> prenom_raw <span class="kw">AS</span> <span class="kw">FROM</span> <span class="st">'https://www.insee.fr/fr/statistiques/fichier/8205621/prenoms-2023-nat.parquet'</span>;</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> prenom_raw;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul class="task-list">
+<li><label><input type="checkbox">Suppression des données manquantes</label></li>
 </ul>
-</div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">OR</span> <span class="kw">REPLACE</span> <span class="kw">VIEW</span> prenom</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">AS</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> prenom_raw</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> annais <span class="op">&lt;&gt;</span> <span class="st">'XXXX'</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>   <span class="kw">AND</span> preusuel <span class="op">&lt;&gt;</span> <span class="st">'_PRENOMS_RARES'</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="top-10-féminin-2023" class="level3" data-number="4.2">
+<h3 data-number="4.2" class="anchored" data-anchor-id="top-10-féminin-2023"><span class="header-section-number">4.2</span> Top 10 féminin 2023</h3>
+<p>Le top 10 féminin annoncé pour l’année 2023 est le suivant :</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Rang</th>
+<th>Prénom</th>
+<th>Nombre</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>LOUISE</td>
+<td>3177</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>AMBRE</td>
+<td>3168</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>ALBA</td>
+<td>3088</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>JADE</td>
+<td>2891</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>EMMA</td>
+<td>2663</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>ROSE</td>
+<td>2375</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>ALMA</td>
+<td>2342</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>ALICE</td>
+<td>2256</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>ROMY</td>
+<td>2198</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>ANNA</td>
+<td>2129</td>
+</tr>
+</tbody>
+</table>
+<ul class="task-list">
+<li><label><input type="checkbox">Vérifions en écrivant une requête</label></li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> prenom</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> sexe <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>   <span class="kw">AND</span> annais <span class="op">=</span> <span class="st">'2023'</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a> <span class="kw">ORDER</span> <span class="kw">BY</span> nombre <span class="kw">DESC</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a> <span class="kw">LIMIT</span> <span class="dv">10</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul class="task-list">
+<li><label><input type="checkbox">Quel prénom est classé 11e dans cette liste ?</label></li>
+<li><label><input type="checkbox">Est-ce que l’on peut écrire ce prénom autrement ?</label></li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> prenom</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> annais <span class="op">=</span> <span class="st">'2023'</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>   <span class="kw">AND</span> STRIP_ACCENTS(preusuel) <span class="op">=</span> <span class="st">'EVA'</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul class="task-list">
+<li><label><input type="checkbox">Refaire le vrai classement</label></li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> STRIP_ACCENTS(preusuel),</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">SUM</span>(nombre) <span class="kw">AS</span> nb</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> prenom</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> sexe <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>   <span class="kw">AND</span> annais <span class="op">=</span> <span class="st">'2023'</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a> <span class="kw">GROUP</span> <span class="kw">BY</span> STRIP_ACCENTS(preusuel)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a> <span class="kw">ORDER</span> <span class="kw">BY</span> nb <span class="kw">DESC</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a> <span class="kw">LIMIT</span> <span class="dv">10</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>### Evolution au cours du temps</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a> <span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> prenom</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> preusuel <span class="op">=</span> <span class="st">'LUDOVIC'</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a> <span class="kw">ORDER</span> <span class="kw">BY</span> annais;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<ul class="task-list">
+<li><label><input type="checkbox">Faire un diagramme en barre avec matplotlib</label></li>
+<li><label><input type="checkbox">Demander à un LLM</label></li>
+</ul>
+</section>
+<section id="par-départements" class="level3" data-number="4.3">
+<h3 data-number="4.3" class="anchored" data-anchor-id="par-départements"><span class="header-section-number">4.3</span> Par départements</h3>
+<div class="sourceCode" id="cb7"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">OR</span> <span class="kw">REPLACE</span> <span class="kw">VIEW</span> prenom_dep_raw <span class="kw">AS</span> <span class="kw">FROM</span> <span class="st">'https://www.insee.fr/fr/statistiques/fichier/8205621/prenoms-2023-dpt.parquet'</span>;</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> prenom_dep_raw;</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">OR</span> <span class="kw">REPLACE</span> <span class="kw">VIEW</span> prenom_dep</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="kw">AS</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> sexe, </span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>       STRIP_ACCENTS(preusuel) <span class="kw">AS</span> preusuel, </span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>       annais, </span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>       dpt,</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>       nombre </span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> prenom_dep_raw</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> annais <span class="op">&lt;&gt;</span> <span class="st">'XXXX'</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>   <span class="kw">AND</span> dpt <span class="op">&lt;&gt;</span> <span class="st">'XX'</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>   <span class="kw">AND</span> preusuel <span class="op">&lt;&gt;</span> <span class="st">'_PRENOMS_RARES'</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
