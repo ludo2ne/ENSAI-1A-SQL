@@ -271,6 +271,12 @@ GRANT ALL PRIVILEGES ON echecs.joueuse TO chantal WITH GRANT OPTION;
 - `PUBLIC` : tous les utilisateurs
 - Suffixe `WITH GRANT OPTION` pour donner le droit de transmettre ce droit
 
+::: {.notes}
+Remarque :
+
+- Si vous donnez les droits WITH GRANT OPTION à quelqu'un
+- Cette personne peut ensuite vous retirer les droits !
+:::
 
 ### Retirer des droits
 

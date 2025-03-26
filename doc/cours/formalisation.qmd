@@ -298,3 +298,10 @@ classDiagram
     joueuse "1" -- "*" participe
     participe "*" -- "1" tournoi
 ```
+
+### Outils 
+
+De nombreux outils existent pour faire des diagrammes UML, soit en mode graphique ou code, par exemple :
+
+- <https://app.diagrams.net/>{target="_blank"}
+- <https://dbdiagram.io/d>{target="_blank"}

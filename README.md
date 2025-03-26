@@ -6,6 +6,12 @@
 - [ ] Soucis pour lancer cloudBeaver avec le wifi ENSAI
 - [ ] callout block -> couleurs moches dans les diapos lors du deploy sur github
 - [ ] Ajouter un UPDATE FROM dans les diapos
+- [ ] PArler un peu plus des databases nosql 
+  - https://blog.amigoscode.com/p/relational-vs-nosql-databases
+  - https://blog.amigoscode.com/p/sql-vs-nosql-explained
+  - https://www.sqlnoir.com/
+- Instister sur ces notions pour les Master STD
+  - Intégrité référentielle, Trigger, Procédure stockée
 
 ### Cours 2024
 

@@ -1,0 +1,174 @@
+---
+title: "Découverte du SQL"
+description: "Explorer des données avec SQL"
+author: "Ludovic Deneuville"
+format: 
+  html:
+    toc: true
+    toc-location: left
+    toc-expand: 3
+from: markdown+emoji
+number-sections: true
+number-depth: 3
+---
+
+## Définitions
+
+- Base de données : Ensemble de tableaux
+- Table : 
+  - Lignes (individus)
+  - Colonnes (attributs)
+- Types de Données :
+  - Texte (comme un nom, une adresse)
+  - Nombre (comme l'âge, le prix)
+  - Date
+  - Booléen
+
+Pourquoi Utiliser une Base de Données ?
+
+- Parce que c'est mieux que d'utiliser du papier
+- Permet de gérer de grandes quantités d'informations
+
+## Fichier des prénoms
+
+<https://www.insee.fr/fr/statistiques/8205621?sommaire=8205628>
+
+- Fichier France
+- Fichier par département de naissance
+
+### Aperçu du fichier national
+
+| sexe | preusuel        | annais | nombre |
+|------|-----------------|--------|--------|
+| 1    | ANDRÉ           | 1960   | 4006   |
+| 1    | DENIS           | 1960   | 4658   |
+| 1    | FRÉDÉRIC        | 1960   | 4314   |
+| 1    | HERVÉ           | 1960   | 4326   |
+| 1    | JEAN-CLAUDE     | 1960   | 4030   |
+| 1    | JOËL            | 1960   | 4888   |
+| 1    | LAURENT         | 1960   | 4275   |
+| 1    | YVES            | 1960   | 4485   |
+| 2    | ANNE            | 1960   | 4813   |
+| 2    | CLAUDINE        | 1960   | 4194   |
+| 2    | ELISABETH       | 1960   | 4106   |
+| 2    | EVELYNE         | 1960   | 4888   |
+| 2    | LAURENCE        | 1960   | 4375   |
+| 2    | MARIE-CHRISTINE | 1960   | 4096   |
+| 2    | MONIQUE         | 1960   | 4590   |
+| 2    | NICOLE          | 1960   | 4602   |
+
+
+
+## Lancement
+
+- [ ] Se connecter au SSPCloud
+- [ ] Ouvrir un service CloudBeaver
+
+## Exercice
+
+### Initialisation
+
+
+- [ ] Créons une vue pointant vers le fichier
+
+```{.sql}
+CREATE OR REPLACE VIEW prenom_raw AS FROM 'https://www.insee.fr/fr/statistiques/fichier/8205621/prenoms-2023-nat.parquet';
+
+SELECT *
+  FROM prenom_raw;
+```
+
+- [ ] Suppression des données manquantes
+
+```{.sql}
+CREATE OR REPLACE VIEW prenom
+AS
+SELECT *
+  FROM prenom_raw
+ WHERE annais <> 'XXXX'
+   AND preusuel <> '_PRENOMS_RARES';
+```
+
+### Top 10 féminin 2023
+
+Le top 10 féminin annoncé pour l'année 2023 est le suivant :
+
+| Rang | Prénom     | Nombre |
+|------|------------|--------|
+| 1    | LOUISE     | 3177   |
+| 2    | AMBRE      | 3168   |
+| 3    | ALBA       | 3088   |
+| 4    | JADE       | 2891   |
+| 5    | EMMA       | 2663   |
+| 6    | ROSE       | 2375   |
+| 7    | ALMA       | 2342   |
+| 8    | ALICE      | 2256   |
+| 9    | ROMY       | 2198   |
+| 10   | ANNA       | 2129   |
+
+- [ ] Vérifions en écrivant une requête
+
+```{.sql}
+SELECT *
+  FROM prenom
+ WHERE sexe = 2
+   AND annais = '2023'
+ ORDER BY nombre DESC
+ LIMIT 10;
+```
+
+- [ ] Quel prénom est classé 11e dans cette liste ?
+- [ ] Est-ce que l'on peut écrire ce prénom autrement ?
+
+```{.sql}
+SELECT *
+  FROM prenom
+ WHERE annais = '2023'
+   AND STRIP_ACCENTS(preusuel) = 'EVA';
+```
+
+- [ ] Refaire le vrai classement
+
+```{.sql}
+SELECT STRIP_ACCENTS(preusuel),
+       SUM(nombre) AS nb
+  FROM prenom
+ WHERE sexe = 2
+   AND annais = '2023'
+ GROUP BY STRIP_ACCENTS(preusuel)
+ ORDER BY nb DESC
+ LIMIT 10;
+ ```
+
+ ### Evolution au cours du temps
+
+```{.sql}
+ SELECT *
+  FROM prenom
+ WHERE preusuel = 'LUDOVIC'
+ ORDER BY annais;
+```
+
+- [ ] Faire un diagramme en barre avec matplotlib
+- [ ] Demander à un LLM
+
+### Par départements
+
+```{.sql}
+CREATE OR REPLACE VIEW prenom_dep_raw AS FROM 'https://www.insee.fr/fr/statistiques/fichier/8205621/prenoms-2023-dpt.parquet';
+
+SELECT *
+  FROM prenom_dep_raw;
+
+CREATE OR REPLACE VIEW prenom_dep
+AS
+SELECT sexe, 
+       STRIP_ACCENTS(preusuel) AS preusuel, 
+       annais, 
+       dpt,
+       nombre 
+  FROM prenom_dep_raw
+ WHERE annais <> 'XXXX'
+   AND dpt <> 'XX'
+   AND preusuel <> '_PRENOMS_RARES';
+```
