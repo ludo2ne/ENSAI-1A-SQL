@@ -12,6 +12,15 @@ number-sections: true
 number-depth: 3
 ---
 
+:construction:
+
+:::{.notes}
+Idées :
+
+- évolution du classement
+- nombre de fois donné par an pour 10000 naissances
+:::
+
 ## Définitions
 
 - Base de données : Ensemble de tableaux
@@ -140,6 +149,20 @@ SELECT STRIP_ACCENTS(preusuel),
  LIMIT 10;
  ```
 
+ - [ ] Corriger les données
+
+ ```{.sql}
+CREATE OR REPLACE VIEW prenom
+AS
+SELECT sexe, 
+       STRIP_ACCENTS(preusuel) AS preusuel, 
+       annais, 
+       nombre 
+  FROM prenom_raw
+ WHERE annais <> 'XXXX'
+   AND preusuel <> '_PRENOMS_RARES';
+ ```
+
  ### Evolution au cours du temps
 
 ```{.sql}
@@ -151,6 +174,253 @@ SELECT STRIP_ACCENTS(preusuel),
 
 - [ ] Faire un diagramme en barre avec matplotlib
 - [ ] Demander à un LLM
+
+
+::: {.callout-note title="Code Python" collapse="true"}
+```{.python}
+import duckdb
+import matplotlib.pyplot as plt
+import pandas as pd
+import numpy as np
+from matplotlib.colors import LinearSegmentedColormap
+
+con = duckdb.connect(database=':memory:', read_only=False)
+
+parquet_url = 'https://www.insee.fr/fr/statistiques/fichier/8205621/prenoms-2023-nat.parquet'
+
+try:
+    con.execute("SET force_download=true")
+    
+    con.execute(f"""
+        CREATE OR REPLACE VIEW prenom_raw AS FROM '{parquet_url}';
+    """)
+
+    con.execute(f"""
+        CREATE OR REPLACE VIEW prenom
+        AS
+        SELECT sexe, 
+               STRIP_ACCENTS(preusuel) AS preusuel, 
+               annais, 
+               nombre 
+          FROM prenom_raw
+         WHERE annais <> 'XXXX'
+           AND preusuel <> '_PRENOMS_RARES';
+    """)
+
+except duckdb.Error as e:
+    print(f"An error occurred with DuckDB: {e}")
+    con.close()
+except Exception as e:
+    print(f"An unexpected error occurred: {e}")
+    con.close()
+
+prenom = "LUDOVIC"
+
+try:
+    query = f"""
+        SELECT annais, nombre
+        FROM prenom
+        WHERE preusuel = '{prenom}'
+          AND annais <> 'XXXX'
+          AND annais >= '1950'
+        ORDER BY annais;
+    """
+    result = con.execute(query).fetchdf()
+
+    if not result.empty:
+        years = [int(y) for y in result['annais']]
+        counts = result['nombre']
+
+        # Create the bar plot
+        plt.figure(figsize=(10, 6))
+        plt.bar(years, counts, color='skyblue')
+
+        #cmap = LinearSegmentedColormap.from_list("gradient", ["darkgreen", "orange"])
+        #norm = plt.Normalize(vmin=min(counts), vmax=max(counts))
+        #plt.bar(years, counts, color=cmap(norm(counts)))
+
+        # Add labels and title
+        plt.xlabel("Année")
+        plt.ylabel("Nombre de fois")
+        plt.title(f"Évolution du Prénom {prenom} par Année")
+
+        years_to_show = np.arange(min(years), max(years) + 1, 10)
+        plt.xticks(years_to_show, rotation=45, ha='right')
+        plt.tight_layout()
+
+        # Show the plot
+        plt.grid(axis='y', linestyle='--')
+        plt.show()
+
+    else:
+        print("No data found for the first name 'LUDOVIC'.")
+
+except duckdb.Error as e:
+    print(f"An error occurred with DuckDB: {e}")
+except Exception as e:
+    print(f"An unexpected error occurred: {e}")
+```
+:::
+
+### Prénoms les plus donnés chaque année
+
+```{.sql}
+WITH ranked_prenoms AS (
+    SELECT
+        sexe,
+        preusuel,
+        annais,
+        nombre,
+        RANK() OVER (PARTITION BY annais ORDER BY nombre DESC) as rnk
+    FROM prenom
+   WHERE sexe = 2 AND annais >= '1950'
+)
+SELECT annais,
+       preusuel
+  FROM ranked_prenoms
+ WHERE rnk = 1
+ ORDER BY annais;
+```
+
+### Différents prénoms
+
+```{.sql}
+CREATE OR REPLACE VIEW differents
+AS
+SELECT DISTINCT(preusuel)
+  FROM prenom;
+
+SELECT COUNT(1) 
+ FROM differents;
+
+SELECT *
+ FROM differents
+WHERE preusuel LIKE '%A%B%C%';
+
+
+SELECT *
+ FROM differents
+WHERE preusuel LIKE '%W%W%';
+```
+
+
+### Prénoms mixtes
+
+```{.sql}
+SELECT preusuel,
+       SUM(nombre) FILTER (WHERE sexe = 1) AS masculin,
+       SUM(nombre) FILTER (WHERE sexe = 2) AS feminin
+  FROM prenom
+ GROUP BY preusuel
+HAVING masculin > 1000 AND feminin > 1000
+ ORDER BY masculin + feminin DESC
+```
+
+::: {.callout-note title="Code Python" collapse="true"}
+```{.python}
+prenom = "ALIX"
+
+try:
+    query = f"""
+        SELECT preusuel,
+               annais,
+               SUM(nombre) FILTER (WHERE sexe = 1) AS masculin,
+               SUM(nombre) FILTER (WHERE sexe = 2) AS feminin
+          FROM prenom
+         WHERE preusuel = '{prenom}'
+           AND annais <> 'XXXX'
+           AND annais >= '1950'
+         GROUP BY preusuel,
+                  annais
+         ORDER BY annais
+    """
+    result = con.execute(query).fetchdf()
+
+    if not result.empty:
+
+        years = [int(y) for y in result['annais']]
+        countf = result['feminin']
+        countm = result['masculin']
+        
+        # Create the bar plot
+        plt.figure(figsize=(10, 6))
+        
+        plt.bar([y+0.2 for y in years], countf, color='lightcoral', label='Femmes')
+        plt.bar(years, countm, color='lightskyblue', label='Hommes')
+        
+        # Add labels and title
+        plt.xlabel("Année")
+        plt.ylabel("Nombre de fois")
+        plt.title(f"Évolution du Prénom {prenom} par Année")
+        
+        years_to_show = np.arange(min(years), max(years) + 1, 10)
+        plt.xticks(years_to_show, rotation=45, ha='right')
+        plt.tight_layout()
+        
+        # Add a legend
+        plt.legend()
+        
+        # Show the plot
+        plt.grid(axis='y', linestyle='--')
+        plt.show()
+
+
+except duckdb.Error as e:
+    print(f"An error occurred with DuckDB: {e}")
+except Exception as e:
+    print(f"An unexpected error occurred: {e}")
+```
+:::
+
+
+### Première lettre
+
+```{.sql}
+SELECT annais,
+       preusuel[1],
+       SUM(nombre) AS nb
+  FROM prenom
+ WHERE annais <> 'XXXX'
+   AND annais = '2023'
+   AND sexe = 2
+ GROUP BY annais,
+          preusuel[1]
+ ORDER BY annais,
+          nb DESC
+```
+
+```{.sql}
+WITH ranked_prenoms AS (
+    SELECT
+        annais,
+        preusuel[1] AS preusuel,
+        SUM(nombre) AS nb,
+        sexe,
+        ROW_NUMBER() OVER (PARTITION BY annais, sexe ORDER BY SUM(nombre) DESC) AS rn
+    FROM
+        prenom
+    WHERE
+        annais <> 'XXXX'
+    GROUP BY
+        annais,
+        preusuel[1],
+        sexe
+)
+SELECT
+    annais,
+    MAX(CASE WHEN sexe = 1 THEN preusuel END) AS maculin,
+    MAX(CASE WHEN sexe = 2 THEN preusuel END) AS feminin
+FROM
+    ranked_prenoms
+WHERE
+    rn = 1
+GROUP BY
+    annais
+ORDER BY
+    annais;
+```
+
+
 
 ### Par départements
 

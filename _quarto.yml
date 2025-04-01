@@ -44,8 +44,14 @@ website:
           - href: doc/tp/tp4.qmd
             text: "TP4 - Chess Unofficial Fed"
     right:
-      - href: doc/glossaire.qmd
-        text: Glossaire
+      - text: Divers
+        menu:
+          - href: doc/glossaire.qmd
+            text: Glossaire
+          - href: doc/ressources.qmd
+            text: Ressources
+          - href: doc/decouverte.qmd
+            text: Découverte
       - icon: github
         href: "{{< meta var.url-repo >}}"
         target: "_blank"

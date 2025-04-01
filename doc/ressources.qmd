@@ -1,0 +1,15 @@
+---
+title: "Ressources"
+description: "Ressources pour apprendre le SQL"
+author: "Ludovic Deneuville"
+format: html
+from: markdown+emoji
+---
+
+<https://sql.sh/>
+
+
+### Le coin stat
+
+[SQL pour débutant](https://www.youtube.com/watch?v=LRjnjipMe54&list=PLyh35eYRez8cAEBfi1LWN70Cs77bBvCOp){target="blank"} en 7 vidéos par Natacha Njongwa Yepnga
+
