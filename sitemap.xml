@@ -2,98 +2,102 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://ludo2ne.github.io/ENSAI-1A-SQL/doc/decouverte.html</loc>
-    <lastmod>2025-03-26T16:24:53.958Z</lastmod>
+    <lastmod>2025-04-01T12:33:55.327Z</lastmod>
   </url>
   <url>
     <loc>https://ludo2ne.github.io/ENSAI-1A-SQL/doc/tp/tp4.html</loc>
-    <lastmod>2025-03-26T16:24:53.963Z</lastmod>
+    <lastmod>2025-04-01T12:33:55.332Z</lastmod>
   </url>
   <url>
     <loc>https://ludo2ne.github.io/ENSAI-1A-SQL/doc/tp/correction/tp3.html</loc>
-    <lastmod>2025-03-26T16:24:53.959Z</lastmod>
+    <lastmod>2025-04-01T12:33:55.328Z</lastmod>
   </url>
   <url>
-    <loc>https://ludo2ne.github.io/ENSAI-1A-SQL/doc/cours/sql-avance.html</loc>
-    <lastmod>2025-03-26T16:24:53.958Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ludo2ne.github.io/ENSAI-1A-SQL/doc/cours/sql-avance-slides.html</loc>
-    <lastmod>2025-03-26T16:24:53.958Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ludo2ne.github.io/ENSAI-1A-SQL/doc/cours/bases-de-donnees.html</loc>
-    <lastmod>2025-03-26T16:24:53.958Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ludo2ne.github.io/ENSAI-1A-SQL/doc/cours/bases-de-donnees-slides.html</loc>
-    <lastmod>2025-03-26T16:24:53.958Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ludo2ne.github.io/ENSAI-1A-SQL/doc/cours/formalisation.html</loc>
-    <lastmod>2025-03-26T16:24:53.958Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ludo2ne.github.io/ENSAI-1A-SQL/doc/cours/formalisation-slides.html</loc>
-    <lastmod>2025-03-26T16:24:53.958Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ludo2ne.github.io/ENSAI-1A-SQL/doc/cours/jointures.html</loc>
-    <lastmod>2025-03-26T16:24:53.958Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ludo2ne.github.io/ENSAI-1A-SQL/doc/cours/jointures-slides.html</loc>
-    <lastmod>2025-03-26T16:24:53.958Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ludo2ne.github.io/ENSAI-1A-SQL/doc/glossaire.html</loc>
-    <lastmod>2025-03-26T16:24:53.959Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ludo2ne.github.io/ENSAI-1A-SQL/index.html</loc>
-    <lastmod>2025-03-26T16:24:53.963Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ludo2ne.github.io/ENSAI-1A-SQL/doc/cours/agregations-slides.html</loc>
-    <lastmod>2025-03-26T16:24:53.958Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ludo2ne.github.io/ENSAI-1A-SQL/doc/cours/agregations.html</loc>
-    <lastmod>2025-03-26T16:24:53.958Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ludo2ne.github.io/ENSAI-1A-SQL/doc/cours/sql-intro-slides.html</loc>
-    <lastmod>2025-03-26T16:24:53.958Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ludo2ne.github.io/ENSAI-1A-SQL/doc/cours/sql-intro.html</loc>
-    <lastmod>2025-03-26T16:24:53.958Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ludo2ne.github.io/ENSAI-1A-SQL/doc/cours/algebre-slides.html</loc>
-    <lastmod>2025-03-26T16:24:53.958Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ludo2ne.github.io/ENSAI-1A-SQL/doc/cours/algebre.html</loc>
-    <lastmod>2025-03-26T16:24:53.958Z</lastmod>
-  </url>
-  <url>
-    <loc>https://ludo2ne.github.io/ENSAI-1A-SQL/doc/cours/intro-slides.html</loc>
-    <lastmod>2025-03-26T16:24:53.958Z</lastmod>
+    <loc>https://ludo2ne.github.io/ENSAI-1A-SQL/doc/ressources.html</loc>
+    <lastmod>2025-04-01T12:33:55.327Z</lastmod>
   </url>
   <url>
     <loc>https://ludo2ne.github.io/ENSAI-1A-SQL/doc/cours/intro.html</loc>
-    <lastmod>2025-03-26T16:24:53.958Z</lastmod>
+    <lastmod>2025-04-01T12:33:55.327Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ludo2ne.github.io/ENSAI-1A-SQL/doc/cours/intro-slides.html</loc>
+    <lastmod>2025-04-01T12:33:55.327Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ludo2ne.github.io/ENSAI-1A-SQL/doc/cours/algebre.html</loc>
+    <lastmod>2025-04-01T12:33:55.326Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ludo2ne.github.io/ENSAI-1A-SQL/doc/cours/algebre-slides.html</loc>
+    <lastmod>2025-04-01T12:33:55.326Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ludo2ne.github.io/ENSAI-1A-SQL/doc/cours/sql-intro.html</loc>
+    <lastmod>2025-04-01T12:33:55.327Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ludo2ne.github.io/ENSAI-1A-SQL/doc/cours/sql-intro-slides.html</loc>
+    <lastmod>2025-04-01T12:33:55.327Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ludo2ne.github.io/ENSAI-1A-SQL/doc/cours/agregations.html</loc>
+    <lastmod>2025-04-01T12:33:55.326Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ludo2ne.github.io/ENSAI-1A-SQL/doc/cours/agregations-slides.html</loc>
+    <lastmod>2025-04-01T12:33:55.326Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ludo2ne.github.io/ENSAI-1A-SQL/index.html</loc>
+    <lastmod>2025-04-01T12:33:55.332Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ludo2ne.github.io/ENSAI-1A-SQL/doc/glossaire.html</loc>
+    <lastmod>2025-04-01T12:33:55.327Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ludo2ne.github.io/ENSAI-1A-SQL/doc/cours/jointures-slides.html</loc>
+    <lastmod>2025-04-01T12:33:55.327Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ludo2ne.github.io/ENSAI-1A-SQL/doc/cours/jointures.html</loc>
+    <lastmod>2025-04-01T12:33:55.327Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ludo2ne.github.io/ENSAI-1A-SQL/doc/cours/formalisation-slides.html</loc>
+    <lastmod>2025-04-01T12:33:55.327Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ludo2ne.github.io/ENSAI-1A-SQL/doc/cours/formalisation.html</loc>
+    <lastmod>2025-04-01T12:33:55.327Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ludo2ne.github.io/ENSAI-1A-SQL/doc/cours/bases-de-donnees-slides.html</loc>
+    <lastmod>2025-04-01T12:33:55.326Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ludo2ne.github.io/ENSAI-1A-SQL/doc/cours/bases-de-donnees.html</loc>
+    <lastmod>2025-04-01T12:33:55.326Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ludo2ne.github.io/ENSAI-1A-SQL/doc/cours/sql-avance-slides.html</loc>
+    <lastmod>2025-04-01T12:33:55.327Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ludo2ne.github.io/ENSAI-1A-SQL/doc/cours/sql-avance.html</loc>
+    <lastmod>2025-04-01T12:33:55.327Z</lastmod>
   </url>
   <url>
     <loc>https://ludo2ne.github.io/ENSAI-1A-SQL/doc/tp/tp1.html</loc>
-    <lastmod>2025-03-26T16:24:53.963Z</lastmod>
+    <lastmod>2025-04-01T12:33:55.332Z</lastmod>
   </url>
   <url>
     <loc>https://ludo2ne.github.io/ENSAI-1A-SQL/doc/tp/tp2.html</loc>
-    <lastmod>2025-03-26T16:24:53.963Z</lastmod>
+    <lastmod>2025-04-01T12:33:55.332Z</lastmod>
   </url>
   <url>
     <loc>https://ludo2ne.github.io/ENSAI-1A-SQL/doc/tp/tp3.html</loc>
-    <lastmod>2025-03-26T16:24:53.963Z</lastmod>
+    <lastmod>2025-04-01T12:33:55.332Z</lastmod>
   </url>
 </urlset>
