@@ -411,7 +411,7 @@ Le mode *Lazy* signifie que Polars va accumuler toutes les instructions que vous
 
 Mais quel est l'intérêt ?
 
-Imaginons que vous êtes en train d'analiser un trés gros fichier et que vous enchainez à la suite diverses opérations (filtres, sélections de colonnes, regroupements, agrégations, tri...), deux choix s'offrent à vous :
+Imaginons que vous êtes en train d'analyser un trés gros fichier et que vous enchainez à la suite diverses opérations (filtres, sélections de colonnes, regroupements, agrégations, tri...), deux choix s'offrent à vous :
 
 Option 1 (mode Eager : `pl.read_parquet()`):
 
@@ -953,8 +953,62 @@ Ce TP avait pour but de vous familiariser avec le Datalab. Vous pouvez l'utilise
 
 ## Personnaliser son service
 
-:construction:
+### Script d'initialisation
 
-- Utiliser un script d'initiation
-- Utilser sa propre image Docker
+Il est possible d'exécuter un script après lancement d'un service, par exemple pour installer des packages, des extensions...
 
+Dans les options avant de lancer le service, onglet *Scripts d'initialisation* puis rentrez l'URL du script.
+
+::: {.callout-important}
+- L'URL du script ne doit pas être dans un dépôt privé
+- Il est possible d'ajouter des arguments au script
+:::
+
+Pour plus d'informations et avoir des exemples : [sspcloud-init-scripts](https://github.com/InseeFrLab/sspcloud-init-scripts){target="_blank"}
+
+Par exemple, le script suivant permet de :
+
+- installer *pytest*
+- ajouter l'extension VSCode Ruff
+- supprimer l'extension VSCode Flake8
+
+```{.bash filename="example.sh"}
+#!/bin/sh
+
+# Install packages and VSCode extensions
+# Expected parameters : None
+
+pip install pytest
+
+code-server --install-extension charliermarsh.ruff
+code-server --uninstall-extension ms-python.flake8
+```
+
+::: {.callout-tip}
+Si vous avez besoin de lancer réguliérement votre service avec cette config :
+
+- Lorsque vous modifiez les paramètres de lancement, cliquez sur la petite disquette
+- Vous pourrez à tout moment relancer avec la même configuration avec un raccourci dans *Mes services*
+:::
+
+
+### Image Docker
+
+Dans les paramètres de lancement vous pouvez également définir votre propre image Docker :
+
+- Créez votre image à partir de la dernière version du service
+- Taguez cette image, puis poussez-la sur DockerHub
+- Dans les paramètres de lancement, utilisez une image personnalisée
+
+Par exemple :
+
+```{.txt filename="Dockerfile"}
+FROM inseefrlab/onyxia-vscode-python:py3.13.5-2025.07.21
+
+# Install packages
+RUN pip install pytest
+
+# Modify VSCode extensions
+RUN code-server --install-extension charliermarsh.ruff
+RUN code-server --uninstall-extension ms-python.flake8
+```

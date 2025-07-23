@@ -14,7 +14,7 @@ number-depth: 3
 
 ## Introduction {.unnumbered}
 
-Vous allez réaliser ce TP su un Datalab.
+Vous allez réaliser ce TP sur un Datalab.
 
 ::: {.callout-note title="Le Datalab en quelques mots"}
 Un TP dédié vous expliquera plus en détail ce qu'est le Datalab.

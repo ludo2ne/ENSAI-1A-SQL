@@ -12,6 +12,9 @@
   - https://www.sqlnoir.com/
 - Instister sur ces notions pour les Master STD
   - Intégrité référentielle, Trigger, Procédure stockée
+- UML
+  - https://www.drawdb.app/editor
+  
 
 ### Cours 2024
 
