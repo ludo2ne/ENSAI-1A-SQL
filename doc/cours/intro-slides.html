@@ -6,8 +6,8 @@
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-2fef5ea3f8957b3e4ecc936fc74692ca.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.7.32">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.25">
 
   <meta name="author" content="Ludovic Deneuville">
   <title>Base de données – Bases de Données Relationnelles et SQL</title>
@@ -95,7 +95,7 @@
     code span.vs { color: #abe338; } /* VerbatimString */
     code span.wa { color: #dcc6e0; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-0c8acc74dca0c2faaedea4940f202713.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-06e768f098560084c2d7120de8ad04fb.css">
   <link rel="stylesheet" href="../../styles-reveal.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
@@ -294,8 +294,8 @@ Ludovic Deneuville
 <section id="requêtes-sql-jolies" class="slide level3">
 <h3>Requêtes SQL jolies</h3>
 <ul>
-<li>retour à la ligne</li>
-<li>mots clés alignés</li>
+<li>Retour à la ligne</li>
+<li>Mots clés alignés</li>
 <li>Mots clés en MAJUSCULE</li>
 </ul>
 <aside class="notes">
@@ -320,7 +320,7 @@ Ludovic Deneuville
 <div class="code-with-filename-file">
 <pre><strong>pasbien.sql</strong></pre>
 </div>
-<div class="sourceCode" id="cb1" data-filename="pasbien.sql"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> c.nom <span class="kw">AS</span> club, <span class="fu">AVG</span>(j.elo) <span class="kw">AS</span> moyenne_elo <span class="kw">FROM</span> joueuse j <span class="kw">INNER</span> <span class="kw">JOIN</span> club c <span class="kw">USING</span> (id_club) <span class="kw">WHERE</span> mail <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">GROUP</span> <span class="kw">BY</span> c.nom <span class="kw">ORDER</span> <span class="kw">BY</span> <span class="dv">2</span> <span class="kw">DESC</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-filename="pasbien.sql"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> c.nom <span class="kw">AS</span> club, <span class="fu">AVG</span>(j.elo) <span class="kw">AS</span> moyenne_elo <span class="kw">FROM</span> joueuse j <span class="kw">INNER</span> <span class="kw">JOIN</span> club c <span class="kw">USING</span> (id_club) <span class="kw">WHERE</span> mail <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">GROUP</span> <span class="kw">BY</span> c.nom <span class="kw">ORDER</span> <span class="kw">BY</span> <span class="dv">2</span> <span class="kw">DESC</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="fragment">
 <div class="hide-html-render">
@@ -334,13 +334,13 @@ Ludovic Deneuville
 <div class="code-with-filename-file">
 <pre><strong>bien.sql</strong></pre>
 </div>
-<div class="sourceCode" id="cb2" data-filename="bien.sql"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> c.nom <span class="kw">AS</span> club, </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" data-filename="bien.sql"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> c.nom <span class="kw">AS</span> club, </span>
 <span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a>       <span class="fu">AVG</span>(j.elo) <span class="kw">AS</span> moyenne_elo</span>
 <span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> joueuse j </span>
 <span id="cb2-4"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">INNER</span> <span class="kw">JOIN</span> club c <span class="kw">USING</span> (id_club) </span>
 <span id="cb2-5"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> j.mail <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span> </span>
 <span id="cb2-6"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">GROUP</span> <span class="kw">BY</span> c.nom </span>
-<span id="cb2-7"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">ORDER</span> <span class="kw">BY</span> <span class="dv">2</span> <span class="kw">DESC</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-7"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">ORDER</span> <span class="kw">BY</span> <span class="dv">2</span> <span class="kw">DESC</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="fragment">
 <div class="hide-html-render">
@@ -364,19 +364,25 @@ Ludovic Deneuville
 <section>
 <section id="les-tp" class="title-slide slide level2 center">
 <h2>Les TP</h2>
+<p>5 TP + 1 TD</p>
 <ul>
-<li>5 TP + 1 TD</li>
 <li>Base de données : PostgreSQL</li>
-<li>Outils : Datalab, cloudBeaver, DBeaver</li>
+<li>Communication avec la BDD : cloudBeaver</li>
+<li><a href="https://datalab.sspcloud.fr/" target="_blank">Datalab SSPCloud de l’INSEE</a>
+<ul>
+<li>créer un compte avec : <code>prenom.nom@eleve.ensai.fr</code></li>
+</ul></li>
+<li><a href="https://onyxia.lab.groupe-genes.fr/" target="_blank">Datalab du GENES</a></li>
 </ul>
 <aside class="notes">
 <ul>
-<li>BDD : PostgreSQL + DuckDB</li>
-<li>Peut-être un TP sur les VM
+<li>BDD :
 <ul>
-<li>Dbeaver installé</li>
-<li>une bdd chacun sur un serveur ENSAI</li>
+<li>PostgreSQL : installé sur un serveur</li>
+<li>DuckDB : embarqué, travaille en mémoire</li>
 </ul></li>
+<li>CloudBeaver = une application web pour interagir facilement avec PostgreSQL</li>
+<li>Sur les VM : DBeaver + une bdd chacun</li>
 </ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -417,8 +423,8 @@ Ludovic Deneuville
 <section id="à-ne-pas-faire" class="slide level3">
 <h3>À ne pas faire</h3>
 <ul>
-<li>Poster l’énoncé sur ChatGPT</li>
-<li>Copier / Coller la réponse sans rien comprendre</li>
+<li>Copier l’énoncé sur une IAGen</li>
+<li>Coller la réponse sans rien comprendre</li>
 </ul>
 <aside class="notes">
 <p>Sauf si vous voulez ne rien retenir…</p>
@@ -478,11 +484,10 @@ Ludovic Deneuville
 <li><a href="https://www.postgresql.org/docs/current/sql.html" target="_blank">https://www.postgresql.org/docs/current/sql.html</a></li>
 </ul>
 <aside class="notes">
-<p>Importance de la biblio en projet, stage</p>
+<p>Au passage :</p>
 <ul>
-<li>désolé s’il y a des fautes, j’ai écrit ce cours un peu dans l’urgence</li>
-<li>n’hésitez pas à me les notifier (pas de point bonus)</li>
-<li>moi j’ai le droit, après je serai assez intransigent si vous laissez des fautes dans vos rapports</li>
+<li>Importance de la biblio en projet, stage</li>
+<li>Commencez toujours par explorer ce qui a été fait sur le sujet</li>
 </ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -687,7 +692,7 @@ Ludovic Deneuville
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
@@ -761,13 +766,14 @@ Ludovic Deneuville
           e.clearSelection();
         }
         const getTextToCopy = function(trigger) {
-            const codeEl = trigger.previousElementSibling.cloneNode(true);
-            for (const childEl of codeEl.children) {
-              if (isCodeAnnotation(childEl)) {
-                childEl.remove();
-              }
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
             }
-            return codeEl.innerText;
+          }
+          return codeEl.innerText;
         }
         const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
           text: getTextToCopy

@@ -6,8 +6,8 @@
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-2fef5ea3f8957b3e4ecc936fc74692ca.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.7.32">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.8.25">
 
   <meta name="author" content="Ludovic Deneuville">
   <title>Base de données – Algèbre Relationnelle</title>
@@ -95,7 +95,7 @@
     code span.vs { color: #abe338; } /* VerbatimString */
     code span.wa { color: #dcc6e0; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-0c8acc74dca0c2faaedea4940f202713.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-06e768f098560084c2d7120de8ad04fb.css">
   <link rel="stylesheet" href="../../styles-reveal.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
@@ -271,9 +271,9 @@ Ludovic Deneuville
 <ul>
 <li><span class="emoji" data-emoji="warning">⚠️</span> Mot clé SQL associé : WHERE</li>
 </ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
 <span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
-<span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> elo <span class="op">&lt;</span> <span class="dv">2400</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> elo <span class="op">&lt;</span> <span class="dv">2400</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
 <section id="projection" class="slide level3">
@@ -282,16 +282,16 @@ Ludovic Deneuville
 <li>Permet de sélectionner certaines colonnes d’une table.</li>
 <li>Mot clé SQL associé : SELECT</li>
 </ul>
-<div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
 <span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a>       prenom</span>
-<span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="union" class="slide level3">
 <h3>Union</h3>
 <ul>
 <li>Combine les lignes de deux tables ayant le <u>même nombre de colonnes et des types compatibles</u></li>
 </ul>
-<div class="sourceCode" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
 <span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a>       prenom</span>
 <span id="cb3-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
 <span id="cb3-4"><a aria-hidden="true" tabindex="-1"></a></span>
@@ -299,7 +299,7 @@ Ludovic Deneuville
 <span id="cb3-6"><a aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-7"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
 <span id="cb3-8"><a aria-hidden="true" tabindex="-1"></a>       prenom</span>
-<span id="cb3-9"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueur;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-9"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueur;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="callout callout-tip callout-titled callout-style-default">
 <div class="callout-body">
 <div class="callout-title">
@@ -339,7 +339,7 @@ Ludovic Deneuville
 <ul>
 <li>Lignes qui se trouvent dans la première relation mais pas dans la seconde</li>
 </ul>
-<div class="sourceCode" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">-- Joueuses évoluant dans un club français et pas dans un club belge</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">-- Joueuses évoluant dans un club français et pas dans un club belge</span></span>
 <span id="cb4-2"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
 <span id="cb4-3"><a aria-hidden="true" tabindex="-1"></a>       prenom</span>
 <span id="cb4-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse_club_fr</span>
@@ -348,7 +348,7 @@ Ludovic Deneuville
 <span id="cb4-7"><a aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-8"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
 <span id="cb4-9"><a aria-hidden="true" tabindex="-1"></a>       prenom</span>
-<span id="cb4-10"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse_club_be;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-10"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse_club_be;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <aside class="notes">
 <p>Imaginons que vous ayez créé 2 tables :</p>
 <ul>
@@ -372,7 +372,7 @@ Ludovic Deneuville
 <ul>
 <li>Lignes communes aux deux tables</li>
 </ul>
-<div class="sourceCode" id="cb5"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">-- Joueuses évoluant dans un club francais et dans un club belge</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">-- Joueuses évoluant dans un club francais et dans un club belge</span></span>
 <span id="cb5-2"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
 <span id="cb5-3"><a aria-hidden="true" tabindex="-1"></a>       prenom</span>
 <span id="cb5-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse_club_fr</span>
@@ -381,25 +381,25 @@ Ludovic Deneuville
 <span id="cb5-7"><a aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-8"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
 <span id="cb5-9"><a aria-hidden="true" tabindex="-1"></a>       prenom</span>
-<span id="cb5-10"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse_club_be;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-10"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse_club_be;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="jointure" class="slide level3">
 <h3>Jointure</h3>
 <ul>
 <li>Permet de combiner deux tables en se basant sur une correspondance entre les colonnes</li>
 </ul>
-<div class="sourceCode" id="cb6"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> j.nom,</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> j.nom,</span>
 <span id="cb6-2"><a aria-hidden="true" tabindex="-1"></a>       j.prenom,</span>
 <span id="cb6-3"><a aria-hidden="true" tabindex="-1"></a>       c.nom <span class="kw">AS</span> club</span>
 <span id="cb6-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse j</span>
-<span id="cb6-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> echecs.club c <span class="kw">USING</span> (id_club);</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> echecs.club c <span class="kw">USING</span> (id_club);</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
 <section id="produit-cartésien" class="slide level3">
 <h3>Produit Cartésien</h3>
-<div class="sourceCode" id="cb7"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
 <span id="cb7-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse j,</span>
 <span id="cb7-3"><a aria-hidden="true" tabindex="-1"></a>       echecs.club c;</span>
-<span id="cb7-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">-- WHERE j.id_club = c.id_club</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">-- WHERE j.id_club = c.id_club</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <aside class="notes">
 <p>Ancienne pratique : utilisé avant à la place des jointures</p>
 <style type="text/css">
@@ -605,7 +605,7 @@ Ludovic Deneuville
         margin: 0.1,
 
         math: {
-          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js',
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
           config: 'TeX-AMS_HTML-full',
           tex2jax: {
             inlineMath: [['\\(','\\)']],
@@ -679,13 +679,14 @@ Ludovic Deneuville
           e.clearSelection();
         }
         const getTextToCopy = function(trigger) {
-            const codeEl = trigger.previousElementSibling.cloneNode(true);
-            for (const childEl of codeEl.children) {
-              if (isCodeAnnotation(childEl)) {
-                childEl.remove();
-              }
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
             }
-            return codeEl.innerText;
+          }
+          return codeEl.innerText;
         }
         const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
           text: getTextToCopy

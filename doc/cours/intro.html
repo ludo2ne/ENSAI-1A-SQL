@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -69,16 +69,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="../../">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-2fef5ea3f8957b3e4ecc936fc74692ca.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-4c655423fa628e8db4e72bbd8cc85dd5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-30e136824c92c3357f4818064204e119.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-b66d9f3da4d84aca26cc7cc1c94b0445.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-d3daa1d1ef55350d6f5c3e6cec97cbbd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -278,6 +279,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Base de données</span>
     </a>
@@ -504,8 +507,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="requêtes-sql-jolies" class="level3">
 <h3 class="anchored" data-anchor-id="requêtes-sql-jolies">Requêtes SQL jolies</h3>
 <ul>
-<li>retour à la ligne</li>
-<li>mots clés alignés</li>
+<li>Retour à la ligne</li>
+<li>Mots clés alignés</li>
 <li>Mots clés en MAJUSCULE</li>
 </ul>
 <div class="notes">
@@ -518,7 +521,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-with-filename-file">
 <pre><strong>pasbien.sql</strong></pre>
 </div>
-<div class="sourceCode" id="cb1" data-filename="pasbien.sql"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> c.nom <span class="kw">AS</span> club, <span class="fu">AVG</span>(j.elo) <span class="kw">AS</span> moyenne_elo <span class="kw">FROM</span> joueuse j <span class="kw">INNER</span> <span class="kw">JOIN</span> club c <span class="kw">USING</span> (id_club) <span class="kw">WHERE</span> mail <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">GROUP</span> <span class="kw">BY</span> c.nom <span class="kw">ORDER</span> <span class="kw">BY</span> <span class="dv">2</span> <span class="kw">DESC</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-filename="pasbien.sql"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> c.nom <span class="kw">AS</span> club, <span class="fu">AVG</span>(j.elo) <span class="kw">AS</span> moyenne_elo <span class="kw">FROM</span> joueuse j <span class="kw">INNER</span> <span class="kw">JOIN</span> club c <span class="kw">USING</span> (id_club) <span class="kw">WHERE</span> mail <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">GROUP</span> <span class="kw">BY</span> c.nom <span class="kw">ORDER</span> <span class="kw">BY</span> <span class="dv">2</span> <span class="kw">DESC</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="fragment">
 <div class="hide-html-render">
@@ -530,13 +533,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-with-filename-file">
 <pre><strong>bien.sql</strong></pre>
 </div>
-<div class="sourceCode" id="cb2" data-filename="bien.sql"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> c.nom <span class="kw">AS</span> club, </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" data-filename="bien.sql"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> c.nom <span class="kw">AS</span> club, </span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">AVG</span>(j.elo) <span class="kw">AS</span> moyenne_elo</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> joueuse j </span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a> <span class="kw">INNER</span> <span class="kw">JOIN</span> club c <span class="kw">USING</span> (id_club) </span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> j.mail <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span> </span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a> <span class="kw">GROUP</span> <span class="kw">BY</span> c.nom </span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a> <span class="kw">ORDER</span> <span class="kw">BY</span> <span class="dv">2</span> <span class="kw">DESC</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a> <span class="kw">ORDER</span> <span class="kw">BY</span> <span class="dv">2</span> <span class="kw">DESC</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="fragment">
 <div class="hide-html-render">
@@ -550,19 +553,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="les-tp" class="level2">
 <h2 class="anchored" data-anchor-id="les-tp">Les TP</h2>
+<p>5 TP + 1 TD</p>
 <ul>
-<li>5 TP + 1 TD</li>
 <li>Base de données : PostgreSQL</li>
-<li>Outils : Datalab, cloudBeaver, DBeaver</li>
+<li>Communication avec la BDD : cloudBeaver</li>
+<li><a href="https://datalab.sspcloud.fr/" target="_blank">Datalab SSPCloud de l’INSEE</a>
+<ul>
+<li>créer un compte avec : <code>prenom.nom@eleve.ensai.fr</code></li>
+</ul></li>
+<li><a href="https://onyxia.lab.groupe-genes.fr/" target="_blank">Datalab du GENES</a></li>
 </ul>
 <div class="notes">
 <ul>
-<li>BDD : PostgreSQL + DuckDB</li>
-<li>Peut-être un TP sur les VM
+<li>BDD :
 <ul>
-<li>Dbeaver installé</li>
-<li>une bdd chacun sur un serveur ENSAI</li>
+<li>PostgreSQL : installé sur un serveur</li>
+<li>DuckDB : embarqué, travaille en mémoire</li>
 </ul></li>
+<li>CloudBeaver = une application web pour interagir facilement avec PostgreSQL</li>
+<li>Sur les VM : DBeaver + une bdd chacun</li>
 </ul>
 </div>
 <section id="ce-quil-faut-faire" class="level3">
@@ -582,8 +591,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="à-ne-pas-faire" class="level3">
 <h3 class="anchored" data-anchor-id="à-ne-pas-faire">À ne pas faire</h3>
 <ul>
-<li>Poster l’énoncé sur ChatGPT</li>
-<li>Copier / Coller la réponse sans rien comprendre</li>
+<li>Copier l’énoncé sur une IAGen</li>
+<li>Coller la réponse sans rien comprendre</li>
 </ul>
 <div class="notes">
 <p>Sauf si vous voulez ne rien retenir…</p>
@@ -623,11 +632,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><a href="https://www.postgresql.org/docs/current/sql.html" target="_blank">https://www.postgresql.org/docs/current/sql.html</a></li>
 </ul>
 <div class="notes">
-<p>Importance de la biblio en projet, stage</p>
+<p>Au passage :</p>
 <ul>
-<li>désolé s’il y a des fautes, j’ai écrit ce cours un peu dans l’urgence</li>
-<li>n’hésitez pas à me les notifier (pas de point bonus)</li>
-<li>moi j’ai le droit, après je serai assez intransigent si vous laissez des fautes dans vos rapports</li>
+<li>Importance de la biblio en projet, stage</li>
+<li>Commencez toujours par explorer ce qui a été fait sur le sujet</li>
 </ul>
 </div>
 
@@ -699,13 +707,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

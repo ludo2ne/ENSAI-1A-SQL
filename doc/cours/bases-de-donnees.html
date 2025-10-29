@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.32">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -34,16 +34,17 @@ ul.task-list li input[type="checkbox"] {
 <meta name="quarto:offset" content="../../">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-2fef5ea3f8957b3e4ecc936fc74692ca.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-4c655423fa628e8db4e72bbd8cc85dd5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-30e136824c92c3357f4818064204e119.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-b66d9f3da4d84aca26cc7cc1c94b0445.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-d3daa1d1ef55350d6f5c3e6cec97cbbd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -247,6 +248,8 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Base de données</span>
     </a>
@@ -483,7 +486,7 @@ ul.task-list li input[type="checkbox"] {
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Définition
+<span class="screen-reader-only">Note</span>Définition
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -532,7 +535,7 @@ Définition
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Articles intéressants
+<span class="screen-reader-only">Tip</span>Articles intéressants
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -561,7 +564,7 @@ Articles intéressants
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Définition
+<span class="screen-reader-only">Note</span>Définition
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -601,20 +604,105 @@ Définition
 <li>Relations de type parent-enfant</li>
 <li>Annuaires LDAP, systèmes de fichiers</li>
 </ul>
-<div class="cell" data-layout-align="default">
+<div class="cell" data-fig-width="6" data-fig-height="4" data-layout-align="default">
 <div class="cell-output-display">
 <div>
 <p></p><figure class="figure"><p></p>
 <div>
-<pre class="mermaid mermaid-js">stateDiagram 
-    ENSAI --&gt; Permanent
-    ENSAI --&gt; Eleve
-    Permanent --&gt; Enseignant
-    Permanent --&gt; Administratif
-    Eleve --&gt; 1A
-    Eleve --&gt; 2A
-    Eleve --&gt; 3A
-</pre>
+<svg width="576" height="384" viewbox="0.00 0.00 408.10 188.00" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 184)">
+<!-- ENSAI -->
+<g id="node1" class="node">
+<title>ENSAI</title>
+<path fill="lightgrey" stroke="black" d="M199.82,-180C199.82,-180 168.38,-180 168.38,-180 162.38,-180 156.38,-174 156.38,-168 156.38,-168 156.38,-156 156.38,-156 156.38,-150 162.38,-144 168.38,-144 168.38,-144 199.82,-144 199.82,-144 205.82,-144 211.82,-150 211.82,-156 211.82,-156 211.82,-168 211.82,-168 211.82,-174 205.82,-180 199.82,-180"></path>
+<text text-anchor="middle" x="184.1" y="-157.8" font-family="Times,serif" font-size="14.00">ENSAI</text>
+</g>
+<!-- Permanent -->
+<g id="node2" class="node">
+<title>Permanent</title>
+<path fill="lightgrey" stroke="black" d="M163.97,-108C163.97,-108 114.23,-108 114.23,-108 108.23,-108 102.23,-102 102.23,-96 102.23,-96 102.23,-84 102.23,-84 102.23,-78 108.23,-72 114.23,-72 114.23,-72 163.97,-72 163.97,-72 169.97,-72 175.97,-78 175.97,-84 175.97,-84 175.97,-96 175.97,-96 175.97,-102 169.97,-108 163.97,-108"></path>
+<text text-anchor="middle" x="139.1" y="-85.8" font-family="Times,serif" font-size="14.00">Permanent</text>
+</g>
+<!-- ENSAI&#45;&gt;Permanent -->
+<g id="edge1" class="edge">
+<title>ENSAI-&gt;Permanent</title>
+<path fill="none" stroke="grey" d="M172.98,-143.7C167.75,-135.56 161.4,-125.69 155.63,-116.7"></path>
+<polygon fill="grey" stroke="grey" points="158.45,-114.62 150.1,-108.1 152.56,-118.41 158.45,-114.62"></polygon>
+</g>
+<!-- Eleve -->
+<g id="node3" class="node">
+<title>Eleve</title>
+<path fill="lightgrey" stroke="black" d="M280.1,-108C280.1,-108 250.1,-108 250.1,-108 244.1,-108 238.1,-102 238.1,-96 238.1,-96 238.1,-84 238.1,-84 238.1,-78 244.1,-72 250.1,-72 250.1,-72 280.1,-72 280.1,-72 286.1,-72 292.1,-78 292.1,-84 292.1,-84 292.1,-96 292.1,-96 292.1,-102 286.1,-108 280.1,-108"></path>
+<text text-anchor="middle" x="265.1" y="-85.8" font-family="Times,serif" font-size="14.00">Eleve</text>
+</g>
+<!-- ENSAI&#45;&gt;Eleve -->
+<g id="edge2" class="edge">
+<title>ENSAI-&gt;Eleve</title>
+<path fill="none" stroke="grey" d="M204.13,-143.7C214.23,-134.97 226.64,-124.24 237.62,-114.75"></path>
+<polygon fill="grey" stroke="grey" points="240.03,-117.29 245.31,-108.1 235.46,-111.99 240.03,-117.29"></polygon>
+</g>
+<!-- Enseignant -->
+<g id="node4" class="node">
+<title>Enseignant</title>
+<path fill="lightgrey" stroke="black" d="M64.31,-36C64.31,-36 11.9,-36 11.9,-36 5.9,-36 -0.1,-30 -0.1,-24 -0.1,-24 -0.1,-12 -0.1,-12 -0.1,-6 5.9,0 11.9,0 11.9,0 64.31,0 64.31,0 70.31,0 76.31,-6 76.31,-12 76.31,-12 76.31,-24 76.31,-24 76.31,-30 70.31,-36 64.31,-36"></path>
+<text text-anchor="middle" x="38.1" y="-13.8" font-family="Times,serif" font-size="14.00">Enseignant</text>
+</g>
+<!-- Permanent&#45;&gt;Enseignant -->
+<g id="edge3" class="edge">
+<title>Permanent-&gt;Enseignant</title>
+<path fill="none" stroke="grey" d="M114.4,-71.88C101.43,-62.89 85.38,-51.76 71.34,-42.03"></path>
+<polygon fill="grey" stroke="grey" points="73.12,-39.01 62.91,-36.19 69.13,-44.76 73.12,-39.01"></polygon>
+</g>
+<!-- Administratif -->
+<g id="node5" class="node">
+<title>Administratif</title>
+<path fill="lightgrey" stroke="black" d="M172.04,-36C172.04,-36 106.17,-36 106.17,-36 100.17,-36 94.17,-30 94.17,-24 94.17,-24 94.17,-12 94.17,-12 94.17,-6 100.17,0 106.17,0 106.17,0 172.04,0 172.04,0 178.04,0 184.04,-6 184.04,-12 184.04,-12 184.04,-24 184.04,-24 184.04,-30 178.04,-36 172.04,-36"></path>
+<text text-anchor="middle" x="139.1" y="-13.8" font-family="Times,serif" font-size="14.00">Administratif</text>
+</g>
+<!-- Permanent&#45;&gt;Administratif -->
+<g id="edge4" class="edge">
+<title>Permanent-&gt;Administratif</title>
+<path fill="none" stroke="grey" d="M139.1,-71.7C139.1,-63.98 139.1,-54.71 139.1,-46.11"></path>
+<polygon fill="grey" stroke="grey" points="142.6,-46.1 139.1,-36.1 135.6,-46.1 142.6,-46.1"></polygon>
+</g>
+<!-- 1A -->
+<g id="node6" class="node">
+<title>1A</title>
+<path fill="lightgrey" stroke="black" d="M244.1,-36C244.1,-36 214.1,-36 214.1,-36 208.1,-36 202.1,-30 202.1,-24 202.1,-24 202.1,-12 202.1,-12 202.1,-6 208.1,0 214.1,0 214.1,0 244.1,0 244.1,0 250.1,0 256.1,-6 256.1,-12 256.1,-12 256.1,-24 256.1,-24 256.1,-30 250.1,-36 244.1,-36"></path>
+<text text-anchor="middle" x="229.1" y="-13.8" font-family="Times,serif" font-size="14.00">1A</text>
+</g>
+<!-- Eleve&#45;&gt;1A -->
+<g id="edge5" class="edge">
+<title>Eleve-&gt;1A</title>
+<path fill="none" stroke="grey" d="M256.2,-71.7C252.11,-63.73 247.15,-54.1 242.61,-45.26"></path>
+<polygon fill="grey" stroke="grey" points="245.59,-43.4 237.9,-36.1 239.36,-46.6 245.59,-43.4"></polygon>
+</g>
+<!-- 2A -->
+<g id="node7" class="node">
+<title>2A</title>
+<path fill="lightgrey" stroke="black" d="M316.1,-36C316.1,-36 286.1,-36 286.1,-36 280.1,-36 274.1,-30 274.1,-24 274.1,-24 274.1,-12 274.1,-12 274.1,-6 280.1,0 286.1,0 286.1,0 316.1,0 316.1,0 322.1,0 328.1,-6 328.1,-12 328.1,-12 328.1,-24 328.1,-24 328.1,-30 322.1,-36 316.1,-36"></path>
+<text text-anchor="middle" x="301.1" y="-13.8" font-family="Times,serif" font-size="14.00">2A</text>
+</g>
+<!-- Eleve&#45;&gt;2A -->
+<g id="edge6" class="edge">
+<title>Eleve-&gt;2A</title>
+<path fill="none" stroke="grey" d="M274,-71.7C278.1,-63.73 283.05,-54.1 287.6,-45.26"></path>
+<polygon fill="grey" stroke="grey" points="290.85,-46.6 292.31,-36.1 284.62,-43.4 290.85,-46.6"></polygon>
+</g>
+<!-- 3A -->
+<g id="node8" class="node">
+<title>3A</title>
+<path fill="lightgrey" stroke="black" d="M388.1,-36C388.1,-36 358.1,-36 358.1,-36 352.1,-36 346.1,-30 346.1,-24 346.1,-24 346.1,-12 346.1,-12 346.1,-6 352.1,0 358.1,0 358.1,0 388.1,0 388.1,0 394.1,0 400.1,-6 400.1,-12 400.1,-12 400.1,-24 400.1,-24 400.1,-30 394.1,-36 388.1,-36"></path>
+<text text-anchor="middle" x="373.1" y="-13.8" font-family="Times,serif" font-size="14.00">3A</text>
+</g>
+<!-- Eleve&#45;&gt;3A -->
+<g id="edge7" class="edge">
+<title>Eleve-&gt;3A</title>
+<path fill="none" stroke="grey" d="M291.52,-71.88C305.51,-62.81 322.88,-51.55 337.99,-41.76"></path>
+<polygon fill="grey" stroke="grey" points="340.09,-44.57 346.58,-36.19 336.29,-38.69 340.09,-44.57"></polygon>
+</g>
+</g>
+</svg>
 </div>
 <p></p></figure><p></p>
 </div>
@@ -1037,7 +1125,7 @@ Tip
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Remarques
+<span class="screen-reader-only">Caution</span>Remarques
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1246,7 +1334,7 @@ Warning
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Définition
+<span class="screen-reader-only">Important</span>Définition
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -1393,13 +1481,14 @@ Tip
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

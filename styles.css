@@ -121,6 +121,25 @@ p{
   border-color: darkblue;
 }
 
+.blue-button {
+  background-color: #2d8cd0;      /* bleu similaire à celui de l’image */
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 4px;
+  padding: 2px 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.blue-button:hover {
+  background-color: #1f74b5;    
+  transform: translateY(-2px);   
+}
+
+
+
+
 /************************************************************/
 /* html Vs RevealJS                                         */
 /************************************************************/
