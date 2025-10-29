@@ -132,16 +132,28 @@ On n'utilise pas la même structure pour du texte ou des fichiers.
 - Relations de type parent-enfant
 - Annuaires LDAP, systèmes de fichiers
 
-```{mermaid}
-stateDiagram 
-    ENSAI --> Permanent
-    ENSAI --> Eleve
-    Permanent --> Enseignant
-    Permanent --> Administratif
-    Eleve --> 1A
-    Eleve --> 2A
-    Eleve --> 3A
+
+```{dot}
+//| fig-width: 6
+//| fig-height: 4
+digraph {
+    bgcolor=transparent;
+    center=true;
+    rankdir=TB;
+
+    node [shape=rect, style="rounded,filled", fillcolor=lightgrey, margin=0.1];
+    edge [color=grey];
+
+    ENSAI -> Permanent;
+    ENSAI -> Eleve;
+    Permanent -> Enseignant;
+    Permanent -> Administratif;
+    Eleve -> "1A";
+    Eleve -> "2A";
+    Eleve -> "3A";
+}
 ```
+
 
 ### Réseau
 

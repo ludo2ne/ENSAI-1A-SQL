@@ -2,11 +2,10 @@
 
 ## :construction: TODO
 
-- [ ] dire de creer compte ssp cloud avec mail prenom.nom@eleve.ensai.fr avant le 1er TP
 - [ ] Soucis pour lancer cloudBeaver avec le wifi ENSAI
 - [ ] callout block -> couleurs moches dans les diapos lors du deploy sur github
 - [ ] Ajouter un UPDATE FROM dans les diapos
-- [ ] PArler un peu plus des databases nosql 
+- [ ] Parler un peu plus des databases nosql 
   - https://blog.amigoscode.com/p/relational-vs-nosql-databases
   - https://blog.amigoscode.com/p/sql-vs-nosql-explained
   - https://www.sqlnoir.com/
@@ -14,7 +13,6 @@
   - Intégrité référentielle, Trigger, Procédure stockée
 - UML
   - https://www.drawdb.app/editor
-  
 
 ### Cours 2024
 

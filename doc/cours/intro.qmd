@@ -2,7 +2,7 @@
 title: "Bases de Données Relationnelles et SQL"
 description: "[Slides](intro-slides.html)"
 author: "Ludovic Deneuville"
-format: 
+format:
   html:
     toc: true
     toc-location: left
@@ -65,8 +65,8 @@ UML pour la modélisation
 
 ### Requêtes SQL jolies
 
-- retour à la ligne
-- mots clés alignés
+- Retour à la ligne
+- Mots clés alignés
 - Mots clés en MAJUSCULE
 
 
@@ -113,15 +113,20 @@ Faites un effort pour vous même et pour vos relecteurs
 
 ## Les TP
 
-- 5 TP + 1 TD
+5 TP + 1 TD
+
 - Base de données : PostgreSQL
-- Outils : Datalab, cloudBeaver, DBeaver
+- Communication avec la BDD : cloudBeaver
+- [Datalab SSPCloud de l'INSEE](https://datalab.sspcloud.fr/){target="_blank"} 
+  - créer un compte avec : `prenom.nom@eleve.ensai.fr`
+- [Datalab du GENES](https://onyxia.lab.groupe-genes.fr/){target="_blank"}
 
 ::: {.notes}
-- BDD : PostgreSQL + DuckDB
-- Peut-être un TP sur les VM
-  - Dbeaver installé
-  - une bdd chacun sur un serveur ENSAI
+- BDD : 
+  - PostgreSQL : installé sur un serveur
+  - DuckDB : embarqué, travaille en mémoire
+- CloudBeaver = une application web pour interagir facilement avec PostgreSQL
+- Sur les VM : DBeaver + une bdd chacun
 :::
 
 ### Ce qu'il faut faire
@@ -140,8 +145,8 @@ si je demande un setup... faites le sinon ça risque de péter plus tard.
 
 ### À ne pas faire
 
-- Poster l'énoncé sur ChatGPT
-- Copier / Coller la réponse sans rien comprendre
+- Copier l'énoncé sur une IAGen
+- Coller la réponse sans rien comprendre
 
 ::: {.notes}
 Sauf si vous voulez ne rien retenir...
@@ -175,9 +180,8 @@ Sauf si vous voulez ne rien retenir...
 - <https://www.postgresql.org/docs/current/sql.html>{target="_blank"}
 
 ::: {.notes}
-Importance de la biblio en projet, stage
+Au passage : 
 
-- désolé s'il y a des fautes, j'ai écrit ce cours un peu dans l'urgence
-- n'hésitez pas à me les notifier (pas de point bonus)
-- moi j'ai le droit, après je serai assez intransigent si vous laissez des fautes dans vos rapports
+- Importance de la biblio en projet, stage
+- Commencez toujours par explorer ce qui a été fait sur le sujet
 :::

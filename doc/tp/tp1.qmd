@@ -16,38 +16,37 @@ number-depth: 3
 
 Vous allez réaliser ce TP sur un Datalab.
 
-::: {.callout-note title="Le Datalab en quelques mots"}
-Un TP dédié vous expliquera plus en détail ce qu'est le Datalab.
+::: {.callout-note title="Rappel : Principe du datalab"}
+Une infrastructure cloud avec des ressources est à votre disposition :
 
-Le Datalab permet aux utilisateurs de lancer facilement des services pour travailler avec des langages comme R ou Python, ou encore gérer des bases de données. 
+- CPU, GPU
+- RAM
+- Stockage
 
-Il offre une grande puissance de calcul, ce qui permet de traiter de gros volumes de données et de réaliser des analyses complexes sans se soucier des limites techniques. 
+Lorsque vous en avez besoin, vous :
 
-Avec cette plateforme :
+- réservez des ressources (en lançant des services)
+- lancez vos programmes, calculs...
+- sauvegardez votre code en utilisant Git
+- exportez vos résultats vers le stockage objet S3
+- libérez les ressources une fois que vous avez terminé
 
-- les utilisateurs accèdent aux ressources nécessaires en quelques clics
-- sans devoir installer eux-mêmes les logiciels 
-- ni configurer les serveurs
+Pour vous aider, l'interface Onyxia vous permet de faire cela en quelques clics.
 :::
 
 ### Datalab du GENES ou SSPCloud {.unnumbered}
 
-Connectez-vous à l'une des 2 instances suivantes (elles sont quasiment identiques) :
+Connectez-vous à l'une des deux instances suivantes  :
 
-- [ ] [Datalab du GENES](https://onyxia.lab.groupe-genes.fr/){target="_blank"}
 - [ ] [Datalab SSPCloud de l'INSEE](https://datalab.sspcloud.fr/){target="_blank"} 
-  - en créant un compte avec votre mail ENSAI
+  - en créant un compte avec votre mail `prenom.nom@eleve.ensai.fr`
+  - il est recommandé d'utiliser en priorité le SSPCloud qui est plus stable
+- [ ] [Datalab du GENES](https://onyxia.lab.groupe-genes.fr/){target="_blank"}
 
-::: {.callout-tip}
-Pour éviter les problèmes de charges :
-
-- Les élèves fonctionnaires feront le TP sur le SSPCloud
-- Les élèves ingénieurs :arrow_right: Datalab du GENES
-:::
 
 ### VM ENSAI {.unnumbered}
 
-::: {.callout-important title="En cas d'indisponibilité des Datalabs"}
+::: {.callout-important title="En cas d'indisponibilité des Datalabs" collapse="true"}
 Uniquement en cas d'indisponibilité des Datalabs, vous pouvez réaliser le TP directement sur la VM. Le logiciel DBeaver est installé.
 :::
 
@@ -65,18 +64,14 @@ Cela ouvre une fenêtre dans laquelle vous pouvez saisir du SQL.
 
 ## Lancement du service
 
-::: {.callout-note}
-Uniquement sur le Datalab.
-:::
-
 - [ ] Lancez le service [CloudBeaver](https://dbeaver.com/docs/cloudbeaver/){target="_blank"}
   - Allez dans **Catalogue de services**
   - Onglet **Databases**
+- [ ] Ouvrez le service
+  - Renseignez username et password
 
 ::: {.callout-tip title="CloudBeaver"}
 CloudBeaver est une application web légère dédiée à la gestion de bases de données. Elle permet de se connecter à divers types de bases de données, qu'elles soient SQL, NoSQL ou hébergées dans le cloud, à partir d'un seul point d'accès via un navigateur. CloudBeaver facilite l'exploration, la modification et la visualisation des données sans nécessiter l'installation de logiciels locaux. 
-
-Elle offre également des fonctionnalités de sécurité pour protéger l'accès aux données. Son interface conviviale en fait un outil accessible aussi bien aux développeurs qu'aux analystes de données.
 :::
 
 Pour ce premier TP, nous n'allons pas utiliser de base de données PostgreSQL. Nous allons simplement utiliser [DuckDB](https://duckdb.org/){target="_blank"} pour lire des fichiers de données.
@@ -87,24 +82,35 @@ DuckDB est un moteur de base de données relationnelle conçu pour des analyses 
 
 DuckDB est idéal pour les charges de travail analytiques en raison de sa simplicité, de sa rapidité et de son extensibilité, surtout pour traiter des fichiers volumineux localement.
 
-| **Caractéristique**   | **Description**                                                                                                                                                 |
-|-----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Caractéristique**   | **Description**                                                                                                                       |
+|-----------------------|---------------------------------------------------------------------------------------------------------------------------------------|
 | **Simplicité**        | Fonctionne sans serveur, intégré dans le processus hôte. Aucune dépendance externe pour la compilation ou l'exécution, simplifiant son déploiement. |
-| **Rapidité**          | Optimisé pour l'analytique (OLAP) avec un moteur d'exécution vectorisé en colonnes, réduisant le temps de traitement pour les requêtes complexes.                 |
-| **Richesse fonctionnelle** | Supporte des requêtes SQL complexes, fonctions de fenêtre, index secondaires, et assure des garanties ACID grâce au contrôle de concurrence (MVCC).         |
-| **Extensibilité**     | Permet l’ajout de types de données, fonctions et formats de fichiers via des extensions (supporte Parquet, JSON, S3, HTTP(S)).                                   |
-| **Gratuit et open-source** | Licence MIT, code source disponible et contributions ouvertes à tous.                                                                                         |
-
+| **Rapidité**          | Optimisé pour l'analytique (OLAP) avec un moteur d'exécution vectorisé en colonnes, réduisant le temps de traitement pour les requêtes complexes. |
+| **Richesse fonctionnelle** | Supporte des requêtes SQL complexes, fonctions de fenêtre, index secondaires, et assure des garanties ACID grâce au contrôle de concurrence (MVCC).|
+| **Extensibilité**     | Permet l’ajout de types de données, fonctions et formats de fichiers via des extensions (supporte Parquet, JSON, S3, HTTP(S)). |
+| **Gratuit et open-source** | Licence MIT, code source disponible et contributions ouvertes à tous. |
 :::
 
+Nous allons créer une base de données stockée en mémoire vive. L'avantage est que c'est très rapide. L'inconvénient, c'est que rien ne sera sauvegardé.
 
 - [ ] Créez une nouvelle connexion **DuckDB**
   - En haut à gauche, cliquez sur le +, puis New connection
   - Sélectionner **DuckDB**
-  - Cliquez sur le bouton CREATE
+  - Database : `:memory:`
+  - Cliquez sur le bouton [CREATE]{.blue-button}
 - [ ] Ouvrez un éditeur SQL
-  - Dans l'explorer à gauche, clic droit sur votre connection *DuckDB* :arrow_right: SQL Editor
+  - Dans l'explorer à gauche, clic droit sur votre connexion *DuckDB* :arrow_right: SQL Editor
   - vous pouvez maintenant saisir du code *SQL*
+
+
+::: {.callout-caution}
+Votre connexion doit être ouverte (rond vert).
+
+Si ce n'est pas le cas : clic droit > Open.
+
+Puis réouvrez une nouvelle fenêtre SQL
+:::
+
 
 
 ## Les prénoms
@@ -112,7 +118,7 @@ DuckDB est idéal pour les charges de travail analytiques en raison de sa simpli
 
 Le fichier des prénoms contient des données sur les prénoms attribués aux enfants nés en France depuis 1900. Ces données sont disponibles au niveau France et par département.
 
-Dans ce TP, nous allons utiliser la version au format [parquet](https://parquet.apache.org/){target="_blank"}, mise à disposition sur le site [data.gouv](https://www.data.gouv.fr/fr/datasets/base-prenoms-insee-format-parquet/){target="_blank"} par [Icem7](https://www.icem7.fr/){target="_blank"}.
+Dans ce TP, nous allons utiliser la version au format [parquet](https://parquet.apache.org/){target="_blank"}.
 
 
 ::: {.callout-note title="Fichier parquet"}
@@ -134,14 +140,22 @@ Pour en savoir plus sur le format Parquet :
 - [Parquet, qu'est-ce que c'est ?, Databricks](https://www.databricks.com/fr/glossary/what-is-parquet){target="_blank"}
 - [What is the Parquet File Format?, Upsolver blog](https://www.upsolver.com/blog/apache-parquet-why-use){target="_blank"}
 
----
 
-- [ ] Créez une vue `prenom` qui pointera vers le fichier parquet des prénoms
-  ```{.sql}
-  CREATE OR REPLACE VIEW prenom AS
-  FROM 'https://static.data.gouv.fr/resources/base-prenoms-insee-format-parquet/20231121-161435/prenoms-nat2022.parquet'
-  ```
-  - Vous pourrez ensuite requêter sur cette vue comme si c'était une table
+Pour des requêtes plus rapides, nous allons forcer le téléchargement en cache du fichier
+
+- [ ] Exécutez `SET force_download=true;`
+
+
+Ici le fichier est relativement modeste (10 Mo), nous pouvons nous permettre de le stocker intégralement en mémoire.
+
+- [ ] Créez une table `prenoms` à partir du contenu du fichier
+
+```{.sql}
+CREATE OR REPLACE TABLE prenoms AS
+FROM 'https://www.insee.fr/fr/statistiques/fichier/8595130/prenoms-2024.parquet'
+```
+
+Vous pourrez ensuite requêter sur cette vue comme si c'était une table.
 
 ::: {.callout-tip title="Éxécuter une requête"}
 Cliquez sur la requête pour y positionner le pointeur de la souris, puis au choix :
@@ -158,7 +172,7 @@ Cliquez sur la requête pour y positionner le pointeur de la souris, puis au cho
 
 ::: {.callout-important}
 
-Prenez le temps et l'habitude d'écrire de jolies requêtes bien alignées !!!
+**Prenez le temps et l'habitude d'écrire de jolies requêtes bien alignées !!!**
 
 ```{.sql filename="bien.sql"}
 SELECT c.nom AS club, 
@@ -178,58 +192,65 @@ SELECT c.nom AS club, AVG(j.elo) AS moyenne_elo FROM joueuse j INNER JOIN club c
 
 :::
 
-- [ ] Listez tous les éléments de `prenom`
-- [ ] Filtrez pour ne plus afficher les *prénoms rares*
+- [ ] Listez tous les éléments de *prenoms*
+- [ ] Filtrez pour n'afficher que le niveau géographique *FRANCE* et le prénom *GINETTE*
 
 ::: {.callout-tip title="Secret statistique"}
-Les prénoms ayant un nombre insuffisant d'occurrences sont regroupés sous une appellation générique. Cela permet de protéger le secret statistique et de garantir l'anonymat.
+Vous remarquerez que les valeurs sont des multiples de 5.
 
-Sans cette précaution, par exemple :
+> Pour chaque prénom, il est indiqué, pour chaque année de naissance et chaque sexe, le nombre de personnes inscrites à l’état civil sous ce prénom, arrondi au multiple de 5 le plus proche
 
-- si vous vous appeliez *Yann-Adam LEFGRIGO* 
-- et que vous êtes le seul à porter ce prénom
-- n'importe qui pourrait connaître votre année de naissance
+Vous remarquerez également que certaines années sont manquantes.
 
-De même, si vous êtiez 2 à porter ce prénom, l'autre *Yann-Adam* connaitrait aussi votre année de naissance. Ce n'est toujours pas satisfaisant. Il faut donc [à minima]{.underline} 3 individus pour garantir l'anonymat.
+> Un prénom est diffusé s'il a été attribué au moins 3 fois à des personnes de sexe féminin ou à des personnes de sexe masculin
+
+En statistique publique, on exige au moins 3 individus pour garantir le secret statistique. Avec 1 ou 2 personnes, on peut identifier ou déduire leurs données.
 :::
 
-- [ ] De quel type est le champ *annais* ? Pourquoi ?
-- [ ] Listez les différentes années de naissance
-  - Classez-ces années en décroissant
-  - Que remarquez-vous ?
-- [ ] Ajoutez un filtre pour exclure l'année non renseignée 
+Pour la suite, nous allons uniquement nous interesser au niveau géographique *FRANCE* :
+
+- [ ] À partir de la table *prenoms*, créez une table *prenoms_fr* conservant uniquement
+  - les lignes où le niveau géographique est égal à *FRANCE*
+  - les colonnes suivantes : *sexe*, *prenom*, *periode*, *valeur*
+- [ ] Combien de lignes contient cette table ?
+
 
 
 ### Année 2022
 
-::: {.callout}
-Filtrez sur l'année 2022 et excluez les prénoms rares.
-:::
+> Filtrez sur l'année *2022*
+
 
 - [ ] Listez les prénoms de l'année 2022
   - Classez-les en décroissant par le nombre de fois où ils sont été donnés
-- [ ] Listez les prénoms de l'année 2022 donnés plus de 2000 fois
+- [ ] Affichez uniquement les colonnes *sexe*, *prenom* et *valeur*
+  - Affichez également ces colonnes pour les questions suivantes
+- [ ] Listez les prénoms de l'année 2022 donnés 2000 fois ou plus
 - [ ] Classez-les d'abord par sexe, puis par nombre décroissant d'occurrences
   - Quels sont les prénoms masculins et féminins les plus donnés ?
 - [ ] Listez les prénoms féminins commençant par la lettre *Q*
-- [ ] Compter le nombre de prénoms commençant par chaque lettre
-  - Pour extraite la première lettre d'un prénom, vous pouvez par exemple utiliser la fonction `SUBSTRING`
-  - Bonus : différenciez filles et garçons
+- [ ] Comptez le nombre de prénoms commençant par chaque lettre
+
+::: {.callout-tip}
+Pour extraire la première lettre d'un prénom, vous pouvez utiliser :
+
+- la fonction [SUBSTRING](https://duckdb.org/docs/stable/sql/functions/text){target="_blank"}
+- le slicing comme en R ou Python
+:::
+  
+- [ ] Bonus : Comptez le nombre de prénoms commençant par chaque lettre en différenciant filles et garçons
 
 
 ### Statistiques descriptives
 
 
-- [ ] Lancez la commande `SUMMARIZE prenom;` pour avoir quelques stats sur la table
-
-::: {.callout}
-Filtrez pour exclure les prénoms rares.
-:::
-
+- [ ] Lancez la commande `SUMMARIZE prenoms;` pour avoir quelques stats sur la table
 - [ ] Affichez pour l'année 2003, les prénoms et leurs nombres de caractères
-  - Trouvez une fonction adéquate
+  - Trouvez une [fonction adéquate](https://duckdb.org/docs/stable/sql/functions/text){target="_blank"}
 - [ ] Affichez le nombres de caractères minimum, maximum et moyen parmi les prénoms de 2003
 - [ ] Listez les 3 prénoms de 2003 ayant le nombre de caractères maximum
+  - Commencez par écrire une requête donnant le nombre de caractères maximum
+  - Utilisez-là comme sous-requête pour afficher les 3 prénoms
 - [ ] Modifiez cette dernière requête pour afficher pour chaque année entre 2015 et 2022 le ou les prénoms avec le plus de caractères
   - classez par année
   - Difficulty : :star: :star: :star:
@@ -238,69 +259,58 @@ Filtrez pour exclure les prénoms rares.
   - utilisez la fonction `ROUND(<value>, 2)` pour arrondir les moyennes
   - Que remarquez-vous ?
 
-::: {.callout-tip collapse="true"} 
-Dans cette partie vous allez avoir besoin d'utiliser des sous-requêtes
-:::
 
 ### Jérôme, c'est moi
 
+
 - [ ] Listez les différentes années où le prénom `JÉRÔME` a été donné
-  - classez par année décroissante
+  - Classez par année décroissante
   - Que remarquez-vous ?
 - [ ] Listez également les `JEROME` avec d'autres accents / sans accent
-  - recherchez une fonction DuckDB qui permet de répondre à ce besoin
+  - Recherchez une fonction DuckDB qui permet de répondre à ce besoin
 - [ ] Affichez pour chaque année le nombre de fois où le prénom JEROME a été donné, quelle que soit l'accentuation
 
 ::: {.callout-tip title="Aide" collapse="true"}
 - voir Fontion DuckDB strip_accents()
-- Regroupez par strip_accents(preusuel) et annais
-- Affichez strip_accents(preusuel), annais et la somme de la colonne *nombre*
+- Regroupez par strip_accents(prenom) et annais
+- Affichez strip_accents(prenom), annais et la somme de la colonne *nombre*
 :::
 
-### Suivi temporel
 
-::: {.callout}
-Filtrez pour exclure l'année *XXXX*.
-:::
+### Vérifions le classement
 
-- [ ] Créez une requête qui permet d'avoir le nombre de naissances par année depuis l'année 2000
-  - Classez par année décroissante
-- [ ] Complétez la requête pour afficher le nombre de prénoms différents données chaque année
-  - Remarque : vous n'aurez pas le nombre exact car certains sont dans les prénoms rares
-- [ ] Écrivez une requête qui donne le nombre de filles et de garçons nés chaque année depuis 2000
+Avec cette histoire d'accent, posons-nous la question si cela peut modifier le classement des top prénoms.
 
-::: {.callout-note}
-Même si le champ *annais* n'est pas de type numérique, il est possible de comparer des chaines de caractères.
+- [ ] Affichez le top 10 des prénoms féminins en 2023 ?
+- [ ] Quel prénom se classe onzième ?
+  - Y-a-t-il d'autres orthographes proches pour écrire ce prénom ?
+- [ ] Refaites le classement en ignorant les accents
 
-Le [code ASCII](https://www.ascii-code.com/fr){target="_blank"} est utilisé pour comparer le premier caractère de la chaine, puis en cas d'égalité, le 2e caractère...
-:::
 
 
 ### Prénoms composés
 
 Nous allons maintenant nous interesser aux prénoms composés entre 2000 et 2009
 
-- [ ] Listez les prénoms composés entre les années 2000 et 2009 incluses
-- [ ] Regroupez-les par *preusuel*, puis affichez également le nombre de fois où ils ont été donnés
+- [ ] Listez les [différents]{.underline} prénoms composés donnés entre les années 2000 et 2009 incluses
+- [ ] Regroupez-les par *prenom*, puis affichez également le nombre de fois où ils ont été donnés
   - Triez en décroissant par ce nombre
 - [ ] Filtrez pour ne garder que les prénoms composés contenant le prénom `JEAN`
   - Que remarquez-vous ? N'y a-t-il pas des intrus ?
 - [ ] Trouvez une solution pour remédier à ce souci
-  - Par exemple avec la fonction DuckDB `split_part()`
 
 
 ### Cette année-là
 
-::: {.callout}
-Difficulty : :star: :star: :star:
+*Difficulty* : :star: :star: :star:
 
-Filtrez sur l'année 1962 et excluez les prénoms rares.
-:::
+> Filtrez sur l'année 1962.
+
 
 - [ ] Comptez le nombre de prénoms distincts donnés
 - [ ] Complétez en comptant le nombre de prénoms distincts donnés par sexe
 - [ ] Complétez en calculant le nombre total des prénoms distincts donnés, en prenant en compte la distinction entre les sexes
-  - exemple : ici *Dominique (H)* et *Dominique (F)* comptent pour 2 prénoms
+  - exemple : ici *Dominique (H)* et *Dominique (F)* comptent pour deux prénoms
 - [ ] Donnez la liste des prénoms donnés à la fois à des filles et des garçons
   - affichez le nombre de fois où ils ont été donnés à chaque sexe
 - [ ] Ajoutez à la dernière requête une colonne contenant un booléen qui affiche
@@ -313,10 +323,12 @@ Filtrez sur l'année 1962 et excluez les prénoms rares.
 ## Fichier des individus
 
 - [ ] Créez une vue qui pointe vers le fichier des individus du recensement de la population 2020
-  ```{.sql}
-  CREATE OR REPLACE VIEW individus AS
-  FROM 'https://static.data.gouv.fr/resources/recensement-de-la-population-fichiers-detail-individus-localises-au-canton-ou-ville-2020-1/20231023-122841/fd-indcvi-2020.parquet';
-  ```
+
+```{.sql}
+CREATE OR REPLACE VIEW individus AS
+FROM 'https://static.data.gouv.fr/resources/recensement-de-la-population-fichiers-detail-individus-localises-au-canton-ou-ville-2020-1/20231023-122841/fd-indcvi-2020.parquet';
+```
+
 - [ ] Comptez le nombre d'individus
   - Pourquoi ce nombre d'individus vivant en France paraît faible ?
 
@@ -341,10 +353,12 @@ Pourquoi utiliser une codification pour le fichier national individus localisés
 :::
 
 - [ ] Pour s'y retrouver, créez une vue vers le dictionnaire des variables
-  ```{.sql}
-  CREATE OR REPLACE VIEW variables_individus AS
-  FROM 'https://static.data.gouv.fr/resources/recensement-de-la-population-fichiers-detail-individus-localises-au-canton-ou-ville-2020-1/20231025-082910/dictionnaire-variables-indcvi-2020.csv'
-  ```
+
+```{.sql}
+CREATE OR REPLACE VIEW variables_individus AS
+FROM 'https://static.data.gouv.fr/resources/recensement-de-la-population-fichiers-detail-individus-localises-au-canton-ou-ville-2020-1/20231025-082910/dictionnaire-variables-indcvi-2020.csv'
+```
+
 - [ ] Affichez tout le contenu de cette vue
 - [ ] Trouvez la modalité représentant le département de résidence de l'individu
 - [ ] Affichez le nombre d'habitants par départements
@@ -366,13 +380,5 @@ C'est la fin du TP, vous pouvez maintenant sauvegarder votre travail et libérer
 ## Pour aller plus loin {.unnumbered}
 
 - [3 explorations bluffantes avec DuckDB](https://www.icem7.fr/pedagogie/3-explorations-bluffantes-avec-duckdb-1-interroger-des-fichiers-distants/){target="_blank"}
-
-{{< video https://www.youtube.com/watch?v=ajo0VBXT6ho >}}
-
----
-
-{{< video https://www.youtube.com/watch?v=7nklk064IR8 >}}
-
-
-
-
+- [Avec DuckDB, gavez-vous d'open data!](https://www.youtube.com/watch?v=ajo0VBXT6ho){target="_blank"}
+- [DuckDB, un aperçu du futur !](https://www.youtube.com/watch?v=7nklk064IR8){target="_blank"}
