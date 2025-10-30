@@ -1,0 +1,1014 @@
+---
+title: "Découverte du Datalab"
+description: "TP3 - Onyxia et le Datalab pour le statisticien"
+author: "Ludovic Deneuville"
+format: 
+  html:
+    toc: true
+    toc-location: left
+    toc-expand: 3
+from: markdown+emoji
+number-sections: true
+number-depth: 3
+lightbox: true
+---
+
+
+## Introduction {.unnumbered}
+
+Le Datalab permet aux statisticiens de découvrir, d'expérimenter, d'apprendre, de se former aux outils de la data.
+
+### Pourquoi un Datalab ?  {.unnumbered}
+
+Dans le monde professionnel, plusieurs problèmes se posent au statisticien :
+
+- sa machine n'est pas assez puissante
+- installer certains logiciels est parfois interdit et bloqué par le système
+- il doit analyser des données sensibles en toute sécurité
+
+À l'INSEE, un projet est né pour pallier à ce besoin : [Onyxia](https://www.onyxia.sh/){target="_blank"} porté par le [lab de l'INSEE](https://github.com/InseeFrLab){target="_blank"}.
+
+La première étape fut de créer une infrastructure Cloud avec des CPUs, des GPUs, de la RAM et du stockage.
+
+Ensuite, avoir plein de ressources c'est très bien, mais encore faut-il savoir les utiliser. Or lancer des services dans le cloud nécessite quelques compétences spécifiques (Docker, Kubernetes, Helm, S3...) qui ne sont pas à la portée de tous.
+
+D'où l'idée de créer une interface graphique pour pouvoir lancer des services en quelques clics. Onyxia s'appuie sur des technologies sous-jacentes (Kubernetes, Helm, S3...) pour proposer une IHM agréable pour le datascientist. Cependant, la philosophie du projet Onyxia est d'être une brique qui facilite le travail sans se rendre indispensable. L'idée est d'éviter que les utilisateurs ne s'enferment dans un choix technologique et qu'il soit couteux d'en sortir.
+
+À l'INSEE, une instance de ce logiciel a été installée sur le [Datalab SSP Cloud](https://datalab.sspcloud.fr/){target="_blank"}, ouverte à tous les agents publics. Vous pouvez y créer un compte car c'est également ouvert à tous les élèves de l'ENSAI (en utilisant votre mail ENSAI).
+
+::: {.callout-warning}
+Ne déposez pas de données sensibles sur cette instance, ni sur celle du GENES.
+
+Pour celles et ceux qui iront à l'INSEE, une autre instance nommée LS3 n'est accessible qu'en interne et autorise l'utilisation de données sensibles.
+:::
+
+Onyxia est un logiciel Libre et Open Source. Chacun peut installer sa propre instance sur son infra. C'est ce qu'ont fait de nombreux organismes, ainsi que le GENES.
+
+{{< video https://www.youtube.com/watch?v=FvpNfVrxBFM >}}
+
+### Les services {.unnumbered}
+
+Le principe est d'offrir aux utilisateurs la possibilité de lancer de nombreux services à la demande (Jupyter, Rstudio, VSCode, PostgreSQL...) avec une puissance de calcul adaptée aux besoins.
+
+::: {.callout-caution}
+Ces services sont éphémères, car si les ressources sont importantes, il faut savoir les partager !
+
+Le principe général est le suivant :
+
+- Vous lancez votre service en réservant des ressources (CPU, GPU, RAM, Stockage)
+- Vous effectuez votre travail
+- Vous sauvegardez votre code (git) et vos résultats (MinIO)
+- Vous supprimez votre service et libérez les ressources 
+:::
+
+
+## Objectifs {.unnumbered}
+
+Ce TP d'initiation va vous permettre de :
+
+- Lancer vos premiers services
+- Vous familiariser avec l'espace de stockage S3
+- Configurer votre compte sur le datalab
+
+::: {.callout-important icon="false" title="Fil rouge"}
+Vos collègues Josette et Félix attendent un heureux événement. Ils avaient trouvé le prénom idéal pour leur enfant à naître.
+
+Cependant, un malencontreux accident de fer à repasser les a rendu amnésiques tous les deux.
+
+Votre mission, si vous l'acceptez, est de retrouver ce fameux prénom. Pour cela, vous allez devoir explorer les fonctionnalités du Datalab.
+:::
+
+## Se connecter
+
+Vous pouvez réaliser ce TP soit sur :
+
+- Le [Datalab du GENES](https://onyxia.lab.groupe-genes.fr/){target="_blank"}
+- Le [Datalab SSPCloud de l'INSEE](https://datalab.sspcloud.fr/){target="_blank"} 
+  - si besoin de créer un compte, utilisez votre mail ENSAI
+
+
+
+## Lancer un service
+
+::: {.callout-important icon="false" title="Fil rouge"}
+Avant de partir à la recherche du prénom, Josette a une envie de doubitchou.
+
+Vous retrouvez la recette, mais il vous manque la quantité exacte en grammes de margarine.
+
+Vous savez simplement que la valeur recherchée correspond à combien il y a de nombres premiers entre 10 000 et 100 000.
+
+Naturellement, vous vous dites que la solution la plus simple est de créer un programme Python pour trouver la réponse. Or, Python n'est pas installé sur votre machine et vous ne savez pas comment faire... Mais alors : pourquoi ne pas lancer un service du Datalab qui permet d'exécuter du Python.
+:::
+
+### Un premier service
+
+- [ ] Allez dans `Catalogue de services`
+- [ ] Sélectionnez le service *Jupyter-python*, puis cliquez deux fois sur `Lancer`
+
+Attendez quelques secondes le temps que le service se lance.
+
+- [ ] Cliquez pour copier le mot de passe
+- [ ] Cliquez sur `Ouvrir le service` :rocket:
+  - password : collez le mot de passe
+
+Votre service *Jupyter Python* s'ouvre.
+
+::: {.callout-note collapse="true" title="Ce qu'il se passe sous le capot"}
+
+Pour plus de détails, vous pouvez consulter la vidéo en bas de la page.
+
+Prenons l'exemple de ce qu'il se passe en arrière plan lorsque vous lancez un service `Vscode-python` :
+
+#### Construction de l'image Docker
+
+Une image [Docker](https://www.docker.com/){target="_blank"} est un paquet léger et autonome qui contient tout le nécessaire pour exécuter une application : le code, les bibliothèques, les dépendances, les variables d'environnement et les fichiers de configuration.
+
+Les images Docker permettent de créer des environnements isolés et cohérents, garantissant ainsi la portabilité et la reproductibilité des applications.
+
+1. Nous partons de l'[image de base d'Onyxia](https://github.com/InseeFrLab/images-datascience/blob/main/base/Dockerfile){target="_blank"}
+    - ubuntu:22.04 et quelques éléments de config
+2. Nous ajoutons la couche [python-minimal](https://github.com/InseeFrLab/images-datascience/blob/main/python-minimal/Dockerfile){target="_blank"}
+    - installation de python et quelques packages classiques
+3. Nous ajoutons la couche [python-datascience](https://github.com/InseeFrLab/images-datascience/blob/main/python-datascience/Dockerfile){target="_blank"}
+    - Julia, Quarto et des packages de datascience (numpy, pandas...)
+4. Nous ajoutons la couche [vscode](https://github.com/InseeFrLab/images-datascience/blob/main/vscode/Dockerfile){target="_blank"}
+    - Installation de Visual Studio Code et configuration
+
+Vous avez maintenant une image Docker avec tout ce qu'il faut pour bien travailler.
+
+#### DockerHub
+
+Cette image est construite et déposée sur DockerHub [onyxia-vscode-python](https://hub.docker.com/r/inseefrlab/onyxia-vscode-python){target="_blank"}.
+
+Nous allons ensuite lancer une instance de cette image : un conteneur. 
+
+Une image est comme un moule, et un conteneur est un objet fabriqué à partir de ce moule. L'image contient les instructions, et le conteneur est l'instance concrète créée à partir de ce modèle. Vous verrez le même principe dans le cours de POO avec les classes (modèles) et les objets (instances)
+
+Pour gérer tous les conteneurs lancés sur le datalab, nous avons besoin d'un orchestrateur : Kubernetes. 
+
+#### Chart Helm
+
+Cependant, nous allons d'abord utiliser [Helm](https://helm.sh/){target="_blank"} pour faciliter le déploiement.
+
+Helm simplifie le processus de déploiement d'applications sur Kubernetes en automatisant les tâches répétitives et en fournissant une gestion centralisée des configurations.
+
+Le [chart Helm vscode-python](https://github.com/InseeFrLab/helm-charts-interactive-services/tree/main/charts/vscode-python){target="_blank"} est un ensemble de fichiers de configuration qui facilite le déploiement d'application dans un envrionnement Kubernetes.
+
+#### Déploiement sur Kube
+
+[Kubernetes](https://kubernetes.io/){target="_blank"} (K8s) est un système open-source qui automatise le déploiement, la mise à l'échelle et la gestion d'applications conteneurisées. C'est un orchestrateur de conteneurs.
+
+K8s récupére via le chart Helm toutes les infos nécessaires et déploie le conteneur (créé à partir de l'image Docker) sur l'infra du datalab.
+
+:::
+
+- [ ] Créez un Notebook Python
+  - File :arrow_right: New :arrow_right: Notebook
+- [ ] Dans la cellule, écrivez un code Python qui permet de compter combien il y a de nombres premiers entre 10 000 et 100 000
+
+Pour vous aider, vous pouvez utiliser cette fonction qui génére une liste de booléens.
+
+```{.python}
+def crible_eratosthene(n) -> list[bool]:
+    """Génère une liste de booléens où True indique qu'un nombre est premier."""
+
+    est_premier = [True] * (n + 1)
+    est_premier[0] = est_premier[1] = False  # 0 et 1 ne sont pas premiers
+
+    for i in range(2, int(n**0.5) + 1):
+        if est_premier[i]:
+            for multiple in range(i * i, n + 1, i):
+                est_premier[multiple] = False
+
+    return est_premier
+```
+
+::: {.callout-tip}
+N'hésitez pas à créer plusieurs cellules pour découper votre code (petites icones avec des `+`)
+:::
+
+Comme vous êtes un as de la programmation, cela ne vous prend que trois minutes. C'est beaucoup plus rapide que si vous aviez du installer Python, ainsi qu'un environnement d'exécution.
+
+- [ ] Vérifiez que le résultat est lui même un nombre premier
+  - Notez le vous en aurez besoin à la fin
+
+
+### Utiliser des données
+
+::: {.callout-important icon="false" title="Fil rouge"}
+Vous vous rendez compte qu'il faut plus de 8 kg de margarine et que vous n'en avez pas assez dans le frigo.
+
+Félix propose d'aller en chercher à la superette du coin. Il entre dans l'ascenseur pour descendre les 6 étages et patatra, il se retrouve bloqué.
+
+Pour retrouver les 5 chiffres du numéro du dépanneur, vous allez devoir répondre à 5 questions en requêtant le fichier des communes françaises.
+:::
+
+
+::: {.callout-note title="COG"}
+Chaque année, l'INSEE publie sur son site le [Code officiel géographique](https://www.insee.fr/fr/information/2560452){target="_blank"} (COG). 
+
+Ce référentiel regroupe, au 1er janvier, les codes et libellés des communes, cantons, arrondissements, départements, régions, ainsi que ceux des pays et territoires étrangers.
+:::
+
+Vous allez utiliser via *DuckDB* du *SQL* dans du code *Python*. Commencez par importer le package et créer la vue vers le fichier des communes 2024.
+
+```{.python}
+import duckdb
+
+duckdb.sql("""
+CREATE OR REPLACE VIEW commune AS
+FROM 'https://www.insee.fr/fr/statistiques/fichier/7766585/v_commune_2024.csv';
+""")
+```
+
+Pour exécuter une requête :
+
+```{.python}
+duckdb.sql("""
+SELECT *
+  FROM commune
+""")
+```
+
+::: {.callout-tip}
+Pour avoir un affichage plus joli, vous pouvez convertir la sortie en du dataframe pandas avec la méthode `to_df()`.
+
+```{.python}
+import pandas as pd
+
+duckdb.sql("""
+SELECT *
+  FROM commune
+""").to_df()
+```
+:::
+
+- [ ] Quel est le code région de Mayotte ?
+- [ ] Combien de communes y a-t-il en Guyane ?
+- [ ] Parmi les 3 départements de la Picardie (Aisne, Oise, Somme), combien de communes ont au minimum 4 *L* dans leur nom ?
+- [ ] Affichez le nombre de communes par département
+  - Classez par nombre de communes décroissant
+  - Quel est le numéro du département se classant au 20e rang ?
+- [ ] Quel est le numéro du département dans lequel se trouve le nom de commune le plus long
+
+::: {.callout-tip collapse="true"}
+- La somme des 5 nombres vaut 149
+- Les nombres sont dans l'ordre croissant
+:::
+
+Vous venez ici d'utiliser des données disponibles sur internet. Vous pouvez également effectuer des traitements sur vos propres données en les stockant sur S3.
+
+
+
+## Stockage S3
+
+::: {.callout-note title="Définition"}
+S3 : Simple Storage System.
+
+Inventé par Amazon, ce système de stockage est devenu l'outil standard du marché pour le stockage en ligne.
+
+[MinIO](https://min.io/){target="_blank"} est une solution alternative de stockage d'objets open-source qui permet de déployer facilement un stockage évolutif et performant. Elle est compatible avec l'API [S3 d'Amazon](https://aws.amazon.com/fr/s3/){target="_blank"}, ce qui facilite l'intégration avec les applications existantes.
+
+Pour faire simple, vous pouvez vous dire que c'est comme si vous allez stocker vos fichiers dans un Drive.
+:::
+
+Lorsque l'on travaille dans le cloud, il est essentiel de [séparer les données des programmes]{.underline} pour :
+
+- mieux gérer les ressources
+- renforcer la sécurité en limitant les accès et les permissions
+- permettre une scalabilité indépendante des composants
+
+
+MinIO offre :
+
+- une haute disponibilité
+- une sécurité renforcée grâce au chiffrement des données et des contrôles d'accès
+- des performances élevées, particulièrement adaptées aux environnements nécessitant un accès rapide aux données, comme le Big Data et l'intelligence artificielle
+
+### Votre bucket
+
+::: {.callout-note title="Définition"}
+Un **bucket** est un conteneur de stockage utilisé pour regrouper des objets (fichiers et métadonnées) dans des systèmes de stockage de type cloud. Il facilite l'organisation, la gestion des permissions et l'accès aux données dans un espace de stockage structuré.
+:::
+
+Lors de votre création de compte, un bucket est créé avec votre nom d'utilisateur. Dans ce bucket, vous pouvez :
+
+- créer / supprimer des dossiers
+- importer / supprimer des fichiers
+
+
+Vous avez plusieurs possibilités pour gérer à votre stockage :
+
+- Depuis le Datalab, onglet *Mes fichiers*
+- Depuis la console MinIO :
+  - <https://minio-console.lab.sspcloud.fr/>{target="_blank"}
+  - <https://minio-simple.lab.groupe-genes.fr>{target="_blank"}
+- Depuis un terminal avec le client Minio
+
+
+### Stocker vos fichiers
+
+::: {.callout-important icon="false" title="Fil rouge"}
+Félix est sauvé, il peut maintenant aller chercher de la margarine et du papier cadeau (ça peut toujours servir).
+
+En attendant, Josette s'occupe en confectionnant un superbe gilet gris avec son amie Thérèse.
+
+Elle se souvient qu'elle a noté quelque part la longueur de fil nécessaire dans un fichier csv.
+:::
+
+- [ ] Téléchargez ce fichier [parquet](data/tp3-longueur-fil.parquet){target="_blank"}
+
+Ensuite, allez sur la page d'accueil du Datalab :
+
+- [ ] Allez dans `Mes fichiers`
+- [ ] Créez un dossier `ENSAI` puis à l'intérieur un dossier `SQL`
+- [ ] Téléversez votre fichier *parquet* dans le dossier *SQL*
+
+::: {.callout-tip title="Chemin vers mes fichiers"}
+Vous remarquerez à droite, des lignes de commande du type `mc cp tp3-longueur-fil.parquet s3/<username>/ENSAI/SQL/tp3-longueur-fil.parquet`.
+
+Ce sont des commandes pour interagir avec votre stockage depuis un terminal (voir ci-après).
+
+Cependant, vous pouvez extraire de ces commandes une information intéressante : le chemin vers votre fichier : `s3/<username>/ENSAI/SQL/tp3-longueur-fil.parquet`.
+:::
+
+Vous venez de charger un fichier, voyons maintenant comment y accéder dans un *Service*, en utilisant par exemple le notebook que vous avez déjà lancé.
+
+
+### Utiliser des données
+
+Sur la page d'accueil du Datalab :
+
+- [ ] Allez dans `Mon Compte`, puis dans l'onglet `Connexion au Stockage`
+
+Vous trouverez ici des informations pour vous connecter au stockage selon le language que vous utilisez : Python, R...
+
+D'ailleurs pour chaque langage, il y a même plusieurs packages qui font le job. Par exemple *s3fs* ou *boto3* pour Python.
+
+Retournez dans votre service Notebook Jupyter :
+
+- [ ] Créez un nouveau Notebook
+  - vous pouvez par exemple le nommer `S3.ipynb`
+- [ ] Créer 2 cellules, puis collez et exécutez les 2 blocs de code ci-dessous
+
+Commencez par importer les packages nécessaires et récupérer les valeurs des variables d'environnement pour pouvoir se connecter à votre stockage.
+
+```{.python}
+import os
+import polars as pl
+
+s3_endpoint = f'https://{os.environ["AWS_S3_ENDPOINT"]}'
+s3_access_key = os.environ["AWS_ACCESS_KEY_ID"]
+s3_secret_access_key = os.environ["AWS_SECRET_ACCESS_KEY"]
+s3_session_token = os.environ["AWS_SESSION_TOKEN"]
+s3_region = os.environ["AWS_DEFAULT_REGION"]
+
+s3_username = os.environ["VAULT_TOP_DIR"] # un peu bancal pour avoir le username
+```
+
+::: {.callout-warning}
+Les clés et les jetons ont une durée de vie limitée.
+
+Si vous laissez votre service ouvert trop longtemps (pas bien !), vos clés et jetons pourraient être expirés.
+
+Dans ce cas, vous pouvez recharger en dur les nouvelles valeurs (voir Mon Compte > Connexion au Stockage).
+:::
+
+Définissez le chemin où se trouve votre fichier et lisez le avec Polars.
+
+```{.python}
+s3_file_path = f"s3://{s3_username}/ENSAI/SQL/tp3-longueur-fil.parquet"
+
+storage_options = {
+    "aws_endpoint":  s3_endpoint,
+    "aws_access_key_id": s3_access_key,
+    "aws_secret_access_key": s3_secret_access_key,
+    "aws_token": s3_session_token,
+    "aws_region": s3_region
+  }
+
+file = pl.scan_parquet(source=s3_file_path, 
+                     storage_options=storage_options)
+```
+
+::: {.callout-note title="Polars"}
+[Polars](https://pola.rs/){target="_blank"} est une bibliothèque rapide et performante pour la manipulation de données en Python et Rust, optimisée pour les grands volumes de données. 
+
+Contrairement à [Pandas](https://pandas.pydata.org/){target="_blank"}, Polars utilise une approche orientée colonnes (columnar) et tire parti du traitement parallèle, ce qui le rend particulièrement adapté pour les opérations analytiques lourdes. 
+
+Sa syntaxe, proche de celle de Pandas, permet des transformations, agrégations et manipulations de données avec des méthodes performantes et expressives.
+
+Pour plus de détails : <https://ssphub.netlify.app/post/polars/>{target="_blank"}
+:::
+
+- [ ] Créez une troisième cellule et affichez le fichier chargé
+  - Que se passe-t-il ?
+
+::: {.callout-important title="Mode Lazy"}
+Vous avez appelé la méthode `scan_parquet()` qui correspond au mode *Lazy* de Polars.
+
+Le mode *Lazy* signifie que Polars va accumuler toutes les instructions que vous lui donnez sans pour autant les exécuter tout de suite.
+
+Mais quel est l'intérêt ?
+
+Imaginons que vous êtes en train d'analyser un trés gros fichier et que vous enchainez à la suite diverses opérations (filtres, sélections de colonnes, regroupements, agrégations, tri...), deux choix s'offrent à vous :
+
+Option 1 (mode Eager : `pl.read_parquet()`):
+
+- vous chargez tout le fichier en RAM (dans la mémoire de votre machine)
+- vous appliquez des opérations dans n'importe quel ordre
+- vous lancez, c'est long et ça rame...
+
+Option 2 (mode Lazy : `pl.scan_parquet()`):
+
+- vous scannez le fichier, i.e. analyser sa structure (types de colonnes) et ses métadonnées
+- vous donnez vos opérations dans n'importe quel ordre
+- à la fin, vous demandez à Polars de vous fournir le résultat
+- à ce moment, Polars va optimiser l'ordre des traitements en utilisant son propre [plan d'exécution]{.underline} et vous donner une réponse beaucoup plus rapide
+
+En résumé, en mode Eager, à chaque étape la machine effectue bêtement tous les calculs que vous lui demandez. En mode Lazy, la machine liste les opérations que vous demandez. Puis lorsque vous exigez un résultat, l'ordre des opérations est optimisé et la réponse est beaucoup plus rapide.
+
+:::
+
+- [ ] Pour demander le chargement du fichier, appelez la méthode `collect()`
+  - stockez le résultat dans une variable *df*
+- [ ] Vous pouvez maintenant afficher le contenu de *df* avec un print
+
+En appelant la méthode `collect()`, vous avez « forcé » Polars à charger les données en mémoire.
+
+- [ ] Appliquez au dataframe la méthode `filter()` pour trouver la longueur de fil du gilet
+  - `df.filter(pl.col("<column_name>") == "<value>")`
+
+### Données d'autres utilisateurs
+
+::: {.callout-important icon="false" title="Fil rouge"}
+Pendant que Josette confectionne son gilet, Félix revient avec la margarine.
+
+Or, Josette n'a finalement plus faim. Félix se met alors à bouder et va s'enfermer dans les toilettes pour avaler des pilules qu'il a prises au passage à la pharmacie. Soudain, la mémoire lui revient !
+
+Il se rappelle qu'ils avaient trouvé le prénom en parcourant... Le fichier des prénoms !
+:::
+
+Ce fichier est stocké sur le bucket d'un autre utilisateur à l'une des adresses suivante :
+
+- SSP Cloud : `s3://ludo2ne/diffusion/ENSAI/SQL-TP/prenoms-nat2022.parquet`
+- Datalab du GENES : `s3://ldeneuville-ensai/diffusion/ENSAI/SQL-TP/prenoms-nat2022.parquet`
+
+::: {.callout-important}
+Malheureusement sur le Datalab du GENES, la fonctionnalité n'est pas encore implémentée sur le Datalab du GENES.
+
+Les dossiers *diffusion* de chaque utilisateur ne sont pas accessibles en lecture.
+
+Ce n'est plus trop dans la philosophie de l'exercice, mais pour contourner le problème : 
+
+- Téléchargez le [fichier des prenoms](https://static.data.gouv.fr/resources/base-prenoms-insee-format-parquet/20231121-161435/prenoms-nat2022.parquet){target="_blank"}
+- Stockez le sur votre S3
+- Utilisez ce fichier pour la suite
+:::
+
+
+::: {.callout-note title="Diffusion"}
+À la racine de votre Bucket, vous pouvez créer un dossier nommé `diffusion`.
+
+Vous pourrez alors stocker à l'intérieur les dossiers et fichiers que vous souhaitez partager aux autres utilisateurs. Ils auront un droit d'accès en lecture sur votre dossier *diffusion*.
+:::
+
+- [ ] Scannez ce fichier avec Polars
+  - stockez-le dans une variable nommée *fichier_prenoms*
+- [ ] Utilisez le code ci-dessous pour afficher le top10 des prénoms féminins en 2022
+
+```{.python}
+top10f2021 = fichier_prenoms\
+    .filter((pl.col("sexe") == 2) & 
+            (pl.col("annais") == "2021") & 
+            (pl.col("preusuel") != "_PRENOMS_RARES"))\
+    .group_by("preusuel")\
+    .agg(pl.col("nombre").sum().alias("nombre_total"))\
+    .sort("nombre_total", descending=True)\
+    .limit(10)\
+    .collect()
+```
+
+- [ ] Vous pouvez effectuez les mêmes traitements en encapsulant du sql :
+
+```{.python}
+top10f2021_sql = fichier_prenoms\
+    .sql("""
+      SELECT preusuel, 
+             SUM(nombre) AS nombre_total
+        FROM self
+       WHERE preusuel <> '_PRENOMS_RARES'
+         AND annais = '2021'
+         AND sexe = 2
+       GROUP BY preusuel
+       ORDER BY nombre_total DESC
+       LIMIT 10
+    """)\
+    .collect()
+```
+
+::: {.callout-important icon="false" title="Fil rouge"}
+Alors que vous alliez chercher le prénom, votre camarade Katia vous demande en quelle année son prénom a été le plus donné entre 1960 et 1980.
+:::
+
+- [ ] Écrivez la requête SQL qui fait le même travail que les instructions ci-dessous
+
+```{.python}
+prenom = "Katia"
+annee_debut, annee_fin = 1960, 1980
+
+df_prenom_annee = fichier_prenoms\
+    .filter((pl.col("preusuel") == prenom.upper()) & 
+            (pl.col("annais").str.to_integer(strict=False).is_not_null()) & 
+            (pl.col("annais").str.to_integer(strict=False) >= annee_debut) & 
+            (pl.col("annais").str.to_integer(strict=False) <= annee_fin))\
+    .group_by("annais")\
+    .agg(pl.col("nombre").sum().alias("nombre_total"))\
+    .sort("annais")\
+    .collect()
+
+print(df_prenom_annee)
+```
+
+::: {.callout-tip title="Diagramme en barre" collapse="true"}
+Vous pouvez également tracer un graphique avec ces données :
+
+```{.python}
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# Set seaborn style for a cleaner, more appealing look
+sns.set_theme(style="whitegrid")
+
+# Create the plot
+fig, ax = plt.subplots(figsize=(10, 6))
+
+# Data
+years = df_prenom_annee["annais"].to_list()         # Extracts years as a list
+counts = df_prenom_annee["nombre_total"].to_list()  # Extracts counts as a list
+
+# Bar plot with custom colors and transparency for better visuals
+ax.bar(years, 
+       counts, 
+       color="#4C72B0", 
+       edgecolor="black", 
+       alpha=0.8)
+
+# Set labels and title with padding for readability
+ax.set_xlabel("Année", fontsize=12, labelpad=10)
+ax.set_ylabel("Nombre d'occurences", fontsize=12, labelpad=10)
+ax.set_title(f"Occurrences du prénom {prenom} par année ({annee_debut}-{annee_fin})", fontsize=14, pad=15)
+
+# Rotate x-axis labels, improve spacing, and format grid
+ax.tick_params(axis='x', rotation=45)
+plt.tight_layout()  # Adjust layout for tight fit
+
+# Display the plot
+plt.show()
+```
+:::
+
+Nous y sommes presque ! Pour trouver le fameux prénom : 
+
+- Reprenez le résultat du nombre de nombres premiers entre 10 000 et 100 000
+- Otez 3
+- Divisez par 5
+
+Le prénom recherché est à ce rang de classement pour les prénoms féminins donnés en France entre 1970 et 2000.
+
+- [ ] Écrivez la requête
+  - Filtrez les prénoms féminins donnés entre 1970 et 2000
+  - Classez-les par le nombre de fois où ils ont été donné décroissant et prénom décroissant
+- [ ] Trouvez le prénom classé au rang demandé
+  - Vous pouvez utiliser ce code : `<df>.with_row_index()[<index_inf>:<index_sup>]`
+
+::: {.callout-tip collapse="true"}
+Ce n'est pas encore implémenté dans Polars, mais il est possible en SQL de générer les rangs : `RANK() OVER (ORDER BY SUM(nombre) DESC) AS rang`.
+
+La réponse :
+
+- Commence par un *S*
+- Monsieur et Madame Hier ont une fille, comment s'appelle-t-elle ?
+:::
+
+
+### Exportez vos résultats vers MinIO
+
+Vous pouvez également exporter vos fichiers vers S3.
+
+Nous allons utiliser ici la librairie [s3fs](https://s3fs.readthedocs.io/){target="_blank"}.
+
+- [ ] Collez et lancez ce code :
+  ```{.python}
+  import s3fs
+  
+  fs = s3fs.S3FileSystem(
+      client_kwargs={'endpoint_url': 'https://'+'minio-simple.lab.groupe-genes.fr'},
+      key = os.environ["AWS_ACCESS_KEY_ID"], 
+      secret = os.environ["AWS_SECRET_ACCESS_KEY"], 
+      token = os.environ["AWS_SESSION_TOKEN"])
+  
+  destination = f"s3://{s3_username}/ENSAI/SQL/output.csv"
+  
+  with fs.open(destination, mode='wb') as f:
+      top10f2021.write_csv(f)
+  ```
+- [ ] Sur le Datalab, allez dans `Mes fichiers` :arrow_right: ENSAI :arrow_right: SQL
+  - le fichier *output.csv* a été généré
+  - rafraichissez la page si besoin
+- [ ] Double-cliquez sur ce fichier pour en avoir un aperçu
+
+
+---
+
+Pour plus de détails sur le stockage des fichiers sur S3 :
+
+- [Les données sur le cloud](https://pythonds.linogaliana.fr/content/modern-ds/s3.html#les-donn%C3%A9es-sur-le-cloud){target="_blank"} , Python pour la data science, Lino Galiana
+
+
+
+## Libérer les ressources {.unnumbered}
+
+Une fois vos travaux terminés, il est temps de libérer les ressources réservées.
+
+- [ ] Si besoin, sauvegardez vos notebooks
+  - clic droit sur le nom du fichier :arrow_right: Download
+- [ ] Puis sur la page d'accueil, allez dans *Mes services*, mettez votre service à la poubelle
+
+Vous pouvez aisément reproduire votre travail plus tard :
+
+- Votre code est téléchargé
+- Vos données sont toujours sur MinIO
+- Il suffit de relancer un nouveau service et de relancer les calculs
+
+Une manière plus propre de travailler est d'utiliser git pour versionner son code.
+
+
+## Fin du TP {.unnumbered}
+
+Le but de ce TP était de vous faire découvrir les fonctionnalités de base du Datalab et les bonnes pratiques de travail dans un environnement Cloud.
+
+::: {.callout-important}
+La suite du TP est optionnelle.
+
+Elle est simplement donnée pour celles et ceux qui souhaient aller plus loin et profiter de toutes les fonctionnalités du Datalab.
+:::
+
+
+### Besoin d'assistance ? {.unnumbered}
+
+- Contactez l'équipe du SSP Cloud sur [Slack](https://join.slack.com/t/3innovation/shared_invite/zt-1bo6y53oy-Y~zKzR2SRg37pq5oYgiPuA){target="_blank"}
+- Pour le Datalab du GENES, vous trouverez sur la page d'accueil un lien pour rejoindre le canal Teams
+
+### Pour aller plus loin {.unnumbered}
+
+Une présentation complète du projet Onyxia au Devoxx 2023, de sa philosophie et de son fonctionnement par Olivier LEVITT, Joseph GARRONE et Frédéric COMTE.
+
+{{< video https://www.youtube.com/watch?v=GXINfnVB21E >}}
+
+Une présentation plus courte
+
+{{< video https://www.youtube.com/watch?v=sOOVg4I19BI >}}
+
+D'autres videos sur la [page GitHub du projet](https://github.com/InseeFrLab/onyxia){target="_blank"}
+
+### Bibliographie {.unnumbered}
+
+- [Utiliser RStudio sur l’environnement SSP Cloud](https://book.utilitr.org/01_R_Insee/Fiche_utiliser_Rstudio_SSPCloud.html){target="_blank"}, UtilitR
+- [Formations et tutoriels du SSP Cloud](https://www.sspcloud.fr/formation){target="_blank"}
+  - Nombreux tutos : Python, R, ML, Spark, Cartographie 
+- [Doc SSP Cloud](https://docs.sspcloud.fr/){target="_blank"}
+- [Principes du Datalab](https://docs.sspcloud.fr/content/principles.html){target="_blank"}
+- [Découverte d'Onyxia et de son datalab SSP Cloud](https://github.com/TheAIWizard/Hands-on-Spark-Lab/blob/main/First-steps-with-cloud-computing/First-steps-with-cloud-computing.md){target="_blank"}, Nathan Randriamanana
+
+
+
+
+---
+
+## Travailler avec Git
+
+::: {.callout-caution}
+Sur le datalab, vos services ont une [**durée de vie limitée**]{.underline}.
+
+Pour sauvegarder vos programmes, la bonne pratique est d'utiliser un dépôt git. Nous allons donc créer et utiliser un jeton pour communiquer avec GitHub.
+
+Pour suivre la démarche, il faut disposer d'un compte [GitHub](https://github.com/){target="_blank"}.
+Il est possible de suivre une démarche similaire avec [GitLab](https://about.gitlab.com/){target="_blank"}.
+:::
+
+
+### Générer un token GitHub
+
+::: {.callout-tip title="Déjà fait ?"}
+Si vous avez déjà généré et déclaré un jeton GitHub, inutile de refaire ces 2 étapes.
+:::
+
+- [ ] Connectez-vous à votre compte GitHub
+- [ ] Allez dans settings :arrow_right: Developer settings :arrow_right: Personal access tokens :arrow_right: Tokens (classic)
+- [ ] Générez un [nouveau jeton classique](https://github.com/settings/tokens/new){target="_blank"}
+  - Renseigner : 
+    - nom du token : Datalab GENES
+    - date d'expiration :arrow_right: Custom :arrow_right: 1 an
+  - :white_check_mark: Cochez repo
+  - Cliquez sur [Generate token]{.green-button}
+  - Copiez ce jeton commençant par `ghp_` et gardez le précieusement de côté quelques minutes
+
+::: {.callout-warning}
+- Ce jeton ne sera visible qu'une seule fois
+- si vous le perdez ou s'il est expiré, il faut en générer un nouveau
+:::
+
+
+### Déclarer votre jeton
+
+GitHub vous a fournit un jeton. Il faut maintenant le déclarer sur le Datalab :
+
+- [ ] Allez dans `Mon Compte` :arrow_right: Onglet `Git`
+- [ ] Renseignez les informations suivantes 
+  - nom d'utilisateur Git 
+  - mail (celui utilisé pour votre compte GitHub)
+- [ ] Collez votre token
+
+::: {.callout-tip title="Config Git" }
+Vous pouvez maintenant échanger du code entre les services du Datalab et vos dépôts GitHub. :tada:
+:::
+
+
+### Dépôt pour le code
+
+Avant de créer un service, nous allons créer un dépôt GitHub qui permettra de sauvegarder votre code.
+
+- [ ] Dans GitHub, créer un [nouveau Repository](https://github.com/new){target="_blank"}
+  - Repository name : TP3-datalab
+  - Private
+  - :white_check_mark: Cochez *Add a README file*
+  - .gitignore template : Python
+  - Choose a license : Apache Licence 2.0
+  - [Create Repository]{.green-button}
+- [ ] Sur la page de votre repo, cliquez sur le bouton [Code]{.green-button}
+- [ ] Copiez l'adresse *https* du repo
+
+
+### Branchez votre service sur un répo
+
+Lors du lancement d'un *Service*, vous pouvez vous brancher sur un répo git. Ainsi le contenu de votre dépôt sera importé dans votre service.
+
+Vous pourrez alors utiliser le code de votre dépôt et éventuellement le mettre à jour en effectuant un *push*.
+
+Lancez un service *Jupyter Notebook*
+
+- [ ] Ouvrez la Configuration
+  - De nombreux onglets permettent de configurer votre service
+  - Service : possibilité d'utiliser une autre image Docker
+  - Resources : choisir CPU et RAM
+  - Init : script à lancer au démarrage
+- [ ] Allez dans l'onglet `Git` et collez l'adresse *https* du repo dans la case *Repository url*
+- [ ] `Lancez` le service, puis attendez quelques secondes
+
+
+### Sauver son code
+
+- [ ] Sur Jupyter, ouvrez un terminal
+  - File :arrow_right: New :arrow_right: Terminal
+- [ ] Positionnez-vous dans le repo : `cd /home/onyxia/work/TP3-datalab/`
+- [ ] `git status` pour voir l'état actuel
+  - le fichier *ex0.ipynb* doit apparaître dans les *Untracked files*
+- [ ] Ajoutez ce fichier à l'index
+- [ ] Créez un commit
+- [ ] Poussez ce commit vers votre dépôt distant (GitHub)
+  - Vous pouvez vérifier sur GitHub que votre fichier *ex0.ipynb* est bien présent
+
+::: {.callout-tip collapse="true"}
+- `git add .`
+- `git commit -m "création fichier tp3"`
+- `git push`
+:::
+
+
+
+#### Exercice
+
+Par exemple en important le fichier des prénoms avec Polars et en encapsulant du SQL :
+
+- [ ] Écrivez la requête du nombre de fois ou votre prénom a été donné entre 2010 et 2020
+- [ ] Créez une nouvelle cellule et écrivez une requête pour afficher les 5 années où sont nées le plus de filles
+- [ ] Quels sont les prénoms masculins et féminins les plus donnés depuis 1900 ?
+- [ ] Affichez le nombres de filles et de garçons nés chaque année depuis 2010
+  - :bulb: Aide : `SUM(CASE WHEN ? THEN ? ELSE ? END)`
+
+
+
+## MinIO
+
+D'autres possibilités pour accéder à votre stockage
+
+### Client MinIO
+
+Le [client MinIO](https://min.io/docs/minio/linux/reference/minio-mc.html){target="_blank"} installé et [utilisable depuis le terminal]{.underline} permet également d'interagir avec vos fichiers.
+
+Ouvrez un terminal (File :arrow_right: New :arrow_right: Terminal):
+
+- [ ] `mc ls s3/<username>/ENSAI/SQL` : pour lister le contenu de votre dossier
+- [ ] `mc cp s3/<username>/ENSAI/SQL/output.csv .` : pour copier le fichier depuis s3 dans votre dossier courant
+  - le fichier apparait dans votre explorer
+- [ ] Supprimez ce fichier : `rm output.csv`
+  - Car importer les fichiers de données dans son espace de travail n'est pas une bonne pratique
+
+::: {.callout-tip}
+La commande `mc --help` liste toutes les commandes possibles (ESPACE pour défiler, CTRL+C pour sortir)
+:::
+
+
+### Console Minio
+
+Vous pouvez également accéder à votre stockage avec la console Minio :
+
+- <https://minio-console.lab.sspcloud.fr/>{target="_blank"}
+- <https://minio-simple.lab.groupe-genes.fr>{target="_blank"}
+
+
+### Python et s3fs
+
+```{.python}
+import os
+import s3fs
+import polars as pl
+
+fs = s3fs.S3FileSystem(
+    client_kwargs={"endpoint_url": f"https://{os.environ['AWS_S3_ENDPOINT']}"},
+    key = os.environ["AWS_ACCESS_KEY_ID"], 
+    secret = os.environ["AWS_SECRET_ACCESS_KEY"], 
+    token = os.environ["AWS_SESSION_TOKEN"])
+
+s3_username = os.environ["VAULT_TOP_DIR"] # un peu bancal pour avoir le username
+
+bucket_name = f"{s3_username}/diffusion/"
+
+files = fs.ls(bucket_name)
+
+for file in files:
+    print(file)
+```
+
+::: {.callout-tip title="Affichage plus joli" collapse="true"}
+```{.python}
+!pip install humanize
+import humanize
+
+data = []
+
+for file in fs.ls(bucket_name, detail=True):
+
+    if file['type'] == 'directory':
+        subfolder_files = fs.find(file['name'])
+        file_count = len(subfolder_files)
+        file_type = "Folder"
+        size = None
+    else:
+        file_count = ""
+        file_type = "File"
+        size = file['size']
+    
+    data.append({
+        "Name": os.path.basename(file['name']),
+        "Type": file_type,
+        "Size": size or 0,
+        "Nb Files": file_count
+    })
+
+df = pl.DataFrame(sorted(
+         data,
+         key=lambda x: (
+             0 if x["Type"] == "Folder" else 1,
+             -x["Nb Files"] if x["Nb Files"] else 0,
+             -x["Size"])
+        ))\
+        .with_columns(pl.col('Size').map_elements(lambda x: humanize.naturalsize(x, binary=True) if x else "", return_dtype=pl.String).alias('Size'))
+
+print(f"Bucket : {bucket_name}", df, sep = "\n")
+```
+:::
+
+## Surveiller son service
+
+- [ ] Sur la page du Datalab, allez dans `Mes services`
+- [ ] Cliquez sur le nom du service (Jupyter-python)
+- [ ] Cliquez sur `Surveillance externe`
+
+Vous arrivez sur la page de l'outil **Grafana** qui permet d'observer les métriques de votre service.
+
+
+## Les secrets
+
+::: {.callout-important title="Enigme du Père Fouras" icon="false"}
+Plus j'ai de gardiens, moins je suis gardé.
+
+Moins j'ai de gardiens, plus je suis gardé.
+
+Qui suis-je ?
+:::
+
+Certains éléments ne doivent pas être diffusés dans votre code (jetons d'accès, mots de passe...).
+
+Pour éviter d'avoir à nettoyer votre code à chaque fois que vous le poussez sur GitHub, le datalab propose de gérer vos secrets.
+
+### Créer un secret
+
+- [ ] Allez dans *Mes secrets*
+- [ ] Créez un `Nouveau secret` nommé *projet_patate*
+- [ ] Double-cliquez pour ouvrir ce secret
+- [ ] `Ajoutez une variable`
+  - Nom : PATATE_TOKEN
+  - Valeur : 123456
+  - Cliquez sur :white_check_mark: pour valider
+- [ ] Ajoutez une autre variable
+  - Nom : PATATE_PORT
+  - Valeur : 5236
+  - Cliquez sur :white_check_mark: pour valider
+
+### Utiliser dans un service
+
+- [ ] Préparez le lancement d'un service Rstudio
+- [ ] Dans la configuration, allez dans l'onglet `Vault`
+- [ ] secret : *projet_patate*
+- [ ] Lancez le service
+
+Dans votre servives, les deux variables d'environnement ont été créées. 
+
+- [ ] Vérifiez leur présence via le terminal : `env | grep PATATE` ou `echo $PATATE_TOKEN`
+- [ ] Ouvrez un notebook et récupérez la valeur de *PATATE_TOKEN*
+  ```{.python}
+  import os
+
+  token = os.environ["PATATE_TOKEN"]
+  print(token)
+  ```
+- [ ] Une fois que vous avez fini de jouer, supprimez votre service
+
+::: {.callout-note}
+Ce TP avait pour but de vous familiariser avec le Datalab. Vous pouvez l'utiliser pour faire du Python, du R, créer une base de données (prochain TP) ou utiliser de nombreux autres outils.
+:::
+
+
+## Personnaliser son service
+
+### Script d'initialisation
+
+Il est possible d'exécuter un script après lancement d'un service, par exemple pour installer des packages, des extensions...
+
+Dans les options avant de lancer le service, onglet *Scripts d'initialisation* puis rentrez l'URL du script.
+
+::: {.callout-important}
+- L'URL du script ne doit pas être dans un dépôt privé
+- Il est possible d'ajouter des arguments au script
+:::
+
+Pour plus d'informations et avoir des exemples : [sspcloud-init-scripts](https://github.com/InseeFrLab/sspcloud-init-scripts){target="_blank"}
+
+Par exemple, le script suivant permet de :
+
+- installer *pytest*
+- ajouter l'extension VSCode Ruff
+- supprimer l'extension VSCode Flake8
+
+```{.bash filename="example.sh"}
+#!/bin/sh
+
+# Install packages and VSCode extensions
+# Expected parameters : None
+
+pip install pytest
+
+code-server --install-extension charliermarsh.ruff
+code-server --uninstall-extension ms-python.flake8
+```
+
+::: {.callout-tip}
+Si vous avez besoin de lancer réguliérement votre service avec cette config :
+
+- Lorsque vous modifiez les paramètres de lancement, cliquez sur la petite disquette
+- Vous pourrez à tout moment relancer avec la même configuration avec un raccourci dans *Mes services*
+:::
+
+
+### Image Docker
+
+Dans les paramètres de lancement vous pouvez également définir votre propre image Docker :
+
+- Créez votre image à partir de la dernière version du service
+- Taguez cette image, puis poussez-la sur DockerHub
+- Dans les paramètres de lancement, utilisez une image personnalisée
+
+Par exemple :
+
+```{.txt filename="Dockerfile"}
+FROM inseefrlab/onyxia-vscode-python:py3.13.5-2025.07.21
+
+# Install packages
+RUN pip install pytest
+
+# Modify VSCode extensions
+RUN code-server --install-extension charliermarsh.ruff
+RUN code-server --uninstall-extension ms-python.flake8
+```

@@ -40,9 +40,11 @@ website:
           - href: doc/tp/tp2.qmd
             text: "TP2 - Vintage"
           - href: doc/tp/tp3.qmd
-            text: "TP3 - Datalab"
+            text: "TP3 - Discographie"
           - href: doc/tp/tp4.qmd
             text: "TP4 - Chess Unofficial Fed"
+          - href: doc/tp/tp_datalab.qmd
+            text: "TP Datalab"
     right:
       - text: Divers
         menu:

@@ -32,6 +32,15 @@
 
 ### TP
 
+- TP1 : 1eres requetes, DuckBD, WHERE, GROUP BY, NOT EXISTS
+- TP2 : INNER JOIN, DATE
+- TP3 : LEFT JOIN, VIEW, INSERT
+- TP4 : 
+- TP5 : 
+
+
+
+
 #### Avant
 
 - TP1 : 1eres requetes, jointure, not exists
@@ -41,10 +50,7 @@
 
 #### Après
 
-- TP1 : 1eres requetes, DuckBD, WHERE, GROUP BY, not exists
-- TP2 : jointure, DATE
-- TP3 : découverte du Datalab
-  - [ ] Benchmark
+
 
 ## :rocket: Publier les pages
 
