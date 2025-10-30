@@ -1,0 +1,2244 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Ludovic Deneuville">
+<meta name="description" content="TP3 - Onyxia et le Datalab pour le statisticien">
+
+<title>Découverte du Datalab – Base de données</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-b66d9f3da4d84aca26cc7cc1c94b0445.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-d3daa1d1ef55350d6f5c3e6cec97cbbd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="floating nav-fixed quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = true;
+    const darkModeDefault = authorPrefersDark;
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
+    </a>
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Base de données</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../index.html"> <i class="bi bi-house" role="img">
+</i> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-cours" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Cours</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-cours">    
+        <li>
+    <a class="dropdown-item" href="../../doc/cours/intro.html">
+ <span class="dropdown-text">Introduction</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../doc/cours/bases-de-donnees.html">
+ <span class="dropdown-text">Base de données</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../doc/cours/sql-intro.html">
+ <span class="dropdown-text">Introduction à SQL</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../doc/cours/agregations.html">
+ <span class="dropdown-text">Agrégations</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../doc/cours/algebre.html">
+ <span class="dropdown-text">Algèbre Relationnelle</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../doc/cours/jointures.html">
+ <span class="dropdown-text">Jointures</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../doc/cours/sql-avance.html">
+ <span class="dropdown-text">SQL avancé</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../doc/cours/formalisation.html">
+ <span class="dropdown-text">Formalisation des BDD</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-tp" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">TP</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-tp">    
+        <li>
+    <a class="dropdown-item" href="../../doc/tp/tp1.html">
+ <span class="dropdown-text">TP1 - Premières requêtes</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../doc/tp/tp2.html">
+ <span class="dropdown-text">TP2 - Vintage</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../doc/tp/tp3.html">
+ <span class="dropdown-text">TP3 - Discographie</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../doc/tp/tp4.html">
+ <span class="dropdown-text">TP4 - Chess Unofficial Fed</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../doc/tp/tp_datalab.html">
+ <span class="dropdown-text">TP Datalab</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-divers" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Divers</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-divers">    
+        <li>
+    <a class="dropdown-item" href="../../doc/glossaire.html">
+ <span class="dropdown-text">Glossaire</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../doc/ressources.html">
+ <span class="dropdown-text">Ressources</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../doc/decouverte.html">
+ <span class="dropdown-text">Découverte</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/ludo2ne/ENSAI-1A-SQL" target="_blank"> <i class="bi bi-github" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="3">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
+  <ul class="collapse">
+  <li><a href="#pourquoi-un-datalab" id="toc-pourquoi-un-datalab" class="nav-link" data-scroll-target="#pourquoi-un-datalab">Pourquoi un Datalab ?</a></li>
+  <li><a href="#les-services" id="toc-les-services" class="nav-link" data-scroll-target="#les-services">Les services</a></li>
+  </ul></li>
+  <li><a href="#objectifs" id="toc-objectifs" class="nav-link" data-scroll-target="#objectifs">Objectifs</a></li>
+  <li><a href="#se-connecter" id="toc-se-connecter" class="nav-link" data-scroll-target="#se-connecter"><span class="header-section-number">1</span> Se connecter</a></li>
+  <li><a href="#lancer-un-service" id="toc-lancer-un-service" class="nav-link" data-scroll-target="#lancer-un-service"><span class="header-section-number">2</span> Lancer un service</a>
+  <ul class="collapse">
+  <li><a href="#un-premier-service" id="toc-un-premier-service" class="nav-link" data-scroll-target="#un-premier-service"><span class="header-section-number">2.1</span> Un premier service</a></li>
+  <li><a href="#utiliser-des-données" id="toc-utiliser-des-données" class="nav-link" data-scroll-target="#utiliser-des-données"><span class="header-section-number">2.2</span> Utiliser des données</a></li>
+  </ul></li>
+  <li><a href="#stockage-s3" id="toc-stockage-s3" class="nav-link" data-scroll-target="#stockage-s3"><span class="header-section-number">3</span> Stockage S3</a>
+  <ul class="collapse">
+  <li><a href="#votre-bucket" id="toc-votre-bucket" class="nav-link" data-scroll-target="#votre-bucket"><span class="header-section-number">3.1</span> Votre bucket</a></li>
+  <li><a href="#stocker-vos-fichiers" id="toc-stocker-vos-fichiers" class="nav-link" data-scroll-target="#stocker-vos-fichiers"><span class="header-section-number">3.2</span> Stocker vos fichiers</a></li>
+  <li><a href="#utiliser-des-données-1" id="toc-utiliser-des-données-1" class="nav-link" data-scroll-target="#utiliser-des-données-1"><span class="header-section-number">3.3</span> Utiliser des données</a></li>
+  <li><a href="#données-dautres-utilisateurs" id="toc-données-dautres-utilisateurs" class="nav-link" data-scroll-target="#données-dautres-utilisateurs"><span class="header-section-number">3.4</span> Données d’autres utilisateurs</a></li>
+  <li><a href="#exportez-vos-résultats-vers-minio" id="toc-exportez-vos-résultats-vers-minio" class="nav-link" data-scroll-target="#exportez-vos-résultats-vers-minio"><span class="header-section-number">3.5</span> Exportez vos résultats vers MinIO</a></li>
+  </ul></li>
+  <li><a href="#libérer-les-ressources" id="toc-libérer-les-ressources" class="nav-link" data-scroll-target="#libérer-les-ressources">Libérer les ressources</a></li>
+  <li><a href="#fin-du-tp" id="toc-fin-du-tp" class="nav-link" data-scroll-target="#fin-du-tp">Fin du TP</a>
+  <ul class="collapse">
+  <li><a href="#besoin-dassistance" id="toc-besoin-dassistance" class="nav-link" data-scroll-target="#besoin-dassistance">Besoin d’assistance ?</a></li>
+  <li><a href="#pour-aller-plus-loin" id="toc-pour-aller-plus-loin" class="nav-link" data-scroll-target="#pour-aller-plus-loin">Pour aller plus loin</a></li>
+  <li><a href="#bibliographie" id="toc-bibliographie" class="nav-link" data-scroll-target="#bibliographie">Bibliographie</a></li>
+  </ul></li>
+  <li><a href="#travailler-avec-git" id="toc-travailler-avec-git" class="nav-link" data-scroll-target="#travailler-avec-git"><span class="header-section-number">4</span> Travailler avec Git</a>
+  <ul class="collapse">
+  <li><a href="#générer-un-token-github" id="toc-générer-un-token-github" class="nav-link" data-scroll-target="#générer-un-token-github"><span class="header-section-number">4.1</span> Générer un token GitHub</a></li>
+  <li><a href="#déclarer-votre-jeton" id="toc-déclarer-votre-jeton" class="nav-link" data-scroll-target="#déclarer-votre-jeton"><span class="header-section-number">4.2</span> Déclarer votre jeton</a></li>
+  <li><a href="#dépôt-pour-le-code" id="toc-dépôt-pour-le-code" class="nav-link" data-scroll-target="#dépôt-pour-le-code"><span class="header-section-number">4.3</span> Dépôt pour le code</a></li>
+  <li><a href="#branchez-votre-service-sur-un-répo" id="toc-branchez-votre-service-sur-un-répo" class="nav-link" data-scroll-target="#branchez-votre-service-sur-un-répo"><span class="header-section-number">4.4</span> Branchez votre service sur un répo</a></li>
+  <li><a href="#sauver-son-code" id="toc-sauver-son-code" class="nav-link" data-scroll-target="#sauver-son-code"><span class="header-section-number">4.5</span> Sauver son code</a></li>
+  </ul></li>
+  <li><a href="#minio" id="toc-minio" class="nav-link" data-scroll-target="#minio"><span class="header-section-number">5</span> MinIO</a>
+  <ul class="collapse">
+  <li><a href="#client-minio" id="toc-client-minio" class="nav-link" data-scroll-target="#client-minio"><span class="header-section-number">5.1</span> Client MinIO</a></li>
+  <li><a href="#console-minio" id="toc-console-minio" class="nav-link" data-scroll-target="#console-minio"><span class="header-section-number">5.2</span> Console Minio</a></li>
+  <li><a href="#python-et-s3fs" id="toc-python-et-s3fs" class="nav-link" data-scroll-target="#python-et-s3fs"><span class="header-section-number">5.3</span> Python et s3fs</a></li>
+  </ul></li>
+  <li><a href="#surveiller-son-service" id="toc-surveiller-son-service" class="nav-link" data-scroll-target="#surveiller-son-service"><span class="header-section-number">6</span> Surveiller son service</a></li>
+  <li><a href="#les-secrets" id="toc-les-secrets" class="nav-link" data-scroll-target="#les-secrets"><span class="header-section-number">7</span> Les secrets</a>
+  <ul class="collapse">
+  <li><a href="#créer-un-secret" id="toc-créer-un-secret" class="nav-link" data-scroll-target="#créer-un-secret"><span class="header-section-number">7.1</span> Créer un secret</a></li>
+  <li><a href="#utiliser-dans-un-service" id="toc-utiliser-dans-un-service" class="nav-link" data-scroll-target="#utiliser-dans-un-service"><span class="header-section-number">7.2</span> Utiliser dans un service</a></li>
+  </ul></li>
+  <li><a href="#personnaliser-son-service" id="toc-personnaliser-son-service" class="nav-link" data-scroll-target="#personnaliser-son-service"><span class="header-section-number">8</span> Personnaliser son service</a>
+  <ul class="collapse">
+  <li><a href="#script-dinitialisation" id="toc-script-dinitialisation" class="nav-link" data-scroll-target="#script-dinitialisation"><span class="header-section-number">8.1</span> Script d’initialisation</a></li>
+  <li><a href="#image-docker" id="toc-image-docker" class="nav-link" data-scroll-target="#image-docker"><span class="header-section-number">8.2</span> Image Docker</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Découverte du Datalab</h1>
+</div>
+
+<div>
+  <div class="description">
+    TP3 - Onyxia et le Datalab pour le statisticien
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Ludovic Deneuville </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Le Datalab permet aux statisticiens de découvrir, d’expérimenter, d’apprendre, de se former aux outils de la data.</p>
+<section id="pourquoi-un-datalab" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="pourquoi-un-datalab">Pourquoi un Datalab ?</h3>
+<p>Dans le monde professionnel, plusieurs problèmes se posent au statisticien :</p>
+<ul>
+<li>sa machine n’est pas assez puissante</li>
+<li>installer certains logiciels est parfois interdit et bloqué par le système</li>
+<li>il doit analyser des données sensibles en toute sécurité</li>
+</ul>
+<p>À l’INSEE, un projet est né pour pallier à ce besoin : <a href="https://www.onyxia.sh/" target="_blank">Onyxia</a> porté par le <a href="https://github.com/InseeFrLab" target="_blank">lab de l’INSEE</a>.</p>
+<p>La première étape fut de créer une infrastructure Cloud avec des CPUs, des GPUs, de la RAM et du stockage.</p>
+<p>Ensuite, avoir plein de ressources c’est très bien, mais encore faut-il savoir les utiliser. Or lancer des services dans le cloud nécessite quelques compétences spécifiques (Docker, Kubernetes, Helm, S3…) qui ne sont pas à la portée de tous.</p>
+<p>D’où l’idée de créer une interface graphique pour pouvoir lancer des services en quelques clics. Onyxia s’appuie sur des technologies sous-jacentes (Kubernetes, Helm, S3…) pour proposer une IHM agréable pour le datascientist. Cependant, la philosophie du projet Onyxia est d’être une brique qui facilite le travail sans se rendre indispensable. L’idée est d’éviter que les utilisateurs ne s’enferment dans un choix technologique et qu’il soit couteux d’en sortir.</p>
+<p>À l’INSEE, une instance de ce logiciel a été installée sur le <a href="https://datalab.sspcloud.fr/" target="_blank">Datalab SSP Cloud</a>, ouverte à tous les agents publics. Vous pouvez y créer un compte car c’est également ouvert à tous les élèves de l’ENSAI (en utilisant votre mail ENSAI).</p>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Ne déposez pas de données sensibles sur cette instance, ni sur celle du GENES.</p>
+<p>Pour celles et ceux qui iront à l’INSEE, une autre instance nommée LS3 n’est accessible qu’en interne et autorise l’utilisation de données sensibles.</p>
+</div>
+</div>
+<p>Onyxia est un logiciel Libre et Open Source. Chacun peut installer sa propre instance sur son infra. C’est ce qu’ont fait de nombreux organismes, ainsi que le GENES.</p>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/FvpNfVrxBFM" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+</section>
+<section id="les-services" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="les-services">Les services</h3>
+<p>Le principe est d’offrir aux utilisateurs la possibilité de lancer de nombreux services à la demande (Jupyter, Rstudio, VSCode, PostgreSQL…) avec une puissance de calcul adaptée aux besoins.</p>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Ces services sont éphémères, car si les ressources sont importantes, il faut savoir les partager !</p>
+<p>Le principe général est le suivant :</p>
+<ul>
+<li>Vous lancez votre service en réservant des ressources (CPU, GPU, RAM, Stockage)</li>
+<li>Vous effectuez votre travail</li>
+<li>Vous sauvegardez votre code (git) et vos résultats (MinIO)</li>
+<li>Vous supprimez votre service et libérez les ressources</li>
+</ul>
+</div>
+</div>
+</section>
+</section>
+<section id="objectifs" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="objectifs">Objectifs</h2>
+<p>Ce TP d’initiation va vous permettre de :</p>
+<ul>
+<li>Lancer vos premiers services</li>
+<li>Vous familiariser avec l’espace de stockage S3</li>
+<li>Configurer votre compte sur le datalab</li>
+</ul>
+<div class="callout callout-style-default callout-important no-icon callout-titled" title="Fil rouge">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Fil rouge
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Vos collègues Josette et Félix attendent un heureux événement. Ils avaient trouvé le prénom idéal pour leur enfant à naître.</p>
+<p>Cependant, un malencontreux accident de fer à repasser les a rendu amnésiques tous les deux.</p>
+<p>Votre mission, si vous l’acceptez, est de retrouver ce fameux prénom. Pour cela, vous allez devoir explorer les fonctionnalités du Datalab.</p>
+</div>
+</div>
+</section>
+<section id="se-connecter" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="se-connecter"><span class="header-section-number">1</span> Se connecter</h2>
+<p>Vous pouvez réaliser ce TP soit sur :</p>
+<ul>
+<li>Le <a href="https://onyxia.lab.groupe-genes.fr/" target="_blank">Datalab du GENES</a></li>
+<li>Le <a href="https://datalab.sspcloud.fr/" target="_blank">Datalab SSPCloud de l’INSEE</a>
+<ul>
+<li>si besoin de créer un compte, utilisez votre mail ENSAI</li>
+</ul></li>
+</ul>
+</section>
+<section id="lancer-un-service" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="lancer-un-service"><span class="header-section-number">2</span> Lancer un service</h2>
+<div class="callout callout-style-default callout-important no-icon callout-titled" title="Fil rouge">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Fil rouge
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Avant de partir à la recherche du prénom, Josette a une envie de doubitchou.</p>
+<p>Vous retrouvez la recette, mais il vous manque la quantité exacte en grammes de margarine.</p>
+<p>Vous savez simplement que la valeur recherchée correspond à combien il y a de nombres premiers entre 10 000 et 100 000.</p>
+<p>Naturellement, vous vous dites que la solution la plus simple est de créer un programme Python pour trouver la réponse. Or, Python n’est pas installé sur votre machine et vous ne savez pas comment faire… Mais alors : pourquoi ne pas lancer un service du Datalab qui permet d’exécuter du Python.</p>
+</div>
+</div>
+<section id="un-premier-service" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="un-premier-service"><span class="header-section-number">2.1</span> Un premier service</h3>
+<ul class="task-list">
+<li><label><input type="checkbox">Allez dans <code>Catalogue de services</code></label></li>
+<li><label><input type="checkbox">Sélectionnez le service <em>Jupyter-python</em>, puis cliquez deux fois sur <code>Lancer</code></label></li>
+</ul>
+<p>Attendez quelques secondes le temps que le service se lance.</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Cliquez pour copier le mot de passe</label></li>
+<li><label><input type="checkbox">Cliquez sur <code>Ouvrir le service</code> <span class="emoji" data-emoji="rocket">🚀</span></label>
+<ul>
+<li>password : collez le mot de passe</li>
+</ul></li>
+</ul>
+<p>Votre service <em>Jupyter Python</em> s’ouvre.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Ce qu'il se passe sous le capot">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Ce qu’il se passe sous le capot
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Pour plus de détails, vous pouvez consulter la vidéo en bas de la page.</p>
+<p>Prenons l’exemple de ce qu’il se passe en arrière plan lorsque vous lancez un service <code>Vscode-python</code> :</p>
+<section id="construction-de-limage-docker" class="level4">
+<h4 class="anchored" data-anchor-id="construction-de-limage-docker">Construction de l’image Docker</h4>
+<p>Une image <a href="https://www.docker.com/" target="_blank">Docker</a> est un paquet léger et autonome qui contient tout le nécessaire pour exécuter une application : le code, les bibliothèques, les dépendances, les variables d’environnement et les fichiers de configuration.</p>
+<p>Les images Docker permettent de créer des environnements isolés et cohérents, garantissant ainsi la portabilité et la reproductibilité des applications.</p>
+<ol type="1">
+<li>Nous partons de l’<a href="https://github.com/InseeFrLab/images-datascience/blob/main/base/Dockerfile" target="_blank">image de base d’Onyxia</a>
+<ul>
+<li>ubuntu:22.04 et quelques éléments de config</li>
+</ul></li>
+<li>Nous ajoutons la couche <a href="https://github.com/InseeFrLab/images-datascience/blob/main/python-minimal/Dockerfile" target="_blank">python-minimal</a>
+<ul>
+<li>installation de python et quelques packages classiques</li>
+</ul></li>
+<li>Nous ajoutons la couche <a href="https://github.com/InseeFrLab/images-datascience/blob/main/python-datascience/Dockerfile" target="_blank">python-datascience</a>
+<ul>
+<li>Julia, Quarto et des packages de datascience (numpy, pandas…)</li>
+</ul></li>
+<li>Nous ajoutons la couche <a href="https://github.com/InseeFrLab/images-datascience/blob/main/vscode/Dockerfile" target="_blank">vscode</a>
+<ul>
+<li>Installation de Visual Studio Code et configuration</li>
+</ul></li>
+</ol>
+<p>Vous avez maintenant une image Docker avec tout ce qu’il faut pour bien travailler.</p>
+</section>
+<section id="dockerhub" class="level4">
+<h4 class="anchored" data-anchor-id="dockerhub">DockerHub</h4>
+<p>Cette image est construite et déposée sur DockerHub <a href="https://hub.docker.com/r/inseefrlab/onyxia-vscode-python" target="_blank">onyxia-vscode-python</a>.</p>
+<p>Nous allons ensuite lancer une instance de cette image : un conteneur.</p>
+<p>Une image est comme un moule, et un conteneur est un objet fabriqué à partir de ce moule. L’image contient les instructions, et le conteneur est l’instance concrète créée à partir de ce modèle. Vous verrez le même principe dans le cours de POO avec les classes (modèles) et les objets (instances)</p>
+<p>Pour gérer tous les conteneurs lancés sur le datalab, nous avons besoin d’un orchestrateur : Kubernetes.</p>
+</section>
+<section id="chart-helm" class="level4">
+<h4 class="anchored" data-anchor-id="chart-helm">Chart Helm</h4>
+<p>Cependant, nous allons d’abord utiliser <a href="https://helm.sh/" target="_blank">Helm</a> pour faciliter le déploiement.</p>
+<p>Helm simplifie le processus de déploiement d’applications sur Kubernetes en automatisant les tâches répétitives et en fournissant une gestion centralisée des configurations.</p>
+<p>Le <a href="https://github.com/InseeFrLab/helm-charts-interactive-services/tree/main/charts/vscode-python" target="_blank">chart Helm vscode-python</a> est un ensemble de fichiers de configuration qui facilite le déploiement d’application dans un envrionnement Kubernetes.</p>
+</section>
+<section id="déploiement-sur-kube" class="level4">
+<h4 class="anchored" data-anchor-id="déploiement-sur-kube">Déploiement sur Kube</h4>
+<p><a href="https://kubernetes.io/" target="_blank">Kubernetes</a> (K8s) est un système open-source qui automatise le déploiement, la mise à l’échelle et la gestion d’applications conteneurisées. C’est un orchestrateur de conteneurs.</p>
+<p>K8s récupére via le chart Helm toutes les infos nécessaires et déploie le conteneur (créé à partir de l’image Docker) sur l’infra du datalab.</p>
+</section>
+</div>
+</div>
+</div>
+<ul class="task-list">
+<li><label><input type="checkbox">Créez un Notebook Python</label>
+<ul>
+<li>File <span class="emoji" data-emoji="arrow_right">➡️</span> New <span class="emoji" data-emoji="arrow_right">➡️</span> Notebook</li>
+</ul></li>
+<li><label><input type="checkbox">Dans la cellule, écrivez un code Python qui permet de compter combien il y a de nombres premiers entre 10 000 et 100 000</label></li>
+</ul>
+<p>Pour vous aider, vous pouvez utiliser cette fonction qui génére une liste de booléens.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> crible_eratosthene(n) <span class="op">-&gt;</span> <span class="bu">list</span>[<span class="bu">bool</span>]:</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Génère une liste de booléens où True indique qu'un nombre est premier."""</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    est_premier <span class="op">=</span> [<span class="va">True</span>] <span class="op">*</span> (n <span class="op">+</span> <span class="dv">1</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    est_premier[<span class="dv">0</span>] <span class="op">=</span> est_premier[<span class="dv">1</span>] <span class="op">=</span> <span class="va">False</span>  <span class="co"># 0 et 1 ne sont pas premiers</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">2</span>, <span class="bu">int</span>(n<span class="op">**</span><span class="fl">0.5</span>) <span class="op">+</span> <span class="dv">1</span>):</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> est_premier[i]:</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span> multiple <span class="kw">in</span> <span class="bu">range</span>(i <span class="op">*</span> i, n <span class="op">+</span> <span class="dv">1</span>, i):</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>                est_premier[multiple] <span class="op">=</span> <span class="va">False</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> est_premier</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>N’hésitez pas à créer plusieurs cellules pour découper votre code (petites icones avec des <code>+</code>)</p>
+</div>
+</div>
+<p>Comme vous êtes un as de la programmation, cela ne vous prend que trois minutes. C’est beaucoup plus rapide que si vous aviez du installer Python, ainsi qu’un environnement d’exécution.</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Vérifiez que le résultat est lui même un nombre premier</label>
+<ul>
+<li>Notez le vous en aurez besoin à la fin</li>
+</ul></li>
+</ul>
+</section>
+<section id="utiliser-des-données" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="utiliser-des-données"><span class="header-section-number">2.2</span> Utiliser des données</h3>
+<div class="callout callout-style-default callout-important no-icon callout-titled" title="Fil rouge">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Fil rouge
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Vous vous rendez compte qu’il faut plus de 8 kg de margarine et que vous n’en avez pas assez dans le frigo.</p>
+<p>Félix propose d’aller en chercher à la superette du coin. Il entre dans l’ascenseur pour descendre les 6 étages et patatra, il se retrouve bloqué.</p>
+<p>Pour retrouver les 5 chiffres du numéro du dépanneur, vous allez devoir répondre à 5 questions en requêtant le fichier des communes françaises.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="COG">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>COG
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Chaque année, l’INSEE publie sur son site le <a href="https://www.insee.fr/fr/information/2560452" target="_blank">Code officiel géographique</a> (COG).</p>
+<p>Ce référentiel regroupe, au 1er janvier, les codes et libellés des communes, cantons, arrondissements, départements, régions, ainsi que ceux des pays et territoires étrangers.</p>
+</div>
+</div>
+<p>Vous allez utiliser via <em>DuckDB</em> du <em>SQL</em> dans du code <em>Python</em>. Commencez par importer le package et créer la vue vers le fichier des communes 2024.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> duckdb</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>duckdb.sql(<span class="st">"""</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="st">CREATE OR REPLACE VIEW commune AS</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="st">FROM 'https://www.insee.fr/fr/statistiques/fichier/7766585/v_commune_2024.csv';</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Pour exécuter une requête :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>duckdb.sql(<span class="st">"""</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT *</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="st">  FROM commune</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Pour avoir un affichage plus joli, vous pouvez convertir la sortie en du dataframe pandas avec la méthode <code>to_df()</code>.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>duckdb.sql(<span class="st">"""</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT *</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="st">  FROM commune</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>).to_df()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+<ul class="task-list">
+<li><label><input type="checkbox">Quel est le code région de Mayotte ?</label></li>
+<li><label><input type="checkbox">Combien de communes y a-t-il en Guyane ?</label></li>
+<li><label><input type="checkbox">Parmi les 3 départements de la Picardie (Aisne, Oise, Somme), combien de communes ont au minimum 4 <em>L</em> dans leur nom ?</label></li>
+<li><label><input type="checkbox">Affichez le nombre de communes par département</label>
+<ul>
+<li>Classez par nombre de communes décroissant</li>
+<li>Quel est le numéro du département se classant au 20e rang ?</li>
+</ul></li>
+<li><label><input type="checkbox">Quel est le numéro du département dans lequel se trouve le nom de commune le plus long</label></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>La somme des 5 nombres vaut 149</li>
+<li>Les nombres sont dans l’ordre croissant</li>
+</ul>
+</div>
+</div>
+</div>
+<p>Vous venez ici d’utiliser des données disponibles sur internet. Vous pouvez également effectuer des traitements sur vos propres données en les stockant sur S3.</p>
+</section>
+</section>
+<section id="stockage-s3" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="stockage-s3"><span class="header-section-number">3</span> Stockage S3</h2>
+<div class="callout callout-style-default callout-note callout-titled" title="Définition">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Définition
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>S3 : Simple Storage System.</p>
+<p>Inventé par Amazon, ce système de stockage est devenu l’outil standard du marché pour le stockage en ligne.</p>
+<p><a href="https://min.io/" target="_blank">MinIO</a> est une solution alternative de stockage d’objets open-source qui permet de déployer facilement un stockage évolutif et performant. Elle est compatible avec l’API <a href="https://aws.amazon.com/fr/s3/" target="_blank">S3 d’Amazon</a>, ce qui facilite l’intégration avec les applications existantes.</p>
+<p>Pour faire simple, vous pouvez vous dire que c’est comme si vous allez stocker vos fichiers dans un Drive.</p>
+</div>
+</div>
+<p>Lorsque l’on travaille dans le cloud, il est essentiel de <u>séparer les données des programmes</u> pour :</p>
+<ul>
+<li>mieux gérer les ressources</li>
+<li>renforcer la sécurité en limitant les accès et les permissions</li>
+<li>permettre une scalabilité indépendante des composants</li>
+</ul>
+<p>MinIO offre :</p>
+<ul>
+<li>une haute disponibilité</li>
+<li>une sécurité renforcée grâce au chiffrement des données et des contrôles d’accès</li>
+<li>des performances élevées, particulièrement adaptées aux environnements nécessitant un accès rapide aux données, comme le Big Data et l’intelligence artificielle</li>
+</ul>
+<section id="votre-bucket" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="votre-bucket"><span class="header-section-number">3.1</span> Votre bucket</h3>
+<div class="callout callout-style-default callout-note callout-titled" title="Définition">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Définition
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Un <strong>bucket</strong> est un conteneur de stockage utilisé pour regrouper des objets (fichiers et métadonnées) dans des systèmes de stockage de type cloud. Il facilite l’organisation, la gestion des permissions et l’accès aux données dans un espace de stockage structuré.</p>
+</div>
+</div>
+<p>Lors de votre création de compte, un bucket est créé avec votre nom d’utilisateur. Dans ce bucket, vous pouvez :</p>
+<ul>
+<li>créer / supprimer des dossiers</li>
+<li>importer / supprimer des fichiers</li>
+</ul>
+<p>Vous avez plusieurs possibilités pour gérer à votre stockage :</p>
+<ul>
+<li>Depuis le Datalab, onglet <em>Mes fichiers</em></li>
+<li>Depuis la console MinIO :
+<ul>
+<li><a href="https://minio-console.lab.sspcloud.fr/" target="_blank">https://minio-console.lab.sspcloud.fr/</a></li>
+<li><a href="https://minio-simple.lab.groupe-genes.fr" target="_blank">https://minio-simple.lab.groupe-genes.fr</a></li>
+</ul></li>
+<li>Depuis un terminal avec le client Minio</li>
+</ul>
+</section>
+<section id="stocker-vos-fichiers" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="stocker-vos-fichiers"><span class="header-section-number">3.2</span> Stocker vos fichiers</h3>
+<div class="callout callout-style-default callout-important no-icon callout-titled" title="Fil rouge">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Fil rouge
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Félix est sauvé, il peut maintenant aller chercher de la margarine et du papier cadeau (ça peut toujours servir).</p>
+<p>En attendant, Josette s’occupe en confectionnant un superbe gilet gris avec son amie Thérèse.</p>
+<p>Elle se souvient qu’elle a noté quelque part la longueur de fil nécessaire dans un fichier csv.</p>
+</div>
+</div>
+<ul class="task-list">
+<li><label><input type="checkbox">Téléchargez ce fichier <a href="data/tp3-longueur-fil.parquet" target="_blank">parquet</a></label></li>
+</ul>
+<p>Ensuite, allez sur la page d’accueil du Datalab :</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Allez dans <code>Mes fichiers</code></label></li>
+<li><label><input type="checkbox">Créez un dossier <code>ENSAI</code> puis à l’intérieur un dossier <code>SQL</code></label></li>
+<li><label><input type="checkbox">Téléversez votre fichier <em>parquet</em> dans le dossier <em>SQL</em></label></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled" title="Chemin vers mes fichiers">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Chemin vers mes fichiers
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Vous remarquerez à droite, des lignes de commande du type <code>mc cp tp3-longueur-fil.parquet s3/&lt;username&gt;/ENSAI/SQL/tp3-longueur-fil.parquet</code>.</p>
+<p>Ce sont des commandes pour interagir avec votre stockage depuis un terminal (voir ci-après).</p>
+<p>Cependant, vous pouvez extraire de ces commandes une information intéressante : le chemin vers votre fichier : <code>s3/&lt;username&gt;/ENSAI/SQL/tp3-longueur-fil.parquet</code>.</p>
+</div>
+</div>
+<p>Vous venez de charger un fichier, voyons maintenant comment y accéder dans un <em>Service</em>, en utilisant par exemple le notebook que vous avez déjà lancé.</p>
+</section>
+<section id="utiliser-des-données-1" class="level3" data-number="3.3">
+<h3 data-number="3.3" class="anchored" data-anchor-id="utiliser-des-données-1"><span class="header-section-number">3.3</span> Utiliser des données</h3>
+<p>Sur la page d’accueil du Datalab :</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Allez dans <code>Mon Compte</code>, puis dans l’onglet <code>Connexion au Stockage</code></label></li>
+</ul>
+<p>Vous trouverez ici des informations pour vous connecter au stockage selon le language que vous utilisez : Python, R…</p>
+<p>D’ailleurs pour chaque langage, il y a même plusieurs packages qui font le job. Par exemple <em>s3fs</em> ou <em>boto3</em> pour Python.</p>
+<p>Retournez dans votre service Notebook Jupyter :</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Créez un nouveau Notebook</label>
+<ul>
+<li>vous pouvez par exemple le nommer <code>S3.ipynb</code></li>
+</ul></li>
+<li><label><input type="checkbox">Créer 2 cellules, puis collez et exécutez les 2 blocs de code ci-dessous</label></li>
+</ul>
+<p>Commencez par importer les packages nécessaires et récupérer les valeurs des variables d’environnement pour pouvoir se connecter à votre stockage.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>s3_endpoint <span class="op">=</span> <span class="ss">f'https://</span><span class="sc">{</span>os<span class="sc">.</span>environ[<span class="st">"AWS_S3_ENDPOINT"</span>]<span class="sc">}</span><span class="ss">'</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>s3_access_key <span class="op">=</span> os.environ[<span class="st">"AWS_ACCESS_KEY_ID"</span>]</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>s3_secret_access_key <span class="op">=</span> os.environ[<span class="st">"AWS_SECRET_ACCESS_KEY"</span>]</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>s3_session_token <span class="op">=</span> os.environ[<span class="st">"AWS_SESSION_TOKEN"</span>]</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>s3_region <span class="op">=</span> os.environ[<span class="st">"AWS_DEFAULT_REGION"</span>]</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>s3_username <span class="op">=</span> os.environ[<span class="st">"VAULT_TOP_DIR"</span>] <span class="co"># un peu bancal pour avoir le username</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Les clés et les jetons ont une durée de vie limitée.</p>
+<p>Si vous laissez votre service ouvert trop longtemps (pas bien !), vos clés et jetons pourraient être expirés.</p>
+<p>Dans ce cas, vous pouvez recharger en dur les nouvelles valeurs (voir Mon Compte &gt; Connexion au Stockage).</p>
+</div>
+</div>
+<p>Définissez le chemin où se trouve votre fichier et lisez le avec Polars.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>s3_file_path <span class="op">=</span> <span class="ss">f"s3://</span><span class="sc">{</span>s3_username<span class="sc">}</span><span class="ss">/ENSAI/SQL/tp3-longueur-fil.parquet"</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>storage_options <span class="op">=</span> {</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"aws_endpoint"</span>:  s3_endpoint,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"aws_access_key_id"</span>: s3_access_key,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"aws_secret_access_key"</span>: s3_secret_access_key,</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">"aws_token"</span>: s3_session_token,</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">"aws_region"</span>: s3_region</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="bu">file</span> <span class="op">=</span> pl.scan_parquet(source<span class="op">=</span>s3_file_path, </span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>                     storage_options<span class="op">=</span>storage_options)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-note callout-titled" title="Polars">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Polars
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><a href="https://pola.rs/" target="_blank">Polars</a> est une bibliothèque rapide et performante pour la manipulation de données en Python et Rust, optimisée pour les grands volumes de données.</p>
+<p>Contrairement à <a href="https://pandas.pydata.org/" target="_blank">Pandas</a>, Polars utilise une approche orientée colonnes (columnar) et tire parti du traitement parallèle, ce qui le rend particulièrement adapté pour les opérations analytiques lourdes.</p>
+<p>Sa syntaxe, proche de celle de Pandas, permet des transformations, agrégations et manipulations de données avec des méthodes performantes et expressives.</p>
+<p>Pour plus de détails : <a href="https://ssphub.netlify.app/post/polars/" target="_blank">https://ssphub.netlify.app/post/polars/</a></p>
+</div>
+</div>
+<ul class="task-list">
+<li><label><input type="checkbox">Créez une troisième cellule et affichez le fichier chargé</label>
+<ul>
+<li>Que se passe-t-il ?</li>
+</ul></li>
+</ul>
+<div class="callout callout-style-default callout-important callout-titled" title="Mode Lazy">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Mode Lazy
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Vous avez appelé la méthode <code>scan_parquet()</code> qui correspond au mode <em>Lazy</em> de Polars.</p>
+<p>Le mode <em>Lazy</em> signifie que Polars va accumuler toutes les instructions que vous lui donnez sans pour autant les exécuter tout de suite.</p>
+<p>Mais quel est l’intérêt ?</p>
+<p>Imaginons que vous êtes en train d’analyser un trés gros fichier et que vous enchainez à la suite diverses opérations (filtres, sélections de colonnes, regroupements, agrégations, tri…), deux choix s’offrent à vous :</p>
+<p>Option 1 (mode Eager : <code>pl.read_parquet()</code>):</p>
+<ul>
+<li>vous chargez tout le fichier en RAM (dans la mémoire de votre machine)</li>
+<li>vous appliquez des opérations dans n’importe quel ordre</li>
+<li>vous lancez, c’est long et ça rame…</li>
+</ul>
+<p>Option 2 (mode Lazy : <code>pl.scan_parquet()</code>):</p>
+<ul>
+<li>vous scannez le fichier, i.e.&nbsp;analyser sa structure (types de colonnes) et ses métadonnées</li>
+<li>vous donnez vos opérations dans n’importe quel ordre</li>
+<li>à la fin, vous demandez à Polars de vous fournir le résultat</li>
+<li>à ce moment, Polars va optimiser l’ordre des traitements en utilisant son propre <u>plan d’exécution</u> et vous donner une réponse beaucoup plus rapide</li>
+</ul>
+<p>En résumé, en mode Eager, à chaque étape la machine effectue bêtement tous les calculs que vous lui demandez. En mode Lazy, la machine liste les opérations que vous demandez. Puis lorsque vous exigez un résultat, l’ordre des opérations est optimisé et la réponse est beaucoup plus rapide.</p>
+</div>
+</div>
+<ul class="task-list">
+<li><label><input type="checkbox">Pour demander le chargement du fichier, appelez la méthode <code>collect()</code></label>
+<ul>
+<li>stockez le résultat dans une variable <em>df</em></li>
+</ul></li>
+<li><label><input type="checkbox">Vous pouvez maintenant afficher le contenu de <em>df</em> avec un print</label></li>
+</ul>
+<p>En appelant la méthode <code>collect()</code>, vous avez « forcé » Polars à charger les données en mémoire.</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Appliquez au dataframe la méthode <code>filter()</code> pour trouver la longueur de fil du gilet</label>
+<ul>
+<li><code>df.filter(pl.col("&lt;column_name&gt;") == "&lt;value&gt;")</code></li>
+</ul></li>
+</ul>
+</section>
+<section id="données-dautres-utilisateurs" class="level3" data-number="3.4">
+<h3 data-number="3.4" class="anchored" data-anchor-id="données-dautres-utilisateurs"><span class="header-section-number">3.4</span> Données d’autres utilisateurs</h3>
+<div class="callout callout-style-default callout-important no-icon callout-titled" title="Fil rouge">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Fil rouge
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Pendant que Josette confectionne son gilet, Félix revient avec la margarine.</p>
+<p>Or, Josette n’a finalement plus faim. Félix se met alors à bouder et va s’enfermer dans les toilettes pour avaler des pilules qu’il a prises au passage à la pharmacie. Soudain, la mémoire lui revient !</p>
+<p>Il se rappelle qu’ils avaient trouvé le prénom en parcourant… Le fichier des prénoms !</p>
+</div>
+</div>
+<p>Ce fichier est stocké sur le bucket d’un autre utilisateur à l’une des adresses suivante :</p>
+<ul>
+<li>SSP Cloud : <code>s3://ludo2ne/diffusion/ENSAI/SQL-TP/prenoms-nat2022.parquet</code></li>
+<li>Datalab du GENES : <code>s3://ldeneuville-ensai/diffusion/ENSAI/SQL-TP/prenoms-nat2022.parquet</code></li>
+</ul>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Malheureusement sur le Datalab du GENES, la fonctionnalité n’est pas encore implémentée sur le Datalab du GENES.</p>
+<p>Les dossiers <em>diffusion</em> de chaque utilisateur ne sont pas accessibles en lecture.</p>
+<p>Ce n’est plus trop dans la philosophie de l’exercice, mais pour contourner le problème :</p>
+<ul>
+<li>Téléchargez le <a href="https://static.data.gouv.fr/resources/base-prenoms-insee-format-parquet/20231121-161435/prenoms-nat2022.parquet" target="_blank">fichier des prenoms</a></li>
+<li>Stockez le sur votre S3</li>
+<li>Utilisez ce fichier pour la suite</li>
+</ul>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Diffusion">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Diffusion
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>À la racine de votre Bucket, vous pouvez créer un dossier nommé <code>diffusion</code>.</p>
+<p>Vous pourrez alors stocker à l’intérieur les dossiers et fichiers que vous souhaitez partager aux autres utilisateurs. Ils auront un droit d’accès en lecture sur votre dossier <em>diffusion</em>.</p>
+</div>
+</div>
+<ul class="task-list">
+<li><label><input type="checkbox">Scannez ce fichier avec Polars</label>
+<ul>
+<li>stockez-le dans une variable nommée <em>fichier_prenoms</em></li>
+</ul></li>
+<li><label><input type="checkbox">Utilisez le code ci-dessous pour afficher le top10 des prénoms féminins en 2022</label></li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>top10f2021 <span class="op">=</span> fichier_prenoms<span class="op">\</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">filter</span>((pl.col(<span class="st">"sexe"</span>) <span class="op">==</span> <span class="dv">2</span>) <span class="op">&amp;</span> </span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>            (pl.col(<span class="st">"annais"</span>) <span class="op">==</span> <span class="st">"2021"</span>) <span class="op">&amp;</span> </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>            (pl.col(<span class="st">"preusuel"</span>) <span class="op">!=</span> <span class="st">"_PRENOMS_RARES"</span>))<span class="op">\</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    .group_by(<span class="st">"preusuel"</span>)<span class="op">\</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    .agg(pl.col(<span class="st">"nombre"</span>).<span class="bu">sum</span>().alias(<span class="st">"nombre_total"</span>))<span class="op">\</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    .sort(<span class="st">"nombre_total"</span>, descending<span class="op">=</span><span class="va">True</span>)<span class="op">\</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    .limit(<span class="dv">10</span>)<span class="op">\</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    .collect()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul class="task-list">
+<li><label><input type="checkbox">Vous pouvez effectuez les mêmes traitements en encapsulant du sql :</label></li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>top10f2021_sql <span class="op">=</span> fichier_prenoms<span class="op">\</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    .sql(<span class="st">"""</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="st">      SELECT preusuel, </span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="st">             SUM(nombre) AS nombre_total</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="st">        FROM self</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="st">       WHERE preusuel &lt;&gt; '_PRENOMS_RARES'</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="st">         AND annais = '2021'</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="st">         AND sexe = 2</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="st">       GROUP BY preusuel</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="st">       ORDER BY nombre_total DESC</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="st">       LIMIT 10</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="st">    """</span>)<span class="op">\</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>    .collect()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-important no-icon callout-titled" title="Fil rouge">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Fil rouge
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Alors que vous alliez chercher le prénom, votre camarade Katia vous demande en quelle année son prénom a été le plus donné entre 1960 et 1980.</p>
+</div>
+</div>
+<ul class="task-list">
+<li><label><input type="checkbox">Écrivez la requête SQL qui fait le même travail que les instructions ci-dessous</label></li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>prenom <span class="op">=</span> <span class="st">"Katia"</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>annee_debut, annee_fin <span class="op">=</span> <span class="dv">1960</span>, <span class="dv">1980</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>df_prenom_annee <span class="op">=</span> fichier_prenoms<span class="op">\</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    .<span class="bu">filter</span>((pl.col(<span class="st">"preusuel"</span>) <span class="op">==</span> prenom.upper()) <span class="op">&amp;</span> </span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>            (pl.col(<span class="st">"annais"</span>).<span class="bu">str</span>.to_integer(strict<span class="op">=</span><span class="va">False</span>).is_not_null()) <span class="op">&amp;</span> </span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>            (pl.col(<span class="st">"annais"</span>).<span class="bu">str</span>.to_integer(strict<span class="op">=</span><span class="va">False</span>) <span class="op">&gt;=</span> annee_debut) <span class="op">&amp;</span> </span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>            (pl.col(<span class="st">"annais"</span>).<span class="bu">str</span>.to_integer(strict<span class="op">=</span><span class="va">False</span>) <span class="op">&lt;=</span> annee_fin))<span class="op">\</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    .group_by(<span class="st">"annais"</span>)<span class="op">\</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>    .agg(pl.col(<span class="st">"nombre"</span>).<span class="bu">sum</span>().alias(<span class="st">"nombre_total"</span>))<span class="op">\</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    .sort(<span class="st">"annais"</span>)<span class="op">\</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    .collect()</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_prenom_annee)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Diagramme en barre">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-22-contents" aria-controls="callout-22" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Diagramme en barre
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-22" class="callout-22-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Vous pouvez également tracer un graphique avec ces données :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Set seaborn style for a cleaner, more appealing look</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>sns.set_theme(style<span class="op">=</span><span class="st">"whitegrid"</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Create the plot</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">6</span>))</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Data</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>years <span class="op">=</span> df_prenom_annee[<span class="st">"annais"</span>].to_list()         <span class="co"># Extracts years as a list</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>counts <span class="op">=</span> df_prenom_annee[<span class="st">"nombre_total"</span>].to_list()  <span class="co"># Extracts counts as a list</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Bar plot with custom colors and transparency for better visuals</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>ax.bar(years, </span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>       counts, </span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>       color<span class="op">=</span><span class="st">"#4C72B0"</span>, </span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>       edgecolor<span class="op">=</span><span class="st">"black"</span>, </span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>       alpha<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Set labels and title with padding for readability</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>ax.set_xlabel(<span class="st">"Année"</span>, fontsize<span class="op">=</span><span class="dv">12</span>, labelpad<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>ax.set_ylabel(<span class="st">"Nombre d'occurences"</span>, fontsize<span class="op">=</span><span class="dv">12</span>, labelpad<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="ss">f"Occurrences du prénom </span><span class="sc">{</span>prenom<span class="sc">}</span><span class="ss"> par année (</span><span class="sc">{</span>annee_debut<span class="sc">}</span><span class="ss">-</span><span class="sc">{</span>annee_fin<span class="sc">}</span><span class="ss">)"</span>, fontsize<span class="op">=</span><span class="dv">14</span>, pad<span class="op">=</span><span class="dv">15</span>)</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a><span class="co"># Rotate x-axis labels, improve spacing, and format grid</span></span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>ax.tick_params(axis<span class="op">=</span><span class="st">'x'</span>, rotation<span class="op">=</span><span class="dv">45</span>)</span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()  <span class="co"># Adjust layout for tight fit</span></span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Display the plot</span></span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<p>Nous y sommes presque ! Pour trouver le fameux prénom :</p>
+<ul>
+<li>Reprenez le résultat du nombre de nombres premiers entre 10 000 et 100 000</li>
+<li>Otez 3</li>
+<li>Divisez par 5</li>
+</ul>
+<p>Le prénom recherché est à ce rang de classement pour les prénoms féminins donnés en France entre 1970 et 2000.</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Écrivez la requête</label>
+<ul>
+<li>Filtrez les prénoms féminins donnés entre 1970 et 2000</li>
+<li>Classez-les par le nombre de fois où ils ont été donné décroissant et prénom décroissant</li>
+</ul></li>
+<li><label><input type="checkbox">Trouvez le prénom classé au rang demandé</label>
+<ul>
+<li>Vous pouvez utiliser ce code : <code>&lt;df&gt;.with_row_index()[&lt;index_inf&gt;:&lt;index_sup&gt;]</code></li>
+</ul></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-23-contents" aria-controls="callout-23" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-23" class="callout-23-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Ce n’est pas encore implémenté dans Polars, mais il est possible en SQL de générer les rangs : <code>RANK() OVER (ORDER BY SUM(nombre) DESC) AS rang</code>.</p>
+<p>La réponse :</p>
+<ul>
+<li>Commence par un <em>S</em></li>
+<li>Monsieur et Madame Hier ont une fille, comment s’appelle-t-elle ?</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="exportez-vos-résultats-vers-minio" class="level3" data-number="3.5">
+<h3 data-number="3.5" class="anchored" data-anchor-id="exportez-vos-résultats-vers-minio"><span class="header-section-number">3.5</span> Exportez vos résultats vers MinIO</h3>
+<p>Vous pouvez également exporter vos fichiers vers S3.</p>
+<p>Nous allons utiliser ici la librairie <a href="https://s3fs.readthedocs.io/" target="_blank">s3fs</a>.</p>
+<ul class="task-list">
+<li><p><label><input type="checkbox">Collez et lancez ce code :</label></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> s3fs</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>fs <span class="op">=</span> s3fs.S3FileSystem(</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    client_kwargs<span class="op">=</span>{<span class="st">'endpoint_url'</span>: <span class="st">'https://'</span><span class="op">+</span><span class="st">'minio-simple.lab.groupe-genes.fr'</span>},</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>    key <span class="op">=</span> os.environ[<span class="st">"AWS_ACCESS_KEY_ID"</span>], </span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>    secret <span class="op">=</span> os.environ[<span class="st">"AWS_SECRET_ACCESS_KEY"</span>], </span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    token <span class="op">=</span> os.environ[<span class="st">"AWS_SESSION_TOKEN"</span>])</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>destination <span class="op">=</span> <span class="ss">f"s3://</span><span class="sc">{</span>s3_username<span class="sc">}</span><span class="ss">/ENSAI/SQL/output.csv"</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> fs.<span class="bu">open</span>(destination, mode<span class="op">=</span><span class="st">'wb'</span>) <span class="im">as</span> f:</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>    top10f2021.write_csv(f)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p><label><input type="checkbox">Sur le Datalab, allez dans <code>Mes fichiers</code> <span class="emoji" data-emoji="arrow_right">➡️</span> ENSAI <span class="emoji" data-emoji="arrow_right">➡️</span> SQL</label></p>
+<ul>
+<li>le fichier <em>output.csv</em> a été généré</li>
+<li>rafraichissez la page si besoin</li>
+</ul></li>
+<li><p><label><input type="checkbox">Double-cliquez sur ce fichier pour en avoir un aperçu</label></p></li>
+</ul>
+<hr>
+<p>Pour plus de détails sur le stockage des fichiers sur S3 :</p>
+<ul>
+<li><a href="https://pythonds.linogaliana.fr/content/modern-ds/s3.html#les-donn%C3%A9es-sur-le-cloud" target="_blank">Les données sur le cloud</a> , Python pour la data science, Lino Galiana</li>
+</ul>
+</section>
+</section>
+<section id="libérer-les-ressources" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="libérer-les-ressources">Libérer les ressources</h2>
+<p>Une fois vos travaux terminés, il est temps de libérer les ressources réservées.</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Si besoin, sauvegardez vos notebooks</label>
+<ul>
+<li>clic droit sur le nom du fichier <span class="emoji" data-emoji="arrow_right">➡️</span> Download</li>
+</ul></li>
+<li><label><input type="checkbox">Puis sur la page d’accueil, allez dans <em>Mes services</em>, mettez votre service à la poubelle</label></li>
+</ul>
+<p>Vous pouvez aisément reproduire votre travail plus tard :</p>
+<ul>
+<li>Votre code est téléchargé</li>
+<li>Vos données sont toujours sur MinIO</li>
+<li>Il suffit de relancer un nouveau service et de relancer les calculs</li>
+</ul>
+<p>Une manière plus propre de travailler est d’utiliser git pour versionner son code.</p>
+</section>
+<section id="fin-du-tp" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="fin-du-tp">Fin du TP</h2>
+<p>Le but de ce TP était de vous faire découvrir les fonctionnalités de base du Datalab et les bonnes pratiques de travail dans un environnement Cloud.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>La suite du TP est optionnelle.</p>
+<p>Elle est simplement donnée pour celles et ceux qui souhaient aller plus loin et profiter de toutes les fonctionnalités du Datalab.</p>
+</div>
+</div>
+<section id="besoin-dassistance" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="besoin-dassistance">Besoin d’assistance ?</h3>
+<ul>
+<li>Contactez l’équipe du SSP Cloud sur <a href="https://join.slack.com/t/3innovation/shared_invite/zt-1bo6y53oy-Y~zKzR2SRg37pq5oYgiPuA" target="_blank">Slack</a></li>
+<li>Pour le Datalab du GENES, vous trouverez sur la page d’accueil un lien pour rejoindre le canal Teams</li>
+</ul>
+</section>
+<section id="pour-aller-plus-loin" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="pour-aller-plus-loin">Pour aller plus loin</h3>
+<p>Une présentation complète du projet Onyxia au Devoxx 2023, de sa philosophie et de son fonctionnement par Olivier LEVITT, Joseph GARRONE et Frédéric COMTE.</p>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/GXINfnVB21E" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<p>Une présentation plus courte</p>
+<div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/sOOVg4I19BI" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
+<p>D’autres videos sur la <a href="https://github.com/InseeFrLab/onyxia" target="_blank">page GitHub du projet</a></p>
+</section>
+<section id="bibliographie" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="bibliographie">Bibliographie</h3>
+<ul>
+<li><a href="https://book.utilitr.org/01_R_Insee/Fiche_utiliser_Rstudio_SSPCloud.html" target="_blank">Utiliser RStudio sur l’environnement SSP Cloud</a>, UtilitR</li>
+<li><a href="https://www.sspcloud.fr/formation" target="_blank">Formations et tutoriels du SSP Cloud</a>
+<ul>
+<li>Nombreux tutos : Python, R, ML, Spark, Cartographie</li>
+</ul></li>
+<li><a href="https://docs.sspcloud.fr/" target="_blank">Doc SSP Cloud</a></li>
+<li><a href="https://docs.sspcloud.fr/content/principles.html" target="_blank">Principes du Datalab</a></li>
+<li><a href="https://github.com/TheAIWizard/Hands-on-Spark-Lab/blob/main/First-steps-with-cloud-computing/First-steps-with-cloud-computing.md" target="_blank">Découverte d’Onyxia et de son datalab SSP Cloud</a>, Nathan Randriamanana</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="travailler-avec-git" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="travailler-avec-git"><span class="header-section-number">4</span> Travailler avec Git</h2>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Caution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Sur le datalab, vos services ont une <u><strong>durée de vie limitée</strong></u>.</p>
+<p>Pour sauvegarder vos programmes, la bonne pratique est d’utiliser un dépôt git. Nous allons donc créer et utiliser un jeton pour communiquer avec GitHub.</p>
+<p>Pour suivre la démarche, il faut disposer d’un compte <a href="https://github.com/" target="_blank">GitHub</a>. Il est possible de suivre une démarche similaire avec <a href="https://about.gitlab.com/" target="_blank">GitLab</a>.</p>
+</div>
+</div>
+<section id="générer-un-token-github" class="level3" data-number="4.1">
+<h3 data-number="4.1" class="anchored" data-anchor-id="générer-un-token-github"><span class="header-section-number">4.1</span> Générer un token GitHub</h3>
+<div class="callout callout-style-default callout-tip callout-titled" title="Déjà fait ?">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Déjà fait ?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Si vous avez déjà généré et déclaré un jeton GitHub, inutile de refaire ces 2 étapes.</p>
+</div>
+</div>
+<ul class="task-list">
+<li><label><input type="checkbox">Connectez-vous à votre compte GitHub</label></li>
+<li><label><input type="checkbox">Allez dans settings <span class="emoji" data-emoji="arrow_right">➡️</span> Developer settings <span class="emoji" data-emoji="arrow_right">➡️</span> Personal access tokens <span class="emoji" data-emoji="arrow_right">➡️</span> Tokens (classic)</label></li>
+<li><label><input type="checkbox">Générez un <a href="https://github.com/settings/tokens/new" target="_blank">nouveau jeton classique</a></label>
+<ul>
+<li>Renseigner :
+<ul>
+<li>nom du token : Datalab GENES</li>
+<li>date d’expiration <span class="emoji" data-emoji="arrow_right">➡️</span> Custom <span class="emoji" data-emoji="arrow_right">➡️</span> 1 an</li>
+</ul></li>
+<li><span class="emoji" data-emoji="white_check_mark">✅</span> Cochez repo</li>
+<li>Cliquez sur <span class="green-button">Generate token</span></li>
+<li>Copiez ce jeton commençant par <code>ghp_</code> et gardez le précieusement de côté quelques minutes</li>
+</ul></li>
+</ul>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Ce jeton ne sera visible qu’une seule fois</li>
+<li>si vous le perdez ou s’il est expiré, il faut en générer un nouveau</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="déclarer-votre-jeton" class="level3" data-number="4.2">
+<h3 data-number="4.2" class="anchored" data-anchor-id="déclarer-votre-jeton"><span class="header-section-number">4.2</span> Déclarer votre jeton</h3>
+<p>GitHub vous a fournit un jeton. Il faut maintenant le déclarer sur le Datalab :</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Allez dans <code>Mon Compte</code> <span class="emoji" data-emoji="arrow_right">➡️</span> Onglet <code>Git</code></label></li>
+<li><label><input type="checkbox">Renseignez les informations suivantes</label>
+<ul>
+<li>nom d’utilisateur Git</li>
+<li>mail (celui utilisé pour votre compte GitHub)</li>
+</ul></li>
+<li><label><input type="checkbox">Collez votre token</label></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled" title="Config Git">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Config Git
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Vous pouvez maintenant échanger du code entre les services du Datalab et vos dépôts GitHub. <span class="emoji" data-emoji="tada">🎉</span></p>
+</div>
+</div>
+</section>
+<section id="dépôt-pour-le-code" class="level3" data-number="4.3">
+<h3 data-number="4.3" class="anchored" data-anchor-id="dépôt-pour-le-code"><span class="header-section-number">4.3</span> Dépôt pour le code</h3>
+<p>Avant de créer un service, nous allons créer un dépôt GitHub qui permettra de sauvegarder votre code.</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Dans GitHub, créer un <a href="https://github.com/new" target="_blank">nouveau Repository</a></label>
+<ul>
+<li>Repository name : TP3-datalab</li>
+<li>Private</li>
+<li><span class="emoji" data-emoji="white_check_mark">✅</span> Cochez <em>Add a README file</em></li>
+<li>.gitignore template : Python</li>
+<li>Choose a license : Apache Licence 2.0</li>
+<li><span class="green-button">Create Repository</span></li>
+</ul></li>
+<li><label><input type="checkbox">Sur la page de votre repo, cliquez sur le bouton <span class="green-button">Code</span></label></li>
+<li><label><input type="checkbox">Copiez l’adresse <em>https</em> du repo</label></li>
+</ul>
+</section>
+<section id="branchez-votre-service-sur-un-répo" class="level3" data-number="4.4">
+<h3 data-number="4.4" class="anchored" data-anchor-id="branchez-votre-service-sur-un-répo"><span class="header-section-number">4.4</span> Branchez votre service sur un répo</h3>
+<p>Lors du lancement d’un <em>Service</em>, vous pouvez vous brancher sur un répo git. Ainsi le contenu de votre dépôt sera importé dans votre service.</p>
+<p>Vous pourrez alors utiliser le code de votre dépôt et éventuellement le mettre à jour en effectuant un <em>push</em>.</p>
+<p>Lancez un service <em>Jupyter Notebook</em></p>
+<ul class="task-list">
+<li><label><input type="checkbox">Ouvrez la Configuration</label>
+<ul>
+<li>De nombreux onglets permettent de configurer votre service</li>
+<li>Service : possibilité d’utiliser une autre image Docker</li>
+<li>Resources : choisir CPU et RAM</li>
+<li>Init : script à lancer au démarrage</li>
+</ul></li>
+<li><label><input type="checkbox">Allez dans l’onglet <code>Git</code> et collez l’adresse <em>https</em> du repo dans la case <em>Repository url</em></label></li>
+<li><label><input type="checkbox"><code>Lancez</code> le service, puis attendez quelques secondes</label></li>
+</ul>
+</section>
+<section id="sauver-son-code" class="level3" data-number="4.5">
+<h3 data-number="4.5" class="anchored" data-anchor-id="sauver-son-code"><span class="header-section-number">4.5</span> Sauver son code</h3>
+<ul class="task-list">
+<li><label><input type="checkbox">Sur Jupyter, ouvrez un terminal</label>
+<ul>
+<li>File <span class="emoji" data-emoji="arrow_right">➡️</span> New <span class="emoji" data-emoji="arrow_right">➡️</span> Terminal</li>
+</ul></li>
+<li><label><input type="checkbox">Positionnez-vous dans le repo : <code>cd /home/onyxia/work/TP3-datalab/</code></label></li>
+<li><label><input type="checkbox"><code>git status</code> pour voir l’état actuel</label>
+<ul>
+<li>le fichier <em>ex0.ipynb</em> doit apparaître dans les <em>Untracked files</em></li>
+</ul></li>
+<li><label><input type="checkbox">Ajoutez ce fichier à l’index</label></li>
+<li><label><input type="checkbox">Créez un commit</label></li>
+<li><label><input type="checkbox">Poussez ce commit vers votre dépôt distant (GitHub)</label>
+<ul>
+<li>Vous pouvez vérifier sur GitHub que votre fichier <em>ex0.ipynb</em> est bien présent</li>
+</ul></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-29-contents" aria-controls="callout-29" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-29" class="callout-29-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li><code>git add .</code></li>
+<li><code>git commit -m "création fichier tp3"</code></li>
+<li><code>git push</code></li>
+</ul>
+</div>
+</div>
+</div>
+<section id="exercice" class="level4">
+<h4 class="anchored" data-anchor-id="exercice">Exercice</h4>
+<p>Par exemple en important le fichier des prénoms avec Polars et en encapsulant du SQL :</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Écrivez la requête du nombre de fois ou votre prénom a été donné entre 2010 et 2020</label></li>
+<li><label><input type="checkbox">Créez une nouvelle cellule et écrivez une requête pour afficher les 5 années où sont nées le plus de filles</label></li>
+<li><label><input type="checkbox">Quels sont les prénoms masculins et féminins les plus donnés depuis 1900 ?</label></li>
+<li><label><input type="checkbox">Affichez le nombres de filles et de garçons nés chaque année depuis 2010</label>
+<ul>
+<li><span class="emoji" data-emoji="bulb">💡</span> Aide : <code>SUM(CASE WHEN ? THEN ? ELSE ? END)</code></li>
+</ul></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="minio" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="minio"><span class="header-section-number">5</span> MinIO</h2>
+<p>D’autres possibilités pour accéder à votre stockage</p>
+<section id="client-minio" class="level3" data-number="5.1">
+<h3 data-number="5.1" class="anchored" data-anchor-id="client-minio"><span class="header-section-number">5.1</span> Client MinIO</h3>
+<p>Le <a href="https://min.io/docs/minio/linux/reference/minio-mc.html" target="_blank">client MinIO</a> installé et <u>utilisable depuis le terminal</u> permet également d’interagir avec vos fichiers.</p>
+<p>Ouvrez un terminal (File <span class="emoji" data-emoji="arrow_right">➡️</span> New <span class="emoji" data-emoji="arrow_right">➡️</span> Terminal):</p>
+<ul class="task-list">
+<li><label><input type="checkbox"><code>mc ls s3/&lt;username&gt;/ENSAI/SQL</code> : pour lister le contenu de votre dossier</label></li>
+<li><label><input type="checkbox"><code>mc cp s3/&lt;username&gt;/ENSAI/SQL/output.csv .</code> : pour copier le fichier depuis s3 dans votre dossier courant</label>
+<ul>
+<li>le fichier apparait dans votre explorer</li>
+</ul></li>
+<li><label><input type="checkbox">Supprimez ce fichier : <code>rm output.csv</code></label>
+<ul>
+<li>Car importer les fichiers de données dans son espace de travail n’est pas une bonne pratique</li>
+</ul></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>La commande <code>mc --help</code> liste toutes les commandes possibles (ESPACE pour défiler, CTRL+C pour sortir)</p>
+</div>
+</div>
+</section>
+<section id="console-minio" class="level3" data-number="5.2">
+<h3 data-number="5.2" class="anchored" data-anchor-id="console-minio"><span class="header-section-number">5.2</span> Console Minio</h3>
+<p>Vous pouvez également accéder à votre stockage avec la console Minio :</p>
+<ul>
+<li><a href="https://minio-console.lab.sspcloud.fr/" target="_blank">https://minio-console.lab.sspcloud.fr/</a></li>
+<li><a href="https://minio-simple.lab.groupe-genes.fr" target="_blank">https://minio-simple.lab.groupe-genes.fr</a></li>
+</ul>
+</section>
+<section id="python-et-s3fs" class="level3" data-number="5.3">
+<h3 data-number="5.3" class="anchored" data-anchor-id="python-et-s3fs"><span class="header-section-number">5.3</span> Python et s3fs</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> s3fs</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>fs <span class="op">=</span> s3fs.S3FileSystem(</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    client_kwargs<span class="op">=</span>{<span class="st">"endpoint_url"</span>: <span class="ss">f"https://</span><span class="sc">{</span>os<span class="sc">.</span>environ[<span class="st">'AWS_S3_ENDPOINT'</span>]<span class="sc">}</span><span class="ss">"</span>},</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>    key <span class="op">=</span> os.environ[<span class="st">"AWS_ACCESS_KEY_ID"</span>], </span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>    secret <span class="op">=</span> os.environ[<span class="st">"AWS_SECRET_ACCESS_KEY"</span>], </span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>    token <span class="op">=</span> os.environ[<span class="st">"AWS_SESSION_TOKEN"</span>])</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>s3_username <span class="op">=</span> os.environ[<span class="st">"VAULT_TOP_DIR"</span>] <span class="co"># un peu bancal pour avoir le username</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>bucket_name <span class="op">=</span> <span class="ss">f"</span><span class="sc">{</span>s3_username<span class="sc">}</span><span class="ss">/diffusion/"</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>files <span class="op">=</span> fs.ls(bucket_name)</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="bu">file</span> <span class="kw">in</span> files:</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="bu">file</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Affichage plus joli">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-31-contents" aria-controls="callout-31" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Affichage plus joli
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-31" class="callout-31-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="op">!</span>pip install humanize</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> humanize</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> []</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> <span class="bu">file</span> <span class="kw">in</span> fs.ls(bucket_name, detail<span class="op">=</span><span class="va">True</span>):</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">file</span>[<span class="st">'type'</span>] <span class="op">==</span> <span class="st">'directory'</span>:</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>        subfolder_files <span class="op">=</span> fs.find(<span class="bu">file</span>[<span class="st">'name'</span>])</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>        file_count <span class="op">=</span> <span class="bu">len</span>(subfolder_files)</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>        file_type <span class="op">=</span> <span class="st">"Folder"</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>        size <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>        file_count <span class="op">=</span> <span class="st">""</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>        file_type <span class="op">=</span> <span class="st">"File"</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>        size <span class="op">=</span> <span class="bu">file</span>[<span class="st">'size'</span>]</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>    data.append({</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Name"</span>: os.path.basename(<span class="bu">file</span>[<span class="st">'name'</span>]),</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Type"</span>: file_type,</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Size"</span>: size <span class="kw">or</span> <span class="dv">0</span>,</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Nb Files"</span>: file_count</span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>    })</span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pl.DataFrame(<span class="bu">sorted</span>(</span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a>         data,</span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>         key<span class="op">=</span><span class="kw">lambda</span> x: (</span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a>             <span class="dv">0</span> <span class="cf">if</span> x[<span class="st">"Type"</span>] <span class="op">==</span> <span class="st">"Folder"</span> <span class="cf">else</span> <span class="dv">1</span>,</span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a>             <span class="op">-</span>x[<span class="st">"Nb Files"</span>] <span class="cf">if</span> x[<span class="st">"Nb Files"</span>] <span class="cf">else</span> <span class="dv">0</span>,</span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a>             <span class="op">-</span>x[<span class="st">"Size"</span>])</span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a>        ))<span class="op">\</span></span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a>        .with_columns(pl.col(<span class="st">'Size'</span>).map_elements(<span class="kw">lambda</span> x: humanize.naturalsize(x, binary<span class="op">=</span><span class="va">True</span>) <span class="cf">if</span> x <span class="cf">else</span> <span class="st">""</span>, return_dtype<span class="op">=</span>pl.String).alias(<span class="st">'Size'</span>))</span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Bucket : </span><span class="sc">{</span>bucket_name<span class="sc">}</span><span class="ss">"</span>, df, sep <span class="op">=</span> <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="surveiller-son-service" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="surveiller-son-service"><span class="header-section-number">6</span> Surveiller son service</h2>
+<ul class="task-list">
+<li><label><input type="checkbox">Sur la page du Datalab, allez dans <code>Mes services</code></label></li>
+<li><label><input type="checkbox">Cliquez sur le nom du service (Jupyter-python)</label></li>
+<li><label><input type="checkbox">Cliquez sur <code>Surveillance externe</code></label></li>
+</ul>
+<p>Vous arrivez sur la page de l’outil <strong>Grafana</strong> qui permet d’observer les métriques de votre service.</p>
+</section>
+<section id="les-secrets" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="les-secrets"><span class="header-section-number">7</span> Les secrets</h2>
+<div class="callout callout-style-default callout-important no-icon callout-titled" title="Enigme du Père Fouras">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Enigme du Père Fouras
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Plus j’ai de gardiens, moins je suis gardé.</p>
+<p>Moins j’ai de gardiens, plus je suis gardé.</p>
+<p>Qui suis-je ?</p>
+</div>
+</div>
+<p>Certains éléments ne doivent pas être diffusés dans votre code (jetons d’accès, mots de passe…).</p>
+<p>Pour éviter d’avoir à nettoyer votre code à chaque fois que vous le poussez sur GitHub, le datalab propose de gérer vos secrets.</p>
+<section id="créer-un-secret" class="level3" data-number="7.1">
+<h3 data-number="7.1" class="anchored" data-anchor-id="créer-un-secret"><span class="header-section-number">7.1</span> Créer un secret</h3>
+<ul class="task-list">
+<li><label><input type="checkbox">Allez dans <em>Mes secrets</em></label></li>
+<li><label><input type="checkbox">Créez un <code>Nouveau secret</code> nommé <em>projet_patate</em></label></li>
+<li><label><input type="checkbox">Double-cliquez pour ouvrir ce secret</label></li>
+<li><label><input type="checkbox"><code>Ajoutez une variable</code></label>
+<ul>
+<li>Nom : PATATE_TOKEN</li>
+<li>Valeur : 123456</li>
+<li>Cliquez sur <span class="emoji" data-emoji="white_check_mark">✅</span> pour valider</li>
+</ul></li>
+<li><label><input type="checkbox">Ajoutez une autre variable</label>
+<ul>
+<li>Nom : PATATE_PORT</li>
+<li>Valeur : 5236</li>
+<li>Cliquez sur <span class="emoji" data-emoji="white_check_mark">✅</span> pour valider</li>
+</ul></li>
+</ul>
+</section>
+<section id="utiliser-dans-un-service" class="level3" data-number="7.2">
+<h3 data-number="7.2" class="anchored" data-anchor-id="utiliser-dans-un-service"><span class="header-section-number">7.2</span> Utiliser dans un service</h3>
+<ul class="task-list">
+<li><label><input type="checkbox">Préparez le lancement d’un service Rstudio</label></li>
+<li><label><input type="checkbox">Dans la configuration, allez dans l’onglet <code>Vault</code></label></li>
+<li><label><input type="checkbox">secret : <em>projet_patate</em></label></li>
+<li><label><input type="checkbox">Lancez le service</label></li>
+</ul>
+<p>Dans votre servives, les deux variables d’environnement ont été créées.</p>
+<ul class="task-list">
+<li><p><label><input type="checkbox">Vérifiez leur présence via le terminal : <code>env | grep PATATE</code> ou <code>echo $PATATE_TOKEN</code></label></p></li>
+<li><p><label><input type="checkbox">Ouvrez un notebook et récupérez la valeur de <em>PATATE_TOKEN</em></label></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>token <span class="op">=</span> os.environ[<span class="st">"PATATE_TOKEN"</span>]</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(token)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p><label><input type="checkbox">Une fois que vous avez fini de jouer, supprimez votre service</label></p></li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Ce TP avait pour but de vous familiariser avec le Datalab. Vous pouvez l’utiliser pour faire du Python, du R, créer une base de données (prochain TP) ou utiliser de nombreux autres outils.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="personnaliser-son-service" class="level2" data-number="8">
+<h2 data-number="8" class="anchored" data-anchor-id="personnaliser-son-service"><span class="header-section-number">8</span> Personnaliser son service</h2>
+<section id="script-dinitialisation" class="level3" data-number="8.1">
+<h3 data-number="8.1" class="anchored" data-anchor-id="script-dinitialisation"><span class="header-section-number">8.1</span> Script d’initialisation</h3>
+<p>Il est possible d’exécuter un script après lancement d’un service, par exemple pour installer des packages, des extensions…</p>
+<p>Dans les options avant de lancer le service, onglet <em>Scripts d’initialisation</em> puis rentrez l’URL du script.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>L’URL du script ne doit pas être dans un dépôt privé</li>
+<li>Il est possible d’ajouter des arguments au script</li>
+</ul>
+</div>
+</div>
+<p>Pour plus d’informations et avoir des exemples : <a href="https://github.com/InseeFrLab/sspcloud-init-scripts" target="_blank">sspcloud-init-scripts</a></p>
+<p>Par exemple, le script suivant permet de :</p>
+<ul>
+<li>installer <em>pytest</em></li>
+<li>ajouter l’extension VSCode Ruff</li>
+<li>supprimer l’extension VSCode Flake8</li>
+</ul>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>example.sh</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15" data-filename="example.sh"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#!/bin/sh</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Install packages and VSCode extensions</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Expected parameters : None</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install pytest</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="ex">code-server</span> <span class="at">--install-extension</span> charliermarsh.ruff</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a><span class="ex">code-server</span> <span class="at">--uninstall-extension</span> ms-python.flake8</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Si vous avez besoin de lancer réguliérement votre service avec cette config :</p>
+<ul>
+<li>Lorsque vous modifiez les paramètres de lancement, cliquez sur la petite disquette</li>
+<li>Vous pourrez à tout moment relancer avec la même configuration avec un raccourci dans <em>Mes services</em></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="image-docker" class="level3" data-number="8.2">
+<h3 data-number="8.2" class="anchored" data-anchor-id="image-docker"><span class="header-section-number">8.2</span> Image Docker</h3>
+<p>Dans les paramètres de lancement vous pouvez également définir votre propre image Docker :</p>
+<ul>
+<li>Créez votre image à partir de la dernière version du service</li>
+<li>Taguez cette image, puis poussez-la sur DockerHub</li>
+<li>Dans les paramètres de lancement, utilisez une image personnalisée</li>
+</ul>
+<p>Par exemple :</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Dockerfile</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16" data-filename="Dockerfile"><pre class="sourceCode txt code-with-copy"><code class="sourceCode default"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>FROM inseefrlab/onyxia-vscode-python:py3.13.5-2025.07.21</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a># Install packages</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>RUN pip install pytest</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a># Modify VSCode extensions</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>RUN code-server --install-extension charliermarsh.ruff</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>RUN code-server --uninstall-extension ms-python.flake8</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/ludo2ne\.github\.io\/ENSAI-1A-SQL\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Website built with <a href="https://quarto.org/" class="external" target="_blank">Quarto</a> <br> <a href="https://github.com/ludo2ne/ENSAI-1A-SQL" class="external" target="_blank">Code source</a></p>
+</div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
