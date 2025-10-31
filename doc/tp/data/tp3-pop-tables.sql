@@ -1249,3 +1249,17 @@ VALUES
 (10, 844, 17),
 (10, 55, 18),
 (10, 733, 19);
+
+
+-- Mettre à jour des séquences
+SELECT setval(pg_get_serial_sequence('artiste', 'id_artiste'), COALESCE(MAX(id_artiste), 1)) 
+FROM artiste;
+
+SELECT setval(pg_get_serial_sequence('album', 'id_album'), COALESCE(MAX(id_album), 1)) 
+FROM album;
+
+SELECT setval(pg_get_serial_sequence('chanson', 'id_chanson'), COALESCE(MAX(id_chanson), 1)) 
+FROM chanson;
+
+SELECT setval(pg_get_serial_sequence('playlist', 'id_playlist'), COALESCE(MAX(id_playlist), 1)) 
+FROM playlist;

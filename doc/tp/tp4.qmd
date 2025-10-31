@@ -24,16 +24,13 @@ Ce sujet vous occupera pour les TP4 et 5.
 
 ## Lancement des services
 
-Connectez-vous à l'une des 2 instances suivantes d'Onyxia (elles sont quasiment identiques) :
+Pour plus de détails, allez dans l'onglet [Datalab](../outils/datalab.qmd){target="_blank"}.
 
-- [Datalab du GENES](https://onyxia.lab.groupe-genes.fr/){target="_blank"}
-- [Datalab SSPCloud de l'INSEE](https://datalab.sspcloud.fr/){target="_blank"} 
-  - si besoin de créer un compte, utilisez votre mail ENSAI
-
-Et ensuite lancez les services suivants (voir TP2 si besoin de plus de détails)
-
-- [ ] PostgreSQL : [Datalab GENES](https://onyxia.lab.groupe-genes.fr/launcher/databases/postgresql?name=postgresql&version=1.0.3&autoLaunch=true&postgresql.primary.persistence.size=«1Gi»&postgresql.primary.resources.limits.cpu=«500m»&postgresql.primary.resources.limits.memory=«2Gi»){target="_blank"} ou [SPPCloud](https://datalab.sspcloud.fr/launcher/databases/postgresql?name=postgresql&version=1.0.3&postgresql.primary.persistence.size=«1Gi»&postgresql.primary.resources.limits.cpu=«500m»&postgresql.primary.resources.limits.memory=«2Gi»&autoLaunch=true){target="_blank"}
-- [ ] CloudBeaver
+- [ ] Connectez-vous à un Datalab
+- [ ] Lancez un service **PostgreSQL**
+- [ ] Lancez un service **cloudBeaver**
+  - ouvrez ce service
+  - vérifiez que vous êtes connectés à la base de données PostgreSQL
 
 
 ## Les données

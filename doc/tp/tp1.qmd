@@ -31,7 +31,6 @@ Connectez-vous à l'une des deux instances suivantes  :
 
 ::: {.callout-important title="En cas d'indisponibilité des Datalabs" collapse="true"}
 Uniquement en cas d'indisponibilité des Datalabs, vous pouvez réaliser le TP directement sur la VM. Le logiciel DBeaver est installé.
-:::
 
 - [ ] Lancez DBeaver
 - [ ] Onglet *Base de données* :arrow_right: *Nouvelle Connexion*
@@ -44,6 +43,7 @@ Uniquement en cas d'indisponibilité des Datalabs, vous pouvez réaliser le TP d
 
 Cela ouvre une fenêtre dans laquelle vous pouvez saisir du SQL.
 
+:::
 
 ## Lancement du service
 

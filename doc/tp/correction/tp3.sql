@@ -294,3 +294,19 @@ SELECT code_pays,
   FROM artiste
  WHERE NOT groupe
  GROUP BY code_pays;
+
+
+-- WITH
+WITH plus_vieux AS (
+SELECT code_pays, 
+       MIN(date_naissance) AS date_min
+  FROM artiste
+ WHERE NOT groupe
+ GROUP BY code_pays
+)
+SELECT a.code_pays, 
+       a.nom, 
+       a.date_naissance
+  FROM artiste a
+  JOIN plus_vieux pv ON a.code_pays = pv.code_pays AND a.date_naissance = pv.date_min
+ ORDER BY a.code_pays;
