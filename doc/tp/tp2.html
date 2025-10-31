@@ -9,7 +9,7 @@
 <meta name="author" content="Ludovic Deneuville">
 <meta name="description" content="TP2">
 
-<title>Exercices vintages – Base de données</title>
+<title>Exercices vintages 💾 – Base de données</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -359,14 +359,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="dropdown-item" href="../../doc/tp/tp4.html">
  <span class="dropdown-text">TP4 - Chess Unofficial Fed</span></a>
   </li>  
-        <li>
-    <a class="dropdown-item" href="../../doc/tp/tp_datalab.html">
- <span class="dropdown-text">TP Datalab</span></a>
-  </li>  
     </ul>
   </li>
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-outils" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Outils</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-outils">    
+        <li>
+    <a class="dropdown-item" href="../../doc/outils/datalab.html">
+ <span class="dropdown-text">Datalab</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../doc/outils/tp-datalab.html">
+ <span class="dropdown-text">TP Datalab</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../doc/outils/vm.html">
+ <span class="dropdown-text">VM</span></a>
+  </li>  
+    </ul>
+  </li>
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-divers" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Divers</span>
@@ -413,13 +428,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#lancement-des-services" id="toc-lancement-des-services" class="nav-link" data-scroll-target="#lancement-des-services"><span class="header-section-number">1</span> Lancement des services</a>
-  <ul class="collapse">
-  <li><a href="#datalab-du-genes-ou-sspcloud" id="toc-datalab-du-genes-ou-sspcloud" class="nav-link" data-scroll-target="#datalab-du-genes-ou-sspcloud"><span class="header-section-number">1.1</span> Datalab du GENES ou SSPCloud</a></li>
-  <li><a href="#base-de-données-postgresql" id="toc-base-de-données-postgresql" class="nav-link" data-scroll-target="#base-de-données-postgresql"><span class="header-section-number">1.2</span> Base de données PostgreSQL</a></li>
-  <li><a href="#cloudbeaver" id="toc-cloudbeaver" class="nav-link" data-scroll-target="#cloudbeaver"><span class="header-section-number">1.3</span> CloudBeaver</a></li>
-  <li><a href="#vm-ensai" id="toc-vm-ensai" class="nav-link" data-scroll-target="#vm-ensai"><span class="header-section-number">1.4</span> VM ENSAI</a></li>
-  </ul></li>
+  <li><a href="#lancement-des-services" id="toc-lancement-des-services" class="nav-link" data-scroll-target="#lancement-des-services"><span class="header-section-number">1</span> Lancement des services</a></li>
   <li><a href="#méthodo-écrire-une-requête" id="toc-méthodo-écrire-une-requête" class="nav-link" data-scroll-target="#méthodo-écrire-une-requête"><span class="header-section-number">2</span> Méthodo : Écrire une requête</a>
   <ul class="collapse">
   <li><a href="#listez-les-tables-nécessaires" id="toc-listez-les-tables-nécessaires" class="nav-link" data-scroll-target="#listez-les-tables-nécessaires"><span class="header-section-number">2.1</span> Listez les tables nécessaires</a></li>
@@ -433,7 +442,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#location-de-dvd" id="toc-location-de-dvd" class="nav-link" data-scroll-target="#location-de-dvd"><span class="header-section-number">3.2</span> Location de DVD <span class="emoji" data-emoji="cd">💿</span></a></li>
   <li><a href="#rugby-world-cup" id="toc-rugby-world-cup" class="nav-link" data-scroll-target="#rugby-world-cup"><span class="header-section-number">3.3</span> Rugby World Cup <span class="emoji" data-emoji="rugby_football">🏉</span></a></li>
   </ul></li>
-  <li><a href="#arrêtez-votre-service" id="toc-arrêtez-votre-service" class="nav-link" data-scroll-target="#arrêtez-votre-service">Arrêtez votre service</a></li>
+  <li><a href="#arrêtez-vos-services" id="toc-arrêtez-vos-services" class="nav-link" data-scroll-target="#arrêtez-vos-services">Arrêtez vos services</a></li>
   </ul>
 </nav>
 </nav>
@@ -447,7 +456,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Exercices vintages</h1>
+<h1 class="title">Exercices vintages 💾</h1>
 </div>
 
 <div>
@@ -503,145 +512,22 @@ Important
 </section>
 <section id="lancement-des-services" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="lancement-des-services"><span class="header-section-number">1</span> Lancement des services</h2>
-<section id="datalab-du-genes-ou-sspcloud" class="level3" data-number="1.1">
-<h3 data-number="1.1" class="anchored" data-anchor-id="datalab-du-genes-ou-sspcloud"><span class="header-section-number">1.1</span> Datalab du GENES ou SSPCloud</h3>
-<p>Connectez-vous à l’une des 2 instances suivantes d’Onyxia (elles sont quasiment identiques) :</p>
+<p>Pour plus de détails, allez dans l’onglet <a href="../../doc/outils/datalab.html" target="_blank">Datalab</a>.</p>
 <ul class="task-list">
-<li><label><input type="checkbox"><a href="https://onyxia.lab.groupe-genes.fr/" target="_blank">Datalab du GENES</a></label></li>
-<li><label><input type="checkbox"><a href="https://datalab.sspcloud.fr/" target="_blank">Datalab SSPCloud de l’INSEE</a></label>
+<li><label><input type="checkbox">Connectez-vous à un Datalab</label></li>
+<li><label><input type="checkbox">Lancez un service <strong>PostgreSQL</strong></label></li>
+<li><label><input type="checkbox">Lancez un service <strong>cloudBeaver</strong></label>
 <ul>
-<li>si besoin de créer un compte, utilisez votre mail ENSAI</li>
+<li>ouvrez ce service</li>
+<li>vérifiez que vous êtes connectés à la base de données PostgreSQL</li>
 </ul></li>
 </ul>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>L’instance du GENES est plus récente donc encore en cours de rodage. Celle de l’INSEE est plus ancienne et donc plus robuste.</p>
-<p>Pour éviter les problèmes de charges, vous utiliserez selon votre profil :</p>
-<ul>
-<li>élèves fonctionnaires <span class="emoji" data-emoji="arrow_right">➡️</span> SSPCloud</li>
-<li>élèves ingénieurs <span class="emoji" data-emoji="arrow_right">➡️</span> SSPCloud ou Datalab du GENES</li>
-</ul>
-</div>
-</div>
-</section>
-<section id="base-de-données-postgresql" class="level3" data-number="1.2">
-<h3 data-number="1.2" class="anchored" data-anchor-id="base-de-données-postgresql"><span class="header-section-number">1.2</span> Base de données PostgreSQL</h3>
-<ul class="task-list">
-<li><label><input type="checkbox">Lancez le service PostgreSQL</label>
-<ul>
-<li>Lien direct de lancement : <a href="https://onyxia.lab.groupe-genes.fr/launcher/databases/postgresql?name=postgresql&amp;version=1.0.3&amp;autoLaunch=true&amp;postgresql.primary.persistence.size=«1Gi»&amp;postgresql.primary.resources.limits.cpu=«500m»&amp;postgresql.primary.resources.limits.memory=«2Gi»" target="_blank">Datalab GENES</a> ou <a href="https://datalab.sspcloud.fr/launcher/databases/postgresql?name=postgresql&amp;version=1.0.3&amp;postgresql.primary.persistence.size=«1Gi»&amp;postgresql.primary.resources.limits.cpu=«500m»&amp;postgresql.primary.resources.limits.memory=«2Gi»&amp;autoLaunch=true" target="_blank">SPPCloud</a></li>
-<li>ou manuellement : <strong>Catalogue de services</strong> <span class="emoji" data-emoji="arrow_right">➡️</span> <strong>Databases</strong> <span class="emoji" data-emoji="arrow_right">➡️</span> <code>Lancer</code></li>
-<li>Configuration Postgresql <span class="emoji" data-emoji="arrow_right">➡️</span> Primary : Mettez tous les paramètres au minimum (Persistent volume size, CPU, Memory)
-<ul>
-<li>Cela permettra d’éviter de réserver inutilement des ressources dont vous n’aurez pas besoin</li>
-</ul></li>
-<li>Cliquez sur <code>Lancer</code></li>
-</ul></li>
-<li><label><input type="checkbox">Copiez-collez dans un fichier texte les informations de connexion PostgreSQL : Hostname, Port, Database, Username, Password</label></li>
-</ul>
-</section>
-<section id="cloudbeaver" class="level3" data-number="1.3">
-<h3 data-number="1.3" class="anchored" data-anchor-id="cloudbeaver"><span class="header-section-number">1.3</span> CloudBeaver</h3>
-<p>Nous venons de créer un SGBD, nous avons maintenant besoin d’un outil de gestion pour s’y connecter et envoyer des requêtes.</p>
-<ul class="task-list">
-<li><label><input type="checkbox">Lancez le service CloudBeaver</label>
-<ul>
-<li><strong>Catalogue de services</strong> <span class="emoji" data-emoji="arrow_right">➡️</span> <strong>Databases</strong></li>
-</ul></li>
-<li><label><input type="checkbox">Copiez-collez également les informations de connexion au service <em>CloudBeaver</em></label></li>
-<li><label><input type="checkbox">Ouvrez ce service</label></li>
-</ul>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Normalement la connexion à la base de données <em>PostgreSQL</em> est détectée automatiquement.</p>
-<p>Dans le cas contraire, il faut cliquer sur le +, puis sur <em>New connection</em> et renseigner les éléments de connexion.</p>
-</div>
-</div>
-<ul class="task-list">
-<li><label><input type="checkbox">Dans l’explorateur à gauche, clic droit sur bdd PostgreSQL <span class="emoji" data-emoji="arrow_right">➡️</span> SQL Editor</label></li>
-</ul>
-<p>Cela ouvre une fenêtre où vous pouvez écrire du code SQL pour interagir avec votre base de données.</p>
-</section>
-<section id="vm-ensai" class="level3" data-number="1.4">
-<h3 data-number="1.4" class="anchored" data-anchor-id="vm-ensai"><span class="header-section-number">1.4</span> VM ENSAI</h3>
-<p>Uniquement en cas de soucis avec les Datalabs, vous pouvez faire le TP sur la VM.</p>
-<div class="callout callout-style-default callout-note callout-titled" title="DBeaver sur la VM">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>DBeaver sur la VM
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Un serveur héberge une base de données PostgreSQL.</p>
-<p>Pour vous connecter à votre bdd, lancez le logiciel DBeaver depuis votre VM. Ensuite, uniquement la première fois, vous devrez effectuer le paramètrage ci-dessous et créer la connexion à votre bdd.</p>
-<section id="paramètrage" class="level4">
-<h4 class="anchored" data-anchor-id="paramètrage">Paramètrage</h4>
-<ul>
-<li>Menu <code>Fenêtre</code> &gt; <code>Preference</code>
-<ul>
-<li>Formatage SQL
-<ul>
-<li>Casse des mots clefs : <code>UPPER</code></li>
-<li><label><input type="checkbox" checked="">Insert spaces for tabs</label></li>
-<li>Appliquer</li>
-</ul></li>
-<li>Metadonnées
-<ul>
-<li>Décocher <code>Ouvrir une connexion séparée pour la lecture des métadonnées</code></li>
-</ul></li>
-<li>Editeur SQL
-<ul>
-<li>Décocher <code>Ouvrir une connexion séparée pour chaque éditeur</code></li>
-</ul></li>
-</ul></li>
-</ul>
-</section>
-<section id="création-de-la-connexion-postgresql" class="level4">
-<h4 class="anchored" data-anchor-id="création-de-la-connexion-postgresql">Création de la connexion PostgreSQL</h4>
-<ul>
-<li>Cliquer sur l’icone <code>Nouvelle connexion</code> en haut à gauche sous fichier</li>
-<li>Sélectionner <code>PostgreSQL</code> puis suivant
-<ul>
-<li>Host : <code>sgbd-eleves.domensai.ecole</code></li>
-<li>Port : <code>5432</code></li>
-<li>Database : <code>idxxxx</code></li>
-<li>Nom d’utilisateur : <code>idxxxx</code></li>
-<li>Mot de passe : <code>idxxxx</code></li>
-<li><code>Test de connexion</code></li>
-<li>Acceptez les mises à jour des pilotes</li>
-<li><code>Terminer</code></li>
-</ul></li>
-</ul>
-</section>
-</div>
-</div>
-</div>
-</section>
+<p>En attendant le lancement des services, voici un peu de lecture ci-dessous.</p>
 </section>
 <section id="méthodo-écrire-une-requête" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="méthodo-écrire-une-requête"><span class="header-section-number">2</span> Méthodo : Écrire une requête</h2>
-<p>Il est parfois difficile d’écrire du premier coup LA requête qui répond directement à la question posée. Voici une méthode qui peut vous aider à écrire vos requêtes pas à pas :</p>
+<p>Il est parfois difficile d’écrire du premier coup LA requête qui répond directement à la question posée.</p>
+<p>Voici une méthode qui peut vous aider à écrire vos requêtes pas à pas :</p>
 <div class="callout callout-style-simple callout-none no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -656,18 +542,41 @@ Tip
 </div>
 <section id="listez-les-tables-nécessaires" class="level3" data-number="2.1">
 <h3 data-number="2.1" class="anchored" data-anchor-id="listez-les-tables-nécessaires"><span class="header-section-number">2.1</span> Listez les tables nécessaires</h3>
-<p>Commencez par lister les tables nécessaires, puis joignez les. Ici nous avons besoin des 2 tables.</p>
-<p>Utilisez pour l’instant <code>SELECT *</code> pour sélectionner toutes les colonnes.</p>
+<p>Commençons par lister les tables nécessaires, puis joignons-les.</p>
+<p>Nous avons besoin ici des 2 tables que nous pouvons joindre en utilisant la colonne <em>id_club</em>.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> joueuse j</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> club c <span class="kw">USING</span>(id_club);</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>Nous utilisons pour l’instant <code>SELECT *</code> pour sélectionner toutes les colonnes
+<ul>
+<li>nous enleverons les colonnes inutiles plus tard</li>
+</ul></li>
+<li>Nous utilisons des alias, cela rendra la requête plus courte et plus claire
+<ul>
+<li>j pour joueuse</li>
+<li>c pour club</li>
+</ul></li>
+</ul>
+</div>
+</div>
 </section>
 <section id="appliquez-les-filtres" class="level3" data-number="2.2">
 <h3 data-number="2.2" class="anchored" data-anchor-id="appliquez-les-filtres"><span class="header-section-number">2.2</span> Appliquez les filtres</h3>
-<p>Pour ne garder que les lignes qui nous intéressent :</p>
+<p>Filtrons pour ne conserver que les lignes qui nous intéressent.</p>
 <ul>
 <li>Ville du club : <em>Saint Quentin</em></li>
-<li>Prénom qui commence par un A**</li>
+<li>Prénom qui commence par un <em>A</em></li>
 </ul>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> joueuse j</span>
@@ -677,6 +586,7 @@ Tip
 </section>
 <section id="ordonnez-les-résultats" class="level3" data-number="2.3">
 <h3 data-number="2.3" class="anchored" data-anchor-id="ordonnez-les-résultats"><span class="header-section-number">2.3</span> Ordonnez les résultats</h3>
+<p>Ordonnons par elo décroissant.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> joueuse j</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> club c <span class="kw">USING</span>(id_club)</span>
@@ -686,7 +596,8 @@ Tip
 </section>
 <section id="sélectionner-les-colonnes-requises" class="level3" data-number="2.4">
 <h3 data-number="2.4" class="anchored" data-anchor-id="sélectionner-les-colonnes-requises"><span class="header-section-number">2.4</span> Sélectionner les colonnes requises</h3>
-<p>Il est demandé de ne garder que les noms et prénoms des joueuses</p>
+<p>Il est demandé de ne garder que les noms et prénoms des joueuses.</p>
+<p>Remplaçons le <em>SELECT *</em> par les noms des colonnes.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> j.nom,</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>       j.prenom</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> joueuse j</span>
@@ -769,7 +680,7 @@ Tip
 <li><p><label><input type="checkbox">Chargez les données avec ce <a href="./data/tp2-dvd-pop.sql" target="_blank">script sql</a></label></p></li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -778,7 +689,7 @@ Tip
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Attention, ici l’ordre de création des tables a son importance.</p>
 <p>Reprenons et modifions l’exemple ci-dessus :</p>
@@ -809,7 +720,7 @@ Tip
 <li><label><input type="checkbox">Nom, Prénom du réalisateur de la <em>Guerre des étoiles</em></label></li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -818,7 +729,7 @@ Tip
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Il existe différentes manières de concaténer du texte :</p>
 <ul>
@@ -888,17 +799,12 @@ Tip
 </ul>
 </section>
 </section>
-<section id="arrêtez-votre-service" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="arrêtez-votre-service">Arrêtez votre service</h2>
+<section id="arrêtez-vos-services" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="arrêtez-vos-services">Arrêtez vos services</h2>
 <p>C’est la fin du TP, vous pouvez maintenant sauvegarder votre travail et libérer les ressources réservées :</p>
 <ul class="task-list">
-<li><label><input type="checkbox">Copiez votre code et collez le sur votre machine dans un fichier <em>.sql</em></label>
-<ul>
-<li>par exemple dans <code>P:/Cours1A/UE3-Bases-de-donnees-relationnelles/TP2/tp2.sql</code></li>
-<li>ou en téléchargeant depuis CloudBeaver le fichier sql (petit bouton avec un dossier et une flèche vers le bas)</li>
-</ul></li>
-<li><label><input type="checkbox">Retournez sur la page d’accueil du Datalab</label></li>
-<li><label><input type="checkbox">Allez dans <em>Mes Services</em> et supprimez votre service</label></li>
+<li><label><input type="checkbox">Copiez-collez vos scripts SQL sur votre machine</label></li>
+<li><label><input type="checkbox">Arrêter les services du Datalab</label></li>
 </ul>
 
 

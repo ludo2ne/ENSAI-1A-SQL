@@ -9,7 +9,7 @@
 <meta name="author" content="Ludovic Deneuville">
 <meta name="description" content="Sélectionner, Filtrer, Agréger">
 
-<title>Premières requêtes SQL – Base de données</title>
+<title>Premières requêtes SQL 🦆 – Base de données</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -356,14 +356,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="dropdown-item" href="../../doc/tp/tp4.html">
  <span class="dropdown-text">TP4 - Chess Unofficial Fed</span></a>
   </li>  
-        <li>
-    <a class="dropdown-item" href="../../doc/tp/tp_datalab.html">
- <span class="dropdown-text">TP Datalab</span></a>
-  </li>  
     </ul>
   </li>
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-outils" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Outils</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-outils">    
+        <li>
+    <a class="dropdown-item" href="../../doc/outils/datalab.html">
+ <span class="dropdown-text">Datalab</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../doc/outils/tp-datalab.html">
+ <span class="dropdown-text">TP Datalab</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../doc/outils/vm.html">
+ <span class="dropdown-text">VM</span></a>
+  </li>  
+    </ul>
+  </li>
   <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-divers" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Divers</span>
@@ -441,7 +456,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Premières requêtes SQL</h1>
+<h1 class="title">Premières requêtes SQL 🦆</h1>
 </div>
 
 <div>
@@ -472,33 +487,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="introduction" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="introduction">Introduction</h2>
 <p>Vous allez réaliser ce TP sur un Datalab.</p>
-<div class="callout callout-style-default callout-note callout-titled" title="Rappel : Principe du datalab">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Rappel : Principe du datalab
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Une infrastructure cloud avec des ressources est à votre disposition :</p>
-<ul>
-<li>CPU, GPU</li>
-<li>RAM</li>
-<li>Stockage</li>
-</ul>
-<p>Lorsque vous en avez besoin, vous :</p>
-<ul>
-<li>réservez des ressources (en lançant des services)</li>
-<li>lancez vos programmes, calculs…</li>
-<li>sauvegardez votre code en utilisant Git</li>
-<li>exportez vos résultats vers le stockage objet S3</li>
-<li>libérez les ressources une fois que vous avez terminé</li>
-</ul>
-<p>Pour vous aider, l’interface Onyxia vous permet de faire cela en quelques clics.</p>
-</div>
-</div>
 <section id="datalab-du-genes-ou-sspcloud" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="datalab-du-genes-ou-sspcloud">Datalab du GENES ou SSPCloud</h3>
 <p>Connectez-vous à l’une des deux instances suivantes :</p>
@@ -514,7 +502,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="vm-ensai" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="vm-ensai">VM ENSAI</h3>
 <div class="callout callout-style-default callout-important callout-titled" title="En cas d'indisponibilité des Datalabs">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -523,7 +511,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Uniquement en cas d’indisponibilité des Datalabs, vous pouvez réaliser le TP directement sur la VM. Le logiciel DBeaver est installé.</p>
 </div>
@@ -863,7 +851,7 @@ Tip
 <li><label><input type="checkbox">Affichez pour chaque année le nombre de fois où le prénom JEROME a été donné, quelle que soit l’accentuation</label></li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled" title="Aide">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-11-contents" aria-controls="callout-11" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -872,7 +860,7 @@ Tip
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-11" class="callout-11-contents callout-collapse collapse">
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
 <li>voir Fontion DuckDB strip_accents()</li>

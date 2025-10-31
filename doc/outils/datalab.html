@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Ludovic Deneuville">
-<meta name="description" content="Cours ENSAI de 1ère année">
+<meta name="description" content="Lancer les services nécessaires pour les TP">
 
-<title>Base de données relationnelles – Base de données</title>
+<title>Utilisation du Datalab – Base de données</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,29 +22,64 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-b66d9f3da4d84aca26cc7cc1c94b0445.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-d3daa1d1ef55350d6f5c3e6cec97cbbd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-b66d9f3da4d84aca26cc7cc1c94b0445.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-d3daa1d1ef55350d6f5c3e6cec97cbbd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -74,10 +109,10 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body class="nav-fixed fullcontent quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
+<body class="floating nav-fixed quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -244,9 +279,9 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="./index.html" class="navbar-brand navbar-brand-logo">
+    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
     </a>
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Base de données</span>
     </a>
   </div>
@@ -257,7 +292,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> <i class="bi bi-house" role="img">
+    <a class="nav-link" href="../../index.html"> <i class="bi bi-house" role="img">
 </i> 
 <span class="menu-text">Home</span></a>
   </li>  
@@ -267,35 +302,35 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-cours">    
         <li>
-    <a class="dropdown-item" href="./doc/cours/intro.html">
+    <a class="dropdown-item" href="../../doc/cours/intro.html">
  <span class="dropdown-text">Introduction</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./doc/cours/bases-de-donnees.html">
+    <a class="dropdown-item" href="../../doc/cours/bases-de-donnees.html">
  <span class="dropdown-text">Base de données</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./doc/cours/sql-intro.html">
+    <a class="dropdown-item" href="../../doc/cours/sql-intro.html">
  <span class="dropdown-text">Introduction à SQL</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./doc/cours/agregations.html">
+    <a class="dropdown-item" href="../../doc/cours/agregations.html">
  <span class="dropdown-text">Agrégations</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./doc/cours/algebre.html">
+    <a class="dropdown-item" href="../../doc/cours/algebre.html">
  <span class="dropdown-text">Algèbre Relationnelle</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./doc/cours/jointures.html">
+    <a class="dropdown-item" href="../../doc/cours/jointures.html">
  <span class="dropdown-text">Jointures</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./doc/cours/sql-avance.html">
+    <a class="dropdown-item" href="../../doc/cours/sql-avance.html">
  <span class="dropdown-text">SQL avancé</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./doc/cours/formalisation.html">
+    <a class="dropdown-item" href="../../doc/cours/formalisation.html">
  <span class="dropdown-text">Formalisation des BDD</span></a>
   </li>  
     </ul>
@@ -306,19 +341,19 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-tp">    
         <li>
-    <a class="dropdown-item" href="./doc/tp/tp1.html">
+    <a class="dropdown-item" href="../../doc/tp/tp1.html">
  <span class="dropdown-text">TP1 - Premières requêtes</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./doc/tp/tp2.html">
+    <a class="dropdown-item" href="../../doc/tp/tp2.html">
  <span class="dropdown-text">TP2 - Vintage</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./doc/tp/tp3.html">
+    <a class="dropdown-item" href="../../doc/tp/tp3.html">
  <span class="dropdown-text">TP3 - Discographie</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./doc/tp/tp4.html">
+    <a class="dropdown-item" href="../../doc/tp/tp4.html">
  <span class="dropdown-text">TP4 - Chess Unofficial Fed</span></a>
   </li>  
     </ul>
@@ -331,15 +366,15 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-outils">    
         <li>
-    <a class="dropdown-item" href="./doc/outils/datalab.html">
+    <a class="dropdown-item" href="../../doc/outils/datalab.html">
  <span class="dropdown-text">Datalab</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./doc/outils/tp-datalab.html">
+    <a class="dropdown-item" href="../../doc/outils/tp-datalab.html">
  <span class="dropdown-text">TP Datalab</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./doc/outils/vm.html">
+    <a class="dropdown-item" href="../../doc/outils/vm.html">
  <span class="dropdown-text">VM</span></a>
   </li>  
     </ul>
@@ -350,15 +385,15 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-divers">    
         <li>
-    <a class="dropdown-item" href="./doc/glossaire.html">
+    <a class="dropdown-item" href="../../doc/glossaire.html">
  <span class="dropdown-text">Glossaire</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./doc/ressources.html">
+    <a class="dropdown-item" href="../../doc/ressources.html">
  <span class="dropdown-text">Ressources</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./doc/decouverte.html">
+    <a class="dropdown-item" href="../../doc/decouverte.html">
  <span class="dropdown-text">Découverte</span></a>
   </li>  
     </ul>
@@ -384,20 +419,39 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="3">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#principe" id="toc-principe" class="nav-link" data-scroll-target="#principe"><span class="header-section-number">1</span> Principe</a></li>
+  <li><a href="#lancement-des-services" id="toc-lancement-des-services" class="nav-link" data-scroll-target="#lancement-des-services"><span class="header-section-number">2</span> Lancement des services</a>
+  <ul class="collapse">
+  <li><a href="#se-connecter" id="toc-se-connecter" class="nav-link" data-scroll-target="#se-connecter"><span class="header-section-number">2.1</span> Se connecter</a></li>
+  <li><a href="#postgresql" id="toc-postgresql" class="nav-link" data-scroll-target="#postgresql"><span class="header-section-number">2.2</span> PostgreSQL</a></li>
+  <li><a href="#cloudbeaver" id="toc-cloudbeaver" class="nav-link" data-scroll-target="#cloudbeaver"><span class="header-section-number">2.3</span> CloudBeaver</a></li>
+  </ul></li>
+  <li><a href="#arrêt-des-services" id="toc-arrêt-des-services" class="nav-link" data-scroll-target="#arrêt-des-services"><span class="header-section-number">3</span> Arrêt des services</a></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Base de données relationnelles</h1>
+<h1 class="title">Utilisation du Datalab</h1>
 </div>
 
 <div>
   <div class="description">
-    Cours ENSAI de 1ère année
+    Lancer les services nécessaires pour les TP
   </div>
 </div>
 
@@ -420,39 +474,155 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<section id="introduction" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Pour les besoin des TP, nous aurons besoin des outils suivants :</p>
 <ul>
-<li>6h de cours</li>
-<li>18h de TP/TD</li>
-</ul>
-<section id="contenu-du-cours" class="level2">
-<h2 class="anchored" data-anchor-id="contenu-du-cours">Contenu du cours</h2>
-<ul>
-<li>Les bases de données
-<ul>
-<li>Les bases de données relationnelles</li>
-</ul></li>
-<li>Introduction au langage SQL
-<ul>
-<li>Créer des tables</li>
-<li>Lire des tables</li>
-</ul></li>
-<li>Les Agrégations</li>
-<li>L’Algébre relationnelle</li>
-<li>Les jointures</li>
-<li>SQL avancé (Vues, Index, Droits, CTE)</li>
-<li>Modélisation UML
-<ul>
-<li>Formes normales</li>
-</ul></li>
+<li>une base de données (PostrgeSQL)</li>
+<li>un outil pour communiquer avec cette base de données (cloudBeaver)</li>
 </ul>
 </section>
-<section id="correction-des-tp" class="level2">
-<h2 class="anchored" data-anchor-id="correction-des-tp">Correction des TP</h2>
+<section id="principe" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="principe"><span class="header-section-number">1</span> Principe</h2>
+<p>Les datalabs sont composés :</p>
 <ul>
-<li><a href="./doc/tp/correction/tp1.sql">TP1</a></li>
-<li><a href="./doc/tp/correction/tp2.sql">TP2</a></li>
-<li><a href="./doc/tp/correction/tp3.sql">TP3</a></li>
-<li><a href="./doc/tp/correction/tp4.sql">TP4</a></li>
+<li>d’une infrastructure cloud on premise (≠ cloud propriétaire : AWS, GCP, OVH… )
+<ul>
+<li>i.e.&nbsp;hébergée dans les locaux de l’INSEE et du GENES</li>
+<li>avec des ressources est à votre disposition (CPU, GPU, RAM, Stockage)</li>
+</ul></li>
+<li>de l’application <a href="https://www.onyxia.sh/" target="_blank">Onyxia</a>
+<ul>
+<li>elle offre une interface pour utiliser cette infrastructure pour lancer des services</li>
+<li>sans avoir à utiliser de commandes “complexes”</li>
+</ul></li>
+</ul>
+<p>Lorsque vous en avez besoin, vous :</p>
+<ul>
+<li>réservez des ressources (en lançant des services)</li>
+<li>lancez vos programmes, calculs…</li>
+<li>sauvegardez votre code en utilisant Git</li>
+<li>exportez vos résultats vers le stockage objet S3</li>
+<li>libérez les ressources une fois que vous avez terminé</li>
+</ul>
+<p>Pour vous aider, l’interface Onyxia vous permet de faire cela en quelques clics.</p>
+</section>
+<section id="lancement-des-services" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="lancement-des-services"><span class="header-section-number">2</span> Lancement des services</h2>
+<p>Les datalabs de l’INSEE et du GENES proposent les services nécessaires.</p>
+<section id="se-connecter" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="se-connecter"><span class="header-section-number">2.1</span> Se connecter</h3>
+<p>Connectez-vous à l’une des 2 instances suivantes d’Onyxia :</p>
+<ul class="task-list">
+<li><label><input type="checkbox"><a href="https://onyxia.lab.groupe-genes.fr/" target="_blank">Datalab du GENES</a></label></li>
+<li><label><input type="checkbox"><a href="https://datalab.sspcloud.fr/" target="_blank">SSP Cloud de l’INSEE</a></label>
+<ul>
+<li>si besoin de créer un compte, utilisez votre mail ENSAI : <code>nom.prenom@eleve.ensai.fr</code></li>
+</ul></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Il est <u>fortement recommandé</u> d’utiliser en priorité le SSP Cloud qui est plus stable.</p>
+</div>
+</div>
+</section>
+<section id="postgresql" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="postgresql"><span class="header-section-number">2.2</span> PostgreSQL</h3>
+<ul class="task-list">
+<li><label><input type="checkbox">Lancez le service <strong>PostgreSQL</strong></label>
+<ul>
+<li>Catalogue de services <span class="emoji" data-emoji="arrow_right">➡️</span> Databases</li>
+</ul></li>
+</ul>
+<p>Lorsque vous lancez le services, les <strong>paramètres de connexion</strong> à cette base de données sont affichés.</p>
+<p>Une fois le service lancé, vous pouvez toujours accéder à ces paramètres via le bouton README.</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Copiez ces paramètres de connexion :</label>
+<ul>
+<li>Hostname</li>
+<li>Port : <em>5432</em></li>
+<li>Database : <em>defaultdb</em></li>
+<li>Username</li>
+<li>Password</li>
+</ul></li>
+</ul>
+<p>Elles serviront pour vous connecter à cette base de données depuis le service <strong>cloudBeaver</strong></p>
+</section>
+<section id="cloudbeaver" class="level3" data-number="2.3">
+<h3 data-number="2.3" class="anchored" data-anchor-id="cloudbeaver"><span class="header-section-number">2.3</span> CloudBeaver</h3>
+<p>Nous venons de créer un SGBD, nous avons maintenant besoin d’un outil de gestion pour s’y connecter et envoyer des requêtes.</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Lancez le service <strong>CloudBeaver</strong></label></li>
+<li><label><input type="checkbox">Copiez <em>username</em> et <em>password</em></label></li>
+<li><label><input type="checkbox">Ouvrez ce service</label>
+<ul>
+<li>Collez <em>username</em> et <em>password</em></li>
+</ul></li>
+</ul>
+<p>Normalement la connexion à la base de données <em>PostgreSQL</em> est détectée automatiquement.</p>
+<p>Si c’est le cas, elle apparait dans l’explorer à gauche qui contient la liste des connexions.</p>
+<div class="callout callout-style-default callout-tip callout-titled" title="Si la connexion PostgreSQL n'apparait pas">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Si la connexion PostgreSQL n’apparait pas
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Dans cloudBeaver :</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Créez une nouvelle connexion</label>
+<ul>
+<li>cliquez sur le <code>+</code> en haut à gauche <span class="emoji" data-emoji="arrow_right">➡️</span> New connection <span class="emoji" data-emoji="arrow_right">➡️</span> PostgreSQL</li>
+</ul></li>
+<li><label><input type="checkbox">Renseignez les paramètres de connexion de la base de données</label>
+<ul>
+<li>Hostname, Port, Database, Username, Password</li>
+</ul></li>
+<li><label><input type="checkbox">Testez la connexion</label></li>
+<li><label><input type="checkbox">Cliquez sur le bouton <span class="blue-button">CREATE</span></label></li>
+</ul>
+</div>
+</div>
+<p>Il faut maintenant <strong>ouvrir la connexion</strong> :</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Clic droit sur la connexion <span class="emoji" data-emoji="arrow_right">➡️</span> Open</label></li>
+</ul>
+<p>Enfin, ouvrez une fenêtre SQL pour saisir vos requêtes :</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Clic droit sur la connexion <span class="emoji" data-emoji="arrow_right">➡️</span> SQL Editor</label></li>
+</ul>
+<p>Vous pouvez lancer quelques requêtes simples pour vérifier que tout fonctionne.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="dv">1</span>;</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> NOW();</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> current_database();</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> version();</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="arrêt-des-services" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="arrêt-des-services"><span class="header-section-number">3</span> Arrêt des services</h2>
+<p>Une fois le TP terminé, il est important de libérer les ressources réservées i.e.&nbsp;arrêter / mettre en pause vos services :</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Copiez votre code et collez le sur votre machine dans un fichier <em>.sql</em></label>
+<ul>
+<li>par exemple dans <code>P:/Cours1A/UE3-Bases-de-donnees-relationnelles/tpx.sql</code></li>
+<li>ou en téléchargeant depuis CloudBeaver le fichier sql (petit bouton avec un dossier et une flèche vers le bas)</li>
+</ul></li>
+<li><label><input type="checkbox">Retournez sur le Datalab <span class="emoji" data-emoji="arrow_right">➡️</span> Mes Services</label></li>
+<li><label><input type="checkbox">Supprimez vos services</label></li>
 </ul>
 
 
