@@ -179,14 +179,14 @@
     "href": "doc/tp/tp1.html",
     "title": "Premières requêtes SQL 🦆",
     "section": "",
-    "text": "Vous allez réaliser ce TP sur un Datalab.\n\n\nConnectez-vous à l’une des deux instances suivantes :\n\nDatalab SSPCloud de l’INSEE\n\nen créant un compte avec votre mail prenom.nom@eleve.ensai.fr\nil est recommandé d’utiliser en priorité le SSPCloud qui est plus stable\n\nDatalab du GENES\n\n\n\n\n\n\n\n\n\n\nImportantEn cas d’indisponibilité des Datalabs\n\n\n\n\n\nUniquement en cas d’indisponibilité des Datalabs, vous pouvez réaliser le TP directement sur la VM. Le logiciel DBeaver est installé.\n\n\n\n\nLancez DBeaver\nOnglet Base de données ➡️ Nouvelle Connexion\n\nType de connexion : DuckDB\nSuivant\nPath : :memory:\nTerminer\n\nDans l’explorer (à gauche), clic droit sur la connexion que vous venez de créer\n\nEditeur SQL ➡️ Script SQL (raccourci : F3)\n\n\nCela ouvre une fenêtre dans laquelle vous pouvez saisir du SQL."
+    "text": "Vous allez réaliser ce TP sur un Datalab.\n\n\nConnectez-vous à l’une des deux instances suivantes :\n\nDatalab SSPCloud de l’INSEE\n\nen créant un compte avec votre mail prenom.nom@eleve.ensai.fr\nil est recommandé d’utiliser en priorité le SSPCloud qui est plus stable\n\nDatalab du GENES\n\n\n\n\n\n\n\n\n\n\nImportantEn cas d’indisponibilité des Datalabs\n\n\n\n\n\nUniquement en cas d’indisponibilité des Datalabs, vous pouvez réaliser le TP directement sur la VM. Le logiciel DBeaver est installé.\n\nLancez DBeaver\nOnglet Base de données ➡️ Nouvelle Connexion\n\nType de connexion : DuckDB\nSuivant\nPath : :memory:\nTerminer\n\nDans l’explorer (à gauche), clic droit sur la connexion que vous venez de créer\n\nEditeur SQL ➡️ Script SQL (raccourci : F3)\n\n\nCela ouvre une fenêtre dans laquelle vous pouvez saisir du SQL."
   },
   {
     "objectID": "doc/tp/tp1.html#introduction",
     "href": "doc/tp/tp1.html#introduction",
     "title": "Premières requêtes SQL 🦆",
     "section": "",
-    "text": "Vous allez réaliser ce TP sur un Datalab.\n\n\nConnectez-vous à l’une des deux instances suivantes :\n\nDatalab SSPCloud de l’INSEE\n\nen créant un compte avec votre mail prenom.nom@eleve.ensai.fr\nil est recommandé d’utiliser en priorité le SSPCloud qui est plus stable\n\nDatalab du GENES\n\n\n\n\n\n\n\n\n\n\nImportantEn cas d’indisponibilité des Datalabs\n\n\n\n\n\nUniquement en cas d’indisponibilité des Datalabs, vous pouvez réaliser le TP directement sur la VM. Le logiciel DBeaver est installé.\n\n\n\n\nLancez DBeaver\nOnglet Base de données ➡️ Nouvelle Connexion\n\nType de connexion : DuckDB\nSuivant\nPath : :memory:\nTerminer\n\nDans l’explorer (à gauche), clic droit sur la connexion que vous venez de créer\n\nEditeur SQL ➡️ Script SQL (raccourci : F3)\n\n\nCela ouvre une fenêtre dans laquelle vous pouvez saisir du SQL."
+    "text": "Vous allez réaliser ce TP sur un Datalab.\n\n\nConnectez-vous à l’une des deux instances suivantes :\n\nDatalab SSPCloud de l’INSEE\n\nen créant un compte avec votre mail prenom.nom@eleve.ensai.fr\nil est recommandé d’utiliser en priorité le SSPCloud qui est plus stable\n\nDatalab du GENES\n\n\n\n\n\n\n\n\n\n\nImportantEn cas d’indisponibilité des Datalabs\n\n\n\n\n\nUniquement en cas d’indisponibilité des Datalabs, vous pouvez réaliser le TP directement sur la VM. Le logiciel DBeaver est installé.\n\nLancez DBeaver\nOnglet Base de données ➡️ Nouvelle Connexion\n\nType de connexion : DuckDB\nSuivant\nPath : :memory:\nTerminer\n\nDans l’explorer (à gauche), clic droit sur la connexion que vous venez de créer\n\nEditeur SQL ➡️ Script SQL (raccourci : F3)\n\n\nCela ouvre une fenêtre dans laquelle vous pouvez saisir du SQL."
   },
   {
     "objectID": "doc/tp/tp1.html#lancement-du-service",
@@ -242,7 +242,7 @@
     "href": "doc/tp/tp4.html#lancement-des-services",
     "title": "Chess Unofficial Federation ♕",
     "section": "1 Lancement des services",
-    "text": "1 Lancement des services\nConnectez-vous à l’une des 2 instances suivantes d’Onyxia (elles sont quasiment identiques) :\n\nDatalab du GENES\nDatalab SSPCloud de l’INSEE\n\nsi besoin de créer un compte, utilisez votre mail ENSAI\n\n\nEt ensuite lancez les services suivants (voir TP2 si besoin de plus de détails)\n\nPostgreSQL : Datalab GENES ou SPPCloud\nCloudBeaver"
+    "text": "1 Lancement des services\nPour plus de détails, allez dans l’onglet Datalab.\n\nConnectez-vous à un Datalab\nLancez un service PostgreSQL\nLancez un service cloudBeaver\n\nouvrez ce service\nvérifiez que vous êtes connectés à la base de données PostgreSQL"
   },
   {
     "objectID": "doc/tp/tp4.html#les-données",
