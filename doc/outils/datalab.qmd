@@ -1,0 +1,133 @@
+---
+title: "Utilisation du Datalab"
+description: "Lancer les services nécessaires pour les TP"
+author: "Ludovic Deneuville"
+format: 
+  html:
+    toc: true
+    toc-location: left
+    toc-expand: 3
+from: markdown+emoji
+number-sections: true
+number-depth: 3
+lightbox: true
+---
+
+## Introduction {.unnumbered}
+
+Pour les besoin des TP, nous aurons besoin des outils suivants :
+
+- une base de données (PostrgeSQL)
+- un outil pour communiquer avec cette base de données (cloudBeaver)
+
+
+## Principe
+
+Les datalabs sont composés :
+
+- d'une infrastructure cloud on premise (≠ cloud propriétaire : AWS, GCP, OVH... )
+  - i.e. hébergée dans les locaux de l'INSEE et du GENES 
+  - avec des ressources est à votre disposition (CPU, GPU, RAM, Stockage)
+- de l'application [Onyxia](https://www.onyxia.sh/){target="_blank"}
+  - elle offre une interface pour utiliser cette infrastructure pour lancer des services
+  - sans avoir à utiliser de commandes "complexes"
+
+Lorsque vous en avez besoin, vous :
+
+- réservez des ressources (en lançant des services)
+- lancez vos programmes, calculs...
+- sauvegardez votre code en utilisant Git
+- exportez vos résultats vers le stockage objet S3
+- libérez les ressources une fois que vous avez terminé
+
+Pour vous aider, l'interface Onyxia vous permet de faire cela en quelques clics.
+
+## Lancement des services
+
+Les datalabs de l'INSEE et du GENES proposent les services nécessaires.
+
+### Se connecter
+
+Connectez-vous à l'une des 2 instances suivantes d'Onyxia :
+
+- [ ] [Datalab du GENES](https://onyxia.lab.groupe-genes.fr/){target="_blank"}
+- [ ] [SSP Cloud de l'INSEE](https://datalab.sspcloud.fr/){target="_blank"}
+  - si besoin de créer un compte, utilisez votre mail ENSAI : `nom.prenom@eleve.ensai.fr`
+
+::: {.callout-tip}
+Il est [fortement recommandé]{.underline} d'utiliser en priorité le SSP Cloud qui est plus stable.
+:::
+
+### PostgreSQL
+
+- [ ] Lancez le service **PostgreSQL**
+  - Catalogue de services :arrow_right: Databases
+
+Lorsque vous lancez le services, les **paramètres de connexion** à cette base de données sont affichés.
+
+Une fois le service lancé, vous pouvez toujours accéder à ces paramètres via le bouton README.
+
+- [ ] Copiez ces paramètres de connexion : 
+  - Hostname
+  - Port : *5432*
+  - Database : *defaultdb*
+  - Username
+  - Password
+
+Elles serviront pour vous connecter à cette base de données depuis le service **cloudBeaver**
+
+
+### CloudBeaver
+
+Nous venons de créer un SGBD, nous avons maintenant besoin d'un outil de gestion pour s'y connecter et envoyer des requêtes.
+
+- [ ] Lancez le service **CloudBeaver**
+- [ ] Copiez *username* et *password*
+- [ ] Ouvrez ce service
+  - Collez *username* et *password*
+
+Normalement la connexion à la base de données *PostgreSQL* est détectée automatiquement.
+
+Si c'est le cas, elle apparait dans l'explorer à gauche qui contient la liste des connexions.
+
+::: {.callout-tip title="Si la connexion PostgreSQL n'apparait pas"}
+Dans cloudBeaver :
+
+- [ ] Créez une nouvelle connexion
+  - cliquez sur le `+` en haut à gauche :arrow_right: New connection :arrow_right: PostgreSQL
+- [ ] Renseignez les paramètres de connexion de la base de données 
+  - Hostname, Port, Database, Username, Password
+- [ ] Testez la connexion
+- [ ] Cliquez sur le bouton [CREATE]{.blue-button}
+:::
+
+Il faut maintenant **ouvrir la connexion** :
+
+- [ ] Clic droit sur la connexion :arrow_right: Open
+
+Enfin, ouvrez une fenêtre SQL pour saisir vos requêtes :
+
+- [ ] Clic droit sur la connexion :arrow_right: SQL Editor
+
+Vous pouvez lancer quelques requêtes simples pour vérifier que tout fonctionne.
+
+```{.sql}
+SELECT 1;
+
+SELECT NOW();
+
+SELECT current_database();
+
+SELECT version();
+```
+
+
+## Arrêt des services
+
+Une fois le TP terminé, il est important de libérer les ressources réservées i.e. arrêter / mettre en pause vos services :
+
+- [ ] Copiez votre code et collez le sur votre machine dans un fichier *.sql*
+  - par exemple dans `P:/Cours1A/UE3-Bases-de-donnees-relationnelles/tpx.sql`
+  - ou en téléchargeant depuis CloudBeaver le fichier sql (petit bouton avec un dossier et une flèche vers le bas)
+- [ ] Retournez sur le Datalab :arrow_right: Mes Services
+- [ ] Supprimez vos services

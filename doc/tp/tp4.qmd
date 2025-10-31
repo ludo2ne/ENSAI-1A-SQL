@@ -1,5 +1,5 @@
 ---
-title: "Chess Unofficial Federation"
+title: "Chess Unofficial Federation ♕"
 description: "TP4 et TP5"
 author: "Ludovic Deneuville"
 format: 
@@ -116,7 +116,7 @@ Dans le modèle de données, certaines tables sont reliées 2 fois entre elles :
   - *id_presidente* est une clé étrangère de la table *club* référençant l'*id_joueuse* de la présidente
 :::
 
-![](./data/tp4-modele.PNG)
+![](./data/tp4-uml.PNG)
 
 ## Recherche des irrégularités
 

@@ -108,11 +108,38 @@ INSERT INTO artiste (id_artiste, nom, code_pays, date_naissance, actif, groupe) 
     (114,'Maroon 5','US','2001-01-01',true,true),
     (115,'Nicki Minaj','US','1982-12-08',true,false),
     (116,'MisterWives','US','2012-01-01',true,true),
-    (117,'Selena Gomez','US','1992-07-22',true,false);
+    (117,'Selena Gomez','US','1992-07-22',true,false),
+    (118, 'Santa', 'FR','1991-07-24',true,false);
 
 
 INSERT INTO album (id_album, titre, annee, id_artiste) VALUES
-(1, 'Dua Lipa', 2017, 1);
+(1, 'Dua Lipa', 2017, 1),
+(2, 'Future Nostalgia', 2020, 1),
+(3, 'Radical Optimism', 2024, 1),
+(4, 'If You Wait', 2013, 3),
+(5, 'Truth Is a Beautiful Thing', 2017, 3),
+(6, 'Californian Soil', 2021, 3),
+(7, 'The Greatest Love', 2024, 3),
+(8, 'Thriller', 1982, 4),
+(9, 'Bad', 1987, 4),
+(10, 'Dangerous', 1991, 4),
+(11, 'Invincible', 2001, 4),
+(12, 'Like a Virgin', 1984, 5),
+(13, 'True Blue', 1986, 5),
+(14, 'Music', 2000, 5),
+(15, 'American Life', 2003, 5),
+(16, 'Confessions on a Dance Floor', 2005, 5),
+(17, 'Minoritaire', 1982, 6),
+(18, 'Positif', 1984, 6),
+(19, 'Non homologué', 1985, 6),
+(20, 'Entre gris clair et gris foncé', 1987, 6),
+(22, 'The Fool', 2023, 2),
+(23, 'The Rise and Fall of a Midwest Princess', 2023, 7),
+(24, 'A Hard Day''s Night', 1964, 8),
+(25, 'Help!', 1965, 8),
+(26, 'Revolver', 1966, 8),
+(27, 'Abbey Road', 1969, 8),
+(28, 'Let It Be', 1970, 8);
 
 INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
 (1, 1, 'Genesis', '00:03:25', 1, 2017),
@@ -126,12 +153,7 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (9, 1, 'Thinking ''Bout You', '00:02:51', 1, 2017),
 (10, 1, 'New Rules', '00:03:29', 1, 2017),
 (11, 1, 'Begging', '00:03:14', 1, 2017),
-(12, 1, 'Homesick', '00:03:50', 1, 2017);
-
-INSERT INTO album (id_album, titre, annee, id_artiste) VALUES
-(2, 'Future Nostalgia', 2020, 1);
-
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+(12, 1, 'Homesick', '00:03:50', 1, 2017),
 (13, 1, 'Future Nostalgia', '00:03:04', 2, 2020),
 (14, 1, 'Don''t Start Now', '00:03:03', 2, 2020),
 (15, 1, 'Cool', '00:03:29', 2, 2020),
@@ -142,17 +164,7 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (20, 1, 'Love Again', '00:04:18', 2, 2020),
 (21, 1, 'Break My Heart', '00:03:41', 2, 2020),
 (22, 1, 'Good in Bed', '00:03:38', 2, 2020),
-(23, 1, 'Boys Will Be Boys', '00:02:46', 2, 2020);
-
-INSERT INTO artiste_chanson (id_artiste, id_chanson) VALUES
-(1, 13), (1, 14), (1, 15), (1, 16), (1, 17), (1, 18),
-(1, 19), (1, 20), (1, 21), (1, 22), (1, 23);
-
-
-INSERT INTO album (id_album, titre, annee, id_artiste) VALUES
-(3, 'Radical Optimism', 2024, 1);
-
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+(23, 1, 'Boys Will Be Boys', '00:02:46', 2, 2020),
 (24, 1, 'End of an Era', '00:03:21', 3, 2024),
 (25, 1, 'Houdini', '00:03:06', 3, 2024),
 (26, 1, 'Training Season', '00:03:29', 3, 2024),
@@ -166,10 +178,6 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (34, 1, 'Happy for You', '00:04:00', 3, 2024);
 
 
-
-INSERT INTO album (id_album, titre, annee, id_artiste) VALUES
-(4, 'If You Wait', 2013, 3);
-
 INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
 (35, 3, 'Hey Now', '00:03:27', 4, 2013),
 (36, 3, 'Stay Awake', '00:03:06', 4, 2013),
@@ -181,12 +189,7 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (42, 3, 'Metal & Dust', '00:03:28', 4, 2013),
 (43, 3, 'Interlude', '00:01:23', 4, 2013),
 (44, 3, 'Flickers', '00:04:42', 4, 2013),
-(45, 3, 'If You Wait', '00:04:45', 4, 2013);
-
-INSERT INTO album (id_album, titre, annee, id_artiste) VALUES
-(5, 'Truth Is a Beautiful Thing', 2017, 3);
-
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+(45, 3, 'If You Wait', '00:04:45', 4, 2013),
 (46, 3, 'Rooting for You', '00:04:29', 5, 2017),
 (47, 3, 'Big Picture', '00:04:41', 5, 2017),
 (48, 3, 'Wild Eyed', '00:04:20', 5, 2017),
@@ -197,16 +200,7 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (53, 3, 'Bones of Ribbon', '00:04:11', 5, 2017),
 (54, 3, 'Who Am I', '00:04:31', 5, 2017),
 (55, 3, 'Leave the War with Me', '00:04:13', 5, 2017),
-(56, 3, 'Truth Is a Beautiful Thing', '00:04:27', 5, 2017);
-
-INSERT INTO artiste_chanson (id_artiste, id_chanson) VALUES
-(3, 46), (3, 47), (3, 48), (3, 49), (3, 50), (3, 51),
-(3, 52), (3, 53), (3, 54), (3, 55), (3, 56);
-
-INSERT INTO album (id_album, titre, annee, id_artiste) VALUES
-(6, 'Californian Soil', 2021, 3);
-
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+(56, 3, 'Truth Is a Beautiful Thing', '00:04:27', 5, 2017),
 (57, 3, 'Intro', '00:01:26', 6, 2021),
 (58, 3, 'Californian Soil', '00:03:42', 6, 2021),
 (59, 3, 'Missing', '00:03:46', 6, 2021),
@@ -217,16 +211,7 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (64, 3, 'Call Your Friends', '00:04:07', 6, 2021),
 (65, 3, 'All My Love', '00:04:16', 6, 2021),
 (66, 3, 'Talking', '00:03:28', 6, 2021),
-(67, 3, 'America', '00:03:50', 6, 2021);
-
-INSERT INTO artiste_chanson (id_artiste, id_chanson) VALUES
-(3, 57), (3, 58), (3, 59), (3, 60), (3, 61), (3, 62),
-(3, 63), (3, 64), (3, 65), (3, 66), (3, 67);
-
-INSERT INTO album (id_album, titre, annee, id_artiste) VALUES
-(7, 'The Greatest Love', 2024, 3);
-
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+(67, 3, 'America', '00:03:50', 6, 2021),
 (68, 3, 'Kind of Man', '00:03:14', 7, 2024),
 (69, 3, 'The Greatest Love', '00:03:38', 7, 2024),
 (70, 3, 'Into Gold', '00:03:42', 7, 2024),
@@ -239,13 +224,6 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (77, 3, 'Stay', '00:03:22', 7, 2024),
 (78, 3, 'When the Sun Hits', '00:04:45', 7, 2024);
 
-
-INSERT INTO album (id_album, titre, annee, id_artiste) VALUES
-(8, 'Thriller', 1982, 4),
-(9, 'Bad', 1987, 4),
-(10, 'Dangerous', 1991, 4),
-(11, 'Invincible', 2001, 4);
-
 INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
 (79, 4, 'Wanna Be Startin'' Somethin''', '00:06:03', 8, 1982),
 (80, 4, 'Baby Be Mine', '00:04:20', 8, 1982),
@@ -256,7 +234,6 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (85, 4, 'Human Nature', '00:04:06', 8, 1982),
 (86, 4, 'P.Y.T. (Pretty Young Thing)', '00:03:59', 8, 1982),
 (87, 4, 'The Lady in My Life', '00:04:59', 8, 1982),
-
 (88, 4, 'Bad', '00:04:07', 9, 1987),
 (89, 4, 'The Way You Make Me Feel', '00:04:58', 9, 1987),
 (90, 4, 'Speed Demon', '00:04:01', 9, 1987),
@@ -268,7 +245,6 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (96, 4, 'Dirty Diana', '00:04:41', 9, 1987),
 (97, 4, 'Smooth Criminal', '00:04:17', 9, 1987),
 (98, 4, 'Leave Me Alone', '00:04:40', 9, 1987),
-
 (99, 4, 'Jam', '00:05:38', 10, 1991),
 (100, 4, 'Why You Wanna Trip on Me', '00:05:25', 10, 1991),
 (101, 4, 'In the Closet', '00:06:31', 10, 1991),
@@ -283,7 +259,6 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (110, 4, 'Keep the Faith', '00:05:57', 10, 1991),
 (111, 4, 'Gone Too Soon', '00:03:23', 10, 1991),
 (112, 4, 'Dangerous', '00:06:57', 10, 1991),
-
 (113, 4, 'Unbreakable', '00:06:26', 11, 2001),
 (114, 4, 'Heartbreaker', '00:05:10', 11, 2001),
 (115, 4, 'Invincible', '00:04:46', 11, 2001),
@@ -300,14 +275,6 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (126, 4, 'The Lost Children', '00:04:00', 11, 2001),
 (127, 4, 'Whatever Happens', '00:04:56', 11, 2001),
 (128, 4, 'Threatened', '00:04:19', 11, 2001);
-
-
-INSERT INTO album (id_album, titre, annee, id_artiste) VALUES
-(12, 'Like a Virgin', 1984, 5),
-(13, 'True Blue', 1986, 5),
-(14, 'Music', 2000, 5),
-(15, 'American Life', 2003, 5),
-(16, 'Confessions on a Dance Floor', 2005, 5);
 
 INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
 (129, 5, 'Material Girl', '00:04:00', 12, 1985),
@@ -349,7 +316,6 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (165, 5, 'Mother and Father', '00:04:33', 15, 2003),
 (166, 5, 'Die Another Day', '00:04:38', 15, 2002),
 (167, 5, 'Easy Ride', '00:05:05', 15, 2003),
-
 (168, 5, 'Hung Up', '00:05:36', 16, 2005),
 (169, 5, 'Get Together', '00:05:30', 16, 2005),
 (170, 5, 'Sorry', '00:04:43', 16, 2006),
@@ -367,19 +333,13 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (182, 5, 'Ghosttown', '00:04:09', NULL, 2015);
 
 
-INSERT INTO album (id_album, titre, annee, id_artiste) VALUES
-(17, 'Minoritaire', 1982, 6),
-(18, 'Positif', 1984, 6),
-(19, 'Non homologué', 1985, 6),
-(20, 'Entre gris clair et gris foncé', 1987, 6);
-
 INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
 (183, 6, 'Quand la musique est bonne', '00:03:59', 17, 1982),
 (184, 6, 'Comme toi', '00:04:10', 17, 1982),
 (185, 6, 'Au bout de mes rêves', '00:04:22', 17, 1982),
 (186, 6, 'Minoritaire', '00:03:59', 17, 1982),
-(187, 6, 'Je ne vous parlerai pas d’elle', '00:03:55', 17, 1982),
-(188, 6, 'Si tu m’emmènes', '00:04:28', 17, 1982),
+(187, 6, 'Je ne vous parlerai pas d''elle', '00:03:55', 17, 1982),
+(188, 6, 'Si tu m''emmènes', '00:04:28', 17, 1982),
 (189, 6, 'Envole-moi', '00:05:00', 18, 1984),
 (190, 6, 'Encore un matin', '00:03:55', 18, 1984),
 (191, 6, 'Peur de rien blues', '00:05:03', 18, 1984),
@@ -394,15 +354,12 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (200, 6, 'Je te donne', '00:05:37', 19, 1985),
 (201, 6, 'Elle a fait un bébé toute seule', '00:03:30', 20, 1987),
 (202, 6, 'Puisque tu pars', '00:07:43', 20, 1987),
-(203, 6, 'C’est ta chance', '00:04:26', 20, 1987),
+(203, 6, 'C''est ta chance', '00:04:26', 20, 1987),
 (204, 6, 'Il changeait la vie', '00:04:10', 20, 1987),
 (205, 6, 'Quelque chose de bizarre', '00:03:37', 20, 1987),
 (206, 6, 'Des bouts de moi', '00:03:48', 20, 1987),
 (207, 6, 'Entre gris clair et gris foncé', '00:05:12', 20, 1987);
 
-
-INSERT INTO album (id_album, titre, annee, id_artiste) VALUES
-(22, 'The Fool', 2023, 2);
 
 INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
 (208, 2, 'The Fool', '00:03:27', 22, 2023),
@@ -417,9 +374,6 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (217, 2, 'The Balance', '00:02:26', 22, 2023),
 (218, 2, 'Goodbye', '00:03:33', 22, 2023);
 
-
-INSERT INTO album (id_album, titre, annee, id_artiste) VALUES
-(23, 'The Rise and Fall of a Midwest Princess', 2023, 7);
 
 INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
 (219, 7, 'Femininomenon', '00:03:39', 23, 2023),
@@ -438,13 +392,6 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (232, 7, 'Guilty Pleasure', '00:03:44', 23, 2023);
 
 
-INSERT INTO album (id_album, titre, annee, id_artiste) VALUES
-(24, 'A Hard Day''s Night', 1964, 8),
-(25, 'Help!', 1965, 8),
-(26, 'Revolver', 1966, 8),
-(27, 'Abbey Road', 1969, 8),
-(28, 'Let It Be', 1970, 8);
-
 INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
 (233, 8, 'A Hard Day''s Night', '00:02:34', 24, 1964),
 (234, 8, 'I Should Have Known Better', '00:02:43', 24, 1964),
@@ -459,7 +406,6 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (243, 8, 'When I Get Home', '00:02:18', 24, 1964),
 (244, 8, 'You Can''t Do That', '00:02:34', 24, 1964),
 (245, 8, 'I''ll Be Back', '00:02:21', 24, 1964),
-
 (246, 8, 'Help!', '00:02:18', 25, 1965),
 (247, 8, 'The Night Before', '00:02:36', 25, 1965),
 (248, 8, 'You''ve Got to Hide Your Love Away', '00:02:09', 25, 1965),
@@ -474,7 +420,6 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (257, 8, 'I''ve Just Seen a Face', '00:02:10', 25, 1965),
 (258, 8, 'Yesterday', '00:02:05', 25, 1965),
 (259, 8, 'Dizzy Miss Lizzy', '00:02:55', 25, 1965),
-
 (260, 8, 'Taxman', '00:02:39', 26, 1966),
 (261, 8, 'Eleanor Rigby', '00:02:06', 26, 1966),
 (262, 8, 'I''m Only Sleeping', '00:03:01', 26, 1966),
@@ -489,7 +434,6 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (271, 8, 'I Want to Tell You', '00:02:30', 26, 1966),
 (272, 8, 'Got to Get You into My Life', '00:02:30', 26, 1966),
 (273, 8, 'Tomorrow Never Knows', '00:02:58', 26, 1966),
-
 (274, 8, 'Come Together', '00:04:20', 27, 1969),
 (275, 8, 'Something', '00:03:03', 27, 1969),
 (276, 8, 'Maxwell''s Silver Hammer', '00:03:27', 27, 1969),
@@ -507,7 +451,6 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (288, 8, 'Carry That Weight', '00:01:36', 27, 1969),
 (289, 8, 'The End', '00:02:20', 27, 1969),
 (290, 8, 'Her Majesty', '00:00:23', 27, 1969),
-
 (291, 8, 'Two of Us', '00:03:36', 28, 1970),
 (292, 8, 'Dig a Pony', '00:03:54', 28, 1970),
 (293, 8, 'Across the Universe', '00:03:48', 28, 1970),
@@ -532,14 +475,11 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (309, 9, 'Jumpin'' Jack Flash', '00:03:42', NULL, 1968),
 (310, 9, 'Wild Horses', '00:05:28', NULL, 1971),
 (311, 9, 'Miss You', '00:04:48', NULL, 1978),
-(312, 9, 'Start Me Up', '00:03:33', NULL, 1981);
-
-
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+(312, 9, 'Start Me Up', '00:03:33', NULL, 1981),
 (313, 10, 'Maman a tort', NULL, NULL, 1984),
 (314, 10, 'Libertine', NULL, NULL, 1986),
 (315, 10, 'Sans contrefaçon', NULL, NULL, 1987),
-(316, 10, 'Pourvu qu''elles soient douces', '00:17:00', NULL, 1988),
+(316, 10, 'Pourvu qu''elles soient douces', '00:04:10', NULL, 1988),
 (317, 10, 'Désenchantée', NULL, NULL, 1991),
 (318, 10, 'Que mon cœur lâche', NULL, NULL, 1992),
 (319, 10, 'XXL', NULL, NULL, 1995),
@@ -547,10 +487,7 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (321, 10, 'L''Âme-stram-gram', NULL, NULL, 1999),
 (322, 10, 'Les Mots', NULL, NULL, 2001),
 (323, 10, 'C''est une belle journée', NULL, NULL, 2002),
-(324, 10, 'Innamoramento', NULL, NULL, 1999);
-
-
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+(324, 10, 'Innamoramento', NULL, NULL, 1999),
 (325, 11, 'Just Dance', '00:03:20', NULL, 2008),
 (326, 11, 'Poker Face', '00:03:57', NULL, 2008),
 (327, 11, 'Bad Romance', '00:04:54', NULL, 2009),
@@ -570,18 +507,12 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (339, 12, 'Why Don''t You Get a Job?', NULL, NULL, 1999),
 (340, 12, 'The Kids Aren''t Alright', NULL, NULL, 1999),
 (341, 12, 'Original Prankster', NULL, NULL, 2000),
-(342, 12, 'Hit That', NULL, NULL, 2003);
-
-
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+(342, 12, 'Hit That', NULL, NULL, 2003),
 (343, 13, 'I''m Like a Bird', NULL, NULL, 2000),
 (344, 13, 'Turn Off the Light', NULL, NULL, 2001),
 (345, 13, 'Promiscuous', NULL, NULL, 2006),
 (346, 13, 'Maneater', NULL, NULL, 2006),
-(347, 13, 'Say It Right', NULL, NULL, 2006);
-
-
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+(347, 13, 'Say It Right', NULL, NULL, 2006),
 (348, 14, 'Baby One More Time', '00:03:30', NULL, 1998),
 (349, 14, 'Crazy', '00:03:17', NULL, 1999),
 (350, 14, 'Oops!... I Did It Again', '00:03:31', NULL, 2000),
@@ -590,17 +521,11 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (353, 14, 'Everytime', '00:03:50', NULL, 2004),
 (354, 14, 'Gimme More', '00:03:11', NULL, 2007),
 (355, 14, 'Piece of Me', '00:03:32', NULL, 2007),
-(356, 14, 'Womanizer', '00:03:43', NULL, 2008);
-
-
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+(356, 14, 'Womanizer', '00:03:43', NULL, 2008),
 (357, 15, 'Genie in a Bottle', '00:03:37', NULL, 1999),
 (358, 15, 'What a Girl Wants', '00:03:34', NULL, 1999),
 (359, 15, 'Lady Marmalade', '00:04:25', NULL, 2001),
-(360, 15, 'Beautiful', '00:03:58', NULL, 2002);
-
-
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+(360, 15, 'Beautiful', '00:03:58', NULL, 2002),
 (361, 16, 'Louxor j''adore', '00:03:02', NULL, 2005),
 (362, 16, 'La Banane', '00:02:18', NULL, 2010),
 (363, 16, 'Des Bisoux', '00:02:39', NULL, 2010),
@@ -617,23 +542,14 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (371, 17, 'Formidable', '00:03:34', NULL, 2013),
 (372, 17, 'Tous les mêmes', '00:03:33', NULL, 2013),
 (373, 17, 'Ta fête', '00:02:56', NULL, 2014),
-(374, 17, 'Ma meilleure ennemie', NULL, NULL, 2025);
-
-
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+(374, 17, 'Ma meilleure ennemie', NULL, NULL, 2025),
 (375, 18, 'The Rockafeller Skank', '00:06:53', NULL, 1998),
 (376, 18, 'Praise You', '00:05:23', NULL, 1998),
-(377, 18, 'Right Here, Right Now', '00:06:27', NULL, 1999);
-
-
-
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+(377, 18, 'Right Here, Right Now', '00:06:27', NULL, 1999),
 (378, 19, 'Tout oublier', '00:03:22', NULL, 2018),
 (379, 19, 'Balance ton quoi', '00:03:09', NULL, 2019),
 (380, 19, 'Flou', '00:03:19', NULL, 2019),
-(381, 19, 'Oui ou non', '00:03:16', NULL, 2019);
-
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+(381, 19, 'Oui ou non', '00:03:16', NULL, 2019),
 (382, 20, 'Hips Don''t Lie', '00:03:38', NULL, 2006),
 (383, 20, 'Whenever, Wherever', '00:03:17', NULL, 2001),
 (384, 20, 'Waka Waka', '00:03:22', NULL, 2010),
@@ -641,10 +557,7 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (386, 20, 'She Wolf', '00:03:07', NULL, 2009),
 (387, 20, 'Underneath Your Clothes', '00:04:14', NULL, 2002),
 (388, 20, 'Chantaje', '00:03:19', NULL, 2016),
-(389, 20, 'Objection', '00:03:42', NULL, 2002);
-
-
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+(389, 20, 'Objection', '00:03:42', NULL, 2002),
 (390, 21, 'With or Without You', '00:04:56', NULL, 1987),
 (391, 21, 'I Still Haven''t Found What I''m Looking For', '00:04:37', NULL, 1987),
 (392, 21, 'Sunday Bloody Sunday', '00:04:40', NULL, 1983),
@@ -663,20 +576,14 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (402, 22, 'Dissimule', '00:03:44', NULL, 2025),
 (403, 22, 'More Love', '00:02:40', NULL, 2024),
 (404, 22, 'Tout savoir', '00:03:16', NULL, 2022),
-(405, 22, 'Insomnies', '00:03:09', NULL, 2022);
-
-
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+(405, 22, 'Insomnies', '00:03:09', NULL, 2022),
 (406, 23, 'Près de moi', '00:03:46', NULL, 2001),
 (407, 23, 'Je serai (ta meilleure amie)', '00:03:45', NULL, 2001),
 (408, 23, 'Toute seule', '00:03:43', NULL, 2002),
 (409, 23, 'Sur un air latino', '00:03:41', NULL, 2003),
 (410, 23, 'J''ai besoin d''amour', '00:03:38', NULL, 2003),
 (411, 23, 'Ensorcelée', '00:03:44', NULL, 2005),
-(412, 23, 'Positive Attitude', NULL, NULL, 2002);
-
-
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+(412, 23, 'Positive Attitude', NULL, NULL, 2002),
 (413, 24, 'If You Had My Love', '00:04:06', NULL, 1999),
 (414, 24, 'Waiting for Tonight', '00:04:07', NULL, 1999),
 (415, 24, 'Love Don''t Cost a Thing', '00:03:39', NULL, 2000),
@@ -685,10 +592,7 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (418, 24, 'All I Have', '00:04:29', NULL, 2003),
 (419, 24, 'Get Right', '00:03:46', NULL, 2005),
 (420, 24, 'Do It Well', '00:03:45', NULL, 2007),
-(421, 24, 'Let''s Get Loud', NULL, NULL, 2000);
-
-
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+(421, 24, 'Let''s Get Loud', NULL, NULL, 2000),
 (422, 25, 'La Main Verte', NULL, NULL, 2003),
 (423, 25, 'L''Hymne de nos campagnes', '00:04:45', NULL, 2000),
 (424, 25, 'Désolé pour hier soir', '00:03:59', NULL, 2003);
@@ -702,28 +606,16 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (429, 26, 'Roule', '00:03:41', NULL, 2020),
 (430, 26, 'Fresh Prince', '00:03:33', NULL, 2014),
 (431, 26, 'Zoum', '00:03:35', NULL, 2016),
-(432, 26, 'Mon Everest', '00:03:46', NULL, 2019);
-
-
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
-(433, 27, 'Don''t Speak', NULL, NULL, 1996);
-
-
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+(432, 26, 'Mon Everest', '00:03:46', NULL, 2019),
+(433, 27, 'Don''t Speak', NULL, NULL, 1996),
 (436, 28, 'Hollaback Girl', NULL, NULL, 2005),
 (437, 28, 'The Sweet Escape', NULL, NULL, 2006),
-(438, 28, 'What You Waiting For?', NULL, NULL, 2004);
-
-
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+(438, 28, 'What You Waiting For?', NULL, NULL, 2004),
 (439, 29, 'Say What You Want', NULL, NULL, 1997),
 (440, 29, 'Black Eyed Boy', NULL, NULL, 1997),
 (441, 29, 'Summer Son', NULL, NULL, 1999),
 (442, 29, 'Inner Smile', NULL, NULL, 2001),
-(443, 29, 'In Demand', NULL, NULL, 2000);
-
-
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+(443, 29, 'In Demand', NULL, NULL, 2000),
 (444, 30, 'Basket Case', NULL, NULL, 1994),
 (445, 30, 'When I Come Around', NULL, NULL, 1994),
 (446, 30, 'American Idiot', NULL, NULL, 2004),
@@ -741,25 +633,13 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (455, 31, 'Meet Me Halfway', '00:03:39', NULL, 2009),
 (456, 31, 'Imma Be', '00:04:47', NULL, 2009),
 (457, 31, 'Don''t Phunk With My Heart', '00:04:00', NULL, 2005),
-(458, 31, 'Rock That Body', '00:03:46', NULL, 2009);
-
-
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+(458, 31, 'Rock That Body', '00:03:46', NULL, 2009),
 (459, 32, 'Wannabe', '00:02:52', NULL, 1996),
-(460, 32, 'Say You’ll Be There', '00:03:59', NULL, 1996),
-(461, 32, '2 Become 1', '00:04:00', NULL, 1996);
-
-
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+(460, 32, 'Say You''ll Be There', '00:03:59', NULL, 1996),
+(461, 32, '2 Become 1', '00:04:00', NULL, 1996),
 (462, 33, 'Partir un jour', '00:03:49', NULL, 1996),
-(463, 33, 'Toujours là pour toi', '00:04:05', NULL, 1996);
-
-
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
-(464, 34, 'Cuitas les bananas', NULL, NULL, NULL);
-
-
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+(463, 33, 'Toujours là pour toi', '00:04:05', NULL, 1996),
+(464, 34, 'Cuitas les bananas', NULL, NULL, NULL),
 (465, 35, 'Dancing Queen', '00:03:50', NULL, 1976),
 (466, 35, 'Mamma Mia', '00:03:32', NULL, 1975),
 (467, 35, 'Waterloo', '00:02:42', NULL, 1974),
@@ -769,10 +649,7 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (471, 35, 'Knowing Me, Knowing You', '00:04:03', NULL, 1977),
 (472, 35, 'The Winner Takes It All', '00:04:55', NULL, 1980),
 (473, 35, 'SOS', '00:03:21', NULL, 1975),
-(474, 35, 'Chiquitita', '00:05:27', NULL, 1979);
-
-
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+(474, 35, 'Chiquitita', '00:05:27', NULL, 1979),
 (475, 36, 'You Oughta Know', '00:04:09', NULL, 1995),
 (476, 36, 'Ironic', '00:03:50', NULL, 1995),
 (477, 36, 'Hand in My Pocket', '00:03:42', NULL, 1995),
@@ -790,18 +667,12 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (486, 37, 'Question de survie', '00:03:45', NULL, 2001),
 (487, 37, 'Etincelle', '00:03:38', NULL, 2002),
 (488, 37, 'Laisse tourner le monde', '00:03:42', NULL, 2002),
-(489, 37, 'Toutes les femmes de ta vie', '00:03:32', NULL, 2001);
-
-
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+(489, 37, 'Toutes les femmes de ta vie', '00:03:32', NULL, 2001),
 (490, 38, 'Complicated', '00:04:04', NULL, 2002),
 (491, 38, 'Sk8er Boi', '00:03:24', NULL, 2002),
 (492, 38, 'I''m with You', '00:03:44', NULL, 2002),
 (493, 38, 'Girlfriend', '00:03:35', NULL, 2007),
-(494, 38, 'When You''re Gone', '00:04:11', NULL, 2007);
-
-
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+(494, 38, 'When You''re Gone', '00:04:11', NULL, 2007),
 (495, 39, 'Chandelier', '00:03:36', NULL, 2014),
 (496, 39, 'Elastic Heart', '00:04:10', NULL, 2013),
 (497, 39, 'Cheap Thrills', '00:03:31', NULL, 2016),
@@ -811,15 +682,12 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (501, 39, 'Bird Set Free', '00:03:38', NULL, 2015),
 (502, 39, 'Move Your Body', '00:03:19', NULL, 2017),
 (503, 39, 'Unstoppable', '00:03:37', NULL, 2016),
-(504, 39, 'Never Give Up', '00:03:40', NULL, 2016);
-
-
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+(504, 39, 'Never Give Up', '00:03:40', NULL, 2016),
 (505, 40, 'Sweet but Psycho', '00:03:07', NULL, 2018),
 (506, 40, 'Kings & Queens', '00:03:28', NULL, 2020),
 (507, 40, 'Torn', '00:02:58', NULL, 2019),
 (508, 40, 'My Head & My Heart', '00:02:51', NULL, 2020),
-(509, 40, 'Who’s Laughing Now', '00:02:58', NULL, 2019),
+(509, 40, 'Who''s Laughing Now', '00:02:58', NULL, 2019),
 (510, 40, 'Maybe You''re the Problem', '00:03:12', NULL, 2022);
 
 
@@ -828,18 +696,12 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (512, 41, 'Nue', '00:03:25', NULL, 2018),
 (513, 41, 'Le Reste', '00:03:28', NULL, 2021),
 (514, 41, 'Tout pour moi', '00:03:22', NULL, 2021),
-(515, 41, 'Ma sœur', '00:03:30', NULL, 2021);
-
-
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+(515, 41, 'Ma sœur', '00:03:30', NULL, 2021),
 (516, 42, 'Wonderwall', '00:04:18', NULL, 1995),
 (517, 42, 'Don''t Look Back in Anger', '00:04:48', NULL, 1996),
 (518, 42, 'Champagne Supernova', '00:07:27', NULL, 1996),
 (519, 42, 'Live Forever', '00:04:36', NULL, 1994),
-(520, 42, 'Supersonic', '00:04:43', NULL, 1994);
-
-
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+(520, 42, 'Supersonic', '00:04:43', NULL, 1994),
 (521, 43, 'Yellow', '00:04:26', NULL, 2000),
 (522, 43, 'The Scientist', '00:05:09', NULL, 2002),
 (523, 43, 'Clocks', '00:05:07', NULL, 2003),
@@ -849,10 +711,7 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (527, 43, 'A Sky Full of Stars', '00:04:28', NULL, 2014),
 (528, 43, 'Adventure of a Lifetime', '00:04:23', NULL, 2015),
 (529, 43, 'Something Just Like This', '00:04:07', NULL, 2017),
-(530, 43, 'Hymn for the Weekend', '00:04:18', NULL, 2015);
-
-
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+(530, 43, 'Hymn for the Weekend', '00:04:18', NULL, 2015),
 (531, 44, 'L''Aventurier', '00:04:32', NULL, 1982),
 (532, 44, '3e Sexe', '00:04:06', NULL, 1985),
 (533, 44, 'Trois nuits par semaine', '00:03:55', NULL, 1985),
@@ -875,22 +734,13 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (547, 45, 'Cardigan', '00:03:59', NULL, 2020),
 (548, 45, 'Willow', '00:03:34', NULL, 2020),
 (549, 45, 'Anti-Hero', '00:03:20', NULL, 2022),
-(550, 45, ' The Fate of Ophelia', '00:03:14', NULL, 2025);
-
-
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+(550, 45, ' The Fate of Ophelia', '00:03:14', NULL, 2025),
 (551, 46, 'Blinding Lights', '00:03:20', NULL, 2019),
 (552, 46, 'Save Your Tears', '00:03:35', NULL, 2020),
 (553, 46, 'Starboy', '00:03:50', NULL, 2016),
 (554, 46, 'The Hills', '00:04:02', NULL, 2015),
-(555, 46, 'Can’t Feel My Face', '00:03:35', NULL, 2015);
-
-
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
-(556, 47, 'Apt', '00:03:14', NULL, 2021);
-
-
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+(555, 46, 'Can''t Feel My Face', '00:03:35', NULL, 2015),
+(556, 47, 'Apt', '00:03:14', NULL, 2021),
 (557, 48, 'My Heart Will Go On', '00:04:40', NULL, 1997),
 (558, 48, 'The Power of Love', '00:05:09', NULL, 1993),
 (559, 48, 'Because You Loved Me', '00:04:33', NULL, 1996),
@@ -898,40 +748,28 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (561, 48, 'All by Myself', '00:05:12', NULL, 1996),
 (562, 48, 'I Drove All Night', '00:04:11', NULL, 2003),
 (563, 48, 'A New Day Has Come', '00:04:21', NULL, 2002),
-(564, 48, 'I’m Alive', '00:04:02', NULL, 2002),
+(564, 48, 'I''m Alive', '00:04:02', NULL, 2002),
 (565, 48, 'Taking Chances', '00:04:02', NULL, 2007),
-(566, 48, 'Loved Me Back to Life', '00:03:43', NULL, 2013);
-
-
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+(566, 48, 'Loved Me Back to Life', '00:03:43', NULL, 2013),
 (567, 49, 'Circle of Life', '00:04:52', NULL, 1994),
 (568, 49, 'Hakuna Matata', '00:03:32', NULL, 1994),
 (569, 49, 'Can You Feel the Love Tonight', '00:04:01', NULL, 1994);
 
 
 INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
-(570, 50, 'Libérée, délivrée', '00:03:44', NULL, 2013);
-
-
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+(570, 50, 'Libérée, délivrée', '00:03:44', NULL, 2013),
 (571, 57, 'Bohemian Rhapsody', '00:05:55', NULL, 1975),
 (572, 57, 'We Will Rock You', '00:02:02', NULL, 1977),
 (573, 57, 'We Are the Champions', '00:03:00', NULL, 1977),
 (574, 57, 'Another One Bites the Dust', '00:03:35', NULL, 1980),
-(575, 57, 'Somebody to Love', '00:04:56', NULL, 1976);
-
-
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+(575, 57, 'Somebody to Love', '00:04:56', NULL, 1976),
 (576, 58, 'No Woman, No Cry', '00:07:07', NULL, 1974),
 (577, 58, 'One Love', '00:02:45', NULL, 1977),
 (578, 58, 'Three Little Birds', '00:03:00', NULL, 1977),
 (579, 58, 'Redemption Song', '00:03:49', NULL, 1980),
 (580, 58, 'Buffalo Soldier', '00:04:16', NULL, 1983),
 (581, 58, 'I Shot the Sheriff', '00:04:26', NULL, 1973),
-(582, 58, 'Jamming', '00:03:31', NULL, 1977);
-
-
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+(582, 58, 'Jamming', '00:03:31', NULL, 1977),
 (583, 59, 'Rivers of Babylon', '00:04:16', NULL, 1978),
 (584, 59, 'Daddy Cool', '00:03:26', NULL, 1976),
 (585, 59, 'Ma Baker', '00:04:36', NULL, 1977),
@@ -943,10 +781,7 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (591, 59, 'Belfast', '00:03:25', NULL, 1977),
 (592, 59, 'Painter Man', '00:03:12', NULL, 1978),
 (593, 59, 'Nightflight to Venus', '00:04:05', NULL, 1978),
-(594, 59, 'Mary''s Boy Child – Oh My Lord', '00:05:45', NULL, 1978);
-
-
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+(594, 59, 'Mary''s Boy Child – Oh My Lord', '00:05:45', NULL, 1978),
 (595, 60, 'Alexandrie Alexandra', '00:04:05', NULL, 1977),
 (596, 60, 'Comme d''habitude', '00:03:20', NULL, 1967),
 (597, 60, 'Le lundi au soleil', '00:03:02', NULL, 1972),
@@ -963,44 +798,26 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (605, 61, 'Mon fils, ma bataille', '00:04:02', NULL, 1980),
 (606, 61, 'Je ne suis pas un héros', '00:04:12', NULL, 1980),
 (607, 61, 'Tous les cris les SOS', '00:05:20', NULL, 1985),
-(608, 61, 'Sauver l’amour', '00:03:57', NULL, 1985),
-(609, 61, 'Vivre ou survivre', '00:04:21', NULL, 1982);
-
-
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+(608, 61, 'Sauver l''amour', '00:03:57', NULL, 1985),
+(609, 61, 'Vivre ou survivre', '00:04:21', NULL, 1982),
 (610, 62, 'Bambino', '00:03:00', NULL, 1956),
 (611, 62, 'Gigi l''Amoroso', '00:04:30', NULL, 1974),
 (612, 62, 'Paroles, paroles', '00:03:22', NULL, 1973),
 (613, 62, 'Laissez-moi danser', '00:03:25', NULL, 1979),
-(614, 62, 'Il venait d''avoir 18 ans', '00:03:50', NULL, 1973);
-
-
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+(614, 62, 'Il venait d''avoir 18 ans', '00:03:50', NULL, 1973),
 (615, 63, 'Back in Black', '00:04:15', NULL, 1980),
 (616, 63, 'Highway to Hell', '00:03:28', NULL, 1979),
 (617, 63, 'Thunderstruck', '00:04:52', NULL, 1990),
-(618, 63, 'You Shook Me All Night Long', '00:03:30', NULL, 1980);
-
-
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+(618, 63, 'You Shook Me All Night Long', '00:03:30', NULL, 1980),
 (619, 64, 'Tata Yoyo', '00:03:10', NULL, 1980),
-(620, 64, 'Chaud cacao', '00:03:22', NULL, 1981);
-
-
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+(620, 64, 'Chaud cacao', '00:03:22', NULL, 1981),
 (621, 65, 'Le Freak', '00:05:23', NULL, 1978),
-(622, 65, 'Good Times', '00:08:13', NULL, 1979);
-
-
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+(622, 65, 'Good Times', '00:08:13', NULL, 1979),
 (623, 66, 'Allô allô Monsieur l''ordinateur', '00:03:25', NULL, 1985),
 (624, 66, 'Tremblement de terre', '00:03:50', NULL, 1989),
 (625, 66, 'Hou! La menteuse', '00:03:32', NULL, 1988),
 (626, 66, 'Les neiges de l''Himalaya', '00:04:05', NULL, 1990),
-(627, 66, 'La Valise', '00:03:12', NULL, 1986);
-
-
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+(627, 66, 'La Valise', '00:03:12', NULL, 1986),
 (628, 67, 'Poupée de cire, poupée de son', '00:02:30', NULL, 1965),
 (629, 67, 'Résiste', '00:04:05', NULL, 1981),
 (630, 67, 'Ella, elle l''a', '00:04:50', NULL, 1987),
@@ -1012,10 +829,7 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 
 
 INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
-(636, 68, 'I Love Rock ''n'' Roll', '00:02:55', NULL, 1981);
-
-
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+(636, 68, 'I Love Rock ''n'' Roll', '00:02:55', NULL, 1981),
 (637, 69, 'Que je t''aime', '00:03:22', NULL, 1969),
 (638, 69, 'Allumer le feu', '00:04:30', NULL, 1998),
 (639, 69, 'Je te promets', '00:04:40', NULL, 1986),
@@ -1025,37 +839,24 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (643, 69, 'Gabrielle', '00:03:45', NULL, 1976),
 (644, 69, 'Requiem pour un fou', '00:04:30', NULL, 1976),
 (645, 69, 'Ma gueule', '00:03:55', NULL, 1979),
-(646, 69, 'Le pénitencier', '00:04:50', NULL, 1964);
-
-
-
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+(646, 69, 'Le pénitencier', '00:04:50', NULL, 1964),
 (647, 70, 'Celebration', '00:04:58', NULL, 1980),
 (648, 70, 'Get Down on It', '00:04:52', NULL, 1981),
-(649, 70, 'Fresh', '00:04:21', NULL, 1984);
-
-
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+(649, 70, 'Fresh', '00:04:21', NULL, 1984),
 (650, 71, 'Banana Split', '00:03:40', NULL, 1979),
 (651, 71, 'Amoureux solitaires', '00:03:50', NULL, 1980),
 (652, 71, 'Les brunes comptent pas pour des prunes', '00:03:55', NULL, 1980),
-(653, 71, 'Zip a doo wah', '00:03:30', NULL, 1981);
-
-
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+(653, 71, 'Zip a doo wah', '00:03:30', NULL, 1981),
 (654, 72, 'Les Corons', '00:04:15', NULL, 1982),
-(655, 72, 'Elle est d’ailleurs', '00:03:45', NULL, 1980),
+(655, 72, 'Elle est d''ailleurs', '00:03:45', NULL, 1980),
 (656, 72, 'Marionnettiste', '00:03:50', NULL, 1975),
 (657, 72, 'Vingt ans', '00:04:10', NULL, 1976),
 (658, 72, 'Quand la mer se retire', '00:04:05', NULL, 1977),
 (659, 72, 'Olivia', '00:03:35', NULL, 1981),
 (660, 72, 'Les Filles du Nord', '00:04:20', NULL, 1982),
-(661, 72, 'Je t’aimais, je t’aime, je t’aimerai', '00:04:45', NULL, 1990),
+(661, 72, 'Je t''aimais, je t''aime, je t''aimerai', '00:04:45', NULL, 1990),
 (662, 72, 'Un jardin sur la terre', '00:03:55', NULL, 1985),
-(663, 72, 'Prends la mer', '00:03:50', NULL, 1982);
-
-
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+(663, 72, 'Prends la mer', '00:03:50', NULL, 1982),
 (664, 73, 'Le Zizi', '00:02:50', NULL, 1974),
 (665, 73, 'La cage aux oiseaux', '00:03:20', NULL, 1966),
 (666, 73, 'Lily', '00:03:50', NULL, 1967),
@@ -1087,10 +888,7 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 
 INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
 (691, 75, 'Marcia Baïla', '00:04:35', NULL, 1984),
-(692, 75, 'C''est comme ça', '00:03:50', NULL, 1986);
-
-
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+(692, 75, 'C''est comme ça', '00:03:50', NULL, 1986),
 (693, 76, 'Bang Bang', '00:03:15', NULL, 1966),
 (694, 76, 'Les gondoles à Venise', '00:03:20', NULL, 1967),
 (695, 76, 'Spacer', '00:03:45', NULL, 1979),
@@ -1099,13 +897,13 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (698, 77, 'Antisocial', '00:03:50', NULL, 1980),
 (699, 77, 'New York avec toi', '00:04:00', NULL, 1984),
 (700, 77, 'Un autre monde', '00:04:05', NULL, 1984),
-(701, 77, 'Ça (c’est vraiment toi)', '00:03:50', NULL, 1986),
+(701, 77, 'Ça (c''est vraiment toi)', '00:03:50', NULL, 1986),
 (702, 78, 'Sensualité', '00:04:05', NULL, 1993),
-(703, 78, 'Je t’attends', '00:03:50', NULL, 1996),
-(704, 78, 'Rien que de l’eau', '00:03:55', NULL, 2001),
+(703, 78, 'Je t''attends', '00:03:50', NULL, 1996),
+(704, 78, 'Rien que de l''eau', '00:03:55', NULL, 2001),
 (705, 78, 'À tâtons', '00:04:10', NULL, 1995),
 (706, 79, 'Fruit de la passion', '00:03:35', NULL, 1995),
-(707, 79, 'Vas-y Francky c’est bon', '00:03:25', NULL, 1996),
+(707, 79, 'Vas-y Francky c''est bon', '00:03:25', NULL, 1996),
 (708, 79, 'Tu veux mon zizi', '00:03:20', NULL, 1994),
 (709, 79, 'Le gouzou', '00:03:30', NULL, 1997),
 (710, 79, 'Alice ça glisse', '00:03:40', NULL, 1998),
@@ -1115,12 +913,10 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (714, 80, 'Le roi des ombres', '00:03:55', NULL, 2003),
 (715, 80, 'Taxi', '00:03:35', NULL, 2001),
 (716, 80, 'La bonne étoile', '00:04:05', NULL, 2004),
-(717, 81, 'J’t’emmène au vent', '00:03:40', NULL, 1997),
+(717, 81, 'J''t''emmène au vent', '00:03:40', NULL, 1997),
 (718, 81, 'Ton invitation', '00:03:50', NULL, 1997),
 (719, 81, 'La nuit je mens', '00:04:00', NULL, 2000),
-(720, 82, 'Mambo No.5', '00:03:39', NULL, 1999);
-
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+(720, 82, 'Mambo No.5', '00:03:39', NULL, 1999),
 (721, 83, 'Porcelain', '00:04:01', NULL, 2000),
 (722, 83, 'South Side', '00:03:40', NULL, 1999),
 (723, 83, 'Why Does My Heart Feel So Bad?', '00:03:22', NULL, 1999),
@@ -1134,7 +930,7 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (731, 85, 'Let Me Entertain You', '00:04:32', NULL, 1998),
 (732, 86, 'Kiss from a Rose', '00:04:48', NULL, 1994),
 (733, 86, 'Crazy', '00:04:30', NULL, 1991),
-(734, 86, 'Love’s Divine', '00:04:30', NULL, 2003),
+(734, 86, 'Love''s Divine', '00:04:30', NULL, 2003),
 (735, 87, 'I Will Always Love You', '00:04:31', NULL, 1992),
 (736, 87, 'I Wanna Dance with Somebody', '00:04:52', NULL, 1987),
 (737, 87, 'How Will I Know', '00:04:35', NULL, 1985),
@@ -1142,13 +938,12 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 
 
 INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
-(739, 89, 'Can’t Get You Out of My Head', '00:03:51', NULL, 2001),
+(739, 89, 'Can''t Get You Out of My Head', '00:03:51', NULL, 2001),
 (740, 89, 'Spinning Around', '00:03:27', NULL, 2000),
 (741, 89, 'Love at First Sight', '00:03:54', NULL, 2002),
 (742, 89, 'In Your Eyes', '00:03:46', NULL, 2002),
 (743, 89, 'Slow', '00:03:22', NULL, 2003),
 (744, 89, 'All the Lovers', '00:04:06', NULL, 2010),
-
 (745, 90, 'Firework', '00:03:47', NULL, 2010),
 (746, 90, 'Roar', '00:03:43', NULL, 2013),
 (747, 90, 'Teenage Dream', '00:03:47', NULL, 2010),
@@ -1157,9 +952,8 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (750, 90, 'California Gurls', '00:03:54', NULL, 2010),
 (751, 90, 'Last Friday Night', '00:03:51', NULL, 2011),
 (752, 90, 'E.T.', '00:03:53', NULL, 2011),
-
 (753, 91, 'Moi… Lolita', '00:04:25', NULL, 2000),
-(754, 91, 'J’en ai marre!', '00:03:28', NULL, 2003),
+(754, 91, 'J''en ai marre!', '00:03:28', NULL, 2003),
 (755, 91, 'Gourmandises', '00:03:55', NULL, 2001),
 (757, 92, 'Play Hard', '00:03:45', NULL, 2013),
 (758, 92, 'Memories', '00:03:30', NULL, 2009),
@@ -1173,26 +967,23 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (766, 92, 'Lovers on the Sun', '00:03:24', NULL, 2014),
 (767, 92, 'Say My Name', '00:03:15', NULL, 2011),
 (768, 92, 'Bang My Head', '00:03:42', NULL, 2015),
-(769, 92, 'Love Don’t Let Me Go', '00:03:50', NULL, 2002),
+(769, 92, 'Love Don''t Let Me Go', '00:03:50', NULL, 2002),
 (770, 92, 'Flashback', '00:03:48', NULL, 2005),
-
 (771, 93, 'White Flag', '00:03:33', NULL, 2003),
 (772, 93, 'Thank You', '00:03:39', NULL, 2000),
 (773, 93, 'Here with Me', '00:03:58', NULL, 1999),
 (774, 93, 'Life for Rent', '00:03:45', NULL, 2003),
-
 (775, 94, 'Tu seras', '00:03:45', NULL, 2003),
 (776, 94, 'Enchantée', '00:03:40', NULL, 2002),
-(777, 94, 'T’en va pas', '00:03:35', NULL, 2004),
+(777, 94, 'T''en va pas', '00:03:35', NULL, 2004),
 (778, 94, 'Où es-tu', '00:03:50', NULL, 2003),
-
 (779, 95, 'Je danse', '00:03:45', NULL, 2002),
 (780, 95, 'Donne-moi le temps', '00:03:50', NULL, 2001),
 (781, 95, 'Au soleil', '00:03:40', NULL, 2002),
 (782, 95, 'Ma révolution', '00:03:55', NULL, 2003),
 (783, 95, 'Là où je pars', '00:03:50', NULL, 2002),
-(784, 95, 'J’ai fait tout ça pour vous', '00:03:45', NULL, 2003),
-(785, 95, 'C’est de l’or', '00:03:35', NULL, 2004),
+(784, 95, 'J''ai fait tout ça pour vous', '00:03:45', NULL, 2003),
+(785, 95, 'C''est de l''or', '00:03:35', NULL, 2004),
 (786, 95, 'Si je meurs ce soir', '00:03:50', NULL, 2004);
 
 
@@ -1200,31 +991,26 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (787, 96, 'Club Foot', '00:03:50', NULL, 2004),
 (788, 96, 'Fire', '00:03:45', NULL, 2009),
 (789, 96, 'L.S.F.', '00:03:35', NULL, 2004),
-
 (790, 97, 'Are You Gonna Go My Way', '00:03:32', NULL, 1993),
 (791, 97, 'Fly Away', '00:03:43', NULL, 1998),
 (792, 97, 'American Woman', '00:04:20', NULL, 1999),
-
 (793, 98, 'In the End', '00:03:36', NULL, 2001),
 (794, 98, 'Numb', '00:03:05', NULL, 2003),
 (795, 98, 'Crawling', '00:03:29', NULL, 2001),
 (796, 98, 'One Step Closer', '00:02:35', NULL, 2000),
 (797, 98, 'Somewhere I Belong', '00:03:33', NULL, 2003),
-(798, 98, 'What I’ve Done', '00:03:25', NULL, 2007),
-
+(798, 98, 'What I''ve Done', '00:03:25', NULL, 2007),
 (799, 99, 'Just Like a Pill', '00:03:57', NULL, 2002),
 (800, 99, 'So What', '00:03:35', NULL, 2008),
 (801, 99, 'Get the Party Started', '00:03:14', NULL, 2001),
 (802, 99, 'Raise Your Glass', '00:03:23', NULL, 2010),
 (803, 99, 'Try', '00:04:10', NULL, 2012),
-
 (804, 100, 'Umbrella', '00:04:36', NULL, 2007),
 (805, 100, 'Diamonds', '00:03:45', NULL, 2012),
 (806, 100, 'Only Girl (In the World)', '00:03:56', NULL, 2010),
 (807, 100, 'We Found Love', '00:03:35', NULL, 2011),
 (808, 100, 'Rude Boy', '00:03:43', NULL, 2009),
 (809, 100, 'Where Have You Been', '00:03:58', NULL, 2011),
-
 (810, 101, 'Butterfly', '00:03:30', NULL, 2002),
 (811, 101, 'Radio Song', '00:03:25', NULL, 2004),
 (812, 101, 'Sexy Summer', '00:03:40', NULL, 2006),
@@ -1239,10 +1025,7 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (817, 102, 'Divine idylle', '00:04:10', NULL, 2007),
 (818, 103, 'In the Waiting Line', '00:04:00', NULL, 2001),
 (820, 105, 'Quand il pète il troue son slip', '00:03:15', NULL, 2010),
-(821, 106, 'Stach stach', '00:03:32', NULL, 2004);
-
-
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+(821, 106, 'Stach stach', '00:03:32', NULL, 2004),
 (822, 107, 'Mignon Mignon', '00:03:15', NULL, 2009),
 (823, 108, 'Le petit bonhomme en mousse', '00:03:12', NULL, 2000),
 (824, 109, 'Wake Me Up', '00:04:09', NULL, 2013),
@@ -1256,49 +1039,53 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (832, 110, 'Gangnam Style', '00:03:39', NULL, 2012),
 (833, 111, 'French Cancan', '00:03:30', NULL, 2011),
 (834, 111, 'La fille du Lido', '00:03:42', NULL, 2013),
-(835, 111, 'Mister H', '00:03:35', NULL, 2012);
-
-
-
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+(835, 111, 'Mister H', '00:03:35', NULL, 2012),
 (836, 112, 'Summertime Sadness', '00:04:25', NULL, 2012),
 (837, 112, 'Born to Die', '00:04:50', NULL, 2012),
 (838, 112, 'Blue Jeans', '00:03:30', NULL, 2012),
 (839, 112, 'Young and Beautiful', '00:03:57', NULL, 2013),
 (840, 112, 'Video Games', '00:04:42', NULL, 2011),
 (841, 112, 'West Coast', '00:04:14', NULL, 2014),
-
 (842, 113, 'Party Rock Anthem', '00:04:23', NULL, 2011),
 (843, 113, 'Sexy and I Know It', '00:03:19', NULL, 2011),
 (844, 113, 'Champagne Showers', '00:03:42', NULL, 2011),
-
 (845, 114, 'Sugar', '00:03:56', NULL, 2015),
 (846, 114, 'Moves Like Jagger', '00:03:21', NULL, 2011),
 (847, 114, 'She Will Be Loved', '00:04:17', NULL, 2004),
 (848, 114, 'Payphone', '00:03:51', NULL, 2012),
 (849, 114, 'Animals', '00:03:50', NULL, 2014),
 (850, 114, 'One More Night', '00:03:39', NULL, 2012),
-
 (851, 115, 'Super Bass', '00:03:20', NULL, 2010),
 (852, 115, 'Starships', '00:03:30', NULL, 2012),
 (853, 115, 'Va Va Voom', '00:03:18', NULL, 2012),
 (854, 115, 'Anaconda', '00:04:20', NULL, 2014),
-
 (855, 116, 'Reflections', '00:03:40', NULL, 2014),
 (856, 116, 'Mothers', '00:03:35', NULL, 2015),
-
 (857, 117, 'Come & Get It', '00:03:41', NULL, 2013),
-(858, 117, 'Good for You', '00:03:42', NULL, 2015),
+(858, 117, 'Wolves', '00:03:17', NULL, 2017),
 (859, 117, 'Love You Like a Love Song', '00:03:39', NULL, 2011),
-(860, 117, 'Hands to Myself', '00:03:20', NULL, 2015),
-(861, 117, 'Rare', '00:03:30', NULL, 2020);
+(860, 117, 'Same Old Love', '00:03:49', NULL, 2015),
+(861, 117, 'Single Soon', '00:03:30', NULL, 2023),
+(862, 105, 'La dernière goutte', '00:03:15', NULL, 2023),
+(863, 105, 'La crotte de nez',   '00:02:50', NULL, 2023),
+(864, 105, 'La cartouche',       '00:04:05', NULL, 2023),
+(865, 105, 'Zizicopter',         '00:03:40', NULL, 2023),
+(866, 118, 'Popcorn salé',   '00:03:05', NULL, 2023),
+(867, 118, 'Recommence-moi', '00:03:40', NULL, 2024),
+(868, 118, 'La différence',   '00:04:00', NULL, 2025);
+
 
 INSERT INTO playlist (id_playlist, nom, date_creation, description) VALUES
   (1, 'Les Ondes de Ludovic',     '2025-10-15', 'Sélection musicale éclectique de Ludovic.'),
   (2, 'Le Groove de Sylvain',     '2025-10-16', 'Mélange de titres énergiques choisis par Sylvain.'),
   (3, 'L''Univers de Clémentine',  '2025-10-17', 'Les coups de cœur musicaux de Clémentine.'),
   (4, 'Christophe en Voyage',  '2025-10-18', 'Une sélection personnelle de Christophe.'),
-  (5, 'Explorations Sonores d''Olivier',      '2025-10-19', 'Les favoris d''Olivier, tous styles confondus.');
+  (5, 'Explorations Sonores d''Olivier',      '2025-10-19', 'Les favoris d''Olivier, tous styles confondus.'),  
+(6, 'Playlist Rock Énergie',  '2025-10-18', 'Une sélection de titres rock pour se motiver.'),
+(7, 'Playlist Chill Soirée',  '2025-10-18', 'Ambiance détendue pour la fin de journée.'),
+(8, 'Playlist Route',  '2025-10-18', 'Des morceaux parfaits pour un long trajet.'),
+(9, 'Playlist Workout',  '2025-10-18', 'Musique dynamique pour accompagner ton entraînement.'),
+(10, 'Playlist Découverte',  '2025-10-18', 'Un mélange éclectique pour découvrir de nouveaux sons.');
 
 INSERT INTO playlist_chanson (id_playlist, id_chanson, ordre, date_ajout) VALUES
   (1, 12, 1, '2025-10-15'), (1, 45, 2, '2025-10-15'), (1, 78, 3, '2025-10-15'),
@@ -1322,7 +1109,7 @@ INSERT INTO playlist_chanson (id_playlist, id_chanson, ordre, date_ajout) VALUES
   (2, 849, 22, '2025-10-16');
 
 INSERT INTO playlist_chanson (id_playlist, id_chanson, ordre, date_ajout) VALUES
-  (3, 3, 1, '2025-10-17'), (3, 24, 2, '2025-10-17'), (3, 67, 3, '2025-10-17'),
+  (3, 3, 1, '2025-10-17'), (3, 673, 2, '2025-10-17'), (3, 67, 3, '2025-10-17'),
   (3, 80, 4, '2025-10-17'), (3, 95, 5, '2025-10-17'), (3, 117, 6, '2025-10-17'),
   (3, 131, 7, '2025-10-17'), (3, 166, 8, '2025-10-17'), (3, 190, 9, '2025-10-17'),
   (3, 245, 10, '2025-10-17'), (3, 288, 11, '2025-10-17'), (3, 322, 12, '2025-10-17'),
@@ -1331,7 +1118,7 @@ INSERT INTO playlist_chanson (id_playlist, id_chanson, ordre, date_ajout) VALUES
   (3, 564, 19, '2025-10-17'), (3, 600, 20, '2025-10-17'), (3, 622, 21, '2025-10-17'),
   (3, 677, 22, '2025-10-17'), (3, 689, 23, '2025-10-17'), (3, 701, 24, '2025-10-17'),
   (3, 734, 25, '2025-10-17'), (3, 751, 26, '2025-10-17'), (3, 809, 27, '2025-10-17'),
-  (3, 844, 28, '2025-10-17');
+  (3, 844, 28, '2025-10-17'), (3, 202, 28, '2025-10-17');
 
 INSERT INTO playlist_chanson (id_playlist, id_chanson, ordre, date_ajout) VALUES
   (4, 14, 1, '2025-10-18'), (4, 32, 2, '2025-10-18'), (4, 75, 3, '2025-10-18'),
@@ -1343,8 +1130,8 @@ INSERT INTO playlist_chanson (id_playlist, id_chanson, ordre, date_ajout) VALUES
   (4, 725, 19, '2025-10-18'), (4, 751, 20, '2025-10-18'), (4, 809, 21, '2025-10-18');
 
 INSERT INTO playlist_chanson (id_playlist, id_chanson, ordre, date_ajout) VALUES
-  (5, 8, 1, '2025-10-19'), (5, 42, 2, '2025-10-19'), (5, 66, 3, '2025-10-19'),
-  (5, 98, 4, '2025-10-19'), (5, 123, 5, '2025-10-19'), (5, 157, 6, '2025-10-19'),
+  (5, 8, 1, '2025-10-19'), (5, 823, 2, '2025-10-19'), (5, 66, 3, '2025-10-19'),
+  (5, 570, 4, '2025-10-19'), (5, 123, 5, '2025-10-19'), (5, 157, 6, '2025-10-19'),
   (5, 176, 7, '2025-10-19'), (5, 188, 8, '2025-10-19'), (5, 213, 9, '2025-10-19'),
   (5, 249, 10, '2025-10-19'), (5, 278, 11, '2025-10-19'), (5, 301, 12, '2025-10-19'),
   (5, 330, 13, '2025-10-19'), (5, 354, 14, '2025-10-19'), (5, 382, 15, '2025-10-19'),
@@ -1353,3 +1140,112 @@ INSERT INTO playlist_chanson (id_playlist, id_chanson, ordre, date_ajout) VALUES
   (5, 612, 22, '2025-10-19'), (5, 645, 23, '2025-10-19'), (5, 699, 24, '2025-10-19'),
   (5, 733, 25, '2025-10-19'), (5, 750, 26, '2025-10-19'), (5, 782, 27, '2025-10-19'),
   (5, 799, 28, '2025-10-19'), (5, 827, 29, '2025-10-19'), (5, 853, 30, '2025-10-19');
+
+INSERT INTO playlist_chanson (id_playlist, id_chanson, ordre)
+VALUES
+(6, 45, 1),
+(6, 102, 2),
+(6, 389, 3),
+(6, 210, 4),
+(6, 823, 5),
+(6, 618, 6),
+(6, 799, 7),
+(6, 342, 8),
+(6, 654, 9),
+(6, 667, 10),
+(6, 271, 11),
+(6, 745, 12),
+(6, 59, 13),
+(6, 580, 14),
+(6, 808, 15),
+(6, 392, 16),
+(6, 233, 17),
+(6, 700, 18);
+
+INSERT INTO playlist_chanson (id_playlist, id_chanson, ordre)
+VALUES
+(7, 22, 1),
+(7, 431, 2),
+(7, 76, 3),
+(7, 190, 4),
+(7, 812, 5),
+(7, 34, 6),
+(7, 567, 7),
+(7, 750, 8),
+(7, 138, 9),
+(7, 260, 10),
+(7, 602, 11),
+(7, 715, 12),
+(7, 489, 13),
+(7, 301, 14),
+(7, 501, 15),
+(7, 800, 16),
+(7, 215, 17),
+(7, 605, 18),
+(7, 111, 19);
+
+INSERT INTO playlist_chanson (id_playlist, id_chanson, ordre)
+VALUES
+(8, 89, 1),
+(8, 540, 2),
+(8, 673, 3),
+(8, 311, 4),
+(8, 254, 5),
+(8, 780, 6),
+(8, 612, 7),
+(8, 720, 8),
+(8, 822, 9),
+(8, 410, 10),
+(8, 324, 11),
+(8, 127, 12),
+(8, 660, 13),
+(8, 415, 14),
+(8, 781, 15),
+(8, 208, 16),
+(8, 340, 17),
+(8, 570, 18),
+(8, 564, 19),
+(8, 859, 20);
+
+INSERT INTO playlist_chanson (id_playlist, id_chanson, ordre)
+VALUES
+(9, 9, 1),
+(9, 201, 2),
+(9, 317, 3),
+(9, 405, 4),
+(9, 612, 5),
+(9, 723, 6),
+(9, 134, 7),
+(9, 220, 8),
+(9, 431, 9),
+(9, 765, 10),
+(9, 840, 11),
+(9, 99, 12),
+(9, 318, 13),
+(9, 257, 14),
+(9, 695, 15),
+(9, 510, 16),
+(9, 861, 17),
+(9, 430, 18);
+
+INSERT INTO playlist_chanson (id_playlist, id_chanson, ordre)
+VALUES
+(10, 570, 1),
+(10, 144, 2),
+(10, 388, 3),
+(10, 255, 4),
+(10, 479, 5),
+(10, 611, 6),
+(10, 721, 7),
+(10, 320, 8),
+(10, 822, 9),
+(10, 77, 10),
+(10, 184, 11),
+(10, 299, 12),
+(10, 370, 13),
+(10, 415, 14),
+(10, 580, 15),
+(10, 801, 16),
+(10, 844, 17),
+(10, 55, 18),
+(10, 733, 19);

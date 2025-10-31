@@ -1,0 +1,45 @@
+// https://dbdiagram.io/
+// Use DBML to define your database structure
+// Docs: https://dbml.dbdiagram.io/docs
+
+Table artiste {
+  id_artiste SERIAL [pk]
+  nom VARCHAR(100)
+  code_pays CHAR(2)
+  date_naissance DATE
+  actif BOOLEAN
+  groupe BOOLEAN
+}
+
+Table album {
+  id_album SERIAL [pk]
+  titre VARCHAR(150)
+  annee SMALLINT
+  id_artiste INT [ref: > artiste.id_artiste]
+}
+
+Table chanson {
+  id_chanson SERIAL [pk]
+  id_artiste_principal INT [ref: > artiste.id_artiste]
+  titre VARCHAR(150)
+  duree INTERVAL
+  "#id_album" INT [ref: > album.id_album]
+  annee SMALLINT
+}
+
+Table playlist {
+  id_playlist SERIAL [pk]
+  nom VARCHAR(150)
+  date_creation DATE
+  description TEXT
+}
+
+Table playlist_chanson {
+  "#id_playlist" INT [ref: > playlist.id_playlist]
+  "#id_chanson" INT [ref: > chanson.id_chanson]
+  ordre INT
+  date_ajout DATE
+  Indexes {
+    ("#id_playlist", "#id_chanson") [pk]
+  }
+}

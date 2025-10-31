@@ -28,5 +28,5 @@ from: markdown+emoji
 
 - [TP1](./doc/tp/correction/tp1.sql)
 - [TP2](./doc/tp/correction/tp2.sql)
-- [TP3](./doc/tp/correction/tp3.qmd)
+- [TP3](./doc/tp/correction/tp3.sql)
 - [TP4](./doc/tp/correction/tp4.sql)

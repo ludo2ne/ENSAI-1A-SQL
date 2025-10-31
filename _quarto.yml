@@ -43,9 +43,15 @@ website:
             text: "TP3 - Discographie"
           - href: doc/tp/tp4.qmd
             text: "TP4 - Chess Unofficial Fed"
-          - href: doc/tp/tp_datalab.qmd
-            text: "TP Datalab"
     right:
+      - text: Outils
+        menu:
+          - href: doc/outils/datalab.qmd
+            text: Datalab
+          - href: doc/outils/tp-datalab.qmd
+            text: TP Datalab
+          - href: doc/outils/vm.qmd
+            text: VM
       - text: Divers
         menu:
           - href: doc/glossaire.qmd

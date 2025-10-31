@@ -1,0 +1,68 @@
+// https://dbdiagram.io/
+// Use DBML to define your database structure
+// Docs: https://dbml.dbdiagram.io/docs
+
+Table cadence {
+	id_cadence INT [ pk ]
+	nom VARCHAR [ not null ]
+	description VARCHAR
+}
+
+Table titre {
+	code CHAR [ pk ]
+	nom VARCHAR [ not null ]
+	description VARCHAR
+}
+
+Table resultat_partie {
+	id_resultat INT [ pk ]
+	resultat VARCHAR [ not null ]
+	description VARCHAR
+}
+
+Table ouverture {
+	id_ouverture INT [ pk ]
+	eco CHAR [ not null ]
+	nom VARCHAR [ not null ]
+	coups VARCHAR
+}
+
+Table club {
+	id_club INT [ pk ]
+	nom VARCHAR [ not null ]
+	ville VARCHAR
+	"#id_presidente" INT [ref: > joueuse.id_joueuse]
+}
+
+Table joueuse {
+	id_joueuse INT [ pk ]
+	"#code_titre" char [ref: > titre.code]
+	nom VARCHAR [ not null ]
+	prenom VARCHAR [ not null ]
+	elo INT [ not null ]
+	date_naissance DATE
+	"#id_club" INT [ref: > club.id_club]
+	arbitre BOOL
+}
+
+Table tournoi {
+	id_tournoi INT [ pk ]
+	nom VARCHAR [ not null ]
+	ville VARCHAR
+	date_debut DATE
+	date_fin DATE
+	"#id_cadence" INT [ref: > cadence.id_cadence]
+	nb_rondes INT
+	nb_participantes INT
+	"#id_arbitre" INT [ref: > joueuse.id_joueuse]
+}
+
+Table partie [headercolor: #175e7a] {
+	id_partie INT [ pk ]
+	"#id_blanc" INT [ not null, ref: > joueuse.id_joueuse]
+	"#id_noir" INT [ not null, ref: > joueuse.id_joueuse]
+	date_partie DATE
+	"#id_resultat" INT [ not null, ref: > resultat_partie.id_resultat ]
+	"#id_ouverture" INT [ref: > ouverture.id_ouverture]
+	"#id_tournoi" INT [ref: > tournoi.id_tournoi]
+}

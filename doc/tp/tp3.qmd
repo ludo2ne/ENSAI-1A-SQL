@@ -1,5 +1,5 @@
 ---
-title: "Discographie"
+title: "Discographie 🎵"
 description: "TP3"
 author: "Ludovic Deneuville"
 format: 
@@ -13,35 +13,37 @@ number-depth: 3
 lightbox: true
 ---
 
-:construction:
-
 ## Introduction {.unnumbered}
 
 ::: {.callout-important}
 - Écrivez des requêtes jolies !
 :::
 
+Les notions vues dans ce TP :
+
+- agrégations
+- jointures
+- insertion de données
+- utilisation de séquence
+- bonus : CTE (vu au dernier cours)
+
 
 ## Lancement des services
 
-Connectez-vous à l'une des 2 instances suivantes d'Onyxia :
+Pour plus de détails, allez dans l'onglet [Datalab](../outils/datalab.qmd){target="_blank"}.
 
-- [Datalab du GENES](https://onyxia.lab.groupe-genes.fr/){target="_blank"}
-- [Datalab SSPCloud de l'INSEE](https://datalab.sspcloud.fr/){target="_blank"} 
-  - si besoin de créer un compte, utilisez votre mail ENSAI (`nom.prenom@eleve.ensai.fr`)
-
-Et ensuite lancez les services suivants :
-
-- [ ] PostgreSQL
-- [ ] CloudBeaver
+- [ ] Connectez-vous à un Datalab
+- [ ] Lancez un service **PostgreSQL**
+- [ ] Lancez un service **cloudBeaver**
+  - ouvrez ce service
+  - vérifiez que vous êtes connectés à la base de données PostgreSQL
 
 
 ## Les données
 
-Le thème du jour sera la musique.
+Le thème du jour sera la musique :musical_note: :guitar: :trumpet:
 
 ### Chargez les données
-
 
 - [ ] Copiez le contenu de ces 2 scripts sql 
   - [création des tables](./data/tp3-create-table.sql){target="_blank"} 
@@ -52,16 +54,7 @@ Le thème du jour sera la musique.
   - raccourci (ALT + X)
 
 
-
-
-
-
-
-
-
-
 ### Description
-
 
 Les tables sont les suivantes :
 
@@ -72,37 +65,40 @@ Les tables sont les suivantes :
 * **playlist_chanson**([#id_playlist, #id_chanson]{.underline}, ordre, date_ajout)
 
 
-### Description des tables
-
-| **Catégorie**        | **Description**                                                                                                              |
-| -------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
-| **artiste**          | Contient les informations sur les artistes (nom, pays, date de naissance, statut actif ou non).                              |
-| **album**            | Liste des albums publiés par les artistes, avec l’année de sortie et la référence vers l’artiste concerné.                   |
-| **chanson**          | Liste des chansons, avec leur artiste principal, durée, année et lien éventuel vers un album.                                |
-| **playlist**         | Représente les playlists créées par les utilisateurs, avec un nom, une date de création et une description.                  |
-| **playlist_chanson** | Table d’association entre les playlists et les chansons, contenant l’ordre des morceaux et la date d’ajout dans la playlist. |
-
-
 ### Modèle de données
 
-![](./data/tp3-modele.PNG)
 
+![](./data/tp3-uml.PNG)
+
+
+## Exercice
 
 ### Exploration des tables
 
+Lorsque vous prenez en main une base de données, la première chose à faire est de regarder ce que contiennent les tables.
+
 - [ ] Listez toutes les chansons
 - [ ] Listez les chansons (titre, année) ainsi que le nom de l'artiste
+- [ ] Ordonnez par nom d'artiste, puis par titre
 - [ ] Ajoutez le titre de l'album si celui-ci est précisé
 
-Interessons nous maintenant aux playlists :
+Faisons quelques statistiques descriptives.
 
-- [ ] Affichez les playlists
-- [ ] Ajoutez les titres des chansons
-  - classez par noms de playlists
-- [ ] Ajoutez les noms des artistes
-  - classez par noms de playlists, puis par noms d'artistes
-- [ ] Quelle playlist a le plus de chansons ?
-- [ ] Quelle playlist dure le plus longtemps ?
+- [ ] Quelle sont les durées minimum, maximum et moyenne des chansons
+- [ ] Affichez le nombre de chansons par année
+  - ordonnez par nombre de chansons décroissant
+- [ ] Quelles sont les années avec au moins 10 chansons
+- [ ] Complétez la dernière requête en ajoutant la durée moyenne des chansons pour chaque année
+
+Est-ce qu'il y a plusieurs chansons ayant le même titre ?
+
+- [ ] Pour chaque titre de chanson, comptez le nombre d'occurences
+- [ ] N'affichez que les titres ayant au moins deux occurences
+- [ ] Est-ce qu'il y a des chansons en doublon ?
+  - i.e. même titre et même artiste
+
+Si vous en trouvez une, essayez de la supprimer. À votre avis, pourquoi cela ne fonctionne pas ?
+
 
 ### Place aux artistes
 
@@ -120,6 +116,113 @@ Interessons nous maintenant aux pays des artistes.
 
 - [ ] Comptez le nombre d'artistes par pays
 
+### Créez votre playlist
+
+- [ ] Insérez une nouvelle ligne dans la table *playlist*
+- [ ] Ajoutez 5 chansons dans votre playlist
+
+::: {.callout-tip}
+Aucune de ces chansons ne correspond à vos goût musicaux...
+
+Vous êtes vraiment sûr ?
+
+Allez un petit effort, il y a des chansons et des artistes très sympas.
+:::
+
+Nous allons maintenant ajouter à votre playlist toutes les chansons de l'album *Californian Soil*.
+
+Pour créer votre requête d'insertion, vous allez avoir besoin des données suivantes : 
+
+- *id_playlist* : vous pouvez soit :
+  - insérer la valeur "en dur"
+  - utiliser `CURRVAL('playlist_id_playlist_seq')` pour obtenir la dernière valeur de *id_playlist* i.e. celui de la playlist que vous venez de créer
+- *id_chanson* : il va falloir une reqûete pour les récupérer
+- *ordre* : vous allez créer et utiliser une séquence
+- *date_ajout* : vous utiliserez simplement : `CURRENT_DATE`
+
+---
+
+- [ ] Créez une séquence nommée *seq_playlist_ordre*
+- [ ] Listez toutes les chansons de l'album *Californian Soil*
+- [ ] Insérer dans votre playlist toutes les chansons de l'album *Californian Soil*
+
+::: {.callout-tip title="Un peu d'aide" collapse="true"}
+Pour trouver un peu d'inspiration, un exemple d'INSERT en utilisant un SELECT :
+
+```{.sql}
+INSERT INTO joueuse_copy(nom, prenom, numero, date_creation)
+SELECT nom,
+       'pierre',
+       nextval('seq_numero'),
+       CURRENT_DATE
+  FROM joueuse;
+```
+:::
+
+
+Est-ce que vous pouvez ajouter plusieurs fois la même chanson dans une playlist ? Pourquoi ?
+
+Comment pourrait-t-on faire pour s'affranchir de cette contrainte ?
+
+
+### Votez pour la meilleure playlist
+
+Interessons-nous maintenant aux playlists.
+
+- [ ] Affichez les playlists
+- [ ] Ajoutez les titres des chansons de la playlist
+  - Colonnes à afficher : nom de la playlist, titre de la chanson
+  - Classez par noms de playlists
+- [ ] Ajoutez les noms des artistes
+  - Classez par nom de playlist, puis par nom d'artiste
+
+Vous remarquez qu'à l'affichage vous avez deux colonnes appelées "nom". Pour faire la différence, vous allez modifier l'affichage de ces colonnes.
+
+- [ ] Modifiez le *SELECT* pour afficher les entêtes de colonnes *Nom de la playlist*, *Titre de la chanson* et *Nom de l'artiste*
+
+---
+
+- [ ] Quelle playlist a le plus de chansons ?
+- [ ] Quelle playlist dure le plus longtemps ?
+
+Nous allons maintenant rechercher les artistes mal-aimés i.e. ceux qui ne sont dans aucune playlist. Procédons par étape.
+
+- [ ] Listez les artistes présents dans les playlists
+- [ ] Ensuite, gardez uniquement les différents *id_artiste*
+- [ ] Affichez les artistes présent dans aucune playlist
+  - en utilisant `NOT IN` et une sous-requête
+  - conservez uniquement les *id_artiste* qui ne sont pas dans la requête précédente
+- [ ] Même question avec `NOT EXISTS`
+  - la syntaxe est un peu moins intuitive mais la requête est plus optimisée
+
+Concentrons-nous miantenant sur les artistes et les chansons les plus populaires.
+
+Vous avez écrit précédemment une requête listant les playlists avec les artistes et les chansons. Repartez de cette requête.
+
+- [ ] Comptez combien de fois chaque chanson apparait dans une playlist
+  - affichez le titre de la chanson, le nom de l'artiste, et le nombre de playlists
+  - ordonnez par nombre de playlists décroissant
+- [ ] Au lieu de faire un simple **JOIN** avec la table *playlist_chanson*, faites un **LEFT JOIN**
+  - Est-ce que « Tu feras la différence. Ton coeur prend des vacances. Il danse avec les loups. » ?
+- [ ] Conservez uniquement celles qui apparaissent dans au moins 3 playlists
+- [ ] Combien y-a-t-il de chansons dans toutes les playlists
+- [ ] Combien y-a-t-il de chansons différentes dans toutes les playlists
+
+
+### I'm WITH u
+
+Les CTE seront évoquées au dernier cours. Cela parait compliqué à première vue mais le principe est très simple.
+
+::: {.callout-note title="CTE"}
+Une CTE (Common Table Expression) est une table temporaire nommée définie au début d’une requête avec le mot-clé **WITH**.
+
+À quoi ça sert ?
+
+- Rendre une requête plus lisible (au lieu d’imbriquer des sous-requêtes)
+- Réutiliser un même sous-résultat plusieurs fois
+- Servir de base à des requêtes récursives
+:::
+
 Que fait cette requête ?
 
 ```{.sql}
@@ -128,20 +231,55 @@ SELECT DISTINCT ON (code_pays) code_pays,
        date_naissance
   FROM artiste
  WHERE NOT groupe
- ORDER BY code_pays, date_naissance ASC;
+ ORDER BY code_pays, 
+          date_naissance ASC;
 ```
 
-- [ ] Construire la même requête avec une CTE
+Nous allons ici construire pas à pas une requête donnant le même résultat en utilisant une CTE.
 
+- [ ] Listez les artistes qui ne sont pas des groupes
+- [ ] Affichez pour chaque pays, la plus ancienne date de naissance (celle du plus vieil artiste)
 
-### Todo
+Nous souhaitons maintenant récupérer le nom du plus viel artiste de chaque pays.
 
-- Chansons avec le même nom
-- Chansons dans plusieurs playlists
-- Créez votre playlist
-- Artistes présent dans aucune playlist
-- Artistes sans chansons
+L'idée pour obtenir ce nom :
 
+- stocker le résultat de notre dernière requête dans une table temporaire *viel_artiste_pays*
+- joindre cette table à la table *artiste* via les colonnes *pays* et *date_naissance*
+
+```{.sql}
+WITH viel_artiste_pays AS (
+  ...
+)
+SELECT ...
+  FROM artiste a
+  JOIN plus_vieux pv ON ...
+  ...
+```
+
+- [ ] En complétant la requête à trous ci-dessous, donnez pour chaque pays l'artiste le plus vieux
+
+::: {.callout-tip title="Autre exemple"}
+Pour vous aider, voici un autre exemple.
+
+Si l'on veut les noms des artistes qui sont les seuls à représenter leur pays :
+
+- nous commençons par lister les pays avec un seul artiste
+- nous joignons avec la table *artiste* pour récupérer dans un second temps les noms
+
+```{.sql}
+WITH artiste_seul_dans_pays AS (
+SELECT code_pays,
+       COUNT(*) AS nb_artistes
+  FROM artiste
+ GROUP BY code_pays
+HAVING COUNT(*) = 1
+)
+SELECT a.*
+  FROM artiste a
+  JOIN artiste_seul_dans_pays n ON a.code_pays = n.code_pays;
+```
+:::
 
 
 ## Arrêtez votre service {.unnumbered}

@@ -29,7 +29,7 @@ CREATE TABLE chanson (
     id_chanson SERIAL PRIMARY KEY,
     id_artiste_principal INT NOT NULL,
     titre VARCHAR(150) NOT NULL,
-    duree TIME,
+    duree INTERVAL,
     id_album INT,
     annee SMALLINT,
     FOREIGN KEY (id_artiste_principal) REFERENCES artiste(id_artiste),
@@ -43,13 +43,6 @@ CREATE TABLE playlist (
     description TEXT
 );
 
-CREATE TABLE artiste_chanson (
-    id_artiste INT NOT NULL,
-    id_chanson INT NOT NULL,
-    PRIMARY KEY (id_artiste, id_chanson),
-    CONSTRAINT fk_am_artiste FOREIGN KEY (id_artiste) REFERENCES artiste(id_artiste),
-    CONSTRAINT fk_am_chanson FOREIGN KEY (id_chanson) REFERENCES chanson(id_chanson)
-);
 
 CREATE TABLE playlist_chanson (
     id_playlist INT NOT NULL,

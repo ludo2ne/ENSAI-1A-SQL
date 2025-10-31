@@ -1,5 +1,5 @@
 ---
-title: "Exercices vintages"
+title: "Exercices vintages 💾"
 description: "TP2"
 author: "Ludovic Deneuville"
 format: 
@@ -32,94 +32,21 @@ Lors de ce TP, vous allez :
 
 ## Lancement des services
 
-### Datalab du GENES ou SSPCloud
+Pour plus de détails, allez dans l'onglet [Datalab](../outils/datalab.qmd){target="_blank"}.
 
-Connectez-vous à l'une des 2 instances suivantes d'Onyxia (elles sont quasiment identiques) :
+- [ ] Connectez-vous à un Datalab
+- [ ] Lancez un service **PostgreSQL**
+- [ ] Lancez un service **cloudBeaver**
+  - ouvrez ce service
+  - vérifiez que vous êtes connectés à la base de données PostgreSQL
 
-- [ ] [Datalab du GENES](https://onyxia.lab.groupe-genes.fr/){target="_blank"}
-- [ ] [Datalab SSPCloud de l'INSEE](https://datalab.sspcloud.fr/){target="_blank"} 
-  - si besoin de créer un compte, utilisez votre mail ENSAI
-
-::: {.callout-tip}
-L'instance du GENES est plus récente donc encore en cours de rodage. Celle de l'INSEE est plus ancienne et donc plus robuste.
-
-Pour éviter les problèmes de charges, vous utiliserez selon votre profil :
-
-- élèves fonctionnaires :arrow_right: SSPCloud
-- élèves ingénieurs :arrow_right: SSPCloud ou Datalab du GENES
-:::
-
-### Base de données PostgreSQL
-
-- [ ] Lancez le service PostgreSQL
-  - Lien direct de lancement : [Datalab GENES](https://onyxia.lab.groupe-genes.fr/launcher/databases/postgresql?name=postgresql&version=1.0.3&autoLaunch=true&postgresql.primary.persistence.size=«1Gi»&postgresql.primary.resources.limits.cpu=«500m»&postgresql.primary.resources.limits.memory=«2Gi»){target="_blank"} ou [SPPCloud](https://datalab.sspcloud.fr/launcher/databases/postgresql?name=postgresql&version=1.0.3&postgresql.primary.persistence.size=«1Gi»&postgresql.primary.resources.limits.cpu=«500m»&postgresql.primary.resources.limits.memory=«2Gi»&autoLaunch=true){target="_blank"}
-  - ou manuellement : **Catalogue de services** :arrow_right: **Databases** :arrow_right: `Lancer`
-  - Configuration Postgresql :arrow_right: Primary : Mettez tous les paramètres au minimum (Persistent volume size, CPU, Memory)
-    - Cela permettra d'éviter de réserver inutilement des ressources dont vous n'aurez pas besoin
-  - Cliquez sur `Lancer`
-- [ ] Copiez-collez dans un fichier texte les informations de connexion PostgreSQL : Hostname, Port, Database, Username, Password
-
-### CloudBeaver
-
-Nous venons de créer un SGBD, nous avons maintenant besoin d'un outil de gestion pour s'y connecter et envoyer des requêtes.
-
-- [ ] Lancez le service CloudBeaver
-  - **Catalogue de services** :arrow_right: **Databases**
-- [ ] Copiez-collez également les informations de connexion au service *CloudBeaver*
-- [ ] Ouvrez ce service
-
-
-::: {.callout-tip}
-Normalement la connexion à la base de données *PostgreSQL* est détectée automatiquement.
-
-Dans le cas contraire, il faut cliquer sur le +, puis sur *New connection* et renseigner les éléments de connexion.
-:::
-
-
-- [ ] Dans l'explorateur à gauche, clic droit sur bdd PostgreSQL :arrow_right: SQL Editor
-
-Cela ouvre une fenêtre où vous pouvez écrire du code SQL pour interagir avec votre base de données.
-
-### VM ENSAI
-
-Uniquement en cas de soucis avec les Datalabs, vous pouvez faire le TP sur la VM.
-
-::: {.callout-note collapse="true" title="DBeaver sur la VM"}
-Un serveur héberge une base de données PostgreSQL.
-
-Pour vous connecter à votre bdd, lancez le logiciel DBeaver depuis votre VM. Ensuite, uniquement la première fois, vous devrez effectuer le paramètrage ci-dessous et créer la connexion à votre bdd. 
-
-#### Paramètrage
-
-- Menu `Fenêtre` > `Preference`
-  - Formatage SQL
-    - Casse des mots clefs : `UPPER`
-    - [x] Insert spaces for tabs
-    - Appliquer
-  - Metadonnées
-    - Décocher `Ouvrir une connexion séparée pour la lecture des métadonnées`
-  - Editeur SQL
-    - Décocher `Ouvrir une connexion séparée pour chaque éditeur`
-
-#### Création de la connexion PostgreSQL
-
-- Cliquer sur l'icone `Nouvelle connexion` en haut à gauche sous fichier
-- Sélectionner `PostgreSQL` puis suivant
-  - Host : `sgbd-eleves.domensai.ecole`
-  - Port : `5432`
-  - Database : `idxxxx`
-  - Nom d'utilisateur : `idxxxx`
-  - Mot de passe : `idxxxx`
-  - `Test de connexion`
-  - Acceptez les mises à jour des pilotes
-  - `Terminer`
-:::
-
+En attendant le lancement des services, voici un peu de lecture ci-dessous.
 
 
 ## Méthodo : Écrire une requête
 
 Il est parfois difficile d'écrire du premier coup LA requête qui répond directement à la question posée.
+
 Voici une méthode qui peut vous aider à écrire vos requêtes pas à pas :
 
 ::: {.callout}
@@ -132,9 +59,9 @@ club([id_club]{.underline}, nom, ville)
 
 ### Listez les tables nécessaires
 
-Commencez par lister les tables nécessaires, puis joignez les. Ici nous avons besoin des 2 tables.
+Commençons par lister les tables nécessaires, puis joignons-les. 
 
-Utilisez pour l'instant `SELECT *` pour sélectionner toutes les colonnes. 
+Nous avons besoin ici des 2 tables que nous pouvons joindre en utilisant la colonne *id_club*.
 
 ```{.sql}
 SELECT *
@@ -142,12 +69,20 @@ SELECT *
   JOIN club c USING(id_club);
 ```
 
+::: {.callout-tip}
+- Nous utilisons pour l'instant `SELECT *` pour sélectionner toutes les colonnes
+  - nous enleverons les colonnes inutiles plus tard
+- Nous utilisons des alias, cela rendra la requête plus courte et plus claire 
+  - j pour joueuse
+  - c pour club
+:::
+
 ### Appliquez les filtres
 
-Pour ne garder que les lignes qui nous intéressent :
+Filtrons pour ne conserver que les lignes qui nous intéressent.
 
 - Ville du club : *Saint Quentin*
-- Prénom qui commence par un A**
+- Prénom qui commence par un *A*
 
 ```{.sql}
 SELECT *
@@ -159,6 +94,8 @@ SELECT *
 
 
 ### Ordonnez les résultats
+
+Ordonnons par elo décroissant.
 
 ```{.sql}
 SELECT *
@@ -172,7 +109,9 @@ SELECT *
 
 ### Sélectionner les colonnes requises
 
-Il est demandé de ne garder que les noms et prénoms des joueuses
+Il est demandé de ne garder que les noms et prénoms des joueuses.
+
+Remplaçons le *SELECT \** par les noms des colonnes.
 
 ```{.sql}
 SELECT j.nom,
@@ -347,12 +286,9 @@ Commencez par créez et charger les tables avec [ce script](./data/tp2-rugby-cre
 - [ ] Donner le nombre total de points obtenus par équipe en classant les équipes de celle ayant marqué le plus à celle ayant marqué le moins
 
 
-## Arrêtez votre service {.unnumbered}
+## Arrêtez vos services {.unnumbered}
 
 C'est la fin du TP, vous pouvez maintenant sauvegarder votre travail et libérer les ressources réservées :
 
-- [ ] Copiez votre code et collez le sur votre machine dans un fichier *.sql*
-  - par exemple dans `P:/Cours1A/UE3-Bases-de-donnees-relationnelles/TP2/tp2.sql`
-  - ou en téléchargeant depuis CloudBeaver le fichier sql (petit bouton avec un dossier et une flèche vers le bas)
-- [ ] Retournez sur la page d'accueil du Datalab
-- [ ] Allez dans *Mes Services* et supprimez votre service
+- [ ] Copiez-collez vos scripts SQL sur votre machine
+- [ ] Arrêter les services du Datalab

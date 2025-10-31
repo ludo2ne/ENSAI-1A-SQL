@@ -1,0 +1,96 @@
+---
+title: "VM ENSAI"
+description: "Faire les TP sur la VM"
+author: "Ludovic Deneuville"
+format: 
+  html:
+    toc: true
+    toc-location: left
+    toc-expand: 3
+from: markdown+emoji
+number-sections: true
+number-depth: 3
+lightbox: true
+---
+
+
+
+## Introduction
+
+::: {.callout-important}
+Les TP peuvent être effectués sur la VM uniquement en cas d'indisponibilité des datalabs.
+:::
+
+Sur la VM ENSAI, vous avez à votre disposition :
+
+- une base de données PostgreSQL
+- le logiciel DBeaver
+
+
+## Base de données PostgreSQL
+
+Une base de données est déjà créée pour vous sur un serveur dédié :
+
+  - Host : *sgbd-eleves.domensai.ecole*
+  - Port : *5432*
+  - Database : *idxxxx*
+  - Nom d'utilisateur : *idxxxx*
+  - Mot de passe : *idxxxx*
+
+## DBeaver
+
+DBeaver va vous permettre de vous connecter à cette base de données et lancer des requêtes SQL.
+
+- [ ] Ouvrez le logiciel DBeaver
+  - il est déjà installé
+
+
+### Paramètrage
+
+Commençons par modifier quelques paramétres par défaut qui vous faciliterons la vie.
+
+- [ ] Allez dans le menu **Fenêtre** :arrow_right: **Preference**
+
+Utilisez la fonction de recherche pour accéder aux sections suivantes :
+
+- [ ] Allez dans la section **Formattage SQL**
+  - Casse des mots clefs : `UPPER`
+  - [x] Insert spaces for tabs
+  - Appliquer
+- [ ] Allez dans **Metadonnées**
+  - *Ouvrir une connexion séparée pour la lecture des métadonnées* : NEVER
+- [ ] Allez dans **Editeur SQL**
+  - *Ouvrir une connexion séparée pour chaque éditeur* : NEVER
+- [ ] Appliquer et Fermer
+
+### Connexion PostgreSQL
+
+Créons maintenant la connexion vers la base de données
+
+- [ ] Créez une nouvelle connexion
+  - Menu *Base de données* :arrow_right: *Nouvelle connexion*
+- [ ] Sélectionnez *PostgreSQL* puis suivant
+- [ ] Renseignez les paramèters de connexion (Host, Port, Database, Username, Password)
+  - voir section PostgreSQL ci-dessus pour les valeurs à saisir
+- [ ] Testez la connexion
+- [ ] Acceptez les mises à jour des pilotes
+- [ ] Cliquez sur **Terminer**
+
+La connexion apparait alors dans votre explorer à gauche.
+
+- [ ] Ouvrez la connxion
+  - clic droit sur la connexion :arrow_right: **Se connecter**
+- [ ] Ouvrez une fenêtre SQL
+  - clic droit :arrow_right: Editeur SQL :arrow_right: Nouveau script
+
+Vous pouvez lancer quelques requêtes simples pour vérifier que tout fonctionne.
+
+```{.sql}
+SELECT 1;
+
+SELECT NOW();
+
+SELECT current_database();
+
+SELECT version();
+```

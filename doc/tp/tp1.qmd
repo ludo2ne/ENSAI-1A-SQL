@@ -1,5 +1,5 @@
 ---
-title: "Premières requêtes SQL"
+title: "Premières requêtes SQL 🦆"
 description: "Sélectionner, Filtrer, Agréger"
 author: "Ludovic Deneuville"
 format: 
@@ -16,23 +16,6 @@ number-depth: 3
 
 Vous allez réaliser ce TP sur un Datalab.
 
-::: {.callout-note title="Rappel : Principe du datalab"}
-Une infrastructure cloud avec des ressources est à votre disposition :
-
-- CPU, GPU
-- RAM
-- Stockage
-
-Lorsque vous en avez besoin, vous :
-
-- réservez des ressources (en lançant des services)
-- lancez vos programmes, calculs...
-- sauvegardez votre code en utilisant Git
-- exportez vos résultats vers le stockage objet S3
-- libérez les ressources une fois que vous avez terminé
-
-Pour vous aider, l'interface Onyxia vous permet de faire cela en quelques clics.
-:::
 
 ### Datalab du GENES ou SSPCloud {.unnumbered}
 
@@ -114,7 +97,6 @@ Puis réouvrez une nouvelle fenêtre SQL
 
 
 ## Les prénoms
-
 
 Le fichier des prénoms contient des données sur les prénoms attribués aux enfants nés en France depuis 1900. Ces données sont disponibles au niveau France et par département.
 
