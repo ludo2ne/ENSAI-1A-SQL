@@ -46,8 +46,8 @@ Le thème du jour sera la musique :musical_note: :guitar: :trumpet:
 ### Chargez les données
 
 - [ ] Copiez le contenu de ces 2 scripts sql 
-  - [création des tables](./data/tp3-create-table.sql){target="_blank"} 
-  - [insertion des données](./data/tp3-pop-table.sql){target="_blank"} 
+  - [création des tables](./data/tp3-create-tables.sql){target="_blank"} 
+  - [insertion des données](./data/tp3-pop-tables.sql){target="_blank"} 
 - [ ] Collez-les dans la fenêtre SQL de CloudBeaver
 - [ ] Exécutez les scripts
   - Cliquez sur la petite icone sous les triangles oranges qui ressemble à :scroll:
@@ -58,11 +58,11 @@ Le thème du jour sera la musique :musical_note: :guitar: :trumpet:
 
 Les tables sont les suivantes :
 
-* **artiste**([id_artiste]{.underline}, nom, code_pays, date_naissance, actif)
-* **album**([id_album]{.underline}, titre, annee, #id_artiste)
-* **chanson**([id_chanson]{.underline}, #id_artiste_principal, titre, duree, #id_album, annee)
-* **playlist**([id_playlist]{.underline}, nom, date_creation, description)
-* **playlist_chanson**([#id_playlist, #id_chanson]{.underline}, ordre, date_ajout)
+- **artiste**([id_artiste]{.underline}, nom, code_pays, date_naissance, actif)
+- **album**([id_album]{.underline}, titre, annee, #id_artiste)
+- **chanson**([id_chanson]{.underline}, #id_artiste_principal, titre, duree, #id_album, annee)
+- **playlist**([id_playlist]{.underline}, nom, date_creation, description)
+- **playlist_chanson**([#id_playlist, #id_chanson]{.underline}, ordre, date_ajout)
 
 
 ### Modèle de données

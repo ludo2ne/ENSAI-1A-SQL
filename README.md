@@ -5,11 +5,11 @@
 - [ ] Soucis pour lancer cloudBeaver avec le wifi ENSAI
 - [ ] callout block -> couleurs moches dans les diapos lors du deploy sur github
 - [ ] Ajouter un UPDATE FROM dans les diapos
-- [ ] Parler un peu plus des databases nosql 
+- [ ] Parler un peu plus des databases nosql
   - https://blog.amigoscode.com/p/relational-vs-nosql-databases
   - https://blog.amigoscode.com/p/sql-vs-nosql-explained
   - https://www.sqlnoir.com/
-- Instister sur ces notions pour les Master STD
+- Insister sur ces notions pour les Master STD
   - Intégrité référentielle, Trigger, Procédure stockée
 - UML
   - https://www.drawdb.app/editor
@@ -34,12 +34,9 @@
 
 - TP1 : 1eres requetes, DuckBD, WHERE, GROUP BY, NOT EXISTS
 - TP2 : INNER JOIN, DATE
-- TP3 : LEFT JOIN, VIEW, INSERT
-- TP4 : 
-- TP5 : 
-
-
-
+- TP3 : SEQUENCE, INSERT
+- TP4 : LEFT JOIN
+- TP5 : VIEW, COALESCE
 
 #### Avant
 
@@ -47,10 +44,6 @@
 - TP2 : GROUP BY, DATE
 - TP3 : VIEW, LEFT JOIN, COALESCE
 - TP4 : CREATE, ALTER, GRANT
-
-#### Après
-
-
 
 ## :rocket: Publier les pages
 
