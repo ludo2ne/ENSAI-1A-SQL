@@ -17,18 +17,19 @@
 ### Cours 2024
 
 - CM1
-  - intro
-  - base de données
+  - intro 20'
+  - base de données 60'
 - CM2
-  - sql-intro
-  - agregations
-  - jointures INNER
+  - sql-intro 60'
+  - agregations 20'
+  - jointures interne 10'
 - CM3
-  - jointures
-  - algébre
-  - sql-avancé
+  - jointures 40'
+  - algébre 20'
+  - sql-avancé 25'
 - CM4
-  - formalisation
+  - sql-avancé 15'
+  - formalisation 60'
 
 ### TP
 

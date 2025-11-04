@@ -415,18 +415,59 @@ CREATE INDEX echecs.idx_nom_joueuse ON echecs.joueuse (nom);
 - Index sous jacent sur colonnes UNIQUE (PK incluse)
 :::
 
+## Fonction
+
+- Bloc de code nommé qui retourne une valeur
+- Encapsuler une logique métier simple.
+
+```{.sql}
+SELECT nom, 
+       get_categorie(date_naissance)
+  FROM echecs.joueuse;
+```
+
+### Exemple
+
+```{.sql}
+CREATE OR REPLACE FUNCTION echecs.get_categorie(p_date_naissance DATE)
+RETURNS VARCHAR(20) AS $$
+DECLARE
+    age INT;
+BEGIN
+    age := DATE_PART('year', AGE(CURRENT_DATE, p_date_naissance));
+
+    IF age < 20 THEN
+        RETURN 'Junior';
+    ELSIF age < 60 THEN
+        RETURN 'Senior';
+    ELSE
+        RETURN 'Vétéran';
+    END IF;
+END;
+$$ LANGUAGE plpgsql;
+```
+
+## Procédure
+
+- Bloc de code SQL exécuté manuellement avec CALL
+- Peut modifier la base de données
+- Ne retourne pas de valeur
+- Automatiser une série d'actions
+
+```{.sql}
+CALL augmenter_elo(3, 50);
+```
+
 
 ## Trigger
 
-::: {.callout-note title="Définition"}
-Un trigger est une fonction qui s'exécute automatiquement en réponse à une mise à jour d'une table
+- Se déclenchent quand un événement survient sur une table
+- Servent à maintenir la cohérence ou enregistrer des historiques
 
-Il permet par exemple de :
+Exemples :
 
-- Garantir l'intégrité des données
-- Implémenter des règles métier
-- Synchroniser des données
-:::
+- Tenir un journal d'audit, historiser les changements
+- Appliquer des règles automatiques
 
 :::{.notes}
 Peut se déclencher avant ou après une maj

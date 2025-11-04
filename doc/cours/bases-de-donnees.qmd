@@ -34,6 +34,8 @@ from: markdown+emoji
 
 
 :::{.notes}
+C'est quoi une donnée ?
+
 - types ?
 - valeurs ?
 - représente quelque chose
@@ -92,6 +94,10 @@ Suivre sur Linkedin : Mauvière, Holtz, Blefari, Lesur, Galiana, Degorre, Natach
 - Données figées -> parquet
 - Données mouvantes -> bdd PostgreSQL
 - Tad Viewer pour afficher le contenu d'un parquet
+
+Parquet : retenez bien ce format.
+
+Et pas "plancher" comme on a pu me dire en exam
 :::
 
 
@@ -106,8 +112,35 @@ Une **base de données** est un ensemble de données rassemblées et stockées d
 :::{.notes}
 Types ?
 
-On n'utilise pas la même structure pour du texte ou des fichiers.
+On n'utilise pas la même structure pour du texte, des fichiers, des images.
 :::
+
+## Usages
+
+### Usage transactionnel
+
+- Faire fonctionner le système au quotidien
+- OLTP : On-Line Transaction Processing
+- Applications et utilisateurs métiers
+
+:::{.notes}
+C'est quoi un domaine métier ?
+:::
+
+
+### Usage décisionnel
+
+- Analyser et comprendre ce qui se passe
+- OLAP : On-Line Analytical Processing
+- Explorer de grands volumes de données historiques pour aider à la décision
+- Data warehouse, outils BI
+
+:::{.notes}
+Données pour les décideurs, tendances...
+
+Le système décisionnel est souvent alimenté par le transactionnel via des ETL : Extract – Transform – Load
+:::
+
 
 ## Enjeux
 
@@ -120,6 +153,8 @@ On n'utilise pas la même structure pour du texte ou des fichiers.
 ::: 
 
 ::: {.notes}
+Le rôle du SGBD est de répondre à ces enjeux.
+
 - Se brancher à la BDD qui est sur un serveur
 - Règles pour la cohérence. :warning: trop de règles -> bon dosage
 :::
@@ -171,6 +206,8 @@ digraph {
 Quelques tables sont gérables avec Excel ou Calc.
 
 Mais ça devient vite trop compliqué.
+
+Si ça vous amuse, vous pouvez essayer de refaire les TP avec Excel.
 :::
 
 ### NoSQL
@@ -187,7 +224,16 @@ Nombreux sous-types :
 :::
 
 :::{.notes}
-Not Only SQL
+Not Only SQL.
+
+Les BDR ne permettent pas de répondre à tous les besoins (trop long, pas adapté...)
+
+Théorème CAP :
+
+- Consistency (Cohérence) : Tout le monde voit la même version des données
+- Availability (Disponibilité) : Le système répond toujours, même sous contrainte
+- Partition Tolerance : Le système supporte les coupures réseau
+
 :::
 
 ### Autres
@@ -218,7 +264,9 @@ Imaginez un classeur Excel avec plusieurs feuilles
   - correspond à la clé primaire d'une table B
 
 ::: {.notes}
-Exemples juste après
+BDD relationnelle. Comment relier les tables ?
+
+Ici définition, exemples juste après
 :::
 
 ### Clé primaire ?
@@ -242,6 +290,11 @@ Exemples juste après
 Quel champ choisir comme clé primaire ? :neutral_face:
 :::
 
+:::{.notes}
+- Nom + prenom -> homonymes
+- Ajouter la date de naissance
+:::
+
 ### Clé primaire technique
 
 Créons une séquence numérique. :sunglasses:
@@ -257,6 +310,10 @@ Créons une séquence numérique. :sunglasses:
 | 6              | Skrichempko            | Almira           | 2361    |
 
 : joueuse
+:::
+
+:::{.notes}
+prefixe ou suffixe id + nom table : `id_<nom_table>`
 :::
 
 ### Clé primaire
@@ -285,7 +342,7 @@ Remarque : pas obligatoire d'avoir une clé primaire
 
 Comment relier ces 2 tables ?
 
-- une joueuse joue pour un seul club
+- Une joueuse joue pour un seul club
 - Un club peut avoir plusieurs joueuses
 
 ```{mermaid}
@@ -306,6 +363,10 @@ classDiagram
 
 ---
 
+:::::: {.panel-tabset .nav-pills}
+
+#### club
+
 ::: {.small-table}
 | **id_club**  | **nom**                          | **ville**            |
 |--------------|----------------------------------|----------------------|
@@ -316,6 +377,22 @@ classDiagram
 
 : club {tbl-colwidths="[15,55,30]"}
 :::
+
+#### joueuse
+
+::: {.small-table}
+| **id_joueuse** | **nom**                | **prenom**       | **elo** |
+|----------------|------------------------|------------------|---------|
+| 1              | Guichard               | Pauline          | 2357    |
+| 2              | Daulyte-Cornette       | Deimante         | 2371    |
+| 3              | Navrotescu             | Andreea          | 2338    |
+| 4              | Sebag                  | Marie            | 2448    |
+| 5              | Millet                 | Sophie           | 2366    |
+| 6              | Skrichempko            | Almira           | 2361    |
+
+: joueuse
+:::
+::::::
 
 ### Clé étrangère
 
@@ -383,6 +460,17 @@ id_club = 1
 Erreur aussi si vous essayer d'insert une joueuse avec id_club=9
 :::
 
+### Intégrité référentielle
+
+- Garantit que les relations entre tables restent cohérentes
+- Empêche les références invalides
+- Empêche la suppression d'une référence utilisée
+  - Évite les "valeurs orphelines"
+
+:::{.notes}
+Permet des actions en cascade gérées directement par le SGBD.
+:::
+
 ### Autre question
 
 Si une joueuse peut adhérer à plusieurs clubs ? :confused:
@@ -399,7 +487,11 @@ Si une joueuse peut adhérer à plusieurs clubs ? :confused:
 ::::::
 
 ::: {.notes}
+Changement des règles.
+
 Par exemple si notre bdd contient aussi les clubs belges, allemands, espagnols...
+
+C'est possible techniquement mais pas adapté (perte cohérence, flexibilité, perf)
 :::
 
 
@@ -439,6 +531,12 @@ Clé primaire ?
 
 - id_adhesion
 - (id_club, id_joueuse)
+
+Si PK = (id_club, id_joueuse), est-ce qu'une joueuse peut adhérer plusieurs fois au même club ?
+
+Si une joueuse est dans un club, change puis revient ?
+
+- Question de l'usage des données (instant t ou historique)
 :::
 
 
@@ -456,7 +554,9 @@ Exemple :
 - Une carte vitale appartient à une seule personne
 
 :::{.notes}
-on aurait pu tout mettre dans la même table
+on aurait pu tout mettre dans la même table.
+
+Mais ici on considère que cela correspond à deux besoins métier différents
 
 [Question]{.underline} : Où met-on la clé étrangère ?
 :::
@@ -502,8 +602,8 @@ Dans ce cas, la table contient une clé étrangère qui référence [sa propre c
 
 Exemple :
 
-- *employe ([id_employe]{.underline}, nom, prenom, #id_superieur)*
-- *id_superieur* clé étrangère qui référence *id_employe*
+- *employe ([id_employe]{.underline}, nom, prenom, #id_chef)*
+- *id_chef* clé étrangère qui référence *id_employe*
 
 
 ::: {.notes}
@@ -570,7 +670,16 @@ Il est nécessaire d'avoir un **outil pour gérer et administrer** une base de d
 :::
 
 - [pgAdmin](https://www.pgadmin.org/){target="_blank"}
-- [DBeaver](https://dbeaver.io/){target="_blank"}
+- [DBeaver](https://dbeaver.io/){target="_blank"} ou cloudBeaver
+
+:::{.notes}
+Sans cette interface, il faudrait via un terminal :
+
+- se connecter au serveur PostgreSQL
+- ouvrir la connexion à la bdd
+- rentrer les requêtes
+:::
+
 
 ### Kesako
 
@@ -590,7 +699,9 @@ A l'ENSAI :
 - utilisez DBeaver pour vous y connecter
 :::
 
+---
 
+Next step : SQL
 
 
 

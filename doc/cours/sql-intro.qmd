@@ -25,7 +25,7 @@ from: markdown+emoji
 ## Structured Query Language
 
 ::: {.callout-note title="Définition"}
-Le SQL est un langage standardisé utilisé pour interagir avec des bases de données relationnelles. 
+Le SQL est un langage déclaratif et standardisé utilisé pour interagir avec des bases de données relationnelles. 
 
 Il permet de créer, manipuler, interroger et gérer les données stockées dans des tables.
 :::
@@ -48,24 +48,34 @@ Les SGBD ne respectent pas exactement la norme SQL.
 - DuckDB's SQL dialect closely follows the conventions of the PostgreSQL dialect. few exceptions
 :::
 
+
+
 ### Composantes du langage
 
+
+:::::: {.panel-tabset .nav-pills}
+
+#### Objectifs
+
 - Définition de Données
 - Manipulation de Données
 - Contrôle des Transactions
 - Contrôle d'accès aux Données
 
-::: {.notes}
+#### Sous-langages
 
-- Manipulation de Données
-  - CRUD
-- Définition de Données
-  - Créer/Modifier/Supprimer une table
-- Contrôle des Transactions
-  - BEGIN, COMMIT, ROLLBACK
-- Contrôle d'accès aux Données
-  - GRANT REVOKE
+::: {.small-table}
+|         | Acronyme                     | Exemple                                     |
+| --------| ---------------------------- | ------------------------------------------- |
+| **DDL** | Data Definition Language     | `CREATE TABLE`, `ALTER TABLE`, `DROP TABLE` |
+| **DML** | Data Manipulation Language   | `INSERT`, `UPDATE`, `DELETE`                |
+| **DQL** | Data Query Language          | `SELECT`                                    |
+| **DCL** | Data Control Language        | `GRANT`, `REVOKE`                           |
+| **TCL** | Transaction Control Language | `COMMIT`, `ROLLBACK`                        |
+: {tbl-colwidths="[10,40,50]"}
 :::
+::::::
+
 
 
 ## Définition de Données
@@ -106,7 +116,7 @@ CREATE TABLE echecs.joueuse (
     elo            INT            CHECK (elo > 0),  
     mail           VARCHAR(100)   UNIQUE,         
     est_arbitre    BOOLEAN        DEFAULT false,
-    code_pays      VARCHAR(2),          
+    code_pays      VARCHAR(2)     REFERENCES echecs.pays(code),          
     taux_victoires FLOAT          CHECK (taux_victoires BETWEEN 0 AND 1)
 );
 ```
@@ -126,6 +136,11 @@ CREATE TABLE echecs.joueuse (
 - DEFAULT : valeur par défaut (principalement lors de l'INSERT)
 
 Important : La PK est NOT NULL et UNIQUE
+
+REFERENCES, dans quel ordre :
+
+- créer les tables joueuse et pays ?
+- supprimer les tables
 :::
 
 
@@ -133,8 +148,10 @@ Important : La PK est NOT NULL et UNIQUE
 
 Utile lorsque le nombre de tables devient grand.
 
-- Organisation des objets, clarté
-- Gestion des permissions
+Cela facilite :
+
+- l'organisation des objets, la clarté
+- la Gestion des permissions
 
 
 ```{.sql}
@@ -142,8 +159,17 @@ CREATE SCHEMA echecs;
 ```
 
 ::: {.notes}
+Si vous travaillez dans une multinationale qui vend des vêtements, est ce que vous allez mélanger les tables qui gérent :
+
+- la vente de slip
+- les stocks
+- les commandes fournisseurs
+- les congés du personnel
+- la compta
+
+---
+
 - Pamplemousse -> Millésime
-- Vente de légume
 - Utiliser la même bdd pour la gestion RH, le métier et la compta
 - créer un schéma pour séparer les tables
 :::
@@ -182,6 +208,32 @@ C'est comme créer un fichier dans un dossier.
 :::
 
 
+### Autres CREATE
+
+```{.sql}
+CREATE TABLE top_joueuses AS
+SELECT nom, prenom, elo
+  FROM echecs.joueuse
+ WHERE elo > 2200;
+
+
+CREATE TABLE joueuse_vide AS
+SELECT nom, prenom, elo
+  FROM echecs.joueuse
+ WHERE 0=1;
+
+
+CREATE TABLE joueuse_backup (LIKE echecs.joueuse INCLUDING ALL);
+```
+
+
+:::{.notes}
+- :warning: Les contraintes (clés primaires, étrangères, etc.) ne sont pas copiées automatiquement
+- LIKE : Cloner une table sans ses données (par exemple avant import)
+  - option INCLUDING ALL = inclut contraintes, index, etc.
+:::
+
+
 ### Bonnes pratiques
 
 - Nom de table représentatif et au singulier
@@ -211,6 +263,16 @@ Renommer :
 ALTER TABLE echecs.joueuse
 RENAME COLUMN date_naissance TO dnais;
 ```
+
+:::{.notes}
+Soyez vigilents :
+
+- :warning: Compatibilité des types
+- perf, peut-être très long
+- contraintes, FK
+- VARCHAR(50) → VARCHAR(20) coupe les chaînes longues
+- FLOAT → INT tronque les décimales
+:::
 
 ### Créer/Supprimer une colonne
 
@@ -280,6 +342,14 @@ DROP TABLE echecs.joueuse;
 DROP TABLE IF EXISTS echecs.joueuse;      -- utile pour les scripts SQL
 ```
 
+:::{.notes}
+- DROP TABLE tout court
+  - si table existe pas, le script s'arrête
+  - la suite n'est pas exécutée
+- DROP TABLE IF EXISTS
+  - utile pour tout supprimer puis recréer
+:::
+
 
 ## Insérer des données
 
@@ -332,10 +402,14 @@ Pourquoi l'on n'insère pas la colonne *id_club* ? :confused:
 :::{.notes}
 Attention à bien mettre les virgules au bon endroit
 
-
 - Pas de double quotes en SQL !!!
 - '' : Pour ajouter un simple quote dans une chaine
 
+Possible d'insérer la colonne id_club en dur :
+
+- pas une bonne pratique
+- sauf si on sait ce qu'on fait (pour figer)
+- penser à modif la séquence
 :::
 
 ### Séquence
@@ -729,11 +803,26 @@ Imaginons que vous souhaitez modifier le `elo` de toutes les joueuses.
 ```{.sql}
 UPDATE echecs.joueuse
    SET elo = elo + 100;
+-- RETURNING id_joueuse, nom, prenom, elo;
 ```
 
 ::: {.callout-warning}
 Généralement un message d'avertissement vous demande si vous êtes certain de vouloir mettre à jour toutes les lignes.
 :::
+
+### Màj à partir d'une autre table
+
+```{.sql}
+--ALTER TABLE echecs.joueuse
+--ADD COLUMN club_commencant_par_a BOOLEAN DEFAULT false;
+
+UPDATE echecs.joueuse j
+   SET club_commencant_par_a = true
+  FROM echecs.club c
+ WHERE j.id_club = c.id_club
+   AND c.nom LIKE 'A%';
+```
+
 
 ## Suppression de données
 
@@ -761,7 +850,7 @@ Et si ? Vous avez exécuté par erreur :
 :::::: {.fragment}
 Il y a un système de transactions avec les mots clés :
 
-- BEGIN
+- BEGIN / END
 - COMMIT
 - ROLLBACK
 
@@ -792,6 +881,11 @@ SELECT nom,
     OR date_naissance BETWEEN '1991-04-20' AND '1992-12-31'
     OR EXTRACT(MONTH FROM date_naissance) = 4;
 ```
+
+:::{.notes}
+Je passe assez vite, les dates et les heures c'est toujours pénible dans tous les langages
+:::
+
 
 ### Type TIMESTAMP
 
@@ -934,6 +1028,17 @@ Le mot clé `DISTINCT` permet de supprimer les doublons.
 SELECT DISTINCT prenom
   FROM echecs.joueuse;
 ```
+
+:::{.notes}
+mot clé à retenir
+
+autre utilisation dans les agrégations
+
+```{.sql}
+SELECT COUNT(DISTINCT code_pays) AS nb_pays
+FROM echecs.joueuse;
+```
+:::
 
 ### Choix
 

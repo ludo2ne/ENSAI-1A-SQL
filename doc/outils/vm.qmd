@@ -78,7 +78,7 @@ Créons maintenant la connexion vers la base de données
 
 La connexion apparait alors dans votre explorer à gauche.
 
-- [ ] Ouvrez la connxion
+- [ ] Ouvrez la connexion
   - clic droit sur la connexion :arrow_right: **Se connecter**
 - [ ] Ouvrez une fenêtre SQL
   - clic droit :arrow_right: Editeur SQL :arrow_right: Nouveau script
