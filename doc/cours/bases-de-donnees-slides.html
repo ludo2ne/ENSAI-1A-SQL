@@ -157,6 +157,7 @@ Ludovic Deneuville
 </ul>
 </div>
 <aside class="notes">
+<p>C’est quoi une donnée ?</p>
 <ul>
 <li>types ?</li>
 <li>valeurs ?</li>
@@ -261,6 +262,8 @@ Ludovic Deneuville
 <li>Données mouvantes -&gt; bdd PostgreSQL</li>
 <li>Tad Viewer pour afficher le contenu d’un parquet</li>
 </ul>
+<p>Parquet : retenez bien ce format.</p>
+<p>Et pas “plancher” comme on a pu me dire en exam</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -292,7 +295,7 @@ Ludovic Deneuville
 </div>
 <aside class="notes">
 <p>Types ?</p>
-<p>On n’utilise pas la même structure pour du texte ou des fichiers.</p>
+<p>On n’utilise pas la même structure pour du texte, des fichiers, des images.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -306,6 +309,55 @@ Ludovic Deneuville
       }</style></aside>
 </section>
 
+<section>
+<section id="usages" class="title-slide slide level2 center">
+<h2>Usages</h2>
+
+</section>
+<section id="usage-transactionnel" class="slide level3">
+<h3>Usage transactionnel</h3>
+<ul>
+<li>Faire fonctionner le système au quotidien</li>
+<li>OLTP : On-Line Transaction Processing</li>
+<li>Applications et utilisateurs métiers</li>
+</ul>
+<aside class="notes">
+<p>C’est quoi un domaine métier ?</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="usage-décisionnel" class="slide level3">
+<h3>Usage décisionnel</h3>
+<ul>
+<li>Analyser et comprendre ce qui se passe</li>
+<li>OLAP : On-Line Analytical Processing</li>
+<li>Explorer de grands volumes de données historiques pour aider à la décision</li>
+<li>Data warehouse, outils BI</li>
+</ul>
+<aside class="notes">
+<p>Données pour les décideurs, tendances…</p>
+<p>Le système décisionnel est souvent alimenté par le transactionnel via des ETL : Extract – Transform – Load</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
 <section id="enjeux" class="title-slide slide level2 center">
 <h2>Enjeux</h2>
 <ul>
@@ -316,6 +368,7 @@ Ludovic Deneuville
 <li class="fragment">Cohérence des données : respect des contraintes d’intégrité</li>
 </ul>
 <aside class="notes">
+<p>Le rôle du SGBD est de répondre à ces enjeux.</p>
 <ul>
 <li>Se brancher à la BDD qui est sur un serveur</li>
 <li>Règles pour la cohérence. <span class="emoji" data-emoji="warning">⚠️</span> trop de règles -&gt; bon dosage</li>
@@ -467,6 +520,7 @@ Ludovic Deneuville
 <aside class="notes">
 <p>Quelques tables sont gérables avec Excel ou Calc.</p>
 <p>Mais ça devient vite trop compliqué.</p>
+<p>Si ça vous amuse, vous pouvez essayer de refaire les TP avec Excel.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -521,7 +575,14 @@ Ludovic Deneuville
 </table>
 </div>
 <aside class="notes">
-<p>Not Only SQL</p>
+<p>Not Only SQL.</p>
+<p>Les BDR ne permettent pas de répondre à tous les besoins (trop long, pas adapté…)</p>
+<p>Théorème CAP :</p>
+<ul>
+<li>Consistency (Cohérence) : Tout le monde voit la même version des données</li>
+<li>Availability (Disponibilité) : Le système répond toujours, même sous contrainte</li>
+<li>Partition Tolerance : Le système supporte les coupures réseau</li>
+</ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -585,7 +646,8 @@ Ludovic Deneuville
 </ul></li>
 </ul>
 <aside class="notes">
-<p>Exemples juste après</p>
+<p>BDD relationnelle. Comment relier les tables ?</p>
+<p>Ici définition, exemples juste après</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -648,6 +710,22 @@ Ludovic Deneuville
 <div class="fragment">
 <p>Quel champ choisir comme clé primaire ? <span class="emoji" data-emoji="neutral_face">😐</span></p>
 </div>
+<aside class="notes">
+<ul>
+<li>Nom + prenom -&gt; homonymes</li>
+<li>Ajouter la date de naissance</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="clé-primaire-technique" class="slide level3">
 <h3>Clé primaire technique</h3>
@@ -703,6 +781,19 @@ Ludovic Deneuville
 </tbody>
 </table>
 </div>
+<aside class="notes">
+<p>prefixe ou suffixe id + nom table : <code>id_&lt;nom_table&gt;</code></p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="clé-primaire-1" class="slide level3">
 <h3>Clé primaire</h3>
@@ -749,7 +840,7 @@ Ludovic Deneuville
 <h3>Clé étrangère ?</h3>
 <p>Comment relier ces 2 tables ?</p>
 <ul>
-<li>une joueuse joue pour un seul club</li>
+<li>Une joueuse joue pour un seul club</li>
 <li>Un club peut avoir plusieurs joueuses</li>
 </ul>
 <div class="cell" data-reveal="true" data-layout-align="default">
@@ -779,6 +870,10 @@ Ludovic Deneuville
 </section>
 <section class="slide level3">
 
+<div class="panel-tabset nav-pills">
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">club</a></li><li><a href="#tabset-1-2">joueuse</a></li></ul>
+<div class="tab-content nav-pills">
+<div id="tabset-1-1">
 <div class="small-table">
 <table class="caption-top">
 <caption>club</caption>
@@ -817,6 +912,62 @@ Ludovic Deneuville
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+<div id="tabset-1-2">
+<div class="small-table">
+<table class="caption-top">
+<caption>joueuse</caption>
+<thead>
+<tr class="header">
+<th><strong>id_joueuse</strong></th>
+<th><strong>nom</strong></th>
+<th><strong>prenom</strong></th>
+<th><strong>elo</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Guichard</td>
+<td>Pauline</td>
+<td>2357</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Daulyte-Cornette</td>
+<td>Deimante</td>
+<td>2371</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Navrotescu</td>
+<td>Andreea</td>
+<td>2338</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Sebag</td>
+<td>Marie</td>
+<td>2448</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Millet</td>
+<td>Sophie</td>
+<td>2366</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>Skrichempko</td>
+<td>Almira</td>
+<td>2361</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
 </div>
 </section>
 <section id="clé-étrangère-1" class="slide level3">
@@ -968,6 +1119,30 @@ Ludovic Deneuville
           display:block!important;
       }</style></aside>
 </section>
+<section id="intégrité-référentielle" class="slide level3">
+<h3>Intégrité référentielle</h3>
+<ul>
+<li>Garantit que les relations entre tables restent cohérentes</li>
+<li>Empêche les références invalides</li>
+<li>Empêche la suppression d’une référence utilisée
+<ul>
+<li>Évite les “valeurs orphelines”</li>
+</ul></li>
+</ul>
+<aside class="notes">
+<p>Permet des actions en cascade gérées directement par le SGBD.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
 <section id="autre-question" class="slide level3">
 <h3>Autre question</h3>
 <p>Si une joueuse peut adhérer à plusieurs clubs ? <span class="emoji" data-emoji="confused">😕</span></p>
@@ -980,7 +1155,9 @@ Ludovic Deneuville
 </div>
 </div>
 <aside class="notes">
+<p>Changement des règles.</p>
 <p>Par exemple si notre bdd contient aussi les clubs belges, allemands, espagnols…</p>
+<p>C’est possible techniquement mais pas adapté (perte cohérence, flexibilité, perf)</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1067,6 +1244,11 @@ Ludovic Deneuville
 <li>id_adhesion</li>
 <li>(id_club, id_joueuse)</li>
 </ul>
+<p>Si PK = (id_club, id_joueuse), est-ce qu’une joueuse peut adhérer plusieurs fois au même club ?</p>
+<p>Si une joueuse est dans un club, change puis revient ?</p>
+<ul>
+<li>Question de l’usage des données (instant t ou historique)</li>
+</ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1093,7 +1275,8 @@ Ludovic Deneuville
 <li>Une carte vitale appartient à une seule personne</li>
 </ul>
 <aside class="notes">
-<p>on aurait pu tout mettre dans la même table</p>
+<p>on aurait pu tout mettre dans la même table.</p>
+<p>Mais ici on considère que cela correspond à deux besoins métier différents</p>
 <p><u>Question</u> : Où met-on la clé étrangère ?</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -1162,8 +1345,8 @@ Ludovic Deneuville
 <p>Dans ce cas, la table contient une clé étrangère qui référence <u>sa propre clé primaire</u>.</p>
 <p>Exemple :</p>
 <ul>
-<li><em>employe (<u>id_employe</u>, nom, prenom, #id_superieur)</em></li>
-<li><em>id_superieur</em> clé étrangère qui référence <em>id_employe</em></li>
+<li><em>employe (<u>id_employe</u>, nom, prenom, #id_chef)</em></li>
+<li><em>id_chef</em> clé étrangère qui référence <em>id_employe</em></li>
 </ul>
 <aside class="notes">
 <p>Conventions</p>
@@ -1281,8 +1464,26 @@ Ludovic Deneuville
 </div>
 <ul>
 <li><a href="https://www.pgadmin.org/" target="_blank">pgAdmin</a></li>
-<li><a href="https://dbeaver.io/" target="_blank">DBeaver</a></li>
+<li><a href="https://dbeaver.io/" target="_blank">DBeaver</a> ou cloudBeaver</li>
 </ul>
+<aside class="notes">
+<p>Sans cette interface, il faudrait via un terminal :</p>
+<ul>
+<li>se connecter au serveur PostgreSQL</li>
+<li>ouvrir la connexion à la bdd</li>
+<li>rentrer les requêtes</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="kesako" class="slide level3">
 <h3>Kesako</h3>
@@ -1314,6 +1515,10 @@ Ludovic Deneuville
           overflow: hidden!important;
           display:block!important;
       }</style></aside>
+</section>
+<section class="slide level3">
+
+<p>Next step : SQL</p>
 
 
 </section></section>

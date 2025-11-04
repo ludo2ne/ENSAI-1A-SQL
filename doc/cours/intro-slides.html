@@ -320,13 +320,27 @@ Ludovic Deneuville
 <div class="code-with-filename-file">
 <pre><strong>pasbien.sql</strong></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-filename="pasbien.sql"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> c.nom <span class="kw">AS</span> club, <span class="fu">AVG</span>(j.elo) <span class="kw">AS</span> moyenne_elo <span class="kw">FROM</span> joueuse j <span class="kw">INNER</span> <span class="kw">JOIN</span> club c <span class="kw">USING</span> (id_club) <span class="kw">WHERE</span> mail <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">GROUP</span> <span class="kw">BY</span> c.nom <span class="kw">ORDER</span> <span class="kw">BY</span> <span class="dv">2</span> <span class="kw">DESC</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-filename="pasbien.sql"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> c.nom <span class="kw">AS</span> club, <span class="fu">AVG</span>(j.elo) <span class="kw">AS</span> moyenne_elo <span class="kw">FROM</span> joueuse j <span class="kw">INNER</span> <span class="kw">JOIN</span> club c </span>
+<span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a><span class="kw">USING</span> (id_club) <span class="kw">WHERE</span> mail <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">GROUP</span> <span class="kw">BY</span> c.nom <span class="kw">ORDER</span> <span class="kw">BY</span> <span class="dv">2</span> <span class="kw">DESC</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="fragment">
 <div class="hide-html-render">
 <p><img data-src="https://media.giphy.com/media/xT5LMDiHQNDcF3F1vO/source.gif" style="width:50.0%"></p>
 </div>
 </div>
+<aside class="notes">
+<p>Que fait cette requête ?</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section class="slide level3">
 
@@ -348,7 +362,14 @@ Ludovic Deneuville
 </div>
 </div>
 <aside class="notes">
-<p>Faites un effort pour vous même et pour vos relecteurs</p>
+<p>Faites un effort pour vous même et pour vos relecteurs.</p>
+<p>SQL : langage déclaratif (ne décrit pas des algorithmes, mais déclare un résultat attendu)</p>
+<p>Le SQL ça ressemble à ça (1ere lecture de requête) :</p>
+<ul>
+<li>Tableau de joueuse et de club</li>
+<li>filtre pour garder si mail non NULL</li>
+<li>Aggrégation par nom de club -&gt; que l’on affiche</li>
+</ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -375,6 +396,7 @@ Ludovic Deneuville
 <li><a href="https://onyxia.lab.groupe-genes.fr/" target="_blank">Datalab du GENES</a></li>
 </ul>
 <aside class="notes">
+<p>Rappel Datalab : Infra + logiciel Onyxia</p>
 <ul>
 <li>BDD :
 <ul>
@@ -448,7 +470,7 @@ Ludovic Deneuville
 <section id="évaluation" class="title-slide slide level2 center">
 <h2>Évaluation</h2>
 <ul>
-<li>Lundi 6 Janvier 10h</li>
+<li>Lundi 5 Janvier 10h</li>
 <li>Durée : 2h</li>
 <li>Sur papier</li>
 <li>Sans documents</li>
