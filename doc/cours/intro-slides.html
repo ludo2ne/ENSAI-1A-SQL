@@ -225,6 +225,7 @@ Ludovic Deneuville
 <li>Savoir utiliser le langage SQL</li>
 </ul>
 <aside class="notes">
+<p>Le plus important, savoir explorer une bdd pour en extraire des infos.</p>
 <p>UML pour la modélisation</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -243,6 +244,7 @@ Ludovic Deneuville
 <h2>SQL</h2>
 <ul>
 <li>Syntaxe simple</li>
+<li>Déclaratif</li>
 <li>Efficace</li>
 <li>Très utilisé</li>
 </ul>
@@ -321,7 +323,7 @@ Ludovic Deneuville
 <pre><strong>pasbien.sql</strong></pre>
 </div>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-filename="pasbien.sql"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> c.nom <span class="kw">AS</span> club, <span class="fu">AVG</span>(j.elo) <span class="kw">AS</span> moyenne_elo <span class="kw">FROM</span> joueuse j <span class="kw">INNER</span> <span class="kw">JOIN</span> club c </span>
-<span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a><span class="kw">USING</span> (id_club) <span class="kw">WHERE</span> mail <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">GROUP</span> <span class="kw">BY</span> c.nom <span class="kw">ORDER</span> <span class="kw">BY</span> <span class="dv">2</span> <span class="kw">DESC</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a><span class="kw">USING</span> (id_club) <span class="kw">WHERE</span> mail <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">GROUP</span> <span class="kw">BY</span> c.nom <span class="kw">HAVING</span> <span class="fu">AVG</span>(j.elo) <span class="op">&gt;</span> <span class="dv">2000</span> <span class="kw">ORDER</span> <span class="kw">BY</span> <span class="dv">2</span> <span class="kw">DESC</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="fragment">
 <div class="hide-html-render">
@@ -330,6 +332,7 @@ Ludovic Deneuville
 </div>
 <aside class="notes">
 <p>Que fait cette requête ?</p>
+<p>Voici ma réaction quand je vois ça !</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -353,8 +356,9 @@ Ludovic Deneuville
 <span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> joueuse j </span>
 <span id="cb2-4"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">INNER</span> <span class="kw">JOIN</span> club c <span class="kw">USING</span> (id_club) </span>
 <span id="cb2-5"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> j.mail <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span> </span>
-<span id="cb2-6"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">GROUP</span> <span class="kw">BY</span> c.nom </span>
-<span id="cb2-7"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">ORDER</span> <span class="kw">BY</span> <span class="dv">2</span> <span class="kw">DESC</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb2-6"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">GROUP</span> <span class="kw">BY</span> c.nom</span>
+<span id="cb2-7"><a aria-hidden="true" tabindex="-1"></a><span class="kw">HAVING</span> <span class="fu">AVG</span>(j.elo) <span class="op">&gt;</span> <span class="dv">2000</span></span>
+<span id="cb2-8"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">ORDER</span> <span class="kw">BY</span> <span class="dv">2</span> <span class="kw">DESC</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 <div class="fragment">
 <div class="hide-html-render">
@@ -362,6 +366,7 @@ Ludovic Deneuville
 </div>
 </div>
 <aside class="notes">
+<p>Alors qu’ici tout le monde voit immédiatement ce que fait la requête.</p>
 <p>Faites un effort pour vous même et pour vos relecteurs.</p>
 <p>SQL : langage déclaratif (ne décrit pas des algorithmes, mais déclare un résultat attendu)</p>
 <p>Le SQL ça ressemble à ça (1ere lecture de requête) :</p>
