@@ -285,6 +285,9 @@ Commencez par créez et charger les tables avec [ce script](./data/tp2-rugby-cre
 - [ ] Pour chaque équipe donner le nombre de matchs qu'elles ont gagné ou perdu
 - [ ] Donner le nombre total de points obtenus par équipe en classant les équipes de celle ayant marqué le plus à celle ayant marqué le moins
 
+::: {.callout-tip collapse="true" title="Solutions"}
+- [Correction TP2](./doc/tp/correction/tp2.sql)
+:::
 
 ## Arrêtez vos services {.unnumbered}
 

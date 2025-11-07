@@ -34,15 +34,15 @@ SELECT *
 SELECT sexe,
        prenom,
        valeur
-  FROM niveau_geographique = 'FRANCE'
-   AND periode = '2022'
-   AND valeur >= 2000
+  FROM prenoms_fr
+ WHERE periode = '2022'
+   AND valeur >= 2000;
 
 -- Donnés 2000 fois ou plus
 SELECT *
   FROM prenoms_fr
  WHERE periode = '2022'
-   AND valeur >= 2000
+   AND valeur >= 2000;
 
 -- Classés par sexe et nombre
 SELECT sexe,
@@ -52,7 +52,7 @@ SELECT sexe,
  WHERE periode = '2022'
    AND valeur >= 2000
  ORDER BY sexe,
-          valeur DESC
+          valeur DESC;
 
 -- Prénoms féminins commençant par la lettre Q
 SELECT sexe,
@@ -61,7 +61,7 @@ SELECT sexe,
   FROM prenoms_fr
  WHERE periode = '2022'
    AND sexe = '2'
-   AND prenom LIKE 'Q%'
+   AND prenom LIKE 'Q%';
 
 -- Prénoms contenant un X et pas de A
 SELECT sexe,
@@ -70,7 +70,7 @@ SELECT sexe,
   FROM prenoms_fr
  WHERE periode = '2022'
    AND prenom LIKE '%X%'
-   AND prenom NOT LIKE '%A%'
+   AND prenom NOT LIKE '%A%';
 
 -- Nombre de prénoms commençant par chaque lettre
 SELECT SUBSTRING(prenom, 1, 1) AS premiere_lettre,
@@ -163,6 +163,11 @@ SELECT DISTINCT periode
  WHERE prenom = 'JÉRÔME'
  ORDER BY periode DESC;
 
+-- Différentes manières d'écrire JEROME
+SELECT DISTINCT(prenom)
+  FROM prenoms_fr
+ WHERE prenom LIKE 'J_R_ME';
+
 -- JEROME avec d'autres accents / sans accent
 SELECT *
   FROM prenoms_fr
@@ -209,28 +214,6 @@ SELECT STRIP_ACCENTS(prenom),
  GROUP BY STRIP_ACCENTS(prenom)
  ORDER BY nb DESC
  LIMIT 10;
-
--------------------------------------------------------------------------------
--- Suivi temporel
--------------------------------------------------------------------------------
-
--- valeur de naissances par année
-SELECT periode,
-       SUM(valeur) AS nb_naissances,
-       COUNT(1) AS nb_prenoms
-  FROM prenoms_fr
- GROUP BY periode
- ORDER BY periode DESC;
-
--- valeur de filles et garçons
-SELECT periode,
-       SUM(valeur) FILTER (WHERE sexe = 1) AS nb_garcons,
-       SUM(valeur) FILTER (WHERE sexe = 2) AS nb_filles
-  FROM prenoms_fr
- GROUP BY periode
- ORDER BY periode DESC;
-
-
 
 
 -------------------------------------------------------------------------------

@@ -165,7 +165,7 @@ SELECT sexe,
    AND preusuel <> '_PRENOMS_RARES';
  ```
 
- ### Evolution au cours du temps
+### Evolution au cours du temps
 
 ```{.sql}
  SELECT *

@@ -36,12 +36,15 @@ from: markdown+emoji
 - Savoir utiliser le langage SQL
 
 :::{.notes}
+Le plus important, savoir explorer une bdd pour en extraire des infos.
+
 UML pour la modélisation
 :::
 
 ## SQL
 
 - Syntaxe simple
+- Déclaratif
 - Efficace
 - Très utilisé
 
@@ -79,7 +82,7 @@ UML pour la modélisation
 
 ```{.sql filename="pasbien.sql"}
 SELECT c.nom AS club, AVG(j.elo) AS moyenne_elo FROM joueuse j INNER JOIN club c 
-USING (id_club) WHERE mail IS NOT NULL GROUP BY c.nom ORDER BY 2 DESC;
+USING (id_club) WHERE mail IS NOT NULL GROUP BY c.nom HAVING AVG(j.elo) > 2000 ORDER BY 2 DESC;
 ```
 
 
@@ -91,6 +94,8 @@ USING (id_club) WHERE mail IS NOT NULL GROUP BY c.nom ORDER BY 2 DESC;
 
 :::{.notes}
 Que fait cette requête ?
+
+Voici ma réaction quand je vois ça !
 :::
 
 ---
@@ -101,7 +106,8 @@ SELECT c.nom AS club,
   FROM joueuse j 
  INNER JOIN club c USING (id_club) 
  WHERE j.mail IS NOT NULL 
- GROUP BY c.nom 
+ GROUP BY c.nom
+HAVING AVG(j.elo) > 2000
  ORDER BY 2 DESC;
 ```
 
@@ -113,6 +119,8 @@ SELECT c.nom AS club,
 ::::::
 
 ::: {.notes}
+Alors qu'ici tout le monde voit immédiatement ce que fait la requête.
+
 Faites un effort pour vous même et pour vos relecteurs.
 
 SQL : langage déclaratif (ne décrit pas des algorithmes, mais déclare un résultat attendu)

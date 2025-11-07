@@ -189,7 +189,7 @@ Vous remarquerez également que certaines années sont manquantes.
 En statistique publique, on exige au moins 3 individus pour garantir le secret statistique. Avec 1 ou 2 personnes, on peut identifier ou déduire leurs données.
 :::
 
-Pour la suite, nous allons uniquement nous interesser au niveau géographique *FRANCE* :
+Pour **la suite du TP**, nous allons uniquement nous interesser au niveau géographique *FRANCE* :
 
 - [ ] À partir de la table *prenoms*, créez une table *prenoms_fr* conservant uniquement
   - les lignes où le niveau géographique est égal à *FRANCE*
@@ -248,20 +248,21 @@ Pour extraire la première lettre d'un prénom, vous pouvez utiliser :
 - [ ] Listez les différentes années où le prénom `JÉRÔME` a été donné
   - Classez par année décroissante
   - Que remarquez-vous ?
+- [ ] Quelles sont les différentes manières d'écrire ce prénom (avec des accents différents) ?
 - [ ] Listez également les `JEROME` avec d'autres accents / sans accent
   - Recherchez une fonction DuckDB qui permet de répondre à ce besoin
 - [ ] Affichez pour chaque année le nombre de fois où le prénom JEROME a été donné, quelle que soit l'accentuation
 
 ::: {.callout-tip title="Aide" collapse="true"}
-- voir Fontion DuckDB strip_accents()
-- Regroupez par strip_accents(prenom) et annais
-- Affichez strip_accents(prenom), annais et la somme de la colonne *nombre*
+- voir Fonction DuckDB strip_accents()
+- Regroupez par strip_accents(prenom) et periode
+- Affichez strip_accents(prenom), periode et la somme de la colonne *valeur*
 :::
 
 
 ### Vérifions le classement
 
-Avec cette histoire d'accent, posons-nous la question si cela peut modifier le classement des top prénoms.
+Avec cette histoire d'accents, posons-nous la question si cela peut modifier le classement des top prénoms.
 
 - [ ] Affichez le top 10 des prénoms féminins en 2023 ?
 - [ ] Quel prénom se classe onzième ?
@@ -349,6 +350,9 @@ FROM 'https://static.data.gouv.fr/resources/recensement-de-la-population-fichier
   - restreignant sur les individus entre 25 et 29 ans
   -  différenciant les hommes et les femmes
 
+::: {.callout-tip collapse="true" title="Solutions"}
+- [Correction TP1](./doc/tp/correction/tp1.sql)
+:::
 
 ## Arrêtez votre service {.unnumbered}
 

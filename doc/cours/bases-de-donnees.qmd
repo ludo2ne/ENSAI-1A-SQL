@@ -238,6 +238,8 @@ Théorème CAP :
 
 ### Autres
 
+- Graph Database
+- Bases NewSQL (relationnelles « modernes » distribuées)
 - Bases de données de séries temporelles
 
 ## Base de données relationnelle
@@ -361,6 +363,16 @@ classDiagram
     }
 ```
 
+
+:::{.notes}
+Si on faisait une seule table :
+
+- Redondance des noms de clubs
+- Risque d'erreur de saisie
+- Difficile si on veut ajouter des infos sur le club
+- Si le nom d'un club change
+:::
+
 ---
 
 :::::: {.panel-tabset .nav-pills}
@@ -393,6 +405,12 @@ classDiagram
 : joueuse
 :::
 ::::::
+
+:::{.notes}
+Spoil : en ajoutant une FK
+
+Dans quelle table ?
+:::
 
 ### Clé étrangère
 
@@ -640,6 +658,12 @@ Il fournit des outils pour stocker, récupérer, modifier et sécuriser les donn
 - [MySQL](https://www.mysql.com/){target="_blank"}, [MariaDB](https://mariadb.org/){target="_blank"}
 - [Oracle Database](https://www.oracle.com/database/){target="_blank"}
 - [SQLite](https://www.sqlite.org/){target="_blank"}
+
+:::{.notes}
+environs égal à Base de données
+Boite noire
+:::
+
 
 ### PostgreSQL
 

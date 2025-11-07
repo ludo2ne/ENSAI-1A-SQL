@@ -28,7 +28,7 @@
   - algébre 20'
   - sql-avancé 25'
 - CM4
-  - sql-avancé 15'
+  - sql-avancé (suite) 15'
   - formalisation 60'
 
 ### TP

@@ -850,7 +850,7 @@ Et si ? Vous avez exécuté par erreur :
 :::::: {.fragment}
 Il y a un système de transactions avec les mots clés :
 
-- BEGIN / END
+- BEGIN
 - COMMIT
 - ROLLBACK
 

@@ -23,10 +23,18 @@ from: markdown+emoji
 - Modélisation UML
   - Formes normales
 
+## TP
 
-## Correction des TP
-
-- [TP1](./doc/tp/correction/tp1.sql)
-- [TP2](./doc/tp/correction/tp2.sql)
-- [TP3](./doc/tp/correction/tp3.sql)
-- [TP4](./doc/tp/correction/tp4.sql)
+- TP1 : Première requêtes SQL
+  - DuckDB, fichier parquet des prénoms
+  - SELECT, WHERE, ORDER BY, GROUP BY
+- TP2 : Exercices vintages
+  - Location de DVD, Ecole de musique, Rugby
+  - INNER JOIN, CREATE TABLE, DATE
+- TP3 : Discographie
+  - HAVING, INSERT, SEQUENCE, LEFT JOIN
+- TP4 : Chess
+  - UPDATE, LEFT JOIN, EXISTS
+- TP5 : ?
+- TD6 : Modélisation
+  - Dépendances fonctionnelles, Formes Normales, UML
