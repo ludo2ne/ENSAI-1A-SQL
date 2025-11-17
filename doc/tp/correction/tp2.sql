@@ -19,7 +19,7 @@ SELECT adresse_adherent
  WHERE num_adherent = 15;
 
 
--- Numéros des adhérents de nom "DUPONT"
+-- Numéros des adhérents de nom DUPONT
 SELECT num_adherent
   FROM musique.adherent_ecole 
  WHERE UPPER(nom_adherent) = 'DUPONT';
@@ -46,11 +46,11 @@ SELECT c.nom_cours,
   FROM musique.adherent_ecole ae
   JOIN musique.suit_cours sc USING(num_adherent) 
   JOIN musique.cours c USING(num_cours)
- WHERE horaire_cours LIKE '%samedi%';
+ WHERE c.horaire_cours LIKE '%samedi%';
 
 
 
--- Quels sont les cours auxquels sont inscrits les adhérents qui jouent du piano
+-- Cours auxquels sont inscrits les adhérents qui jouent du piano
 -- Remarque : pas besoin de passer par la table adherent_ecole
 SELECT DISTINCT c.nom_cours
   FROM musique.instrument i
@@ -130,7 +130,7 @@ WHERE LOWER(f.titre) = 'la guerre des etoiles';
 
 
 -- Nom, Prénom des adhérents ayant emprunté le film "la guerre des etoiles"
-SELECT DISTINCT CONCAT_WS(' ', a.nom_adherent, a.prenom_adherent) AS adherent
+SELECT DISTINCT CONCAT_WS(' ', a.nom_adherent, a.prenom_adherent) AS nom_complet_adherent
   FROM dvd.adherent a
   JOIN dvd.emprunte e USING(num_adherent)
   JOIN dvd.dvd d USING(num_DVD) 
@@ -139,14 +139,14 @@ SELECT DISTINCT CONCAT_WS(' ', a.nom_adherent, a.prenom_adherent) AS adherent
 
 
 -- Nom, Prénom des adhérents ayant au moins un emprunt en cours
-SELECT DISTINCT CONCAT_WS(' ', a.nom_adherent, a.prenom_adherent) AS adherent       
+SELECT DISTINCT CONCAT_WS(' ', a.nom_adherent, a.prenom_adherent) AS nom_complet_adherent       
   FROM dvd.adherent a
   JOIN dvd.emprunte e USING(num_adherent)
  WHERE e.date_fin IS NULL;
 
 
 -- Nom, Prénom du réalisateur de la Guerre des étoiles
-SELECT DISTINCT UPPER(r.nom_realisateur) || ' ' || r.prenom_realisateur  AS realisateur
+SELECT DISTINCT UPPER(r.nom_realisateur) || ' ' || r.prenom_realisateur AS nom_complet_realisateur
   FROM dvd.realisateur r
   JOIN dvd.a_realise ar USING(num_realisateur) 
   JOIN dvd.film f USING(num_film)
@@ -172,8 +172,8 @@ SELECT r.nom_realisateur
   JOIN dvd.dvd d USING(num_film)
   JOIN dvd.emprunte e USING(num_dvd)
   JOIN dvd.adherent a USING(num_adherent)
- WHERE UPPER(nom_adherent) = 'DUCHEMIN' 
-   AND UPPER(prenom_adherent) = 'PIERRE';
+ WHERE UPPER(a.nom_adherent) = 'DUCHEMIN' 
+   AND UPPER(a.prenom_adherent) = 'PIERRE';
 
 
 -- Nom des réalisateurs de films de science fiction ou policiers
@@ -192,20 +192,20 @@ SELECT COUNT(*)
  
 -- Nombre d'emprunts ayant été effectués par Dominique Duchemin.
 SELECT COUNT(*)
-  FROM dvd.adherent
-  JOIN dvd.emprunte USING (num_adherent)
- WHERE UPPER(nom_adherent) = 'DUCHEMIN' 
-   AND UPPER(prenom_adherent) = 'DOMINIQUE';
+  FROM dvd.adherent a
+  JOIN dvd.emprunte e USING (num_adherent)
+ WHERE UPPER(a.nom_adherent) = 'DUCHEMIN' 
+   AND UPPER(a.prenom_adherent) = 'DOMINIQUE';
   
    
 -- Nombre de films differents ayant ete empruntes par Dominique Duchemin
 SELECT COUNT(DISTINCT num_film)
-  FROM dvd.adherent
-  JOIN dvd.emprunte USING (num_adherent)
-  JOIN dvd.dvd USING (num_dvd)
-  JOIN dvd.film USING (num_film)
- WHERE UPPER(nom_adherent) = 'DUCHEMIN' 
-   AND UPPER(prenom_adherent) = 'DOMINIQUE';
+  FROM dvd.adherent a
+  JOIN dvd.emprunte e USING (num_adherent)
+  JOIN dvd.dvd d USING (num_dvd)
+  JOIN dvd.film f USING (num_film)
+ WHERE UPPER(a.nom_adherent) = 'DUCHEMIN' 
+   AND UPPER(a.prenom_adherent) = 'DOMINIQUE';
 
 
 -- Numéro des DVD en ordre décroissant du nombre de fois qu ils ont ete empruntes
@@ -232,7 +232,7 @@ SELECT MAX(date_fin - date_debut) AS duree_jours
   FROM dvd.emprunte e;
 
 -- En date du 10 août 2010, combien de DVD sont en cours d'emprunt
-SELECT f.titre
+SELECT COUNT(1)
   FROM dvd.emprunte e
   JOIN dvd.dvd d USING(num_dvd)
   JOIN dvd.film f USING(num_film)

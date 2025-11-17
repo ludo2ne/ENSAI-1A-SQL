@@ -384,6 +384,26 @@ Pour définir la fiabilité des transactions :
 
 ## Index
 
+### Optimisation
+
+Possible d'optimiser à plusieurs niveaux :
+
+- Logique : Normalisation / Dénormalisation
+- Physique : Indexation, Partitionnement
+- Requêtes SQL
+
+:::{.notes}
+- Normaliser pour éviter la redondance et les anomalies
+- Dé-normaliser quand les lectures sont plus fréquentes que les écritures
+- Bon typage
+- Indexation, Partitionnement
+- Éviter SELECT * → ne charger que les colonnes utiles.
+- Vérifier le plan d'exécution : 
+
+EXPLAIN SELECT * FROM joueuse WHERE prenom = 'Amandine';
+:::
+
+
 ### Créer un index
 
 ::: {.callout-note title="Définition"}
@@ -393,12 +413,31 @@ Il permet une lecture plus rapide sur une colonne utilisée fréquemment dans *W
 :::
 
 ```{.sql}
-CREATE INDEX echecs.idx_nom_joueuse ON echecs.joueuse (nom);
+CREATE INDEX echecs.idx_prenom_joueuse ON echecs.joueuse (prenom);
 ```
 
 :::{.notes}
 - Recherche longue si beaucoup de lignes
 - Système clé-valeur (index -> ligne)
+:::
+
+### Application
+
+```{.sql}
+SELECT *
+  FROM echecs.joueuse
+ WHERE prenom = 'Amandine';
+```
+
+- Sans index : parcourt intégral de la table
+- Avec index :
+  - recherche sous forme d'arbre, récupère les id
+  - lit directement les lignes concernées
+
+:::{.notes}
+- index stocké sous forme d'un arbre B+ trié sur prenom
+- recherche logarithmique : très rapide O(log n)
+- index contient des pointeurs vers les lignes correspondantes dans la table
 :::
 
 

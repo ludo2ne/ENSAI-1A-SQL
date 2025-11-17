@@ -27,7 +27,7 @@ Les datalabs sont composés :
 
 - d'une infrastructure cloud on premise (≠ cloud propriétaire : AWS, GCP, OVH... )
   - i.e. hébergée dans les locaux de l'INSEE et du GENES 
-  - avec des ressources est à votre disposition (CPU, GPU, RAM, Stockage)
+  - avec des ressources à votre disposition (CPU, GPU, RAM, Stockage)
 - de l'application [Onyxia](https://www.onyxia.sh/){target="_blank"}
   - elle offre une interface pour utiliser cette infrastructure pour lancer des services
   - sans avoir à utiliser de commandes "complexes"

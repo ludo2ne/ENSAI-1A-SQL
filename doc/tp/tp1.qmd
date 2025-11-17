@@ -204,13 +204,14 @@ Pour **la suite du TP**, nous allons uniquement nous interesser au niveau géogr
 
 
 - [ ] Listez les prénoms de l'année 2022
-  - Classez-les en décroissant par le nombre de fois où ils sont été donnés
+  - Classez-les en décroissant par le nombre de fois où ils ont été donnés
 - [ ] Affichez uniquement les colonnes *sexe*, *prenom* et *valeur*
   - Affichez également ces colonnes pour les questions suivantes
 - [ ] Listez les prénoms de l'année 2022 donnés 2000 fois ou plus
 - [ ] Classez-les d'abord par sexe, puis par nombre décroissant d'occurrences
   - Quels sont les prénoms masculins et féminins les plus donnés ?
 - [ ] Listez les prénoms féminins commençant par la lettre *Q*
+- [ ] Listez les prénoms contenant exactement deux fois la lettre *V*
 - [ ] Comptez le nombre de prénoms commençant par chaque lettre
 
 ::: {.callout-tip}

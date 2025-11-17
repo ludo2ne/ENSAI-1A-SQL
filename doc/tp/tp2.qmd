@@ -28,6 +28,7 @@ Lors de ce TP, vous allez :
 
 ::: {.callout-important}
 - Écrivez des requêtes jolies !
+- À la fin du TP, exportez ou copiez vos requêtes dans un fichier de votre VM ou machine personnelle
 :::
 
 ## Lancement des services
@@ -39,6 +40,11 @@ Pour plus de détails, allez dans l'onglet [Datalab](../outils/datalab.qmd){targ
 - [ ] Lancez un service **cloudBeaver**
   - ouvrez ce service
   - vérifiez que vous êtes connectés à la base de données PostgreSQL
+  - ouvrez la connexion (clic droit > Open), un petit rond vert apparait :green_circle:
+
+::: {.callout-important}
+cloudBeaver est parfois capricieux, en cas de blocage, n'hésitez pas à rafraichir la page (F5).
+:::
 
 En attendant le lancement des services, voici un peu de lecture ci-dessous.
 
@@ -123,6 +129,8 @@ SELECT j.nom,
  ORDER BY j.elo DESC;
 ```
 
+Maintenant, place à quelques exercices historiques.
+
 
 ## Exercices
 
@@ -135,6 +143,7 @@ Nous allons commencer par créer les tables et insérer les données :
 - [ ] Exécutez le script
   - Cliquez sur la petite icone sous les triangles oranges qui ressemble à :scroll:
   - raccourci (ALT + X)
+  - En cas d'erreur, corrigez, puis relancez intégralement le script
 - [ ] Vérifiez que votre schéma et vos tables sont créés
   - Dans l'explorateur : PostgreSQL :arrow_right: Databases :arrow_right: defaultdb :arrow_right: Schemas
   - Clic droit sur *Schemas* :arrow_right: Refresh
@@ -160,7 +169,7 @@ Réalisez les jointures qui permettent d'obtenir :
 - [ ] Le nom des adhérents inscrits au cours numéro 6
 - [ ] Les noms des cours ayant lieu le samedi et les noms des adhérents inscrits
 - [ ] Les noms des cours auxquels sont inscrits les adhérents qui jouent du piano
-- [ ] De quels instruments jouent les personnes inscrites au cours de guitare classique (`GUIT-CLASS`)
+- [ ] De quels instruments jouent les personnes inscrites au cours de guitare classique (*GUIT-CLASS*)
 
 
 ### Location de DVD :cd:
@@ -195,6 +204,7 @@ Voici le Modèle de données :
       num_realisateur  INT REFERENCES dvd.realisateur(num_realisateur),
       PRIMARY KEY (num_film, num_realisateur));
   ```
+
 - [ ] Écrivez les requêtes qui permettent de créer les 3 autres tables
 - [ ] Chargez les données avec ce [script sql](./data/tp2-dvd-pop.sql){target="_blank"} 
 
@@ -215,13 +225,21 @@ Donnez les requêtes pour obtenir :
 
 - [ ] Nom et prénom des adhérents
 - [ ] Titre des films de la base 
-- [ ] Numéro d'adhérent de `Pierre DUCHEMIN`
-- [ ] Nom, Prénom et adresse de tous les `DUCHEMIN`
-- [ ] Numéro des DVD du film `la guerre des etoiles`
+- [ ] Numéro d'adhérent de *Pierre DUCHEMIN*
+- [ ] Nom, Prénom et adresse de tous les *DUCHEMIN*
+- [ ] Numéro des DVD du film *la guerre des etoiles*
 
-Pour les 3 requêtes suivantes, vous afficherez les noms et prénoms sur une seule colonne. Utilisez le mot clé `AS` pour renommer cette colonne à l'affichage.
+::: {.callout-note title="Recherche dans la doc"}
+- [ ] Recherchez dans la [documentation officielle PostgreSQL](https://www.postgresql.org/docs/){target="_blank"}, un moyen de répondre au besoin ci-dessous
 
-- [ ] Nom, Prénom des adhérents ayant emprunté le film `la guerre des etoiles`
+Pour connaitre la version utilisée : `SELECT version();`
+:::
+
+Pour les 3 requêtes suivantes, vous afficherez les noms et prénoms sur une seule colonne. 
+
+Utilisez le mot clé `AS` pour nommer cette colonne *nom_complet* à l'affichage.
+
+- [ ] Nom, Prénom des adhérents ayant emprunté le film *la guerre des etoiles*
 - [ ] Nom, Prénom des adhérents ayant au moins un emprunt en cours (la date de fin de l'emprunt est nulle) 
 - [ ] Nom, Prénom du réalisateur de la *Guerre des étoiles*
 
