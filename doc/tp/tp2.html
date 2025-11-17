@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.25">
+<meta name="generator" content="quarto-1.8.26">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -74,8 +74,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b758ccaa5987ceb1b75504551e579abf.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap-b66d9f3da4d84aca26cc7cc1c94b0445.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
@@ -282,8 +282,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a href="../../index.html" class="navbar-brand navbar-brand-logo">
-    </a>
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Base de données</span>
     </a>
@@ -506,6 +504,7 @@ Important
 <div class="callout-body-container callout-body">
 <ul>
 <li>Écrivez des requêtes jolies !</li>
+<li>À la fin du TP, exportez ou copiez vos requêtes dans un fichier de votre VM ou machine personnelle</li>
 </ul>
 </div>
 </div>
@@ -520,8 +519,22 @@ Important
 <ul>
 <li>ouvrez ce service</li>
 <li>vérifiez que vous êtes connectés à la base de données PostgreSQL</li>
+<li>ouvrez la connexion (clic droit &gt; Open), un petit rond vert apparait <span class="emoji" data-emoji="green_circle">🟢</span></li>
 </ul></li>
 </ul>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>cloudBeaver est parfois capricieux, en cas de blocage, n’hésitez pas à rafraichir la page (F5).</p>
+</div>
+</div>
 <p>En attendant le lancement des services, voici un peu de lecture ci-dessous.</p>
 </section>
 <section id="méthodo-écrire-une-requête" class="level2" data-number="2">
@@ -605,6 +618,7 @@ Tip
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> c.ville <span class="op">=</span> <span class="st">'Saint Quentin'</span></span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>   <span class="kw">AND</span> j.prenom <span class="kw">LIKE</span> <span class="st">'A%'</span></span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a> <span class="kw">ORDER</span> <span class="kw">BY</span> j.elo <span class="kw">DESC</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Maintenant, place à quelques exercices historiques.</p>
 </section>
 </section>
 <section id="exercices" class="level2" data-number="3">
@@ -619,6 +633,7 @@ Tip
 <ul>
 <li>Cliquez sur la petite icone sous les triangles oranges qui ressemble à <span class="emoji" data-emoji="scroll">📜</span></li>
 <li>raccourci (ALT + X)</li>
+<li>En cas d’erreur, corrigez, puis relancez intégralement le script</li>
 </ul></li>
 <li><label><input type="checkbox">Vérifiez que votre schéma et vos tables sont créés</label>
 <ul>
@@ -645,7 +660,7 @@ Tip
 <li><label><input type="checkbox">Le nom des adhérents inscrits au cours numéro 6</label></li>
 <li><label><input type="checkbox">Les noms des cours ayant lieu le samedi et les noms des adhérents inscrits</label></li>
 <li><label><input type="checkbox">Les noms des cours auxquels sont inscrits les adhérents qui jouent du piano</label></li>
-<li><label><input type="checkbox">De quels instruments jouent les personnes inscrites au cours de guitare classique (<code>GUIT-CLASS</code>)</label></li>
+<li><label><input type="checkbox">De quels instruments jouent les personnes inscrites au cours de guitare classique (<em>GUIT-CLASS</em>)</label></li>
 </ul>
 </section>
 <section id="location-de-dvd" class="level3" data-number="3.2">
@@ -680,7 +695,7 @@ Tip
 <li><p><label><input type="checkbox">Chargez les données avec ce <a href="./data/tp2-dvd-pop.sql" target="_blank">script sql</a></label></p></li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -689,7 +704,7 @@ Tip
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Attention, ici l’ordre de création des tables a son importance.</p>
 <p>Reprenons et modifions l’exemple ci-dessus :</p>
@@ -709,18 +724,35 @@ Tip
 <ul class="task-list">
 <li><label><input type="checkbox">Nom et prénom des adhérents</label></li>
 <li><label><input type="checkbox">Titre des films de la base</label></li>
-<li><label><input type="checkbox">Numéro d’adhérent de <code>Pierre DUCHEMIN</code></label></li>
-<li><label><input type="checkbox">Nom, Prénom et adresse de tous les <code>DUCHEMIN</code></label></li>
-<li><label><input type="checkbox">Numéro des DVD du film <code>la guerre des etoiles</code></label></li>
+<li><label><input type="checkbox">Numéro d’adhérent de <em>Pierre DUCHEMIN</em></label></li>
+<li><label><input type="checkbox">Nom, Prénom et adresse de tous les <em>DUCHEMIN</em></label></li>
+<li><label><input type="checkbox">Numéro des DVD du film <em>la guerre des etoiles</em></label></li>
 </ul>
-<p>Pour les 3 requêtes suivantes, vous afficherez les noms et prénoms sur une seule colonne. Utilisez le mot clé <code>AS</code> pour renommer cette colonne à l’affichage.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Recherche dans la doc">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Recherche dans la doc
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <ul class="task-list">
-<li><label><input type="checkbox">Nom, Prénom des adhérents ayant emprunté le film <code>la guerre des etoiles</code></label></li>
+<li><label><input type="checkbox">Recherchez dans la <a href="https://www.postgresql.org/docs/" target="_blank">documentation officielle PostgreSQL</a>, un moyen de répondre au besoin ci-dessous</label></li>
+</ul>
+<p>Pour connaitre la version utilisée : <code>SELECT version();</code></p>
+</div>
+</div>
+<p>Pour les 3 requêtes suivantes, vous afficherez les noms et prénoms sur une seule colonne.</p>
+<p>Utilisez le mot clé <code>AS</code> pour nommer cette colonne <em>nom_complet</em> à l’affichage.</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Nom, Prénom des adhérents ayant emprunté le film <em>la guerre des etoiles</em></label></li>
 <li><label><input type="checkbox">Nom, Prénom des adhérents ayant au moins un emprunt en cours (la date de fin de l’emprunt est nulle)</label></li>
 <li><label><input type="checkbox">Nom, Prénom du réalisateur de la <em>Guerre des étoiles</em></label></li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -729,7 +761,7 @@ Tip
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Il existe différentes manières de concaténer du texte :</p>
 <ul>
@@ -798,7 +830,7 @@ Tip
 <li><label><input type="checkbox">Donner le nombre total de points obtenus par équipe en classant les équipes de celle ayant marqué le plus à celle ayant marqué le moins</label></li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled" title="Solutions">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -807,7 +839,7 @@ Tip
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
 <li><a href="./doc/tp/correction/tp2.sql">Correction TP2</a></li>
