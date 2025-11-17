@@ -282,7 +282,7 @@ SELECT a.*
 :::
 
 ::: {.callout-tip collapse="true" title="Solutions"}
-- [Correction TP3](./doc/tp/correction/tp3.sql)
+- [Correction TP3](./correction/tp3.sql)
 :::
 
 ## Arrêtez votre service {.unnumbered}

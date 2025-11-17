@@ -352,7 +352,7 @@ FROM 'https://static.data.gouv.fr/resources/recensement-de-la-population-fichier
   -  différenciant les hommes et les femmes
 
 ::: {.callout-tip collapse="true" title="Solutions"}
-- [Correction TP1](./doc/tp/correction/tp1.sql)
+- [Correction TP1](./correction/tp1.sql)
 :::
 
 ## Arrêtez votre service {.unnumbered}

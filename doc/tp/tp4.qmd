@@ -413,7 +413,7 @@ Choisissez une joueuse, par exemple *Judith POLGAR*
 
 
 ::: {.callout-tip collapse="true" title="Solutions"}
-- [Correction TP4](./doc/tp/correction/tp4.sql)
+- [Correction TP4](./correction/tp4.sql)
 :::
 
 ## Arrêtez votre service {.unnumbered}
