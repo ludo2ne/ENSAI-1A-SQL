@@ -1,0 +1,322 @@
+---
+title: "NBA stats"
+description: "TP5"
+author: "Ludovic Deneuville"
+format: 
+  html:
+    toc: true
+    toc-location: left
+    toc-expand: 3
+from: markdown+emoji
+number-sections: true
+number-depth: 3
+lightbox: true
+---
+
+
+
+## Introduction {.unnumbered}
+
+Vous allez travailler sur des données de la nba depuis les années 2000.
+
+Les données sont brutes i.e. elles ont été récupérée via l'api [stats nba](https://www.nba.com/stats){target="_blank"} et elles n'ont quasiment pas été retouchées.
+
+Le modèle de données n'est pas fourni ! Ce sera à vous d'explorer vous même la base de données.
+
+::: {.callout-tip}
+Dans votre vie professionnelle, dans 95 % des cas vous allez hériter de missions où la documentation est obsolète voire inexistante. 
+
+Il faut donc apprendre à vous débrouiller dès maintenant. Et au passage, vous convaincre que faire et maintenir la doc ça aide et c'est bien !
+:::
+
+
+## Importer la base de données
+
+- [ ] Connectez-vous à un Datalab
+- [ ] Lancez un service **PostgreSQL**
+- [ ] Lancez un service **cloudBeaver**
+
+:construction:
+
+```{.python}
+import os
+import subprocess
+
+import psycopg2
+import s3fs
+from dotenv import load_dotenv
+
+load_dotenv()
+
+AWS_ENDPOINT = os.environ["AWS_ENDPOINT_URL"]
+DUMP_FILE = "nba.dump"
+FILE_PATH = f"s3://ludo2ne/diffusion/ENSAI/SQL-TP/{DUMP_FILE}"
+
+fs = s3fs.S3FileSystem(
+    client_kwargs={"endpoint_url": AWS_ENDPOINT},
+    key=os.environ["AWS_ACCESS_KEY_ID"],
+    secret=os.environ["AWS_SECRET_ACCESS_KEY"],
+    token=os.environ["AWS_SESSION_TOKEN"],
+)
+
+print("📥 Téléchargement du dump depuis S3...")
+with fs.open(FILE_PATH, "rb") as f_in:
+    with open(DUMP_FILE, "wb") as f_out:
+        f_out.write(f_in.read())
+print("✅ Dump téléchargé :")
+
+
+PG_HOST = os.getenv("POSTGRESQL_HOST")
+PG_PORT = os.getenv("POSTGRESQL_PORT", "5432")
+PG_DB = os.getenv("POSTGRESQL_DATABASE")
+PG_USER = os.getenv("POSTGRESQL_USERNAME")
+PG_PASSWORD = os.getenv("POSTGRESQL_PASSWORD")
+PG_SCHEMA = os.getenv("POSTGRESQL_SCHEMA")
+
+os.environ["PGPASSWORD"] = PG_PASSWORD
+
+conn = psycopg2.connect(
+    dbname=PG_DB, user=PG_USER, password=PG_PASSWORD, host=PG_HOST, port=PG_PORT
+)
+conn.autocommit = True
+cur = conn.cursor()
+
+sql_create_schema = f"CREATE SCHEMA IF NOT EXISTS {PG_SCHEMA};"
+cur.execute(sql_create_schema)
+
+cmd = [
+    "pg_restore",
+    "-d",
+    PG_DB,
+    "-h",
+    PG_HOST,
+    "-p",
+    PG_PORT,
+    "-U",
+    PG_USER,
+    "-n",
+    PG_SCHEMA,
+    DUMP_FILE,
+]
+
+
+print("⏳ Restauration PostgreSQL...")
+subprocess.run(cmd, check=True)
+print("🎉 Base NBA restaurée dans votre PostgreSQL")
+```
+
+
+## Rendez-vous en base inconnue
+
+Je n'ai pas réussi à inviter Laury T pour vous accompagner dans cette aventure mais voici quelques requêtes utiles pour explorer une base de données PostgreSQL.
+
+```{.sql}
+SELECT table_name
+  FROM information_schema.tables
+ WHERE table_schema = '<schema_name>'
+   AND table_type = 'BASE TABLE'
+ ORDER BY table_name;
+```
+
+```{.sql}
+SELECT column_name,
+       data_type,
+       is_nullable,
+       column_default
+  FROM information_schema.columns
+ WHERE table_schema = '<...>'
+   AND table_name   = '<...>'
+ ORDER BY ordinal_position;
+```
+
+::: {.callout-note title="Glossaire" collapse="true"}
+| Colonne     | Signification                                                                        |
+| ----------- | ------------------------------------------------------------------------------------ |
+| **matchup** | Description du match : ex. `LAL @ BOS` (à l'extérieur) ou `LAL vs BOS` (à domicile). |
+| **wl**      | Résultat pour l'équipe : `W` (win), `L` (loss).                                      |
+| **min**     | Minutes totales jouées par l'équipe (toujours `240` sauf prolongation).              |
+| **pts**     | Total des points de l'équipe.                                                        |
+| **fgm**     | Field goals made — tirs réussis (2 pts + 3 pts). |
+| **fga**     | Field goals attempted — tirs tentés.             |
+| **fg_pct**  | Taux de réussite : `fgm / fga`.                  |
+| **fg3m**    | 3-points réussis.       |
+| **fg3a**    | 3-points tentés.        |
+| **fg3_pct** | Pourcentage à 3 points. |
+| **ftm**     | Free throws made — lancers francs réussis.     |
+| **fta**     | Free throws attempted — lancers francs tentés. |
+| **ft_pct**  | Pourcentage aux lancers.                       |
+| **oreb**    | Rebonds offensifs.            |
+| **dreb**    | Rebonds défensifs.            |
+| **reb**     | Rebonds totaux (oreb + dreb). |
+| **ast**     | Passes décisives.           |
+| **stl**     | Interceptions.              |
+| **blk**     | Contres.                    |
+| **tov**     | Ballons perdus (turnovers). |
+| **pf**      | Fautes personnelles.        |
+
+:::
+
+## Explorons avec les Spurs 
+
+- [ ] Quel est l'id de l'équipe des Spurs de San Antonio ?
+- [ ] Listez les joueurs des Spurs
+- [ ] Listez tous les matchs des Spurs de la saison régulière *2024-2025*
+  - classez ces matchs par date
+- [ ] Choisissez un *game_id* parmi ces matchs et regardez combien de lignes correspondent
+
+Ce choix de conception a des avantages et des inconvénients. Nous y reviendrons par la suite lorsque nous afficherons les scores de chaque match.
+
+- [ ] Proposez une clé primaire pour la table *game*
+- [ ] Ecrivez une requête pour vérifier si votre proposition est correcte
+
+Regardons maintenant les stats des joueurs.
+
+- [ ] Affichez les stats des joueurs des Spurs pour la saison régulière *2024-2025*
+- [ ] Affichez les stats des joueurs des Spurs par match
+- [ ] Est-ce qu'il n'y aurait pas des doublons dans cette table ?
+- [ ] Est-ce que cette table contient les stats des joueurs par match de toutes les saisons ?
+
+
+## Matchs et classements 
+
+Dans toute cette partie nous nous interesserons à la saison *2020-2021*.
+
+- [ ] Listez les matchs de la saison
+- [ ] Combien y-a-t-il eu de match cette saison
+- [ ] Distinguez saison régulière et Playoffs
+
+Interessons-nous la saison régulière.
+
+- [ ] Listez les matchs de *Utah Jazz*
+- [ ] Comptez leur nombre de victoires et de défaites
+- [ ] Utilisez COUNT et FILTER pour avoir le résultat sur une seule ligne
+  - ajoutez le nombre de matchs joués
+- [ ] Affichez les mêmes colones pour chaque équipe de la conférence *Ouest*
+  - classez par nombre de victoires décroissant
+
+Passons maintenant aux Playoffs.
+
+- [ ] Listez les matchs de *Utah Jazz*
+- [ ] Pour chacun de leurs matchs, affichez le score, le nom de leurs adversaires et le résultat
+- [ ] Affichez les scores de matchs
+
+Une dernière question pour la route :
+
+- [ ] Si vous deviez afficher toutes les finales et leur score, comment feriez-vous ?
+
+::: {.callout-tip collapse="true" title="Aide"}
+
+- [ ] Quelles étapes sont réalisées ci-dessous ?
+
+Tout simplement :
+
+```{.sql}
+WITH last_playoff_games AS (
+SELECT season_id, MAX(game_id) AS last_game_id
+  FROM nba.game
+ WHERE season_type = 'Playoffs'
+ GROUP BY season_id
+),
+final_teams AS (
+SELECT g.season_id, 
+       g.team_id AS team_id_win, 
+       g2.team_id AS team_id_los
+  FROM nba.game g
+  JOIN last_playoff_games lpg ON g.season_id = lpg.season_id AND g.game_id = lpg.last_game_id
+  JOIN nba.game g2 ON g2.game_id = g.game_id AND g2.team_id <> g.team_id
+ WHERE g.wl = 'W'
+)
+SELECT gwin.season_id,
+       twin.full_name AS equipe,
+       COUNT(*) FILTER (WHERE gwin.wl = 'W') || ' - ' || COUNT(*) FILTER (WHERE gwin.wl = 'L') AS score,
+       tlos.full_name AS adversaire
+  FROM nba.game gwin
+  JOIN final_teams ft ON ft.team_id_win = gwin.team_id AND ft.season_id = gwin.season_id
+  JOIN nba.team twin ON twin.id = gwin.team_id
+  JOIN nba.game glos ON glos.game_id = gwin.game_id AND glos.team_id = ft.team_id_los
+  JOIN nba.team tlos ON tlos.id = glos.team_id
+ WHERE gwin.season_type = 'Playoffs'
+ GROUP BY gwin.season_id, twin.full_name, tlos.full_name
+ ORDER BY gwin.season_id DESC;
+```
+:::
+
+
+
+## Triple zéro
+
+Lors d'un match, les principales statistiques utilisées pour mesurer les performances des joueurs sont : les points, les rebonds, les passes décisives, les interceptions et les contres.
+
+Un joueur réalise alors un :
+
+- **double-double** : s'il atteint au moins 10 dans deux de ces statistiques
+- **triple-double** : au moins 10 dans trois de ces statistiques (grosse perf)
+- **quadruple-double** : au moins 10 dans quatre de ces statistiques (très rare)
+
+Il existe également d'autres performances très rares :
+
+- **double triple-double** : s'il atteint au moins 20 dans trois de ces statistiques
+- **Five-by-five** : au moins 5 dans les cinq catégories
+
+Vous aussi en avez assez d'entendre toujours les mêmes noms réaliser ce genre de performance : Wemby, Curry, Gilgeous-Alexander, Doncic, Jokic...
+
+L'heure de la revanche a sonné. Mettons aujourd'hui en lumière les vrais champions, ceux qui réalisent des 0 dans ces stats, font des fautes, perdent des balles.
+
+- [ ] Affichez les statistiques par match de chaque joueur
+- [ ] Conservez uniquement ceux ayant joué plus de 10 minutes par match
+
+::: {.callout-tip}
+- Commencez par retirer les lignes ou la colonne *minutes* est vide
+- Puis utilisez `CAST(SPLIT_PART(minutes, ':', 1) AS integer)`
+:::
+
+- [ ] En plus du nom du joueur et du nombre de minutes jouées, affichez les cinq statistiques demandées
+- [ ] Est-ce que nous avons un champion avec un *quintuple zéro* ?
+- [ ] :star: :star: :star: Un peu plus compliqué, est-ce qu'il y a des quadruples zéros ?
+  - *quadruple zéro* : 0 points et 3 autres stats à 0
+  - Le `CASE WHEN` est votre ami ici
+
+
+Quelques autres titres à décerner (toujours avec au moins 10min de jeu):
+
+- [ ] Celui qui a le plus souvent marqué 0 points
+- [ ] Qui est le pire shooter d'un match ?
+  - i.e. qui n'a marqué aucun point, et a tenté le plus grand nombre de tirs, lancers francs inclus
+- [ ] Liste des joueurs qui lors d'un match ont eu plus de pertes de balle (turnover) que de points marqués
+- [ ] Top 10 de ceux qui ne terminent pas souvent les matchs (ils sont expulsés après 6 fautes personnelles)
+
+La colonne *plusminuspoints* est la différence entre le nombre de points marqués par l'équipe et le nombre de points encaissés lorsque le joueur est sur le terrain.
+
+Cela donne une idée de l'influence et l'impact du joueur lorsqu'il est sur le terrain.
+
+- [ ] Quel joueur a eu la pire influence sur un seul match
+- [ ] Quels sont les joueurs qui ont le plus grand nombre de matchs avec une influence négative sur l'équipe
+
+Ils ont essayé de faire perdre leur équipe mais ils n'ont pas réussi :
+
+- [ ] Quel joueur a eu la pire influence, et pourtant son équipe a gagné
+- [ ] Ajoutez les deux équipes et le score du match
+
+
+
+::: {.callout-tip collapse="true" title="Solutions"}
+- [Correction TP5](./correction/tp5.sql)
+:::
+
+
+## Arrêtez vos services {.unnumbered}
+
+C'est la fin du TP, vous pouvez maintenant sauvegarder votre travail et libérer les ressources réservées :
+
+- [ ] Copiez-collez vos scripts SQL sur votre machine
+- [ ] Arrêter les services du Datalab
+
+
+
+
+
+
+
+
+
+

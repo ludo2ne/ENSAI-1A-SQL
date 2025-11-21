@@ -51,34 +51,42 @@ Votre mission du jour sera d'aider la nouvellement créée *Fédération França
   - raccourci (ALT + X)
 
 
-::: {.callout-note title="Reprise TP5"}
-Après avoir chargé les données pour le TP5, veuillez appliquer ces corrections vues lors d'un exercice du TP4 :
+### Description des tables
 
-```{.sql}
-UPDATE echecs.joueuse
-   SET elo = elo - 1200
- WHERE elo > 2600
-   AND code_titre IS NULL;
+| **Catégorie**        | **Description**                                                                                          |
+|----------------------|----------------------------------------------------------------------------------------------------------|
+| **Joueuse**          | Liste des joueuses                                                                                        |
+| **Titre**            | Liste des titres, certains attribués aux fortes joueuses                                                |
+| **Club**             | Liste des clubs                                                                                           |
+| **Partie**           | Partie entre 2 joueuses, soit libre, soit dans le cadre d'un tournoi                                      |
+| **Résultat_partie**  | Différents résultats possibles dans une partie (par exemple : victoire des blancs, match nul, etc.)     |
+| **Ouverture**        | Désignation de l'ouverture (comment débute une partie)                                                 |
+| **Tournoi**          | Liste des tournois                                                                                       |
+| **Cadence**          | Rythme de jeu lors d'un tournoi (blitz, rapide, lent)                                                  |
 
-UPDATE echecs.joueuse
-   SET date_naissance = date_naissance + INTERVAL '100 years'
- WHERE id_joueuse IN (111, 122, 133, 144);
 
-UPDATE echecs.joueuse
-   SET date_naissance = date_naissance - INTERVAL '100 years'
- WHERE id_joueuse IN (155, 166, 177, 188);
+### Modèle de données
 
-UPDATE echecs.joueuse
-   SET nom = REPLACE(REPLACE(REPLACE(nom, 'EUH', 'E'), 'AO', 'A'), 'OU', 'U')
- WHERE code_titre IS NULL;
+![](./data/tp4-uml.PNG)
 
-DELETE FROM echecs.partie
- WHERE id_blanc = id_noir;
-```
+::: {.callout-caution}
+Dans le modèle de données, certaines tables sont reliées 2 fois entre elles :
 
+- *joueuse* et *partie* : car lors d'une partie une joueuse a les blancs et l'autre, les noirs
+- *joueuse* et *club* :
+  - *id_club* est une clé étrangère dans la table *joueuse* car une joueuse est membre d'un seul club
+  - *id_presidente* est une clé étrangère de la table *club* référençant l'*id_joueuse* de la présidente
 :::
 
-### Description
+
+Quelques remarques sur ce schéma :
+
+- :key: clé primaire
+- `#` clé étrangère
+- NN : NOT NULL
+
+
+### Notation relationnelle
 
 Les tables sont les suivantes :
 
@@ -91,29 +99,6 @@ Les tables sont les suivantes :
 - **tournoi**([id_tournoi]{.underline}, nom, ville, date_debut, date_fin, #id_cadence, nb_rondes, nb_participantes, #id_arbitre)
 - **cadence**([id_cadence]{.underline}, nom, description)
 
-| **Catégorie**       | **Description**                                                                                          |
-|---------------------|----------------------------------------------------------------------------------------------------------|
-| **Joueuse**          | Liste des joueuses                                                                                        |
-| **Titre**            | Liste des titres, certains attribués aux fortes joueuses                                                |
-| **Club**             | Liste des clubs                                                                                           |
-| **Partie**           | Partie entre 2 joueuses, soit libre, soit dans le cadre d'un tournoi                                      |
-| **Résultat_partie**  | Différents résultats possibles dans une partie (par exemple : victoire des blancs, match nul, etc.)     |
-| **Ouverture**        | Désignation de l'ouverture (comment débute une partie)                                                 |
-| **Tournoi**          | Liste des tournois                                                                                       |
-| **Cadence**          | Rythme de jeu lors d'un tournoi (blitz, rapide, lent)                                                  |
-
-### Modèle de données
-
-::: {.callout-caution}
-Dans le modèle de données, certaines tables sont reliées 2 fois entre elles :
-
-- *joueuse* et *partie* : car lors d'une partie une joueuse a les blancs et l'autre, les noirs
-- *joueuse* et *club* :
-  - *id_club* est une clé étrangère dans la table *joueuse* car une joueuse est membre d'un seul club
-  - *id_presidente* est une clé étrangère de la table *club* référençant l'*id_joueuse* de la présidente
-:::
-
-![](./data/tp4-uml.PNG)
 
 ## Recherche des irrégularités
 
@@ -176,18 +161,6 @@ Mais pour faire plus simple, la fédé a décidé de nommer comme présidente de
 - [ ] Stockez dans une table temporaire les couples (id_club, id_joueuse de la future présidente)
 - [ ] Mettez à jour la table *club* avec leurs nouvelles présidentes
 - [ ] Listez les clubs et leurs présidentes
-
-
-
-## Remise en route TP5
-
-Quelques questions faciles pour se remettre en route.
-
-- [ ] Affichez noms, prénoms, elo des joueuses ainsi que le nom de leur club. Ordonnez par elo décroissant
-  - Combien avez-vous de lignes ?
-  - Combien de lignes compte la table *joueuse* ?
-- [ ] Affichez tous les noms, prénoms, elo des joueuses ainsi que leur éventuel nom de club
-- [ ] Ajoutez à la précédente requête l'éventuel nom du titre de la joueuse
 
 
 ## Quelques statistiques

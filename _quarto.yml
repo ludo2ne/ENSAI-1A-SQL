@@ -43,6 +43,8 @@ website:
             text: "TP3 - Discographie"
           - href: doc/tp/tp4.qmd
             text: "TP4 - Chess Unofficial Fed"
+          - href: doc/tp/tp5.qmd
+            text: "TP5 - NBA stats"
       - text: Outils
         menu:
           - href: doc/outils/datalab.qmd

@@ -195,7 +195,7 @@ Nous allons maintenant rechercher les artistes mal-aimés i.e. ceux qui ne sont 
 - [ ] Même question avec `NOT EXISTS`
   - la syntaxe est un peu moins intuitive mais la requête est plus optimisée
 
-Concentrons-nous miantenant sur les artistes et les chansons les plus populaires.
+Concentrons-nous maintenant sur les artistes et les chansons les plus populaires.
 
 Vous avez écrit précédemment une requête listant les playlists avec les artistes et les chansons. Repartez de cette requête.
 
@@ -285,12 +285,9 @@ SELECT a.*
 - [Correction TP3](./correction/tp3.sql)
 :::
 
-## Arrêtez votre service {.unnumbered}
+## Arrêtez vos services {.unnumbered}
 
 C'est la fin du TP, vous pouvez maintenant sauvegarder votre travail et libérer les ressources réservées :
 
-- [ ] Copiez votre code et collez le sur votre machine dans un fichier *.sql*
-  - par exemple dans `P:/Cours1A/UE3-Bases-de-donnees-relationnelles/TP4/tp4.sql`
-  - ou en téléchargeant depuis CloudBeaver le fichier sql (petit bouton avec un dossier et une flèche vers le bas)
-- [ ] Retournez sur la page d'accueil du Datalab
-- [ ] Allez dans *Mes Services* et supprimez votre service
+- [ ] Copiez-collez vos scripts SQL sur votre machine
+- [ ] Arrêter les services du Datalab

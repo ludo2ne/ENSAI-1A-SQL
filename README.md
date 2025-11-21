@@ -35,7 +35,7 @@
 
 - TP1 : 1eres requetes, DuckBD, WHERE, GROUP BY, NOT EXISTS
 - TP2 : INNER JOIN, DATE
-  - Rappels : jointures (USING/ON), alias, table d'association
+  - Rappels : jointures (USING/ON), alias, table d'association, Modélisation (PK, FK)
 - TP3 : SEQUENCE, INSERT
 - TP4 : LEFT JOIN
 - TP5 : VIEW, COALESCE
