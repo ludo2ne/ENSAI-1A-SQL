@@ -7,9 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Ludovic Deneuville">
-<meta name="description" content="TP3">
+<meta name="description" content="TP5">
 
-<title>Discographie 🎵 – Base de données</title>
+<title>NBA stats – Base de données</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -80,9 +80,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap-b66d9f3da4d84aca26cc7cc1c94b0445.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
 <link href="../../site_libs/bootstrap/bootstrap-dark-d3daa1d1ef55350d6f5c3e6cec97cbbd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
-<link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
-<link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -430,21 +427,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#lancement-des-services" id="toc-lancement-des-services" class="nav-link" data-scroll-target="#lancement-des-services"><span class="header-section-number">1</span> Lancement des services</a></li>
-  <li><a href="#les-données" id="toc-les-données" class="nav-link" data-scroll-target="#les-données"><span class="header-section-number">2</span> Les données</a>
-  <ul class="collapse">
-  <li><a href="#chargez-les-données" id="toc-chargez-les-données" class="nav-link" data-scroll-target="#chargez-les-données"><span class="header-section-number">2.1</span> Chargez les données</a></li>
-  <li><a href="#description" id="toc-description" class="nav-link" data-scroll-target="#description"><span class="header-section-number">2.2</span> Description</a></li>
-  <li><a href="#modèle-de-données" id="toc-modèle-de-données" class="nav-link" data-scroll-target="#modèle-de-données"><span class="header-section-number">2.3</span> Modèle de données</a></li>
-  </ul></li>
-  <li><a href="#exercice" id="toc-exercice" class="nav-link" data-scroll-target="#exercice"><span class="header-section-number">3</span> Exercice</a>
-  <ul class="collapse">
-  <li><a href="#exploration-des-tables" id="toc-exploration-des-tables" class="nav-link" data-scroll-target="#exploration-des-tables"><span class="header-section-number">3.1</span> Exploration des tables</a></li>
-  <li><a href="#place-aux-artistes" id="toc-place-aux-artistes" class="nav-link" data-scroll-target="#place-aux-artistes"><span class="header-section-number">3.2</span> Place aux artistes</a></li>
-  <li><a href="#créez-votre-playlist" id="toc-créez-votre-playlist" class="nav-link" data-scroll-target="#créez-votre-playlist"><span class="header-section-number">3.3</span> Créez votre playlist</a></li>
-  <li><a href="#votez-pour-la-meilleure-playlist" id="toc-votez-pour-la-meilleure-playlist" class="nav-link" data-scroll-target="#votez-pour-la-meilleure-playlist"><span class="header-section-number">3.4</span> Votez pour la meilleure playlist</a></li>
-  <li><a href="#im-with-u" id="toc-im-with-u" class="nav-link" data-scroll-target="#im-with-u"><span class="header-section-number">3.5</span> I’m WITH u</a></li>
-  </ul></li>
+  <li><a href="#importer-la-base-de-données" id="toc-importer-la-base-de-données" class="nav-link" data-scroll-target="#importer-la-base-de-données"><span class="header-section-number">1</span> Importer la base de données</a></li>
+  <li><a href="#rendez-vous-en-base-inconnue" id="toc-rendez-vous-en-base-inconnue" class="nav-link" data-scroll-target="#rendez-vous-en-base-inconnue"><span class="header-section-number">2</span> Rendez-vous en base inconnue</a></li>
+  <li><a href="#explorons-avec-les-spurs" id="toc-explorons-avec-les-spurs" class="nav-link" data-scroll-target="#explorons-avec-les-spurs"><span class="header-section-number">3</span> Explorons avec les Spurs</a></li>
+  <li><a href="#matchs-et-classements" id="toc-matchs-et-classements" class="nav-link" data-scroll-target="#matchs-et-classements"><span class="header-section-number">4</span> Matchs et classements</a></li>
+  <li><a href="#triple-zéro" id="toc-triple-zéro" class="nav-link" data-scroll-target="#triple-zéro"><span class="header-section-number">5</span> Triple zéro</a></li>
   <li><a href="#arrêtez-vos-services" id="toc-arrêtez-vos-services" class="nav-link" data-scroll-target="#arrêtez-vos-services">Arrêtez vos services</a></li>
   </ul>
 </nav>
@@ -459,12 +446,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Discographie 🎵</h1>
+<h1 class="title">NBA stats</h1>
 </div>
 
 <div>
   <div class="description">
-    TP3
+    TP5
   </div>
 </div>
 
@@ -489,133 +476,348 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="introduction" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="introduction">Introduction</h2>
-<div class="callout callout-style-default callout-important callout-titled">
+<p>Vous allez travailler sur des données de la nba depuis les années 2000.</p>
+<p>Les données sont brutes i.e.&nbsp;elles ont été récupérée via l’api <a href="https://www.nba.com/stats" target="_blank">stats nba</a> et elles n’ont quasiment pas été retouchées.</p>
+<p>Le modèle de données n’est pas fourni ! Ce sera à vous d’explorer vous même la base de données.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Important
+Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<ul>
-<li>Écrivez des requêtes jolies !</li>
-</ul>
+<p>Dans votre vie professionnelle, dans 95 % des cas vous allez hériter de missions où la documentation est obsolète voire inexistante.</p>
+<p>Il faut donc apprendre à vous débrouiller dès maintenant. Et au passage, vous convaincre que faire et maintenir la doc ça aide et c’est bien !</p>
 </div>
 </div>
-<p>Les notions vues dans ce TP :</p>
-<ul>
-<li>agrégations</li>
-<li>jointures</li>
-<li>insertion de données</li>
-<li>utilisation de séquence</li>
-<li>bonus : CTE (vu au dernier cours)</li>
-</ul>
 </section>
-<section id="lancement-des-services" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="lancement-des-services"><span class="header-section-number">1</span> Lancement des services</h2>
-<p>Pour plus de détails, allez dans l’onglet <a href="../../doc/outils/datalab.html" target="_blank">Datalab</a>.</p>
+<section id="importer-la-base-de-données" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="importer-la-base-de-données"><span class="header-section-number">1</span> Importer la base de données</h2>
 <ul class="task-list">
 <li><label><input type="checkbox">Connectez-vous à un Datalab</label></li>
 <li><label><input type="checkbox">Lancez un service <strong>PostgreSQL</strong></label></li>
-<li><label><input type="checkbox">Lancez un service <strong>cloudBeaver</strong></label>
+<li><label><input type="checkbox">Lancez un service <strong>cloudBeaver</strong></label></li>
+</ul>
+<p><span class="emoji" data-emoji="construction">🚧</span></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> subprocess</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> psycopg2</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> s3fs</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> dotenv <span class="im">import</span> load_dotenv</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>load_dotenv()</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>AWS_ENDPOINT <span class="op">=</span> os.environ[<span class="st">"AWS_ENDPOINT_URL"</span>]</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>DUMP_FILE <span class="op">=</span> <span class="st">"nba.dump"</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>FILE_PATH <span class="op">=</span> <span class="ss">f"s3://ludo2ne/diffusion/ENSAI/SQL-TP/</span><span class="sc">{</span>DUMP_FILE<span class="sc">}</span><span class="ss">"</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>fs <span class="op">=</span> s3fs.S3FileSystem(</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    client_kwargs<span class="op">=</span>{<span class="st">"endpoint_url"</span>: AWS_ENDPOINT},</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    key<span class="op">=</span>os.environ[<span class="st">"AWS_ACCESS_KEY_ID"</span>],</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    secret<span class="op">=</span>os.environ[<span class="st">"AWS_SECRET_ACCESS_KEY"</span>],</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    token<span class="op">=</span>os.environ[<span class="st">"AWS_SESSION_TOKEN"</span>],</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"📥 Téléchargement du dump depuis S3..."</span>)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="cf">with</span> fs.<span class="bu">open</span>(FILE_PATH, <span class="st">"rb"</span>) <span class="im">as</span> f_in:</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(DUMP_FILE, <span class="st">"wb"</span>) <span class="im">as</span> f_out:</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>        f_out.write(f_in.read())</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"✅ Dump téléchargé :"</span>)</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>PG_HOST <span class="op">=</span> os.getenv(<span class="st">"POSTGRESQL_HOST"</span>)</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>PG_PORT <span class="op">=</span> os.getenv(<span class="st">"POSTGRESQL_PORT"</span>, <span class="st">"5432"</span>)</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>PG_DB <span class="op">=</span> os.getenv(<span class="st">"POSTGRESQL_DATABASE"</span>)</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>PG_USER <span class="op">=</span> os.getenv(<span class="st">"POSTGRESQL_USERNAME"</span>)</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>PG_PASSWORD <span class="op">=</span> os.getenv(<span class="st">"POSTGRESQL_PASSWORD"</span>)</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>PG_SCHEMA <span class="op">=</span> os.getenv(<span class="st">"POSTGRESQL_SCHEMA"</span>)</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>os.environ[<span class="st">"PGPASSWORD"</span>] <span class="op">=</span> PG_PASSWORD</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>conn <span class="op">=</span> psycopg2.<span class="ex">connect</span>(</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    dbname<span class="op">=</span>PG_DB, user<span class="op">=</span>PG_USER, password<span class="op">=</span>PG_PASSWORD, host<span class="op">=</span>PG_HOST, port<span class="op">=</span>PG_PORT</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>conn.autocommit <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>cur <span class="op">=</span> conn.cursor()</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>sql_create_schema <span class="op">=</span> <span class="ss">f"CREATE SCHEMA IF NOT EXISTS </span><span class="sc">{</span>PG_SCHEMA<span class="sc">}</span><span class="ss">;"</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>cur.execute(sql_create_schema)</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>cmd <span class="op">=</span> [</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>    <span class="st">"pg_restore"</span>,</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>    <span class="st">"-d"</span>,</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>    PG_DB,</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>    <span class="st">"-h"</span>,</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>    PG_HOST,</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>    <span class="st">"-p"</span>,</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>    PG_PORT,</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>    <span class="st">"-U"</span>,</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>    PG_USER,</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>    <span class="st">"-n"</span>,</span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>    PG_SCHEMA,</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>    DUMP_FILE,</span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"⏳ Restauration PostgreSQL..."</span>)</span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>subprocess.run(cmd, check<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"🎉 Base NBA restaurée dans votre PostgreSQL"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="rendez-vous-en-base-inconnue" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="rendez-vous-en-base-inconnue"><span class="header-section-number">2</span> Rendez-vous en base inconnue</h2>
+<p>Je n’ai pas réussi à inviter Laury T pour vous accompagner dans cette aventure mais voici quelques requêtes utiles pour explorer une base de données PostgreSQL.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> table_name</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> information_schema.<span class="kw">tables</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> table_schema <span class="op">=</span> <span class="st">'&lt;schema_name&gt;'</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>   <span class="kw">AND</span> table_type <span class="op">=</span> <span class="st">'BASE TABLE'</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a> <span class="kw">ORDER</span> <span class="kw">BY</span> table_name;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> column_name,</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>       data_type,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>       is_nullable,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>       column_default</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> information_schema.<span class="kw">columns</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> table_schema <span class="op">=</span> <span class="st">'&lt;...&gt;'</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>   <span class="kw">AND</span> table_name   <span class="op">=</span> <span class="st">'&lt;...&gt;'</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a> <span class="kw">ORDER</span> <span class="kw">BY</span> ordinal_position;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-note callout-titled" title="Glossaire">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Glossaire
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 11%">
+<col style="width: 88%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Colonne</th>
+<th>Signification</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>matchup</strong></td>
+<td>Description du match : ex. <code>LAL @ BOS</code> (à l’extérieur) ou <code>LAL vs BOS</code> (à domicile).</td>
+</tr>
+<tr class="even">
+<td><strong>wl</strong></td>
+<td>Résultat pour l’équipe : <code>W</code> (win), <code>L</code> (loss).</td>
+</tr>
+<tr class="odd">
+<td><strong>min</strong></td>
+<td>Minutes totales jouées par l’équipe (toujours <code>240</code> sauf prolongation).</td>
+</tr>
+<tr class="even">
+<td><strong>pts</strong></td>
+<td>Total des points de l’équipe.</td>
+</tr>
+<tr class="odd">
+<td><strong>fgm</strong></td>
+<td>Field goals made — tirs réussis (2 pts + 3 pts).</td>
+</tr>
+<tr class="even">
+<td><strong>fga</strong></td>
+<td>Field goals attempted — tirs tentés.</td>
+</tr>
+<tr class="odd">
+<td><strong>fg_pct</strong></td>
+<td>Taux de réussite : <code>fgm / fga</code>.</td>
+</tr>
+<tr class="even">
+<td><strong>fg3m</strong></td>
+<td>3-points réussis.</td>
+</tr>
+<tr class="odd">
+<td><strong>fg3a</strong></td>
+<td>3-points tentés.</td>
+</tr>
+<tr class="even">
+<td><strong>fg3_pct</strong></td>
+<td>Pourcentage à 3 points.</td>
+</tr>
+<tr class="odd">
+<td><strong>ftm</strong></td>
+<td>Free throws made — lancers francs réussis.</td>
+</tr>
+<tr class="even">
+<td><strong>fta</strong></td>
+<td>Free throws attempted — lancers francs tentés.</td>
+</tr>
+<tr class="odd">
+<td><strong>ft_pct</strong></td>
+<td>Pourcentage aux lancers.</td>
+</tr>
+<tr class="even">
+<td><strong>oreb</strong></td>
+<td>Rebonds offensifs.</td>
+</tr>
+<tr class="odd">
+<td><strong>dreb</strong></td>
+<td>Rebonds défensifs.</td>
+</tr>
+<tr class="even">
+<td><strong>reb</strong></td>
+<td>Rebonds totaux (oreb + dreb).</td>
+</tr>
+<tr class="odd">
+<td><strong>ast</strong></td>
+<td>Passes décisives.</td>
+</tr>
+<tr class="even">
+<td><strong>stl</strong></td>
+<td>Interceptions.</td>
+</tr>
+<tr class="odd">
+<td><strong>blk</strong></td>
+<td>Contres.</td>
+</tr>
+<tr class="even">
+<td><strong>tov</strong></td>
+<td>Ballons perdus (turnovers).</td>
+</tr>
+<tr class="odd">
+<td><strong>pf</strong></td>
+<td>Fautes personnelles.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<section id="explorons-avec-les-spurs" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="explorons-avec-les-spurs"><span class="header-section-number">3</span> Explorons avec les Spurs</h2>
+<ul class="task-list">
+<li><label><input type="checkbox">Quel est l’id de l’équipe des Spurs de San Antonio ?</label></li>
+<li><label><input type="checkbox">Listez les joueurs des Spurs</label></li>
+<li><label><input type="checkbox">Listez tous les matchs des Spurs de la saison régulière <em>2024-2025</em></label>
 <ul>
-<li>ouvrez ce service</li>
-<li>vérifiez que vous êtes connectés à la base de données PostgreSQL</li>
+<li>classez ces matchs par date</li>
+</ul></li>
+<li><label><input type="checkbox">Choisissez un <em>game_id</em> parmi ces matchs et regardez combien de lignes correspondent</label></li>
+</ul>
+<p>Ce choix de conception a des avantages et des inconvénients. Nous y reviendrons par la suite lorsque nous afficherons les scores de chaque match.</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Proposez une clé primaire pour la table <em>game</em></label></li>
+<li><label><input type="checkbox">Ecrivez une requête pour vérifier si votre proposition est correcte</label></li>
+</ul>
+<p>Regardons maintenant les stats des joueurs.</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Affichez les stats des joueurs des Spurs pour la saison régulière <em>2024-2025</em></label></li>
+<li><label><input type="checkbox">Affichez les stats des joueurs des Spurs par match</label></li>
+<li><label><input type="checkbox">Est-ce qu’il n’y aurait pas des doublons dans cette table ?</label></li>
+<li><label><input type="checkbox">Est-ce que cette table contient les stats des joueurs par match de toutes les saisons ?</label></li>
+</ul>
+</section>
+<section id="matchs-et-classements" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="matchs-et-classements"><span class="header-section-number">4</span> Matchs et classements</h2>
+<p>Dans toute cette partie nous nous interesserons à la saison <em>2020-2021</em>.</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Listez les matchs de la saison</label></li>
+<li><label><input type="checkbox">Combien y-a-t-il eu de match cette saison</label></li>
+<li><label><input type="checkbox">Distinguez saison régulière et Playoffs</label></li>
+</ul>
+<p>Interessons-nous la saison régulière.</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Listez les matchs de <em>Utah Jazz</em></label></li>
+<li><label><input type="checkbox">Comptez leur nombre de victoires et de défaites</label></li>
+<li><label><input type="checkbox">Utilisez COUNT et FILTER pour avoir le résultat sur une seule ligne</label>
+<ul>
+<li>ajoutez le nombre de matchs joués</li>
+</ul></li>
+<li><label><input type="checkbox">Affichez les mêmes colones pour chaque équipe de la conférence <em>Ouest</em></label>
+<ul>
+<li>classez par nombre de victoires décroissant</li>
 </ul></li>
 </ul>
-</section>
-<section id="les-données" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="les-données"><span class="header-section-number">2</span> Les données</h2>
-<p>Le thème du jour sera la musique <span class="emoji" data-emoji="musical_note">🎵</span> <span class="emoji" data-emoji="guitar">🎸</span> <span class="emoji" data-emoji="trumpet">🎺</span></p>
-<section id="chargez-les-données" class="level3" data-number="2.1">
-<h3 data-number="2.1" class="anchored" data-anchor-id="chargez-les-données"><span class="header-section-number">2.1</span> Chargez les données</h3>
+<p>Passons maintenant aux Playoffs.</p>
 <ul class="task-list">
-<li><label><input type="checkbox">Copiez le contenu de ces 2 scripts sql</label>
+<li><label><input type="checkbox">Listez les matchs de <em>Utah Jazz</em></label></li>
+<li><label><input type="checkbox">Pour chacun de leurs matchs, affichez le score, le nom de leurs adversaires et le résultat</label></li>
+<li><label><input type="checkbox">Affichez les scores de matchs</label></li>
+</ul>
+<p>Une dernière question pour la route :</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Si vous deviez afficher toutes les finales et leur score, comment feriez-vous ?</label></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled" title="Aide">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Aide
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul class="task-list">
+<li><label><input type="checkbox">Quelles étapes sont réalisées ci-dessous ?</label></li>
+</ul>
+<p>Tout simplement :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">WITH</span> last_playoff_games <span class="kw">AS</span> (</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> season_id, <span class="fu">MAX</span>(game_id) <span class="kw">AS</span> last_game_id</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> nba.game</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> season_type <span class="op">=</span> <span class="st">'Playoffs'</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a> <span class="kw">GROUP</span> <span class="kw">BY</span> season_id</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>),</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>final_teams <span class="kw">AS</span> (</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> g.season_id, </span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>       g.team_id <span class="kw">AS</span> team_id_win, </span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>       g2.team_id <span class="kw">AS</span> team_id_los</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> nba.game g</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> last_playoff_games lpg <span class="kw">ON</span> g.season_id <span class="op">=</span> lpg.season_id <span class="kw">AND</span> g.game_id <span class="op">=</span> lpg.last_game_id</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> nba.game g2 <span class="kw">ON</span> g2.game_id <span class="op">=</span> g.game_id <span class="kw">AND</span> g2.team_id <span class="op">&lt;&gt;</span> g.team_id</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> g.wl <span class="op">=</span> <span class="st">'W'</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> gwin.season_id,</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>       twin.full_name <span class="kw">AS</span> equipe,</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>       <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">FILTER</span> (<span class="kw">WHERE</span> gwin.wl <span class="op">=</span> <span class="st">'W'</span>) <span class="op">||</span> <span class="st">' - '</span> <span class="op">||</span> <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">FILTER</span> (<span class="kw">WHERE</span> gwin.wl <span class="op">=</span> <span class="st">'L'</span>) <span class="kw">AS</span> score,</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>       tlos.full_name <span class="kw">AS</span> adversaire</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> nba.game gwin</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> final_teams ft <span class="kw">ON</span> ft.team_id_win <span class="op">=</span> gwin.team_id <span class="kw">AND</span> ft.season_id <span class="op">=</span> gwin.season_id</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> nba.team twin <span class="kw">ON</span> twin.<span class="kw">id</span> <span class="op">=</span> gwin.team_id</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> nba.game glos <span class="kw">ON</span> glos.game_id <span class="op">=</span> gwin.game_id <span class="kw">AND</span> glos.team_id <span class="op">=</span> ft.team_id_los</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> nba.team tlos <span class="kw">ON</span> tlos.<span class="kw">id</span> <span class="op">=</span> glos.team_id</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> gwin.season_type <span class="op">=</span> <span class="st">'Playoffs'</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a> <span class="kw">GROUP</span> <span class="kw">BY</span> gwin.season_id, twin.full_name, tlos.full_name</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a> <span class="kw">ORDER</span> <span class="kw">BY</span> gwin.season_id <span class="kw">DESC</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+</section>
+<section id="triple-zéro" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="triple-zéro"><span class="header-section-number">5</span> Triple zéro</h2>
+<p>Lors d’un match, les principales statistiques utilisées pour mesurer les performances des joueurs sont : les points, les rebonds, les passes décisives, les interceptions et les contres.</p>
+<p>Un joueur réalise alors un :</p>
 <ul>
-<li><a href="./data/tp3-create-tables.sql" target="_blank">création des tables</a></li>
-<li><a href="./data/tp3-pop-tables.sql" target="_blank">insertion des données</a></li>
-</ul></li>
-<li><label><input type="checkbox">Collez-les dans la fenêtre SQL de CloudBeaver</label></li>
-<li><label><input type="checkbox">Exécutez les scripts</label>
+<li><strong>double-double</strong> : s’il atteint au moins 10 dans deux de ces statistiques</li>
+<li><strong>triple-double</strong> : au moins 10 dans trois de ces statistiques (grosse perf)</li>
+<li><strong>quadruple-double</strong> : au moins 10 dans quatre de ces statistiques (très rare)</li>
+</ul>
+<p>Il existe également d’autres performances très rares :</p>
 <ul>
-<li>Cliquez sur la petite icone sous les triangles oranges qui ressemble à <span class="emoji" data-emoji="scroll">📜</span></li>
-<li>raccourci (ALT + X)</li>
-</ul></li>
+<li><strong>double triple-double</strong> : s’il atteint au moins 20 dans trois de ces statistiques</li>
+<li><strong>Five-by-five</strong> : au moins 5 dans les cinq catégories</li>
 </ul>
-</section>
-<section id="description" class="level3" data-number="2.2">
-<h3 data-number="2.2" class="anchored" data-anchor-id="description"><span class="header-section-number">2.2</span> Description</h3>
-<p>Les tables sont les suivantes :</p>
-<ul>
-<li><strong>artiste</strong>(<u>id_artiste</u>, nom, code_pays, date_naissance, actif)</li>
-<li><strong>album</strong>(<u>id_album</u>, titre, annee, #id_artiste)</li>
-<li><strong>chanson</strong>(<u>id_chanson</u>, #id_artiste_principal, titre, duree, #id_album, annee)</li>
-<li><strong>playlist</strong>(<u>id_playlist</u>, nom, date_creation, description)</li>
-<li><strong>playlist_chanson</strong>(<u>#id_playlist, #id_chanson</u>, ordre, date_ajout)</li>
-</ul>
-</section>
-<section id="modèle-de-données" class="level3" data-number="2.3">
-<h3 data-number="2.3" class="anchored" data-anchor-id="modèle-de-données"><span class="header-section-number">2.3</span> Modèle de données</h3>
-<p><a href="./data/tp3-uml.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="./data/tp3-uml.PNG" class="img-fluid"></a></p>
-</section>
-</section>
-<section id="exercice" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="exercice"><span class="header-section-number">3</span> Exercice</h2>
-<section id="exploration-des-tables" class="level3" data-number="3.1">
-<h3 data-number="3.1" class="anchored" data-anchor-id="exploration-des-tables"><span class="header-section-number">3.1</span> Exploration des tables</h3>
-<p>Lorsque vous prenez en main une base de données, la première chose à faire est de regarder ce que contiennent les tables.</p>
+<p>Vous aussi en avez assez d’entendre toujours les mêmes noms réaliser ce genre de performance : Wemby, Curry, Gilgeous-Alexander, Doncic, Jokic…</p>
+<p>L’heure de la revanche a sonné. Mettons aujourd’hui en lumière les vrais champions, ceux qui réalisent des 0 dans ces stats, font des fautes, perdent des balles.</p>
 <ul class="task-list">
-<li><label><input type="checkbox">Listez toutes les chansons</label></li>
-<li><label><input type="checkbox">Listez les chansons (titre, année) ainsi que le nom de l’artiste</label></li>
-<li><label><input type="checkbox">Ordonnez par nom d’artiste, puis par titre</label></li>
-<li><label><input type="checkbox">Ajoutez le titre de l’album si celui-ci est précisé</label></li>
-</ul>
-<p>Faisons quelques statistiques descriptives.</p>
-<ul class="task-list">
-<li><label><input type="checkbox">Quelle sont les durées minimum, maximum et moyenne des chansons</label></li>
-<li><label><input type="checkbox">Affichez le nombre de chansons par année</label>
-<ul>
-<li>ordonnez par nombre de chansons décroissant</li>
-</ul></li>
-<li><label><input type="checkbox">Quelles sont les années avec au moins 10 chansons</label></li>
-<li><label><input type="checkbox">Complétez la dernière requête en ajoutant la durée moyenne des chansons pour chaque année</label></li>
-</ul>
-<p>Est-ce qu’il y a plusieurs chansons ayant le même titre ?</p>
-<ul class="task-list">
-<li><label><input type="checkbox">Pour chaque titre de chanson, comptez le nombre d’occurences</label></li>
-<li><label><input type="checkbox">N’affichez que les titres ayant au moins deux occurences</label></li>
-<li><label><input type="checkbox">Est-ce qu’il y a des chansons en doublon ?</label>
-<ul>
-<li>i.e.&nbsp;même titre et même artiste</li>
-</ul></li>
-</ul>
-<p>Si vous en trouvez une, essayez de la supprimer. À votre avis, pourquoi cela ne fonctionne pas ?</p>
-</section>
-<section id="place-aux-artistes" class="level3" data-number="3.2">
-<h3 data-number="3.2" class="anchored" data-anchor-id="place-aux-artistes"><span class="header-section-number">3.2</span> Place aux artistes</h3>
-<ul class="task-list">
-<li><label><input type="checkbox">Listez les noms d’artistes ainsi que les titres de leurs chansons</label></li>
-<li><label><input type="checkbox">Comptez le nombre de chansons par artiste</label></li>
-<li><label><input type="checkbox">Classez par ordre décroissant</label></li>
-<li><label><input type="checkbox">Conservez uniquement les artistes ayant 20 chansons ou plus</label></li>
-</ul>
-<p>Il y a des artistes solo et des groupes. Pour la groupe la date de naissance ne devrait pas être renseignée.</p>
-<ul class="task-list">
-<li><label><input type="checkbox">Mettez à jour la table pour supprimer les dates de naissance des groupes</label></li>
-<li><label><input type="checkbox">Quel est le plus viel artiste solo en activité ?</label></li>
-</ul>
-<p>Interessons nous maintenant aux pays des artistes.</p>
-<ul class="task-list">
-<li><label><input type="checkbox">Comptez le nombre d’artistes par pays</label></li>
-</ul>
-</section>
-<section id="créez-votre-playlist" class="level3" data-number="3.3">
-<h3 data-number="3.3" class="anchored" data-anchor-id="créez-votre-playlist"><span class="header-section-number">3.3</span> Créez votre playlist</h3>
-<ul class="task-list">
-<li><label><input type="checkbox">Insérez une nouvelle ligne dans la table <em>playlist</em></label></li>
-<li><label><input type="checkbox">Ajoutez 5 chansons dans votre playlist</label></li>
+<li><label><input type="checkbox">Affichez les statistiques par match de chaque joueur</label></li>
+<li><label><input type="checkbox">Conservez uniquement ceux ayant joué plus de 10 minutes par match</label></li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -627,190 +829,44 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Aucune de ces chansons ne correspond à vos goût musicaux…</p>
-<p>Vous êtes vraiment sûr ?</p>
-<p>Allez un petit effort, il y a des chansons et des artistes très sympas.</p>
-</div>
-</div>
-<p>Nous allons maintenant ajouter à votre playlist toutes les chansons de l’album <em>Californian Soil</em>.</p>
-<p>Pour créer votre requête d’insertion, vous allez avoir besoin des données suivantes :</p>
 <ul>
-<li><em>id_playlist</em> : vous pouvez soit :
-<ul>
-<li>insérer la valeur “en dur”</li>
-<li>utiliser <code>CURRVAL('playlist_id_playlist_seq')</code> pour obtenir la dernière valeur de <em>id_playlist</em> i.e.&nbsp;celui de la playlist que vous venez de créer</li>
-</ul></li>
-<li><em>id_chanson</em> : il va falloir une reqûete pour les récupérer</li>
-<li><em>ordre</em> : vous allez créer et utiliser une séquence</li>
-<li><em>date_ajout</em> : vous utiliserez simplement : <code>CURRENT_DATE</code></li>
+<li>Commencez par retirer les lignes ou la colonne <em>minutes</em> est vide</li>
+<li>Puis utilisez <code>CAST(SPLIT_PART(minutes, ':', 1) AS integer)</code></li>
 </ul>
-<hr>
+</div>
+</div>
 <ul class="task-list">
-<li><label><input type="checkbox">Créez une séquence nommée <em>seq_playlist_ordre</em></label></li>
-<li><label><input type="checkbox">Listez toutes les chansons de l’album <em>Californian Soil</em></label></li>
-<li><label><input type="checkbox">Insérer dans votre playlist toutes les chansons de l’album <em>Californian Soil</em></label></li>
-</ul>
-<div class="callout callout-style-default callout-tip callout-titled" title="Un peu d'aide">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Un peu d’aide
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Pour trouver un peu d’inspiration, un exemple d’INSERT en utilisant un SELECT :</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> joueuse_copy(nom, prenom, numero, date_creation)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>       <span class="st">'pierre'</span>,</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>       nextval(<span class="st">'seq_numero'</span>),</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>       <span class="fu">CURRENT_DATE</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> joueuse;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</div>
-</div>
-<p>Est-ce que vous pouvez ajouter plusieurs fois la même chanson dans une playlist ? Pourquoi ?</p>
-<p>Comment pourrait-t-on faire pour s’affranchir de cette contrainte ?</p>
-</section>
-<section id="votez-pour-la-meilleure-playlist" class="level3" data-number="3.4">
-<h3 data-number="3.4" class="anchored" data-anchor-id="votez-pour-la-meilleure-playlist"><span class="header-section-number">3.4</span> Votez pour la meilleure playlist</h3>
-<p>Interessons-nous maintenant aux playlists.</p>
-<ul class="task-list">
-<li><label><input type="checkbox">Affichez les playlists</label></li>
-<li><label><input type="checkbox">Ajoutez les titres des chansons de la playlist</label>
+<li><label><input type="checkbox">En plus du nom du joueur et du nombre de minutes jouées, affichez les cinq statistiques demandées</label></li>
+<li><label><input type="checkbox">Est-ce que nous avons un champion avec un <em>quintuple zéro</em> ?</label></li>
+<li><label><input type="checkbox"><span class="emoji" data-emoji="star">⭐</span> <span class="emoji" data-emoji="star">⭐</span> <span class="emoji" data-emoji="star">⭐</span> Un peu plus compliqué, est-ce qu’il y a des quadruples zéros ?</label>
 <ul>
-<li>Colonnes à afficher : nom de la playlist, titre de la chanson</li>
-<li>Classez par noms de playlists</li>
-</ul></li>
-<li><label><input type="checkbox">Ajoutez les noms des artistes</label>
-<ul>
-<li>Classez par nom de playlist, puis par nom d’artiste</li>
+<li><em>quadruple zéro</em> : 0 points et 3 autres stats à 0</li>
+<li>Le <code>CASE WHEN</code> est votre ami ici</li>
 </ul></li>
 </ul>
-<p>Vous remarquez qu’à l’affichage vous avez deux colonnes appelées “nom”. Pour faire la différence, vous allez modifier l’affichage de ces colonnes.</p>
+<p>Quelques autres titres à décerner (toujours avec au moins 10min de jeu):</p>
 <ul class="task-list">
-<li><label><input type="checkbox">Modifiez le <em>SELECT</em> pour afficher les entêtes de colonnes <em>Nom de la playlist</em>, <em>Titre de la chanson</em> et <em>Nom de l’artiste</em></label></li>
-</ul>
-<hr>
-<ul class="task-list">
-<li><label><input type="checkbox">Quelle playlist a le plus de chansons ?</label></li>
-<li><label><input type="checkbox">Quelle playlist dure le plus longtemps ?</label></li>
-</ul>
-<p>Nous allons maintenant rechercher les artistes mal-aimés i.e.&nbsp;ceux qui ne sont dans aucune playlist. Procédons par étape.</p>
-<ul class="task-list">
-<li><label><input type="checkbox">Listez les artistes présents dans les playlists</label></li>
-<li><label><input type="checkbox">Ensuite, gardez uniquement les différents <em>id_artiste</em></label></li>
-<li><label><input type="checkbox">Affichez les artistes présent dans aucune playlist</label>
+<li><label><input type="checkbox">Celui qui a le plus souvent marqué 0 points</label></li>
+<li><label><input type="checkbox">Qui est le pire shooter d’un match ?</label>
 <ul>
-<li>en utilisant <code>NOT IN</code> et une sous-requête</li>
-<li>conservez uniquement les <em>id_artiste</em> qui ne sont pas dans la requête précédente</li>
+<li>i.e.&nbsp;qui n’a marqué aucun point, et a tenté le plus grand nombre de tirs, lancers francs inclus</li>
 </ul></li>
-<li><label><input type="checkbox">Même question avec <code>NOT EXISTS</code></label>
-<ul>
-<li>la syntaxe est un peu moins intuitive mais la requête est plus optimisée</li>
-</ul></li>
+<li><label><input type="checkbox">Liste des joueurs qui lors d’un match ont eu plus de pertes de balle (turnover) que de points marqués</label></li>
+<li><label><input type="checkbox">Top 10 de ceux qui ne terminent pas souvent les matchs (ils sont expulsés après 6 fautes personnelles)</label></li>
 </ul>
-<p>Concentrons-nous maintenant sur les artistes et les chansons les plus populaires.</p>
-<p>Vous avez écrit précédemment une requête listant les playlists avec les artistes et les chansons. Repartez de cette requête.</p>
+<p>La colonne <em>plusminuspoints</em> est la différence entre le nombre de points marqués par l’équipe et le nombre de points encaissés lorsque le joueur est sur le terrain.</p>
+<p>Cela donne une idée de l’influence et l’impact du joueur lorsqu’il est sur le terrain.</p>
 <ul class="task-list">
-<li><label><input type="checkbox">Comptez combien de fois chaque chanson apparait dans une playlist</label>
-<ul>
-<li>affichez le titre de la chanson, le nom de l’artiste, et le nombre de playlists</li>
-<li>ordonnez par nombre de playlists décroissant</li>
-</ul></li>
-<li><label><input type="checkbox">Au lieu de faire un simple <strong>JOIN</strong> avec la table <em>playlist_chanson</em>, faites un <strong>LEFT JOIN</strong></label>
-<ul>
-<li>Est-ce que « Tu feras la différence. Ton coeur prend des vacances. Il danse avec les loups. » ?</li>
-</ul></li>
-<li><label><input type="checkbox">Conservez uniquement celles qui apparaissent dans au moins 3 playlists</label></li>
-<li><label><input type="checkbox">Combien y-a-t-il de chansons dans toutes les playlists</label></li>
-<li><label><input type="checkbox">Combien y-a-t-il de chansons différentes dans toutes les playlists</label></li>
+<li><label><input type="checkbox">Quel joueur a eu la pire influence sur un seul match</label></li>
+<li><label><input type="checkbox">Quels sont les joueurs qui ont le plus grand nombre de matchs avec une influence négative sur l’équipe</label></li>
 </ul>
-</section>
-<section id="im-with-u" class="level3" data-number="3.5">
-<h3 data-number="3.5" class="anchored" data-anchor-id="im-with-u"><span class="header-section-number">3.5</span> I’m WITH u</h3>
-<p>Les CTE seront évoquées au dernier cours. Cela parait compliqué à première vue mais le principe est très simple.</p>
-<div class="callout callout-style-default callout-note callout-titled" title="CTE">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>CTE
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Une CTE (Common Table Expression) est une table temporaire nommée définie au début d’une requête avec le mot-clé <strong>WITH</strong>.</p>
-<p>À quoi ça sert ?</p>
-<ul>
-<li>Rendre une requête plus lisible (au lieu d’imbriquer des sous-requêtes)</li>
-<li>Réutiliser un même sous-résultat plusieurs fois</li>
-<li>Servir de base à des requêtes récursives</li>
-</ul>
-</div>
-</div>
-<p>Que fait cette requête ?</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="kw">DISTINCT</span> <span class="kw">ON</span> (code_pays) code_pays, </span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>       nom, </span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>       date_naissance</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> artiste</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> <span class="kw">NOT</span> groupe</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a> <span class="kw">ORDER</span> <span class="kw">BY</span> code_pays, </span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>          date_naissance <span class="kw">ASC</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Nous allons ici construire pas à pas une requête donnant le même résultat en utilisant une CTE.</p>
+<p>Ils ont essayé de faire perdre leur équipe mais ils n’ont pas réussi :</p>
 <ul class="task-list">
-<li><label><input type="checkbox">Listez les artistes qui ne sont pas des groupes</label></li>
-<li><label><input type="checkbox">Affichez pour chaque pays, la plus ancienne date de naissance (celle du plus vieil artiste)</label></li>
+<li><label><input type="checkbox">Quel joueur a eu la pire influence, et pourtant son équipe a gagné</label></li>
+<li><label><input type="checkbox">Ajoutez les deux équipes et le score du match</label></li>
 </ul>
-<p>Nous souhaitons maintenant récupérer le nom du plus viel artiste de chaque pays.</p>
-<p>L’idée pour obtenir ce nom :</p>
-<ul>
-<li>stocker le résultat de notre dernière requête dans une table temporaire <em>viel_artiste_pays</em></li>
-<li>joindre cette table à la table <em>artiste</em> via les colonnes <em>pays</em> et <em>date_naissance</em></li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">WITH</span> viel_artiste_pays <span class="kw">AS</span> (</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="op">..</span>.</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">..</span>.</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> artiste a</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> plus_vieux pv <span class="kw">ON</span> <span class="op">..</span>.</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="op">..</span>.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<ul class="task-list">
-<li><label><input type="checkbox">En complétant la requête à trous ci-dessous, donnez pour chaque pays l’artiste le plus vieux</label></li>
-</ul>
-<div class="callout callout-style-default callout-tip callout-titled" title="Autre exemple">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Autre exemple
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Pour vous aider, voici un autre exemple.</p>
-<p>Si l’on veut les noms des artistes qui sont les seuls à représenter leur pays :</p>
-<ul>
-<li>nous commençons par lister les pays avec un seul artiste</li>
-<li>nous joignons avec la table <em>artiste</em> pour récupérer dans un second temps les noms</li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">WITH</span> artiste_seul_dans_pays <span class="kw">AS</span> (</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> code_pays,</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> nb_artistes</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> artiste</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a> <span class="kw">GROUP</span> <span class="kw">BY</span> code_pays</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="kw">HAVING</span> <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> a.<span class="op">*</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> artiste a</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> artiste_seul_dans_pays n <span class="kw">ON</span> a.code_pays <span class="op">=</span> n.code_pays;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</div>
 <div class="callout callout-style-default callout-tip callout-titled" title="Solutions">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -819,15 +875,14 @@ Tip
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
-<li><a href="./correction/tp3.sql">Correction TP3</a></li>
+<li><a href="./correction/tp5.sql">Correction TP5</a></li>
 </ul>
 </div>
 </div>
 </div>
-</section>
 </section>
 <section id="arrêtez-vos-services" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="arrêtez-vos-services">Arrêtez vos services</h2>
@@ -1268,38 +1323,6 @@ Tip
 </div>
   </div>
 </footer>
-<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
-(function() {
-  let previousOnload = window.onload;
-  window.onload = () => {
-    if (previousOnload) {
-      previousOnload();
-    }
-    lightboxQuarto.on('slide_before_load', (data) => {
-      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-      const href = trigger.getAttribute('href');
-      if (href !== null) {
-        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
-        if (imgEl !== null) {
-          const srcAttr = imgEl.getAttribute("src");
-          if (srcAttr && srcAttr.startsWith("data:")) {
-            slideConfig.href = srcAttr;
-          }
-        }
-      } 
-    });
-  
-    lightboxQuarto.on('slide_after_load', (data) => {
-      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(slideNode);
-      }
-    });
-  
-  };
-  
-})();
-          </script>
 
 
 

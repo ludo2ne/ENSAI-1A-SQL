@@ -357,6 +357,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="dropdown-item" href="../../doc/tp/tp4.html">
  <span class="dropdown-text">TP4 - Chess Unofficial Fed</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="../../doc/tp/tp5.html">
+ <span class="dropdown-text">TP5 - NBA stats</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -430,16 +434,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#les-données" id="toc-les-données" class="nav-link" data-scroll-target="#les-données"><span class="header-section-number">2</span> Les données</a>
   <ul class="collapse">
   <li><a href="#chargez-les-données" id="toc-chargez-les-données" class="nav-link" data-scroll-target="#chargez-les-données"><span class="header-section-number">2.1</span> Chargez les données</a></li>
-  <li><a href="#description" id="toc-description" class="nav-link" data-scroll-target="#description"><span class="header-section-number">2.2</span> Description</a></li>
+  <li><a href="#description-des-tables" id="toc-description-des-tables" class="nav-link" data-scroll-target="#description-des-tables"><span class="header-section-number">2.2</span> Description des tables</a></li>
   <li><a href="#modèle-de-données" id="toc-modèle-de-données" class="nav-link" data-scroll-target="#modèle-de-données"><span class="header-section-number">2.3</span> Modèle de données</a></li>
+  <li><a href="#notation-relationnelle" id="toc-notation-relationnelle" class="nav-link" data-scroll-target="#notation-relationnelle"><span class="header-section-number">2.4</span> Notation relationnelle</a></li>
   </ul></li>
   <li><a href="#recherche-des-irrégularités" id="toc-recherche-des-irrégularités" class="nav-link" data-scroll-target="#recherche-des-irrégularités"><span class="header-section-number">3</span> Recherche des irrégularités</a></li>
   <li><a href="#élection-des-présidentes" id="toc-élection-des-présidentes" class="nav-link" data-scroll-target="#élection-des-présidentes"><span class="header-section-number">4</span> Élection des présidentes</a></li>
-  <li><a href="#remise-en-route-tp5" id="toc-remise-en-route-tp5" class="nav-link" data-scroll-target="#remise-en-route-tp5"><span class="header-section-number">5</span> Remise en route TP5</a></li>
-  <li><a href="#quelques-statistiques" id="toc-quelques-statistiques" class="nav-link" data-scroll-target="#quelques-statistiques"><span class="header-section-number">6</span> Quelques statistiques</a></li>
-  <li><a href="#afficher-les-résultats-de-parties" id="toc-afficher-les-résultats-de-parties" class="nav-link" data-scroll-target="#afficher-les-résultats-de-parties"><span class="header-section-number">7</span> Afficher les résultats de parties</a></li>
-  <li><a href="#gagnantes-des-tournois" id="toc-gagnantes-des-tournois" class="nav-link" data-scroll-target="#gagnantes-des-tournois"><span class="header-section-number">8</span> Gagnantes des tournois</a></li>
-  <li><a href="#qui-est-la-meilleure" id="toc-qui-est-la-meilleure" class="nav-link" data-scroll-target="#qui-est-la-meilleure"><span class="header-section-number">9</span> Qui est la meilleure ?</a></li>
+  <li><a href="#quelques-statistiques" id="toc-quelques-statistiques" class="nav-link" data-scroll-target="#quelques-statistiques"><span class="header-section-number">5</span> Quelques statistiques</a></li>
+  <li><a href="#afficher-les-résultats-de-parties" id="toc-afficher-les-résultats-de-parties" class="nav-link" data-scroll-target="#afficher-les-résultats-de-parties"><span class="header-section-number">6</span> Afficher les résultats de parties</a></li>
+  <li><a href="#gagnantes-des-tournois" id="toc-gagnantes-des-tournois" class="nav-link" data-scroll-target="#gagnantes-des-tournois"><span class="header-section-number">7</span> Gagnantes des tournois</a></li>
+  <li><a href="#qui-est-la-meilleure" id="toc-qui-est-la-meilleure" class="nav-link" data-scroll-target="#qui-est-la-meilleure"><span class="header-section-number">8</span> Qui est la meilleure ?</a></li>
   <li><a href="#arrêtez-votre-service" id="toc-arrêtez-votre-service" class="nav-link" data-scroll-target="#arrêtez-votre-service">Arrêtez votre service</a></li>
   </ul>
 </nav>
@@ -541,56 +545,13 @@ Important
 <li>raccourci (ALT + X)</li>
 </ul></li>
 </ul>
-<div class="callout callout-style-default callout-note callout-titled" title="Reprise TP5">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Reprise TP5
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Après avoir chargé les données pour le TP5, veuillez appliquer ces corrections vues lors d’un exercice du TP4 :</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">UPDATE</span> echecs.joueuse</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>   <span class="kw">SET</span> elo <span class="op">=</span> elo <span class="op">-</span> <span class="dv">1200</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> elo <span class="op">&gt;</span> <span class="dv">2600</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>   <span class="kw">AND</span> code_titre <span class="kw">IS</span> <span class="kw">NULL</span>;</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="kw">UPDATE</span> echecs.joueuse</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>   <span class="kw">SET</span> date_naissance <span class="op">=</span> date_naissance <span class="op">+</span> <span class="dt">INTERVAL</span> <span class="st">'100 years'</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> id_joueuse <span class="kw">IN</span> (<span class="dv">111</span>, <span class="dv">122</span>, <span class="dv">133</span>, <span class="dv">144</span>);</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="kw">UPDATE</span> echecs.joueuse</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>   <span class="kw">SET</span> date_naissance <span class="op">=</span> date_naissance <span class="op">-</span> <span class="dt">INTERVAL</span> <span class="st">'100 years'</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> id_joueuse <span class="kw">IN</span> (<span class="dv">155</span>, <span class="dv">166</span>, <span class="dv">177</span>, <span class="dv">188</span>);</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="kw">UPDATE</span> echecs.joueuse</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>   <span class="kw">SET</span> nom <span class="op">=</span> <span class="kw">REPLACE</span>(<span class="kw">REPLACE</span>(<span class="kw">REPLACE</span>(nom, <span class="st">'EUH'</span>, <span class="st">'E'</span>), <span class="st">'AO'</span>, <span class="st">'A'</span>), <span class="st">'OU'</span>, <span class="st">'U'</span>)</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> code_titre <span class="kw">IS</span> <span class="kw">NULL</span>;</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="kw">DELETE</span> <span class="kw">FROM</span> echecs.partie</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> id_blanc <span class="op">=</span> id_noir;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</div>
 </section>
-<section id="description" class="level3" data-number="2.2">
-<h3 data-number="2.2" class="anchored" data-anchor-id="description"><span class="header-section-number">2.2</span> Description</h3>
-<p>Les tables sont les suivantes :</p>
-<ul>
-<li><strong>joueuse</strong>(<u>id_joueuse</u>, code_titre, nom, prenom, elo, date_naissance, #id_club, arbitre)</li>
-<li><strong>titre</strong>(<u>code</u>, nom, description)</li>
-<li><strong>club</strong>(<u>id_club</u>, nom, ville, #id_presidente)</li>
-<li><strong>partie</strong>(<u>id_partie</u>, #id_blanc, #id_noir, date_partie, #id_resultat, #id_ouverture, #id_tournoi)</li>
-<li><strong>resultat_partie</strong>(<u>id_resultat</u>, resultat, description)</li>
-<li><strong>ouverture</strong>(<u>id_ouverture</u>, eco, nom, coups)</li>
-<li><strong>tournoi</strong>(<u>id_tournoi</u>, nom, ville, date_debut, date_fin, #id_cadence, nb_rondes, nb_participantes, #id_arbitre)</li>
-<li><strong>cadence</strong>(<u>id_cadence</u>, nom, description)</li>
-</ul>
+<section id="description-des-tables" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="description-des-tables"><span class="header-section-number">2.2</span> Description des tables</h3>
 <table class="caption-top table">
 <colgroup>
-<col style="width: 16%">
-<col style="width: 83%">
+<col style="width: 17%">
+<col style="width: 82%">
 </colgroup>
 <thead>
 <tr class="header">
@@ -636,6 +597,7 @@ Important
 </section>
 <section id="modèle-de-données" class="level3" data-number="2.3">
 <h3 data-number="2.3" class="anchored" data-anchor-id="modèle-de-données"><span class="header-section-number">2.3</span> Modèle de données</h3>
+<p><a href="./data/tp4-uml.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="./data/tp4-uml.PNG" class="img-fluid"></a></p>
 <div class="callout callout-style-default callout-caution callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -657,7 +619,26 @@ Caution
 </ul>
 </div>
 </div>
-<p><a href="./data/tp4-uml.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="./data/tp4-uml.PNG" class="img-fluid"></a></p>
+<p>Quelques remarques sur ce schéma :</p>
+<ul>
+<li><span class="emoji" data-emoji="key">🔑</span> clé primaire</li>
+<li><code>#</code> clé étrangère</li>
+<li>NN : NOT NULL</li>
+</ul>
+</section>
+<section id="notation-relationnelle" class="level3" data-number="2.4">
+<h3 data-number="2.4" class="anchored" data-anchor-id="notation-relationnelle"><span class="header-section-number">2.4</span> Notation relationnelle</h3>
+<p>Les tables sont les suivantes :</p>
+<ul>
+<li><strong>joueuse</strong>(<u>id_joueuse</u>, code_titre, nom, prenom, elo, date_naissance, #id_club, arbitre)</li>
+<li><strong>titre</strong>(<u>code</u>, nom, description)</li>
+<li><strong>club</strong>(<u>id_club</u>, nom, ville, #id_presidente)</li>
+<li><strong>partie</strong>(<u>id_partie</u>, #id_blanc, #id_noir, date_partie, #id_resultat, #id_ouverture, #id_tournoi)</li>
+<li><strong>resultat_partie</strong>(<u>id_resultat</u>, resultat, description)</li>
+<li><strong>ouverture</strong>(<u>id_ouverture</u>, eco, nom, coups)</li>
+<li><strong>tournoi</strong>(<u>id_tournoi</u>, nom, ville, date_debut, date_fin, #id_cadence, nb_rondes, nb_participantes, #id_arbitre)</li>
+<li><strong>cadence</strong>(<u>id_cadence</u>, nom, description)</li>
+</ul>
 </section>
 </section>
 <section id="recherche-des-irrégularités" class="level2" data-number="3">
@@ -697,7 +678,7 @@ Caution
 <li><label><input type="checkbox">Une fois que le résultat est assez correct, mettez à jour la table <em>joueuse</em></label></li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -706,7 +687,7 @@ Tip
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
 <li>Vous pouvez utiliser la fonction <em>REPLACE()</em>
@@ -755,21 +736,8 @@ Tip
 <li><label><input type="checkbox">Listez les clubs et leurs présidentes</label></li>
 </ul>
 </section>
-<section id="remise-en-route-tp5" class="level2" data-number="5">
-<h2 data-number="5" class="anchored" data-anchor-id="remise-en-route-tp5"><span class="header-section-number">5</span> Remise en route TP5</h2>
-<p>Quelques questions faciles pour se remettre en route.</p>
-<ul class="task-list">
-<li><label><input type="checkbox">Affichez noms, prénoms, elo des joueuses ainsi que le nom de leur club. Ordonnez par elo décroissant</label>
-<ul>
-<li>Combien avez-vous de lignes ?</li>
-<li>Combien de lignes compte la table <em>joueuse</em> ?</li>
-</ul></li>
-<li><label><input type="checkbox">Affichez tous les noms, prénoms, elo des joueuses ainsi que leur éventuel nom de club</label></li>
-<li><label><input type="checkbox">Ajoutez à la précédente requête l’éventuel nom du titre de la joueuse</label></li>
-</ul>
-</section>
-<section id="quelques-statistiques" class="level2" data-number="6">
-<h2 data-number="6" class="anchored" data-anchor-id="quelques-statistiques"><span class="header-section-number">6</span> Quelques statistiques</h2>
+<section id="quelques-statistiques" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="quelques-statistiques"><span class="header-section-number">5</span> Quelques statistiques</h2>
 <div class="callout callout-style-simple callout-important no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -790,7 +758,7 @@ Tip
 <li><label><input type="checkbox">Pour chaque tournoi, calculez également les taux de victoire des blancs et des noirs, ainsi que celui de matchs nuls</label></li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -799,7 +767,7 @@ Tip
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
 <li>Commencez par exemple par calculer le nombre de victoires des blancs</li>
@@ -844,8 +812,8 @@ Tip
 <li><label><input type="checkbox">Affichez les joueuses ayant joué plus de 5 fois avec les pièces noires la <em>Défense Sicilienne</em></label></li>
 </ul>
 </section>
-<section id="afficher-les-résultats-de-parties" class="level2" data-number="7">
-<h2 data-number="7" class="anchored" data-anchor-id="afficher-les-résultats-de-parties"><span class="header-section-number">7</span> Afficher les résultats de parties</h2>
+<section id="afficher-les-résultats-de-parties" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="afficher-les-résultats-de-parties"><span class="header-section-number">6</span> Afficher les résultats de parties</h2>
 <p>Les résultats de parties sont généralement affichés sous ce format :</p>
 <table class="caption-top table">
 <caption>Aix-les-Bains 2006</caption>
@@ -961,8 +929,8 @@ Tip
 </div>
 </div>
 </section>
-<section id="gagnantes-des-tournois" class="level2" data-number="8">
-<h2 data-number="8" class="anchored" data-anchor-id="gagnantes-des-tournois"><span class="header-section-number">8</span> Gagnantes des tournois</h2>
+<section id="gagnantes-des-tournois" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="gagnantes-des-tournois"><span class="header-section-number">7</span> Gagnantes des tournois</h2>
 <p>Via la table <em>partie</em>, il est possible de retrouver quelle joueuse a participé à quel tournoi.</p>
 <p>Cependant ce n’est pas très intuitif, ni pratique.</p>
 <p>Nous allons donc commencer par créer une vue des participantes</p>
@@ -1054,7 +1022,7 @@ Tip
 <li><label><input type="checkbox">Faites de même pour les noirs et stockez le tout dans une vue <em>partie_score</em></label></li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1063,18 +1031,18 @@ Tip
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
 <li>Vous pouvez utiliser une structure <em>CASE WHEN THEN</em></li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">&lt;</span>?<span class="op">&gt;</span>,</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>       <span class="cf">CASE</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>           <span class="cf">WHEN</span> <span class="op">&lt;</span>?<span class="op">&gt;</span> <span class="cf">THEN</span> <span class="op">&lt;</span>?<span class="op">&gt;</span> </span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>           <span class="cf">WHEN</span> <span class="op">&lt;</span>?<span class="op">&gt;</span> <span class="cf">THEN</span> <span class="op">&lt;</span>?<span class="op">&gt;</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>           <span class="cf">ELSE</span> <span class="op">&lt;</span>?<span class="op">&gt;</span>          </span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>       <span class="cf">END</span> <span class="kw">AS</span> score</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> <span class="op">&lt;</span>?<span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">&lt;</span>?<span class="op">&gt;</span>,</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>       <span class="cf">CASE</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>           <span class="cf">WHEN</span> <span class="op">&lt;</span>?<span class="op">&gt;</span> <span class="cf">THEN</span> <span class="op">&lt;</span>?<span class="op">&gt;</span> </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>           <span class="cf">WHEN</span> <span class="op">&lt;</span>?<span class="op">&gt;</span> <span class="cf">THEN</span> <span class="op">&lt;</span>?<span class="op">&gt;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>           <span class="cf">ELSE</span> <span class="op">&lt;</span>?<span class="op">&gt;</span>          </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>       <span class="cf">END</span> <span class="kw">AS</span> score</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> <span class="op">&lt;</span>?<span class="op">&gt;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -1090,7 +1058,7 @@ Tip
 </ul></li>
 </ul>
 <div class="callout callout-style-default callout-note callout-titled" title="Vérification">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1099,47 +1067,47 @@ Tip
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Une petite requête basique pour vérifier vos résultats :</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">WITH</span> resultat_score <span class="kw">AS</span> (</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> rp.<span class="op">*</span>,</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>           <span class="cf">CASE</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>               <span class="cf">WHEN</span> rp.resultat <span class="kw">IN</span> (<span class="st">'1 - 0'</span>, <span class="st">'1 - F'</span>) <span class="cf">THEN</span> <span class="dv">1</span> </span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>               <span class="cf">WHEN</span> rp.resultat <span class="op">=</span> <span class="st">'X - X'</span>             <span class="cf">THEN</span> <span class="fl">0.5</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>               <span class="cf">ELSE</span> <span class="dv">0</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>           <span class="cf">END</span> <span class="kw">AS</span> score_blanc,</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>           <span class="cf">CASE</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>               <span class="cf">WHEN</span> rp.resultat <span class="kw">IN</span> (<span class="st">'0 - 1'</span>, <span class="st">'F - 1'</span>) <span class="cf">THEN</span> <span class="dv">1</span> </span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>               <span class="cf">WHEN</span> rp.resultat <span class="op">=</span> <span class="st">'X - X'</span>             <span class="cf">THEN</span> <span class="fl">0.5</span></span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>               <span class="cf">ELSE</span> <span class="dv">0</span></span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>           <span class="cf">END</span> <span class="kw">AS</span> score_noir</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>      <span class="kw">FROM</span> echecs.resultat_partie rp</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    ),</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>partie_score <span class="kw">AS</span> (</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> p.id_partie,</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>           p.id_tournoi,</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>           UNNEST(<span class="dt">ARRAY</span>[id_blanc, id_noir]) <span class="kw">AS</span> id_joueuse,</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>           UNNEST(<span class="dt">ARRAY</span>[score_blanc, score_noir]) <span class="kw">AS</span> score,</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>           UNNEST(<span class="dt">ARRAY</span>[jn.elo, jb.elo]) <span class="kw">AS</span> elo_adversaire</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>      <span class="kw">FROM</span> echecs.partie p</span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>      <span class="kw">JOIN</span> resultat_score <span class="kw">USING</span>(id_resultat)</span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>      <span class="kw">JOIN</span> echecs.joueuse jb <span class="kw">ON</span> (jb.id_joueuse <span class="op">=</span> p.id_blanc)</span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>      <span class="kw">JOIN</span> echecs.joueuse jn <span class="kw">ON</span> (jn.id_joueuse <span class="op">=</span> p.id_noir)</span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> CONCAT_WS(<span class="st">' '</span>, <span class="fu">LOWER</span>(j.code_titre), j.nom, j.prenom) <span class="kw">AS</span> joueuse,</span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>       j.elo,</span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>       <span class="fu">SUM</span>(ps.score) <span class="kw">AS</span> points,</span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>       <span class="fu">ROUND</span>(<span class="fu">AVG</span>(ps.elo_adversaire)) <span class="kw">AS</span> moyenne_elo_adversaire</span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse j</span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> partie_score ps <span class="kw">USING</span>(id_joueuse)</span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> echecs.tournoi t <span class="kw">USING</span>(id_tournoi)</span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> t.nom <span class="op">=</span> <span class="st">'Open de Guingamp'</span></span>
-<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a> <span class="kw">GROUP</span> <span class="kw">BY</span> j.id_joueuse,</span>
-<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>          joueuse,</span>
-<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>          j.elo</span>
-<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a> <span class="kw">ORDER</span> <span class="kw">BY</span> points <span class="kw">DESC</span>,</span>
-<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>          moyenne_elo_adversaire <span class="kw">DESC</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">WITH</span> resultat_score <span class="kw">AS</span> (</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> rp.<span class="op">*</span>,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>           <span class="cf">CASE</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>               <span class="cf">WHEN</span> rp.resultat <span class="kw">IN</span> (<span class="st">'1 - 0'</span>, <span class="st">'1 - F'</span>) <span class="cf">THEN</span> <span class="dv">1</span> </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>               <span class="cf">WHEN</span> rp.resultat <span class="op">=</span> <span class="st">'X - X'</span>             <span class="cf">THEN</span> <span class="fl">0.5</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>               <span class="cf">ELSE</span> <span class="dv">0</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>           <span class="cf">END</span> <span class="kw">AS</span> score_blanc,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>           <span class="cf">CASE</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>               <span class="cf">WHEN</span> rp.resultat <span class="kw">IN</span> (<span class="st">'0 - 1'</span>, <span class="st">'F - 1'</span>) <span class="cf">THEN</span> <span class="dv">1</span> </span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>               <span class="cf">WHEN</span> rp.resultat <span class="op">=</span> <span class="st">'X - X'</span>             <span class="cf">THEN</span> <span class="fl">0.5</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>               <span class="cf">ELSE</span> <span class="dv">0</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>           <span class="cf">END</span> <span class="kw">AS</span> score_noir</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>      <span class="kw">FROM</span> echecs.resultat_partie rp</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    ),</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>partie_score <span class="kw">AS</span> (</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> p.id_partie,</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>           p.id_tournoi,</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>           UNNEST(<span class="dt">ARRAY</span>[id_blanc, id_noir]) <span class="kw">AS</span> id_joueuse,</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>           UNNEST(<span class="dt">ARRAY</span>[score_blanc, score_noir]) <span class="kw">AS</span> score,</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>           UNNEST(<span class="dt">ARRAY</span>[jn.elo, jb.elo]) <span class="kw">AS</span> elo_adversaire</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>      <span class="kw">FROM</span> echecs.partie p</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>      <span class="kw">JOIN</span> resultat_score <span class="kw">USING</span>(id_resultat)</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>      <span class="kw">JOIN</span> echecs.joueuse jb <span class="kw">ON</span> (jb.id_joueuse <span class="op">=</span> p.id_blanc)</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>      <span class="kw">JOIN</span> echecs.joueuse jn <span class="kw">ON</span> (jn.id_joueuse <span class="op">=</span> p.id_noir)</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> CONCAT_WS(<span class="st">' '</span>, <span class="fu">LOWER</span>(j.code_titre), j.nom, j.prenom) <span class="kw">AS</span> joueuse,</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>       j.elo,</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>       <span class="fu">SUM</span>(ps.score) <span class="kw">AS</span> points,</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>       <span class="fu">ROUND</span>(<span class="fu">AVG</span>(ps.elo_adversaire)) <span class="kw">AS</span> moyenne_elo_adversaire</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse j</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> partie_score ps <span class="kw">USING</span>(id_joueuse)</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> echecs.tournoi t <span class="kw">USING</span>(id_tournoi)</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> t.nom <span class="op">=</span> <span class="st">'Open de Guingamp'</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a> <span class="kw">GROUP</span> <span class="kw">BY</span> j.id_joueuse,</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>          joueuse,</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>          j.elo</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a> <span class="kw">ORDER</span> <span class="kw">BY</span> points <span class="kw">DESC</span>,</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>          moyenne_elo_adversaire <span class="kw">DESC</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -1152,8 +1120,8 @@ Tip
 <li><label><input type="checkbox">Affichez la liste de toutes les gagnantes des tournois</label></li>
 </ul>
 </section>
-<section id="qui-est-la-meilleure" class="level2" data-number="9">
-<h2 data-number="9" class="anchored" data-anchor-id="qui-est-la-meilleure"><span class="header-section-number">9</span> Qui est la meilleure ?</h2>
+<section id="qui-est-la-meilleure" class="level2" data-number="8">
+<h2 data-number="8" class="anchored" data-anchor-id="qui-est-la-meilleure"><span class="header-section-number">8</span> Qui est la meilleure ?</h2>
 <div class="callout callout-style-simple callout-important no-icon">
 <div class="callout-body d-flex">
 <div class="callout-icon-container">
@@ -1175,7 +1143,7 @@ Tip
 </ul></li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled" title="Solutions">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1184,7 +1152,7 @@ Tip
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
 <li><a href="./correction/tp4.sql">Correction TP4</a></li>

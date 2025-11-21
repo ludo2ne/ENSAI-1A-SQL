@@ -236,7 +236,7 @@ SELECT COUNT(1)
   FROM dvd.emprunte e
   JOIN dvd.dvd d USING(num_dvd)
   JOIN dvd.film f USING(num_film)
- WHERE '2010-08-10' BETWEEN date_debut and date_fin;
+ WHERE '2010-08-10' BETWEEN date_debut AND COALESCE(date_fin, CURRENT_DATE);
 
 -- Combien de dvd ont été achetés chaque année
 SELECT EXTRACT(YEAR FROM date_achat) AS annee_achat,
