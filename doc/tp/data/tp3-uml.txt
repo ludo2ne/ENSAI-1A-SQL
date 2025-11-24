@@ -15,12 +15,12 @@ Table album {
   id_album SERIAL [pk]
   titre VARCHAR(150)
   annee SMALLINT
-  id_artiste INT [ref: > artiste.id_artiste]
+  "#id_artiste" INT [ref: > artiste.id_artiste]
 }
 
 Table chanson {
   id_chanson SERIAL [pk]
-  id_artiste_principal INT [ref: > artiste.id_artiste]
+  "#id_artiste_principal" INT [ref: > artiste.id_artiste]
   titre VARCHAR(150)
   duree INTERVAL
   "#id_album" INT [ref: > album.id_album]

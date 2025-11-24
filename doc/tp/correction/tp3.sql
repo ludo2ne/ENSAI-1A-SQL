@@ -1,31 +1,53 @@
 -- Listez toutes les chansons
 SELECT *
-  FROM chanson;
+  FROM music.chanson;
 
 
 -- Listez les chansons (titre, année) ainsi que le nom de l'artiste
 SELECT c.titre,
        c.annee,
        a.nom
-  FROM chanson c
-  JOIN artiste a ON c.id_artiste_principal = a.id_artiste
+  FROM music.chanson c
+  JOIN music.artiste a ON c.id_artiste_principal = a.id_artiste
  ORDER BY a.nom, c.titre;
 
 
 -- Ajoutez le titre de l'album si celui-ci est précisé
+SELECT c.titre,
+       c.annee,
+       ar.nom   AS nom_artiste,
+       al.titre AS titre_album
+  FROM music.chanson c
+  JOIN music.artiste ar ON c.id_artiste_principal = ar.id_artiste
+  LEFT JOIN music.album al USING(id_album)
+ ORDER BY ar.nom, c.titre;
+
+
+-- Vérifiez s il y a dans un album des chansons dont l'artiste principal n'est pas l'artiste de l'album
+SELECT c.titre,
+       c.annee,
+       ar.nom   AS nom_artiste,
+       al.titre AS titre_album,
+       aral.nom AS artiste_album
+  FROM music.chanson c
+  JOIN music.artiste ar ON c.id_artiste_principal = ar.id_artiste
+  LEFT JOIN music.album al USING(id_album)
+  LEFT JOIN music.artiste aral ON al.id_artiste = aral.id_artiste
+ WHERE c.id_artiste_principal <> aral.id_artiste
+ ORDER BY ar.nom, c.titre;
 
 
 -- Durées minimum, maximum et moyenne des chansons
 SELECT MIN(duree),
        MAX(duree),
        AVG(duree)
-  FROM chanson;
+  FROM music.chanson;
 
 
 -- Nombre de chansons par année
 SELECT annee, 
        COUNT(*) AS nb_chansons
-  FROM chanson
+  FROM music.chanson
  GROUP BY annee
  ORDER BY nb_chansons DESC;
 
@@ -33,7 +55,7 @@ SELECT annee,
  -- Années avec un nombre de chansons supérieur ou égal à 10
 SELECT annee, 
        COUNT(*) AS nb_chansons
-  FROM chanson
+  FROM music.chanson
  GROUP BY annee
 HAVING COUNT(*) >= 10;
 
@@ -42,7 +64,7 @@ HAVING COUNT(*) >= 10;
 SELECT annee,
        AVG(duree),
        DATE_TRUNC('second', AVG(duree)) AS duree_moyenne -- Format HH:MM:SS
-  FROM chanson
+  FROM music.chanson
  GROUP BY annee
 HAVING COUNT(*) >= 10
  ORDER BY AVG(duree) DESC;
@@ -51,19 +73,39 @@ HAVING COUNT(*) >= 10
 -- Chansons avec le même titre
 SELECT titre, 
        COUNT(*) AS nb_occurrences
-  FROM chanson
+  FROM music.chanson
  GROUP BY titre
-HAVING COUNT(*) > 1;
+HAVING COUNT(*) >= 2;
+
 
 -- Chansons en doublon : même titre, même artiste
 SELECT c.titre, 
        a.nom AS artiste, 
        COUNT(*) AS nb_occurrences
-  FROM chanson c
-  JOIN artiste a ON c.id_artiste_principal = a.id_artiste
+  FROM music.chanson c
+  JOIN music.artiste a ON c.id_artiste_principal = a.id_artiste
  GROUP BY c.titre, 
           a.nom
 HAVING COUNT(*) > 1;
+
+
+-- Vue titre frequents
+--DROP VIEW music.titre_frequent;
+CREATE VIEW music.titre_frequent
+AS
+SELECT titre
+  FROM music.chanson
+ GROUP BY titre
+HAVING COUNT(*) >= 2;
+
+-- Nom artiste et titres frequents
+SELECT a.nom AS nom_artiste,
+       c.*
+  FROM music.titre_frequent tf
+  JOIN music.chanson c USING(titre)
+  JOIN music.artiste a ON c.id_artiste_principal = a.id_artiste
+ ORDER BY c.titre;  
+
 
 --------------------------------------------------------------
 -- Place aux artistes
@@ -72,8 +114,8 @@ HAVING COUNT(*) > 1;
 -- Listez les noms d'artistes ainsi que les titres de leurs chansons
 SELECT a.nom, 
        c.titre
-  FROM artiste a
-  JOIN chanson c ON a.id_artiste = c.id_artiste_principal
+  FROM music.artiste a
+  JOIN music.chanson c ON a.id_artiste = c.id_artiste_principal
   ORDER BY a.nom, 
            c.titre;
 
@@ -81,34 +123,47 @@ SELECT a.nom,
 -- Comptez le nombre de chansons par artiste
 SELECT a.nom, 
        COUNT(*) AS nb_chansons
-  FROM artiste a
-  JOIN chanson c ON a.id_artiste = c.id_artiste_principal
+  FROM music.artiste a
+  JOIN music.chanson c ON a.id_artiste = c.id_artiste_principal
  GROUP BY a.nom
  ORDER BY nb_chansons DESC;
 
 
--- Comptez le nombre de chansons par artiste (≥ 20 chansons)
+-- Comptez le nombre de chansons par artiste 20 chansons ou plus
 SELECT a.nom, 
        COUNT(*) AS nb_chansons
-  FROM artiste a
-  JOIN chanson c ON a.id_artiste = c.id_artiste_principal
+  FROM music.artiste a
+  JOIN music.chanson c ON a.id_artiste = c.id_artiste_principal
  GROUP BY a.nom
 HAVING COUNT(*) >= 20
  ORDER BY nb_chansons DESC;
 
 
+-- Supprimer les dates de naissance des groupes
+UPDATE music.artiste
+   SET date_naissance = NULL
+ WHERE groupe;
+
+
+-- Plus viel artiste solo en activite
+SELECT nom,
+       date_naissance,
+       EXTRACT(YEAR FROM AGE(CURRENT_DATE, date_naissance)) AS age_en_annees
+  FROM music.artiste a
+ WHERE actif
+   AND NOT groupe
+   AND date_naissance IS NOT NULL
+ ORDER BY date_naissance ASC
+ LIMIT 1;
+
+
 -- Comptez le nombre d'artistes par pays
 SELECT code_pays, 
        COUNT(*) AS nb_artistes
-  FROM artiste
+  FROM music.artiste
  GROUP BY code_pays
  ORDER BY nb_artistes DESC;
 
-
--- Supprimer les dates de naissance des groupes
-UPDATE artiste
-SET date_naissance = NULL
-WHERE groupe IS NOT NULL;
 
 --------------------------------------------------------------
 -- Créez votre playlist
@@ -130,12 +185,13 @@ VALUES
 
 
 -- Créez une séquence nommée seq_playlist_ordre
-CREATE SEQUENCE seq_playlist_ordre START 1;
+CREATE SEQUENCE seq_playlist_ordre START 6;
+
 
 -- Chansons de l'album Californian Soil
 SELECT c.*
-  FROM album a
-  JOIN chanson c USING(id_album)
+  FROM music.album a
+  JOIN music.chanson c USING(id_album)
  WHERE a.titre = 'Californian Soil';
 
 
@@ -145,8 +201,8 @@ SELECT CURRVAL('playlist_id_playlist_seq'),
        c.id_chanson,
        nextval('seq_playlist_ordre'),
        CURRENT_DATE
-  FROM chanson c
-  JOIN album a USING(id_album)
+  FROM music.chanson c
+  JOIN music.album a USING(id_album)
  WHERE a.titre = 'Californian Soil'
  ORDER BY c.id_chanson;
 
@@ -165,45 +221,48 @@ SELECT CURRVAL('playlist_id_playlist_seq'),
 
 -- Affichez les playlists
 SELECT *
-  FROM playlist p;
+  FROM music.playlist p;
 
 
 -- Ajoutez les titres des chansons
 SELECT p.nom,
+       pc.ordre,
        c.titre
-  FROM playlist p
-  JOIN playlist_chanson pc USING(id_playlist)
-  JOIN chanson c USING (id_chanson)
- ORDER BY 1;
+  FROM music.playlist p
+  JOIN music.playlist_chanson pc USING(id_playlist)
+  JOIN music.chanson c USING (id_chanson)
+ ORDER BY 1, 2;
 
 
 -- Ajoutez les noms des artistes
 SELECT p.nom,
+       pc.ordre,
        c.titre,
        a.nom
-  FROM playlist p
-  JOIN playlist_chanson pc USING(id_playlist)
-  JOIN chanson c USING (id_chanson)
-  JOIN artiste a ON a.id_artiste = c.id_artiste_principal
- ORDER BY p.nom, a.nom;
+  FROM music.playlist p
+  JOIN music.playlist_chanson pc USING(id_playlist)
+  JOIN music.chanson c USING (id_chanson)
+  JOIN music.artiste a ON a.id_artiste = c.id_artiste_principal
+ ORDER BY 1, 2;
 
 
 -- Affichage des noms de colonnes
-SELECT p.nom AS "Nom de la playlist",
-       a.nom AS "Nom de l'artiste",
+SELECT p.nom   AS "Nom de la playlist",
+       pc.ordre,
+       a.nom   AS "Nom de l'artiste",
        c.titre AS "Titre de la chanson"
-  FROM playlist p
-  JOIN playlist_chanson pc USING(id_playlist)
-  JOIN chanson c USING (id_chanson)
-  JOIN artiste a ON a.id_artiste = c.id_artiste_principal
- ORDER BY p.nom, a.nom;
+  FROM music.playlist p
+  JOIN music.playlist_chanson pc USING(id_playlist)
+  JOIN music.chanson c USING (id_chanson)
+  JOIN music.artiste a ON a.id_artiste = c.id_artiste_principal
+ ORDER BY 1, 2;
 
 
 -- Quelle playlist a le plus de chansons
 SELECT p.nom, 
        COUNT(pc.id_chanson) AS nb_chansons
-  FROM playlist p
-  JOIN playlist_chanson pc USING(id_playlist)
+  FROM music.playlist p
+  JOIN music.playlist_chanson pc USING(id_playlist)
  GROUP BY p.id_playlist, p.nom
  ORDER BY nb_chansons DESC;
 
@@ -211,34 +270,55 @@ SELECT p.nom,
 -- Quelle playlist dure le plus longtemps
 SELECT p.nom, 
        SUM(EXTRACT(EPOCH FROM c.duree)) AS duree_totale_secondes
-  FROM playlist p
-  JOIN playlist_chanson pc USING(id_playlist)
-  JOIN chanson c USING(id_chanson)
+  FROM music.playlist p
+  JOIN music.playlist_chanson pc USING(id_playlist)
+  JOIN music.chanson c USING(id_chanson)
 GROUP BY p.id_playlist, p.nom
 ORDER BY duree_totale_secondes DESC;
 
 
 -- Artistes présents dans les playlists
 SELECT a.*
-  FROM chanson c
-  JOIN playlist_chanson pc USING(id_chanson)
-  JOIN artiste a ON a.id_artiste = c.id_artiste_principal;
+  FROM music.chanson c
+  JOIN music.playlist_chanson pc USING(id_chanson)
+  JOIN music.artiste a ON a.id_artiste = c.id_artiste_principal;
 
 
 -- Gardez uniquement les différents id_artiste
 SELECT DISTINCT a.id_artiste
-  FROM chanson c
-  JOIN playlist_chanson pc USING(id_chanson)
-  JOIN artiste a ON a.id_artiste = c.id_artiste_principal;
+  FROM music.chanson c
+  JOIN music.playlist_chanson pc USING(id_chanson)
+  JOIN music.artiste a ON a.id_artiste = c.id_artiste_principal;
+
+
+-- NOT IN
+SELECT a.*
+  FROM music.artiste a
+WHERE a.id_artiste NOT IN (
+    SELECT DISTINCT c.id_artiste_principal
+      FROM music.playlist_chanson pc
+      JOIN music.chanson c ON pc.id_chanson = c.id_chanson
+);
+
+
+-- NOT EXISTS
+SELECT a.*
+  FROM music.artiste a
+WHERE NOT EXISTS (
+    SELECT 1
+      FROM music.chanson c
+      JOIN music.playlist_chanson pc ON pc.id_chanson = c.id_chanson
+     WHERE c.id_artiste_principal = a.id_artiste
+);
 
 
 -- Combien de fois chaque chanson apparait dans une playlist
 SELECT a.nom, 
        c.titre, 
        COUNT(pc.id_playlist) AS nb_playlists
-  FROM chanson c
-  JOIN artiste a ON a.id_artiste = c.id_artiste_principal
-  JOIN playlist_chanson pc USING(id_chanson)
+  FROM music.chanson c
+  JOIN music.artiste a ON a.id_artiste = c.id_artiste_principal
+  JOIN music.playlist_chanson pc USING(id_chanson)
  GROUP BY a.nom, 
           c.titre
 ORDER BY nb_playlists DESC;
@@ -248,9 +328,9 @@ ORDER BY nb_playlists DESC;
 SELECT a.nom, 
        c.titre, 
        COUNT(pc.id_playlist) AS nb_playlists
-  FROM chanson c
-  JOIN artiste a ON a.id_artiste = c.id_artiste_principal
-  LEFT JOIN playlist_chanson pc USING(id_chanson)
+  FROM music.chanson c
+  JOIN music.artiste a ON a.id_artiste = c.id_artiste_principal
+  LEFT JOIN music.playlist_chanson pc USING(id_chanson)
  GROUP BY a.nom, 
           c.titre
 ORDER BY nb_playlists DESC;
@@ -260,9 +340,9 @@ ORDER BY nb_playlists DESC;
 SELECT a.nom, 
        c.titre, 
        COUNT(pc.id_playlist) AS nb_playlists
-  FROM chanson c
-  JOIN artiste a ON a.id_artiste = c.id_artiste_principal
-  LEFT JOIN playlist_chanson pc USING(id_chanson)
+  FROM music.chanson c
+  JOIN music.artiste a ON a.id_artiste = c.id_artiste_principal
+  LEFT JOIN music.playlist_chanson pc USING(id_chanson)
  GROUP BY a.nom, 
           c.titre
 HAVING COUNT(pc.id_playlist) >= 3
@@ -271,42 +351,52 @@ ORDER BY nb_playlists DESC;
 
 -- Combien y a-t-il de chansons dans toutes les playlists
 SELECT COUNT(*) AS total_chansons
-  FROM playlist_chanson;
+  FROM music.playlist_chanson;
 
 
 -- Combien y a-t-il de chansons différentes dans toutes les playlists
 SELECT COUNT(DISTINCT id_chanson) AS total_chansons_uniques
-  FROM playlist_chanson;
+  FROM music.playlist_chanson;
 
 --------------------------------------------------------------
 -- I'm WITH u
 --------------------------------------------------------------
 
+-- Elle liste pour chaque pays l artiste solo le plus vieux
+SELECT DISTINCT ON (code_pays) code_pays, 
+       nom, 
+       date_naissance
+  FROM music.artiste
+ WHERE NOT groupe
+ ORDER BY code_pays, 
+          date_naissance ASC;
+
+
 -- Listez les artistes qui ne sont pas des groupes
 SELECT *
-  FROM artiste
+  FROM music.artiste
  WHERE NOT groupe;
 
 
 -- Affichez pour chaque pays, la plus ancienne date de naissance 
 SELECT code_pays, 
        MIN(date_naissance)
-  FROM artiste
+  FROM music.artiste
  WHERE NOT groupe
  GROUP BY code_pays;
 
 
 -- WITH
-WITH plus_vieux AS (
+WITH viel_artiste_pays AS (
 SELECT code_pays, 
        MIN(date_naissance) AS date_min
-  FROM artiste
+  FROM music.artiste
  WHERE NOT groupe
  GROUP BY code_pays
 )
 SELECT a.code_pays, 
        a.nom, 
        a.date_naissance
-  FROM artiste a
-  JOIN plus_vieux pv ON a.code_pays = pv.code_pays AND a.date_naissance = pv.date_min
+  FROM music.artiste a
+  JOIN viel_artiste_pays pv ON a.code_pays = pv.code_pays AND a.date_naissance = pv.date_min
  ORDER BY a.code_pays;

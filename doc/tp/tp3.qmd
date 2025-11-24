@@ -17,6 +17,7 @@ lightbox: true
 
 ::: {.callout-important}
 - Écrivez des requêtes jolies !
+- À la fin du TP, exportez ou copiez vos requêtes dans un fichier de votre VM ou machine personnelle
 :::
 
 Les notions vues dans ce TP :
@@ -78,9 +79,13 @@ Les tables sont les suivantes :
 Lorsque vous prenez en main une base de données, la première chose à faire est de regarder ce que contiennent les tables.
 
 - [ ] Listez toutes les chansons
-- [ ] Listez les chansons (titre, année) ainsi que le nom de l'artiste
+- [ ] Affichez les colonnes *titre* et *année* ainsi que le *nom de l'artiste principal*
 - [ ] Ordonnez par nom d'artiste, puis par titre
-- [ ] Ajoutez le titre de l'album si celui-ci est précisé
+- [ ] Ajoutez le titre de l'album [si celui-ci est précisé]{.underline}
+- [ ] Ajoutez le nom de l'artiste de l'album
+- [ ] Est-ce qu'il y a des chansons où il y a une différence entre :
+  - l'artiste principal de la chanson
+  - l'artiste de l'album qui contient cette chanson
 
 Faisons quelques statistiques descriptives.
 
@@ -93,11 +98,15 @@ Faisons quelques statistiques descriptives.
 Est-ce qu'il y a plusieurs chansons ayant le même titre ?
 
 - [ ] Pour chaque titre de chanson, comptez le nombre d'occurences
-- [ ] N'affichez que les titres ayant au moins deux occurences
+- [ ] Est-ce qu'il y a des titres de chansons présents au moins deux fois ?
 - [ ] Est-ce qu'il y a des chansons en doublon ?
   - i.e. même titre et même artiste
 
 Si vous en trouvez une, essayez de la supprimer. À votre avis, pourquoi cela ne fonctionne pas ?
+
+- [ ] Créez une vue *titre_frequent* listant les titres des chansons présents au moins deux fois ?
+- [ ] Pour ces titres, affichez tous les détails des chansons, ainsi que l'artiste principal
+  - triez par titre
 
 
 ### Place aux artistes
@@ -107,9 +116,10 @@ Si vous en trouvez une, essayez de la supprimer. À votre avis, pourquoi cela ne
 - [ ] Classez par ordre décroissant
 - [ ] Conservez uniquement les artistes ayant 20 chansons ou plus
 
-Il y a des artistes solo et des groupes. Pour la groupe la date de naissance ne devrait pas être renseignée.
+Il y a des artistes solo et des groupes. Pour les groupe la date de naissance ne devrait pas être renseignée.
 
 - [ ] Mettez à jour la table pour supprimer les dates de naissance des groupes
+  - :scream: si vous avez fait une bétise, pas de panique, il faut relancer les deux scripts du début de TP (create and pop)
 - [ ] Quel est le plus viel artiste solo en activité ?
 
 Interessons nous maintenant aux pays des artistes.
@@ -143,6 +153,8 @@ Pour créer votre requête d'insertion, vous allez avoir besoin des données sui
 ---
 
 - [ ] Créez une séquence nommée *seq_playlist_ordre*
+  - comme vous avez déjà inséré 5 chansons, les valeurs de la colonne ordre de 1 à 5 sont normalement déjà prises
+  - commencez votre séquence à la valeur 6
 - [ ] Listez toutes les chansons de l'album *Californian Soil*
 - [ ] Insérer dans votre playlist toutes les chansons de l'album *Californian Soil*
 
@@ -171,10 +183,9 @@ Interessons-nous maintenant aux playlists.
 
 - [ ] Affichez les playlists
 - [ ] Ajoutez les titres des chansons de la playlist
-  - Colonnes à afficher : nom de la playlist, titre de la chanson
-  - Classez par noms de playlists
+  - Colonnes à afficher : nom de la playlist, ordre, titre de la chanson
+  - Classez par noms de playlists, puis ordre
 - [ ] Ajoutez les noms des artistes
-  - Classez par nom de playlist, puis par nom d'artiste
 
 Vous remarquez qu'à l'affichage vous avez deux colonnes appelées "nom". Pour faire la différence, vous allez modifier l'affichage de ces colonnes.
 
@@ -185,11 +196,13 @@ Vous remarquez qu'à l'affichage vous avez deux colonnes appelées "nom". Pour f
 - [ ] Quelle playlist a le plus de chansons ?
 - [ ] Quelle playlist dure le plus longtemps ?
 
-Nous allons maintenant rechercher les artistes mal-aimés i.e. ceux qui ne sont dans aucune playlist. Procédons par étape.
+Nous allons maintenant rechercher les artistes mal-aimés i.e. ceux qui ne sont dans aucune playlist. 
+
+Procédons par étape:
 
 - [ ] Listez les artistes présents dans les playlists
-- [ ] Ensuite, gardez uniquement les différents *id_artiste*
-- [ ] Affichez les artistes présent dans aucune playlist
+- [ ] Ensuite, gardez uniquement les *id_artiste* sans doublons
+- [ ] Affichez les artistes qui ne sont présents dans aucune playlist
   - en utilisant `NOT IN` et une sous-requête
   - conservez uniquement les *id_artiste* qui ne sont pas dans la requête précédente
 - [ ] Même question avec `NOT EXISTS`
@@ -229,7 +242,7 @@ Que fait cette requête ?
 SELECT DISTINCT ON (code_pays) code_pays, 
        nom, 
        date_naissance
-  FROM artiste
+  FROM music.artiste
  WHERE NOT groupe
  ORDER BY code_pays, 
           date_naissance ASC;
@@ -249,15 +262,15 @@ L'idée pour obtenir ce nom :
 
 ```{.sql}
 WITH viel_artiste_pays AS (
-  ...
+...
 )
 SELECT ...
-  FROM artiste a
-  JOIN plus_vieux pv ON ...
+  FROM ...
+  JOIN viel_artiste_pays pv ON ...
   ...
 ```
 
-- [ ] En complétant la requête à trous ci-dessous, donnez pour chaque pays l'artiste le plus vieux
+- [ ] En complétant la requête à trous ci-dessus, donnez pour chaque pays l'artiste le plus vieux
 
 ::: {.callout-tip title="Autre exemple"}
 Pour vous aider, voici un autre exemple.
