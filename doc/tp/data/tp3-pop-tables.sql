@@ -1,4 +1,4 @@
-INSERT INTO artiste (id_artiste, nom, code_pays, date_naissance, actif, groupe) VALUES
+INSERT INTO music.artiste (id_artiste, nom, code_pays, date_naissance, actif, groupe) VALUES
     (1,'Dua Lipa','GB','1995-08-22',true,false),
     (3,'London Grammar','GB','2012-01-01',true,true),
     (4,'Michael Jackson','US','1958-08-29',false,false),
@@ -112,7 +112,7 @@ INSERT INTO artiste (id_artiste, nom, code_pays, date_naissance, actif, groupe) 
     (118, 'Santa', 'FR','1991-07-24',true,false);
 
 
-INSERT INTO album (id_album, titre, annee, id_artiste) VALUES
+INSERT INTO music.album (id_album, titre, annee, id_artiste) VALUES
 (1, 'Dua Lipa', 2017, 1),
 (2, 'Future Nostalgia', 2020, 1),
 (3, 'Radical Optimism', 2024, 1),
@@ -141,7 +141,7 @@ INSERT INTO album (id_album, titre, annee, id_artiste) VALUES
 (27, 'Abbey Road', 1969, 8),
 (28, 'Let It Be', 1970, 8);
 
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+INSERT INTO music.chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
 (1, 1, 'Genesis', '00:03:25', 1, 2017),
 (2, 1, 'Lost in Your Light', '00:03:23', 1, 2017),
 (3, 1, 'Hotter than Hell', '00:03:07', 1, 2017),
@@ -178,7 +178,7 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (34, 1, 'Happy for You', '00:04:00', 3, 2024);
 
 
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+INSERT INTO music.chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
 (35, 3, 'Hey Now', '00:03:27', 4, 2013),
 (36, 3, 'Stay Awake', '00:03:06', 4, 2013),
 (37, 3, 'Shyer', '00:03:10', 4, 2013),
@@ -224,7 +224,7 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (77, 3, 'Stay', '00:03:22', 7, 2024),
 (78, 3, 'When the Sun Hits', '00:04:45', 7, 2024);
 
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+INSERT INTO music.chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
 (79, 4, 'Wanna Be Startin'' Somethin''', '00:06:03', 8, 1982),
 (80, 4, 'Baby Be Mine', '00:04:20', 8, 1982),
 (81, 4, 'The Girl Is Mine', '00:03:42', 8, 1982),
@@ -276,7 +276,7 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (127, 4, 'Whatever Happens', '00:04:56', 11, 2001),
 (128, 4, 'Threatened', '00:04:19', 11, 2001);
 
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+INSERT INTO music.chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
 (129, 5, 'Material Girl', '00:04:00', 12, 1985),
 (130, 5, 'Angel', '00:03:56', 12, 1985),
 (131, 5, 'Like a Virgin', '00:03:38', 12, 1984),
@@ -333,7 +333,7 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (182, 5, 'Ghosttown', '00:04:09', NULL, 2015);
 
 
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+INSERT INTO music.chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
 (183, 6, 'Quand la musique est bonne', '00:03:59', 17, 1982),
 (184, 6, 'Comme toi', '00:04:10', 17, 1982),
 (185, 6, 'Au bout de mes rêves', '00:04:22', 17, 1982),
@@ -361,7 +361,7 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (207, 6, 'Entre gris clair et gris foncé', '00:05:12', 20, 1987);
 
 
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+INSERT INTO music.chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
 (208, 2, 'The Fool', '00:03:27', 22, 2023),
 (209, 2, 'Night Heights', '00:04:09', 22, 2023),
 (210, 2, 'Maria', '00:04:23', 22, 2023),
@@ -375,7 +375,7 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (218, 2, 'Goodbye', '00:03:33', 22, 2023);
 
 
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+INSERT INTO music.chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
 (219, 7, 'Femininomenon', '00:03:39', 23, 2023),
 (220, 7, 'Red Wine Supernova', '00:03:12', 23, 2023),
 (221, 7, 'After Midnight', '00:03:24', 23, 2023),
@@ -392,7 +392,7 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (232, 7, 'Guilty Pleasure', '00:03:44', 23, 2023);
 
 
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+INSERT INTO music.chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
 (233, 8, 'A Hard Day''s Night', '00:02:34', 24, 1964),
 (234, 8, 'I Should Have Known Better', '00:02:43', 24, 1964),
 (235, 8, 'If I Fell', '00:02:20', 24, 1964),
@@ -465,7 +465,7 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (302, 8, 'Get Back', '00:03:09', 28, 1970);
 
 
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+INSERT INTO music.chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
 (303, 9, '(I Can''t Get No) Satisfaction', '00:03:43', NULL, 1965),
 (304, 9, 'Paint It Black', '00:03:45', NULL, 1966),
 (305, 9, 'Angie', '00:04:32', NULL, 1973),
@@ -499,7 +499,7 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (333, 11, 'Applause', '00:03:32', NULL, 2013),
 (334, 11, 'Abracadabra', '00:03:43', NULL, 2025);
 
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+INSERT INTO music.chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
 (335, 12, 'Come Out and Play (Keep ''em Separated)', NULL, NULL, 1994),
 (336, 12, 'Self Esteem', NULL, NULL, 1994),
 (337, 12, 'Gotta Get Away', NULL, NULL, 1995),
@@ -536,7 +536,7 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (368, 16, 'Nu', '00:02:26', NULL, 2024);
 
 
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+INSERT INTO music.chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
 (369, 17, 'Alors on danse', '00:03:27', NULL, 2009),
 (370, 17, 'Papaoutai', '00:03:52', NULL, 2013),
 (371, 17, 'Formidable', '00:03:34', NULL, 2013),
@@ -570,7 +570,7 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (399, 21, 'Mysterious Ways', '00:04:01', NULL, 1991);
 
 
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+INSERT INTO music.chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
 (400, 22, 'J''me barre', '00:02:59', NULL, 2023),
 (401, 22, 'Q', '00:03:16', NULL, 2022),
 (402, 22, 'Dissimule', '00:03:44', NULL, 2025),
@@ -598,7 +598,7 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (424, 25, 'Désolé pour hier soir', '00:03:59', NULL, 2003);
 
 
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+INSERT INTO music.chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
 (425, 26, 'Clown', '00:03:42', NULL, 2014),
 (426, 26, 'Cosmo', '00:03:37', NULL, 2016),
 (427, 26, 'Le coach', '00:03:29', NULL, 2017),
@@ -623,7 +623,7 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (448, 30, 'Wake Me Up When September Ends', NULL, NULL, 2005);
 
 
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+INSERT INTO music.chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
 (449, 31, 'Where Is the Love?', '00:04:18', NULL, 2003),
 (450, 31, 'Let''s Get It Started', '00:03:37', NULL, 2004),
 (451, 31, 'Boom Boom Pow', '00:04:09', NULL, 2009),
@@ -662,7 +662,7 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (484, 36, 'Flavors of Entanglement', '00:04:24', NULL, 2008);
 
 
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+INSERT INTO music.chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
 (485, 37, 'Maniac', '00:03:34', NULL, 2001),
 (486, 37, 'Question de survie', '00:03:45', NULL, 2001),
 (487, 37, 'Etincelle', '00:03:38', NULL, 2002),
@@ -691,7 +691,7 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (510, 40, 'Maybe You''re the Problem', '00:03:12', NULL, 2022);
 
 
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+INSERT INTO music.chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
 (511, 41, 'La Grenade', '00:03:20', NULL, 2018),
 (512, 41, 'Nue', '00:03:25', NULL, 2018),
 (513, 41, 'Le Reste', '00:03:28', NULL, 2021),
@@ -724,7 +724,7 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (540, 44, 'Memoria', '00:04:31', NULL, 2002);
 
 
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+INSERT INTO music.chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
 (541, 45, 'Love Story', '00:03:55', NULL, 2008),
 (542, 45, 'You Belong With Me', '00:03:52', NULL, 2008),
 (543, 45, 'Shake It Off', '00:03:39', NULL, 2014),
@@ -756,7 +756,7 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (569, 49, 'Can You Feel the Love Tonight', '00:04:01', NULL, 1994);
 
 
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+INSERT INTO music.chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
 (570, 50, 'Libérée, délivrée', '00:03:44', NULL, 2013),
 (571, 57, 'Bohemian Rhapsody', '00:05:55', NULL, 1975),
 (572, 57, 'We Will Rock You', '00:02:02', NULL, 1977),
@@ -793,7 +793,7 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (603, 60, 'Chanson populaire', '00:03:15', NULL, 1972);
 
 
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+INSERT INTO music.chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
 (604, 61, 'L''Aziza', '00:03:44', NULL, 1985),
 (605, 61, 'Mon fils, ma bataille', '00:04:02', NULL, 1980),
 (606, 61, 'Je ne suis pas un héros', '00:04:12', NULL, 1980),
@@ -828,7 +828,7 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (635, 67, 'Babacar', '00:04:40', NULL, 1987);
 
 
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+INSERT INTO music.chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
 (636, 68, 'I Love Rock ''n'' Roll', '00:02:55', NULL, 1981),
 (637, 69, 'Que je t''aime', '00:03:22', NULL, 1969),
 (638, 69, 'Allumer le feu', '00:04:30', NULL, 1998),
@@ -886,7 +886,7 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (690, 74, 'Polnareff chante Michel', '00:03:50', NULL, 1975);
 
 
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+INSERT INTO music.chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
 (691, 75, 'Marcia Baïla', '00:04:35', NULL, 1984),
 (692, 75, 'C''est comme ça', '00:03:50', NULL, 1986),
 (693, 76, 'Bang Bang', '00:03:15', NULL, 1966),
@@ -937,7 +937,7 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (738, 88, 'Tomber la chemise', '00:04:05', NULL, 1998);
 
 
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+INSERT INTO music.chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
 (739, 89, 'Can''t Get You Out of My Head', '00:03:51', NULL, 2001),
 (740, 89, 'Spinning Around', '00:03:27', NULL, 2000),
 (741, 89, 'Love at First Sight', '00:03:54', NULL, 2002),
@@ -987,7 +987,7 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (786, 95, 'Si je meurs ce soir', '00:03:50', NULL, 2004);
 
 
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+INSERT INTO music.chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
 (787, 96, 'Club Foot', '00:03:50', NULL, 2004),
 (788, 96, 'Fire', '00:03:45', NULL, 2009),
 (789, 96, 'L.S.F.', '00:03:35', NULL, 2004),
@@ -1019,7 +1019,7 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 
 
 
-INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
+INSERT INTO music.chanson (id_chanson, id_artiste_principal, titre, duree, id_album, annee) VALUES
 (815, 102, 'Joe le taxi', '00:03:45', NULL, 1987),
 (816, 102, 'Be My Baby', '00:03:55', NULL, 1992),
 (817, 102, 'Divine idylle', '00:04:10', NULL, 2007),
@@ -1075,7 +1075,7 @@ INSERT INTO chanson (id_chanson, id_artiste_principal, titre, duree, id_album, a
 (868, 118, 'La différence',   '00:04:00', NULL, 2025);
 
 
-INSERT INTO playlist (id_playlist, nom, date_creation, description) VALUES
+INSERT INTO music.playlist (id_playlist, nom, date_creation, description) VALUES
   (1, 'Les Ondes de Ludovic',     '2025-10-15', 'Sélection musicale éclectique de Ludovic.'),
   (2, 'Le Groove de Sylvain',     '2025-10-16', 'Mélange de titres énergiques choisis par Sylvain.'),
   (3, 'L''Univers de Clémentine',  '2025-10-17', 'Les coups de cœur musicaux de Clémentine.'),
@@ -1087,7 +1087,7 @@ INSERT INTO playlist (id_playlist, nom, date_creation, description) VALUES
 (9, 'Playlist Workout',  '2025-10-18', 'Musique dynamique pour accompagner ton entraînement.'),
 (10, 'Playlist Découverte',  '2025-10-18', 'Un mélange éclectique pour découvrir de nouveaux sons.');
 
-INSERT INTO playlist_chanson (id_playlist, id_chanson, ordre, date_ajout) VALUES
+INSERT INTO music.playlist_chanson (id_playlist, id_chanson, ordre, date_ajout) VALUES
   (1, 12, 1, '2025-10-15'), (1, 45, 2, '2025-10-15'), (1, 78, 3, '2025-10-15'),
   (1, 134, 4, '2025-10-15'), (1, 152, 5, '2025-10-15'), (1, 210, 6, '2025-10-15'),
   (1, 226, 7, '2025-10-15'), (1, 305, 8, '2025-10-15'), (1, 319, 9, '2025-10-15'),
@@ -1098,7 +1098,7 @@ INSERT INTO playlist_chanson (id_playlist, id_chanson, ordre, date_ajout) VALUES
   (1, 745, 22, '2025-10-15'), (1, 790, 23, '2025-10-15'), (1, 802, 24, '2025-10-15'),
   (1, 846, 25, '2025-10-15');
 
-INSERT INTO playlist_chanson (id_playlist, id_chanson, ordre, date_ajout) VALUES
+INSERT INTO music.playlist_chanson (id_playlist, id_chanson, ordre, date_ajout) VALUES
   (2, 18, 1, '2025-10-16'), (2, 64, 2, '2025-10-16'), (2, 97, 3, '2025-10-16'),
   (2, 111, 4, '2025-10-16'), (2, 156, 5, '2025-10-16'), (2, 202, 6, '2025-10-16'),
   (2, 289, 7, '2025-10-16'), (2, 314, 8, '2025-10-16'), (2, 355, 9, '2025-10-16'),
@@ -1108,7 +1108,7 @@ INSERT INTO playlist_chanson (id_playlist, id_chanson, ordre, date_ajout) VALUES
   (2, 742, 19, '2025-10-16'), (2, 790, 20, '2025-10-16'), (2, 815, 21, '2025-10-16'),
   (2, 849, 22, '2025-10-16');
 
-INSERT INTO playlist_chanson (id_playlist, id_chanson, ordre, date_ajout) VALUES
+INSERT INTO music.playlist_chanson (id_playlist, id_chanson, ordre, date_ajout) VALUES
   (3, 3, 1, '2025-10-17'), (3, 673, 2, '2025-10-17'), (3, 67, 3, '2025-10-17'),
   (3, 80, 4, '2025-10-17'), (3, 95, 5, '2025-10-17'), (3, 117, 6, '2025-10-17'),
   (3, 131, 7, '2025-10-17'), (3, 166, 8, '2025-10-17'), (3, 190, 9, '2025-10-17'),
@@ -1120,7 +1120,7 @@ INSERT INTO playlist_chanson (id_playlist, id_chanson, ordre, date_ajout) VALUES
   (3, 734, 25, '2025-10-17'), (3, 751, 26, '2025-10-17'), (3, 809, 27, '2025-10-17'),
   (3, 844, 28, '2025-10-17'), (3, 202, 28, '2025-10-17');
 
-INSERT INTO playlist_chanson (id_playlist, id_chanson, ordre, date_ajout) VALUES
+INSERT INTO music.playlist_chanson (id_playlist, id_chanson, ordre, date_ajout) VALUES
   (4, 14, 1, '2025-10-18'), (4, 32, 2, '2025-10-18'), (4, 75, 3, '2025-10-18'),
   (4, 120, 4, '2025-10-18'), (4, 167, 5, '2025-10-18'), (4, 204, 6, '2025-10-18'),
   (4, 230, 7, '2025-10-18'), (4, 276, 8, '2025-10-18'), (4, 312, 9, '2025-10-18'),
@@ -1129,7 +1129,7 @@ INSERT INTO playlist_chanson (id_playlist, id_chanson, ordre, date_ajout) VALUES
   (4, 615, 16, '2025-10-18'), (4, 661, 17, '2025-10-18'), (4, 688, 18, '2025-10-18'),
   (4, 725, 19, '2025-10-18'), (4, 751, 20, '2025-10-18'), (4, 809, 21, '2025-10-18');
 
-INSERT INTO playlist_chanson (id_playlist, id_chanson, ordre, date_ajout) VALUES
+INSERT INTO music.playlist_chanson (id_playlist, id_chanson, ordre, date_ajout) VALUES
   (5, 8, 1, '2025-10-19'), (5, 823, 2, '2025-10-19'), (5, 66, 3, '2025-10-19'),
   (5, 570, 4, '2025-10-19'), (5, 123, 5, '2025-10-19'), (5, 157, 6, '2025-10-19'),
   (5, 176, 7, '2025-10-19'), (5, 188, 8, '2025-10-19'), (5, 213, 9, '2025-10-19'),
@@ -1141,7 +1141,7 @@ INSERT INTO playlist_chanson (id_playlist, id_chanson, ordre, date_ajout) VALUES
   (5, 733, 25, '2025-10-19'), (5, 750, 26, '2025-10-19'), (5, 782, 27, '2025-10-19'),
   (5, 799, 28, '2025-10-19'), (5, 827, 29, '2025-10-19'), (5, 853, 30, '2025-10-19');
 
-INSERT INTO playlist_chanson (id_playlist, id_chanson, ordre)
+INSERT INTO music.playlist_chanson (id_playlist, id_chanson, ordre)
 VALUES
 (6, 45, 1),
 (6, 102, 2),
@@ -1162,7 +1162,7 @@ VALUES
 (6, 233, 17),
 (6, 700, 18);
 
-INSERT INTO playlist_chanson (id_playlist, id_chanson, ordre)
+INSERT INTO music.playlist_chanson (id_playlist, id_chanson, ordre)
 VALUES
 (7, 22, 1),
 (7, 431, 2),
@@ -1184,7 +1184,7 @@ VALUES
 (7, 605, 18),
 (7, 111, 19);
 
-INSERT INTO playlist_chanson (id_playlist, id_chanson, ordre)
+INSERT INTO music.playlist_chanson (id_playlist, id_chanson, ordre)
 VALUES
 (8, 89, 1),
 (8, 540, 2),
@@ -1207,7 +1207,7 @@ VALUES
 (8, 564, 19),
 (8, 859, 20);
 
-INSERT INTO playlist_chanson (id_playlist, id_chanson, ordre)
+INSERT INTO music.playlist_chanson (id_playlist, id_chanson, ordre)
 VALUES
 (9, 9, 1),
 (9, 201, 2),
@@ -1228,7 +1228,7 @@ VALUES
 (9, 861, 17),
 (9, 430, 18);
 
-INSERT INTO playlist_chanson (id_playlist, id_chanson, ordre)
+INSERT INTO music.playlist_chanson (id_playlist, id_chanson, ordre)
 VALUES
 (10, 570, 1),
 (10, 144, 2),

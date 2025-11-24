@@ -501,6 +501,7 @@ Important
 <div class="callout-body-container callout-body">
 <ul>
 <li>Écrivez des requêtes jolies !</li>
+<li>À la fin du TP, exportez ou copiez vos requêtes dans un fichier de votre VM ou machine personnelle</li>
 </ul>
 </div>
 </div>
@@ -568,9 +569,15 @@ Important
 <p>Lorsque vous prenez en main une base de données, la première chose à faire est de regarder ce que contiennent les tables.</p>
 <ul class="task-list">
 <li><label><input type="checkbox">Listez toutes les chansons</label></li>
-<li><label><input type="checkbox">Listez les chansons (titre, année) ainsi que le nom de l’artiste</label></li>
+<li><label><input type="checkbox">Affichez les colonnes <em>titre</em> et <em>année</em> ainsi que le <em>nom de l’artiste principal</em></label></li>
 <li><label><input type="checkbox">Ordonnez par nom d’artiste, puis par titre</label></li>
-<li><label><input type="checkbox">Ajoutez le titre de l’album si celui-ci est précisé</label></li>
+<li><label><input type="checkbox">Ajoutez le titre de l’album <u>si celui-ci est précisé</u></label></li>
+<li><label><input type="checkbox">Ajoutez le nom de l’artiste de l’album</label></li>
+<li><label><input type="checkbox">Est-ce qu’il y a des chansons où il y a une différence entre :</label>
+<ul>
+<li>l’artiste principal de la chanson</li>
+<li>l’artiste de l’album qui contient cette chanson</li>
+</ul></li>
 </ul>
 <p>Faisons quelques statistiques descriptives.</p>
 <ul class="task-list">
@@ -585,13 +592,20 @@ Important
 <p>Est-ce qu’il y a plusieurs chansons ayant le même titre ?</p>
 <ul class="task-list">
 <li><label><input type="checkbox">Pour chaque titre de chanson, comptez le nombre d’occurences</label></li>
-<li><label><input type="checkbox">N’affichez que les titres ayant au moins deux occurences</label></li>
+<li><label><input type="checkbox">Est-ce qu’il y a des titres de chansons présents au moins deux fois ?</label></li>
 <li><label><input type="checkbox">Est-ce qu’il y a des chansons en doublon ?</label>
 <ul>
 <li>i.e.&nbsp;même titre et même artiste</li>
 </ul></li>
 </ul>
 <p>Si vous en trouvez une, essayez de la supprimer. À votre avis, pourquoi cela ne fonctionne pas ?</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Créez une vue <em>titre_frequent</em> listant les titres des chansons présents au moins deux fois ?</label></li>
+<li><label><input type="checkbox">Pour ces titres, affichez tous les détails des chansons, ainsi que l’artiste principal</label>
+<ul>
+<li>triez par titre</li>
+</ul></li>
+</ul>
 </section>
 <section id="place-aux-artistes" class="level3" data-number="3.2">
 <h3 data-number="3.2" class="anchored" data-anchor-id="place-aux-artistes"><span class="header-section-number">3.2</span> Place aux artistes</h3>
@@ -601,9 +615,12 @@ Important
 <li><label><input type="checkbox">Classez par ordre décroissant</label></li>
 <li><label><input type="checkbox">Conservez uniquement les artistes ayant 20 chansons ou plus</label></li>
 </ul>
-<p>Il y a des artistes solo et des groupes. Pour la groupe la date de naissance ne devrait pas être renseignée.</p>
+<p>Il y a des artistes solo et des groupes. Pour les groupe la date de naissance ne devrait pas être renseignée.</p>
 <ul class="task-list">
-<li><label><input type="checkbox">Mettez à jour la table pour supprimer les dates de naissance des groupes</label></li>
+<li><label><input type="checkbox">Mettez à jour la table pour supprimer les dates de naissance des groupes</label>
+<ul>
+<li><span class="emoji" data-emoji="scream">😱</span> si vous avez fait une bétise, pas de panique, il faut relancer les deux scripts du début de TP (create and pop)</li>
+</ul></li>
 <li><label><input type="checkbox">Quel est le plus viel artiste solo en activité ?</label></li>
 </ul>
 <p>Interessons nous maintenant aux pays des artistes.</p>
@@ -646,7 +663,11 @@ Tip
 </ul>
 <hr>
 <ul class="task-list">
-<li><label><input type="checkbox">Créez une séquence nommée <em>seq_playlist_ordre</em></label></li>
+<li><label><input type="checkbox">Créez une séquence nommée <em>seq_playlist_ordre</em></label>
+<ul>
+<li>comme vous avez déjà inséré 5 chansons, les valeurs de la colonne ordre de 1 à 5 sont normalement déjà prises</li>
+<li>commencez votre séquence à la valeur 6</li>
+</ul></li>
 <li><label><input type="checkbox">Listez toutes les chansons de l’album <em>Californian Soil</em></label></li>
 <li><label><input type="checkbox">Insérer dans votre playlist toutes les chansons de l’album <em>Californian Soil</em></label></li>
 </ul>
@@ -682,13 +703,10 @@ Tip
 <li><label><input type="checkbox">Affichez les playlists</label></li>
 <li><label><input type="checkbox">Ajoutez les titres des chansons de la playlist</label>
 <ul>
-<li>Colonnes à afficher : nom de la playlist, titre de la chanson</li>
-<li>Classez par noms de playlists</li>
+<li>Colonnes à afficher : nom de la playlist, ordre, titre de la chanson</li>
+<li>Classez par noms de playlists, puis ordre</li>
 </ul></li>
-<li><label><input type="checkbox">Ajoutez les noms des artistes</label>
-<ul>
-<li>Classez par nom de playlist, puis par nom d’artiste</li>
-</ul></li>
+<li><label><input type="checkbox">Ajoutez les noms des artistes</label></li>
 </ul>
 <p>Vous remarquez qu’à l’affichage vous avez deux colonnes appelées “nom”. Pour faire la différence, vous allez modifier l’affichage de ces colonnes.</p>
 <ul class="task-list">
@@ -699,11 +717,12 @@ Tip
 <li><label><input type="checkbox">Quelle playlist a le plus de chansons ?</label></li>
 <li><label><input type="checkbox">Quelle playlist dure le plus longtemps ?</label></li>
 </ul>
-<p>Nous allons maintenant rechercher les artistes mal-aimés i.e.&nbsp;ceux qui ne sont dans aucune playlist. Procédons par étape.</p>
+<p>Nous allons maintenant rechercher les artistes mal-aimés i.e.&nbsp;ceux qui ne sont dans aucune playlist.</p>
+<p>Procédons par étape:</p>
 <ul class="task-list">
 <li><label><input type="checkbox">Listez les artistes présents dans les playlists</label></li>
-<li><label><input type="checkbox">Ensuite, gardez uniquement les différents <em>id_artiste</em></label></li>
-<li><label><input type="checkbox">Affichez les artistes présent dans aucune playlist</label>
+<li><label><input type="checkbox">Ensuite, gardez uniquement les <em>id_artiste</em> sans doublons</label></li>
+<li><label><input type="checkbox">Affichez les artistes qui ne sont présents dans aucune playlist</label>
 <ul>
 <li>en utilisant <code>NOT IN</code> et une sous-requête</li>
 <li>conservez uniquement les <em>id_artiste</em> qui ne sont pas dans la requête précédente</li>
@@ -756,7 +775,7 @@ Tip
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="kw">DISTINCT</span> <span class="kw">ON</span> (code_pays) code_pays, </span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>       nom, </span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>       date_naissance</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> artiste</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> music.artiste</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> <span class="kw">NOT</span> groupe</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a> <span class="kw">ORDER</span> <span class="kw">BY</span> code_pays, </span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>          date_naissance <span class="kw">ASC</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -772,14 +791,14 @@ Tip
 <li>joindre cette table à la table <em>artiste</em> via les colonnes <em>pays</em> et <em>date_naissance</em></li>
 </ul>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">WITH</span> viel_artiste_pays <span class="kw">AS</span> (</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="op">..</span>.</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="op">..</span>.</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">..</span>.</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> artiste a</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> plus_vieux pv <span class="kw">ON</span> <span class="op">..</span>.</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> <span class="op">..</span>.</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> viel_artiste_pays pv <span class="kw">ON</span> <span class="op">..</span>.</span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="op">..</span>.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul class="task-list">
-<li><label><input type="checkbox">En complétant la requête à trous ci-dessous, donnez pour chaque pays l’artiste le plus vieux</label></li>
+<li><label><input type="checkbox">En complétant la requête à trous ci-dessus, donnez pour chaque pays l’artiste le plus vieux</label></li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled" title="Autre exemple">
 <div class="callout-header d-flex align-content-center">
