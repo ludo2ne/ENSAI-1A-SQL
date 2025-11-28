@@ -124,18 +124,6 @@ Une autre erreur concernerait les dates de naissances des joueuses
 - [ ] Écrivez une requête pour ne garder que les joueuses avec des années de naissances étranges
 - [ ] Apportez une correction adaptée
 
-Toujours sur la table des joueuses, vous avez peut-être remarqué qu'une puissante technique d'anonymisation a été utilisée.
-
-- [ ] Commencez par afficher dans un *SELECT* une version plus propre
-- [ ] Une fois que le résultat est assez correct, mettez à jour la table *joueuse*
-
-::: {.callout-tip collapse="true"}
-- Vous pouvez utiliser la fonction *REPLACE()*
-  - et même les enchainer : REPLACE(REPLACE(REPLACE())) 
-- Attention : les noms des joueuses titrées n'ont pas été anonymisées
-
-Si vous souhaitez utiliser des techniques d'anonymisation un peu plus efficaces, rendez-vous en 3A pour les Master ID et STD.
-:::
 
 Passons maintenant à la table des parties. À votre avis, est-ce normal de jouer des parties contre soi-même ?
 
@@ -184,7 +172,33 @@ Regardons maintenant quelques statistiques sur ces données.
 
 - [ ] Complétez pour ne conserver que les tournois avec 20 % ou moins de matchs nuls
 
-Jetons maintenant un oeil aux ouvertures qui permettent de gagner plus souvent
+Le but des questions suivantes va être d'afficher le nombre de partie jouées en tournoi et hors tournoi.
+
+Le résultat doit être l'un des deux ci-dessous :
+
+:::::: columns
+::: column
+| tournoi | nb_parties |
+|---------|------------|
+| false   | 10000      |
+| true    | 3610       |
+:::
+
+::: column
+| nb_parties_en_tournoi | nb_parties_hors_tournoi |
+|-----------------------|-------------------------|
+| 3610                  | 10000                   |
+:::
+::::::
+
+Affichez ce résultat avec une requête utilisant :
+
+- [ ] UNION
+- [ ] COALESCE(id_tournoi IS NOT NULL, false)
+- [ ] CASE WHEN
+- [ ] FILTER
+
+Jetons maintenant un oeil aux ouvertures qui permettent de gagner plus souvent.
 
 ::: {.callout-note title="Ouvertures"}
 En début de partie, le nombre de coups possibles et corrects reste assez limité. Les différentes possibilités de commencer une partie sont catégorisées et appelées Ouvertures.
@@ -259,7 +273,7 @@ Nous allons donc commencer par créer une vue des participantes
 - [ ] Listez tous les différents couples (id_joueuse, id_tournoi) possibles et existants dans la table *partie*
 - [ ] Créez la vue `participante(id_tournoi, id_joueuse)`
   - en y insérant les données de la dernière requête
-- [ ] Vérifiez que cette vue contient 960 enregistrements
+- [ ] Vérifiez que cette vue contient 980 enregistrements
 
 ::: {.callout-important icon="false" appearance="simple"}
 Pour trouver les gagnantes des tournois, il faut trouver leurs nombres de points marqués.
@@ -389,12 +403,9 @@ Choisissez une joueuse, par exemple *Judith POLGAR*
 - [Correction TP4](./correction/tp4.sql)
 :::
 
-## Arrêtez votre service {.unnumbered}
+## Arrêtez vos services {.unnumbered}
 
 C'est la fin du TP, vous pouvez maintenant sauvegarder votre travail et libérer les ressources réservées :
 
-- [ ] Copiez votre code et collez le sur votre machine dans un fichier *.sql*
-  - par exemple dans `P:/Cours1A/UE3-Bases-de-donnees-relationnelles/TP4/tp4.sql`
-  - ou en téléchargeant depuis CloudBeaver le fichier sql (petit bouton avec un dossier et une flèche vers le bas)
-- [ ] Retournez sur la page d'accueil du Datalab
-- [ ] Allez dans *Mes Services* et supprimez votre service
+- [ ] Copiez-collez vos scripts SQL sur votre machine
+- [ ] Arrêter les services du Datalab

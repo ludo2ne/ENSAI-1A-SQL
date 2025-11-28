@@ -55,26 +55,6 @@ UPDATE echecs.joueuse
 
 
 ----------------------------------------------------------------------
--- Anonymisation
-----------------------------------------------------------------------
-
-SELECT *
-  FROM echecs.joueuse;
-
-
--- tentative pour casser l'anonymat
-SELECT REPLACE(REPLACE(REPLACE(nom, 'EUH', 'E'), 'AO', 'A'), 'OU', 'U')
-  FROM echecs.joueuse
- WHERE code_titre IS NULL;
-
-
--- maj des noms des joueuse
-UPDATE echecs.joueuse
-   SET nom = REPLACE(REPLACE(REPLACE(nom, 'EUH', 'E'), 'AO', 'A'), 'OU', 'U')
- WHERE code_titre IS NULL;
-
-
-----------------------------------------------------------------------
 -- Parties louches
 ----------------------------------------------------------------------
 
@@ -85,7 +65,7 @@ SELECT *
 
 
 -- table tricheuses
-CREATE TABLE echecs.Tricheuse
+CREATE TABLE echecs.tricheuse
 AS
 SELECT * 
   FROM echecs.joueuse
@@ -164,39 +144,6 @@ SELECT c.nom,
 
 
 ----------------------------------------------------------------------
--- Remise en route TP5
-----------------------------------------------------------------------
-
-SELECT j.nom,
-       j.prenom,
-       j.elo,
-       c.nom AS "Nom club"
-  FROM echecs.joueuse j
-  JOIN echecs.club c USING(id_club)
- ORDER BY elo DESC;
-
-
-SELECT j.nom,
-       j.prenom,
-       j.elo,
-       c.nom AS "Nom club"
-  FROM echecs.joueuse j
-  LEFT JOIN echecs.club c USING(id_club)
- ORDER BY elo DESC;
- 
-
-SELECT j.nom,
-       j.prenom,
-       j.elo,
-       t.nom AS "Titre",
-       c.nom AS "Nom club"
-  FROM echecs.joueuse j
-  LEFT JOIN echecs.club c USING(id_club)
-  LEFT JOIN echecs.titre t ON j.code_titre = t.code
- ORDER BY elo DESC;
-
-
-----------------------------------------------------------------------
 -- Statistiques sur les parties
 ----------------------------------------------------------------------
 
@@ -235,6 +182,47 @@ SELECT t.nom AS tournoi,
   LEFT JOIN echecs.tournoi t USING(id_tournoi)
  GROUP BY t.nom
 HAVING ROUND(1.0 * COUNT(*) FILTER (WHERE id_resultat = 3) / COUNT(*), 2) <= 0.2;
+
+
+----------------------------------------------------------------------
+-- Tournoi / pas tournoi
+----------------------------------------------------------------------
+
+-- UNION
+SELECT true AS tournoi, 
+       COUNT(*) AS nb_parties
+  FROM echecs.partie
+ WHERE id_tournoi IS NOT NULL
+UNION ALL
+SELECT false, 
+       COUNT(*)
+  FROM echecs.partie
+ WHERE id_tournoi IS NULL;
+
+
+-- COALESCE
+SELECT COALESCE(id_tournoi IS NOT NULL, false) AS tournoi,
+       COUNT(*) AS nb_parties
+  FROM echecs.partie
+ GROUP BY tournoi;
+
+
+-- CASE WHEN
+SELECT CASE WHEN id_tournoi IS NOT NULL THEN true ELSE false END AS tournoi,
+       COUNT(*) AS nb_parties
+  FROM echecs.partie
+ GROUP BY 1;
+
+SELECT COUNT(CASE WHEN id_tournoi IS NOT NULL THEN 1 END) AS nb_parties_en_tournoi,
+       COUNT(CASE WHEN id_tournoi IS NULL THEN 1 END)     AS nb_parties_hors_tournoi
+  FROM echecs.partie;
+
+
+
+-- FILTER
+SELECT COUNT(*) FILTER (WHERE id_tournoi IS NOT NULL) AS nb_parties_en_tournoi,
+       COUNT(*) FILTER (WHERE id_tournoi IS NULL)     AS nb_parties_hors_tournoi
+  FROM echecs.partie;
 
 
 ----------------------------------------------------------------------

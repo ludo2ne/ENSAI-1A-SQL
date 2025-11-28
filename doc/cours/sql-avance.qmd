@@ -276,6 +276,11 @@ Remarque :
 
 - Si vous donnez les droits WITH GRANT OPTION à quelqu'un
 - Cette personne peut ensuite vous retirer les droits !
+  - si vous n'êtes pas propriétaire de la table
+
+propriétaire <> créateur
+
+`ALTER TABLE t OWNER TO michel;`
 :::
 
 ### Retirer des droits
