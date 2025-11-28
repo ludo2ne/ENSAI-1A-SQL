@@ -534,8 +534,13 @@ Ludovic Deneuville
 <p>Remarque :</p>
 <ul>
 <li>Si vous donnez les droits WITH GRANT OPTION à quelqu’un</li>
-<li>Cette personne peut ensuite vous retirer les droits !</li>
+<li>Cette personne peut ensuite vous retirer les droits !
+<ul>
+<li>si vous n’êtes pas propriétaire de la table</li>
+</ul></li>
 </ul>
+<p>propriétaire &lt;&gt; créateur</p>
+<p><code>ALTER TABLE t OWNER TO michel;</code></p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

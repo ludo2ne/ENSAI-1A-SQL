@@ -14024,6 +14024,18 @@ INSERT INTO echecs.partie (id_partie,id_blanc,id_noir,date_partie,id_resultat,id
 	 (13610,276,135,'2024-01-17',2,1,15.0);
 
 
-
-
 SET SEARCH_PATH TO echecs, public;
+
+SELECT setval(pg_get_serial_sequence('echecs.cadence', 'id_cadence'), COALESCE(MAX(id_cadence), 1)) FROM echecs.cadence;
+
+SELECT setval(pg_get_serial_sequence('echecs.resultat_partie', 'id_resultat'), COALESCE(MAX(id_resultat), 1)) FROM echecs.resultat_partie;
+
+SELECT setval(pg_get_serial_sequence('echecs.ouverture', 'id_ouverture'), COALESCE(MAX(id_ouverture), 1)) FROM echecs.ouverture;
+
+SELECT setval(pg_get_serial_sequence('echecs.club', 'id_club'), COALESCE(MAX(id_club), 1)) FROM echecs.club;
+
+SELECT setval(pg_get_serial_sequence('echecs.joueuse', 'id_joueuse'), COALESCE(MAX(id_joueuse), 1)) FROM echecs.joueuse;
+
+SELECT setval(pg_get_serial_sequence('echecs.tournoi', 'id_tournoi'), COALESCE(MAX(id_tournoi), 1)) FROM echecs.tournoi;
+
+SELECT setval(pg_get_serial_sequence('echecs.partie', 'id_partie'), COALESCE(MAX(id_partie), 1)) FROM echecs.partie;
