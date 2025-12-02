@@ -1082,14 +1082,14 @@
     "href": "doc/tp/tp4.html",
     "title": "Chess Unofficial Federation ♕",
     "section": "",
-    "text": "Important\n\n\n\n\nÉcrivez des requêtes jolies !\n\n\n\nCe sujet vous occupera pour les TP4 et 5."
+    "text": "Important\n\n\n\n\nÉcrivez des requêtes jolies !"
   },
   {
     "objectID": "doc/tp/tp4.html#introduction",
     "href": "doc/tp/tp4.html#introduction",
     "title": "Chess Unofficial Federation ♕",
     "section": "",
-    "text": "Important\n\n\n\n\nÉcrivez des requêtes jolies !\n\n\n\nCe sujet vous occupera pour les TP4 et 5."
+    "text": "Important\n\n\n\n\nÉcrivez des requêtes jolies !"
   },
   {
     "objectID": "doc/tp/tp4.html#lancement-des-services",
@@ -1124,7 +1124,7 @@
     "href": "doc/tp/tp4.html#quelques-statistiques",
     "title": "Chess Unofficial Federation ♕",
     "section": "5 Quelques statistiques",
-    "text": "5 Quelques statistiques\n\n\n\n\n\n\nRegardons maintenant quelques statistiques sur ces données.\n\n\n\n\nComptez le nombre de parties jouées\nAffichez le nombre de parties jouées par tournoi\n\naffichez le nom du tournoi\nincluez les parties jouées hors tournoi\n\nPour chaque tournoi, calculez également les taux de victoire des blancs et des noirs, ainsi que celui de matchs nuls\n\n\n\n\n\n\n\nTip\n\n\n\n\n\n\nCommencez par exemple par calculer le nombre de victoires des blancs\nDivisez par le bon nombre\nPour avoir un float, vous pouvez multiplier par 1.0\nUtilisez ROUND() pour arrondir à 2 chiffres significatifs\n\n\n\n\n\nComplétez pour ne conserver que les tournois avec 20 % ou moins de matchs nuls\n\nLe but des questions suivantes va être d’afficher le nombre de partie jouées en tournoi et hors tournoi.\nLe résultat doit être l’un des deux ci-dessous :\n\n\n\n\n\ntournoi\nnb_parties\n\n\n\n\nfalse\n10000\n\n\ntrue\n3610\n\n\n\n\n\n\n\nnb_parties_en_tournoi\nnb_parties_hors_tournoi\n\n\n\n\n3610\n10000\n\n\n\n\n\nAffichez ce résultat avec une requête utilisant :\n\nUNION\nCOALESCE(id_tournoi IS NOT NULL, false)\nCASE WHEN\nFILTER\n\nJetons maintenant un oeil aux ouvertures qui permettent de gagner plus souvent.\n\n\n\n\n\n\nNoteOuvertures\n\n\n\nEn début de partie, le nombre de coups possibles et corrects reste assez limité. Les différentes possibilités de commencer une partie sont catégorisées et appelées Ouvertures.\nVient ensuite le milieu de jeu lorsque toutes les pièces sont développées.\nEt enfin (si personne ne s’est pris un échec et mat) la finale, i.e. lorsque les Dames ont été échangées et qu’il reste peu de pièces.\n\n\n\nUne des ouvertures n’existe pas, elle n’a été jouée dans aucune partie\n\nTrouvez et supprimez cette ouverture\n\nComme fait précédemment pour les tournois, calculez pour chaque ouverture :\n\nnombre de parties jouées\ntaux de victoire des blancs\ntaux de victoire des noirs\ntaux de matchs nuls\n\nAffichez les joueuses ayant joué plus de 5 fois avec les pièces noires la Défense Sicilienne"
+    "text": "5 Quelques statistiques\n\n\n\n\n\n\nRegardons maintenant quelques statistiques sur ces données.\n\n\n\n\nComptez le nombre de parties jouées\nAffichez le nombre de parties jouées par tournoi\n\naffichez le nom du tournoi\nincluez les parties jouées hors tournoi\n\nPour chaque tournoi, calculez également les taux de victoire des blancs et des noirs, ainsi que celui de matchs nuls\n\n\n\n\n\n\n\nTip\n\n\n\n\n\n\nCommencez par exemple par calculer le nombre de victoires des blancs\nDivisez par le bon nombre\nPour avoir un float, vous pouvez multiplier par 1.0\nUtilisez ROUND() pour arrondir à 2 chiffres significatifs\n\n\n\n\n\nComplétez pour ne conserver que les tournois avec 20 % ou moins de matchs nuls\n\nLe but des questions suivantes va être d’afficher le nombre de parties jouées en tournoi et hors tournoi.\nLe résultat doit être l’un des deux ci-dessous :\n\n\n\n\n\ntournoi\nnb_parties\n\n\n\n\nfalse\n10000\n\n\ntrue\n3610\n\n\n\n\n\n\n\nnb_parties_en_tournoi\nnb_parties_hors_tournoi\n\n\n\n\n3610\n10000\n\n\n\n\n\nAffichez ce résultat avec une requête utilisant :\n\nUNION\nCOALESCE(id_tournoi IS NOT NULL, false)\nCASE WHEN\nFILTER\n\nJetons maintenant un oeil aux ouvertures qui permettent de gagner plus souvent.\n\n\n\n\n\n\nNoteOuvertures\n\n\n\nEn début de partie, le nombre de coups possibles et corrects reste assez limité. Les différentes possibilités de commencer une partie sont catégorisées et appelées Ouvertures.\nVient ensuite le milieu de jeu lorsque toutes les pièces sont développées.\nEt enfin (si personne ne s’est pris un échec et mat) la finale, i.e. lorsque les Dames ont été échangées et qu’il reste peu de pièces.\n\n\n\nUne des ouvertures n’existe pas, elle n’a été jouée dans aucune partie\n\nTrouvez et supprimez cette ouverture\n\nComme fait précédemment pour les tournois, calculez pour chaque ouverture :\n\nnombre de parties jouées\ntaux de victoire des blancs\ntaux de victoire des noirs\ntaux de matchs nuls\n\nAffichez les joueuses ayant joué plus de 5 fois avec les pièces noires la Défense Sicilienne"
   },
   {
     "objectID": "doc/tp/tp4.html#afficher-les-résultats-de-parties",
