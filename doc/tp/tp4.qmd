@@ -1,6 +1,6 @@
 ---
 title: "Chess Unofficial Federation ♕"
-description: "TP4 et TP5"
+description: "TP4"
 author: "Ludovic Deneuville"
 format: 
   html:
@@ -20,7 +20,6 @@ lightbox: true
 - Écrivez des requêtes jolies !
 :::
 
-Ce sujet vous occupera pour les TP4 et 5.
 
 ## Lancement des services
 
@@ -172,7 +171,7 @@ Regardons maintenant quelques statistiques sur ces données.
 
 - [ ] Complétez pour ne conserver que les tournois avec 20 % ou moins de matchs nuls
 
-Le but des questions suivantes va être d'afficher le nombre de partie jouées en tournoi et hors tournoi.
+Le but des questions suivantes va être d'afficher le nombre de parties jouées en tournoi et hors tournoi.
 
 Le résultat doit être l'un des deux ci-dessous :
 
