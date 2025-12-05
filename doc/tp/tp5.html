@@ -9,7 +9,7 @@
 <meta name="author" content="Ludovic Deneuville">
 <meta name="description" content="TP5">
 
-<title>NBA stats – Base de données</title>
+<title>NBA stats 🏀 – Base de données</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -446,7 +446,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">NBA stats</h1>
+<h1 class="title">NBA stats 🏀</h1>
 </div>
 
 <div>
@@ -501,12 +501,59 @@ Tip
 <li><label><input type="checkbox">Lancez un service <strong>PostgreSQL</strong></label></li>
 <li><label><input type="checkbox">Lancez un service <strong>cloudBeaver</strong></label></li>
 </ul>
-<p><span class="emoji" data-emoji="construction">🚧</span></p>
-<p>Follow instructions: <a href="https://github.com/ludo2ne/SQL-NBA-POSTGRESQL/" target="_blank">https://github.com/ludo2ne/SQL-NBA-POSTGRESQL/</a></p>
+<p>Aujourd’hui, pas de script sql pour créer les tables et importer les données, vous allez utiliser un <strong>dump</strong>.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="Définition">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Définition
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Un dump de base de données est un fichier qui contient une copie complète d’une base de données.</p>
+<p>Il sert à :</p>
+<ul>
+<li>Sauvegarder une base de données</li>
+<li>Transférer une base vers un autre serveur</li>
+<li>Reconstituer la base à l’identique (tables, données, index, etc.)</li>
+</ul>
+<p>En bref : c’est une photographie de la base de données à un instant donné, utilisable pour la recréer ailleurs.</p>
+</div>
+</div>
+<p>Le fichier <em>nba.dump</em> est disponible sur le stockage S3 de l’enseignant.</p>
+<p>Pour récupérer ce fichier et l’utiliser pour votre base de données :</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Suivez les instructions du README de ce répo : <a href="https://github.com/ludo2ne/SQL-NBA-POSTGRESQL/" target="_blank">https://github.com/ludo2ne/SQL-NBA-POSTGRESQL/</a></label></li>
+<li><label><input type="checkbox">Une fois les données récupérées, arrêtez le service <em>Vscode-python</em></label></li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled" title="Explications">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Explications
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Le script <em>5_import_for_students.py</em> :</p>
+<ul>
+<li>Se connecte au S3 de l’enseignant pour récupérer le fichier <em>nba.dump</em></li>
+<li>Utilise les variables d’envionnement pour se connecter à votre base de données
+<ul>
+<li>Celles que vous avez renseigné dans le fichier <em>.env</em></li>
+</ul></li>
+<li>Utilise <em>pg_restore</em> pour créer la base de données à partir du dump</li>
+</ul>
+</div>
+</div>
+<p><span class="emoji" data-emoji="construction">🚧</span> Todo Pour datalab GENES</p>
 </section>
 <section id="rendez-vous-en-base-inconnue" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="rendez-vous-en-base-inconnue"><span class="header-section-number">2</span> Rendez-vous en base inconnue</h2>
-<p>Je n’ai pas réussi à inviter Laury T pour vous accompagner dans cette aventure mais voici quelques requêtes utiles pour explorer une base de données PostgreSQL.</p>
+<p>Je n’ai pas réussi à inviter Laury T. pour vous accompagner dans cette aventure mais voici quelques requêtes utiles pour explorer une base de données PostgreSQL.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> table_name</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> information_schema.<span class="kw">tables</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> table_schema <span class="op">=</span> <span class="st">'&lt;schema_name&gt;'</span></span>
@@ -520,8 +567,15 @@ Tip
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> table_schema <span class="op">=</span> <span class="st">'&lt;...&gt;'</span></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>   <span class="kw">AND</span> table_name   <span class="op">=</span> <span class="st">'&lt;...&gt;'</span></span>
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a> <span class="kw">ORDER</span> <span class="kw">BY</span> ordinal_position;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> table_name, </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>       column_name,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>       data_type</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> information_schema.<span class="kw">columns</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> table_schema <span class="op">=</span> <span class="st">'&lt;...&gt;'</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">AND</span> (column_name ILIKE <span class="st">'id%'</span> <span class="kw">OR</span> column_name ILIKE <span class="st">'%id'</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> table_name, column_name;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="callout callout-style-default callout-note callout-titled" title="Glossaire">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -530,7 +584,7 @@ Tip
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <table class="caption-top table">
 <colgroup>
@@ -636,6 +690,20 @@ Tip
 </section>
 <section id="explorons-avec-les-spurs" class="level2" data-number="3">
 <h2 data-number="3" class="anchored" data-anchor-id="explorons-avec-les-spurs"><span class="header-section-number">3</span> Explorons avec les Spurs</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Vous allez avoir parfois des incompatibilités de types.</p>
+<p>Vous pouvez utiliser par exemple <code>&lt;colname&gt;::int</code> ou <code>&lt;colname&gt;::str</code> pour caster.</p>
+</div>
+</div>
 <ul class="task-list">
 <li><label><input type="checkbox">Quel est l’id de l’équipe des Spurs de San Antonio ?</label></li>
 <li><label><input type="checkbox">Listez les joueurs des Spurs</label></li>
@@ -674,7 +742,7 @@ Tip
 <ul>
 <li>ajoutez le nombre de matchs joués</li>
 </ul></li>
-<li><label><input type="checkbox">Affichez les mêmes colones pour chaque équipe de la conférence <em>Ouest</em></label>
+<li><label><input type="checkbox">Affichez les mêmes colonnes pour chaque équipe de la conférence <em>Ouest</em></label>
 <ul>
 <li>classez par nombre de victoires décroissant</li>
 </ul></li>
@@ -690,7 +758,7 @@ Tip
 <li><label><input type="checkbox">Si vous deviez afficher toutes les finales et leur score, comment feriez-vous ?</label></li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled" title="Aide">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -699,39 +767,39 @@ Tip
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul class="task-list">
 <li><label><input type="checkbox">Quelles étapes sont réalisées ci-dessous ?</label></li>
 </ul>
 <p>Tout simplement :</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">WITH</span> last_playoff_games <span class="kw">AS</span> (</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> season_id, <span class="fu">MAX</span>(game_id) <span class="kw">AS</span> last_game_id</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> nba.game</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> season_type <span class="op">=</span> <span class="st">'Playoffs'</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a> <span class="kw">GROUP</span> <span class="kw">BY</span> season_id</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>),</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>final_teams <span class="kw">AS</span> (</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> g.season_id, </span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>       g.team_id <span class="kw">AS</span> team_id_win, </span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>       g2.team_id <span class="kw">AS</span> team_id_los</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> nba.game g</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> last_playoff_games lpg <span class="kw">ON</span> g.season_id <span class="op">=</span> lpg.season_id <span class="kw">AND</span> g.game_id <span class="op">=</span> lpg.last_game_id</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> nba.game g2 <span class="kw">ON</span> g2.game_id <span class="op">=</span> g.game_id <span class="kw">AND</span> g2.team_id <span class="op">&lt;&gt;</span> g.team_id</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> g.wl <span class="op">=</span> <span class="st">'W'</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> gwin.season_id,</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>       twin.full_name <span class="kw">AS</span> equipe,</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>       <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">FILTER</span> (<span class="kw">WHERE</span> gwin.wl <span class="op">=</span> <span class="st">'W'</span>) <span class="op">||</span> <span class="st">' - '</span> <span class="op">||</span> <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">FILTER</span> (<span class="kw">WHERE</span> gwin.wl <span class="op">=</span> <span class="st">'L'</span>) <span class="kw">AS</span> score,</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>       tlos.full_name <span class="kw">AS</span> adversaire</span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> nba.game gwin</span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> final_teams ft <span class="kw">ON</span> ft.team_id_win <span class="op">=</span> gwin.team_id <span class="kw">AND</span> ft.season_id <span class="op">=</span> gwin.season_id</span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> nba.team twin <span class="kw">ON</span> twin.<span class="kw">id</span> <span class="op">=</span> gwin.team_id</span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> nba.game glos <span class="kw">ON</span> glos.game_id <span class="op">=</span> gwin.game_id <span class="kw">AND</span> glos.team_id <span class="op">=</span> ft.team_id_los</span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> nba.team tlos <span class="kw">ON</span> tlos.<span class="kw">id</span> <span class="op">=</span> glos.team_id</span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> gwin.season_type <span class="op">=</span> <span class="st">'Playoffs'</span></span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a> <span class="kw">GROUP</span> <span class="kw">BY</span> gwin.season_id, twin.full_name, tlos.full_name</span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a> <span class="kw">ORDER</span> <span class="kw">BY</span> gwin.season_id <span class="kw">DESC</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">WITH</span> last_playoff_games <span class="kw">AS</span> (</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> season_id, <span class="fu">MAX</span>(game_id) <span class="kw">AS</span> last_game_id</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> nba.game</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> season_type <span class="op">=</span> <span class="st">'Playoffs'</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a> <span class="kw">GROUP</span> <span class="kw">BY</span> season_id</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>),</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>final_teams <span class="kw">AS</span> (</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> g.season_id, </span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>       g.team_id <span class="kw">AS</span> team_id_win, </span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>       g2.team_id <span class="kw">AS</span> team_id_los</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> nba.game g</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> last_playoff_games lpg <span class="kw">ON</span> g.season_id <span class="op">=</span> lpg.season_id <span class="kw">AND</span> g.game_id <span class="op">=</span> lpg.last_game_id</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> nba.game g2 <span class="kw">ON</span> g2.game_id <span class="op">=</span> g.game_id <span class="kw">AND</span> g2.team_id <span class="op">&lt;&gt;</span> g.team_id</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> g.wl <span class="op">=</span> <span class="st">'W'</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> gwin.season_id,</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>       twin.full_name <span class="kw">AS</span> equipe,</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>       <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">FILTER</span> (<span class="kw">WHERE</span> gwin.wl <span class="op">=</span> <span class="st">'W'</span>) <span class="op">||</span> <span class="st">' - '</span> <span class="op">||</span> <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">FILTER</span> (<span class="kw">WHERE</span> gwin.wl <span class="op">=</span> <span class="st">'L'</span>) <span class="kw">AS</span> score,</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>       tlos.full_name <span class="kw">AS</span> adversaire</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> nba.game gwin</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> final_teams ft <span class="kw">ON</span> ft.team_id_win <span class="op">=</span> gwin.team_id <span class="kw">AND</span> ft.season_id <span class="op">=</span> gwin.season_id</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> nba.team twin <span class="kw">ON</span> twin.<span class="kw">id</span> <span class="op">=</span> gwin.team_id</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> nba.game glos <span class="kw">ON</span> glos.game_id <span class="op">=</span> gwin.game_id <span class="kw">AND</span> glos.team_id <span class="op">=</span> ft.team_id_los</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> nba.team tlos <span class="kw">ON</span> tlos.<span class="kw">id</span> <span class="op">=</span> glos.team_id</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> gwin.season_type <span class="op">=</span> <span class="st">'Playoffs'</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a> <span class="kw">GROUP</span> <span class="kw">BY</span> gwin.season_id, twin.full_name, tlos.full_name</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a> <span class="kw">ORDER</span> <span class="kw">BY</span> gwin.season_id <span class="kw">DESC</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -803,7 +871,7 @@ Tip
 <li><label><input type="checkbox">Ajoutez les deux équipes et le score du match</label></li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled" title="Solutions">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -812,7 +880,7 @@ Tip
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-5" class="callout-5-contents callout-collapse collapse">
+<div id="callout-8" class="callout-8-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
 <li><a href="./correction/tp5.sql">Correction TP5</a></li>
