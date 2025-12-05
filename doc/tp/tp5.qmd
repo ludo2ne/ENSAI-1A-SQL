@@ -1,5 +1,5 @@
 ---
-title: "NBA stats"
+title: "NBA stats 🏀"
 description: "TP5"
 author: "Ludovic Deneuville"
 format: 
@@ -36,14 +36,43 @@ Il faut donc apprendre à vous débrouiller dès maintenant. Et au passage, vous
 - [ ] Lancez un service **PostgreSQL**
 - [ ] Lancez un service **cloudBeaver**
 
-:construction:
+Aujourd'hui, pas de script sql pour créer les tables et importer les données, vous allez utiliser un **dump**.
 
-Follow instructions: <https://github.com/ludo2ne/SQL-NBA-POSTGRESQL/>{target="_blank"}
+::: {.callout-note title="Définition"}
+Un dump de base de données est un fichier qui contient une copie complète d'une base de données.
+
+Il sert à :
+
+- Sauvegarder une base de données
+- Transférer une base vers un autre serveur
+- Reconstituer la base à l'identique (tables, données, index, etc.)
+
+En bref : c'est une photographie de la base de données à un instant donné, utilisable pour la recréer ailleurs.
+:::
+
+Le fichier *nba.dump* est disponible sur le stockage S3 de l'enseignant.
+
+Pour récupérer ce fichier et l'utiliser pour votre base de données :
+
+- [ ] Suivez les instructions du README de ce répo : <https://github.com/ludo2ne/SQL-NBA-POSTGRESQL/>{target="_blank"}
+- [ ] Une fois les données récupérées, arrêtez le service *Vscode-python*
+
+::: {.callout-note title="Explications"}
+Le script *5_import_for_students.py* :
+
+- Se connecte au S3 de l'enseignant pour récupérer le fichier *nba.dump*
+- Utilise les variables d'envionnement pour se connecter à votre base de données
+  - Celles que vous avez renseigné dans le fichier *.env*
+- Utilise *pg_restore* pour créer la base de données à partir du dump
+:::
+
+
+:construction: Todo Pour datalab GENES
 
 
 ## Rendez-vous en base inconnue
 
-Je n'ai pas réussi à inviter Laury T pour vous accompagner dans cette aventure mais voici quelques requêtes utiles pour explorer une base de données PostgreSQL.
+Je n'ai pas réussi à inviter Laury T. pour vous accompagner dans cette aventure mais voici quelques requêtes utiles pour explorer une base de données PostgreSQL.
 
 ```{.sql}
 SELECT table_name
@@ -62,6 +91,16 @@ SELECT column_name,
  WHERE table_schema = '<...>'
    AND table_name   = '<...>'
  ORDER BY ordinal_position;
+```
+
+```{.sql}
+SELECT table_name, 
+       column_name,
+       data_type
+  FROM information_schema.columns
+ WHERE table_schema = '<...>'
+  AND (column_name ILIKE 'id%' OR column_name ILIKE '%id')
+ORDER BY table_name, column_name;
 ```
 
 ::: {.callout-note title="Glossaire" collapse="true"}
@@ -91,7 +130,13 @@ SELECT column_name,
 
 :::
 
-## Explorons avec les Spurs 
+## Explorons avec les Spurs
+
+::: {.callout-tip}
+Vous allez avoir parfois des incompatibilités de types.
+
+Vous pouvez utiliser par exemple `<colname>::int` ou `<colname>::str` pour caster.
+:::
 
 - [ ] Quel est l'id de l'équipe des Spurs de San Antonio ?
 - [ ] Listez les joueurs des Spurs
@@ -126,7 +171,7 @@ Interessons-nous la saison régulière.
 - [ ] Comptez leur nombre de victoires et de défaites
 - [ ] Utilisez COUNT et FILTER pour avoir le résultat sur une seule ligne
   - ajoutez le nombre de matchs joués
-- [ ] Affichez les mêmes colones pour chaque équipe de la conférence *Ouest*
+- [ ] Affichez les mêmes colonnes pour chaque équipe de la conférence *Ouest*
   - classez par nombre de victoires décroissant
 
 Passons maintenant aux Playoffs.

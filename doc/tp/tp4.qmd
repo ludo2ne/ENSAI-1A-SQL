@@ -18,6 +18,7 @@ lightbox: true
 
 ::: {.callout-important}
 - Écrivez des requêtes jolies !
+- À la fin du TP, exportez ou copiez vos requêtes dans un fichier de votre VM ou machine personnelle
 :::
 
 
