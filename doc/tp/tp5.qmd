@@ -75,14 +75,14 @@ Le script *5_import_for_students.py* :
 Je n'ai pas réussi à inviter Laury T. pour vous accompagner dans cette aventure mais voici quelques requêtes utiles pour explorer une base de données PostgreSQL.
 
 ```{.sql}
+-- Liste des tables du schema
 SELECT table_name
   FROM information_schema.tables
  WHERE table_schema = '<schema_name>'
    AND table_type = 'BASE TABLE'
  ORDER BY table_name;
-```
 
-```{.sql}
+-- Colonnes d une table
 SELECT column_name,
        data_type,
        is_nullable,
@@ -91,17 +91,243 @@ SELECT column_name,
  WHERE table_schema = '<...>'
    AND table_name   = '<...>'
  ORDER BY ordinal_position;
-```
 
-```{.sql}
+-- Colonnes commencant ou terminant par id
 SELECT table_name, 
        column_name,
        data_type
   FROM information_schema.columns
  WHERE table_schema = '<...>'
-  AND (column_name ILIKE 'id%' OR column_name ILIKE '%id')
+   AND (column_name ILIKE 'id%' OR column_name ILIKE '%id')
 ORDER BY table_name, column_name;
+
+-- Generer les CREATE TABLE basiques
+SELECT 'CREATE TABLE ' || table_schema || '.' || table_name || ' ( ' || E'\n' ||
+       STRING_AGG(
+           '  ' || column_name || ' ' || UPPER(data_type),
+           ',' || E'\n'
+           ORDER BY ordinal_position
+       )
+       || E'\n);' AS create_table_script
+  FROM information_schema.columns
+ WHERE table_schema = '<...>'
+ GROUP BY table_schema, table_name
+ ORDER BY table_name;
 ```
+
+::: {.callout-tip title="Requêtes plus complètes" collapse="true"}
+
+Liste des colonnes des tables d'un schéma
+
+```{.sql}
+WITH
+params AS (
+    SELECT
+        '<...>' AS schemaname
+),
+cols AS (
+    SELECT
+        c.table_schema,
+        c.table_name,
+        c.column_name,
+        c.ordinal_position,
+        c.is_nullable,
+        c.udt_name,
+        c.character_maximum_length,
+        c.column_default
+    FROM information_schema.columns c
+    JOIN params p ON c.table_schema = p.schemaname
+),
+pks AS (
+    SELECT DISTINCT
+        kcu.table_schema,
+        kcu.table_name,
+        kcu.column_name
+    FROM information_schema.table_constraints tc
+    JOIN information_schema.key_column_usage kcu
+         ON tc.constraint_name = kcu.constraint_name
+        AND tc.table_schema = kcu.table_schema
+    JOIN params p ON tc.table_schema = p.schemaname
+    WHERE tc.constraint_type = 'PRIMARY KEY'
+),
+uniques AS (
+    SELECT DISTINCT
+        kcu.table_schema,
+        kcu.table_name,
+        kcu.column_name
+    FROM information_schema.table_constraints tc
+    JOIN information_schema.key_column_usage kcu
+         ON tc.constraint_name = kcu.constraint_name
+        AND tc.table_schema = kcu.table_schema
+    JOIN params p ON tc.table_schema = p.schemaname
+    WHERE tc.constraint_type = 'UNIQUE'
+),
+fks AS (
+    SELECT DISTINCT ON (kcu.table_schema, kcu.table_name, kcu.column_name)
+        kcu.table_schema,
+        kcu.table_name,
+        kcu.column_name,
+        ccu.table_name AS ref_table,
+        ccu.column_name AS ref_column
+    FROM information_schema.table_constraints tc
+    JOIN information_schema.key_column_usage kcu
+         ON tc.constraint_name = kcu.constraint_name
+        AND tc.table_schema = kcu.table_schema
+    JOIN information_schema.constraint_column_usage ccu
+         ON tc.constraint_name = ccu.constraint_name
+    JOIN params p ON tc.table_schema = p.schemaname
+    WHERE tc.constraint_type = 'FOREIGN KEY'
+    ORDER BY kcu.table_schema, kcu.table_name, kcu.column_name
+)
+SELECT
+    c.table_name AS "Table",
+    c.column_name AS "Column",
+    c.udt_name || COALESCE('(' || c.character_maximum_length::text || ')', '') AS "Type",
+    CASE WHEN pk.column_name IS NOT NULL THEN true ELSE false END AS "PK",
+    CASE WHEN fk.ref_table IS NOT NULL THEN fk.ref_table || '.' || fk.ref_column END AS "FK",
+    CASE WHEN pk.column_name IS NOT NULL THEN true ELSE false END OR CASE WHEN u.column_name IS NOT NULL THEN true ELSE false END AS "Unique",
+    CASE WHEN c.is_nullable ='YES' THEN true ELSE false END AS "Nullable",
+    c.column_default AS "Default value"
+FROM cols c
+LEFT JOIN pks pk
+       ON pk.table_schema = c.table_schema
+      AND pk.table_name = c.table_name
+      AND pk.column_name = c.column_name
+LEFT JOIN uniques u
+       ON u.table_schema = c.table_schema
+      AND u.table_name = c.table_name
+      AND u.column_name = c.column_name
+LEFT JOIN fks fk
+       ON fk.table_schema = c.table_schema
+      AND fk.table_name = c.table_name
+      AND fk.column_name = c.column_name
+ORDER BY
+    c.table_name,
+    c.ordinal_position;
+```
+
+
+Une requête quasi complète pour créer les tables d'un schéma :
+
+```{.sql}
+WITH 
+params AS (
+    SELECT '<...>' AS schema_name
+),
+tables AS (
+    SELECT table_name
+    FROM information_schema.tables t
+    JOIN params p ON t.table_schema = p.schema_name
+    WHERE t.table_type = 'BASE TABLE'
+),
+cols AS (
+    SELECT
+        c.table_schema,
+        c.table_name,
+        c.ordinal_position,
+        c.column_name,
+        c.udt_name,
+        c.character_maximum_length,
+        c.is_nullable,
+        c.column_default
+    FROM information_schema.columns c
+    JOIN params p ON c.table_schema = p.schema_name
+    JOIN tables t ON c.table_name = t.table_name
+),
+pks AS (
+    SELECT DISTINCT
+        tc.table_schema,
+        tc.table_name,
+        kcu.column_name
+    FROM information_schema.table_constraints tc
+    JOIN information_schema.key_column_usage kcu
+         ON tc.constraint_name = kcu.constraint_name
+    JOIN params p ON tc.table_schema = p.schema_name
+    WHERE tc.constraint_type = 'PRIMARY KEY'
+),
+uniques AS (
+    SELECT DISTINCT
+        tc.table_schema,
+        tc.table_name,
+        tc.constraint_name,
+        STRING_AGG(kcu.column_name, ', ' ORDER BY kcu.ordinal_position) AS cols
+    FROM information_schema.table_constraints tc
+    JOIN information_schema.key_column_usage kcu
+         ON tc.constraint_name = kcu.constraint_name
+    JOIN params p ON tc.table_schema = p.schema_name
+    WHERE tc.constraint_type = 'UNIQUE'
+    GROUP BY tc.table_schema, tc.table_name, tc.constraint_name
+),
+fks AS (
+    SELECT DISTINCT
+        tc.table_schema,
+        tc.table_name,
+        tc.constraint_name,
+        kcu.column_name,
+        ccu.table_schema AS foreign_table_schema,
+        ccu.table_name   AS foreign_table_name,
+        ccu.column_name  AS foreign_column_name
+    FROM information_schema.table_constraints tc
+    JOIN information_schema.key_column_usage kcu
+         ON tc.constraint_name = kcu.constraint_name
+    JOIN information_schema.referential_constraints rc
+         ON tc.constraint_name = rc.constraint_name
+    JOIN information_schema.constraint_column_usage ccu
+         ON rc.constraint_name = ccu.constraint_name
+    JOIN params p ON tc.table_schema = p.schema_name
+    WHERE tc.constraint_type = 'FOREIGN KEY'
+)
+SELECT
+    'CREATE TABLE ' || c.table_schema || '.' || c.table_name || ' (' || E'\n' ||
+    STRING_AGG(
+        '  ' || c.column_name || ' ' || c.udt_name ||
+        CASE WHEN c.character_maximum_length IS NOT NULL
+             THEN '(' || c.character_maximum_length || ')' ELSE '' END ||
+        CASE WHEN c.column_default IS NOT NULL
+             THEN ' DEFAULT ' || c.column_default ELSE '' END ||
+        CASE WHEN c.is_nullable = 'NO'
+             THEN ' NOT NULL' ELSE '' END,
+        ',' || E'\n'
+        ORDER BY c.ordinal_position
+    )
+    -- PRIMARY KEY
+    ||
+    COALESCE((
+        SELECT ',' || E'\n  PRIMARY KEY (' ||
+               STRING_AGG(DISTINCT column_name, ', ') ||
+               ')'
+        FROM pks pk
+        WHERE pk.table_name = c.table_name
+    ), '')
+    -- UNIQUE constraints
+    ||
+    COALESCE((
+        SELECT STRING_AGG(
+            ',' || E'\n  CONSTRAINT ' || constraint_name ||
+            ' UNIQUE (' || cols || ')'
+        , '')
+        FROM uniques u
+        WHERE u.table_name = c.table_name
+    ), '')
+    -- FOREIGN KEYS
+    ||
+    COALESCE((
+        SELECT STRING_AGG(
+            ',' || E'\n  CONSTRAINT ' || constraint_name ||
+            ' FOREIGN KEY (' || column_name || ')' ||
+            ' REFERENCES ' || foreign_table_schema || '.' || foreign_table_name ||
+            ' (' || foreign_column_name || ')'
+        , '')
+        FROM fks fk
+        WHERE fk.table_name = c.table_name
+    ), '')
+    || E'\n);\n' AS create_table_script
+FROM cols c
+GROUP BY c.table_schema, c.table_name
+ORDER BY c.table_name;
+);
+```
+:::
 
 ::: {.callout-note title="Glossaire" collapse="true"}
 | Colonne     | Signification                                                                        |
@@ -157,7 +383,7 @@ Regardons maintenant les stats des joueurs.
 - [ ] Est-ce que cette table contient les stats des joueurs par match de toutes les saisons ?
 
 
-## Matchs et classements 
+## Afficher les matchs
 
 Dans toute cette partie nous nous interesserons à la saison *2020-2021*.
 
@@ -190,8 +416,13 @@ Une dernière question pour la route :
 
 Tout simplement :
 
+- Trouvez le dernier match des playoffs i.e. celui qui a le plus grand id
+- Déduisez l'équipe ayant gagné le dernier match et la finaliste
+- Enfin listez tous les matchs de la finales pour avoir le score
+
 ```{.sql}
-WITH last_playoff_games AS (
+WITH 
+last_playoff_games AS (
 SELECT season_id, MAX(game_id) AS last_game_id
   FROM nba.game
  WHERE season_type = 'Playoffs'
@@ -220,7 +451,6 @@ SELECT gwin.season_id,
  ORDER BY gwin.season_id DESC;
 ```
 :::
-
 
 
 ## Triple zéro
@@ -277,6 +507,20 @@ Ils ont essayé de faire perdre leur équipe mais ils n'ont pas réussi :
 - [ ] Quel joueur a eu la pire influence, et pourtant son équipe a gagné
 - [ ] Ajoutez les deux équipes et le score du match
 
+
+## Classement par saison
+
+::: {.callout}
+Pour occuper les plus rapides :rocket:
+:::
+
+- [ ] Affichez le classement de la conférence OUEST de la saison 2008
+  - Triez par pourcentage de victoires
+  - En cas d'égalité, vous pouvez si vous le souhaitez trouver les autres critères de déparatage mais cela complique grandement la requête
+- [ ] Pour chaque saison, affichez l'équipe gagnante, ainsi que son classement dans sa conférence lors de la saison régulière
+  - Procédez par étapes
+- [ ] Affichez combien d'équipes classées 3e lors de la saison régulière ont gagné
+- [ ] Quelle équipe a réussi le meilleur bilan sur une saison (meilleur pourcentage de victoire)
 
 
 ::: {.callout-tip collapse="true" title="Solutions"}
