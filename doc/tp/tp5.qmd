@@ -55,6 +55,9 @@ Le fichier *nba.dump* est disponible sur le stockage S3 de l'enseignant.
 Pour récupérer ce fichier et l'utiliser pour votre base de données :
 
 - [ ] Suivez les instructions du README de ce répo : <https://github.com/ludo2ne/SQL-NBA-POSTGRESQL/>{target="_blank"}
+  - :warning: Si vous êtes sur le datalab du GENES 
+  - :arrow_right_hook: Avant de lancer le script `5_import_for_students`
+  - :arrow_right_hook: Dans le FILE_PATH, remplacez *ludo2ne* par *ldeneuville-ensai*
 - [ ] Une fois les données récupérées, arrêtez le service *Vscode-python*
 
 ::: {.callout-note title="Explications"}
