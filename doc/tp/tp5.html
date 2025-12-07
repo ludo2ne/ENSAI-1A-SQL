@@ -430,8 +430,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#importer-la-base-de-données" id="toc-importer-la-base-de-données" class="nav-link" data-scroll-target="#importer-la-base-de-données"><span class="header-section-number">1</span> Importer la base de données</a></li>
   <li><a href="#rendez-vous-en-base-inconnue" id="toc-rendez-vous-en-base-inconnue" class="nav-link" data-scroll-target="#rendez-vous-en-base-inconnue"><span class="header-section-number">2</span> Rendez-vous en base inconnue</a></li>
   <li><a href="#explorons-avec-les-spurs" id="toc-explorons-avec-les-spurs" class="nav-link" data-scroll-target="#explorons-avec-les-spurs"><span class="header-section-number">3</span> Explorons avec les Spurs</a></li>
-  <li><a href="#matchs-et-classements" id="toc-matchs-et-classements" class="nav-link" data-scroll-target="#matchs-et-classements"><span class="header-section-number">4</span> Matchs et classements</a></li>
+  <li><a href="#afficher-les-matchs" id="toc-afficher-les-matchs" class="nav-link" data-scroll-target="#afficher-les-matchs"><span class="header-section-number">4</span> Afficher les matchs</a></li>
   <li><a href="#triple-zéro" id="toc-triple-zéro" class="nav-link" data-scroll-target="#triple-zéro"><span class="header-section-number">5</span> Triple zéro</a></li>
+  <li><a href="#classement-par-saison" id="toc-classement-par-saison" class="nav-link" data-scroll-target="#classement-par-saison"><span class="header-section-number">6</span> Classement par saison</a></li>
   <li><a href="#arrêtez-vos-services" id="toc-arrêtez-vos-services" class="nav-link" data-scroll-target="#arrêtez-vos-services">Arrêtez vos services</a></li>
   </ul>
 </nav>
@@ -525,7 +526,12 @@ Tip
 <p>Le fichier <em>nba.dump</em> est disponible sur le stockage S3 de l’enseignant.</p>
 <p>Pour récupérer ce fichier et l’utiliser pour votre base de données :</p>
 <ul class="task-list">
-<li><label><input type="checkbox">Suivez les instructions du README de ce répo : <a href="https://github.com/ludo2ne/SQL-NBA-POSTGRESQL/" target="_blank">https://github.com/ludo2ne/SQL-NBA-POSTGRESQL/</a></label></li>
+<li><label><input type="checkbox">Suivez les instructions du README de ce répo : <a href="https://github.com/ludo2ne/SQL-NBA-POSTGRESQL/" target="_blank">https://github.com/ludo2ne/SQL-NBA-POSTGRESQL/</a></label>
+<ul>
+<li><span class="emoji" data-emoji="warning">⚠️</span> Si vous êtes sur le datalab du GENES</li>
+<li><span class="emoji" data-emoji="arrow_right_hook">↪️</span> Avant de lancer le script <code>5_import_for_students</code></li>
+<li><span class="emoji" data-emoji="arrow_right_hook">↪️</span> Dans le FILE_PATH, remplacez <em>ludo2ne</em> par <em>ldeneuville-ensai</em></li>
+</ul></li>
 <li><label><input type="checkbox">Une fois les données récupérées, arrêtez le service <em>Vscode-python</em></label></li>
 </ul>
 <div class="callout callout-style-default callout-note callout-titled" title="Explications">
@@ -554,28 +560,263 @@ Tip
 <section id="rendez-vous-en-base-inconnue" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="rendez-vous-en-base-inconnue"><span class="header-section-number">2</span> Rendez-vous en base inconnue</h2>
 <p>Je n’ai pas réussi à inviter Laury T. pour vous accompagner dans cette aventure mais voici quelques requêtes utiles pour explorer une base de données PostgreSQL.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> table_name</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> information_schema.<span class="kw">tables</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> table_schema <span class="op">=</span> <span class="st">'&lt;schema_name&gt;'</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>   <span class="kw">AND</span> table_type <span class="op">=</span> <span class="st">'BASE TABLE'</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a> <span class="kw">ORDER</span> <span class="kw">BY</span> table_name;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> column_name,</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>       data_type,</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>       is_nullable,</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>       column_default</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> information_schema.<span class="kw">columns</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> table_schema <span class="op">=</span> <span class="st">'&lt;...&gt;'</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>   <span class="kw">AND</span> table_name   <span class="op">=</span> <span class="st">'&lt;...&gt;'</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a> <span class="kw">ORDER</span> <span class="kw">BY</span> ordinal_position;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> table_name, </span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>       column_name,</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>       data_type</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> information_schema.<span class="kw">columns</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> table_schema <span class="op">=</span> <span class="st">'&lt;...&gt;'</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">AND</span> (column_name ILIKE <span class="st">'id%'</span> <span class="kw">OR</span> column_name ILIKE <span class="st">'%id'</span>)</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> table_name, column_name;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="callout callout-style-default callout-note callout-titled" title="Glossaire">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Liste des tables du schema</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> table_name</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> information_schema.<span class="kw">tables</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> table_schema <span class="op">=</span> <span class="st">'&lt;schema_name&gt;'</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>   <span class="kw">AND</span> table_type <span class="op">=</span> <span class="st">'BASE TABLE'</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a> <span class="kw">ORDER</span> <span class="kw">BY</span> table_name;</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">-- Colonnes d une table</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> column_name,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>       data_type,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>       is_nullable,</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>       column_default</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> information_schema.<span class="kw">columns</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> table_schema <span class="op">=</span> <span class="st">'&lt;...&gt;'</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>   <span class="kw">AND</span> table_name   <span class="op">=</span> <span class="st">'&lt;...&gt;'</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a> <span class="kw">ORDER</span> <span class="kw">BY</span> ordinal_position;</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">-- Colonnes commencant ou terminant par id</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> table_name, </span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>       column_name,</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>       data_type</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> information_schema.<span class="kw">columns</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> table_schema <span class="op">=</span> <span class="st">'&lt;...&gt;'</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>   <span class="kw">AND</span> (column_name ILIKE <span class="st">'id%'</span> <span class="kw">OR</span> column_name ILIKE <span class="st">'%id'</span>)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> table_name, column_name;</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="co">-- Generer les CREATE TABLE basiques</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="st">'CREATE TABLE '</span> <span class="op">||</span> table_schema <span class="op">||</span> <span class="st">'.'</span> <span class="op">||</span> table_name <span class="op">||</span> <span class="st">' ( '</span> <span class="op">||</span> E<span class="st">'</span><span class="ch">\n</span><span class="st">'</span> <span class="op">||</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>       STRING_AGG(</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>           <span class="st">'  '</span> <span class="op">||</span> column_name <span class="op">||</span> <span class="st">' '</span> <span class="op">||</span> <span class="fu">UPPER</span>(data_type),</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>           <span class="st">','</span> <span class="op">||</span> E<span class="st">'</span><span class="ch">\n</span><span class="st">'</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>           <span class="kw">ORDER</span> <span class="kw">BY</span> ordinal_position</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>       )</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>       <span class="op">||</span> E<span class="st">'</span><span class="ch">\n</span><span class="st">);'</span> <span class="kw">AS</span> create_table_script</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> information_schema.<span class="kw">columns</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> table_schema <span class="op">=</span> <span class="st">'&lt;...&gt;'</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a> <span class="kw">GROUP</span> <span class="kw">BY</span> table_schema, table_name</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a> <span class="kw">ORDER</span> <span class="kw">BY</span> table_name;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-tip callout-titled" title="Requêtes plus complètes">
 <div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Requêtes plus complètes
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Liste des colonnes des tables d’un schéma</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">WITH</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>params <span class="kw">AS</span> (</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">'&lt;...&gt;'</span> <span class="kw">AS</span> schemaname</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>),</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>cols <span class="kw">AS</span> (</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        c.table_schema,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        c.table_name,</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        c.column_name,</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        c.ordinal_position,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        c.is_nullable,</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        c.udt_name,</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        c.character_maximum_length,</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>        c.column_default</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FROM</span> information_schema.<span class="kw">columns</span> c</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="kw">JOIN</span> params p <span class="kw">ON</span> c.table_schema <span class="op">=</span> p.schemaname</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>),</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>pks <span class="kw">AS</span> (</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> <span class="kw">DISTINCT</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>        kcu.table_schema,</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>        kcu.table_name,</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>        kcu.column_name</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FROM</span> information_schema.table_constraints tc</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    <span class="kw">JOIN</span> information_schema.key_column_usage kcu</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>         <span class="kw">ON</span> tc.constraint_name <span class="op">=</span> kcu.constraint_name</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>        <span class="kw">AND</span> tc.table_schema <span class="op">=</span> kcu.table_schema</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>    <span class="kw">JOIN</span> params p <span class="kw">ON</span> tc.table_schema <span class="op">=</span> p.schemaname</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>    <span class="kw">WHERE</span> tc.constraint_type <span class="op">=</span> <span class="st">'PRIMARY KEY'</span></span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>),</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>uniques <span class="kw">AS</span> (</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> <span class="kw">DISTINCT</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>        kcu.table_schema,</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>        kcu.table_name,</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>        kcu.column_name</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FROM</span> information_schema.table_constraints tc</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>    <span class="kw">JOIN</span> information_schema.key_column_usage kcu</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>         <span class="kw">ON</span> tc.constraint_name <span class="op">=</span> kcu.constraint_name</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>        <span class="kw">AND</span> tc.table_schema <span class="op">=</span> kcu.table_schema</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>    <span class="kw">JOIN</span> params p <span class="kw">ON</span> tc.table_schema <span class="op">=</span> p.schemaname</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>    <span class="kw">WHERE</span> tc.constraint_type <span class="op">=</span> <span class="st">'UNIQUE'</span></span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>),</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>fks <span class="kw">AS</span> (</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> <span class="kw">DISTINCT</span> <span class="kw">ON</span> (kcu.table_schema, kcu.table_name, kcu.column_name)</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>        kcu.table_schema,</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>        kcu.table_name,</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>        kcu.column_name,</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>        ccu.table_name <span class="kw">AS</span> ref_table,</span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>        ccu.column_name <span class="kw">AS</span> ref_column</span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FROM</span> information_schema.table_constraints tc</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>    <span class="kw">JOIN</span> information_schema.key_column_usage kcu</span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>         <span class="kw">ON</span> tc.constraint_name <span class="op">=</span> kcu.constraint_name</span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>        <span class="kw">AND</span> tc.table_schema <span class="op">=</span> kcu.table_schema</span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>    <span class="kw">JOIN</span> information_schema.constraint_column_usage ccu</span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>         <span class="kw">ON</span> tc.constraint_name <span class="op">=</span> ccu.constraint_name</span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>    <span class="kw">JOIN</span> params p <span class="kw">ON</span> tc.table_schema <span class="op">=</span> p.schemaname</span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>    <span class="kw">WHERE</span> tc.constraint_type <span class="op">=</span> <span class="st">'FOREIGN KEY'</span></span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>    <span class="kw">ORDER</span> <span class="kw">BY</span> kcu.table_schema, kcu.table_name, kcu.column_name</span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span></span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>    c.table_name <span class="kw">AS</span> <span class="ot">"Table"</span>,</span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>    c.column_name <span class="kw">AS</span> <span class="ot">"Column"</span>,</span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>    c.udt_name <span class="op">||</span> <span class="fu">COALESCE</span>(<span class="st">'('</span> <span class="op">||</span> c.character_maximum_length:<span class="ch">:text</span> <span class="op">||</span> <span class="st">')'</span>, <span class="st">''</span>) <span class="kw">AS</span> <span class="ot">"Type"</span>,</span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>    <span class="cf">CASE</span> <span class="cf">WHEN</span> pk.column_name <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="cf">THEN</span> <span class="kw">true</span> <span class="cf">ELSE</span> <span class="kw">false</span> <span class="cf">END</span> <span class="kw">AS</span> <span class="ot">"PK"</span>,</span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>    <span class="cf">CASE</span> <span class="cf">WHEN</span> fk.ref_table <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="cf">THEN</span> fk.ref_table <span class="op">||</span> <span class="st">'.'</span> <span class="op">||</span> fk.ref_column <span class="cf">END</span> <span class="kw">AS</span> <span class="ot">"FK"</span>,</span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>    <span class="cf">CASE</span> <span class="cf">WHEN</span> pk.column_name <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="cf">THEN</span> <span class="kw">true</span> <span class="cf">ELSE</span> <span class="kw">false</span> <span class="cf">END</span> <span class="kw">OR</span> <span class="cf">CASE</span> <span class="cf">WHEN</span> u.column_name <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="cf">THEN</span> <span class="kw">true</span> <span class="cf">ELSE</span> <span class="kw">false</span> <span class="cf">END</span> <span class="kw">AS</span> <span class="ot">"Unique"</span>,</span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>    <span class="cf">CASE</span> <span class="cf">WHEN</span> c.is_nullable <span class="op">=</span><span class="st">'YES'</span> <span class="cf">THEN</span> <span class="kw">true</span> <span class="cf">ELSE</span> <span class="kw">false</span> <span class="cf">END</span> <span class="kw">AS</span> <span class="ot">"Nullable"</span>,</span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>    c.column_default <span class="kw">AS</span> <span class="ot">"Default value"</span></span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> cols c</span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a><span class="kw">LEFT</span> <span class="kw">JOIN</span> pks pk</span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>       <span class="kw">ON</span> pk.table_schema <span class="op">=</span> c.table_schema</span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>      <span class="kw">AND</span> pk.table_name <span class="op">=</span> c.table_name</span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>      <span class="kw">AND</span> pk.column_name <span class="op">=</span> c.column_name</span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a><span class="kw">LEFT</span> <span class="kw">JOIN</span> uniques u</span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>       <span class="kw">ON</span> u.table_schema <span class="op">=</span> c.table_schema</span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>      <span class="kw">AND</span> u.table_name <span class="op">=</span> c.table_name</span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a>      <span class="kw">AND</span> u.column_name <span class="op">=</span> c.column_name</span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a><span class="kw">LEFT</span> <span class="kw">JOIN</span> fks fk</span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a>       <span class="kw">ON</span> fk.table_schema <span class="op">=</span> c.table_schema</span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a>      <span class="kw">AND</span> fk.table_name <span class="op">=</span> c.table_name</span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a>      <span class="kw">AND</span> fk.column_name <span class="op">=</span> c.column_name</span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a>    c.table_name,</span>
+<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a>    c.ordinal_position;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Une requête quasi complète pour créer les tables d’un schéma :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">WITH</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>params <span class="kw">AS</span> (</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> <span class="st">'&lt;...&gt;'</span> <span class="kw">AS</span> schema_name</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>),</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="kw">tables</span> <span class="kw">AS</span> (</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> table_name</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FROM</span> information_schema.<span class="kw">tables</span> t</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">JOIN</span> params p <span class="kw">ON</span> t.table_schema <span class="op">=</span> p.schema_name</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">WHERE</span> t.table_type <span class="op">=</span> <span class="st">'BASE TABLE'</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>),</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>cols <span class="kw">AS</span> (</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>        c.table_schema,</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>        c.table_name,</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>        c.ordinal_position,</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>        c.column_name,</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>        c.udt_name,</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>        c.character_maximum_length,</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>        c.is_nullable,</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>        c.column_default</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FROM</span> information_schema.<span class="kw">columns</span> c</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>    <span class="kw">JOIN</span> params p <span class="kw">ON</span> c.table_schema <span class="op">=</span> p.schema_name</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    <span class="kw">JOIN</span> <span class="kw">tables</span> t <span class="kw">ON</span> c.table_name <span class="op">=</span> t.table_name</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>),</span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>pks <span class="kw">AS</span> (</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> <span class="kw">DISTINCT</span></span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>        tc.table_schema,</span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>        tc.table_name,</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>        kcu.column_name</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FROM</span> information_schema.table_constraints tc</span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>    <span class="kw">JOIN</span> information_schema.key_column_usage kcu</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>         <span class="kw">ON</span> tc.constraint_name <span class="op">=</span> kcu.constraint_name</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>    <span class="kw">JOIN</span> params p <span class="kw">ON</span> tc.table_schema <span class="op">=</span> p.schema_name</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>    <span class="kw">WHERE</span> tc.constraint_type <span class="op">=</span> <span class="st">'PRIMARY KEY'</span></span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>),</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>uniques <span class="kw">AS</span> (</span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> <span class="kw">DISTINCT</span></span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>        tc.table_schema,</span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>        tc.table_name,</span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>        tc.constraint_name,</span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>        STRING_AGG(kcu.column_name, <span class="st">', '</span> <span class="kw">ORDER</span> <span class="kw">BY</span> kcu.ordinal_position) <span class="kw">AS</span> cols</span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FROM</span> information_schema.table_constraints tc</span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>    <span class="kw">JOIN</span> information_schema.key_column_usage kcu</span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>         <span class="kw">ON</span> tc.constraint_name <span class="op">=</span> kcu.constraint_name</span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>    <span class="kw">JOIN</span> params p <span class="kw">ON</span> tc.table_schema <span class="op">=</span> p.schema_name</span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>    <span class="kw">WHERE</span> tc.constraint_type <span class="op">=</span> <span class="st">'UNIQUE'</span></span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>    <span class="kw">GROUP</span> <span class="kw">BY</span> tc.table_schema, tc.table_name, tc.constraint_name</span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>),</span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>fks <span class="kw">AS</span> (</span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>    <span class="kw">SELECT</span> <span class="kw">DISTINCT</span></span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>        tc.table_schema,</span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>        tc.table_name,</span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a>        tc.constraint_name,</span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a>        kcu.column_name,</span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>        ccu.table_schema <span class="kw">AS</span> foreign_table_schema,</span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>        ccu.table_name   <span class="kw">AS</span> foreign_table_name,</span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>        ccu.column_name  <span class="kw">AS</span> foreign_column_name</span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a>    <span class="kw">FROM</span> information_schema.table_constraints tc</span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a>    <span class="kw">JOIN</span> information_schema.key_column_usage kcu</span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a>         <span class="kw">ON</span> tc.constraint_name <span class="op">=</span> kcu.constraint_name</span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a>    <span class="kw">JOIN</span> information_schema.referential_constraints rc</span>
+<span id="cb3-62"><a href="#cb3-62" aria-hidden="true" tabindex="-1"></a>         <span class="kw">ON</span> tc.constraint_name <span class="op">=</span> rc.constraint_name</span>
+<span id="cb3-63"><a href="#cb3-63" aria-hidden="true" tabindex="-1"></a>    <span class="kw">JOIN</span> information_schema.constraint_column_usage ccu</span>
+<span id="cb3-64"><a href="#cb3-64" aria-hidden="true" tabindex="-1"></a>         <span class="kw">ON</span> rc.constraint_name <span class="op">=</span> ccu.constraint_name</span>
+<span id="cb3-65"><a href="#cb3-65" aria-hidden="true" tabindex="-1"></a>    <span class="kw">JOIN</span> params p <span class="kw">ON</span> tc.table_schema <span class="op">=</span> p.schema_name</span>
+<span id="cb3-66"><a href="#cb3-66" aria-hidden="true" tabindex="-1"></a>    <span class="kw">WHERE</span> tc.constraint_type <span class="op">=</span> <span class="st">'FOREIGN KEY'</span></span>
+<span id="cb3-67"><a href="#cb3-67" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-68"><a href="#cb3-68" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span></span>
+<span id="cb3-69"><a href="#cb3-69" aria-hidden="true" tabindex="-1"></a>    <span class="st">'CREATE TABLE '</span> <span class="op">||</span> c.table_schema <span class="op">||</span> <span class="st">'.'</span> <span class="op">||</span> c.table_name <span class="op">||</span> <span class="st">' ('</span> <span class="op">||</span> E<span class="st">'</span><span class="ch">\n</span><span class="st">'</span> <span class="op">||</span></span>
+<span id="cb3-70"><a href="#cb3-70" aria-hidden="true" tabindex="-1"></a>    STRING_AGG(</span>
+<span id="cb3-71"><a href="#cb3-71" aria-hidden="true" tabindex="-1"></a>        <span class="st">'  '</span> <span class="op">||</span> c.column_name <span class="op">||</span> <span class="st">' '</span> <span class="op">||</span> c.udt_name <span class="op">||</span></span>
+<span id="cb3-72"><a href="#cb3-72" aria-hidden="true" tabindex="-1"></a>        <span class="cf">CASE</span> <span class="cf">WHEN</span> c.character_maximum_length <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span></span>
+<span id="cb3-73"><a href="#cb3-73" aria-hidden="true" tabindex="-1"></a>             <span class="cf">THEN</span> <span class="st">'('</span> <span class="op">||</span> c.character_maximum_length <span class="op">||</span> <span class="st">')'</span> <span class="cf">ELSE</span> <span class="st">''</span> <span class="cf">END</span> <span class="op">||</span></span>
+<span id="cb3-74"><a href="#cb3-74" aria-hidden="true" tabindex="-1"></a>        <span class="cf">CASE</span> <span class="cf">WHEN</span> c.column_default <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span></span>
+<span id="cb3-75"><a href="#cb3-75" aria-hidden="true" tabindex="-1"></a>             <span class="cf">THEN</span> <span class="st">' DEFAULT '</span> <span class="op">||</span> c.column_default <span class="cf">ELSE</span> <span class="st">''</span> <span class="cf">END</span> <span class="op">||</span></span>
+<span id="cb3-76"><a href="#cb3-76" aria-hidden="true" tabindex="-1"></a>        <span class="cf">CASE</span> <span class="cf">WHEN</span> c.is_nullable <span class="op">=</span> <span class="st">'NO'</span></span>
+<span id="cb3-77"><a href="#cb3-77" aria-hidden="true" tabindex="-1"></a>             <span class="cf">THEN</span> <span class="st">' NOT NULL'</span> <span class="cf">ELSE</span> <span class="st">''</span> <span class="cf">END</span>,</span>
+<span id="cb3-78"><a href="#cb3-78" aria-hidden="true" tabindex="-1"></a>        <span class="st">','</span> <span class="op">||</span> E<span class="st">'</span><span class="ch">\n</span><span class="st">'</span></span>
+<span id="cb3-79"><a href="#cb3-79" aria-hidden="true" tabindex="-1"></a>        <span class="kw">ORDER</span> <span class="kw">BY</span> c.ordinal_position</span>
+<span id="cb3-80"><a href="#cb3-80" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb3-81"><a href="#cb3-81" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- PRIMARY KEY</span></span>
+<span id="cb3-82"><a href="#cb3-82" aria-hidden="true" tabindex="-1"></a>    <span class="op">||</span></span>
+<span id="cb3-83"><a href="#cb3-83" aria-hidden="true" tabindex="-1"></a>    <span class="fu">COALESCE</span>((</span>
+<span id="cb3-84"><a href="#cb3-84" aria-hidden="true" tabindex="-1"></a>        <span class="kw">SELECT</span> <span class="st">','</span> <span class="op">||</span> E<span class="st">'</span><span class="ch">\n</span><span class="st">  PRIMARY KEY ('</span> <span class="op">||</span></span>
+<span id="cb3-85"><a href="#cb3-85" aria-hidden="true" tabindex="-1"></a>               STRING_AGG(<span class="kw">DISTINCT</span> column_name, <span class="st">', '</span>) <span class="op">||</span></span>
+<span id="cb3-86"><a href="#cb3-86" aria-hidden="true" tabindex="-1"></a>               <span class="st">')'</span></span>
+<span id="cb3-87"><a href="#cb3-87" aria-hidden="true" tabindex="-1"></a>        <span class="kw">FROM</span> pks pk</span>
+<span id="cb3-88"><a href="#cb3-88" aria-hidden="true" tabindex="-1"></a>        <span class="kw">WHERE</span> pk.table_name <span class="op">=</span> c.table_name</span>
+<span id="cb3-89"><a href="#cb3-89" aria-hidden="true" tabindex="-1"></a>    ), <span class="st">''</span>)</span>
+<span id="cb3-90"><a href="#cb3-90" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- UNIQUE constraints</span></span>
+<span id="cb3-91"><a href="#cb3-91" aria-hidden="true" tabindex="-1"></a>    <span class="op">||</span></span>
+<span id="cb3-92"><a href="#cb3-92" aria-hidden="true" tabindex="-1"></a>    <span class="fu">COALESCE</span>((</span>
+<span id="cb3-93"><a href="#cb3-93" aria-hidden="true" tabindex="-1"></a>        <span class="kw">SELECT</span> STRING_AGG(</span>
+<span id="cb3-94"><a href="#cb3-94" aria-hidden="true" tabindex="-1"></a>            <span class="st">','</span> <span class="op">||</span> E<span class="st">'</span><span class="ch">\n</span><span class="st">  CONSTRAINT '</span> <span class="op">||</span> constraint_name <span class="op">||</span></span>
+<span id="cb3-95"><a href="#cb3-95" aria-hidden="true" tabindex="-1"></a>            <span class="st">' UNIQUE ('</span> <span class="op">||</span> cols <span class="op">||</span> <span class="st">')'</span></span>
+<span id="cb3-96"><a href="#cb3-96" aria-hidden="true" tabindex="-1"></a>        , <span class="st">''</span>)</span>
+<span id="cb3-97"><a href="#cb3-97" aria-hidden="true" tabindex="-1"></a>        <span class="kw">FROM</span> uniques u</span>
+<span id="cb3-98"><a href="#cb3-98" aria-hidden="true" tabindex="-1"></a>        <span class="kw">WHERE</span> u.table_name <span class="op">=</span> c.table_name</span>
+<span id="cb3-99"><a href="#cb3-99" aria-hidden="true" tabindex="-1"></a>    ), <span class="st">''</span>)</span>
+<span id="cb3-100"><a href="#cb3-100" aria-hidden="true" tabindex="-1"></a>    <span class="co">-- FOREIGN KEYS</span></span>
+<span id="cb3-101"><a href="#cb3-101" aria-hidden="true" tabindex="-1"></a>    <span class="op">||</span></span>
+<span id="cb3-102"><a href="#cb3-102" aria-hidden="true" tabindex="-1"></a>    <span class="fu">COALESCE</span>((</span>
+<span id="cb3-103"><a href="#cb3-103" aria-hidden="true" tabindex="-1"></a>        <span class="kw">SELECT</span> STRING_AGG(</span>
+<span id="cb3-104"><a href="#cb3-104" aria-hidden="true" tabindex="-1"></a>            <span class="st">','</span> <span class="op">||</span> E<span class="st">'</span><span class="ch">\n</span><span class="st">  CONSTRAINT '</span> <span class="op">||</span> constraint_name <span class="op">||</span></span>
+<span id="cb3-105"><a href="#cb3-105" aria-hidden="true" tabindex="-1"></a>            <span class="st">' FOREIGN KEY ('</span> <span class="op">||</span> column_name <span class="op">||</span> <span class="st">')'</span> <span class="op">||</span></span>
+<span id="cb3-106"><a href="#cb3-106" aria-hidden="true" tabindex="-1"></a>            <span class="st">' REFERENCES '</span> <span class="op">||</span> foreign_table_schema <span class="op">||</span> <span class="st">'.'</span> <span class="op">||</span> foreign_table_name <span class="op">||</span></span>
+<span id="cb3-107"><a href="#cb3-107" aria-hidden="true" tabindex="-1"></a>            <span class="st">' ('</span> <span class="op">||</span> foreign_column_name <span class="op">||</span> <span class="st">')'</span></span>
+<span id="cb3-108"><a href="#cb3-108" aria-hidden="true" tabindex="-1"></a>        , <span class="st">''</span>)</span>
+<span id="cb3-109"><a href="#cb3-109" aria-hidden="true" tabindex="-1"></a>        <span class="kw">FROM</span> fks fk</span>
+<span id="cb3-110"><a href="#cb3-110" aria-hidden="true" tabindex="-1"></a>        <span class="kw">WHERE</span> fk.table_name <span class="op">=</span> c.table_name</span>
+<span id="cb3-111"><a href="#cb3-111" aria-hidden="true" tabindex="-1"></a>    ), <span class="st">''</span>)</span>
+<span id="cb3-112"><a href="#cb3-112" aria-hidden="true" tabindex="-1"></a>    <span class="op">||</span> E<span class="st">'</span><span class="ch">\n</span><span class="st">);</span><span class="ch">\n</span><span class="st">'</span> <span class="kw">AS</span> create_table_script</span>
+<span id="cb3-113"><a href="#cb3-113" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> cols c</span>
+<span id="cb3-114"><a href="#cb3-114" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> c.table_schema, c.table_name</span>
+<span id="cb3-115"><a href="#cb3-115" aria-hidden="true" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> c.table_name;</span>
+<span id="cb3-116"><a href="#cb3-116" aria-hidden="true" tabindex="-1"></a>);</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Glossaire">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -584,7 +825,7 @@ Tip
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <table class="caption-top table">
 <colgroup>
@@ -726,8 +967,8 @@ Tip
 <li><label><input type="checkbox">Est-ce que cette table contient les stats des joueurs par match de toutes les saisons ?</label></li>
 </ul>
 </section>
-<section id="matchs-et-classements" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="matchs-et-classements"><span class="header-section-number">4</span> Matchs et classements</h2>
+<section id="afficher-les-matchs" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="afficher-les-matchs"><span class="header-section-number">4</span> Afficher les matchs</h2>
 <p>Dans toute cette partie nous nous interesserons à la saison <em>2020-2021</em>.</p>
 <ul class="task-list">
 <li><label><input type="checkbox">Listez les matchs de la saison</label></li>
@@ -758,7 +999,7 @@ Tip
 <li><label><input type="checkbox">Si vous deviez afficher toutes les finales et leur score, comment feriez-vous ?</label></li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled" title="Aide">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -767,39 +1008,45 @@ Tip
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div id="callout-7" class="callout-7-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul class="task-list">
 <li><label><input type="checkbox">Quelles étapes sont réalisées ci-dessous ?</label></li>
 </ul>
 <p>Tout simplement :</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">WITH</span> last_playoff_games <span class="kw">AS</span> (</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> season_id, <span class="fu">MAX</span>(game_id) <span class="kw">AS</span> last_game_id</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> nba.game</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> season_type <span class="op">=</span> <span class="st">'Playoffs'</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a> <span class="kw">GROUP</span> <span class="kw">BY</span> season_id</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>),</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>final_teams <span class="kw">AS</span> (</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> g.season_id, </span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>       g.team_id <span class="kw">AS</span> team_id_win, </span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>       g2.team_id <span class="kw">AS</span> team_id_los</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> nba.game g</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> last_playoff_games lpg <span class="kw">ON</span> g.season_id <span class="op">=</span> lpg.season_id <span class="kw">AND</span> g.game_id <span class="op">=</span> lpg.last_game_id</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> nba.game g2 <span class="kw">ON</span> g2.game_id <span class="op">=</span> g.game_id <span class="kw">AND</span> g2.team_id <span class="op">&lt;&gt;</span> g.team_id</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> g.wl <span class="op">=</span> <span class="st">'W'</span></span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> gwin.season_id,</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>       twin.full_name <span class="kw">AS</span> equipe,</span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>       <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">FILTER</span> (<span class="kw">WHERE</span> gwin.wl <span class="op">=</span> <span class="st">'W'</span>) <span class="op">||</span> <span class="st">' - '</span> <span class="op">||</span> <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">FILTER</span> (<span class="kw">WHERE</span> gwin.wl <span class="op">=</span> <span class="st">'L'</span>) <span class="kw">AS</span> score,</span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>       tlos.full_name <span class="kw">AS</span> adversaire</span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> nba.game gwin</span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> final_teams ft <span class="kw">ON</span> ft.team_id_win <span class="op">=</span> gwin.team_id <span class="kw">AND</span> ft.season_id <span class="op">=</span> gwin.season_id</span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> nba.team twin <span class="kw">ON</span> twin.<span class="kw">id</span> <span class="op">=</span> gwin.team_id</span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> nba.game glos <span class="kw">ON</span> glos.game_id <span class="op">=</span> gwin.game_id <span class="kw">AND</span> glos.team_id <span class="op">=</span> ft.team_id_los</span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> nba.team tlos <span class="kw">ON</span> tlos.<span class="kw">id</span> <span class="op">=</span> glos.team_id</span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> gwin.season_type <span class="op">=</span> <span class="st">'Playoffs'</span></span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a> <span class="kw">GROUP</span> <span class="kw">BY</span> gwin.season_id, twin.full_name, tlos.full_name</span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a> <span class="kw">ORDER</span> <span class="kw">BY</span> gwin.season_id <span class="kw">DESC</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>Trouvez le dernier match des playoffs i.e.&nbsp;celui qui a le plus grand id</li>
+<li>Déduisez l’équipe ayant gagné le dernier match et la finaliste</li>
+<li>Enfin listez tous les matchs de la finales pour avoir le score</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">WITH</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>last_playoff_games <span class="kw">AS</span> (</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> season_id, <span class="fu">MAX</span>(game_id) <span class="kw">AS</span> last_game_id</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> nba.game</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> season_type <span class="op">=</span> <span class="st">'Playoffs'</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a> <span class="kw">GROUP</span> <span class="kw">BY</span> season_id</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>),</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>final_teams <span class="kw">AS</span> (</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> g.season_id, </span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>       g.team_id <span class="kw">AS</span> team_id_win, </span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>       g2.team_id <span class="kw">AS</span> team_id_los</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> nba.game g</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> last_playoff_games lpg <span class="kw">ON</span> g.season_id <span class="op">=</span> lpg.season_id <span class="kw">AND</span> g.game_id <span class="op">=</span> lpg.last_game_id</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> nba.game g2 <span class="kw">ON</span> g2.game_id <span class="op">=</span> g.game_id <span class="kw">AND</span> g2.team_id <span class="op">&lt;&gt;</span> g.team_id</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> g.wl <span class="op">=</span> <span class="st">'W'</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> gwin.season_id,</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>       twin.full_name <span class="kw">AS</span> equipe,</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>       <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">FILTER</span> (<span class="kw">WHERE</span> gwin.wl <span class="op">=</span> <span class="st">'W'</span>) <span class="op">||</span> <span class="st">' - '</span> <span class="op">||</span> <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">FILTER</span> (<span class="kw">WHERE</span> gwin.wl <span class="op">=</span> <span class="st">'L'</span>) <span class="kw">AS</span> score,</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>       tlos.full_name <span class="kw">AS</span> adversaire</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> nba.game gwin</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> final_teams ft <span class="kw">ON</span> ft.team_id_win <span class="op">=</span> gwin.team_id <span class="kw">AND</span> ft.season_id <span class="op">=</span> gwin.season_id</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> nba.team twin <span class="kw">ON</span> twin.<span class="kw">id</span> <span class="op">=</span> gwin.team_id</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> nba.game glos <span class="kw">ON</span> glos.game_id <span class="op">=</span> gwin.game_id <span class="kw">AND</span> glos.team_id <span class="op">=</span> ft.team_id_los</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> nba.team tlos <span class="kw">ON</span> tlos.<span class="kw">id</span> <span class="op">=</span> glos.team_id</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> gwin.season_type <span class="op">=</span> <span class="st">'Playoffs'</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a> <span class="kw">GROUP</span> <span class="kw">BY</span> gwin.season_id, twin.full_name, tlos.full_name</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a> <span class="kw">ORDER</span> <span class="kw">BY</span> gwin.season_id <span class="kw">DESC</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </div>
 </div>
@@ -870,8 +1117,34 @@ Tip
 <li><label><input type="checkbox">Quel joueur a eu la pire influence, et pourtant son équipe a gagné</label></li>
 <li><label><input type="checkbox">Ajoutez les deux équipes et le score du match</label></li>
 </ul>
+</section>
+<section id="classement-par-saison" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="classement-par-saison"><span class="header-section-number">6</span> Classement par saison</h2>
+<div class="callout callout-style-simple callout-none no-icon">
+<div class="callout-body d-flex">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-body-container">
+<p>Pour occuper les plus rapides <span class="emoji" data-emoji="rocket">🚀</span></p>
+</div>
+</div>
+</div>
+<ul class="task-list">
+<li><label><input type="checkbox">Affichez le classement de la conférence OUEST de la saison 2008</label>
+<ul>
+<li>Triez par pourcentage de victoires</li>
+<li>En cas d’égalité, vous pouvez si vous le souhaitez trouver les autres critères de déparatage mais cela complique grandement la requête</li>
+</ul></li>
+<li><label><input type="checkbox">Pour chaque saison, affichez l’équipe gagnante, ainsi que son classement dans sa conférence lors de la saison régulière</label>
+<ul>
+<li>Procédez par étapes</li>
+</ul></li>
+<li><label><input type="checkbox">Affichez combien d’équipes classées 3e lors de la saison régulière ont gagné</label></li>
+<li><label><input type="checkbox">Quelle équipe a réussi le meilleur bilan sur une saison (meilleur pourcentage de victoire)</label></li>
+</ul>
 <div class="callout callout-style-default callout-tip callout-titled" title="Solutions">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-8-contents" aria-controls="callout-8" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -880,7 +1153,7 @@ Tip
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-8" class="callout-8-contents callout-collapse collapse">
+<div id="callout-9" class="callout-9-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
 <li><a href="./correction/tp5.sql">Correction TP5</a></li>

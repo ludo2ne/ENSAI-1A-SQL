@@ -339,3 +339,61 @@ SELECT p.display_first_last AS joueur,
    AND CAST(SPLIT_PART(psm.minutes, ':', 1) AS integer) > 9
    AND g.wl = 'W'
  ORDER BY psm.plusminuspoints;
+
+
+------------------------------------------------------
+-- Classement par saison
+------------------------------------------------------
+
+SELECT t.full_name AS team,
+       COUNT(*) FILTER (WHERE g.wl = 'W') AS wins,
+       COUNT(*) FILTER (WHERE g.wl = 'L') AS losses,
+       ROUND(COUNT(*) FILTER (WHERE g.wl = 'W')::numeric / COUNT(*), 3) AS win_pct
+  FROM nba.game g
+  JOIN nba.team t ON g.team_id::int = t.id
+ WHERE g.season_id = '22008'
+   AND g.season_type = 'Regular Season'
+   AND t.conference = 'West'
+ GROUP BY t.full_name
+ ORDER BY win_pct DESC;
+
+
+
+WITH 
+last_playoff_games_by_season AS (
+    SELECT season_id, MAX(game_id) AS last_game_id
+      FROM nba.game
+     WHERE season_type = 'Playoffs'
+     GROUP BY season_id
+),
+winner_by_season AS (
+    SELECT g.season_id, 
+           g.team_id
+      FROM nba.game g
+      JOIN last_playoff_games_by_season lpg ON g.season_id = lpg.season_id AND g.game_id = lpg.last_game_id
+     WHERE g.wl = 'W'
+),
+conf_rank AS (
+    SELECT g.season_id,
+           t.conference,
+           g.team_id::int AS team_id,
+           COUNT(*) FILTER (WHERE wl='W') AS wins,
+           COUNT(*) FILTER (WHERE wl='L') AS losses,
+           RANK() OVER (
+               PARTITION BY g.season_id, t.conference
+               ORDER BY COUNT(*) FILTER (WHERE wl='W')::numeric / COUNT(*) DESC
+           ) AS conf_rank
+      FROM nba.game g
+      JOIN nba.team t ON g.team_id::int = t.id
+     WHERE g.season_type = 'Regular Season'
+    GROUP BY g.season_id, t.conference, g.team_id
+)
+SELECT RIGHT(w.season_id, 4) AS Season,
+       t.full_name AS champion_team,
+       t.id,
+       t.conference,
+       r.conf_rank AS regular_season_rank
+  FROM winner_by_season w
+  JOIN nba.team t ON w.team_id::int = t.id
+  JOIN conf_rank r ON r.team_id = t.id AND RIGHT(r.season_id, 4) = RIGHT(w.season_id, 4)
+ORDER BY w.season_id;
