@@ -546,16 +546,19 @@ Tip
 <div class="callout-body-container callout-body">
 <p>Le script <em>5_import_for_students.py</em> :</p>
 <ul>
-<li>Se connecte au S3 de l’enseignant pour récupérer le fichier <em>nba.dump</em></li>
+<li>Se connecte au S3 de l’enseignant pour récupérer le fichier <em>nba.dump</em>
+<ul>
+<li>Vous remarquerez que le fichier est dans un dossier nommé <em>diffusion</em></li>
+<li>Ce dossier est accessible en lecture aux autres utilisateurs</li>
+</ul></li>
 <li>Utilise les variables d’envionnement pour se connecter à votre base de données
 <ul>
 <li>Celles que vous avez renseigné dans le fichier <em>.env</em></li>
 </ul></li>
-<li>Utilise <em>pg_restore</em> pour créer la base de données à partir du dump</li>
+<li>Utilise l’utilitaire <em>pg_restore</em> pour créer la base de données à partir du dump</li>
 </ul>
 </div>
 </div>
-<p><span class="emoji" data-emoji="construction">🚧</span> Todo Pour datalab GENES</p>
 </section>
 <section id="rendez-vous-en-base-inconnue" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="rendez-vous-en-base-inconnue"><span class="header-section-number">2</span> Rendez-vous en base inconnue</h2>
@@ -928,6 +931,12 @@ Tip
 </div>
 </div>
 </div>
+<p>Si un modèle de données est nécessaire pour vous, vous pouvez par exemple :</p>
+<ul>
+<li>Générer les CREATE TABLE</li>
+<li>Demander à une IAgen de vous générer le modèle</li>
+<li>Par exemple au format utilsé par ce site : <a href="https://dbdiagram.io/" target="_blank">https://dbdiagram.io/</a></li>
+</ul>
 </section>
 <section id="explorons-avec-les-spurs" class="level2" data-number="3">
 <h2 data-number="3" class="anchored" data-anchor-id="explorons-avec-les-spurs"><span class="header-section-number">3</span> Explorons avec les Spurs</h2>
@@ -952,7 +961,11 @@ Tip
 <ul>
 <li>classez ces matchs par date</li>
 </ul></li>
-<li><label><input type="checkbox">Choisissez un <em>game_id</em> parmi ces matchs et regardez combien de lignes correspondent</label></li>
+<li><label><input type="checkbox">Combien de lignes correspondent à chaque <em>game_id</em> dans la table <em>game</em> ?</label>
+<ul>
+<li>Choisissez des exemples de <em>game_id</em> et vérifiez</li>
+<li>Ou mieux écrivez une requête qui vérifie l’hypothèse pour tous les <em>game_id</em></li>
+</ul></li>
 </ul>
 <p>Ce choix de conception a des avantages et des inconvénients. Nous y reviendrons par la suite lorsque nous afficherons les scores de chaque match.</p>
 <ul class="task-list">
