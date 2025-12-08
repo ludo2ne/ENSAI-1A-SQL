@@ -64,13 +64,13 @@ Pour récupérer ce fichier et l'utiliser pour votre base de données :
 Le script *5_import_for_students.py* :
 
 - Se connecte au S3 de l'enseignant pour récupérer le fichier *nba.dump*
+  - Vous remarquerez que le fichier est dans un dossier nommé *diffusion*
+  - Ce dossier est accessible en lecture aux autres utilisateurs
 - Utilise les variables d'envionnement pour se connecter à votre base de données
   - Celles que vous avez renseigné dans le fichier *.env*
-- Utilise *pg_restore* pour créer la base de données à partir du dump
+- Utilise l'utilitaire *pg_restore* pour créer la base de données à partir du dump
 :::
 
-
-:construction: Todo Pour datalab GENES
 
 
 ## Rendez-vous en base inconnue
@@ -359,6 +359,12 @@ ORDER BY c.table_name;
 
 :::
 
+Si un modèle de données est nécessaire pour vous, vous pouvez par exemple :
+
+- Générer les CREATE TABLE
+- Demander à une IAgen de vous générer le modèle
+- Par exemple au format utilsé par ce site : <https://dbdiagram.io/>{target="_blank"}
+
 ## Explorons avec les Spurs
 
 ::: {.callout-tip}
@@ -371,7 +377,9 @@ Vous pouvez utiliser par exemple `<colname>::int` ou `<colname>::str` pour caste
 - [ ] Listez les joueurs des Spurs
 - [ ] Listez tous les matchs des Spurs de la saison régulière *2024-2025*
   - classez ces matchs par date
-- [ ] Choisissez un *game_id* parmi ces matchs et regardez combien de lignes correspondent
+- [ ] Combien de lignes correspondent à chaque *game_id* dans la table *game* ?
+  - Choisissez des exemples de *game_id* et vérifiez
+  - Ou mieux écrivez une requête qui vérifie l'hypothèse pour tous les *game_id*
 
 Ce choix de conception a des avantages et des inconvénients. Nous y reviendrons par la suite lorsque nous afficherons les scores de chaque match.
 
