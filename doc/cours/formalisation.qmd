@@ -60,9 +60,10 @@ Si on connait X, on peut en déduire Y
 | Augmentation       | Si X → Y, alors XZ → YZ                               |
 | Transitivité       | Si X → Y et Y → Z alors, X → Z                        |
 
+
 :::{.notes}
 - (nom, prenom) → nom
-- id_joueuse → nom alors (id_joueuse, id_partie) → (id_joueuse, nom)
+- id_joueuse → nom alors (id_joueuse, id_partie) → (nom, id_partie)
 :::
 
 ### Règles dérivées
@@ -73,6 +74,17 @@ Si on connait X, on peut en déduire Y
 | Décomposition       | Si X → YZ, alors X → Z et X → Y |
 | Pseudo-transitivité | Si X → Y et WY → Z alors WX → Z |
 
+:::{.notes}
+Décomposition
+
+- Si id_joueuse → (nom, prenom) alors
+  - id_joueuse → nom
+  - id_joueuse → prenom
+
+Inverse : Union
+
+Auto-détermination : X → X
+:::
 
 ### Deux Propriétés
 
@@ -88,7 +100,7 @@ X → Y est directe s'il n'existe pas de Z tel que X → Z et Z → Y
 - pas élémenaire : num_client, nom → adresse
 :::
 
-## Formes normales
+## Formes Normales
 
 ### Normalisation
 
@@ -108,7 +120,7 @@ Une relation est 1NF si tous ses attributs sont atomiques.
 
 - Une *date* est atomique
 - Un *nom* est atomique
-- Une *liste de prénoms* n'est pas atomique
+- Une *liste de clubs* n'est pas atomique
 - Est-ce qu'un *adresse* est atomique ?
 
 
@@ -137,9 +149,9 @@ Autrement dit, tous les attributs sont déterminés par la clé complète.
 
 Exemple de relation non 2NF :
 
-- joueuse([nom, prenom, dnais]{.underline}) → elo
-- si par exemple (nom, dnais) → elo
-  - si *nom* et *dnais* suffisent pour déterminer le *elo*
+- participation([id_tournoi, id_joueuse]{.underline}, classement, nom_joueuse, nom_tournoi)
+  - *nom_joueuse* dépend uniquement de *id_joueuse*
+  - *nom_tournoi* dépend uniquement de *id_tournoi*
 
 
 ### 3e forme normale
@@ -157,16 +169,16 @@ Autrement dit, un attribut ne peut pas dépendre fonctionnellement d'un autre at
 
 Exemple de relation non 3NF :
 
-- joueuse([id_joueuse]{.underline}, code_pays, capitale)
-- id_joueuse → (code_pays, capitale)
-- or code_pays → capitale donc DF non directe
+- joueuse([id_joueuse]{.underline}, code_pays, nom_pays)
+- id_joueuse → (code_pays, nom_pays)
+- or code_pays → nom_pays donc DF non directe
 
 
 ::: {.callout-tip title="Passer en 3NF"}
 Créer une table *pays*
 
 - joueuse([id_joueuse]{.underline}, code_pays)
-- pays([code_pays]{.underline}, capitale)
+- pays([code_pays]{.underline}, nom_pays)
 
 :::
 
@@ -217,8 +229,14 @@ classDiagram
 ::::::
 
 :::{.notes}
-- Conceptuel : niveau utilisateur (accents, espaces)
+- Conceptuel : niveau utilisateur 
+  - accents, espaces
+  - Entités, Relations, Attributs, Cardinalités
+- Logique : compatible avec un SGBD relationnel
+  - Entités → table, Attributs → colonnes
+  - Types, PK, FK, UNIQUE, CHECK, NOT NULL
 - Physique : niveau développeur (transposable directement en SQL)
+  - Types exacts
 :::
 
 ### Associations 1:n {background-color="beige"}

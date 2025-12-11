@@ -4,15 +4,37 @@ SELECT *
  WHERE nickname = 'Spurs';
 
 
+-- Joueurs des Spurs
+SELECT *
+  FROM nba.player p
+  JOIN nba.team t ON t.id::int = p.team_id
+ WHERE t.nickname = 'Spurs';
+
+
 -- Listez tous les matchs des Spurs de la saison réguliere 2024-2025
+--   En explorant la table game, vous en deduirez comment fonctionnent les season_id
 SELECT *
   FROM nba.game g
   JOIN nba.team t ON t.id = g.team_id::int
  WHERE t.nickname = 'Spurs'
-   AND season_id = '22024';
+   AND season_id = '22024'
+ ORDER BY game_date;
 
 
--- Clé primaire possible game
+-- Choisissez un game_id parmi ces matchs et regardez combien de lignes correspondent
+SELECT *
+  FROM nba.game g
+ WHERE game_id = '0022400094';
+
+-- Tous les game_id ont 2 lignes
+SELECT game_id
+  FROM nba.game
+ GROUP BY game_id
+HAVING COUNT(1) <> 2;
+
+
+-- Clé primaire possible pour game
+--   On verifie que ce couple n a pas de doublons
 SELECT team_id,
        game_id
   FROM nba.game
@@ -21,25 +43,7 @@ SELECT team_id,
 HAVING COUNT(1) > 1;
 
 
--- Joueurs des Spurs
-SELECT *
-  FROM nba.player p
-  JOIN nba.team t ON t.id::int = p.team_id
- WHERE t.nickname = 'Spurs';
-
-
--- Vérifiez que tous les id de la table team sont convertibles en entiers
-SELECT CAST(id AS INTEGER)
-  FROM nba.team;
-
-
--- Modifier le type de la colonne
-ALTER TABLE nba.team
-    ALTER COLUMN id TYPE integer
-    USING CAST(id AS integer);
-
-
--- Stats joueurs spurs saison 2024
+-- Stats joueurs spurs saison 2024, table regular_season_stat
 SELECT p.display_first_last,
        rss.*
   FROM nba.regular_season_stat rss
@@ -49,7 +53,7 @@ SELECT p.display_first_last,
    AND t.nickname = 'Spurs';
 
 
--- Stats joueur par match
+-- Stats joueur par match, table player_stat_match
 SELECT p.display_first_last,
        psm.*
   FROM nba.player_stat_match psm
@@ -59,7 +63,8 @@ SELECT p.display_first_last,
    AND psm.minutes <> '';
 
 
--- Doublons dans la table
+-- Est-ce qu il y a des doublons dans la table
+--   Il devrait y avoir une seule ligne par joueur et par match
 SELECT gameid,
        personid,
        COUNT(1)
@@ -69,8 +74,8 @@ SELECT gameid,
 HAVING COUNT(1) > 1;
 
 
--- stats des joueurs par match de toutes les saisons ?
-SELECT DISTINCT season_id
+-- Est-ce que cette table contient les stats des joueurs par match de toutes les saisons
+SELECT DISTINCT g.season_id
   FROM nba.player_stat_match psm
   JOIN nba.game g ON g.game_id = psm.gameid;
 
@@ -79,20 +84,21 @@ SELECT DISTINCT season_id
 -- Matchs et classements
 ------------------------------------------------------
 
+-- Match de la saison 2020-2021
 SELECT *
   FROM nba.game
- WHERE season_id = '22020';
+ WHERE season_id IN ('22020', '42020');
 
 
 -- Nombre de matchs
-SELECT COUNT(1)
+SELECT COUNT(1) / 2
   FROM nba.game
- WHERE season_id = '22020';
+ WHERE season_id IN ('22020', '42020');
 
 
--- Matchs de saison régulière et de playoff
+-- Distinguez saison réguliere et Playoffs
 SELECT season_type,
-       COUNT(1)
+       COUNT(1) / 2
   FROM nba.game
  WHERE season_id IN ('22020', '42020')
  GROUP BY season_type;
@@ -106,7 +112,7 @@ SELECT g.*
    AND t.nickname = 'Jazz';
 
 
--- Sur une seule ligne
+-- Resultat sur une seule ligne
 SELECT COUNT(1)                           AS nb_matchs,
        COUNT(*) FILTER (WHERE g.wl = 'W') AS victoire,
        COUNT(*) FILTER (WHERE g.wl = 'L') AS defaite

@@ -14,8 +14,9 @@ from: markdown+emoji
 - Les bases de données
   - Les bases de données relationnelles
 - Introduction au langage SQL
-  - Créer des tables
-  - Lire des tables
+  - Opérations CRUD
+  - Filtre sur les lignes
+  - Dates, Gestion des valeurs nulles
 - Les Agrégations
 - L'Algébre relationnelle
 - Les jointures
@@ -33,8 +34,9 @@ from: markdown+emoji
   - INNER JOIN, CREATE TABLE, DATE
 - TP3 : Discographie
   - HAVING, INSERT, SEQUENCE, LEFT JOIN
-- TP4 : Chess
+- TP4 : Unofficial Chess Federation
   - UPDATE, LEFT JOIN, EXISTS
-- TP5 : ?
+- TP5 : NBA stats
+  - Travail sur une base mal structurée
 - TD6 : Modélisation
   - Dépendances fonctionnelles, Formes Normales, UML

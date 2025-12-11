@@ -1,5 +1,5 @@
 ---
-title: "Chess Unofficial Federation ♕"
+title: "Unofficial Chess Federation ♕"
 description: "TP4"
 author: "Ludovic Deneuville"
 format: 

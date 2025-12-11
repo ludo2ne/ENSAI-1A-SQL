@@ -525,13 +525,20 @@ Ils ont essayé de faire perdre leur équipe mais ils n'ont pas réussi :
 Pour occuper les plus rapides :rocket:
 :::
 
-- [ ] Affichez le classement de la conférence OUEST de la saison 2008
+- [ ] Affichez le classement de la conférence OUEST de la saison régulière 2008-2009
   - Triez par pourcentage de victoires
   - En cas d'égalité, vous pouvez si vous le souhaitez trouver les autres critères de déparatage mais cela complique grandement la requête
 - [ ] Pour chaque saison, affichez l'équipe gagnante, ainsi que son classement dans sa conférence lors de la saison régulière
   - Procédez par étapes
 - [ ] Affichez combien d'équipes classées 3e lors de la saison régulière ont gagné
 - [ ] Quelle équipe a réussi le meilleur bilan sur une saison (meilleur pourcentage de victoire)
+- [ ] Classement des équipes ayant le plus gagné / perdu des matchs par moins de 5 points d'écarts
+
+Pour chaque saison régulière donnez le match :
+
+- [ ] Avec le plus grand écart de points
+- [ ] Avec le plus de points marqués (ne pas inclure les éventuelles prolongations)
+- [ ] Avec le moins de points marqués
 
 
 ::: {.callout-tip collapse="true" title="Solutions"}

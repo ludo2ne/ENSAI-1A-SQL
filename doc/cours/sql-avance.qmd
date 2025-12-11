@@ -481,11 +481,11 @@ BEGIN
     age := DATE_PART('year', AGE(CURRENT_DATE, p_date_naissance));
 
     IF age < 20 THEN
-        RETURN 'Junior';
+        RETURN 'Juniore';
     ELSIF age < 60 THEN
-        RETURN 'Senior';
+        RETURN 'Seniore';
     ELSE
-        RETURN 'Vétéran';
+        RETURN 'Vétérante';
     END IF;
 END;
 $$ LANGUAGE plpgsql;
@@ -505,7 +505,7 @@ CALL augmenter_elo(3, 50);
 
 ## Trigger
 
-- Se déclenchent quand un événement survient sur une table
+- Se déclenche quand un événement survient sur une table
 - Servent à maintenir la cohérence ou enregistrer des historiques
 
 Exemples :
@@ -521,3 +521,39 @@ Peut se déclencher avant ou après une maj
 - Synchroniser des données : Mettre à jour des tables liées automatiquement.
 :::
 
+### Exemple
+
+```{.sql}
+CREATE OR REPLACE FUNCTION echecs.format_nom_prenom()
+RETURNS TRIGGER AS $$
+BEGIN
+    NEW.nom := INITCAP(NEW.nom);
+    NEW.prenom := INITCAP(NEW.prenom);
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+```
+
+<br>
+
+```{.sql}
+CREATE TRIGGER trg_format_nom_prenom
+BEFORE INSERT OR UPDATE ON echecs.joueuse
+FOR EACH ROW
+EXECUTE FUNCTION echecs.format_nom_prenom();
+```
+
+
+### Exemple 2
+
+```{.sql}
+CREATE OR REPLACE FUNCTION echecs.block_update_taux()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF NEW.taux_victoires <> OLD.taux_victoires THEN
+        RAISE EXCEPTION 'Le taux de victoires ne peut pas être modifié manuellement.';
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+```
