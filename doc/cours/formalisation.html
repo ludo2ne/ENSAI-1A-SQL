@@ -402,7 +402,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#règles-dérivées" id="toc-règles-dérivées" class="nav-link" data-scroll-target="#règles-dérivées">Règles dérivées</a></li>
   <li><a href="#deux-propriétés" id="toc-deux-propriétés" class="nav-link" data-scroll-target="#deux-propriétés">Deux Propriétés</a></li>
   </ul></li>
-  <li><a href="#formes-normales" id="toc-formes-normales" class="nav-link" data-scroll-target="#formes-normales"><span class="header-section-number">2</span> Formes normales</a>
+  <li><a href="#formes-normales" id="toc-formes-normales" class="nav-link" data-scroll-target="#formes-normales"><span class="header-section-number">2</span> Formes Normales</a>
   <ul class="collapse">
   <li><a href="#normalisation" id="toc-normalisation" class="nav-link" data-scroll-target="#normalisation">Normalisation</a></li>
   <li><a href="#ère-forme-normale" id="toc-ère-forme-normale" class="nav-link" data-scroll-target="#ère-forme-normale">1ère forme normale</a></li>
@@ -530,7 +530,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="notes">
 <ul>
 <li>(nom, prenom) → nom</li>
-<li>id_joueuse → nom alors (id_joueuse, id_partie) → (id_joueuse, nom)</li>
+<li>id_joueuse → nom alors (id_joueuse, id_partie) → (nom, id_partie)</li>
 </ul>
 </div>
 </section>
@@ -558,6 +558,18 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 </tbody>
 </table>
+<div class="notes">
+<p>Décomposition</p>
+<ul>
+<li>Si id_joueuse → (nom, prenom) alors
+<ul>
+<li>id_joueuse → nom</li>
+<li>id_joueuse → prenom</li>
+</ul></li>
+</ul>
+<p>Inverse : Union</p>
+<p>Auto-détermination : X → X</p>
+</div>
 </section>
 <section id="deux-propriétés" class="level3">
 <h3 class="anchored" data-anchor-id="deux-propriétés">Deux Propriétés</h3>
@@ -595,7 +607,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 </section>
 <section id="formes-normales" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="formes-normales"><span class="header-section-number">2</span> Formes normales</h2>
+<h2 data-number="2" class="anchored" data-anchor-id="formes-normales"><span class="header-section-number">2</span> Formes Normales</h2>
 <section id="normalisation" class="level3">
 <h3 class="anchored" data-anchor-id="normalisation">Normalisation</h3>
 <div class="callout callout-style-default callout-note callout-titled" title="Définition">
@@ -635,7 +647,7 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li>Une <em>date</em> est atomique</li>
 <li>Un <em>nom</em> est atomique</li>
-<li>Une <em>liste de prénoms</em> n’est pas atomique</li>
+<li>Une <em>liste de clubs</em> n’est pas atomique</li>
 <li>Est-ce qu’un <em>adresse</em> est atomique ?</li>
 </ul>
 <div class="notes">
@@ -674,10 +686,10 @@ ul.task-list li input[type="checkbox"] {
 <hr>
 <p>Exemple de relation non 2NF :</p>
 <ul>
-<li>joueuse(<u>nom, prenom, dnais</u>) → elo</li>
-<li>si par exemple (nom, dnais) → elo
+<li>participation(<u>id_tournoi, id_joueuse</u>, classement, nom_joueuse, nom_tournoi)
 <ul>
-<li>si <em>nom</em> et <em>dnais</em> suffisent pour déterminer le <em>elo</em></li>
+<li><em>nom_joueuse</em> dépend uniquement de <em>id_joueuse</em></li>
+<li><em>nom_tournoi</em> dépend uniquement de <em>id_tournoi</em></li>
 </ul></li>
 </ul>
 </section>
@@ -704,9 +716,9 @@ ul.task-list li input[type="checkbox"] {
 <hr>
 <p>Exemple de relation non 3NF :</p>
 <ul>
-<li>joueuse(<u>id_joueuse</u>, code_pays, capitale)</li>
-<li>id_joueuse → (code_pays, capitale)</li>
-<li>or code_pays → capitale donc DF non directe</li>
+<li>joueuse(<u>id_joueuse</u>, code_pays, nom_pays)</li>
+<li>id_joueuse → (code_pays, nom_pays)</li>
+<li>or code_pays → nom_pays donc DF non directe</li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled" title="Passer en 3NF">
 <div class="callout-header d-flex align-content-center">
@@ -721,7 +733,7 @@ ul.task-list li input[type="checkbox"] {
 <p>Créer une table <em>pays</em></p>
 <ul>
 <li>joueuse(<u>id_joueuse</u>, code_pays)</li>
-<li>pays(<u>code_pays</u>, capitale)</li>
+<li>pays(<u>code_pays</u>, nom_pays)</li>
 </ul>
 </div>
 </div>
@@ -795,8 +807,20 @@ ul.task-list li input[type="checkbox"] {
 </div>
 <div class="notes">
 <ul>
-<li>Conceptuel : niveau utilisateur (accents, espaces)</li>
-<li>Physique : niveau développeur (transposable directement en SQL)</li>
+<li>Conceptuel : niveau utilisateur
+<ul>
+<li>accents, espaces</li>
+<li>Entités, Relations, Attributs, Cardinalités</li>
+</ul></li>
+<li>Logique : compatible avec un SGBD relationnel
+<ul>
+<li>Entités → table, Attributs → colonnes</li>
+<li>Types, PK, FK, UNIQUE, CHECK, NOT NULL</li>
+</ul></li>
+<li>Physique : niveau développeur (transposable directement en SQL)
+<ul>
+<li>Types exacts</li>
+</ul></li>
 </ul>
 </div>
 </section>

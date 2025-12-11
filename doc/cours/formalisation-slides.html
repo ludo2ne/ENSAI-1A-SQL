@@ -239,7 +239,7 @@ Ludovic Deneuville
 <aside class="notes">
 <ul>
 <li>(nom, prenom) → nom</li>
-<li>id_joueuse → nom alors (id_joueuse, id_partie) → (id_joueuse, nom)</li>
+<li>id_joueuse → nom alors (id_joueuse, id_partie) → (nom, id_partie)</li>
 </ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
@@ -277,6 +277,28 @@ Ludovic Deneuville
 </tr>
 </tbody>
 </table>
+<aside class="notes">
+<p>Décomposition</p>
+<ul>
+<li>Si id_joueuse → (nom, prenom) alors
+<ul>
+<li>id_joueuse → nom</li>
+<li>id_joueuse → prenom</li>
+</ul></li>
+</ul>
+<p>Inverse : Union</p>
+<p>Auto-détermination : X → X</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="deux-propriétés" class="slide level3">
 <h3>Deux Propriétés</h3>
@@ -328,7 +350,7 @@ Ludovic Deneuville
 </section></section>
 <section>
 <section id="formes-normales" class="title-slide slide level2 center">
-<h2>Formes normales</h2>
+<h2>Formes Normales</h2>
 
 </section>
 <section id="normalisation" class="slide level3">
@@ -374,7 +396,7 @@ Ludovic Deneuville
 <ul>
 <li>Une <em>date</em> est atomique</li>
 <li>Un <em>nom</em> est atomique</li>
-<li>Une <em>liste de prénoms</em> n’est pas atomique</li>
+<li>Une <em>liste de clubs</em> n’est pas atomique</li>
 <li>Est-ce qu’un <em>adresse</em> est atomique ?</li>
 </ul>
 <aside class="notes">
@@ -427,10 +449,10 @@ Ludovic Deneuville
 
 <p>Exemple de relation non 2NF :</p>
 <ul>
-<li>joueuse(<u>nom, prenom, dnais</u>) → elo</li>
-<li>si par exemple (nom, dnais) → elo
+<li>participation(<u>id_tournoi, id_joueuse</u>, classement, nom_joueuse, nom_tournoi)
 <ul>
-<li>si <em>nom</em> et <em>dnais</em> suffisent pour déterminer le <em>elo</em></li>
+<li><em>nom_joueuse</em> dépend uniquement de <em>id_joueuse</em></li>
+<li><em>nom_tournoi</em> dépend uniquement de <em>id_tournoi</em></li>
 </ul></li>
 </ul>
 </section>
@@ -461,9 +483,9 @@ Ludovic Deneuville
 
 <p>Exemple de relation non 3NF :</p>
 <ul>
-<li>joueuse(<u>id_joueuse</u>, code_pays, capitale)</li>
-<li>id_joueuse → (code_pays, capitale)</li>
-<li>or code_pays → capitale donc DF non directe</li>
+<li>joueuse(<u>id_joueuse</u>, code_pays, nom_pays)</li>
+<li>id_joueuse → (code_pays, nom_pays)</li>
+<li>or code_pays → nom_pays donc DF non directe</li>
 </ul>
 <div title="Passer en 3NF">
 <div class="callout callout-tip callout-titled callout-style-default">
@@ -478,7 +500,7 @@ Ludovic Deneuville
 <p>Créer une table <em>pays</em></p>
 <ul>
 <li>joueuse(<u>id_joueuse</u>, code_pays)</li>
-<li>pays(<u>code_pays</u>, capitale)</li>
+<li>pays(<u>code_pays</u>, nom_pays)</li>
 </ul>
 </div>
 </div>
@@ -557,8 +579,20 @@ Ludovic Deneuville
 </div></div>
 <aside class="notes">
 <ul>
-<li>Conceptuel : niveau utilisateur (accents, espaces)</li>
-<li>Physique : niveau développeur (transposable directement en SQL)</li>
+<li>Conceptuel : niveau utilisateur
+<ul>
+<li>accents, espaces</li>
+<li>Entités, Relations, Attributs, Cardinalités</li>
+</ul></li>
+<li>Logique : compatible avec un SGBD relationnel
+<ul>
+<li>Entités → table, Attributs → colonnes</li>
+<li>Types, PK, FK, UNIQUE, CHECK, NOT NULL</li>
+</ul></li>
+<li>Physique : niveau développeur (transposable directement en SQL)
+<ul>
+<li>Types exacts</li>
+</ul></li>
 </ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {

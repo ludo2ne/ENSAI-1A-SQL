@@ -467,7 +467,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#exemple" id="toc-exemple" class="nav-link" data-scroll-target="#exemple">Exemple</a></li>
   </ul></li>
   <li><a href="#procédure" id="toc-procédure" class="nav-link" data-scroll-target="#procédure"><span class="header-section-number">7</span> Procédure</a></li>
-  <li><a href="#trigger" id="toc-trigger" class="nav-link" data-scroll-target="#trigger"><span class="header-section-number">8</span> Trigger</a></li>
+  <li><a href="#trigger" id="toc-trigger" class="nav-link" data-scroll-target="#trigger"><span class="header-section-number">8</span> Trigger</a>
+  <ul class="collapse">
+  <li><a href="#exemple-1" id="toc-exemple-1" class="nav-link" data-scroll-target="#exemple-1">Exemple</a></li>
+  <li><a href="#exemple-2" id="toc-exemple-2" class="nav-link" data-scroll-target="#exemple-2">Exemple 2</a></li>
+  </ul></li>
   </ul>
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="sql-avance-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
 </nav>
@@ -970,11 +974,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>    age <span class="op">:=</span> DATE_PART(<span class="st">'year'</span>, AGE(<span class="fu">CURRENT_DATE</span>, p_date_naissance));</span>
 <span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">IF</span> age <span class="op">&lt;</span> <span class="dv">20</span> <span class="cf">THEN</span></span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>        <span class="kw">RETURN</span> <span class="st">'Junior'</span>;</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>        <span class="kw">RETURN</span> <span class="st">'Juniore'</span>;</span>
 <span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">ELSIF</span> age <span class="op">&lt;</span> <span class="dv">60</span> <span class="cf">THEN</span></span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>        <span class="kw">RETURN</span> <span class="st">'Senior'</span>;</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>        <span class="kw">RETURN</span> <span class="st">'Seniore'</span>;</span>
 <span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">ELSE</span></span>
-<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>        <span class="kw">RETURN</span> <span class="st">'Vétéran'</span>;</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>        <span class="kw">RETURN</span> <span class="st">'Vétérante'</span>;</span>
 <span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">END</span> <span class="cf">IF</span>;</span>
 <span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a><span class="cf">END</span>;</span>
 <span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>$$ LANGUAGE plpgsql;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -993,7 +997,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="trigger" class="level2" data-number="8">
 <h2 data-number="8" class="anchored" data-anchor-id="trigger"><span class="header-section-number">8</span> Trigger</h2>
 <ul>
-<li>Se déclenchent quand un événement survient sur une table</li>
+<li>Se déclenche quand un événement survient sur une table</li>
 <li>Servent à maintenir la cohérence ou enregistrer des historiques</li>
 </ul>
 <p>Exemples :</p>
@@ -1009,8 +1013,36 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Synchroniser des données : Mettre à jour des tables liées automatiquement.</li>
 </ul>
 </div>
+<section id="exemple-1" class="level3">
+<h3 class="anchored" data-anchor-id="exemple-1">Exemple</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">OR</span> <span class="kw">REPLACE</span> <span class="kw">FUNCTION</span> echecs.format_nom_prenom()</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>RETURNS <span class="kw">TRIGGER</span> <span class="kw">AS</span> $$</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="cf">BEGIN</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">NEW</span>.nom <span class="op">:=</span> <span class="fu">INITCAP</span>(<span class="kw">NEW</span>.nom);</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">NEW</span>.prenom <span class="op">:=</span> <span class="fu">INITCAP</span>(<span class="kw">NEW</span>.prenom);</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">RETURN</span> <span class="kw">NEW</span>;</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="cf">END</span>;</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>$$ LANGUAGE plpgsql;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><br></p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TRIGGER</span> trg_format_nom_prenom</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="kw">BEFORE</span> <span class="kw">INSERT</span> <span class="kw">OR</span> <span class="kw">UPDATE</span> <span class="kw">ON</span> echecs.joueuse</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="cf">FOR</span> <span class="kw">EACH</span> <span class="kw">ROW</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="kw">EXECUTE</span> <span class="kw">FUNCTION</span> echecs.format_nom_prenom();</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="exemple-2" class="level3">
+<h3 class="anchored" data-anchor-id="exemple-2">Exemple 2</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">OR</span> <span class="kw">REPLACE</span> <span class="kw">FUNCTION</span> echecs.block_update_taux()</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>RETURNS <span class="kw">TRIGGER</span> <span class="kw">AS</span> $$</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="cf">BEGIN</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">IF</span> <span class="kw">NEW</span>.taux_victoires <span class="op">&lt;&gt;</span> <span class="kw">OLD</span>.taux_victoires <span class="cf">THEN</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>        RAISE <span class="kw">EXCEPTION</span> <span class="st">'Le taux de victoires ne peut pas être modifié manuellement.'</span>;</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">END</span> <span class="cf">IF</span>;</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">RETURN</span> <span class="kw">NEW</span>;</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="cf">END</span>;</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>$$ LANGUAGE plpgsql;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
