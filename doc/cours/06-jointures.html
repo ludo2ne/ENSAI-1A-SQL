@@ -2,19 +2,25 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.26">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Ludovic Deneuville">
 <meta name="description" content="Slides">
 
-<title>Algèbre Relationnelle – Base de données</title>
+<title>Jointures entre Tables – Base de données</title>
 <style>
-code{white-space: pre-wrap;}
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -69,17 +75,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="../../">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b758ccaa5987ceb1b75504551e579abf.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-b66d9f3da4d84aca26cc7cc1c94b0445.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-d3daa1d1ef55350d6f5c3e6cec97cbbd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-8b0b5ce2d45c65f90787eecfe492c3d4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-88b07732f5075a2b8381a7695c30467d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-8b0b5ce2d45c65f90787eecfe492c3d4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -107,12 +114,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<meta name="mermaid-theme" content="forest">
+<script src="../../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body class="floating nav-fixed quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
+<body class="floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -254,8 +265,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         changeGiscusTheme();
       }
     };
-    const authorPrefersDark = true;
+    const authorPrefersDark = false;
     const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
     let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
     // Dark / light mode switch
     window.quartoToggleColorScheme = () => {
@@ -300,35 +313,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-cours">    
         <li>
-    <a class="dropdown-item" href="../../doc/cours/intro.html">
+    <a class="dropdown-item" href="../../doc/cours/01-intro.html">
  <span class="dropdown-text">Introduction</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../doc/cours/bases-de-donnees.html">
+    <a class="dropdown-item" href="../../doc/cours/02-bases-de-donnees.html">
  <span class="dropdown-text">Base de données</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../doc/cours/sql-intro.html">
+    <a class="dropdown-item" href="../../doc/cours/03-sql-intro.html">
  <span class="dropdown-text">Introduction à SQL</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../doc/cours/agregations.html">
+    <a class="dropdown-item" href="../../doc/cours/04-agregations.html">
  <span class="dropdown-text">Agrégations</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../doc/cours/algebre.html">
+    <a class="dropdown-item" href="../../doc/cours/05-algebre.html">
  <span class="dropdown-text">Algèbre Relationnelle</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../doc/cours/jointures.html">
+    <a class="dropdown-item" href="../../doc/cours/06-jointures.html">
  <span class="dropdown-text">Jointures</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../doc/cours/sql-avance.html">
+    <a class="dropdown-item" href="../../doc/cours/07-sql-avance.html">
  <span class="dropdown-text">SQL avancé</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../doc/cours/formalisation.html">
+    <a class="dropdown-item" href="../../doc/cours/08-formalisation.html">
  <span class="dropdown-text">Formalisation des BDD</span></a>
   </li>  
     </ul>
@@ -400,6 +413,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
     </ul>
   </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-examens" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Examens</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-examens">    
+        <li>
+    <a class="dropdown-item" href="../../doc/examens/bdr-2024.html">
+ <span class="dropdown-text">Examen 2024</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../doc/examens/bdr-2025.html">
+ <span class="dropdown-text">Examen 2025</span></a>
+  </li>  
+    </ul>
+  </li>
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/ludo2ne/ENSAI-1A-SQL" target="_blank"> <i class="bi bi-github" role="img">
 </i> 
@@ -422,23 +450,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <nav id="TOC" role="doc-toc" class="toc-active">
+    <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="3">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#algèbre-relationnelle" id="toc-algèbre-relationnelle" class="nav-link active" data-scroll-target="#algèbre-relationnelle"><span class="header-section-number">1</span> Algèbre Relationnelle</a></li>
-  <li><a href="#principaux-opérateurs" id="toc-principaux-opérateurs" class="nav-link" data-scroll-target="#principaux-opérateurs"><span class="header-section-number">2</span> Principaux opérateurs</a>
+  <li><a href="#jointures" id="toc-jointures" class="nav-link active" data-scroll-target="#jointures"><span class="header-section-number">1</span> Jointures</a>
   <ul class="collapse">
-  <li><a href="#sélection" id="toc-sélection" class="nav-link" data-scroll-target="#sélection">Sélection</a></li>
-  <li><a href="#projection" id="toc-projection" class="nav-link" data-scroll-target="#projection">Projection</a></li>
-  <li><a href="#union" id="toc-union" class="nav-link" data-scroll-target="#union">Union</a></li>
-  <li><a href="#différence" id="toc-différence" class="nav-link" data-scroll-target="#différence">Différence</a></li>
-  <li><a href="#intersection" id="toc-intersection" class="nav-link" data-scroll-target="#intersection">Intersection</a></li>
-  <li><a href="#jointure" id="toc-jointure" class="nav-link" data-scroll-target="#jointure">Jointure</a></li>
-  <li><a href="#produit-cartésien" id="toc-produit-cartésien" class="nav-link" data-scroll-target="#produit-cartésien">Produit Cartésien</a></li>
+  <li><a href="#tables-utilisées" id="toc-tables-utilisées" class="nav-link" data-scroll-target="#tables-utilisées"><span class="header-section-number">1.1</span> Tables utilisées</a></li>
+  <li><a href="#données" id="toc-données" class="nav-link" data-scroll-target="#données"><span class="header-section-number">1.2</span> Données</a></li>
   </ul></li>
+  <li><a href="#jointure-interne" id="toc-jointure-interne" class="nav-link" data-scroll-target="#jointure-interne"><span class="header-section-number">2</span> Jointure interne</a>
+  <ul class="collapse">
+  <li><a href="#ere-tentative" id="toc-ere-tentative" class="nav-link" data-scroll-target="#ere-tentative"><span class="header-section-number">2.1</span> 1ere tentative</a></li>
+  <li><a href="#e-tentative" id="toc-e-tentative" class="nav-link" data-scroll-target="#e-tentative"><span class="header-section-number">2.2</span> 2e tentative</a></li>
+  <li><a href="#alias" id="toc-alias" class="nav-link" data-scroll-target="#alias"><span class="header-section-number">2.3</span> Alias</a></li>
+  <li><a href="#using" id="toc-using" class="nav-link" data-scroll-target="#using"><span class="header-section-number">2.4</span> USING</a></li>
+  <li><a href="#au-final" id="toc-au-final" class="nav-link" data-scroll-target="#au-final"><span class="header-section-number">2.5</span> Au final</a></li>
+  <li><a href="#à-ne-pas-faire" id="toc-à-ne-pas-faire" class="nav-link" data-scroll-target="#à-ne-pas-faire"><span class="header-section-number">2.6</span> À ne pas faire</a></li>
+  <li><a href="#résultat" id="toc-résultat" class="nav-link" data-scroll-target="#résultat"><span class="header-section-number">2.7</span> Résultat</a></li>
+  </ul></li>
+  <li><a href="#jointure-externe" id="toc-jointure-externe" class="nav-link" data-scroll-target="#jointure-externe"><span class="header-section-number">3</span> Jointure externe</a>
+  <ul class="collapse">
+  <li><a href="#idée" id="toc-idée" class="nav-link" data-scroll-target="#idée"><span class="header-section-number">3.1</span> Idée</a></li>
+  <li><a href="#left-join" id="toc-left-join" class="nav-link" data-scroll-target="#left-join"><span class="header-section-number">3.2</span> LEFT JOIN</a></li>
+  <li><a href="#résultat-1" id="toc-résultat-1" class="nav-link" data-scroll-target="#résultat-1"><span class="header-section-number">3.3</span> Résultat</a></li>
+  </ul></li>
+  <li><a href="#jointure-complète" id="toc-jointure-complète" class="nav-link" data-scroll-target="#jointure-complète"><span class="header-section-number">4</span> Jointure complète</a>
+  <ul class="collapse">
+  <li><a href="#résultat-2" id="toc-résultat-2" class="nav-link" data-scroll-target="#résultat-2"><span class="header-section-number">4.1</span> Résultat</a></li>
+  </ul></li>
+  <li><a href="#jointure-croisée" id="toc-jointure-croisée" class="nav-link" data-scroll-target="#jointure-croisée"><span class="header-section-number">5</span> Jointure croisée</a></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="algebre-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="06-jointures-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -450,12 +493,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Algèbre Relationnelle</h1>
-</div>
+<h1 class="title">Jointures entre Tables</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Joindre les tables</div>
+    <div class="quarto-category">Jointures externes</div>
+    <div class="quarto-category">Alias</div>
+  </div>
+  </div>
 
 <div>
   <div class="description">
-    <a href="algebre-slides.html">Slides</a>
+    <a href="06-jointures-slides.html">Slides</a>
   </div>
 </div>
 
@@ -478,98 +526,242 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="algèbre-relationnelle" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="algèbre-relationnelle"><span class="header-section-number">1</span> Algèbre Relationnelle</h2>
+<section id="jointures" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="jointures"><span class="header-section-number">1</span> Jointures</h2>
+<div class="callout callout-style-default callout-important callout-titled" title="Objectifs">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Important</span>Objectifs
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <ul>
-<li><a href="https://www.seas.upenn.edu/~zives/03f/cis550/codd.pdf" target="_blank">A Relational Model of Data for Large Shared Data Banks</a>, Edgar F. Codd, 1970</li>
-<li>Objectif : Modéliser une base de données ainsi que ses opérations</li>
-<li>Dans un SGBD relationel, tout est question de relation</li>
+<li>Regrouper les données de plusieurs tables</li>
+<li>En utilisant les liens entre ces tables</li>
 </ul>
+</div>
+</div>
+<div class="notes">
+<ul>
+<li>Jusqu’à maintenant, on aurait pu tout faire sous excel…</li>
+<li>Faire une jointure est comme créer un gros tableau</li>
+</ul>
+</div>
+<section id="tables-utilisées" class="level3" data-number="1.1">
+<h3 data-number="1.1" class="anchored" data-anchor-id="tables-utilisées"><span class="header-section-number">1.1</span> Tables utilisées</h3>
+<p>Dans les exemples ci-dessous, nous allons utiliser ces 2 tables.</p>
+<p>Vous pouvez tout à fait faire des jointures avec 3 tables, 4 tables…</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">classDiagram
+    class Joueuse {
+        id_joueuse PK
+        nom
+        prenom
+        elo
+        id_club
+    }
+    
+    class Club {
+        id_club PK
+        nom
+        ville
+    }
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
 </section>
-<section id="principaux-opérateurs" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="principaux-opérateurs"><span class="header-section-number">2</span> Principaux opérateurs</h2>
+<section id="données" class="level3" data-number="1.2">
+<h3 data-number="1.2" class="anchored" data-anchor-id="données"><span class="header-section-number">1.2</span> Données</h3>
+<div class="tabset-margin-container"></div><div class="panel-tabset nav-pills">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Joueuse</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Club</a></li></ul>
+<div class="tab-content nav-pills">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
 <div class="small-table">
 <table class="caption-top table">
 <colgroup>
-<col style="width: 32%">
-<col style="width: 67%">
+<col style="width: 19%">
+<col style="width: 29%">
+<col style="width: 22%">
+<col style="width: 11%">
+<col style="width: 17%">
 </colgroup>
 <thead>
 <tr class="header">
-<th><strong>Opérateur</strong></th>
-<th><strong>Description</strong></th>
+<th><strong>id_joueuse</strong></th>
+<th><strong>nom</strong></th>
+<th><strong>prenom</strong></th>
+<th><strong>elo</strong></th>
+<th><strong>id_club</strong></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><strong>σ (Sélection)</strong></td>
-<td>Filtrer les lignes selon une condition</td>
+<td>1</td>
+<td>Guichard</td>
+<td>Pauline</td>
+<td>2357</td>
+<td>3</td>
 </tr>
 <tr class="even">
-<td><strong>π (Projection)</strong></td>
-<td>Sélectionner des colonnes spécifiques</td>
+<td>2</td>
+<td>Daulyte</td>
+<td>Deimante</td>
+<td>2371</td>
+<td>1</td>
 </tr>
 <tr class="odd">
-<td><strong>U (Union)</strong></td>
-<td>Combiner les lignes de deux relations</td>
+<td>3</td>
+<td>Navrotescu</td>
+<td>Andreea</td>
+<td>2338</td>
+<td>2</td>
 </tr>
 <tr class="even">
-<td><strong>− (Différence)</strong></td>
-<td>Retourner les lignes présentes dans une relation mais pas dans l’autre</td>
+<td>4</td>
+<td>Sebag</td>
+<td>Marie</td>
+<td>2448</td>
+<td>2</td>
 </tr>
 <tr class="odd">
-<td><strong>∩ (Intersection)</strong></td>
-<td>Trouver les lignes communes aux deux relations</td>
+<td>5</td>
+<td>Millet</td>
+<td>Sophie</td>
+<td>2366</td>
+<td>3</td>
 </tr>
 <tr class="even">
-<td><strong>⨝ (Jointure)</strong></td>
-<td>Combiner deux relations basées sur une condition</td>
-</tr>
-<tr class="odd">
-<td><strong>x (Produit Cartésien)</strong></td>
-<td>Combinaison des colonnes</td>
+<td>6</td>
+<td>Skrichempko</td>
+<td>Almira</td>
+<td>2361</td>
+<td></td>
 </tr>
 </tbody>
 </table>
 </div>
-<section id="sélection" class="level3">
-<h3 class="anchored" data-anchor-id="sélection">Sélection</h3>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="small-table">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 48%">
+<col style="width: 31%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>id_club</strong></th>
+<th><strong>nom</strong></th>
+<th><strong>ville</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>C’Chartres Echecs</td>
+<td>Chartres</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Bischwiller</td>
+<td>Bischwiller</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Asnieres - le Grand Echiquier</td>
+<td>Asnieres</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Tours des Hauts-De-France</td>
+<td>Saint-Quentin</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="notes">
 <ul>
-<li>Permet de filtrer les lignes d’une table selon une condition</li>
+<li>Des remarques sur ces données ?</li>
+<li>Comment-vous pensez que l’on va faire la jointure ?</li>
 </ul>
-<div class="fragment">
-<ul>
-<li><span class="emoji" data-emoji="warning">⚠️</span> Mot clé SQL associé : WHERE</li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> elo <span class="op">&lt;</span> <span class="dv">2400</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="projection" class="level3">
-<h3 class="anchored" data-anchor-id="projection">Projection</h3>
-<ul>
-<li>Permet de sélectionner certaines colonnes d’une table.</li>
-<li>Mot clé SQL associé : SELECT</li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>       prenom</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="union" class="level3">
-<h3 class="anchored" data-anchor-id="union">Union</h3>
+<section id="jointure-interne" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="jointure-interne"><span class="header-section-number">2</span> Jointure interne</h2>
+<p>L’<strong>INNER JOIN</strong> renvoie uniquement les lignes qui ont des <u>correspondances dans les deux tables</u>.</p>
+<div class="notes">
+<p>Au max, vous avez le nombre de lignes de la table la plus grande</p>
+</div>
+<section id="ere-tentative" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="ere-tentative"><span class="header-section-number">2.1</span> 1ere tentative</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>       prenom,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>       nom <span class="kw">AS</span> club</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a> <span class="kw">INNER</span> <span class="kw">JOIN</span> echecs.club <span class="kw">ON</span> id_club <span class="op">=</span> id_club;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <ul>
-<li>Combine les lignes de deux tables ayant le <u>même nombre de colonnes et des types compatibles</u></li>
+<li>Nous affichons <em>nom</em> et <em>prenom</em> de la table <em>joueuse</em></li>
+<li>Nous ajoutons le <em>nom</em> du <em>club</em></li>
+<li>Nous faisons la jointure entre <em>joueuse</em> et <em>club</em> via la colonne <em>id_club</em></li>
 </ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>       prenom</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="kw">UNION</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>       prenom</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueur;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p>Des soucis dans cette requête ? <span class="emoji" data-emoji="confused">😕</span></p>
+</div>
+</section>
+<section id="e-tentative" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="e-tentative"><span class="header-section-number">2.2</span> 2e tentative</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> joueuse.nom,</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>       joueuse.prenom,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>       club.nom <span class="kw">AS</span> club</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a> <span class="kw">INNER</span> <span class="kw">JOIN</span> echecs.club <span class="kw">ON</span> club.id_club <span class="op">=</span> joueuse.id_club;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="fragment">
+<p>Ça fonctionne !</p>
+<p>Mais c’est un peu long d’écrire avant chaque colonne le nom de la table.</p>
+</div>
+</section>
+<section id="alias" class="level3" data-number="2.3">
+<h3 data-number="2.3" class="anchored" data-anchor-id="alias"><span class="header-section-number">2.3</span> Alias</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> j.nom,            <span class="co">-- signifie colonne nom de la table d'alias j</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>       j.prenom,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>       c.nom <span class="kw">AS</span> club</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse j  <span class="co">-- déclare j comme alias de la table joueuse</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a> <span class="kw">INNER</span> <span class="kw">JOIN</span> echecs.club c <span class="kw">ON</span> c.id_club <span class="op">=</span> j.id_club;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-note callout-titled" title="Alias">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Alias
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>L’Alias est comme un surnom pour la table</li>
+<li>Par défaut l’alias de la table est son propre nom (i.e.&nbsp;si vous ne déclarez pas d’alias)</li>
+<li>Généralement on utilise comme alias la 1ere lettre ou les 2 premières lettres</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="using" class="level3" data-number="2.4">
+<h3 data-number="2.4" class="anchored" data-anchor-id="using"><span class="header-section-number">2.4</span> USING</h3>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -580,82 +772,381 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<ul>
-<li><strong>UNION</strong> : Combine les résultats des requêtes et supprime les doublons</li>
-<li><strong>UNION ALL</strong> : Combine les résultats des requêtes et garde tous les doublons</li>
-</ul>
+<p>Si votre base de données est bien conçue, les colonnes utilisées pour les jointures portent le même nom dans les deux tables.</p>
+<p>Dans ce cas, et uniquement dans ce cas, vous pouvez utiliser le mot clé <code>USING</code> à la place de <code>ON</code>.</p>
 </div>
 </div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> j.nom,</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>       j.prenom,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>       c.nom <span class="kw">AS</span> club</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse j</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a> <span class="kw">INNER</span> <span class="kw">JOIN</span> echecs.club c <span class="kw">USING</span> (id_club);</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="notes">
-<ul>
-<li>En général, on prend les mêmes colonnes des 2 côtés</li>
-<li>Possible de faire plusieurs UNION</li>
-<li>ORDER BY à la fin : ordonne le tout</li>
-</ul>
+<p>Si vos colonnes n’ont pas le même nom, pas possible de faire USING</p>
 </div>
 </section>
-<section id="différence" class="level3">
-<h3 class="anchored" data-anchor-id="différence">Différence</h3>
-<ul>
-<li>Lignes qui se trouvent dans la première relation mais pas dans la seconde</li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Joueuses évoluant dans un club français et pas dans un club belge</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>       prenom</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse_club_fr</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="kw">EXCEPT</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>       prenom</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse_club_be;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="notes">
-<p>Imaginons que vous ayez créé 2 tables :</p>
-<ul>
-<li>joueuses évoluant dans un club français</li>
-<li>joueuses évoluant dans un club belge</li>
-</ul>
+<section id="au-final" class="level3" data-number="2.5">
+<h3 data-number="2.5" class="anchored" data-anchor-id="au-final"><span class="header-section-number">2.5</span> Au final</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> j.nom,</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>       j.prenom,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>       c.nom <span class="kw">AS</span> club</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse j</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> echecs.club c <span class="kw">USING</span> (id_club);</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Vous pouvez même enlever le <code>INNER</code> qui est optionnel.</p>
+</section>
+<section id="à-ne-pas-faire" class="level3" data-number="2.6">
+<h3 data-number="2.6" class="anchored" data-anchor-id="à-ne-pas-faire"><span class="header-section-number">2.6</span> À ne pas faire</h3>
+<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-</section>
-<section id="intersection" class="level3">
-<h3 class="anchored" data-anchor-id="intersection">Intersection</h3>
-<ul>
-<li>Lignes communes aux deux tables</li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Joueuses évoluant dans un club francais et dans un club belge</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>       prenom</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse_club_fr</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="kw">INTERSECT</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>       prenom</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse_club_be;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="jointure" class="level3">
-<h3 class="anchored" data-anchor-id="jointure">Jointure</h3>
-<ul>
-<li>Permet de combiner deux tables en se basant sur une correspondance entre les colonnes</li>
-</ul>
+<div class="callout-title-container flex-fill">
+Caution
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Il est aussi possible de faire une jointure avec <code>NATURAL JOIN</code> sans préciser aucun nom de colonnes. Cela va joindre les tables via les colonnes ayant le même nom dans les 2 tables.</p>
+<p>Cette pratique est déconseillée, car vous ne maitrisez pas les colonnes servant à la jointure et c’est visuellement moins parlant.</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled" title="Ancienne écriture">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Warning</span>Ancienne écriture
+</div>
+</div>
+<div class="callout-body-container callout-body">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> j.nom,</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>       j.prenom,</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>       c.nom <span class="kw">AS</span> club</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse j</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> echecs.club c <span class="kw">USING</span> (id_club);</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="produit-cartésien" class="level3">
-<h3 class="anchored" data-anchor-id="produit-cartésien">Produit Cartésien</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse j,</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>       echecs.club c;</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">-- WHERE j.id_club = c.id_club</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse j,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>       echecs.club c </span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> j.id_club <span class="op">=</span> c.id_club;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
 <div class="notes">
-<p>Ancienne pratique : utilisé avant à la place des jointures</p>
+<p>Ancienne écriture encore utilisée par un certain nombre.</p>
+</div>
+</section>
+<section id="résultat" class="level3" data-number="2.7">
+<h3 data-number="2.7" class="anchored" data-anchor-id="résultat"><span class="header-section-number">2.7</span> Résultat</h3>
+<div class="small-table">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th><strong>nom</strong></th>
+<th><strong>prenom</strong></th>
+<th><strong>club</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Daulyte</td>
+<td>Deimante</td>
+<td>C’Chartres Echecs</td>
+</tr>
+<tr class="even">
+<td>Navrotescu</td>
+<td>Andreea</td>
+<td>Bischwiller</td>
+</tr>
+<tr class="odd">
+<td>Sebag</td>
+<td>Marie</td>
+<td>Bischwiller</td>
+</tr>
+<tr class="even">
+<td>Guichard</td>
+<td>Pauline</td>
+<td>Asnieres - le Grand Echiquier</td>
+</tr>
+<tr class="odd">
+<td>Millet</td>
+<td>Sophie</td>
+<td>Asnieres - le Grand Echiquier</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="fragment">
+<p>Il n’y a pas quelque chose qui vous chagrine ? <span class="emoji" data-emoji="frowning">😦</span></p>
+</div>
+<div class="notes">
+<p>A votre avis, pourquoi il manque une joueuse ?</p>
+</div>
+</section>
+</section>
+<section id="jointure-externe" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="jointure-externe"><span class="header-section-number">3</span> Jointure externe</h2>
+<p>Ce serait pas mal d’afficher toutes les joueuses, même celles qui n’ont pas de club.</p>
+<p>Comment faire ? <span class="emoji" data-emoji="neutral_face">😐</span></p>
+<hr>
+<div class="hide-html-render">
+<iframe src="https://giphy.com/embed/1zRgQYRbZWFXGZ1Tgw" width="960" height="540" frameborder="0" class="giphy-embed no-print" allowfullscreen="">
+</iframe>
+</div>
+<hr>
+<section id="idée" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="idée"><span class="header-section-number">3.1</span> Idée</h3>
+<ul>
+<li>Lister les noms et prénoms des joueuses</li>
+<li>Éventuellement compléter avec le nom du club</li>
+</ul>
+<div class="fragment">
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> j.nom,</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>       j.prenom,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>       c.nom <span class="kw">AS</span> club</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse j</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">LEFT</span> <span class="kw">JOIN</span> echecs.club c <span class="kw">USING</span> (id_club);</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="left-join" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="left-join"><span class="header-section-number">3.2</span> LEFT JOIN</h3>
+<p>Utilisons un <code>LEFT JOIN</code> pour faire une jointure externe :</p>
+<ul>
+<li>nous gardons toutes les données présentes dans les tables avant le <em>LEFT JOIN</em></li>
+<li>nous complétons si possible avec les données des tables après le <em>LEFT JOIN</em></li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled" title="RIGHT JOIN">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>RIGHT JOIN
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>À l’inverse, le <code>RIGHT JOIN</code> garde tout ce qu’il y a après et compléte si possible avec ce qu’il y a avant.</p>
+<p>Il est moins utilisé car moins intuitif, mais reste parfois indispensable.</p>
+</div>
+</div>
+<div class="notes">
+<p>Il y a certains cas particuliers où le RIGHT JOIN est indispensable</p>
+<p>Vous verrez parfois LEFT OUTER JOIN</p>
+</div>
+</section>
+<section id="résultat-1" class="level3" data-number="3.3">
+<h3 data-number="3.3" class="anchored" data-anchor-id="résultat-1"><span class="header-section-number">3.3</span> Résultat</h3>
+<div class="tabset-margin-container"></div><div class="panel-tabset nav-pills">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">LEFT JOIN</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">RIGHT JOIN</a></li></ul>
+<div class="tab-content nav-pills">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<div class="small-table">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th><strong>nom</strong></th>
+<th><strong>prenom</strong></th>
+<th><strong>club</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Daulyte</td>
+<td>Deimante</td>
+<td>C’Chartres Echecs</td>
+</tr>
+<tr class="even">
+<td>Navrotescu</td>
+<td>Andreea</td>
+<td>Bischwiller</td>
+</tr>
+<tr class="odd">
+<td>Sebag</td>
+<td>Marie</td>
+<td>Bischwiller</td>
+</tr>
+<tr class="even">
+<td>Guichard</td>
+<td>Pauline</td>
+<td>Asnieres - le Grand Echiquier</td>
+</tr>
+<tr class="odd">
+<td>Millet</td>
+<td>Sophie</td>
+<td>Asnieres - le Grand Echiquier</td>
+</tr>
+<tr class="even">
+<td>Skrichempko</td>
+<td>Almira</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<div class="small-table">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th><strong>nom</strong></th>
+<th><strong>prenom</strong></th>
+<th><strong>club</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Daulyte</td>
+<td>Deimante</td>
+<td>C’Chartres Echecs</td>
+</tr>
+<tr class="even">
+<td>Navrotescu</td>
+<td>Andreea</td>
+<td>Bischwiller</td>
+</tr>
+<tr class="odd">
+<td>Sebag</td>
+<td>Marie</td>
+<td>Bischwiller</td>
+</tr>
+<tr class="even">
+<td>Guichard</td>
+<td>Pauline</td>
+<td>Asnieres - le Grand Echiquier</td>
+</tr>
+<tr class="odd">
+<td>Millet</td>
+<td>Sophie</td>
+<td>Asnieres - le Grand Echiquier</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>Tours des Hauts-De-France</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="jointure-complète" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="jointure-complète"><span class="header-section-number">4</span> Jointure complète</h2>
+<p>Le <code>FULL JOIN</code> permet de faire une jointure bilatérale (i.e.&nbsp;un UNION entre les éléments de la <em>LEFT JOIN</em> et de la <em>RIGHT JOIN</em>)</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> j.nom,</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>       j.prenom,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>       c.nom <span class="kw">AS</span> club</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse j</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FULL</span> <span class="kw">JOIN</span> echecs.club c <span class="kw">USING</span> (id_club);</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="résultat-2" class="level3" data-number="4.1">
+<h3 data-number="4.1" class="anchored" data-anchor-id="résultat-2"><span class="header-section-number">4.1</span> Résultat</h3>
+<div class="small-table">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th><strong>nom</strong></th>
+<th><strong>prenom</strong></th>
+<th><strong>club</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Daulyte</td>
+<td>Deimante</td>
+<td>C’Chartres Echecs</td>
+</tr>
+<tr class="even">
+<td>Navrotescu</td>
+<td>Andreea</td>
+<td>Bischwiller</td>
+</tr>
+<tr class="odd">
+<td>Sebag</td>
+<td>Marie</td>
+<td>Bischwiller</td>
+</tr>
+<tr class="even">
+<td>Guichard</td>
+<td>Pauline</td>
+<td>Asnieres - le Grand Echiquier</td>
+</tr>
+<tr class="odd">
+<td>Millet</td>
+<td>Sophie</td>
+<td>Asnieres - le Grand Echiquier</td>
+</tr>
+<tr class="even">
+<td>Skrichempko</td>
+<td>Almira</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td>Tours des Hauts-De-France</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</section>
+<section id="jointure-croisée" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="jointure-croisée"><span class="header-section-number">5</span> Jointure croisée</h2>
+<p><code>CROSS JOIN</code> renvoie le produit cartésien des deux tables.</p>
+<div class="small-table">
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th><strong>nom</strong></th>
+<th><strong>prenom</strong></th>
+<th><strong>club</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Daulyte</td>
+<td>Deimante</td>
+<td>C’Chartres Echecs</td>
+</tr>
+<tr class="even">
+<td>Daulyte</td>
+<td>Deimante</td>
+<td>Bischwiller</td>
+</tr>
+<tr class="odd">
+<td>Daulyte</td>
+<td>Deimante</td>
+<td>Asnieres - le Grand Echiquier</td>
+</tr>
+<tr class="even">
+<td>Daulyte</td>
+<td>Deimante</td>
+<td>Tours des Hauts-De-France</td>
+</tr>
+<tr class="odd">
+<td>Navrotescu</td>
+<td>Andreea</td>
+<td>C’Chartres Echecs</td>
+</tr>
+<tr class="even">
+<td>Navrotescu</td>
+<td>Andreea</td>
+<td>Bischwiller</td>
+</tr>
+<tr class="odd">
+<td>Navrotescu</td>
+<td>Andreea</td>
+<td>Asnieres - le Grand Echiquier</td>
+</tr>
+<tr class="even">
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+</tbody>
+</table>
 </div>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->

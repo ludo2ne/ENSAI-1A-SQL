@@ -6,21 +6,30 @@
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
 <link href="../../site_libs/quarto-html/light-border.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b758ccaa5987ceb1b75504551e579abf.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.8.26">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.10.18">
 
   <meta name="author" content="Ludovic Deneuville">
-  <title>Base de données – Algèbre Relationnelle</title>
+  <title>Base de données – Bases de Données Relationnelles et SQL</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/reset.css">
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/reveal.css">
   <style>
-    code{white-space: pre-wrap;}
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
     span.smallcaps{font-variant: small-caps;}
-    div.columns{display: flex; gap: min(4vw, 1.5em);}
-    div.column{flex: auto; overflow-x: auto;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
     ul.task-list{list-style: none;}
     ul.task-list li input[type="checkbox"] {
@@ -95,7 +104,7 @@
     code span.vs { color: #abe338; } /* VerbatimString */
     code span.wa { color: #dcc6e0; } /* Warning */
   </style>
-  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-06e768f098560084c2d7120de8ad04fb.css">
+  <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto-84b150702567ae7e15cad124fb9039e2.css">
   <link rel="stylesheet" href="../../styles-reveal.css">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
@@ -194,134 +203,145 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Algèbre Relationnelle</h1>
+  <h1 class="title">Bases de Données Relationnelles et SQL</h1>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
 <div class="quarto-title-author-name">
-Ludovic Deneuville 
+Ludovic Deneuville
 </div>
 </div>
 </div>
 
 </section>
-<section id="algèbre-relationnelle" class="title-slide slide level2 center">
-<h2>Algèbre Relationnelle</h2>
+<section id="bases-de-données-relationnelles-et-sql" class="title-slide slide level2 center">
+<h2>Bases de Données Relationnelles et SQL</h2>
 <ul>
-<li><a href="https://www.seas.upenn.edu/~zives/03f/cis550/codd.pdf" target="_blank">A Relational Model of Data for Large Shared Data Banks</a>, Edgar F. Codd, 1970</li>
-<li>Objectif : Modéliser une base de données ainsi que ses opérations</li>
-<li>Dans un SGBD relationel, tout est question de relation</li>
+<li>6h CM</li>
+<li>15h TP + 3h TD</li>
+<li><code>ludovic.deneuville@ensai.fr</code></li>
+<li>bureau 161</li>
+<li>sur la base des cours de Benjamin Girault</li>
 </ul>
+</section>
+
+<section id="objectifs" class="title-slide slide level2 center">
+<h2>Objectifs</h2>
+<ul>
+<li>Interrogation</li>
+<li>Création</li>
+<li>Modélisation</li>
+<li>Savoir utiliser le langage SQL</li>
+</ul>
+<aside class="notes">
+<p>Le plus important, savoir explorer une bdd pour en extraire des infos.</p>
+<p>UML pour la modélisation</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+
+<section id="sql" class="title-slide slide level2 center">
+<h2>SQL</h2>
+<ul>
+<li>Syntaxe simple</li>
+<li>Déclaratif</li>
+<li>Efficace</li>
+<li>Très utilisé</li>
+</ul>
+<aside class="notes">
+<ul>
+<li>Compétence indispensable du Datascientist</li>
+<li>ça s’encapsule dans plein de langages (R, Python, Julia, Stata, SAS…)</li>
+<li>utile pour Big Data</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 
 <section>
-<section id="principaux-opérateurs" class="title-slide slide level2 center">
-<h2>Principaux opérateurs</h2>
-<div class="small-table">
-<table class="caption-top">
-<colgroup>
-<col style="width: 32%">
-<col style="width: 67%">
-</colgroup>
-<thead>
-<tr class="header">
-<th><strong>Opérateur</strong></th>
-<th><strong>Description</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><strong>σ (Sélection)</strong></td>
-<td>Filtrer les lignes selon une condition</td>
-</tr>
-<tr class="even">
-<td><strong>π (Projection)</strong></td>
-<td>Sélectionner des colonnes spécifiques</td>
-</tr>
-<tr class="odd">
-<td><strong>U (Union)</strong></td>
-<td>Combiner les lignes de deux relations</td>
-</tr>
-<tr class="even">
-<td><strong>− (Différence)</strong></td>
-<td>Retourner les lignes présentes dans une relation mais pas dans l’autre</td>
-</tr>
-<tr class="odd">
-<td><strong>∩ (Intersection)</strong></td>
-<td>Trouver les lignes communes aux deux relations</td>
-</tr>
-<tr class="even">
-<td><strong>⨝ (Jointure)</strong></td>
-<td>Combiner deux relations basées sur une condition</td>
-</tr>
-<tr class="odd">
-<td><strong>x (Produit Cartésien)</strong></td>
-<td>Combinaison des colonnes</td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-<section id="sélection" class="slide level3">
-<h3>Sélection</h3>
+<section id="conventions" class="title-slide slide level2 center">
+<h2>Conventions</h2>
 <ul>
-<li>Permet de filtrer les lignes d’une table selon une condition</li>
+<li><code>&lt;...&gt;</code> : texte à remplacer</li>
+<li><code>[...]</code> : élément optionnel</li>
+<li>Une requête se termine par un <code>;</code></li>
+<li><code>-- Ce qui vient ensuite est commenté</code></li>
 </ul>
+<aside class="notes">
+<ul>
+<li>Parfois possible d’utiliser <code>/* commentaire */</code></li>
+<li><code>;</code> : même si les logiciels souvent s’en moquent</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="requêtes-sql-jolies" class="slide level3">
+<h3>Requêtes SQL jolies</h3>
+<ul>
+<li>Retour à la ligne</li>
+<li>Mots clés alignés</li>
+<li>Mots clés en MAJUSCULE</li>
+</ul>
+<aside class="notes">
+<ul>
+<li>Mots clés en MAJUSCULE, reste en minuscules</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section class="slide level3">
+
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>pasbien.sql</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-filename="pasbien.sql"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> c.nom <span class="kw">AS</span> club, <span class="fu">AVG</span>(j.elo) <span class="kw">AS</span> moyenne_elo <span class="kw">FROM</span> joueuse j <span class="kw">INNER</span> <span class="kw">JOIN</span> club c </span>
+<span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a><span class="kw">USING</span> (id_club) <span class="kw">WHERE</span> mail <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">GROUP</span> <span class="kw">BY</span> c.nom <span class="kw">HAVING</span> <span class="fu">AVG</span>(j.elo) <span class="op">&gt;</span> <span class="dv">2000</span> <span class="kw">ORDER</span> <span class="kw">BY</span> <span class="dv">2</span> <span class="kw">DESC</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
 <div class="fragment">
-<ul>
-<li><span class="emoji" data-emoji="warning">⚠️</span> Mot clé SQL associé : WHERE</li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
-<span id="cb1-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
-<span id="cb1-3"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> elo <span class="op">&lt;</span> <span class="dv">2400</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</section>
-<section id="projection" class="slide level3">
-<h3>Projection</h3>
-<ul>
-<li>Permet de sélectionner certaines colonnes d’une table.</li>
-<li>Mot clé SQL associé : SELECT</li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
-<span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a>       prenom</span>
-<span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="union" class="slide level3">
-<h3>Union</h3>
-<ul>
-<li>Combine les lignes de deux tables ayant le <u>même nombre de colonnes et des types compatibles</u></li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
-<span id="cb3-2"><a aria-hidden="true" tabindex="-1"></a>       prenom</span>
-<span id="cb3-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
-<span id="cb3-4"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a aria-hidden="true" tabindex="-1"></a><span class="kw">UNION</span></span>
-<span id="cb3-6"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
-<span id="cb3-8"><a aria-hidden="true" tabindex="-1"></a>       prenom</span>
-<span id="cb3-9"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueur;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="callout callout-tip callout-titled callout-style-default">
-<div class="callout-body">
-<div class="callout-title">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Tip</strong></p>
-</div>
-<div class="callout-content">
-<ul>
-<li><strong>UNION</strong> : Combine les résultats des requêtes et supprime les doublons</li>
-<li><strong>UNION ALL</strong> : Combine les résultats des requêtes et garde tous les doublons</li>
-</ul>
-</div>
+<div class="hide-html-render">
+<p><a href="https://media.giphy.com/media/xT5LMDiHQNDcF3F1vO/source.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img data-src="https://media.giphy.com/media/xT5LMDiHQNDcF3F1vO/source.gif" style="width:50.0%"></a></p>
 </div>
 </div>
 <aside class="notes">
-<ul>
-<li>En général, on prend les mêmes colonnes des 2 côtés</li>
-<li>Possible de faire plusieurs UNION</li>
-<li>ORDER BY à la fin : ordonne le tout</li>
-</ul>
+<p>Que fait cette requête ?</p>
+<p>Voici ma réaction quand je vois ça !</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -334,92 +354,195 @@ Ludovic Deneuville
           display:block!important;
       }</style></aside>
 </section>
-<section id="différence" class="slide level3">
-<h3>Différence</h3>
-<ul>
-<li>Lignes qui se trouvent dans la première relation mais pas dans la seconde</li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">-- Joueuses évoluant dans un club français et pas dans un club belge</span></span>
-<span id="cb4-2"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
-<span id="cb4-3"><a aria-hidden="true" tabindex="-1"></a>       prenom</span>
-<span id="cb4-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse_club_fr</span>
-<span id="cb4-5"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-6"><a aria-hidden="true" tabindex="-1"></a><span class="kw">EXCEPT</span></span>
-<span id="cb4-7"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-8"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
-<span id="cb4-9"><a aria-hidden="true" tabindex="-1"></a>       prenom</span>
-<span id="cb4-10"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse_club_be;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<aside class="notes">
-<p>Imaginons que vous ayez créé 2 tables :</p>
-<ul>
-<li>joueuses évoluant dans un club français</li>
-<li>joueuses évoluant dans un club belge</li>
-</ul>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
-</section>
-<section id="intersection" class="slide level3">
-<h3>Intersection</h3>
-<ul>
-<li>Lignes communes aux deux tables</li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">-- Joueuses évoluant dans un club francais et dans un club belge</span></span>
-<span id="cb5-2"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
-<span id="cb5-3"><a aria-hidden="true" tabindex="-1"></a>       prenom</span>
-<span id="cb5-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse_club_fr</span>
-<span id="cb5-5"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-6"><a aria-hidden="true" tabindex="-1"></a><span class="kw">INTERSECT</span></span>
-<span id="cb5-7"><a aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-8"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
-<span id="cb5-9"><a aria-hidden="true" tabindex="-1"></a>       prenom</span>
-<span id="cb5-10"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse_club_be;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="jointure" class="slide level3">
-<h3>Jointure</h3>
-<ul>
-<li>Permet de combiner deux tables en se basant sur une correspondance entre les colonnes</li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> j.nom,</span>
-<span id="cb6-2"><a aria-hidden="true" tabindex="-1"></a>       j.prenom,</span>
-<span id="cb6-3"><a aria-hidden="true" tabindex="-1"></a>       c.nom <span class="kw">AS</span> club</span>
-<span id="cb6-4"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse j</span>
-<span id="cb6-5"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> echecs.club c <span class="kw">USING</span> (id_club);</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</section>
-<section id="produit-cartésien" class="slide level3">
-<h3>Produit Cartésien</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
-<span id="cb7-2"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse j,</span>
-<span id="cb7-3"><a aria-hidden="true" tabindex="-1"></a>       echecs.club c;</span>
-<span id="cb7-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">-- WHERE j.id_club = c.id_club</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<aside class="notes">
-<p>Ancienne pratique : utilisé avant à la place des jointures</p>
-<style type="text/css">
-        span.MJX_Assistive_MathML {
-          position:absolute!important;
-          clip: rect(1px, 1px, 1px, 1px);
-          padding: 1px 0 0 0!important;
-          border: 0!important;
-          height: 1px!important;
-          width: 1px!important;
-          overflow: hidden!important;
-          display:block!important;
-      }</style></aside>
+<section class="slide level3">
 
-
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>bien.sql</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" data-filename="bien.sql"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> c.nom <span class="kw">AS</span> club, </span>
+<span id="cb2-2"><a aria-hidden="true" tabindex="-1"></a>       <span class="fu">AVG</span>(j.elo) <span class="kw">AS</span> moyenne_elo</span>
+<span id="cb2-3"><a aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> joueuse j </span>
+<span id="cb2-4"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">INNER</span> <span class="kw">JOIN</span> club c <span class="kw">USING</span> (id_club) </span>
+<span id="cb2-5"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> j.mail <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span> </span>
+<span id="cb2-6"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">GROUP</span> <span class="kw">BY</span> c.nom</span>
+<span id="cb2-7"><a aria-hidden="true" tabindex="-1"></a><span class="kw">HAVING</span> <span class="fu">AVG</span>(j.elo) <span class="op">&gt;</span> <span class="dv">2000</span></span>
+<span id="cb2-8"><a aria-hidden="true" tabindex="-1"></a> <span class="kw">ORDER</span> <span class="kw">BY</span> <span class="dv">2</span> <span class="kw">DESC</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="fragment">
+<div class="hide-html-render">
+<p><a href="https://media.giphy.com/media/3o7absbD7PbTFQa0c8/source.gif" class="lightbox" data-gallery="quarto-lightbox-gallery-2"><img data-src="https://media.giphy.com/media/3o7absbD7PbTFQa0c8/source.gif" style="width:50.0%"></a></p>
+</div>
+</div>
+<aside class="notes">
+<p>Alors qu’ici tout le monde voit immédiatement ce que fait la requête.</p>
+<p>Faites un effort pour vous même et pour vos relecteurs.</p>
+<p>SQL : langage déclaratif (ne décrit pas des algorithmes, mais déclare un résultat attendu)</p>
+<p>Le SQL ça ressemble à ça (1ere lecture de requête) :</p>
+<ul>
+<li>Tableau de joueuse et de club</li>
+<li>filtre pour garder si mail non NULL</li>
+<li>Aggrégation par nom de club -&gt; que l’on affiche</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
+<section>
+<section id="les-tp" class="title-slide slide level2 center">
+<h2>Les TP</h2>
+<p>5 TP + 1 TD</p>
+<ul>
+<li>Base de données : PostgreSQL</li>
+<li>Communication avec la BDD : cloudBeaver</li>
+<li><a href="https://datalab.sspcloud.fr/" target="_blank">Datalab SSPCloud de l’INSEE</a>
+<ul>
+<li>créer un compte avec : <code>prenom.nom@eleve.ensai.fr</code></li>
+</ul></li>
+<li><a href="https://onyxia.lab.groupe-genes.fr/" target="_blank">Datalab du GENES</a></li>
+</ul>
+<aside class="notes">
+<p>Rappel Datalab : Infra + logiciel Onyxia</p>
+<ul>
+<li>BDD :
+<ul>
+<li>PostgreSQL : installé sur un serveur</li>
+<li>DuckDB : embarqué, travaille en mémoire</li>
+</ul></li>
+<li>CloudBeaver = une application web pour interagir facilement avec PostgreSQL</li>
+<li>Sur les VM : DBeaver + une bdd chacun</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="ce-quil-faut-faire" class="slide level3">
+<h3>Ce qu’il faut faire</h3>
+<ul>
+<li>Lire attentivement les consignes</li>
+<li>Essayer de résoudre par soi même</li>
+<li>Chercher dans le cours / sur internet</li>
+<li>Demander de l’aide à ses camarades</li>
+<li>Demander de l’aide à l’enseignant</li>
+</ul>
+<aside class="notes">
+<p>ça peut paraitre un peu infentilisant mais c’est nécessaire de le rappeler !!!</p>
+<p>si je demande un setup… faites le sinon ça risque de péter plus tard.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="à-ne-pas-faire" class="slide level3">
+<h3>À ne pas faire</h3>
+<ul>
+<li>Copier l’énoncé sur une IAGen</li>
+<li>Coller la réponse sans rien comprendre</li>
+</ul>
+<aside class="notes">
+<p>Sauf si vous voulez ne rien retenir…</p>
+<ul>
+<li>Je ne dis pas qu’il ne faut jamais utiliser les LLM</li>
+<li>ça peut servir pour débgugger</li>
+<li>ou pour des taches sans VA</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section></section>
+<section id="évaluation" class="title-slide slide level2 center">
+<h2>Évaluation</h2>
+<ul>
+<li>Lundi 5 Janvier 10h</li>
+<li>Durée : 2h</li>
+<li>Sur papier</li>
+<li>Sans documents</li>
+</ul>
+<aside class="notes">
+<ul>
+<li>partie QCM</li>
+<li>des requêtes SQL à écrire</li>
+<li>pas de pièges</li>
+<li>pour vérifier que vous retenez l’essentiel</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+
+<section id="bibliographie" class="title-slide slide level2 smaller center">
+<h2>Bibliographie</h2>
+<ul>
+<li><a href="https://laurent-audibert.developpez.com/Cours-BD/" target="_blank">https://laurent-audibert.developpez.com/Cours-BD/</a></li>
+<li><a href="https://upinfo.univ-cotedazur.fr/im/bases-de-donnees/" target="_blank">https://upinfo.univ-cotedazur.fr/im/bases-de-donnees/</a></li>
+<li><a href="https://oseox.fr/sql/" target="_blank">https://oseox.fr/sql/</a></li>
+<li><a href="https://learnsql.fr/blog/aide-memoire-pour-les-entretiens-sql/" target="_blank">https://learnsql.fr/blog/aide-memoire-pour-les-entretiens-sql/</a></li>
+<li><a href="https://datascientest.com/base-de-donnees-definition" target="_blank">https://datascientest.com/base-de-donnees-definition</a></li>
+<li><a href="https://www.postgresql.org/docs/current/sql.html" target="_blank">https://www.postgresql.org/docs/current/sql.html</a></li>
+</ul>
+<aside class="notes">
+<p>Au passage :</p>
+<ul>
+<li>Importance de la biblio en projet, stage</li>
+<li>Commencez toujours par explorer ce qui a été fait sur le sujet</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+
+
+</section>
     </div>
   <div class="quarto-auto-generated-content" style="display: none;">
 <div class="footer footer-default">
-<p><a href="../../index.html">Home</a> — <a href="algebre.html">Algèbre Relationnelle</a></p>
+<p><a href="../../index.html">Home</a> — <a href="01-intro.html">Introduction à SQL</a></p>
 </div>
 </div></div>
 
@@ -799,6 +922,38 @@ Ludovic Deneuville
         }
       });
       </script>
+    <script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+    (function() {
+      let previousOnload = window.onload;
+      window.onload = () => {
+        if (previousOnload) {
+          previousOnload();
+        }
+        lightboxQuarto.on('slide_before_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          const href = trigger.getAttribute('href');
+          if (href !== null) {
+            const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+            if (imgEl !== null) {
+              const srcAttr = imgEl.getAttribute("src");
+              if (srcAttr && srcAttr.startsWith("data:")) {
+                slideConfig.href = srcAttr;
+              }
+            }
+          } 
+        });
+      
+        lightboxQuarto.on('slide_after_load', (data) => {
+          const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(slideNode);
+          }
+        });
+      
+      };
+      
+    })();
+              </script>
     
 
 </body></html>

@@ -1,0 +1,15 @@
+[
+  {
+    "listing": "/index.html",
+    "items": [
+      "/doc/cours/01-intro.html",
+      "/doc/cours/02-bases-de-donnees.html",
+      "/doc/cours/03-sql-intro.html",
+      "/doc/cours/04-agregations.html",
+      "/doc/cours/05-algebre.html",
+      "/doc/cours/06-jointures.html",
+      "/doc/cours/07-sql-avance.html",
+      "/doc/cours/08-formalisation.html"
+    ]
+  }
+]

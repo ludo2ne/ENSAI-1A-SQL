@@ -6,10 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Ludovic Deneuville">
-<meta name="description" content="TP3">
+<meta name="author" content="">
+<meta name="dcterms.date" content="2026-01-05">
 
-<title>Discographie 🎵 – Base de données</title>
+<title>Examen final : Bases de données relationnelles – Base de données</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -453,25 +453,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#lancement-des-services" id="toc-lancement-des-services" class="nav-link" data-scroll-target="#lancement-des-services"><span class="header-section-number">1</span> Lancement des services</a></li>
-  <li><a href="#les-données" id="toc-les-données" class="nav-link" data-scroll-target="#les-données"><span class="header-section-number">2</span> Les données</a>
+  <li><a href="#instructions" id="toc-instructions" class="nav-link active" data-scroll-target="#instructions">Instructions</a></li>
+  <li><a href="#questions-à-réponses-courtes-2-points" id="toc-questions-à-réponses-courtes-2-points" class="nav-link" data-scroll-target="#questions-à-réponses-courtes-2-points"><span class="header-section-number">1</span> Questions à réponses courtes (2 points)</a></li>
+  <li><a href="#qcm-8-points" id="toc-qcm-8-points" class="nav-link" data-scroll-target="#qcm-8-points"><span class="header-section-number">2</span> QCM (8 points)</a>
   <ul class="collapse">
-  <li><a href="#chargez-les-données" id="toc-chargez-les-données" class="nav-link" data-scroll-target="#chargez-les-données"><span class="header-section-number">2.1</span> Chargez les données</a></li>
-  <li><a href="#description" id="toc-description" class="nav-link" data-scroll-target="#description"><span class="header-section-number">2.2</span> Description</a></li>
-  <li><a href="#modèle-de-données" id="toc-modèle-de-données" class="nav-link" data-scroll-target="#modèle-de-données"><span class="header-section-number">2.3</span> Modèle de données</a></li>
+  <li><a href="#dans-une-base-de-données-relationnelle-une-clé-primaire" id="toc-dans-une-base-de-données-relationnelle-une-clé-primaire" class="nav-link" data-scroll-target="#dans-une-base-de-données-relationnelle-une-clé-primaire"><span class="header-section-number">2.1</span> Dans une base de données relationnelle, une clé primaire :</a></li>
+  <li><a href="#à-propos-des-clés-étrangères-quelles-affirmations-sont-correctes" id="toc-à-propos-des-clés-étrangères-quelles-affirmations-sont-correctes" class="nav-link" data-scroll-target="#à-propos-des-clés-étrangères-quelles-affirmations-sont-correctes"><span class="header-section-number">2.2</span> À propos des clés étrangères, quelles affirmations sont correctes ?</a></li>
+  <li><a href="#pour-lister-les-joueuses-dont-le-elo-est-supérieur-à-la-moyenne-je-peux-utiliser" id="toc-pour-lister-les-joueuses-dont-le-elo-est-supérieur-à-la-moyenne-je-peux-utiliser" class="nav-link" data-scroll-target="#pour-lister-les-joueuses-dont-le-elo-est-supérieur-à-la-moyenne-je-peux-utiliser"><span class="header-section-number">2.3</span> Pour lister les joueuses dont le Elo est supérieur à la moyenne, je peux utiliser :</a></li>
+  <li><a href="#un-index" id="toc-un-index" class="nav-link" data-scroll-target="#un-index"><span class="header-section-number">2.4</span> Un index :</a></li>
+  <li><a href="#quelles-propositions-sont-correctes-à-propos-des-vues" id="toc-quelles-propositions-sont-correctes-à-propos-des-vues" class="nav-link" data-scroll-target="#quelles-propositions-sont-correctes-à-propos-des-vues"><span class="header-section-number">2.5</span> Quelles propositions sont correctes à propos des vues ?</a></li>
+  <li><a href="#quelles-syntaxes-permettent-correctement-de-concaténer-nom-et-prenom-dans-une-requête-postgresql" id="toc-quelles-syntaxes-permettent-correctement-de-concaténer-nom-et-prenom-dans-une-requête-postgresql" class="nav-link" data-scroll-target="#quelles-syntaxes-permettent-correctement-de-concaténer-nom-et-prenom-dans-une-requête-postgresql"><span class="header-section-number">2.6</span> Quelles syntaxes permettent correctement de concaténer <code>nom</code> et <code>prenom</code> dans une requête PostgreSQL ?</a></li>
+  <li><a href="#à-propos-de-la-commande-sql-delete-from-echecs.joueuse" id="toc-à-propos-de-la-commande-sql-delete-from-echecs.joueuse" class="nav-link" data-scroll-target="#à-propos-de-la-commande-sql-delete-from-echecs.joueuse"><span class="header-section-number">2.7</span> À propos de la commande SQL <code>DELETE FROM echecs.joueuse;</code> :</a></li>
+  <li><a href="#à-propos-du-format-de-fichier-parquet-quelles-affirmations-sont-correctes" id="toc-à-propos-du-format-de-fichier-parquet-quelles-affirmations-sont-correctes" class="nav-link" data-scroll-target="#à-propos-du-format-de-fichier-parquet-quelles-affirmations-sont-correctes"><span class="header-section-number">2.8</span> À propos du format de fichier Parquet, quelles affirmations sont correctes ?</a></li>
+  <li><a href="#quelles-propositions-sont-correctes-à-propos-de-la-requête-ci-dessus" id="toc-quelles-propositions-sont-correctes-à-propos-de-la-requête-ci-dessus" class="nav-link" data-scroll-target="#quelles-propositions-sont-correctes-à-propos-de-la-requête-ci-dessus"><span class="header-section-number">2.9</span> Quelles propositions sont correctes à propos de la requête ci-dessus ?</a></li>
   </ul></li>
-  <li><a href="#exercice" id="toc-exercice" class="nav-link" data-scroll-target="#exercice"><span class="header-section-number">3</span> Exercice</a>
+  <li><a href="#requêtes-sql-7-points" id="toc-requêtes-sql-7-points" class="nav-link" data-scroll-target="#requêtes-sql-7-points"><span class="header-section-number">3</span> Requêtes SQL (7 points)</a>
   <ul class="collapse">
-  <li><a href="#exploration-des-tables" id="toc-exploration-des-tables" class="nav-link" data-scroll-target="#exploration-des-tables"><span class="header-section-number">3.1</span> Exploration des tables</a></li>
-  <li><a href="#place-aux-artistes" id="toc-place-aux-artistes" class="nav-link" data-scroll-target="#place-aux-artistes"><span class="header-section-number">3.2</span> Place aux artistes</a></li>
-  <li><a href="#créez-votre-playlist" id="toc-créez-votre-playlist" class="nav-link" data-scroll-target="#créez-votre-playlist"><span class="header-section-number">3.3</span> Créez votre playlist</a></li>
-  <li><a href="#votez-pour-la-meilleure-playlist" id="toc-votez-pour-la-meilleure-playlist" class="nav-link" data-scroll-target="#votez-pour-la-meilleure-playlist"><span class="header-section-number">3.4</span> Votez pour la meilleure playlist</a></li>
-  <li><a href="#im-with-u" id="toc-im-with-u" class="nav-link" data-scroll-target="#im-with-u"><span class="header-section-number">3.5</span> I’m WITH u</a></li>
+  <li><a href="#questions-préliminaires" id="toc-questions-préliminaires" class="nav-link" data-scroll-target="#questions-préliminaires"><span class="header-section-number">3.1</span> Questions préliminaires</a></li>
+  <li><a href="#requêtes" id="toc-requêtes" class="nav-link" data-scroll-target="#requêtes"><span class="header-section-number">3.2</span> Requêtes</a></li>
   </ul></li>
-  <li><a href="#arrêtez-vos-services" id="toc-arrêtez-vos-services" class="nav-link" data-scroll-target="#arrêtez-vos-services">Arrêtez vos services</a></li>
+  <li><a href="#modélisation-3-points" id="toc-modélisation-3-points" class="nav-link" data-scroll-target="#modélisation-3-points"><span class="header-section-number">4</span> Modélisation (3 points)</a>
+  <ul class="collapse">
+  <li><a href="#conception-de-la-base-de-données" id="toc-conception-de-la-base-de-données" class="nav-link" data-scroll-target="#conception-de-la-base-de-données"><span class="header-section-number">4.1</span> Conception de la base de données</a></li>
+  </ul></li>
   </ul>
-</nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="bdr-2025.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li></ul></div></nav>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -483,25 +489,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Discographie 🎵</h1>
+<h1 class="title">Examen final : Bases de données relationnelles</h1>
+<p class="subtitle lead">ENSAI 1A UE3</p>
 </div>
 
-<div>
-  <div class="description">
-    TP3
-  </div>
-</div>
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Ludovic Deneuville </p>
-          </div>
-  </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">January 5, 2026</p>
+    </div>
+  </div>
   
     
   </div>
@@ -511,376 +513,240 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="introduction" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="introduction">Introduction</h2>
-<div class="callout callout-style-default callout-important callout-titled">
+<section id="instructions" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="instructions">Instructions</h2>
+<ul>
+<li>Examen sur papier</li>
+<li>Durée : 2h</li>
+<li>Sans documents</li>
+<li>Sans calculatrice</li>
+</ul>
+<div class="callout callout-style-default callout-important callout-titled" title="À lire avant de commencer">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Important
+<span class="screen-reader-only">Important</span>À lire avant de commencer
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <ul>
-<li>Écrivez des requêtes jolies !</li>
-<li>À la fin du TP, exportez ou copiez vos requêtes dans un fichier de votre VM ou machine personnelle</li>
+<li>Les exercices peuvent être traités dans l’ordre de votre choix.</li>
+<li>Le sujet vous paraîtra peut-être un peu long. Si vous bloquez sur une question, passez rapidement à la suivante.</li>
+<li>Dans chaque exercice, les questions ne sont pas forcément de difficulté croissante.</li>
+<li>Sauf mention contraire, les différentes questions attendent des <u>réponses courtes</u>.</li>
+<li>Respectez scrupuleusement les consignes. Cependant, si une question ne vous semble pas claire, notez sur votre copie la manière dont vous l’avez comprise et traitée.</li>
+<li>Veuillez respecter les règles de base du langage et les bonnes pratiques (casse, mots-clés, ordre et indentation). Vous serez pénalisés si vos requêtes SQL ne respectent pas le formalisme donné en cours et en TP.</li>
+<li>Vous répondrez au <strong>QCM</strong> sur votre copie d’examen en recopiant simplement le numéro de la question ainsi que les réponses choisies. Aucune justification n’est attendue.</li>
 </ul>
 </div>
 </div>
-<p>Les notions vues dans ce TP :</p>
-<ul>
-<li>agrégations</li>
-<li>jointures</li>
-<li>insertion de données</li>
-<li>utilisation de séquence</li>
-<li>bonus : CTE (vu au dernier cours)</li>
-</ul>
+<div style="page-break-after: always;"></div>
 </section>
-<section id="lancement-des-services" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="lancement-des-services"><span class="header-section-number">1</span> Lancement des services</h2>
-<p>Pour plus de détails, allez dans l’onglet <a href="../../doc/outils/datalab.html" target="_blank">Datalab</a>.</p>
-<ul class="task-list">
-<li><label><input type="checkbox">Connectez-vous à un Datalab</label></li>
-<li><label><input type="checkbox">Lancez un service <strong>PostgreSQL</strong></label></li>
-<li><label><input type="checkbox">Lancez un service <strong>cloudBeaver</strong></label>
-<ul>
-<li>ouvrez ce service</li>
-<li>vérifiez que vous êtes connectés à la base de données PostgreSQL</li>
-</ul></li>
-</ul>
-</section>
-<section id="les-données" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="les-données"><span class="header-section-number">2</span> Les données</h2>
-<p>Le thème du jour sera la musique <span class="emoji" data-emoji="musical_note">🎵</span> <span class="emoji" data-emoji="guitar">🎸</span> <span class="emoji" data-emoji="trumpet">🎺</span></p>
-<section id="chargez-les-données" class="level3" data-number="2.1">
-<h3 data-number="2.1" class="anchored" data-anchor-id="chargez-les-données"><span class="header-section-number">2.1</span> Chargez les données</h3>
-<ul class="task-list">
-<li><label><input type="checkbox">Copiez le contenu de ces 2 scripts sql</label>
-<ul>
-<li><a href="./data/tp3-create-tables.sql" target="_blank">création des tables</a></li>
-<li><a href="./data/tp3-pop-tables.sql" target="_blank">insertion des données</a></li>
-</ul></li>
-<li><label><input type="checkbox">Collez-les dans la fenêtre SQL de CloudBeaver</label></li>
-<li><label><input type="checkbox">Exécutez les scripts</label>
-<ul>
-<li>Cliquez sur la petite icone sous les triangles oranges qui ressemble à <span class="emoji" data-emoji="scroll">📜</span></li>
-<li>raccourci (ALT + X)</li>
-</ul></li>
-</ul>
-</section>
-<section id="description" class="level3" data-number="2.2">
-<h3 data-number="2.2" class="anchored" data-anchor-id="description"><span class="header-section-number">2.2</span> Description</h3>
-<p>Les tables sont les suivantes :</p>
-<ul>
-<li><strong>artiste</strong>(<u>id_artiste</u>, nom, code_pays, date_naissance, actif)</li>
-<li><strong>album</strong>(<u>id_album</u>, titre, annee, #id_artiste)</li>
-<li><strong>chanson</strong>(<u>id_chanson</u>, #id_artiste_principal, titre, duree, #id_album, annee)</li>
-<li><strong>playlist</strong>(<u>id_playlist</u>, nom, date_creation, description)</li>
-<li><strong>playlist_chanson</strong>(<u>#id_playlist, #id_chanson</u>, ordre, date_ajout)</li>
-</ul>
-</section>
-<section id="modèle-de-données" class="level3" data-number="2.3">
-<h3 data-number="2.3" class="anchored" data-anchor-id="modèle-de-données"><span class="header-section-number">2.3</span> Modèle de données</h3>
-<p><a href="./data/tp3-uml.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="./data/tp3-uml.PNG" class="img-fluid"></a></p>
-</section>
-</section>
-<section id="exercice" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="exercice"><span class="header-section-number">3</span> Exercice</h2>
-<section id="exploration-des-tables" class="level3" data-number="3.1">
-<h3 data-number="3.1" class="anchored" data-anchor-id="exploration-des-tables"><span class="header-section-number">3.1</span> Exploration des tables</h3>
-<p>Lorsque vous prenez en main une base de données, la première chose à faire est de regarder ce que contiennent les tables.</p>
-<ul class="task-list">
-<li><label><input type="checkbox">Listez toutes les chansons</label></li>
-<li><label><input type="checkbox">Affichez les colonnes <em>titre</em> et <em>année</em> ainsi que le <em>nom de l’artiste principal</em></label></li>
-<li><label><input type="checkbox">Ordonnez par nom d’artiste, puis par titre</label></li>
-<li><label><input type="checkbox">Ajoutez le titre de l’album <u>si celui-ci est précisé</u></label></li>
-<li><label><input type="checkbox">Ajoutez le nom de l’artiste de l’album</label></li>
-<li><label><input type="checkbox">Est-ce qu’il y a des chansons où il y a une différence entre :</label>
-<ul>
-<li>l’artiste principal de la chanson</li>
-<li>l’artiste de l’album qui contient cette chanson</li>
-</ul></li>
-</ul>
-<p>Faisons quelques statistiques descriptives.</p>
-<ul class="task-list">
-<li><label><input type="checkbox">Quelle sont les durées minimum, maximum et moyenne des chansons</label></li>
-<li><label><input type="checkbox">Affichez le nombre de chansons par année</label>
-<ul>
-<li>ordonnez par nombre de chansons décroissant</li>
-</ul></li>
-<li><label><input type="checkbox">Quelles sont les années avec au moins 10 chansons</label></li>
-<li><label><input type="checkbox">Complétez la dernière requête en ajoutant la durée moyenne des chansons pour chaque année</label></li>
-</ul>
-<p>Est-ce qu’il y a plusieurs chansons ayant le même titre ?</p>
-<ul class="task-list">
-<li><label><input type="checkbox">Pour chaque titre de chanson, comptez le nombre d’occurences</label></li>
-<li><label><input type="checkbox">Est-ce qu’il y a des titres de chansons présents au moins deux fois ?</label></li>
-<li><label><input type="checkbox">Est-ce qu’il y a des chansons en doublon ?</label>
-<ul>
-<li>i.e.&nbsp;même titre et même artiste</li>
-</ul></li>
-</ul>
-<p>Si vous en trouvez une, essayez de la supprimer. À votre avis, pourquoi cela ne fonctionne pas ?</p>
-<ul class="task-list">
-<li><label><input type="checkbox">Créez une vue <em>titre_frequent</em> listant les titres des chansons présents au moins deux fois ?</label></li>
-<li><label><input type="checkbox">Pour ces titres, affichez tous les détails des chansons, ainsi que l’artiste principal</label>
-<ul>
-<li>triez par titre</li>
-</ul></li>
-</ul>
-</section>
-<section id="place-aux-artistes" class="level3" data-number="3.2">
-<h3 data-number="3.2" class="anchored" data-anchor-id="place-aux-artistes"><span class="header-section-number">3.2</span> Place aux artistes</h3>
-<ul class="task-list">
-<li><label><input type="checkbox">Listez les noms d’artistes ainsi que les titres de leurs chansons</label></li>
-<li><label><input type="checkbox">Comptez le nombre de chansons par artiste</label></li>
-<li><label><input type="checkbox">Classez par ordre décroissant</label></li>
-<li><label><input type="checkbox">Conservez uniquement les artistes ayant 20 chansons ou plus</label></li>
-</ul>
-<p>Il y a des artistes solo et des groupes. Pour les groupe la date de naissance ne devrait pas être renseignée.</p>
-<ul class="task-list">
-<li><label><input type="checkbox">Mettez à jour la table pour supprimer les dates de naissance des groupes</label>
-<ul>
-<li><span class="emoji" data-emoji="scream">😱</span> si vous avez fait une bétise, pas de panique, il faut relancer les deux scripts du début de TP (create and pop)</li>
-</ul></li>
-<li><label><input type="checkbox">Quel est le plus viel artiste solo en activité ?</label></li>
-</ul>
-<p>Interessons nous maintenant aux pays des artistes.</p>
-<ul class="task-list">
-<li><label><input type="checkbox">Comptez le nombre d’artistes par pays</label></li>
-</ul>
-</section>
-<section id="créez-votre-playlist" class="level3" data-number="3.3">
-<h3 data-number="3.3" class="anchored" data-anchor-id="créez-votre-playlist"><span class="header-section-number">3.3</span> Créez votre playlist</h3>
-<ul class="task-list">
-<li><label><input type="checkbox">Insérez une nouvelle ligne dans la table <em>playlist</em></label></li>
-<li><label><input type="checkbox">Ajoutez 5 chansons dans votre playlist</label></li>
-</ul>
-<div class="callout callout-style-default callout-tip callout-titled">
+<section id="questions-à-réponses-courtes-2-points" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="questions-à-réponses-courtes-2-points"><span class="header-section-number">1</span> Questions à réponses courtes (2 points)</h2>
+<div class="callout callout-style-default callout-note callout-titled" title="Instructions">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Tip
+<span class="screen-reader-only">Note</span>Instructions
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Aucune de ces chansons ne correspond à vos goût musicaux…</p>
-<p>Vous êtes vraiment sûr ?</p>
-<p>Allez un petit effort, il y a des chansons et des artistes très sympas.</p>
+<p>Répondez brièvement aux questions suivantes.</p>
 </div>
 </div>
-<p>Nous allons maintenant ajouter à votre playlist toutes les chansons de l’album <em>Californian Soil</em>.</p>
-<p>Pour créer votre requête d’insertion, vous allez avoir besoin des données suivantes :</p>
-<ul>
-<li><em>id_playlist</em> : vous pouvez soit :
-<ul>
-<li>insérer la valeur “en dur”</li>
-<li>utiliser <code>CURRVAL('playlist_id_playlist_seq')</code> pour obtenir la dernière valeur de <em>id_playlist</em> i.e.&nbsp;celui de la playlist que vous venez de créer</li>
-</ul></li>
-<li><em>id_chanson</em> : il va falloir une reqûete pour les récupérer</li>
-<li><em>ordre</em> : vous allez créer et utiliser une séquence</li>
-<li><em>date_ajout</em> : vous utiliserez simplement : <code>CURRENT_DATE</code></li>
-</ul>
-<hr>
-<ul class="task-list">
-<li><label><input type="checkbox">Créez une séquence nommée <em>seq_playlist_ordre</em></label>
-<ul>
-<li>comme vous avez déjà inséré 5 chansons, les valeurs de la colonne ordre de 1 à 5 sont normalement déjà prises</li>
-<li>commencez votre séquence à la valeur 6</li>
-</ul></li>
-<li><label><input type="checkbox">Listez toutes les chansons de l’album <em>Californian Soil</em></label></li>
-<li><label><input type="checkbox">Insérer dans votre playlist toutes les chansons de l’album <em>Californian Soil</em></label></li>
-</ul>
-<div class="callout callout-style-default callout-tip callout-titled" title="Un peu d'aide">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Un peu d’aide
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-3" class="callout-3-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<p>Pour trouver un peu d’inspiration, un exemple d’INSERT en utilisant un SELECT :</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">INSERT</span> <span class="kw">INTO</span> joueuse_copy(nom, prenom, numero, date_creation)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>       <span class="st">'pierre'</span>,</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>       nextval(<span class="st">'seq_numero'</span>),</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>       <span class="fu">CURRENT_DATE</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> joueuse;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</div>
-</div>
-<p>Est-ce que vous pouvez ajouter plusieurs fois la même chanson dans une playlist ? Pourquoi ?</p>
-<p>Comment pourrait-t-on faire pour s’affranchir de cette contrainte ?</p>
+<ol type="a">
+<li>Citez au moins cinq outils ou logiciels utilisés en TP.</li>
+<li>Vous disposez d’une table <code>personne(id_personne, nom, prenom, age)</code>. Vous devez stocker la liste des compétences de chaque personne. Comment faites-vous ?</li>
+<li>Qu’est-ce qu’un snapshot ?</li>
+<li>À quoi sert un schéma ?</li>
+<li>Citez 6 opérateurs de l’algèbre relationnelle.</li>
+</ol>
+<div style="page-break-after: always;"></div>
 </section>
-<section id="votez-pour-la-meilleure-playlist" class="level3" data-number="3.4">
-<h3 data-number="3.4" class="anchored" data-anchor-id="votez-pour-la-meilleure-playlist"><span class="header-section-number">3.4</span> Votez pour la meilleure playlist</h3>
-<p>Interessons-nous maintenant aux playlists.</p>
-<ul class="task-list">
-<li><label><input type="checkbox">Affichez les playlists</label></li>
-<li><label><input type="checkbox">Ajoutez les titres des chansons de la playlist</label>
-<ul>
-<li>Colonnes à afficher : nom de la playlist, ordre, titre de la chanson</li>
-<li>Classez par noms de playlists, puis ordre</li>
-</ul></li>
-<li><label><input type="checkbox">Ajoutez les noms des artistes</label></li>
-</ul>
-<p>Vous remarquez qu’à l’affichage vous avez deux colonnes appelées “nom”. Pour faire la différence, vous allez modifier l’affichage de ces colonnes.</p>
-<ul class="task-list">
-<li><label><input type="checkbox">Modifiez le <em>SELECT</em> pour afficher les entêtes de colonnes <em>Nom de la playlist</em>, <em>Titre de la chanson</em> et <em>Nom de l’artiste</em></label></li>
-</ul>
-<hr>
-<ul class="task-list">
-<li><label><input type="checkbox">Quelle playlist a le plus de chansons ?</label></li>
-<li><label><input type="checkbox">Quelle playlist dure le plus longtemps ?</label></li>
-</ul>
-<p>Nous allons maintenant rechercher les artistes mal-aimés i.e.&nbsp;ceux qui ne sont dans aucune playlist.</p>
-<p>Procédons par étape:</p>
-<ul class="task-list">
-<li><label><input type="checkbox">Listez les artistes présents dans les playlists</label></li>
-<li><label><input type="checkbox">Ensuite, gardez uniquement les <em>id_artiste</em> sans doublons</label></li>
-<li><label><input type="checkbox">Affichez les artistes qui ne sont présents dans aucune playlist</label>
-<ul>
-<li>en utilisant <code>NOT IN</code> et une sous-requête</li>
-<li>conservez uniquement les <em>id_artiste</em> qui ne sont pas dans la requête précédente</li>
-</ul></li>
-<li><label><input type="checkbox">Même question avec <code>NOT EXISTS</code></label>
-<ul>
-<li>la syntaxe est un peu moins intuitive mais la requête est plus optimisée</li>
-</ul></li>
-</ul>
-<p>Concentrons-nous maintenant sur les artistes et les chansons les plus populaires.</p>
-<p>Vous avez écrit précédemment une requête listant les playlists avec les artistes et les chansons. Repartez de cette requête.</p>
-<ul class="task-list">
-<li><label><input type="checkbox">Comptez combien de fois chaque chanson apparait dans une playlist</label>
-<ul>
-<li>affichez le titre de la chanson, le nom de l’artiste, et le nombre de playlists</li>
-<li>ordonnez par nombre de playlists décroissant</li>
-</ul></li>
-<li><label><input type="checkbox">Au lieu de faire un simple <strong>JOIN</strong> avec la table <em>playlist_chanson</em>, faites un <strong>LEFT JOIN</strong></label>
-<ul>
-<li>Est-ce que « Tu feras la différence. Ton coeur prend des vacances. Il danse avec les loups. » ?</li>
-</ul></li>
-<li><label><input type="checkbox">Conservez uniquement celles qui apparaissent dans au moins 3 playlists</label></li>
-<li><label><input type="checkbox">Combien y-a-t-il de chansons dans toutes les playlists</label></li>
-<li><label><input type="checkbox">Combien y-a-t-il de chansons différentes dans toutes les playlists</label></li>
-</ul>
-</section>
-<section id="im-with-u" class="level3" data-number="3.5">
-<h3 data-number="3.5" class="anchored" data-anchor-id="im-with-u"><span class="header-section-number">3.5</span> I’m WITH u</h3>
-<p>Les CTE seront évoquées au dernier cours. Cela parait compliqué à première vue mais le principe est très simple.</p>
-<div class="callout callout-style-default callout-note callout-titled" title="CTE">
+<section id="qcm-8-points" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="qcm-8-points"><span class="header-section-number">2</span> QCM (8 points)</h2>
+<div class="callout callout-style-default callout-note callout-titled" title="Instructions">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>CTE
+<span class="screen-reader-only">Note</span>Instructions
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Une CTE (Common Table Expression) est une table temporaire nommée définie au début d’une requête avec le mot-clé <strong>WITH</strong>.</p>
-<p>À quoi ça sert ?</p>
-<ul>
-<li>Rendre une requête plus lisible (au lieu d’imbriquer des sous-requêtes)</li>
-<li>Réutiliser un même sous-résultat plusieurs fois</li>
-<li>Servir de base à des requêtes récursives</li>
-</ul>
+<p>Chaque question peut avoir une ou plusieurs réponses correctes (au minimum une réponse est correcte).</p>
+<p>Réponse correcte : <strong>1 point</strong>.<br>
+Réponse partiellement correcte : <strong>ratio</strong>.<br>
+Si présence d’une réponse fausse : <strong>0</strong>.</p>
 </div>
 </div>
-<p>Que fait cette requête ?</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="kw">DISTINCT</span> <span class="kw">ON</span> (code_pays) code_pays, </span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>       nom, </span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>       date_naissance</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> music.artiste</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> <span class="kw">NOT</span> groupe</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a> <span class="kw">ORDER</span> <span class="kw">BY</span> code_pays, </span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>          date_naissance <span class="kw">ASC</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Nous allons ici construire pas à pas une requête donnant le même résultat en utilisant une CTE.</p>
-<ul class="task-list">
-<li><label><input type="checkbox">Listez les artistes qui ne sont pas des groupes</label></li>
-<li><label><input type="checkbox">Affichez pour chaque pays, la plus ancienne date de naissance (celle du plus vieil artiste)</label></li>
-</ul>
-<p>Nous souhaitons maintenant récupérer le nom du plus viel artiste de chaque pays.</p>
-<p>L’idée pour obtenir ce nom :</p>
-<ul>
-<li>stocker le résultat de notre dernière requête dans une table temporaire <em>viel_artiste_pays</em></li>
-<li>joindre cette table à la table <em>artiste</em> via les colonnes <em>pays</em> et <em>date_naissance</em></li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">WITH</span> viel_artiste_pays <span class="kw">AS</span> (</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="op">..</span>.</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">..</span>.</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> <span class="op">..</span>.</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> viel_artiste_pays pv <span class="kw">ON</span> <span class="op">..</span>.</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="op">..</span>.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<ul class="task-list">
-<li><label><input type="checkbox">En complétant la requête à trous ci-dessus, donnez pour chaque pays l’artiste le plus vieux</label></li>
-</ul>
-<div class="callout callout-style-default callout-tip callout-titled" title="Autre exemple">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Autre exemple
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Pour vous aider, voici un autre exemple.</p>
-<p>Si l’on veut les noms des artistes qui sont les seuls à représenter leur pays :</p>
-<ul>
-<li>nous commençons par lister les pays avec un seul artiste</li>
-<li>nous joignons avec la table <em>artiste</em> pour récupérer dans un second temps les noms</li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">WITH</span> artiste_seul_dans_pays <span class="kw">AS</span> (</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> code_pays,</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> nb_artistes</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> artiste</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a> <span class="kw">GROUP</span> <span class="kw">BY</span> code_pays</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="kw">HAVING</span> <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="op">=</span> <span class="dv">1</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> a.<span class="op">*</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> artiste a</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> artiste_seul_dans_pays n <span class="kw">ON</span> a.code_pays <span class="op">=</span> n.code_pays;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</div>
-<div class="callout callout-style-default callout-tip callout-titled" title="Solutions">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Solutions
-</div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
-</div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
-<div class="callout-body-container callout-body">
-<ul>
-<li><a href="./correction/tp3.sql">Correction TP3</a></li>
-</ul>
-</div>
-</div>
-</div>
+<section id="dans-une-base-de-données-relationnelle-une-clé-primaire" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="dans-une-base-de-données-relationnelle-une-clé-primaire"><span class="header-section-number">2.1</span> Dans une base de données relationnelle, une clé primaire :</h3>
+<ol type="a">
+<li>Peut être constituée de plusieurs colonnes.</li>
+<li>Doit toujours être un nombre entier.</li>
+<li>Est automatiquement indexée par le SGBD.</li>
+<li>Contient uniquement des valeurs non nulles.</li>
+<li>Identifie de manière unique chaque ligne d’une table.</li>
+</ol>
+</section>
+<section id="à-propos-des-clés-étrangères-quelles-affirmations-sont-correctes" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="à-propos-des-clés-étrangères-quelles-affirmations-sont-correctes"><span class="header-section-number">2.2</span> À propos des clés étrangères, quelles affirmations sont correctes ?</h3>
+<ol type="a">
+<li>Son utilisation est obligatoire pour représenter une relation entre deux tables.</li>
+<li>Elle peut référencer la clé primaire de sa propre table.</li>
+<li>Elle empêche l’insertion d’une ligne si la valeur référencée n’existe pas dans la table cible.</li>
+<li>Dans une association 1-n, elle peut être positionnée au choix dans l’une des deux tables.</li>
+</ol>
+</section>
+<section id="pour-lister-les-joueuses-dont-le-elo-est-supérieur-à-la-moyenne-je-peux-utiliser" class="level3" data-number="2.3">
+<h3 data-number="2.3" class="anchored" data-anchor-id="pour-lister-les-joueuses-dont-le-elo-est-supérieur-à-la-moyenne-je-peux-utiliser"><span class="header-section-number">2.3</span> Pour lister les joueuses dont le Elo est supérieur à la moyenne, je peux utiliser :</h3>
+<ol type="a">
+<li>La condition <code>WHERE elo &gt; AVG(elo)</code>.</li>
+<li>Une sous-requête dans la clause <code>WHERE</code> pour comparer le Elo d’une joueuse à la moyenne.</li>
+<li>Une CTE pour calculer la moyenne Elo, puis filtrer les joueuses en comparant leur Elo à la valeur calculée.</li>
+<li>Une clause <code>GROUP BY</code> pour calculer la moyenne Elo, puis sélectionner uniquement les joueuses dont le Elo est supérieur à cette moyenne.</li>
+</ol>
+</section>
+<section id="un-index" class="level3" data-number="2.4">
+<h3 data-number="2.4" class="anchored" data-anchor-id="un-index"><span class="header-section-number">2.4</span> Un index :</h3>
+<ol type="a">
+<li>Permet d’accélérer les recherches sur une ou plusieurs colonnes d’une table.</li>
+<li>Améliore les performances de toutes les opérations sur une table.</li>
+<li>Prend de la place sur le disque.</li>
+<li>Est particulièrement efficace pour les tables très petites.</li>
+<li>Garantit l’unicité des valeurs d’une colonne.</li>
+</ol>
+</section>
+<section id="quelles-propositions-sont-correctes-à-propos-des-vues" class="level3" data-number="2.5">
+<h3 data-number="2.5" class="anchored" data-anchor-id="quelles-propositions-sont-correctes-à-propos-des-vues"><span class="header-section-number">2.5</span> Quelles propositions sont correctes à propos des vues ?</h3>
+<ol type="a">
+<li>Une vue stocke physiquement les résultats de la requête SQL dans la base de données.</li>
+<li>Supprimer une vue supprime également les données de la table sous-jacente.</li>
+<li>Les performances peuvent être affectées par l’utilisation de vues.</li>
+<li>Une vue peut être utilisée pour restreindre l’accès à certaines lignes ou colonnes d’une table.</li>
+</ol>
+</section>
+<section id="quelles-syntaxes-permettent-correctement-de-concaténer-nom-et-prenom-dans-une-requête-postgresql" class="level3" data-number="2.6">
+<h3 data-number="2.6" class="anchored" data-anchor-id="quelles-syntaxes-permettent-correctement-de-concaténer-nom-et-prenom-dans-une-requête-postgresql"><span class="header-section-number">2.6</span> Quelles syntaxes permettent correctement de concaténer <code>nom</code> et <code>prenom</code> dans une requête PostgreSQL ?</h3>
+<ol type="a">
+<li><code>SELECT nom + ' ' + prenom FROM echecs.joueuse;</code></li>
+<li><code>SELECT nom || ' ' || prenom FROM echecs.joueuse;</code></li>
+<li><code>SELECT CONCAT(nom, ' ', prenom) FROM echecs.joueuse;</code></li>
+<li><code>SELECT CONCAT_WS(' ', nom, prenom) FROM echecs.joueuse;</code></li>
+<li><code>SELECT nom &amp;&amp; prenom FROM echecs.joueuse;</code></li>
+</ol>
+</section>
+<section id="à-propos-de-la-commande-sql-delete-from-echecs.joueuse" class="level3" data-number="2.7">
+<h3 data-number="2.7" class="anchored" data-anchor-id="à-propos-de-la-commande-sql-delete-from-echecs.joueuse"><span class="header-section-number">2.7</span> À propos de la commande SQL <code>DELETE FROM echecs.joueuse;</code> :</h3>
+<ol type="a">
+<li>La requête supprime toutes les lignes de la table <code>echecs.joueuse</code>.</li>
+<li>La requête supprime la table <code>echecs.joueuse</code>.</li>
+<li>La requête peut être annulée par un <code>ROLLBACK</code> si elle est exécutée dans une transaction non validée.</li>
+<li>Les contraintes de clé étrangère peuvent empêcher l’exécution de cette requête.</li>
+<li>Après cette requête, la structure de la table reste intacte.</li>
+<li>La commande déclenche les triggers de suppression définis sur la table, s’il y en a.</li>
+</ol>
+</section>
+<section id="à-propos-du-format-de-fichier-parquet-quelles-affirmations-sont-correctes" class="level3" data-number="2.8">
+<h3 data-number="2.8" class="anchored" data-anchor-id="à-propos-du-format-de-fichier-parquet-quelles-affirmations-sont-correctes"><span class="header-section-number">2.8</span> À propos du format de fichier Parquet, quelles affirmations sont correctes ?</h3>
+<ol type="a">
+<li>Parquet est un format de stockage en colonnes, optimisé pour les requêtes analytiques.</li>
+<li>Parquet stocke les données ligne par ligne, ce qui permet des insertions rapides.</li>
+<li>Parquet utilise des techniques de compression et d’encodage pour réduire la taille des fichiers.</li>
+<li>Les fichiers Parquet sont lisibles directement par un humain, comme un fichier CSV.</li>
+<li>Parquet peut stocker des statistiques sur les colonnes, comme des minimums et maximums, pour optimiser les lectures.</li>
+</ol>
+<p><br>
+</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> c.nom      <span class="kw">AS</span> nom_club,</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">COUNT</span>(<span class="dv">1</span>)   <span class="kw">AS</span> nb_joueuses,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">AVG</span>(j.elo) <span class="kw">AS</span> moyenne_elo</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse j</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> echecs.club c <span class="kw">USING</span>(id_club)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> j.elo <span class="op">&gt;</span> <span class="dv">2000</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a> <span class="kw">GROUP</span> <span class="kw">BY</span> c.nom</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="kw">HAVING</span> <span class="fu">AVG</span>(j.elo) <span class="op">&gt;</span> <span class="dv">2200</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="quelles-propositions-sont-correctes-à-propos-de-la-requête-ci-dessus" class="level3" data-number="2.9">
+<h3 data-number="2.9" class="anchored" data-anchor-id="quelles-propositions-sont-correctes-à-propos-de-la-requête-ci-dessus"><span class="header-section-number">2.9</span> Quelles propositions sont correctes à propos de la requête ci-dessus ?</h3>
+<ol type="a">
+<li>La clause <code>WHERE</code> filtre les joueuses ayant un Elo strictement supérieur à 2000 avant l’agrégation.</li>
+<li>La clause <code>HAVING</code> filtre les clubs dont la moyenne des Elo est strictement supérieure à 2200.</li>
+<li>Le nombre de joueuses compte uniquement les joueuses avec Elo &gt; 2000.</li>
+<li>La moyenne Elo est calculée sur toutes les joueuses du club, même celles avec Elo ≤ 2000.</li>
+<li>Si un club n’a aucune joueuse avec Elo &gt; 2000, il ne sera pas présent dans le résultat.</li>
+</ol>
+<div style="page-break-after: always;"></div>
 </section>
 </section>
-<section id="arrêtez-vos-services" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="arrêtez-vos-services">Arrêtez vos services</h2>
-<p>C’est la fin du TP, vous pouvez maintenant sauvegarder votre travail et libérer les ressources réservées :</p>
-<ul class="task-list">
-<li><label><input type="checkbox">Copiez-collez vos scripts SQL sur votre machine</label></li>
-<li><label><input type="checkbox">Arrêter les services du Datalab</label></li>
+<section id="requêtes-sql-7-points" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="requêtes-sql-7-points"><span class="header-section-number">3</span> Requêtes SQL (7 points)</h2>
+<p><a href="img/bdr-2025-uml.PNG" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="img/bdr-2025-uml.PNG" class="img-fluid" style="width:80.0%"></a></p>
+<section id="questions-préliminaires" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="questions-préliminaires"><span class="header-section-number">3.1</span> Questions préliminaires</h3>
+<ol type="i">
+<li><p>Quel est l’intérêt de la table <code>categorie_livre</code> ?</p></li>
+<li><p>Est-ce qu’un livre peut avoir plusieurs auteurs ?</p></li>
+<li><p>Comment feriez-vous pour vous assurer que le nombre de pages soit un entier positif ?</p></li>
+</ol>
+</section>
+<section id="requêtes" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="requêtes"><span class="header-section-number">3.2</span> Requêtes</h3>
+<p>Écrivez les requêtes permettant de répondre aux questions suivantes.</p>
+<ol type="a">
+<li>Listez les noms, prénoms et dates de naissance des auteurs, classés par nom puis par prénom.</li>
+<li>Listez les titres des livres de 2012 de 500 pages ou plus, ainsi que les nom et prénom de leur auteur.</li>
+<li>Quels sont les titres des livres qui n’ont jamais été empruntés ?</li>
+<li>Pour les emprunts en cours, affichez le titre du livre, le nom de l’auteur et le nom de l’étudiant qui l’a emprunté.</li>
+<li>Quel est le nombre de livres par nom de catégorie ?</li>
+<li>Donnez la liste des étudiants de 1A qui ont emprunté 15 livres ou plus.</li>
+<li>Supprimez les étudiants dont le mail est invalide (c’est-à-dire ne respectant pas le motif <code>xx@yy.zz</code> avec <code>xx</code>, <code>yy</code> et <code>zz</code> non vides). Que se passe-t-il si ces étudiants ont déjà emprunté des livres ?</li>
+</ol>
+<div style="page-break-after: always;"></div>
+</section>
+</section>
+<section id="modélisation-3-points" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="modélisation-3-points"><span class="header-section-number">4</span> Modélisation (3 points)</h2>
+<p>Une entreprise souhaite mettre en place un système de gestion des congés de ses employés. L’objectif est de permettre :</p>
+<ul>
+<li>aux employés d’enregistrer leurs demandes de congés ;</li>
+<li>aux responsables hiérarchiques directs de valider ou refuser ces demandes ;</li>
+<li>aux responsables hiérarchiques de déléguer temporairement la validation à un autre employé en cas d’absence.</li>
 </ul>
+<p>Les congés peuvent être de différents types (congés annuels, RTT, récupération, garde d’enfant malade, etc.).</p>
+<p>Chaque demande de congé possède :</p>
+<ul>
+<li>un type</li>
+<li>une date de début</li>
+<li>une date de fin</li>
+<li>un statut (validé, refusé, en attente)</li>
+<li>un motif de rejet le cas échéant</li>
+</ul>
+<p>Le système doit permettre d’identifier la personne ayant validé (ou refusé) chaque demande.</p>
+<p>Chaque employé (nom, prénom) a un supérieur hiérarchique direct chargé de valider ses demandes de congés. Seule la personne dirigeant l’entreprise n’a pas de supérieur.</p>
+<p>Un responsable peut déléguer temporairement la validation des congés de son équipe à un autre employé, par exemple en cas d’absence.</p>
+<blockquote class="blockquote">
+<p>Il n’est pas demandé de vérifier si l’employé dispose d’un solde de congés suffisant.</p>
+</blockquote>
+<section id="conception-de-la-base-de-données" class="level3" data-number="4.1">
+<h3 data-number="4.1" class="anchored" data-anchor-id="conception-de-la-base-de-données"><span class="header-section-number">4.1</span> Conception de la base de données</h3>
+<p>Définissez les tables et les colonnes nécessaires, leurs relations, les clés et les cardinalités pour représenter ce système en respectant les trois premières formes normales.</p>
+<p>Vous pouvez modéliser :</p>
+<ul>
+<li>soit sous la forme d’un schéma UML ;</li>
+<li>soit en utilisant la notation relationnelle (<code>table(colonne1, colonne2, ...)</code>).</li>
+</ul>
+<p>Expliquez et commentez vos choix de conception.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

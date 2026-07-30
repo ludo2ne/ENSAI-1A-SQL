@@ -2,25 +2,66 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.26">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Ludovic Deneuville">
-<meta name="description" content="Slides">
+<meta name="dcterms.date" content="2025-01-06">
 
-<title>Formalisation des bases de données – Base de données</title>
+<title>Examen final : Bases de données relationnelles – Base de données</title>
 <style>
-code{white-space: pre-wrap;}
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -34,17 +75,21 @@ ul.task-list li input[type="checkbox"] {
 <meta name="quarto:offset" content="../../">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b758ccaa5987ceb1b75504551e579abf.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-b66d9f3da4d84aca26cc7cc1c94b0445.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-d3daa1d1ef55350d6f5c3e6cec97cbbd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-8b0b5ce2d45c65f90787eecfe492c3d4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-88b07732f5075a2b8381a7695c30467d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-8b0b5ce2d45c65f90787eecfe492c3d4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
+<link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
+<link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -72,16 +117,12 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<meta name="mermaid-theme" content="forest">
-<script src="../../site_libs/quarto-diagram/mermaid.min.js"></script>
-<script src="../../site_libs/quarto-diagram/mermaid-init.js"></script>
-<link href="../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body class="floating nav-fixed quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
+<body class="floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -223,8 +264,10 @@ ul.task-list li input[type="checkbox"] {
         changeGiscusTheme();
       }
     };
-    const authorPrefersDark = true;
+    const authorPrefersDark = false;
     const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
     let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
     // Dark / light mode switch
     window.quartoToggleColorScheme = () => {
@@ -269,35 +312,35 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-cours">    
         <li>
-    <a class="dropdown-item" href="../../doc/cours/intro.html">
+    <a class="dropdown-item" href="../../doc/cours/01-intro.html">
  <span class="dropdown-text">Introduction</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../doc/cours/bases-de-donnees.html">
+    <a class="dropdown-item" href="../../doc/cours/02-bases-de-donnees.html">
  <span class="dropdown-text">Base de données</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../doc/cours/sql-intro.html">
+    <a class="dropdown-item" href="../../doc/cours/03-sql-intro.html">
  <span class="dropdown-text">Introduction à SQL</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../doc/cours/agregations.html">
+    <a class="dropdown-item" href="../../doc/cours/04-agregations.html">
  <span class="dropdown-text">Agrégations</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../doc/cours/algebre.html">
+    <a class="dropdown-item" href="../../doc/cours/05-algebre.html">
  <span class="dropdown-text">Algèbre Relationnelle</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../doc/cours/jointures.html">
+    <a class="dropdown-item" href="../../doc/cours/06-jointures.html">
  <span class="dropdown-text">Jointures</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../doc/cours/sql-avance.html">
+    <a class="dropdown-item" href="../../doc/cours/07-sql-avance.html">
  <span class="dropdown-text">SQL avancé</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../doc/cours/formalisation.html">
+    <a class="dropdown-item" href="../../doc/cours/08-formalisation.html">
  <span class="dropdown-text">Formalisation des BDD</span></a>
   </li>  
     </ul>
@@ -369,6 +412,21 @@ ul.task-list li input[type="checkbox"] {
   </li>  
     </ul>
   </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-examens" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Examens</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-examens">    
+        <li>
+    <a class="dropdown-item" href="../../doc/examens/bdr-2024.html">
+ <span class="dropdown-text">Examen 2024</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../doc/examens/bdr-2025.html">
+ <span class="dropdown-text">Examen 2025</span></a>
+  </li>  
+    </ul>
+  </li>
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/ludo2ne/ENSAI-1A-SQL" target="_blank"> <i class="bi bi-github" role="img">
 </i> 
@@ -391,35 +449,31 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <nav id="TOC" role="doc-toc" class="toc-active">
+    <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="3">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#objectifs" id="toc-objectifs" class="nav-link active" data-scroll-target="#objectifs">Objectifs</a></li>
-  <li><a href="#dépendances-fonctionnelles" id="toc-dépendances-fonctionnelles" class="nav-link" data-scroll-target="#dépendances-fonctionnelles"><span class="header-section-number">1</span> Dépendances fonctionnelles</a>
+  <li><a href="#instructions" id="toc-instructions" class="nav-link active" data-scroll-target="#instructions">Instructions</a></li>
+  <li><a href="#questions-de-cours-3-points" id="toc-questions-de-cours-3-points" class="nav-link" data-scroll-target="#questions-de-cours-3-points"><span class="header-section-number">1</span> Questions de cours (3 points)</a></li>
+  <li><a href="#qcm-7-points" id="toc-qcm-7-points" class="nav-link" data-scroll-target="#qcm-7-points"><span class="header-section-number">2</span> QCM (7 points)</a>
   <ul class="collapse">
-  <li><a href="#les-axiomes-darmstrong" id="toc-les-axiomes-darmstrong" class="nav-link" data-scroll-target="#les-axiomes-darmstrong">Les axiomes d’Armstrong</a></li>
-  <li><a href="#règles-dérivées" id="toc-règles-dérivées" class="nav-link" data-scroll-target="#règles-dérivées">Règles dérivées</a></li>
-  <li><a href="#deux-propriétés" id="toc-deux-propriétés" class="nav-link" data-scroll-target="#deux-propriétés">Deux Propriétés</a></li>
+  <li><a href="#dans-une-base-de-données-relationnelle-une-clé-primaire" id="toc-dans-une-base-de-données-relationnelle-une-clé-primaire" class="nav-link" data-scroll-target="#dans-une-base-de-données-relationnelle-une-clé-primaire">Dans une base de données relationnelle, une clé primaire :</a></li>
+  <li><a href="#dans-une-base-de-données-relationnelle-une-clé-étrangère" id="toc-dans-une-base-de-données-relationnelle-une-clé-étrangère" class="nav-link" data-scroll-target="#dans-une-base-de-données-relationnelle-une-clé-étrangère">Dans une base de données relationnelle, une clé étrangère :</a></li>
+  <li><a href="#dans-une-commande-select-la-clause-where" id="toc-dans-une-commande-select-la-clause-where" class="nav-link" data-scroll-target="#dans-une-commande-select-la-clause-where">Dans une commande <code>SELECT</code>, la clause <code>WHERE</code> :</a></li>
+  <li><a href="#vous-disposez-de-deux-tables-client-et-commande-liées-par-le-champ-id_client.-votre-objectif-est-de-lister-tous-les-clients-ainsi-que-leur-nombre-de-commandes." id="toc-vous-disposez-de-deux-tables-client-et-commande-liées-par-le-champ-id_client.-votre-objectif-est-de-lister-tous-les-clients-ainsi-que-leur-nombre-de-commandes." class="nav-link" data-scroll-target="#vous-disposez-de-deux-tables-client-et-commande-liées-par-le-champ-id_client.-votre-objectif-est-de-lister-tous-les-clients-ainsi-que-leur-nombre-de-commandes.">Vous disposez de deux tables <code>client</code> et <code>commande</code> liées par le champ <code>id_client</code>. Votre objectif est de lister <strong>tous</strong> les clients ainsi que leur nombre de commandes.</a></li>
+  <li><a href="#une-transaction-sql-permet" id="toc-une-transaction-sql-permet" class="nav-link" data-scroll-target="#une-transaction-sql-permet">Une transaction SQL permet :</a></li>
+  <li><a href="#cette-table-respecte-t-elle-les-formes-normales" id="toc-cette-table-respecte-t-elle-les-formes-normales" class="nav-link" data-scroll-target="#cette-table-respecte-t-elle-les-formes-normales">Cette table respecte-t-elle les formes normales ?</a></li>
+  <li><a href="#quelles-propositions-sont-correctes-à-propos-des-vues" id="toc-quelles-propositions-sont-correctes-à-propos-des-vues" class="nav-link" data-scroll-target="#quelles-propositions-sont-correctes-à-propos-des-vues">Quelles propositions sont correctes à propos des vues ?</a></li>
   </ul></li>
-  <li><a href="#formes-normales" id="toc-formes-normales" class="nav-link" data-scroll-target="#formes-normales"><span class="header-section-number">2</span> Formes Normales</a>
+  <li><a href="#requêtes-sql-5-points" id="toc-requêtes-sql-5-points" class="nav-link" data-scroll-target="#requêtes-sql-5-points"><span class="header-section-number">3</span> Requêtes SQL (5 points)</a></li>
+  <li><a href="#modélisation-5-points" id="toc-modélisation-5-points" class="nav-link" data-scroll-target="#modélisation-5-points"><span class="header-section-number">4</span> Modélisation (5 points)</a>
   <ul class="collapse">
-  <li><a href="#normalisation" id="toc-normalisation" class="nav-link" data-scroll-target="#normalisation">Normalisation</a></li>
-  <li><a href="#ère-forme-normale" id="toc-ère-forme-normale" class="nav-link" data-scroll-target="#ère-forme-normale">1ère forme normale</a></li>
-  <li><a href="#e-forme-normale" id="toc-e-forme-normale" class="nav-link" data-scroll-target="#e-forme-normale">2e forme normale</a></li>
-  <li><a href="#e-forme-normale-1" id="toc-e-forme-normale-1" class="nav-link" data-scroll-target="#e-forme-normale-1">3e forme normale</a></li>
-  </ul></li>
-  <li><a href="#modélisation-uml" id="toc-modélisation-uml" class="nav-link" data-scroll-target="#modélisation-uml"><span class="header-section-number">3</span> Modélisation UML</a>
-  <ul class="collapse">
-  <li><a href="#unified-modeling-language" id="toc-unified-modeling-language" class="nav-link" data-scroll-target="#unified-modeling-language">Unified Modeling Language</a></li>
-  <li><a href="#modèles" id="toc-modèles" class="nav-link" data-scroll-target="#modèles">Modèles</a></li>
-  <li><a href="#associations-1n" id="toc-associations-1n" class="nav-link" data-scroll-target="#associations-1n">Associations 1:n</a></li>
-  <li><a href="#associations-multiples" id="toc-associations-multiples" class="nav-link" data-scroll-target="#associations-multiples">Associations multiples</a></li>
-  <li><a href="#associations-nn" id="toc-associations-nn" class="nav-link" data-scroll-target="#associations-nn">Associations n:n</a></li>
-  <li><a href="#outils" id="toc-outils" class="nav-link" data-scroll-target="#outils">Outils</a></li>
+  <li><a href="#conception-de-la-base-de-données" id="toc-conception-de-la-base-de-données" class="nav-link" data-scroll-target="#conception-de-la-base-de-données">Conception de la base de données</a></li>
+  <li><a href="#requête-sql-1" id="toc-requête-sql-1" class="nav-link" data-scroll-target="#requête-sql-1">Requête SQL 1</a></li>
+  <li><a href="#requête-sql-2" id="toc-requête-sql-2" class="nav-link" data-scroll-target="#requête-sql-2">Requête SQL 2</a></li>
   </ul></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="formalisation-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="bdr-2024.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li></ul></div></nav>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -431,14 +485,10 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Formalisation des bases de données</h1>
+<h1 class="title">Examen final : Bases de données relationnelles</h1>
+<p class="subtitle lead">ENSAI 1A UE3</p>
 </div>
 
-<div>
-  <div class="description">
-    <a href="formalisation-slides.html">Slides</a>
-  </div>
-</div>
 
 
 <div class="quarto-title-meta">
@@ -450,6 +500,12 @@ ul.task-list li input[type="checkbox"] {
           </div>
   </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">January 6, 2025</p>
+    </div>
+  </div>
   
     
   </div>
@@ -459,478 +515,272 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="objectifs" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="objectifs">Objectifs</h2>
-<p>Structurer une base de données pour qu’elle soit :</p>
+<section id="instructions" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="instructions">Instructions</h2>
 <ul>
-<li>efficace</li>
-<li>propre</li>
-<li>légère</li>
-<li>facile à maintenir</li>
+<li>Examen sur papier</li>
+<li>Durée : 2h</li>
+<li>Sans documents</li>
+<li>Sans calculatrice</li>
 </ul>
-<div class="notes">
-<ul>
-<li>pas de doublons et de redondances</li>
-<li>Moins de risques d’incohérences entre différentes parties de la base</li>
-<li>Stockage réduit, car les informations répétées sont éliminées.</li>
-</ul>
-</div>
-</section>
-<section id="dépendances-fonctionnelles" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="dépendances-fonctionnelles"><span class="header-section-number">1</span> Dépendances fonctionnelles</h2>
-<div class="callout callout-style-default callout-note callout-titled" title="Définition">
+<div class="callout callout-style-default callout-important callout-titled" title="À lire avant de commencer">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Définition
+<span class="screen-reader-only">Important</span>À lire avant de commencer
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Une dépendance fonctionnelle indique qu’une colonne (ou un ensemble de colonnes) détermine de manière unique une autre colonne :</p>
 <ul>
-<li>X → Y</li>
-<li>X détermine Y</li>
-<li>Y dépend fonctionnellement de X</li>
+<li>Les exercices peuvent être traités dans l’ordre de votre choix.</li>
+<li>Le sujet vous paraîtra peut-être un peu long. Si vous bloquez sur une question, passez rapidement à la suivante.</li>
+<li>Dans chaque exercice, les questions ne sont pas forcément de difficulté croissante.</li>
+<li>Sauf mention contraire, les différentes questions attendent des <u>réponses courtes</u>.</li>
+<li>Respectez scrupuleusement les consignes. Cependant, si une question ne vous semble pas claire, notez sur votre copie la manière dont vous l’avez comprise et traitée.</li>
+<li>Veuillez respecter les règles de base du langage et les bonnes pratiques (casse, mots-clés, ordre et indentation). Vous serez pénalisés si vos requêtes SQL ne respectent pas le formalisme donné en cours et en TP.</li>
+<li>Vous répondrez au <strong>QCM</strong> sur votre copie d’examen en recopiant simplement le numéro de la question ainsi que les réponses choisies. Aucune justification n’est attendue.</li>
 </ul>
 </div>
 </div>
-<div class="notes">
-<p>Si on connait X, on peut en déduire Y</p>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="questions-de-cours-3-points" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="questions-de-cours-3-points"><span class="header-section-number">1</span> Questions de cours (3 points)</h2>
+<div class="callout callout-style-default callout-note callout-titled" title="Instructions">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
 </div>
-<section id="les-axiomes-darmstrong" class="level3">
-<h3 class="anchored" data-anchor-id="les-axiomes-darmstrong">Les axiomes d’Armstrong</h3>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Instructions
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Répondez brièvement aux questions suivantes.</p>
+</div>
+</div>
+<ol type="a">
+<li>Citez 3 différents formats de fichiers pour stocker de la donnée.</li>
+<li>Qu’utiliseriez-vous pour stocker des données représentant un volume de :</li>
+</ol>
+<ul>
+<li>100 Ko</li>
+<li>1 Go</li>
+<li>100 Go</li>
+</ul>
+<p>Justifiez vos choix.</p>
+<ol start="3" type="a">
+<li>Qu’est-ce qu’une table ?</li>
+<li>À quoi sert un schéma ?</li>
+<li>Citez 5 opérateurs de l’algèbre relationnelle.</li>
+<li>Dans la requête suivante, que signifie <code>WITH GRANT OPTION</code> ?</li>
+</ol>
+<p><br>
+</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">GRANT</span> <span class="kw">ALL</span> <span class="kw">PRIVILEGES</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">ON</span> echecs.joueuse</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">TO</span> chantal</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">WITH</span> <span class="kw">GRANT</span> <span class="kw">OPTION</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="qcm-7-points" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="qcm-7-points"><span class="header-section-number">2</span> QCM (7 points)</h2>
+<div class="callout callout-style-default callout-note callout-titled" title="Instructions">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Instructions
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Chaque question peut avoir une ou plusieurs réponses correctes (au minimum une réponse est correcte).</p>
+<p>Réponse correcte : <strong>1 point</strong>.<br>
+Réponse partiellement correcte : <strong>ratio</strong>.<br>
+Si présence d’une réponse fausse : <strong>0</strong>.</p>
+</div>
+</div>
+<section id="dans-une-base-de-données-relationnelle-une-clé-primaire" class="level3">
+<h3 class="anchored" data-anchor-id="dans-une-base-de-données-relationnelle-une-clé-primaire">Dans une base de données relationnelle, une clé primaire :</h3>
+<ol type="a">
+<li>Contient uniquement des valeurs non nulles.</li>
+<li>Identifie de manière unique chaque ligne d’une table.</li>
+<li>Peut être constituée de plusieurs colonnes.</li>
+<li>Est toujours générée automatiquement.</li>
+</ol>
+</section>
+<section id="dans-une-base-de-données-relationnelle-une-clé-étrangère" class="level3">
+<h3 class="anchored" data-anchor-id="dans-une-base-de-données-relationnelle-une-clé-étrangère">Dans une base de données relationnelle, une clé étrangère :</h3>
+<ol type="a">
+<li>Contient des valeurs uniques.</li>
+<li>Contient uniquement des valeurs non nulles.</li>
+<li>Référence la clé primaire d’une autre table.</li>
+<li>Est obligatoire pour faire le lien avec une autre table.</li>
+</ol>
+</section>
+<section id="dans-une-commande-select-la-clause-where" class="level3">
+<h3 class="anchored" data-anchor-id="dans-une-commande-select-la-clause-where">Dans une commande <code>SELECT</code>, la clause <code>WHERE</code> :</h3>
+<ol type="a">
+<li>Permet de trier les données.</li>
+<li>Sert à filtrer les lignes en fonction d’une condition.</li>
+<li>Permet d’agréger les données.</li>
+<li>Peut être utilisée pour filtrer après un <code>GROUP BY</code>.</li>
+</ol>
+</section>
+<section id="vous-disposez-de-deux-tables-client-et-commande-liées-par-le-champ-id_client.-votre-objectif-est-de-lister-tous-les-clients-ainsi-que-leur-nombre-de-commandes." class="level3">
+<h3 class="anchored" data-anchor-id="vous-disposez-de-deux-tables-client-et-commande-liées-par-le-champ-id_client.-votre-objectif-est-de-lister-tous-les-clients-ainsi-que-leur-nombre-de-commandes.">Vous disposez de deux tables <code>client</code> et <code>commande</code> liées par le champ <code>id_client</code>. Votre objectif est de lister <strong>tous</strong> les clients ainsi que leur nombre de commandes.</h3>
+<p>Quel type de jointure pouvez-vous utiliser ?</p>
+<ol type="a">
+<li>FULL OUTER JOIN</li>
+<li>INNER JOIN</li>
+<li>NATURAL JOIN</li>
+<li>LEFT JOIN</li>
+<li>CROSS JOIN</li>
+</ol>
+<div style="page-break-after: always;"></div>
+</section>
+<section id="une-transaction-sql-permet" class="level3">
+<h3 class="anchored" data-anchor-id="une-transaction-sql-permet">Une transaction SQL permet :</h3>
+<ol type="a">
+<li>D’assurer que toutes les opérations d’une transaction soient exécutées correctement ou qu’aucune ne soit effectuée en cas d’erreur.</li>
+<li>D’améliorer les performances des requêtes.</li>
+<li>De verrouiller temporairement les données pour éviter les conflits avec d’autres opérations concurrentes.</li>
+<li>De limiter le nombre d’opérations pouvant être effectuées dans une base de données.</li>
+<li>De garantir la cohérence des données même en cas de panne du système.</li>
+</ol>
+</section>
+<section id="cette-table-respecte-t-elle-les-formes-normales" class="level3">
+<h3 class="anchored" data-anchor-id="cette-table-respecte-t-elle-les-formes-normales">Cette table respecte-t-elle les formes normales ?</h3>
 <table class="caption-top table">
-<colgroup>
-<col style="width: 26%">
-<col style="width: 73%">
-</colgroup>
 <thead>
 <tr class="header">
-<th><strong>Nom</strong></th>
-<th><strong>Description</strong></th>
+<th>id_etudiant</th>
+<th>nom_etudiant</th>
+<th style="text-align: right;">id_cours</th>
+<th>nom_cours</th>
+<th>professeur</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>Réflexivité</td>
-<td>(X, Y) → X</td>
+<td>1</td>
+<td>Anaïs</td>
+<td style="text-align: right;">101</td>
+<td>Mathématiques</td>
+<td>Dupont</td>
 </tr>
 <tr class="even">
-<td>Augmentation</td>
-<td>Si X → Y, alors XZ → YZ</td>
+<td>2</td>
+<td>Benoît</td>
+<td style="text-align: right;">102</td>
+<td>Informatique</td>
+<td>Martin</td>
 </tr>
 <tr class="odd">
-<td>Transitivité</td>
-<td>Si X → Y et Y → Z alors, X → Z</td>
+<td>3</td>
+<td>Claire</td>
+<td style="text-align: right;">101</td>
+<td>Mathématiques</td>
+<td>Dupont</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>Anaïs</td>
+<td style="text-align: right;">103</td>
+<td>Physique</td>
+<td>Lefevre</td>
 </tr>
 </tbody>
 </table>
-<div class="notes">
-<ul>
-<li>(nom, prenom) → nom</li>
-<li>id_joueuse → nom alors (id_joueuse, id_partie) → (nom, id_partie)</li>
-</ul>
-</div>
+<ol type="a">
+<li>Elle ne respecte aucune des formes normales.</li>
+<li>Elle respecte la première forme normale (1NF).</li>
+<li>Elle respecte la deuxième forme normale (2NF).</li>
+<li>Elle respecte la troisième forme normale (3NF).</li>
+</ol>
 </section>
-<section id="règles-dérivées" class="level3">
-<h3 class="anchored" data-anchor-id="règles-dérivées">Règles dérivées</h3>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th><strong>Nom</strong></th>
-<th><strong>Description</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Union</td>
-<td>Si X → Y et X → Z, alors X → YZ</td>
-</tr>
-<tr class="even">
-<td>Décomposition</td>
-<td>Si X → YZ, alors X → Z et X → Y</td>
-</tr>
-<tr class="odd">
-<td>Pseudo-transitivité</td>
-<td>Si X → Y et WY → Z alors WX → Z</td>
-</tr>
-</tbody>
-</table>
-<div class="notes">
-<p>Décomposition</p>
-<ul>
-<li>Si id_joueuse → (nom, prenom) alors
-<ul>
-<li>id_joueuse → nom</li>
-<li>id_joueuse → prenom</li>
-</ul></li>
-</ul>
-<p>Inverse : Union</p>
-<p>Auto-détermination : X → X</p>
-</div>
-</section>
-<section id="deux-propriétés" class="level3">
-<h3 class="anchored" data-anchor-id="deux-propriétés">Deux Propriétés</h3>
-<div class="callout callout-style-default callout-note callout-titled" title="Dépendance Fonctionnelle Élémentaire">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Dépendance Fonctionnelle Élémentaire
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>X → Y est élémentaire s’il n’existe aucun sous-ensemble strict Z inclus dans X tel que Z → Y</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-note callout-titled" title="Dépendance Fonctionnelle Directe">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Dépendance Fonctionnelle Directe
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>X → Y est directe s’il n’existe pas de Z tel que X → Z et Z → Y</p>
-</div>
-</div>
-<div class="notes">
-<ul>
-<li>pas élémenaire : num_client, nom → adresse</li>
-</ul>
-</div>
+<section id="quelles-propositions-sont-correctes-à-propos-des-vues" class="level3">
+<h3 class="anchored" data-anchor-id="quelles-propositions-sont-correctes-à-propos-des-vues">Quelles propositions sont correctes à propos des vues ?</h3>
+<ol type="a">
+<li>Une vue permet de simplifier l’accès aux données.</li>
+<li>Une vue stocke physiquement les résultats de la requête SQL dans la base de données.</li>
+<li>Une vue peut être utilisée pour restreindre l’accès à certaines lignes ou colonnes d’une table.</li>
+<li>Les performances peuvent être affectées par l’utilisation de vues.</li>
+</ol>
+<div style="page-break-after: always;"></div>
 </section>
 </section>
-<section id="formes-normales" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="formes-normales"><span class="header-section-number">2</span> Formes Normales</h2>
-<section id="normalisation" class="level3">
-<h3 class="anchored" data-anchor-id="normalisation">Normalisation</h3>
-<div class="callout callout-style-default callout-note callout-titled" title="Définition">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Définition
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>La normalisation vise à organiser les données :</p>
+<section id="requêtes-sql-5-points" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="requêtes-sql-5-points"><span class="header-section-number">3</span> Requêtes SQL (5 points)</h2>
+<p><a href="img/diag-tp4.png" class="lightbox" data-gallery="quarto-lightbox-gallery-1"><img src="img/diag-tp4.png" class="img-fluid" style="width:80.0%"></a></p>
+<p>En vous appuyant sur le modèle de base de données du schéma <code>echecs</code> ci-dessus, écrivez les requêtes permettant de répondre aux questions suivantes.</p>
+<ol type="a">
+<li>Listez les noms, prénoms et elo de toutes les joueuses, classées par elo décroissant.</li>
+<li>Listez les noms, prénoms, elo et nom du club des joueuses ayant un elo supérieur à 2000 et dont le prénom se termine par la lettre <code>A</code>.</li>
+<li>Affichez, pour tous les tournois, le nom du tournoi, le nom de la cadence, les nom et prénom de l’arbitre ainsi que le nom de son éventuel club.</li>
+<li>Listez les joueuses qui auraient joué des parties contre elles-mêmes.</li>
+<li>Comptez le nombre de parties jouées par nom d’ouverture.</li>
+<li>Listez les clubs dont la moyenne elo de leurs joueuses est comprise entre 1500 et 1700. Pour chaque club, affichez :</li>
+</ol>
 <ul>
-<li>en éliminant les redondances et les incohérences</li>
-<li>en préservant les dépendances fonctionnelles</li>
-<li>sans perdre d’informations</li>
+<li>le nom du club</li>
+<li>la moyenne elo</li>
+<li>le elo maximum</li>
+<li>le nombre de joueuses</li>
 </ul>
-</div>
-</div>
+<p>Ordonnez les résultats par moyenne elo.</p>
+<div style="page-break-after: always;"></div>
 </section>
-<section id="ère-forme-normale" class="level3">
-<h3 class="anchored" data-anchor-id="ère-forme-normale">1ère forme normale</h3>
-<div class="callout callout-style-default callout-note callout-titled" title="Définition">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Définition
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Une relation est 1NF si tous ses attributs sont atomiques.</p>
-</div>
-</div>
+<section id="modélisation-5-points" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="modélisation-5-points"><span class="header-section-number">4</span> Modélisation (5 points)</h2>
+<p>Vous devez concevoir une base de données pour gérer les informations sur des personnes qui participent à des compétitions sportives. Toutes ces personnes adhèrent obligatoirement à un et un seul club.</p>
+<p>Une compétition est définie par :</p>
 <ul>
-<li>Une <em>date</em> est atomique</li>
-<li>Un <em>nom</em> est atomique</li>
-<li>Une <em>liste de clubs</em> n’est pas atomique</li>
-<li>Est-ce qu’un <em>adresse</em> est atomique ?</li>
+<li>son nom</li>
+<li>sa date</li>
+<li>sa ville</li>
+<li>son type</li>
 </ul>
-<div class="notes">
+<p>Il existe trois types de compétitions sportives :</p>
 <ul>
-<li>atomique : représente une seule information</li>
-<li>non atomique : plusieurs informations combinées</li>
-<li>assez subjectif</li>
-<li>dépend du cas d’utilisation
-<ul>
-<li>si vous n’utilisez pas le champ adresse -&gt; atomique</li>
-<li>si vous avez utiliser par exemple la ville -&gt; pas atomique</li>
-</ul></li>
+<li>Natation</li>
+<li>Cyclisme</li>
+<li>Course à pied</li>
 </ul>
-</div>
+<p>Chaque compétition est associée à un seul de ces types.</p>
+<p>Un club est défini par :</p>
+<ul>
+<li>son nom</li>
+<li>sa ville</li>
+<li>sa date de création</li>
+</ul>
+<p>Une personne est adhérente à un seul club.</p>
+<section id="conception-de-la-base-de-données" class="level3">
+<h3 class="anchored" data-anchor-id="conception-de-la-base-de-données">Conception de la base de données</h3>
+<p>Définissez les tables nécessaires, leurs relations, les clés et les cardinalités pour représenter ce système en respectant les trois premières formes normales.</p>
+<p>Vous pouvez modéliser :</p>
+<ul>
+<li>soit sous la forme d’un schéma UML</li>
+<li>soit en utilisant la notation relationnelle (<code>table(colonne1, colonne2, ...)</code>)</li>
+</ul>
+<p>Expliquez et commentez vos choix de conception.</p>
 </section>
-<section id="e-forme-normale" class="level3">
-<h3 class="anchored" data-anchor-id="e-forme-normale">2e forme normale</h3>
-<div class="callout callout-style-default callout-note callout-titled" title="Définition">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Définition
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Une relation est 2NF si :</p>
+<section id="requête-sql-1" class="level3">
+<h3 class="anchored" data-anchor-id="requête-sql-1">Requête SQL 1</h3>
+<p>Écrivez une requête SQL pour lister toutes les personnes ayant participé à une épreuve de Natation.</p>
+<p>Affichez :</p>
 <ul>
-<li>elle est 1NF</li>
-<li>tout attribut non clé est en DF élémentaire avec la clé</li>
-</ul>
-<p>Autrement dit, tous les attributs sont déterminés par la clé complète.</p>
-</div>
-</div>
-<hr>
-<p>Exemple de relation non 2NF :</p>
-<ul>
-<li>participation(<u>id_tournoi, id_joueuse</u>, classement, nom_joueuse, nom_tournoi)
-<ul>
-<li><em>nom_joueuse</em> dépend uniquement de <em>id_joueuse</em></li>
-<li><em>nom_tournoi</em> dépend uniquement de <em>id_tournoi</em></li>
-</ul></li>
+<li>le nom</li>
+<li>le prénom</li>
+<li>le nom de l’épreuve</li>
 </ul>
 </section>
-<section id="e-forme-normale-1" class="level3">
-<h3 class="anchored" data-anchor-id="e-forme-normale-1">3e forme normale</h3>
-<div class="callout callout-style-default callout-note callout-titled" title="Définition">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Définition
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Une relation est 3NF si :</p>
-<ul>
-<li>elle est 2NF</li>
-<li>tout attribut non clé est en DF directe avec la clé</li>
-</ul>
-<p>Autrement dit, un attribut ne peut pas dépendre fonctionnellement d’un autre attribut non clé.</p>
-</div>
-</div>
-<hr>
-<p>Exemple de relation non 3NF :</p>
-<ul>
-<li>joueuse(<u>id_joueuse</u>, code_pays, nom_pays)</li>
-<li>id_joueuse → (code_pays, nom_pays)</li>
-<li>or code_pays → nom_pays donc DF non directe</li>
-</ul>
-<div class="callout callout-style-default callout-tip callout-titled" title="Passer en 3NF">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Passer en 3NF
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Créer une table <em>pays</em></p>
-<ul>
-<li>joueuse(<u>id_joueuse</u>, code_pays)</li>
-<li>pays(<u>code_pays</u>, nom_pays)</li>
-</ul>
-</div>
-</div>
-</section>
-</section>
-<section id="modélisation-uml" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="modélisation-uml"><span class="header-section-number">3</span> Modélisation UML</h2>
-<section id="unified-modeling-language" class="level3">
-<h3 class="anchored" data-anchor-id="unified-modeling-language">Unified Modeling Language</h3>
-<div class="callout callout-style-default callout-note callout-titled" title="Définition">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Définition
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>UML est un langage de modélisation graphique standardisé utilisé pour spécifier, visualiser, concevoir et documenter différents aspects des systèmes logiciels.</p>
-<p>Il offre une série de diagrammes pour représenter différents aspects d’un système.</p>
-</div>
-</div>
-</section>
-<section id="modèles" class="level3" data-background-color="beige">
-<h3 data-background-color="beige" class="anchored" data-anchor-id="modèles">Modèles</h3>
-<div class="columns">
-<div class="column">
-<p>Modèle conceptuel</p>
-<div class="cell" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class="figure"><p></p>
-<div>
-<pre class="mermaid mermaid-js">classDiagram
-    class Joueuse {
-        identifiant
-        nom
-        prenom
-        elo
-        identifiant du club
-    }
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-</div><div class="column">
-<p>Modèle physique</p>
-<div class="cell" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class="figure"><p></p>
-<div>
-<pre class="mermaid mermaid-js">classDiagram
-    class joueuse {
-        id_joueuse SERIAL PK
-        nom        VARCHAR50
-        prenom     VARCHAR50
-        elo        INT
-        #id_club   INT
-    }
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="notes">
-<ul>
-<li>Conceptuel : niveau utilisateur
-<ul>
-<li>accents, espaces</li>
-<li>Entités, Relations, Attributs, Cardinalités</li>
-</ul></li>
-<li>Logique : compatible avec un SGBD relationnel
-<ul>
-<li>Entités → table, Attributs → colonnes</li>
-<li>Types, PK, FK, UNIQUE, CHECK, NOT NULL</li>
-</ul></li>
-<li>Physique : niveau développeur (transposable directement en SQL)
-<ul>
-<li>Types exacts</li>
-</ul></li>
-</ul>
-</div>
-</section>
-<section id="associations-1n" class="level3" data-background-color="beige">
-<h3 data-background-color="beige" class="anchored" data-anchor-id="associations-1n">Associations 1:n</h3>
-<div class="cell" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class="figure"><p></p>
-<div>
-<pre class="mermaid mermaid-js">classDiagram
-    direction LR
-    class joueuse {
-        id_joueuse SERIAL PK
-        nom        VARCHAR50
-        prenom     VARCHAR50
-        elo        INT
-        #id_club   INT
-    }
-    
-    class club {
-        id_club   SERIAL PK
-        nom       VARCHAR50
-        ville     VARCHAR50
-    }
-
-    joueuse "*" -- "0..1" club
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-<p><a href="../../doc/cours/bases-de-donnees.html#associations">cf.&nbsp;Cours BDD, partie associations</a></p>
-</section>
-<section id="associations-multiples" class="level3" data-background-color="beige">
-<h3 data-background-color="beige" class="anchored" data-anchor-id="associations-multiples">Associations multiples</h3>
-<div class="cell" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class="figure"><p></p>
-<div>
-<pre class="mermaid mermaid-js">classDiagram
-    direction LR
-    class joueuse {
-        id_joueuse SERIAL PK
-        nom        VARCHAR50
-        prenom     VARCHAR50
-        elo        INT
-        #id_club   INT
-    }
-    
-    class partie {
-        #id_blanc     INT
-        #id_noir      INT
-        #id_resultat  INT
-    }
-
-    partie "*" --&gt; "1" joueuse : jouée avec les blancs par ▶
-    partie "*" --&gt; "1" joueuse : jouée avec les noirs par ▶
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-</section>
-<section id="associations-nn" class="level3" data-background-color="beige">
-<h3 data-background-color="beige" class="anchored" data-anchor-id="associations-nn">Associations n:n</h3>
-<div class="cell" data-layout-align="default">
-<div class="cell-output-display">
-<div>
-<p></p><figure class="figure"><p></p>
-<div>
-<pre class="mermaid mermaid-js">classDiagram
-    direction LR
-    class joueuse {
-        id_joueuse SERIAL PK
-        nom        VARCHAR50
-        prenom     VARCHAR50
-        elo        INT
-        #id_club   INT
-    }
-    
-    class participe {
-        #id_joueuse     INT
-        #id_tournoi     INT
-    }
-
-    class tournoi {
-        #id_tournoi     INT
-        nom             INT
-    }
-
-    joueuse "1" -- "*" participe
-    participe "*" -- "1" tournoi
-</pre>
-</div>
-<p></p></figure><p></p>
-</div>
-</div>
-</div>
-</section>
-<section id="outils" class="level3">
-<h3 class="anchored" data-anchor-id="outils">Outils</h3>
-<p>De nombreux outils existent pour faire des diagrammes UML, soit en mode graphique ou code, par exemple :</p>
-<ul>
-<li><a href="https://app.diagrams.net/" target="_blank">https://app.diagrams.net/</a></li>
-<li><a href="https://dbdiagram.io/d" target="_blank">https://dbdiagram.io/d</a></li>
-</ul>
+<section id="requête-sql-2" class="level3">
+<h3 class="anchored" data-anchor-id="requête-sql-2">Requête SQL 2</h3>
+<p>Écrivez une requête SQL qui affiche, pour chaque club et chaque type de compétition, le nombre de membres ayant participé.</p>
 
 
 </section>
@@ -1364,6 +1214,38 @@ ul.task-list li input[type="checkbox"] {
 </div>
   </div>
 </footer>
+<script>var lightboxQuarto = GLightbox({"closeEffect":"zoom","descPosition":"bottom","loop":false,"openEffect":"zoom","selector":".lightbox"});
+(function() {
+  let previousOnload = window.onload;
+  window.onload = () => {
+    if (previousOnload) {
+      previousOnload();
+    }
+    lightboxQuarto.on('slide_before_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      const href = trigger.getAttribute('href');
+      if (href !== null) {
+        const imgEl = window.document.querySelector(`a[href="${href}"] img`);
+        if (imgEl !== null) {
+          const srcAttr = imgEl.getAttribute("src");
+          if (srcAttr && srcAttr.startsWith("data:")) {
+            slideConfig.href = srcAttr;
+          }
+        }
+      } 
+    });
+  
+    lightboxQuarto.on('slide_after_load', (data) => {
+      const { slideIndex, slideNode, slideConfig, player, trigger } = data;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(slideNode);
+      }
+    });
+  
+  };
+  
+})();
+          </script>
 
 
 

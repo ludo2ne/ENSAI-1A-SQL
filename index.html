@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.26">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -11,10 +11,16 @@
 
 <title>Base de données relationnelles – Base de données</title>
 <style>
-code{white-space: pre-wrap;}
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -32,19 +38,22 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-listing/list.min.js"></script>
+<script src="site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b758ccaa5987ceb1b75504551e579abf.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-b66d9f3da4d84aca26cc7cc1c94b0445.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-d3daa1d1ef55350d6f5c3e6cec97cbbd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-8b0b5ce2d45c65f90787eecfe492c3d4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-88b07732f5075a2b8381a7695c30467d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-8b0b5ce2d45c65f90787eecfe492c3d4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -72,12 +81,70 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script>
 
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-lessons-listing .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-title','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-title-sort'] }],
+      
+      searchColumns: ["listing-title","listing-author"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-lessons-listing'] = new List('listing-lessons-listing', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-fixed fullcontent quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
+<body class="floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -219,8 +286,10 @@ ul.task-list li input[type="checkbox"] {
         changeGiscusTheme();
       }
     };
-    const authorPrefersDark = true;
+    const authorPrefersDark = false;
     const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
     let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
     // Dark / light mode switch
     window.quartoToggleColorScheme = () => {
@@ -265,35 +334,35 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-cours">    
         <li>
-    <a class="dropdown-item" href="./doc/cours/intro.html">
+    <a class="dropdown-item" href="./doc/cours/01-intro.html">
  <span class="dropdown-text">Introduction</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./doc/cours/bases-de-donnees.html">
+    <a class="dropdown-item" href="./doc/cours/02-bases-de-donnees.html">
  <span class="dropdown-text">Base de données</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./doc/cours/sql-intro.html">
+    <a class="dropdown-item" href="./doc/cours/03-sql-intro.html">
  <span class="dropdown-text">Introduction à SQL</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./doc/cours/agregations.html">
+    <a class="dropdown-item" href="./doc/cours/04-agregations.html">
  <span class="dropdown-text">Agrégations</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./doc/cours/algebre.html">
+    <a class="dropdown-item" href="./doc/cours/05-algebre.html">
  <span class="dropdown-text">Algèbre Relationnelle</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./doc/cours/jointures.html">
+    <a class="dropdown-item" href="./doc/cours/06-jointures.html">
  <span class="dropdown-text">Jointures</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./doc/cours/sql-avance.html">
+    <a class="dropdown-item" href="./doc/cours/07-sql-avance.html">
  <span class="dropdown-text">SQL avancé</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./doc/cours/formalisation.html">
+    <a class="dropdown-item" href="./doc/cours/08-formalisation.html">
  <span class="dropdown-text">Formalisation des BDD</span></a>
   </li>  
     </ul>
@@ -365,6 +434,21 @@ ul.task-list li input[type="checkbox"] {
   </li>  
     </ul>
   </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-examens" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Examens</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-examens">    
+        <li>
+    <a class="dropdown-item" href="./doc/examens/bdr-2024.html">
+ <span class="dropdown-text">Examen 2024</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./doc/examens/bdr-2025.html">
+ <span class="dropdown-text">Examen 2025</span></a>
+  </li>  
+    </ul>
+  </li>
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/ludo2ne/ENSAI-1A-SQL" target="_blank"> <i class="bi bi-github" role="img">
 </i> 
@@ -386,8 +470,20 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="3">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#contenu-du-cours" id="toc-contenu-du-cours" class="nav-link active" data-scroll-target="#contenu-du-cours"><span class="header-section-number">1</span> Contenu du cours</a></li>
+  <li><a href="#tp" id="toc-tp" class="nav-link" data-scroll-target="#tp"><span class="header-section-number">2</span> TP</a></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -426,31 +522,112 @@ ul.task-list li input[type="checkbox"] {
 <li>6h de cours</li>
 <li>18h de TP/TD</li>
 </ul>
-<section id="contenu-du-cours" class="level2">
-<h2 class="anchored" data-anchor-id="contenu-du-cours">Contenu du cours</h2>
-<ul>
-<li>Les bases de données
-<ul>
-<li>Les bases de données relationnelles</li>
-</ul></li>
-<li>Introduction au langage SQL
-<ul>
-<li>Opérations CRUD</li>
-<li>Filtre sur les lignes</li>
-<li>Dates, Gestion des valeurs nulles</li>
-</ul></li>
-<li>Les Agrégations</li>
-<li>L’Algébre relationnelle</li>
-<li>Les jointures</li>
-<li>SQL avancé (Vues, Index, Droits, CTE)</li>
-<li>Modélisation UML
-<ul>
-<li>Formes normales</li>
-</ul></li>
-</ul>
+<section id="contenu-du-cours" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="contenu-du-cours"><span class="header-section-number">1</span> Contenu du cours</h2>
+<div id="listing-lessons-listing" class="quarto-listing quarto-listing-container-table">
+<table class="quarto-listing-table table">
+<thead>
+<tr>
+
+<th>
+Title
+</th>
+
+<th>
+Categories
+</th>
+
+</tr>
+</thead>
+<tbody class="list">
+
+<tr data-index="0" data-categories="SW50cm9kdWN0aW9uJTJDQ29udmVudGlvbnM=" data-listing-file-modified-sort="1785398825355" data-listing-reading-time-sort="3" data-listing-word-count-sort="523" data-listing-title-sort="Bases de Données Relationnelles et SQL" data-listing-filename-sort="01-intro.qmd">
+<td>
+<a href="./doc/cours/01-intro.html" class="title listing-title">Bases de Données Relationnelles et SQL</a>
+</td>
+<td>
+<span class="listing-categories">Introduction, Conventions</span>
+</td>
+
+</tr>
+
+<tr data-index="1" data-categories="VGFibGVzJTJDQ2wlQzMlQTklMjBwcmltYWlyZSUyQ0NsJUMzJUE5JTIwJUMzJUE5dHJhbmclQzMlQThyZSUyQ0Fzc29jaWF0aW9u" data-listing-file-modified-sort="1785398825355" data-listing-reading-time-sort="19" data-listing-word-count-sort="3728" data-listing-title-sort="Bases de Données" data-listing-filename-sort="02-bases-de-donnees.qmd">
+<td>
+<a href="./doc/cours/02-bases-de-donnees.html" class="title listing-title">Bases de Données</a>
+</td>
+<td>
+<span class="listing-categories">Tables, Clé primaire, Clé étrangère, Association</span>
+</td>
+
+</tr>
+
+<tr data-index="2" data-categories="Q3IlQzMlQTllciUyMGRlcyUyMHRhYmxlcyUyQ0xpcmUlMjBkZXMlMjBkb25uJUMzJUE5ZXMlMkNGaWx0cmVyJTJDT3Jkb25uZXIlMkNEYXRlcyUyQ1ZhbGV1cnMlMjBOdWxsZXM=" data-listing-file-modified-sort="1785398825355" data-listing-reading-time-sort="23" data-listing-word-count-sort="4473" data-listing-title-sort="SQL - Introduction" data-listing-filename-sort="03-sql-intro.qmd">
+<td>
+<a href="./doc/cours/03-sql-intro.html" class="title listing-title">SQL - Introduction</a>
+</td>
+<td>
+<span class="listing-categories">Créer des tables, Lire des données, Filtrer, Ordonner, Dates, Valeurs Nulles</span>
+</td>
+
+</tr>
+
+<tr data-index="3" data-categories="Q29tcHRlciUyQ1JlZ3JvdXBlciUyQ1N0YXRz" data-listing-file-modified-sort="1785398825355" data-listing-reading-time-sort="5" data-listing-word-count-sort="934" data-listing-title-sort="Agrégations" data-listing-filename-sort="04-agregations.qmd">
+<td>
+<a href="./doc/cours/04-agregations.html" class="title listing-title">Agrégations</a>
+</td>
+<td>
+<span class="listing-categories">Compter, Regrouper, Stats</span>
+</td>
+
+</tr>
+
+<tr data-index="4" data-categories="T3AlQzMlQTlyYXRpb25z" data-listing-file-modified-sort="1785398825355" data-listing-reading-time-sort="3" data-listing-word-count-sort="522" data-listing-title-sort="Algèbre Relationnelle" data-listing-filename-sort="05-algebre.qmd">
+<td>
+<a href="./doc/cours/05-algebre.html" class="title listing-title">Algèbre Relationnelle</a>
+</td>
+<td>
+<span class="listing-categories">Opérations</span>
+</td>
+
+</tr>
+
+<tr data-index="5" data-categories="Sm9pbmRyZSUyMGxlcyUyMHRhYmxlcyUyQ0pvaW50dXJlcyUyMGV4dGVybmVzJTJDQWxpYXM=" data-listing-file-modified-sort="1785398825355" data-listing-reading-time-sort="13" data-listing-word-count-sort="2511" data-listing-title-sort="Jointures entre Tables" data-listing-filename-sort="06-jointures.qmd">
+<td>
+<a href="./doc/cours/06-jointures.html" class="title listing-title">Jointures entre Tables</a>
+</td>
+<td>
+<span class="listing-categories">Joindre les tables, Jointures externes, Alias</span>
+</td>
+
+</tr>
+
+<tr data-index="6" data-categories="U291cy1yZXF1JUMzJUFBdGVzJTJDVnVlcyUyQ0Ryb2l0cyUyQ1RyYW5zYWN0aW9ucyUyQ0luZGV4JTJDVHJpZ2dlcnM=" data-listing-file-modified-sort="1785398825355" data-listing-reading-time-sort="10" data-listing-word-count-sort="1818" data-listing-title-sort="SQL avancé" data-listing-filename-sort="07-sql-avance.qmd">
+<td>
+<a href="./doc/cours/07-sql-avance.html" class="title listing-title">SQL avancé</a>
+</td>
+<td>
+<span class="listing-categories">Sous-requêtes, Vues, Droits, Transactions, Index, Triggers</span>
+</td>
+
+</tr>
+
+<tr data-index="7" data-categories="RCVDMyVBOXBlbmRhbmNlcyUyMGZvbmN0aW9ubmVsbGVzJTJDRm9ybWVzJTIwTm9ybWFsZXMlMkNVTUw=" data-listing-file-modified-sort="1785398825355" data-listing-reading-time-sort="8" data-listing-word-count-sort="1442" data-listing-title-sort="Formalisation des bases de données" data-listing-filename-sort="08-formalisation.qmd">
+<td>
+<a href="./doc/cours/08-formalisation.html" class="title listing-title">Formalisation des bases de données</a>
+</td>
+<td>
+<span class="listing-categories">Dépendances fonctionnelles, Formes Normales, UML</span>
+</td>
+
+</tr>
+
+</tbody>
+</table>
+<div class="listing-no-matching d-none">No matching items</div>
+</div>
 </section>
-<section id="tp" class="level2">
-<h2 class="anchored" data-anchor-id="tp">TP</h2>
+<section id="tp" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="tp"><span class="header-section-number">2</span> TP</h2>
 <ul>
 <li>TP1 : Première requêtes SQL
 <ul>
@@ -479,6 +656,7 @@ ul.task-list li input[type="checkbox"] {
 <li>Dépendances fonctionnelles, Formes Normales, UML</li>
 </ul></li>
 </ul>
+
 
 
 </section>

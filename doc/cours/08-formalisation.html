@@ -2,60 +2,31 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.26">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Ludovic Deneuville">
 <meta name="description" content="Slides">
 
-<title>Jointures entre Tables – Base de données</title>
+<title>Formalisation des bases de données – Base de données</title>
 <style>
-code{white-space: pre-wrap;}
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -69,17 +40,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="../../">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b758ccaa5987ceb1b75504551e579abf.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-b66d9f3da4d84aca26cc7cc1c94b0445.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-d3daa1d1ef55350d6f5c3e6cec97cbbd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-8b0b5ce2d45c65f90787eecfe492c3d4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-88b07732f5075a2b8381a7695c30467d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-8b0b5ce2d45c65f90787eecfe492c3d4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -116,7 +88,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body class="floating nav-fixed quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
+<body class="floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -258,8 +230,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         changeGiscusTheme();
       }
     };
-    const authorPrefersDark = true;
+    const authorPrefersDark = false;
     const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
     let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
     // Dark / light mode switch
     window.quartoToggleColorScheme = () => {
@@ -304,35 +278,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-cours">    
         <li>
-    <a class="dropdown-item" href="../../doc/cours/intro.html">
+    <a class="dropdown-item" href="../../doc/cours/01-intro.html">
  <span class="dropdown-text">Introduction</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../doc/cours/bases-de-donnees.html">
+    <a class="dropdown-item" href="../../doc/cours/02-bases-de-donnees.html">
  <span class="dropdown-text">Base de données</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../doc/cours/sql-intro.html">
+    <a class="dropdown-item" href="../../doc/cours/03-sql-intro.html">
  <span class="dropdown-text">Introduction à SQL</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../doc/cours/agregations.html">
+    <a class="dropdown-item" href="../../doc/cours/04-agregations.html">
  <span class="dropdown-text">Agrégations</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../doc/cours/algebre.html">
+    <a class="dropdown-item" href="../../doc/cours/05-algebre.html">
  <span class="dropdown-text">Algèbre Relationnelle</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../doc/cours/jointures.html">
+    <a class="dropdown-item" href="../../doc/cours/06-jointures.html">
  <span class="dropdown-text">Jointures</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../doc/cours/sql-avance.html">
+    <a class="dropdown-item" href="../../doc/cours/07-sql-avance.html">
  <span class="dropdown-text">SQL avancé</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../doc/cours/formalisation.html">
+    <a class="dropdown-item" href="../../doc/cours/08-formalisation.html">
  <span class="dropdown-text">Formalisation des BDD</span></a>
   </li>  
     </ul>
@@ -404,6 +378,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
     </ul>
   </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-examens" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Examens</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-examens">    
+        <li>
+    <a class="dropdown-item" href="../../doc/examens/bdr-2024.html">
+ <span class="dropdown-text">Examen 2024</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../doc/examens/bdr-2025.html">
+ <span class="dropdown-text">Examen 2025</span></a>
+  </li>  
+    </ul>
+  </li>
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/ludo2ne/ENSAI-1A-SQL" target="_blank"> <i class="bi bi-github" role="img">
 </i> 
@@ -426,38 +415,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <nav id="TOC" role="doc-toc" class="toc-active">
+    <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="3">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#jointures" id="toc-jointures" class="nav-link active" data-scroll-target="#jointures"><span class="header-section-number">1</span> Jointures</a>
+  <li><a href="#objectifs" id="toc-objectifs" class="nav-link active" data-scroll-target="#objectifs">Objectifs</a></li>
+  <li><a href="#dépendances-fonctionnelles" id="toc-dépendances-fonctionnelles" class="nav-link" data-scroll-target="#dépendances-fonctionnelles"><span class="header-section-number">1</span> Dépendances fonctionnelles</a>
   <ul class="collapse">
-  <li><a href="#tables-utilisées" id="toc-tables-utilisées" class="nav-link" data-scroll-target="#tables-utilisées">Tables utilisées</a></li>
-  <li><a href="#données" id="toc-données" class="nav-link" data-scroll-target="#données">Données</a></li>
+  <li><a href="#les-axiomes-darmstrong" id="toc-les-axiomes-darmstrong" class="nav-link" data-scroll-target="#les-axiomes-darmstrong"><span class="header-section-number">1.1</span> Les axiomes d’Armstrong</a></li>
+  <li><a href="#règles-dérivées" id="toc-règles-dérivées" class="nav-link" data-scroll-target="#règles-dérivées"><span class="header-section-number">1.2</span> Règles dérivées</a></li>
+  <li><a href="#deux-propriétés" id="toc-deux-propriétés" class="nav-link" data-scroll-target="#deux-propriétés"><span class="header-section-number">1.3</span> Deux Propriétés</a></li>
   </ul></li>
-  <li><a href="#jointure-interne" id="toc-jointure-interne" class="nav-link" data-scroll-target="#jointure-interne"><span class="header-section-number">2</span> Jointure interne</a>
+  <li><a href="#formes-normales" id="toc-formes-normales" class="nav-link" data-scroll-target="#formes-normales"><span class="header-section-number">2</span> Formes Normales</a>
   <ul class="collapse">
-  <li><a href="#ere-tentative" id="toc-ere-tentative" class="nav-link" data-scroll-target="#ere-tentative">1ere tentative</a></li>
-  <li><a href="#e-tentative" id="toc-e-tentative" class="nav-link" data-scroll-target="#e-tentative">2e tentative</a></li>
-  <li><a href="#alias" id="toc-alias" class="nav-link" data-scroll-target="#alias">Alias</a></li>
-  <li><a href="#using" id="toc-using" class="nav-link" data-scroll-target="#using">USING</a></li>
-  <li><a href="#au-final" id="toc-au-final" class="nav-link" data-scroll-target="#au-final">Au final</a></li>
-  <li><a href="#à-ne-pas-faire" id="toc-à-ne-pas-faire" class="nav-link" data-scroll-target="#à-ne-pas-faire">À ne pas faire</a></li>
-  <li><a href="#résultat" id="toc-résultat" class="nav-link" data-scroll-target="#résultat">Résultat</a></li>
+  <li><a href="#normalisation" id="toc-normalisation" class="nav-link" data-scroll-target="#normalisation"><span class="header-section-number">2.1</span> Normalisation</a></li>
+  <li><a href="#ère-forme-normale" id="toc-ère-forme-normale" class="nav-link" data-scroll-target="#ère-forme-normale"><span class="header-section-number">2.2</span> 1ère forme normale</a></li>
+  <li><a href="#e-forme-normale" id="toc-e-forme-normale" class="nav-link" data-scroll-target="#e-forme-normale"><span class="header-section-number">2.3</span> 2e forme normale</a></li>
+  <li><a href="#e-forme-normale-1" id="toc-e-forme-normale-1" class="nav-link" data-scroll-target="#e-forme-normale-1"><span class="header-section-number">2.4</span> 3e forme normale</a></li>
   </ul></li>
-  <li><a href="#jointure-externe" id="toc-jointure-externe" class="nav-link" data-scroll-target="#jointure-externe"><span class="header-section-number">3</span> Jointure externe</a>
+  <li><a href="#modélisation-uml" id="toc-modélisation-uml" class="nav-link" data-scroll-target="#modélisation-uml"><span class="header-section-number">3</span> Modélisation UML</a>
   <ul class="collapse">
-  <li><a href="#idée" id="toc-idée" class="nav-link" data-scroll-target="#idée">Idée</a></li>
-  <li><a href="#left-join" id="toc-left-join" class="nav-link" data-scroll-target="#left-join">LEFT JOIN</a></li>
-  <li><a href="#résultat-1" id="toc-résultat-1" class="nav-link" data-scroll-target="#résultat-1">Résultat</a></li>
+  <li><a href="#unified-modeling-language" id="toc-unified-modeling-language" class="nav-link" data-scroll-target="#unified-modeling-language"><span class="header-section-number">3.1</span> Unified Modeling Language</a></li>
+  <li><a href="#modèles" id="toc-modèles" class="nav-link" data-scroll-target="#modèles"><span class="header-section-number">3.2</span> Modèles</a></li>
+  <li><a href="#associations-1n" id="toc-associations-1n" class="nav-link" data-scroll-target="#associations-1n"><span class="header-section-number">3.3</span> Associations 1:n</a></li>
+  <li><a href="#associations-multiples" id="toc-associations-multiples" class="nav-link" data-scroll-target="#associations-multiples"><span class="header-section-number">3.4</span> Associations multiples</a></li>
+  <li><a href="#associations-nn" id="toc-associations-nn" class="nav-link" data-scroll-target="#associations-nn"><span class="header-section-number">3.5</span> Associations n:n</a></li>
+  <li><a href="#outils" id="toc-outils" class="nav-link" data-scroll-target="#outils"><span class="header-section-number">3.6</span> Outils</a></li>
   </ul></li>
-  <li><a href="#jointure-complète" id="toc-jointure-complète" class="nav-link" data-scroll-target="#jointure-complète"><span class="header-section-number">4</span> Jointure complète</a>
-  <ul class="collapse">
-  <li><a href="#résultat-2" id="toc-résultat-2" class="nav-link" data-scroll-target="#résultat-2">Résultat</a></li>
-  </ul></li>
-  <li><a href="#jointure-croisée" id="toc-jointure-croisée" class="nav-link" data-scroll-target="#jointure-croisée"><span class="header-section-number">5</span> Jointure croisée</a></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="jointures-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="08-formalisation-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -469,12 +455,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Jointures entre Tables</h1>
-</div>
+<h1 class="title">Formalisation des bases de données</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Dépendances fonctionnelles</div>
+    <div class="quarto-category">Formes Normales</div>
+    <div class="quarto-category">UML</div>
+  </div>
+  </div>
 
 <div>
   <div class="description">
-    <a href="jointures-slides.html">Slides</a>
+    <a href="08-formalisation-slides.html">Slides</a>
   </div>
 </div>
 
@@ -497,34 +488,310 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="jointures" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="jointures"><span class="header-section-number">1</span> Jointures</h2>
-<div class="callout callout-style-default callout-important callout-titled" title="Objectifs">
+<section id="objectifs" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="objectifs">Objectifs</h2>
+<p>Structurer une base de données pour qu’elle soit :</p>
+<ul>
+<li>efficace</li>
+<li>propre</li>
+<li>légère</li>
+<li>facile à maintenir</li>
+</ul>
+<div class="notes">
+<ul>
+<li>pas de doublons et de redondances</li>
+<li>Moins de risques d’incohérences entre différentes parties de la base</li>
+<li>Stockage réduit, car les informations répétées sont éliminées.</li>
+</ul>
+</div>
+</section>
+<section id="dépendances-fonctionnelles" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="dépendances-fonctionnelles"><span class="header-section-number">1</span> Dépendances fonctionnelles</h2>
+<div class="callout callout-style-default callout-note callout-titled" title="Définition">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>Objectifs
+<span class="screen-reader-only">Note</span>Définition
 </div>
 </div>
 <div class="callout-body-container callout-body">
+<p>Une dépendance fonctionnelle indique qu’une colonne (ou un ensemble de colonnes) détermine de manière unique une autre colonne :</p>
 <ul>
-<li>Regrouper les données de plusieurs tables</li>
-<li>En utilisant les liens entre ces tables</li>
+<li>X → Y</li>
+<li>X détermine Y</li>
+<li>Y dépend fonctionnellement de X</li>
 </ul>
 </div>
 </div>
 <div class="notes">
+<p>Si on connait X, on peut en déduire Y</p>
+</div>
+<section id="les-axiomes-darmstrong" class="level3" data-number="1.1">
+<h3 data-number="1.1" class="anchored" data-anchor-id="les-axiomes-darmstrong"><span class="header-section-number">1.1</span> Les axiomes d’Armstrong</h3>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 26%">
+<col style="width: 73%">
+</colgroup>
+<thead>
+<tr class="header">
+<th><strong>Nom</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Réflexivité</td>
+<td>(X, Y) → X</td>
+</tr>
+<tr class="even">
+<td>Augmentation</td>
+<td>Si X → Y, alors XZ → YZ</td>
+</tr>
+<tr class="odd">
+<td>Transitivité</td>
+<td>Si X → Y et Y → Z alors, X → Z</td>
+</tr>
+</tbody>
+</table>
+<div class="notes">
 <ul>
-<li>Jusqu’à maintenant, on aurait pu tout faire sous excel…</li>
-<li>Faire une jointure est comme créer un gros tableau</li>
+<li>(nom, prenom) → nom</li>
+<li>id_joueuse → nom alors (id_joueuse, id_partie) → (nom, id_partie)</li>
 </ul>
 </div>
-<section id="tables-utilisées" class="level3">
-<h3 class="anchored" data-anchor-id="tables-utilisées">Tables utilisées</h3>
-<p>Dans les exemples ci-dessous, nous allons utiliser ces 2 tables.</p>
-<p>Vous pouvez tout à fait faire des jointures avec 3 tables, 4 tables…</p>
+</section>
+<section id="règles-dérivées" class="level3" data-number="1.2">
+<h3 data-number="1.2" class="anchored" data-anchor-id="règles-dérivées"><span class="header-section-number">1.2</span> Règles dérivées</h3>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th><strong>Nom</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Union</td>
+<td>Si X → Y et X → Z, alors X → YZ</td>
+</tr>
+<tr class="even">
+<td>Décomposition</td>
+<td>Si X → YZ, alors X → Z et X → Y</td>
+</tr>
+<tr class="odd">
+<td>Pseudo-transitivité</td>
+<td>Si X → Y et WY → Z alors WX → Z</td>
+</tr>
+</tbody>
+</table>
+<div class="notes">
+<p>Décomposition</p>
+<ul>
+<li>Si id_joueuse → (nom, prenom) alors
+<ul>
+<li>id_joueuse → nom</li>
+<li>id_joueuse → prenom</li>
+</ul></li>
+</ul>
+<p>Inverse : Union</p>
+<p>Auto-détermination : X → X</p>
+</div>
+</section>
+<section id="deux-propriétés" class="level3" data-number="1.3">
+<h3 data-number="1.3" class="anchored" data-anchor-id="deux-propriétés"><span class="header-section-number">1.3</span> Deux Propriétés</h3>
+<div class="callout callout-style-default callout-note callout-titled" title="Dépendance Fonctionnelle Élémentaire">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Dépendance Fonctionnelle Élémentaire
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>X → Y est élémentaire s’il n’existe aucun sous-ensemble strict Z inclus dans X tel que Z → Y</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note callout-titled" title="Dépendance Fonctionnelle Directe">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Dépendance Fonctionnelle Directe
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>X → Y est directe s’il n’existe pas de Z tel que X → Z et Z → Y</p>
+</div>
+</div>
+<div class="notes">
+<ul>
+<li>pas élémenaire : num_client, nom → adresse</li>
+</ul>
+</div>
+</section>
+</section>
+<section id="formes-normales" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="formes-normales"><span class="header-section-number">2</span> Formes Normales</h2>
+<section id="normalisation" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="normalisation"><span class="header-section-number">2.1</span> Normalisation</h3>
+<div class="callout callout-style-default callout-note callout-titled" title="Définition">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Définition
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>La normalisation vise à organiser les données :</p>
+<ul>
+<li>en éliminant les redondances et les incohérences</li>
+<li>en préservant les dépendances fonctionnelles</li>
+<li>sans perdre d’informations</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="ère-forme-normale" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="ère-forme-normale"><span class="header-section-number">2.2</span> 1ère forme normale</h3>
+<div class="callout callout-style-default callout-note callout-titled" title="Définition">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Définition
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Une relation est 1NF si tous ses attributs sont atomiques.</p>
+</div>
+</div>
+<ul>
+<li>Une <em>date</em> est atomique</li>
+<li>Un <em>nom</em> est atomique</li>
+<li>Une <em>liste de clubs</em> n’est pas atomique</li>
+<li>Est-ce qu’un <em>adresse</em> est atomique ?</li>
+</ul>
+<div class="notes">
+<ul>
+<li>atomique : représente une seule information</li>
+<li>non atomique : plusieurs informations combinées</li>
+<li>assez subjectif</li>
+<li>dépend du cas d’utilisation
+<ul>
+<li>si vous n’utilisez pas le champ adresse -&gt; atomique</li>
+<li>si vous avez utiliser par exemple la ville -&gt; pas atomique</li>
+</ul></li>
+</ul>
+</div>
+</section>
+<section id="e-forme-normale" class="level3" data-number="2.3">
+<h3 data-number="2.3" class="anchored" data-anchor-id="e-forme-normale"><span class="header-section-number">2.3</span> 2e forme normale</h3>
+<div class="callout callout-style-default callout-note callout-titled" title="Définition">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Définition
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Une relation est 2NF si :</p>
+<ul>
+<li>elle est 1NF</li>
+<li>tout attribut non clé est en DF élémentaire avec la clé</li>
+</ul>
+<p>Autrement dit, tous les attributs sont déterminés par la clé complète.</p>
+</div>
+</div>
+<hr>
+<p>Exemple de relation non 2NF :</p>
+<ul>
+<li>participation(<u>id_tournoi, id_joueuse</u>, classement, nom_joueuse, nom_tournoi)
+<ul>
+<li><em>nom_joueuse</em> dépend uniquement de <em>id_joueuse</em></li>
+<li><em>nom_tournoi</em> dépend uniquement de <em>id_tournoi</em></li>
+</ul></li>
+</ul>
+</section>
+<section id="e-forme-normale-1" class="level3" data-number="2.4">
+<h3 data-number="2.4" class="anchored" data-anchor-id="e-forme-normale-1"><span class="header-section-number">2.4</span> 3e forme normale</h3>
+<div class="callout callout-style-default callout-note callout-titled" title="Définition">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Définition
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Une relation est 3NF si :</p>
+<ul>
+<li>elle est 2NF</li>
+<li>tout attribut non clé est en DF directe avec la clé</li>
+</ul>
+<p>Autrement dit, un attribut ne peut pas dépendre fonctionnellement d’un autre attribut non clé.</p>
+</div>
+</div>
+<hr>
+<p>Exemple de relation non 3NF :</p>
+<ul>
+<li>joueuse(<u>id_joueuse</u>, code_pays, nom_pays)</li>
+<li>id_joueuse → (code_pays, nom_pays)</li>
+<li>or code_pays → nom_pays donc DF non directe</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled" title="Passer en 3NF">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Passer en 3NF
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Créer une table <em>pays</em></p>
+<ul>
+<li>joueuse(<u>id_joueuse</u>, code_pays)</li>
+<li>pays(<u>code_pays</u>, nom_pays)</li>
+</ul>
+</div>
+</div>
+</section>
+</section>
+<section id="modélisation-uml" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="modélisation-uml"><span class="header-section-number">3</span> Modélisation UML</h2>
+<section id="unified-modeling-language" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="unified-modeling-language"><span class="header-section-number">3.1</span> Unified Modeling Language</h3>
+<div class="callout callout-style-default callout-note callout-titled" title="Définition">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Définition
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>UML est un langage de modélisation graphique standardisé utilisé pour spécifier, visualiser, concevoir et documenter différents aspects des systèmes logiciels.</p>
+<p>Il offre une série de diagrammes pour représenter différents aspects d’un système.</p>
+</div>
+</div>
+</section>
+<section id="modèles" class="level3" data-background-color="beige" data-number="3.2">
+<h3 data-background-color="beige" data-number="3.2" class="anchored" data-anchor-id="modèles"><span class="header-section-number">3.2</span> Modèles</h3>
+<div class="columns">
+<div class="column">
+<p>Modèle conceptuel</p>
 <div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -532,17 +799,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div>
 <pre class="mermaid mermaid-js">classDiagram
     class Joueuse {
-        id_joueuse PK
+        identifiant
         nom
         prenom
         elo
-        id_club
-    }
-    
-    class Club {
-        id_club PK
-        nom
-        ville
+        identifiant du club
     }
 </pre>
 </div>
@@ -550,574 +811,158 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-</section>
-<section id="données" class="level3">
-<h3 class="anchored" data-anchor-id="données">Données</h3>
-<div class="tabset-margin-container"></div><div class="panel-tabset nav-pills">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true" href="">Joueuse</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false" href="">Club</a></li></ul>
-<div class="tab-content nav-pills">
-<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
-<div class="small-table">
-<table class="caption-top table">
-<colgroup>
-<col style="width: 19%">
-<col style="width: 29%">
-<col style="width: 22%">
-<col style="width: 11%">
-<col style="width: 17%">
-</colgroup>
-<thead>
-<tr class="header">
-<th><strong>id_joueuse</strong></th>
-<th><strong>nom</strong></th>
-<th><strong>prenom</strong></th>
-<th><strong>elo</strong></th>
-<th><strong>id_club</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>1</td>
-<td>Guichard</td>
-<td>Pauline</td>
-<td>2357</td>
-<td>3</td>
-</tr>
-<tr class="even">
-<td>2</td>
-<td>Daulyte</td>
-<td>Deimante</td>
-<td>2371</td>
-<td>1</td>
-</tr>
-<tr class="odd">
-<td>3</td>
-<td>Navrotescu</td>
-<td>Andreea</td>
-<td>2338</td>
-<td>2</td>
-</tr>
-<tr class="even">
-<td>4</td>
-<td>Sebag</td>
-<td>Marie</td>
-<td>2448</td>
-<td>2</td>
-</tr>
-<tr class="odd">
-<td>5</td>
-<td>Millet</td>
-<td>Sophie</td>
-<td>2366</td>
-<td>3</td>
-</tr>
-<tr class="even">
-<td>6</td>
-<td>Skrichempko</td>
-<td>Almira</td>
-<td>2361</td>
-<td></td>
-</tr>
-</tbody>
-</table>
+</div><div class="column">
+<p>Modèle physique</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">classDiagram
+    class joueuse {
+        id_joueuse SERIAL PK
+        nom        VARCHAR50
+        prenom     VARCHAR50
+        elo        INT
+        #id_club   INT
+    }
+</pre>
 </div>
+<p></p></figure><p></p>
 </div>
-<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
-<div class="small-table">
-<table class="caption-top table">
-<colgroup>
-<col style="width: 20%">
-<col style="width: 48%">
-<col style="width: 31%">
-</colgroup>
-<thead>
-<tr class="header">
-<th><strong>id_club</strong></th>
-<th><strong>nom</strong></th>
-<th><strong>ville</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>1</td>
-<td>C’Chartres Echecs</td>
-<td>Chartres</td>
-</tr>
-<tr class="even">
-<td>2</td>
-<td>Bischwiller</td>
-<td>Bischwiller</td>
-</tr>
-<tr class="odd">
-<td>3</td>
-<td>Asnieres - le Grand Echiquier</td>
-<td>Asnieres</td>
-</tr>
-<tr class="even">
-<td>4</td>
-<td>Tours des Hauts-De-France</td>
-<td>Saint-Quentin</td>
-</tr>
-</tbody>
-</table>
 </div>
 </div>
 </div>
 </div>
 <div class="notes">
 <ul>
-<li>Des remarques sur ces données ?</li>
-<li>Comment-vous pensez que l’on va faire la jointure ?</li>
-</ul>
-</div>
-</section>
-</section>
-<section id="jointure-interne" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="jointure-interne"><span class="header-section-number">2</span> Jointure interne</h2>
-<p>L’<strong>INNER JOIN</strong> renvoie uniquement les lignes qui ont des <u>correspondances dans les deux tables</u>.</p>
-<div class="notes">
-<p>Au max, vous avez le nombre de lignes de la table la plus grande</p>
-</div>
-<section id="ere-tentative" class="level3">
-<h3 class="anchored" data-anchor-id="ere-tentative">1ere tentative</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>       prenom,</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>       nom <span class="kw">AS</span> club</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a> <span class="kw">INNER</span> <span class="kw">JOIN</span> echecs.club <span class="kw">ON</span> id_club <span class="op">=</span> id_club;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<li>Conceptuel : niveau utilisateur
 <ul>
-<li>Nous affichons <em>nom</em> et <em>prenom</em> de la table <em>joueuse</em></li>
-<li>Nous ajoutons le <em>nom</em> du <em>club</em></li>
-<li>Nous faisons la jointure entre <em>joueuse</em> et <em>club</em> via la colonne <em>id_club</em></li>
-</ul>
-<div class="fragment">
-<p>Des soucis dans cette requête ? <span class="emoji" data-emoji="confused">😕</span></p>
-</div>
-</section>
-<section id="e-tentative" class="level3">
-<h3 class="anchored" data-anchor-id="e-tentative">2e tentative</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> joueuse.nom,</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>       joueuse.prenom,</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>       club.nom <span class="kw">AS</span> club</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a> <span class="kw">INNER</span> <span class="kw">JOIN</span> echecs.club <span class="kw">ON</span> club.id_club <span class="op">=</span> joueuse.id_club;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="fragment">
-<p>Ça fonctionne !</p>
-<p>Mais c’est un peu long d’écrire avant chaque colonne le nom de la table.</p>
-</div>
-</section>
-<section id="alias" class="level3">
-<h3 class="anchored" data-anchor-id="alias">Alias</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> j.nom,            <span class="co">-- signifie colonne nom de la table d'alias j</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>       j.prenom,</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>       c.nom <span class="kw">AS</span> club</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse j  <span class="co">-- déclare j comme alias de la table joueuse</span></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a> <span class="kw">INNER</span> <span class="kw">JOIN</span> echecs.club c <span class="kw">ON</span> c.id_club <span class="op">=</span> j.id_club;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="callout callout-style-default callout-note callout-titled" title="Alias">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>Alias
-</div>
-</div>
-<div class="callout-body-container callout-body">
+<li>accents, espaces</li>
+<li>Entités, Relations, Attributs, Cardinalités</li>
+</ul></li>
+<li>Logique : compatible avec un SGBD relationnel
 <ul>
-<li>L’Alias est comme un surnom pour la table</li>
-<li>Par défaut l’alias de la table est son propre nom (i.e.&nbsp;si vous ne déclarez pas d’alias)</li>
-<li>Généralement on utilise comme alias la 1ere lettre ou les 2 premières lettres</li>
-</ul>
-</div>
-</div>
-</section>
-<section id="using" class="level3">
-<h3 class="anchored" data-anchor-id="using">USING</h3>
-<div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Tip
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Si votre base de données est bien conçue, les colonnes utilisées pour les jointures portent le même nom dans les deux tables.</p>
-<p>Dans ce cas, et uniquement dans ce cas, vous pouvez utiliser le mot clé <code>USING</code> à la place de <code>ON</code>.</p>
-</div>
-</div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> j.nom,</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>       j.prenom,</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>       c.nom <span class="kw">AS</span> club</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse j</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a> <span class="kw">INNER</span> <span class="kw">JOIN</span> echecs.club c <span class="kw">USING</span> (id_club);</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="notes">
-<p>Si vos colonnes n’ont pas le même nom, pas possible de faire USING</p>
-</div>
-</section>
-<section id="au-final" class="level3">
-<h3 class="anchored" data-anchor-id="au-final">Au final</h3>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> j.nom,</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>       j.prenom,</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>       c.nom <span class="kw">AS</span> club</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse j</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> echecs.club c <span class="kw">USING</span> (id_club);</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Vous pouvez même enlever le <code>INNER</code> qui est optionnel.</p>
-</section>
-<section id="à-ne-pas-faire" class="level3">
-<h3 class="anchored" data-anchor-id="à-ne-pas-faire">À ne pas faire</h3>
-<div class="callout callout-style-default callout-caution callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Caution
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Il est aussi possible de faire une jointure avec <code>NATURAL JOIN</code> sans préciser aucun nom de colonnes. Cela va joindre les tables via les colonnes ayant le même nom dans les 2 tables.</p>
-<p>Cette pratique est déconseillée, car vous ne maitrisez pas les colonnes servant à la jointure et c’est visuellement moins parlant.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-warning callout-titled" title="Ancienne écriture">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Warning</span>Ancienne écriture
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> j.nom,</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>       j.prenom,</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>       c.nom <span class="kw">AS</span> club</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse j,</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>       echecs.club c </span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> j.id_club <span class="op">=</span> c.id_club;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</div>
-<div class="notes">
-<p>Ancienne écriture encore utilisée par un certain nombre.</p>
-</div>
-</section>
-<section id="résultat" class="level3">
-<h3 class="anchored" data-anchor-id="résultat">Résultat</h3>
-<div class="small-table">
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th><strong>nom</strong></th>
-<th><strong>prenom</strong></th>
-<th><strong>club</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Daulyte</td>
-<td>Deimante</td>
-<td>C’Chartres Echecs</td>
-</tr>
-<tr class="even">
-<td>Navrotescu</td>
-<td>Andreea</td>
-<td>Bischwiller</td>
-</tr>
-<tr class="odd">
-<td>Sebag</td>
-<td>Marie</td>
-<td>Bischwiller</td>
-</tr>
-<tr class="even">
-<td>Guichard</td>
-<td>Pauline</td>
-<td>Asnieres - le Grand Echiquier</td>
-</tr>
-<tr class="odd">
-<td>Millet</td>
-<td>Sophie</td>
-<td>Asnieres - le Grand Echiquier</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="fragment">
-<p>Il n’y a pas quelque chose qui vous chagrine ? <span class="emoji" data-emoji="frowning">😦</span></p>
-</div>
-<div class="notes">
-<p>A votre avis, pourquoi il manque une joueuse ?</p>
-</div>
-</section>
-</section>
-<section id="jointure-externe" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="jointure-externe"><span class="header-section-number">3</span> Jointure externe</h2>
-<p>Ce serait pas mal d’afficher toutes les joueuses, même celles qui n’ont pas de club.</p>
-<p>Comment faire ? <span class="emoji" data-emoji="neutral_face">😐</span></p>
-<hr>
-<div class="hide-html-render">
-<iframe src="https://giphy.com/embed/1zRgQYRbZWFXGZ1Tgw" width="960" height="540" frameborder="0" class="giphy-embed no-print" allowfullscreen="">
-</iframe>
-</div>
-<hr>
-<section id="idée" class="level3">
-<h3 class="anchored" data-anchor-id="idée">Idée</h3>
+<li>Entités → table, Attributs → colonnes</li>
+<li>Types, PK, FK, UNIQUE, CHECK, NOT NULL</li>
+</ul></li>
+<li>Physique : niveau développeur (transposable directement en SQL)
 <ul>
-<li>Lister les noms et prénoms des joueuses</li>
-<li>Éventuellement compléter avec le nom du club</li>
+<li>Types exacts</li>
+</ul></li>
 </ul>
-<div class="fragment">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> j.nom,</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>       j.prenom,</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>       c.nom <span class="kw">AS</span> club</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse j</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">LEFT</span> <span class="kw">JOIN</span> echecs.club c <span class="kw">USING</span> (id_club);</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="left-join" class="level3">
-<h3 class="anchored" data-anchor-id="left-join">LEFT JOIN</h3>
-<p>Utilisons un <code>LEFT JOIN</code> pour faire une jointure externe :</p>
+<section id="associations-1n" class="level3" data-background-color="beige" data-number="3.3">
+<h3 data-background-color="beige" data-number="3.3" class="anchored" data-anchor-id="associations-1n"><span class="header-section-number">3.3</span> Associations 1:n</h3>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">classDiagram
+    direction LR
+    class joueuse {
+        id_joueuse SERIAL PK
+        nom        VARCHAR50
+        prenom     VARCHAR50
+        elo        INT
+        #id_club   INT
+    }
+    
+    class club {
+        id_club   SERIAL PK
+        nom       VARCHAR50
+        ville     VARCHAR50
+    }
+
+    joueuse "*" -- "0..1" club
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p><a href="../../doc/cours/02-bases-de-donnees.html#associations">cf.&nbsp;Cours BDD, partie associations</a></p>
+</section>
+<section id="associations-multiples" class="level3" data-background-color="beige" data-number="3.4">
+<h3 data-background-color="beige" data-number="3.4" class="anchored" data-anchor-id="associations-multiples"><span class="header-section-number">3.4</span> Associations multiples</h3>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">classDiagram
+    direction LR
+    class joueuse {
+        id_joueuse SERIAL PK
+        nom        VARCHAR50
+        prenom     VARCHAR50
+        elo        INT
+        #id_club   INT
+    }
+    
+    class partie {
+        #id_blanc     INT
+        #id_noir      INT
+        #id_resultat  INT
+    }
+
+    partie "*" --&gt; "1" joueuse : jouée avec les blancs par ▶
+    partie "*" --&gt; "1" joueuse : jouée avec les noirs par ▶
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="associations-nn" class="level3" data-background-color="beige" data-number="3.5">
+<h3 data-background-color="beige" data-number="3.5" class="anchored" data-anchor-id="associations-nn"><span class="header-section-number">3.5</span> Associations n:n</h3>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">classDiagram
+    direction LR
+    class joueuse {
+        id_joueuse SERIAL PK
+        nom        VARCHAR50
+        prenom     VARCHAR50
+        elo        INT
+        #id_club   INT
+    }
+    
+    class participe {
+        #id_joueuse     INT
+        #id_tournoi     INT
+    }
+
+    class tournoi {
+        #id_tournoi     INT
+        nom             INT
+    }
+
+    joueuse "1" -- "*" participe
+    participe "*" -- "1" tournoi
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="outils" class="level3" data-number="3.6">
+<h3 data-number="3.6" class="anchored" data-anchor-id="outils"><span class="header-section-number">3.6</span> Outils</h3>
+<p>De nombreux outils existent pour faire des diagrammes UML, soit en mode graphique ou code, par exemple :</p>
 <ul>
-<li>nous gardons toutes les données présentes dans les tables avant le <em>LEFT JOIN</em></li>
-<li>nous complétons si possible avec les données des tables après le <em>LEFT JOIN</em></li>
+<li><a href="https://app.diagrams.net/" target="_blank">https://app.diagrams.net/</a></li>
+<li><a href="https://dbdiagram.io/d" target="_blank">https://dbdiagram.io/d</a></li>
 </ul>
-<div class="callout callout-style-default callout-tip callout-titled" title="RIGHT JOIN">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>RIGHT JOIN
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>À l’inverse, le <code>RIGHT JOIN</code> garde tout ce qu’il y a après et compléte si possible avec ce qu’il y a avant.</p>
-<p>Il est moins utilisé car moins intuitif, mais reste parfois indispensable.</p>
-</div>
-</div>
-<div class="notes">
-<p>Il y a certains cas particuliers où le RIGHT JOIN est indispensable</p>
-<p>Vous verrez parfois LEFT OUTER JOIN</p>
-</div>
-</section>
-<section id="résultat-1" class="level3">
-<h3 class="anchored" data-anchor-id="résultat-1">Résultat</h3>
-<div class="tabset-margin-container"></div><div class="panel-tabset nav-pills">
-<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true" href="">LEFT JOIN</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false" href="">RIGHT JOIN</a></li></ul>
-<div class="tab-content nav-pills">
-<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
-<div class="small-table">
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th><strong>nom</strong></th>
-<th><strong>prenom</strong></th>
-<th><strong>club</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Daulyte</td>
-<td>Deimante</td>
-<td>C’Chartres Echecs</td>
-</tr>
-<tr class="even">
-<td>Navrotescu</td>
-<td>Andreea</td>
-<td>Bischwiller</td>
-</tr>
-<tr class="odd">
-<td>Sebag</td>
-<td>Marie</td>
-<td>Bischwiller</td>
-</tr>
-<tr class="even">
-<td>Guichard</td>
-<td>Pauline</td>
-<td>Asnieres - le Grand Echiquier</td>
-</tr>
-<tr class="odd">
-<td>Millet</td>
-<td>Sophie</td>
-<td>Asnieres - le Grand Echiquier</td>
-</tr>
-<tr class="even">
-<td>Skrichempko</td>
-<td>Almira</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
-<div class="small-table">
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th><strong>nom</strong></th>
-<th><strong>prenom</strong></th>
-<th><strong>club</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Daulyte</td>
-<td>Deimante</td>
-<td>C’Chartres Echecs</td>
-</tr>
-<tr class="even">
-<td>Navrotescu</td>
-<td>Andreea</td>
-<td>Bischwiller</td>
-</tr>
-<tr class="odd">
-<td>Sebag</td>
-<td>Marie</td>
-<td>Bischwiller</td>
-</tr>
-<tr class="even">
-<td>Guichard</td>
-<td>Pauline</td>
-<td>Asnieres - le Grand Echiquier</td>
-</tr>
-<tr class="odd">
-<td>Millet</td>
-<td>Sophie</td>
-<td>Asnieres - le Grand Echiquier</td>
-</tr>
-<tr class="even">
-<td></td>
-<td></td>
-<td>Tours des Hauts-De-France</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="jointure-complète" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="jointure-complète"><span class="header-section-number">4</span> Jointure complète</h2>
-<p>Le <code>FULL JOIN</code> permet de faire une jointure bilatérale (i.e.&nbsp;un UNION entre les éléments de la <em>LEFT JOIN</em> et de la <em>RIGHT JOIN</em>)</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> j.nom,</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>       j.prenom,</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>       c.nom <span class="kw">AS</span> club</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse j</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FULL</span> <span class="kw">JOIN</span> echecs.club c <span class="kw">USING</span> (id_club);</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<section id="résultat-2" class="level3">
-<h3 class="anchored" data-anchor-id="résultat-2">Résultat</h3>
-<div class="small-table">
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th><strong>nom</strong></th>
-<th><strong>prenom</strong></th>
-<th><strong>club</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Daulyte</td>
-<td>Deimante</td>
-<td>C’Chartres Echecs</td>
-</tr>
-<tr class="even">
-<td>Navrotescu</td>
-<td>Andreea</td>
-<td>Bischwiller</td>
-</tr>
-<tr class="odd">
-<td>Sebag</td>
-<td>Marie</td>
-<td>Bischwiller</td>
-</tr>
-<tr class="even">
-<td>Guichard</td>
-<td>Pauline</td>
-<td>Asnieres - le Grand Echiquier</td>
-</tr>
-<tr class="odd">
-<td>Millet</td>
-<td>Sophie</td>
-<td>Asnieres - le Grand Echiquier</td>
-</tr>
-<tr class="even">
-<td>Skrichempko</td>
-<td>Almira</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td></td>
-<td></td>
-<td>Tours des Hauts-De-France</td>
-</tr>
-</tbody>
-</table>
-</div>
-</section>
-</section>
-<section id="jointure-croisée" class="level2" data-number="5">
-<h2 data-number="5" class="anchored" data-anchor-id="jointure-croisée"><span class="header-section-number">5</span> Jointure croisée</h2>
-<p><code>CROSS JOIN</code> renvoie le produit cartésien des deux tables.</p>
-<div class="small-table">
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th><strong>nom</strong></th>
-<th><strong>prenom</strong></th>
-<th><strong>club</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Daulyte</td>
-<td>Deimante</td>
-<td>C’Chartres Echecs</td>
-</tr>
-<tr class="even">
-<td>Daulyte</td>
-<td>Deimante</td>
-<td>Bischwiller</td>
-</tr>
-<tr class="odd">
-<td>Daulyte</td>
-<td>Deimante</td>
-<td>Asnieres - le Grand Echiquier</td>
-</tr>
-<tr class="even">
-<td>Daulyte</td>
-<td>Deimante</td>
-<td>Tours des Hauts-De-France</td>
-</tr>
-<tr class="odd">
-<td>Navrotescu</td>
-<td>Andreea</td>
-<td>C’Chartres Echecs</td>
-</tr>
-<tr class="even">
-<td>Navrotescu</td>
-<td>Andreea</td>
-<td>Bischwiller</td>
-</tr>
-<tr class="odd">
-<td>Navrotescu</td>
-<td>Andreea</td>
-<td>Asnieres - le Grand Echiquier</td>
-</tr>
-<tr class="even">
-<td>…</td>
-<td>…</td>
-<td>…</td>
-</tr>
-</tbody>
-</table>
-</div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

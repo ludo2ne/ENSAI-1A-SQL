@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.26">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -11,10 +11,16 @@
 
 <title>SQL avancé – Base de données</title>
 <style>
-code{white-space: pre-wrap;}
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -69,17 +75,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="../../">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b758ccaa5987ceb1b75504551e579abf.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-b66d9f3da4d84aca26cc7cc1c94b0445.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-d3daa1d1ef55350d6f5c3e6cec97cbbd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-8b0b5ce2d45c65f90787eecfe492c3d4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-88b07732f5075a2b8381a7695c30467d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-8b0b5ce2d45c65f90787eecfe492c3d4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -112,7 +119,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body class="floating nav-fixed quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
+<body class="floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -254,8 +261,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         changeGiscusTheme();
       }
     };
-    const authorPrefersDark = true;
+    const authorPrefersDark = false;
     const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
     let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
     // Dark / light mode switch
     window.quartoToggleColorScheme = () => {
@@ -300,35 +309,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-cours">    
         <li>
-    <a class="dropdown-item" href="../../doc/cours/intro.html">
+    <a class="dropdown-item" href="../../doc/cours/01-intro.html">
  <span class="dropdown-text">Introduction</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../doc/cours/bases-de-donnees.html">
+    <a class="dropdown-item" href="../../doc/cours/02-bases-de-donnees.html">
  <span class="dropdown-text">Base de données</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../doc/cours/sql-intro.html">
+    <a class="dropdown-item" href="../../doc/cours/03-sql-intro.html">
  <span class="dropdown-text">Introduction à SQL</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../doc/cours/agregations.html">
+    <a class="dropdown-item" href="../../doc/cours/04-agregations.html">
  <span class="dropdown-text">Agrégations</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../doc/cours/algebre.html">
+    <a class="dropdown-item" href="../../doc/cours/05-algebre.html">
  <span class="dropdown-text">Algèbre Relationnelle</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../doc/cours/jointures.html">
+    <a class="dropdown-item" href="../../doc/cours/06-jointures.html">
  <span class="dropdown-text">Jointures</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../doc/cours/sql-avance.html">
+    <a class="dropdown-item" href="../../doc/cours/07-sql-avance.html">
  <span class="dropdown-text">SQL avancé</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../doc/cours/formalisation.html">
+    <a class="dropdown-item" href="../../doc/cours/08-formalisation.html">
  <span class="dropdown-text">Formalisation des BDD</span></a>
   </li>  
     </ul>
@@ -400,6 +409,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
     </ul>
   </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-examens" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Examens</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-examens">    
+        <li>
+    <a class="dropdown-item" href="../../doc/examens/bdr-2024.html">
+ <span class="dropdown-text">Examen 2024</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../doc/examens/bdr-2025.html">
+ <span class="dropdown-text">Examen 2025</span></a>
+  </li>  
+    </ul>
+  </li>
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/ludo2ne/ENSAI-1A-SQL" target="_blank"> <i class="bi bi-github" role="img">
 </i> 
@@ -422,58 +446,58 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <nav id="TOC" role="doc-toc" class="toc-active">
+    <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="3">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
   <li><a href="#sous-requête" id="toc-sous-requête" class="nav-link active" data-scroll-target="#sous-requête"><span class="header-section-number">1</span> Sous-requête</a>
   <ul class="collapse">
-  <li><a href="#dans-un-filtre" id="toc-dans-un-filtre" class="nav-link" data-scroll-target="#dans-un-filtre">Dans un filtre</a></li>
-  <li><a href="#imbriquer-les-select" id="toc-imbriquer-les-select" class="nav-link" data-scroll-target="#imbriquer-les-select">Imbriquer les SELECT</a></li>
-  <li><a href="#exists" id="toc-exists" class="nav-link" data-scroll-target="#exists">EXISTS</a></li>
+  <li><a href="#dans-un-filtre" id="toc-dans-un-filtre" class="nav-link" data-scroll-target="#dans-un-filtre"><span class="header-section-number">1.1</span> Dans un filtre</a></li>
+  <li><a href="#imbriquer-les-select" id="toc-imbriquer-les-select" class="nav-link" data-scroll-target="#imbriquer-les-select"><span class="header-section-number">1.2</span> Imbriquer les SELECT</a></li>
+  <li><a href="#exists" id="toc-exists" class="nav-link" data-scroll-target="#exists"><span class="header-section-number">1.3</span> EXISTS</a></li>
   </ul></li>
   <li><a href="#les-vues" id="toc-les-vues" class="nav-link" data-scroll-target="#les-vues"><span class="header-section-number">2</span> Les vues</a>
   <ul class="collapse">
-  <li><a href="#joueuses-françaises" id="toc-joueuses-françaises" class="nav-link" data-scroll-target="#joueuses-françaises">Joueuses Françaises</a></li>
-  <li><a href="#nouvelle-table" id="toc-nouvelle-table" class="nav-link" data-scroll-target="#nouvelle-table">Nouvelle table</a></li>
-  <li><a href="#common-table-expression" id="toc-common-table-expression" class="nav-link" data-scroll-target="#common-table-expression">Common Table Expression</a></li>
-  <li><a href="#table-temporaire" id="toc-table-temporaire" class="nav-link" data-scroll-target="#table-temporaire">Table temporaire</a></li>
-  <li><a href="#vue" id="toc-vue" class="nav-link" data-scroll-target="#vue">Vue</a></li>
-  <li><a href="#avantages-et-inconvénients" id="toc-avantages-et-inconvénients" class="nav-link" data-scroll-target="#avantages-et-inconvénients">Avantages et inconvénients</a></li>
-  <li><a href="#vues-matérialisées" id="toc-vues-matérialisées" class="nav-link" data-scroll-target="#vues-matérialisées">Vues matérialisées</a></li>
+  <li><a href="#joueuses-françaises" id="toc-joueuses-françaises" class="nav-link" data-scroll-target="#joueuses-françaises"><span class="header-section-number">2.1</span> Joueuses Françaises</a></li>
+  <li><a href="#nouvelle-table" id="toc-nouvelle-table" class="nav-link" data-scroll-target="#nouvelle-table"><span class="header-section-number">2.2</span> Nouvelle table</a></li>
+  <li><a href="#common-table-expression" id="toc-common-table-expression" class="nav-link" data-scroll-target="#common-table-expression"><span class="header-section-number">2.3</span> Common Table Expression</a></li>
+  <li><a href="#table-temporaire" id="toc-table-temporaire" class="nav-link" data-scroll-target="#table-temporaire"><span class="header-section-number">2.4</span> Table temporaire</a></li>
+  <li><a href="#vue" id="toc-vue" class="nav-link" data-scroll-target="#vue"><span class="header-section-number">2.5</span> Vue</a></li>
+  <li><a href="#avantages-et-inconvénients" id="toc-avantages-et-inconvénients" class="nav-link" data-scroll-target="#avantages-et-inconvénients"><span class="header-section-number">2.6</span> Avantages et inconvénients</a></li>
+  <li><a href="#vues-matérialisées" id="toc-vues-matérialisées" class="nav-link" data-scroll-target="#vues-matérialisées"><span class="header-section-number">2.7</span> Vues matérialisées</a></li>
   </ul></li>
   <li><a href="#gérer-les-droits" id="toc-gérer-les-droits" class="nav-link" data-scroll-target="#gérer-les-droits"><span class="header-section-number">3</span> Gérer les droits</a>
   <ul class="collapse">
-  <li><a href="#donner-des-droits-sur-une-table" id="toc-donner-des-droits-sur-une-table" class="nav-link" data-scroll-target="#donner-des-droits-sur-une-table">Donner des droits sur une table</a></li>
-  <li><a href="#retirer-des-droits" id="toc-retirer-des-droits" class="nav-link" data-scroll-target="#retirer-des-droits">Retirer des droits</a></li>
-  <li><a href="#rôle" id="toc-rôle" class="nav-link" data-scroll-target="#rôle">Rôle</a></li>
-  <li><a href="#droits-sur-un-schéma" id="toc-droits-sur-un-schéma" class="nav-link" data-scroll-target="#droits-sur-un-schéma">Droits sur un schéma</a></li>
+  <li><a href="#donner-des-droits-sur-une-table" id="toc-donner-des-droits-sur-une-table" class="nav-link" data-scroll-target="#donner-des-droits-sur-une-table"><span class="header-section-number">3.1</span> Donner des droits sur une table</a></li>
+  <li><a href="#retirer-des-droits" id="toc-retirer-des-droits" class="nav-link" data-scroll-target="#retirer-des-droits"><span class="header-section-number">3.2</span> Retirer des droits</a></li>
+  <li><a href="#rôle" id="toc-rôle" class="nav-link" data-scroll-target="#rôle"><span class="header-section-number">3.3</span> Rôle</a></li>
+  <li><a href="#droits-sur-un-schéma" id="toc-droits-sur-un-schéma" class="nav-link" data-scroll-target="#droits-sur-un-schéma"><span class="header-section-number">3.4</span> Droits sur un schéma</a></li>
   </ul></li>
   <li><a href="#transactions" id="toc-transactions" class="nav-link" data-scroll-target="#transactions"><span class="header-section-number">4</span> Transactions</a>
   <ul class="collapse">
-  <li><a href="#exemple-classique" id="toc-exemple-classique" class="nav-link" data-scroll-target="#exemple-classique">Exemple classique</a></li>
-  <li><a href="#transfert-de-fonds" id="toc-transfert-de-fonds" class="nav-link" data-scroll-target="#transfert-de-fonds">Transfert de fonds</a></li>
-  <li><a href="#propriétés-acid" id="toc-propriétés-acid" class="nav-link" data-scroll-target="#propriétés-acid">Propriétés ACID</a></li>
+  <li><a href="#exemple-classique" id="toc-exemple-classique" class="nav-link" data-scroll-target="#exemple-classique"><span class="header-section-number">4.1</span> Exemple classique</a></li>
+  <li><a href="#transfert-de-fonds" id="toc-transfert-de-fonds" class="nav-link" data-scroll-target="#transfert-de-fonds"><span class="header-section-number">4.2</span> Transfert de fonds</a></li>
+  <li><a href="#propriétés-acid" id="toc-propriétés-acid" class="nav-link" data-scroll-target="#propriétés-acid"><span class="header-section-number">4.3</span> Propriétés ACID</a></li>
   </ul></li>
   <li><a href="#index" id="toc-index" class="nav-link" data-scroll-target="#index"><span class="header-section-number">5</span> Index</a>
   <ul class="collapse">
-  <li><a href="#optimisation" id="toc-optimisation" class="nav-link" data-scroll-target="#optimisation">Optimisation</a></li>
-  <li><a href="#créer-un-index" id="toc-créer-un-index" class="nav-link" data-scroll-target="#créer-un-index">Créer un index</a></li>
-  <li><a href="#application" id="toc-application" class="nav-link" data-scroll-target="#application">Application</a></li>
-  <li><a href="#avantages-et-inconvénients-1" id="toc-avantages-et-inconvénients-1" class="nav-link" data-scroll-target="#avantages-et-inconvénients-1">Avantages et inconvénients</a></li>
+  <li><a href="#optimisation" id="toc-optimisation" class="nav-link" data-scroll-target="#optimisation"><span class="header-section-number">5.1</span> Optimisation</a></li>
+  <li><a href="#créer-un-index" id="toc-créer-un-index" class="nav-link" data-scroll-target="#créer-un-index"><span class="header-section-number">5.2</span> Créer un index</a></li>
+  <li><a href="#application" id="toc-application" class="nav-link" data-scroll-target="#application"><span class="header-section-number">5.3</span> Application</a></li>
+  <li><a href="#avantages-et-inconvénients-1" id="toc-avantages-et-inconvénients-1" class="nav-link" data-scroll-target="#avantages-et-inconvénients-1"><span class="header-section-number">5.4</span> Avantages et inconvénients</a></li>
   </ul></li>
   <li><a href="#fonction" id="toc-fonction" class="nav-link" data-scroll-target="#fonction"><span class="header-section-number">6</span> Fonction</a>
   <ul class="collapse">
-  <li><a href="#exemple" id="toc-exemple" class="nav-link" data-scroll-target="#exemple">Exemple</a></li>
+  <li><a href="#exemple" id="toc-exemple" class="nav-link" data-scroll-target="#exemple"><span class="header-section-number">6.1</span> Exemple</a></li>
   </ul></li>
   <li><a href="#procédure" id="toc-procédure" class="nav-link" data-scroll-target="#procédure"><span class="header-section-number">7</span> Procédure</a></li>
   <li><a href="#trigger" id="toc-trigger" class="nav-link" data-scroll-target="#trigger"><span class="header-section-number">8</span> Trigger</a>
   <ul class="collapse">
-  <li><a href="#exemple-1" id="toc-exemple-1" class="nav-link" data-scroll-target="#exemple-1">Exemple</a></li>
-  <li><a href="#exemple-2" id="toc-exemple-2" class="nav-link" data-scroll-target="#exemple-2">Exemple 2</a></li>
+  <li><a href="#exemple-1" id="toc-exemple-1" class="nav-link" data-scroll-target="#exemple-1"><span class="header-section-number">8.1</span> Exemple</a></li>
+  <li><a href="#exemple-2" id="toc-exemple-2" class="nav-link" data-scroll-target="#exemple-2"><span class="header-section-number">8.2</span> Exemple 2</a></li>
   </ul></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="sql-avance-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="07-sql-avance-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -486,11 +510,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <h1 class="title">SQL avancé</h1>
-</div>
+  <div class="quarto-categories">
+    <div class="quarto-category">Sous-requêtes</div>
+    <div class="quarto-category">Vues</div>
+    <div class="quarto-category">Droits</div>
+    <div class="quarto-category">Transactions</div>
+    <div class="quarto-category">Index</div>
+    <div class="quarto-category">Triggers</div>
+  </div>
+  </div>
 
 <div>
   <div class="description">
-    <a href="sql-avance-slides.html">Slides</a>
+    <a href="07-sql-avance-slides.html">Slides</a>
   </div>
 </div>
 
@@ -527,8 +559,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>);</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <section id="sous-requête" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="sous-requête"><span class="header-section-number">1</span> Sous-requête</h2>
-<section id="dans-un-filtre" class="level3">
-<h3 class="anchored" data-anchor-id="dans-un-filtre">Dans un filtre</h3>
+<section id="dans-un-filtre" class="level3" data-number="1.1">
+<h3 data-number="1.1" class="anchored" data-anchor-id="dans-un-filtre"><span class="header-section-number">1.1</span> Dans un filtre</h3>
 <p>Vous souhaitez lister les joueuses avec un elo supérieur à la moyenne.</p>
 <p><br></p>
 <div class="fragment">
@@ -547,8 +579,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </div>
 </section>
-<section id="imbriquer-les-select" class="level3">
-<h3 class="anchored" data-anchor-id="imbriquer-les-select">Imbriquer les SELECT</h3>
+<section id="imbriquer-les-select" class="level3" data-number="1.2">
+<h3 data-number="1.2" class="anchored" data-anchor-id="imbriquer-les-select"><span class="header-section-number">1.2</span> Imbriquer les SELECT</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> j.nom, </span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>       j.prenom, </span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>       j.elo,</span>
@@ -566,8 +598,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a> <span class="kw">GROUP</span> <span class="kw">BY</span> id_club</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
 </section>
-<section id="exists" class="level3">
-<h3 class="anchored" data-anchor-id="exists">EXISTS</h3>
+<section id="exists" class="level3" data-number="1.3">
+<h3 data-number="1.3" class="anchored" data-anchor-id="exists"><span class="header-section-number">1.3</span> EXISTS</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.club c</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> <span class="kw">EXISTS</span> (<span class="kw">SELECT</span> <span class="dv">1</span></span>
@@ -590,8 +622,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="les-vues" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="les-vues"><span class="header-section-number">2</span> Les vues</h2>
-<section id="joueuses-françaises" class="level3">
-<h3 class="anchored" data-anchor-id="joueuses-françaises">Joueuses Françaises</h3>
+<section id="joueuses-françaises" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="joueuses-françaises"><span class="header-section-number">2.1</span> Joueuses Françaises</h3>
 <div class="callout callout-style-default callout-note callout-titled" title="Question">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -607,8 +639,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="nouvelle-table" class="level3">
-<h3 class="anchored" data-anchor-id="nouvelle-table">Nouvelle table</h3>
+<section id="nouvelle-table" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="nouvelle-table"><span class="header-section-number">2.2</span> Nouvelle table</h3>
 <p>Solution 1 : créons une nouvelle table</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TABLE</span> echecs.joueuse_fr_2000</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">AS</span></span>
@@ -635,8 +667,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="common-table-expression" class="level3">
-<h3 class="anchored" data-anchor-id="common-table-expression">Common Table Expression</h3>
+<section id="common-table-expression" class="level3" data-number="2.3">
+<h3 data-number="2.3" class="anchored" data-anchor-id="common-table-expression"><span class="header-section-number">2.3</span> Common Table Expression</h3>
 <p>Pour une utilisation ponctuelle, utilisez une CTE <span class="emoji" data-emoji="sunglasses">😎</span></p>
 <ul>
 <li>Commencez par définir votre sous-requête <em>joueuses_fr_elo2000</em> avec <code>WITH</code></li>
@@ -660,8 +692,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </div>
 </section>
-<section id="table-temporaire" class="level3">
-<h3 class="anchored" data-anchor-id="table-temporaire">Table temporaire</h3>
+<section id="table-temporaire" class="level3" data-number="2.4">
+<h3 data-number="2.4" class="anchored" data-anchor-id="table-temporaire"><span class="header-section-number">2.4</span> Table temporaire</h3>
 <p>N’existe que le temps de la session.</p>
 <p><br></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">TEMPORARY</span> <span class="kw">TABLE</span> joueuses_fr_elo2000 </span>
@@ -684,8 +716,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="vue" class="level3">
-<h3 class="anchored" data-anchor-id="vue">Vue</h3>
+<section id="vue" class="level3" data-number="2.5">
+<h3 data-number="2.5" class="anchored" data-anchor-id="vue"><span class="header-section-number">2.5</span> Vue</h3>
 <div class="callout callout-style-default callout-note callout-titled" title="Définition">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -715,8 +747,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </div>
 </section>
-<section id="avantages-et-inconvénients" class="level3">
-<h3 class="anchored" data-anchor-id="avantages-et-inconvénients">Avantages et inconvénients</h3>
+<section id="avantages-et-inconvénients" class="level3" data-number="2.6">
+<h3 data-number="2.6" class="anchored" data-anchor-id="avantages-et-inconvénients"><span class="header-section-number">2.6</span> Avantages et inconvénients</h3>
 <ul>
 <li><span class="emoji" data-emoji="heavy_check_mark">✔️</span> Simplicité d’accès aux données</li>
 <li><span class="emoji" data-emoji="heavy_check_mark">✔️</span> Meilleure organisation des données</li>
@@ -733,8 +765,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </div>
 </section>
-<section id="vues-matérialisées" class="level3">
-<h3 class="anchored" data-anchor-id="vues-matérialisées">Vues matérialisées</h3>
+<section id="vues-matérialisées" class="level3" data-number="2.7">
+<h3 data-number="2.7" class="anchored" data-anchor-id="vues-matérialisées"><span class="header-section-number">2.7</span> Vues matérialisées</h3>
 <p>Photo à un instant t (snapshot) <span class="emoji" data-emoji="camera">📷</span></p>
 <p><br></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">MATERIALIZED</span> <span class="kw">VIEW</span> joueuses_fr_elo2000 </span>
@@ -749,8 +781,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="3" class="anchored" data-anchor-id="gérer-les-droits"><span class="header-section-number">3</span> Gérer les droits</h2>
 <p>L’utilisateur qui crée une table peut distribuer des droits aux autres.</p>
 <p>Voir section <em>priviléges</em> de la doc PostgreSQL</p>
-<section id="donner-des-droits-sur-une-table" class="level3">
-<h3 class="anchored" data-anchor-id="donner-des-droits-sur-une-table">Donner des droits sur une table</h3>
+<section id="donner-des-droits-sur-une-table" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="donner-des-droits-sur-une-table"><span class="header-section-number">3.1</span> Donner des droits sur une table</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Lecture pour tous</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="kw">GRANT</span> <span class="kw">SELECT</span> <span class="kw">ON</span> echecs.joueuse <span class="kw">TO</span> <span class="kw">PUBLIC</span>;</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -774,8 +806,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><code>ALTER TABLE t OWNER TO michel;</code></p>
 </div>
 </section>
-<section id="retirer-des-droits" class="level3">
-<h3 class="anchored" data-anchor-id="retirer-des-droits">Retirer des droits</h3>
+<section id="retirer-des-droits" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="retirer-des-droits"><span class="header-section-number">3.2</span> Retirer des droits</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Lecture</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="kw">REVOKE</span> <span class="kw">SELECT</span> <span class="kw">ON</span> echecs.joueuse <span class="kw">TO</span> chantal;</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -784,8 +816,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><br></p>
 <p>Suffixe <code>CASCADE</code> pour retirer les droits à ceux qui ont reçu les droits de la part de…</p>
 </section>
-<section id="rôle" class="level3">
-<h3 class="anchored" data-anchor-id="rôle">Rôle</h3>
+<section id="rôle" class="level3" data-number="3.3">
+<h3 data-number="3.3" class="anchored" data-anchor-id="rôle"><span class="header-section-number">3.3</span> Rôle</h3>
 <p>Pour une gestion simplifiée des droits</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- créer un rôle</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">ROLE</span> eleve;</span>
@@ -800,8 +832,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Plus pratique avec les rôles.</p>
 </div>
 </section>
-<section id="droits-sur-un-schéma" class="level3">
-<h3 class="anchored" data-anchor-id="droits-sur-un-schéma">Droits sur un schéma</h3>
+<section id="droits-sur-un-schéma" class="level3" data-number="3.4">
+<h3 data-number="3.4" class="anchored" data-anchor-id="droits-sur-un-schéma"><span class="header-section-number">3.4</span> Droits sur un schéma</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- droit d'accès au schéma i.e. de consulter les objets du schéma</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="kw">GRANT</span> <span class="kw">USAGE</span> <span class="kw">ON</span> <span class="kw">SCHEMA</span> echecs <span class="kw">TO</span> <span class="kw">PUBLIC</span>;</span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -817,8 +849,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="transactions" class="level2" data-number="4">
 <h2 data-number="4" class="anchored" data-anchor-id="transactions"><span class="header-section-number">4</span> Transactions</h2>
-<section id="exemple-classique" class="level3">
-<h3 class="anchored" data-anchor-id="exemple-classique">Exemple classique</h3>
+<section id="exemple-classique" class="level3" data-number="4.1">
+<h3 data-number="4.1" class="anchored" data-anchor-id="exemple-classique"><span class="header-section-number">4.1</span> Exemple classique</h3>
 <div class="callout callout-style-default callout-important callout-titled" title="Mission">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -835,8 +867,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </section>
-<section id="transfert-de-fonds" class="level3">
-<h3 class="anchored" data-anchor-id="transfert-de-fonds">Transfert de fonds</h3>
+<section id="transfert-de-fonds" class="level3" data-number="4.2">
+<h3 data-number="4.2" class="anchored" data-anchor-id="transfert-de-fonds"><span class="header-section-number">4.2</span> Transfert de fonds</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="cf">BEGIN</span>; <span class="co">-- Début de la transaction</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="kw">UPDATE</span> compte <span class="kw">SET</span> solde <span class="op">=</span> solde <span class="op">-</span> <span class="dv">10000000</span> <span class="kw">WHERE</span> <span class="kw">id</span> <span class="op">=</span> <span class="dv">1</span>;</span>
@@ -855,8 +887,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </div>
 </section>
-<section id="propriétés-acid" class="level3">
-<h3 class="anchored" data-anchor-id="propriétés-acid">Propriétés ACID</h3>
+<section id="propriétés-acid" class="level3" data-number="4.3">
+<h3 data-number="4.3" class="anchored" data-anchor-id="propriétés-acid"><span class="header-section-number">4.3</span> Propriétés ACID</h3>
 <p>Pour définir la fiabilité des transactions :</p>
 <ul>
 <li><strong>Atomicité</strong> : Une transaction est “tout ou rien”</li>
@@ -873,8 +905,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="index" class="level2" data-number="5">
 <h2 data-number="5" class="anchored" data-anchor-id="index"><span class="header-section-number">5</span> Index</h2>
-<section id="optimisation" class="level3">
-<h3 class="anchored" data-anchor-id="optimisation">Optimisation</h3>
+<section id="optimisation" class="level3" data-number="5.1">
+<h3 data-number="5.1" class="anchored" data-anchor-id="optimisation"><span class="header-section-number">5.1</span> Optimisation</h3>
 <p>Possible d’optimiser à plusieurs niveaux :</p>
 <ul>
 <li>Logique : Normalisation / Dénormalisation</li>
@@ -893,8 +925,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>EXPLAIN SELECT * FROM joueuse WHERE prenom = ‘Amandine’;</p>
 </div>
 </section>
-<section id="créer-un-index" class="level3">
-<h3 class="anchored" data-anchor-id="créer-un-index">Créer un index</h3>
+<section id="créer-un-index" class="level3" data-number="5.2">
+<h3 data-number="5.2" class="anchored" data-anchor-id="créer-un-index"><span class="header-section-number">5.2</span> Créer un index</h3>
 <div class="callout callout-style-default callout-note callout-titled" title="Définition">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -917,8 +949,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </div>
 </section>
-<section id="application" class="level3">
-<h3 class="anchored" data-anchor-id="application">Application</h3>
+<section id="application" class="level3" data-number="5.3">
+<h3 data-number="5.3" class="anchored" data-anchor-id="application"><span class="header-section-number">5.3</span> Application</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> prenom <span class="op">=</span> <span class="st">'Amandine'</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -938,8 +970,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 </div>
 </section>
-<section id="avantages-et-inconvénients-1" class="level3">
-<h3 class="anchored" data-anchor-id="avantages-et-inconvénients-1">Avantages et inconvénients</h3>
+<section id="avantages-et-inconvénients-1" class="level3" data-number="5.4">
+<h3 data-number="5.4" class="anchored" data-anchor-id="avantages-et-inconvénients-1"><span class="header-section-number">5.4</span> Avantages et inconvénients</h3>
 <ul>
 <li><span class="emoji" data-emoji="heavy_check_mark">✔️</span> Haute cardinalité</li>
 <li><span class="emoji" data-emoji="heavy_check_mark">✔️</span> Peu de valeurs nulles</li>
@@ -964,8 +996,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom, </span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>       get_categorie(date_naissance)</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<section id="exemple" class="level3">
-<h3 class="anchored" data-anchor-id="exemple">Exemple</h3>
+<section id="exemple" class="level3" data-number="6.1">
+<h3 data-number="6.1" class="anchored" data-anchor-id="exemple"><span class="header-section-number">6.1</span> Exemple</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">OR</span> <span class="kw">REPLACE</span> <span class="kw">FUNCTION</span> echecs.get_categorie(p_date_naissance <span class="dt">DATE</span>)</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>RETURNS <span class="dt">VARCHAR</span>(<span class="dv">20</span>) <span class="kw">AS</span> $$</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="kw">DECLARE</span></span>
@@ -1013,8 +1045,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Synchroniser des données : Mettre à jour des tables liées automatiquement.</li>
 </ul>
 </div>
-<section id="exemple-1" class="level3">
-<h3 class="anchored" data-anchor-id="exemple-1">Exemple</h3>
+<section id="exemple-1" class="level3" data-number="8.1">
+<h3 data-number="8.1" class="anchored" data-anchor-id="exemple-1"><span class="header-section-number">8.1</span> Exemple</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">OR</span> <span class="kw">REPLACE</span> <span class="kw">FUNCTION</span> echecs.format_nom_prenom()</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>RETURNS <span class="kw">TRIGGER</span> <span class="kw">AS</span> $$</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="cf">BEGIN</span></span>
@@ -1029,8 +1061,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="cf">FOR</span> <span class="kw">EACH</span> <span class="kw">ROW</span></span>
 <span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="kw">EXECUTE</span> <span class="kw">FUNCTION</span> echecs.format_nom_prenom();</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="exemple-2" class="level3">
-<h3 class="anchored" data-anchor-id="exemple-2">Exemple 2</h3>
+<section id="exemple-2" class="level3" data-number="8.2">
+<h3 data-number="8.2" class="anchored" data-anchor-id="exemple-2"><span class="header-section-number">8.2</span> Exemple 2</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">OR</span> <span class="kw">REPLACE</span> <span class="kw">FUNCTION</span> echecs.block_update_taux()</span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>RETURNS <span class="kw">TRIGGER</span> <span class="kw">AS</span> $$</span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="cf">BEGIN</span></span>

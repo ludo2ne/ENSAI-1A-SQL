@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.26">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -11,10 +11,16 @@
 
 <title>Glossaire – Base de données</title>
 <style>
-code{white-space: pre-wrap;}
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -34,17 +40,18 @@ ul.task-list li input[type="checkbox"] {
 <meta name="quarto:offset" content="../">
 <script src="../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b758ccaa5987ceb1b75504551e579abf.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-b66d9f3da4d84aca26cc7cc1c94b0445.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../site_libs/bootstrap/bootstrap-dark-d3daa1d1ef55350d6f5c3e6cec97cbbd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-8b0b5ce2d45c65f90787eecfe492c3d4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-dark-88b07732f5075a2b8381a7695c30467d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../site_libs/bootstrap/bootstrap-8b0b5ce2d45c65f90787eecfe492c3d4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -77,7 +84,7 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body class="nav-fixed fullcontent quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
+<body class="floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -219,8 +226,10 @@ ul.task-list li input[type="checkbox"] {
         changeGiscusTheme();
       }
     };
-    const authorPrefersDark = true;
+    const authorPrefersDark = false;
     const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
     let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
     // Dark / light mode switch
     window.quartoToggleColorScheme = () => {
@@ -265,35 +274,35 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-cours">    
         <li>
-    <a class="dropdown-item" href="../doc/cours/intro.html">
+    <a class="dropdown-item" href="../doc/cours/01-intro.html">
  <span class="dropdown-text">Introduction</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../doc/cours/bases-de-donnees.html">
+    <a class="dropdown-item" href="../doc/cours/02-bases-de-donnees.html">
  <span class="dropdown-text">Base de données</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../doc/cours/sql-intro.html">
+    <a class="dropdown-item" href="../doc/cours/03-sql-intro.html">
  <span class="dropdown-text">Introduction à SQL</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../doc/cours/agregations.html">
+    <a class="dropdown-item" href="../doc/cours/04-agregations.html">
  <span class="dropdown-text">Agrégations</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../doc/cours/algebre.html">
+    <a class="dropdown-item" href="../doc/cours/05-algebre.html">
  <span class="dropdown-text">Algèbre Relationnelle</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../doc/cours/jointures.html">
+    <a class="dropdown-item" href="../doc/cours/06-jointures.html">
  <span class="dropdown-text">Jointures</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../doc/cours/sql-avance.html">
+    <a class="dropdown-item" href="../doc/cours/07-sql-avance.html">
  <span class="dropdown-text">SQL avancé</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../doc/cours/formalisation.html">
+    <a class="dropdown-item" href="../doc/cours/08-formalisation.html">
  <span class="dropdown-text">Formalisation des BDD</span></a>
   </li>  
     </ul>
@@ -365,6 +374,21 @@ ul.task-list li input[type="checkbox"] {
   </li>  
     </ul>
   </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-examens" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Examens</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-examens">    
+        <li>
+    <a class="dropdown-item" href="../doc/examens/bdr-2024.html">
+ <span class="dropdown-text">Examen 2024</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../doc/examens/bdr-2025.html">
+ <span class="dropdown-text">Examen 2025</span></a>
+  </li>  
+    </ul>
+  </li>
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/ludo2ne/ENSAI-1A-SQL" target="_blank"> <i class="bi bi-github" role="img">
 </i> 
@@ -386,8 +410,34 @@ ul.task-list li input[type="checkbox"] {
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="3">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#table" id="toc-table" class="nav-link active" data-scroll-target="#table"><span class="header-section-number">1</span> Table</a>
+  <ul class="collapse">
+  <li><a href="#ligne" id="toc-ligne" class="nav-link" data-scroll-target="#ligne"><span class="header-section-number">1.1</span> Ligne</a></li>
+  <li><a href="#colonne" id="toc-colonne" class="nav-link" data-scroll-target="#colonne"><span class="header-section-number">1.2</span> Colonne</a></li>
+  <li><a href="#clé-primaire" id="toc-clé-primaire" class="nav-link" data-scroll-target="#clé-primaire"><span class="header-section-number">1.3</span> Clé primaire</a></li>
+  <li><a href="#clé-étrangère" id="toc-clé-étrangère" class="nav-link" data-scroll-target="#clé-étrangère"><span class="header-section-number">1.4</span> Clé étrangère</a></li>
+  </ul></li>
+  <li><a href="#bases-de-données" id="toc-bases-de-données" class="nav-link" data-scroll-target="#bases-de-données"><span class="header-section-number">2</span> Bases de Données</a></li>
+  <li><a href="#sql-structured-query-language" id="toc-sql-structured-query-language" class="nav-link" data-scroll-target="#sql-structured-query-language"><span class="header-section-number">3</span> SQL (Structured Query Language)</a>
+  <ul class="collapse">
+  <li><a href="#manipulation-de-données" id="toc-manipulation-de-données" class="nav-link" data-scroll-target="#manipulation-de-données"><span class="header-section-number">3.1</span> Manipulation de données</a></li>
+  <li><a href="#définition-de-données" id="toc-définition-de-données" class="nav-link" data-scroll-target="#définition-de-données"><span class="header-section-number">3.2</span> Définition de Données</a></li>
+  <li><a href="#transaction" id="toc-transaction" class="nav-link" data-scroll-target="#transaction"><span class="header-section-number">3.3</span> Transaction</a></li>
+  <li><a href="#accès-aux-données" id="toc-accès-aux-données" class="nav-link" data-scroll-target="#accès-aux-données"><span class="header-section-number">3.4</span> Accès aux données</a></li>
+  <li><a href="#formes-normales" id="toc-formes-normales" class="nav-link" data-scroll-target="#formes-normales"><span class="header-section-number">3.5</span> Formes Normales</a></li>
+  </ul></li>
+  </ul>
+</nav>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -423,36 +473,36 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p><span class="emoji" data-emoji="construction">🚧</span></p>
-<section id="table" class="level2">
-<h2 class="anchored" data-anchor-id="table">Table</h2>
+<section id="table" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="table"><span class="header-section-number">1</span> Table</h2>
 <p>Structure de données dans une base de données relationnelle qui contient :</p>
 <ul>
 <li>des lignes représentant des entités</li>
 <li>des colonnes représentant un attribut de ces entités</li>
 </ul>
 <p>Synonymes : Relation</p>
-<section id="ligne" class="level3">
-<h3 class="anchored" data-anchor-id="ligne">Ligne</h3>
+<section id="ligne" class="level3" data-number="1.1">
+<h3 data-number="1.1" class="anchored" data-anchor-id="ligne"><span class="header-section-number">1.1</span> Ligne</h3>
 <p>Un ensemble de valeurs correspondant à un objet ou une entité dans une table.</p>
 <p>Synonymes : Enregistrement, Entité, Tuple, Observation</p>
 </section>
-<section id="colonne" class="level3">
-<h3 class="anchored" data-anchor-id="colonne">Colonne</h3>
+<section id="colonne" class="level3" data-number="1.2">
+<h3 data-number="1.2" class="anchored" data-anchor-id="colonne"><span class="header-section-number">1.2</span> Colonne</h3>
 <p>Une structure verticale dans une table qui contient un type spécifique de données.</p>
 <p>Synonymes : Attribut, Champs, Propriété, Variable, Dimension</p>
 </section>
-<section id="clé-primaire" class="level3">
-<h3 class="anchored" data-anchor-id="clé-primaire">Clé primaire</h3>
+<section id="clé-primaire" class="level3" data-number="1.3">
+<h3 data-number="1.3" class="anchored" data-anchor-id="clé-primaire"><span class="header-section-number">1.3</span> Clé primaire</h3>
 <p>Un champ ou un ensemble de champs qui identifie de manière unique chaque ligne d’une table.</p>
 </section>
-<section id="clé-étrangère" class="level3">
-<h3 class="anchored" data-anchor-id="clé-étrangère">Clé étrangère</h3>
+<section id="clé-étrangère" class="level3" data-number="1.4">
+<h3 data-number="1.4" class="anchored" data-anchor-id="clé-étrangère"><span class="header-section-number">1.4</span> Clé étrangère</h3>
 <p>Un champ dans une table qui est une référence à la clé primaire d’une autre table.</p>
 <p>Elle est utilisée pour établir une relation entre deux tables.</p>
 </section>
 </section>
-<section id="bases-de-données" class="level2">
-<h2 class="anchored" data-anchor-id="bases-de-données">Bases de Données</h2>
+<section id="bases-de-données" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="bases-de-données"><span class="header-section-number">2</span> Bases de Données</h2>
 <ul>
 <li><strong>Donnée</strong> : information brute composée d’un concept, d’un domaine des possibles, d’une valeur.</li>
 <li><strong>Métadonnée</strong> : donnée qui décrit d’autres données (contenu, structure, contexte…). Par exemple, pour une photo, les métadonnées pourraient inclure la date de prise de vue, le lieu, des mots-clés décrivant le contenu…</li>
@@ -465,13 +515,13 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>pgAdmin</strong> : Interface graphique pour administrer des bases de données PostgreSQL. Elle permet de créer, modifier, supprimer des objets de base de données, et d’exécuter des requêtes SQL.</li>
 </ul>
 </section>
-<section id="sql-structured-query-language" class="level2">
-<h2 class="anchored" data-anchor-id="sql-structured-query-language">SQL (Structured Query Language)</h2>
+<section id="sql-structured-query-language" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="sql-structured-query-language"><span class="header-section-number">3</span> SQL (Structured Query Language)</h2>
 <ul>
 <li><strong>SQL</strong> : Un langage standardisé pour interagir avec des bases de données relationnelles. SQL permet de créer, lire, mettre à jour et supprimer des données (CRUD).</li>
 </ul>
-<section id="manipulation-de-données" class="level3">
-<h3 class="anchored" data-anchor-id="manipulation-de-données">Manipulation de données</h3>
+<section id="manipulation-de-données" class="level3" data-number="3.1">
+<h3 data-number="3.1" class="anchored" data-anchor-id="manipulation-de-données"><span class="header-section-number">3.1</span> Manipulation de données</h3>
 <ul>
 <li><strong>INSERT INTO</strong> : Insérer de nouvelles lignes dans une table</li>
 <li><strong>UPDATE</strong> : Modifier les données existantes dans une table</li>
@@ -487,8 +537,8 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>CTE (Common Table Expression)</strong> : Une sous-requête qui peut être utilisée dans une requête principale pour améliorer la lisibilité et la structure des requêtes complexes.</li>
 </ul>
 </section>
-<section id="définition-de-données" class="level3">
-<h3 class="anchored" data-anchor-id="définition-de-données">Définition de Données</h3>
+<section id="définition-de-données" class="level3" data-number="3.2">
+<h3 data-number="3.2" class="anchored" data-anchor-id="définition-de-données"><span class="header-section-number">3.2</span> Définition de Données</h3>
 <ul>
 <li><strong>CREATE</strong> : Créer des tables, des vues, des index…</li>
 <li><strong>ALTER</strong> : Modifier la structure d’une table</li>
@@ -499,8 +549,8 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>SCHEMA</strong> : Utilisé pour organiser une base de données. Un schéma peut contenir des tables, des vues, des fonctions…</li>
 </ul>
 </section>
-<section id="transaction" class="level3">
-<h3 class="anchored" data-anchor-id="transaction">Transaction</h3>
+<section id="transaction" class="level3" data-number="3.3">
+<h3 data-number="3.3" class="anchored" data-anchor-id="transaction"><span class="header-section-number">3.3</span> Transaction</h3>
 <ul>
 <li><strong>TRANSACTION</strong> : Un bloc de commandes SQL qui peut être validé (<code>COMMIT</code>) ou annulé (<code>ROLLBACK</code>) dans son ensemble</li>
 <li><strong>COMMIT</strong> : Commande permettant de valider une transaction</li>
@@ -508,15 +558,15 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>ACID</strong> : Propriétés des transactions garantissant leur intégrité : <strong>Atomicité</strong>, <strong>Cohérence</strong>, <strong>Isolation</strong>, <strong>Durabilité</strong>.</li>
 </ul>
 </section>
-<section id="accès-aux-données" class="level3">
-<h3 class="anchored" data-anchor-id="accès-aux-données">Accès aux données</h3>
+<section id="accès-aux-données" class="level3" data-number="3.4">
+<h3 data-number="3.4" class="anchored" data-anchor-id="accès-aux-données"><span class="header-section-number">3.4</span> Accès aux données</h3>
 <ul>
 <li>GRANT</li>
 <li>REVOKE</li>
 </ul>
 </section>
-<section id="formes-normales" class="level3">
-<h3 class="anchored" data-anchor-id="formes-normales">Formes Normales</h3>
+<section id="formes-normales" class="level3" data-number="3.5">
+<h3 data-number="3.5" class="anchored" data-anchor-id="formes-normales"><span class="header-section-number">3.5</span> Formes Normales</h3>
 <ul>
 <li><a href="https://formations.imt-atlantique.fr/bd_ihm/fr/normalisation/normal_forms/" target="_blank">https://formations.imt-atlantique.fr/bd_ihm/fr/normalisation/normal_forms/</a></li>
 </ul>

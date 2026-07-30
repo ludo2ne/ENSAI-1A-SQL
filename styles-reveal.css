@@ -15,3 +15,12 @@
 .sourceCode .co {         /* SQL comments */
   color: green;
 }
+
+
+
+/* Dont print gif */
+@media print {
+  img[src$=".gif"] {
+    display: none !important;
+  }
+}

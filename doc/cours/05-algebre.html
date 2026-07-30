@@ -2,19 +2,25 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.8.26">
+<meta name="generator" content="quarto-1.10.18">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Ludovic Deneuville">
 <meta name="description" content="Slides">
 
-<title>Agrégations – Base de données</title>
+<title>Algèbre Relationnelle – Base de données</title>
 <style>
-code{white-space: pre-wrap;}
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
 span.smallcaps{font-variant: small-caps;}
-div.columns{display: flex; gap: min(4vw, 1.5em);}
-div.column{flex: auto; overflow-x: auto;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
@@ -69,17 +75,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="../../">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-587c61ba64f3a5504c4d52d930310e48.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b758ccaa5987ceb1b75504551e579abf.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-b85bc7c33db8c58e0ec93c3465666fed.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-b66d9f3da4d84aca26cc7cc1c94b0445.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-d3daa1d1ef55350d6f5c3e6cec97cbbd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-8b0b5ce2d45c65f90787eecfe492c3d4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-88b07732f5075a2b8381a7695c30467d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-8b0b5ce2d45c65f90787eecfe492c3d4.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -112,7 +119,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body class="floating nav-fixed quarto-dark"><script id="quarto-html-before-body" type="application/javascript">
+<body class="floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -254,8 +261,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         changeGiscusTheme();
       }
     };
-    const authorPrefersDark = true;
+    const authorPrefersDark = false;
     const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
     let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
     // Dark / light mode switch
     window.quartoToggleColorScheme = () => {
@@ -300,35 +309,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-cours">    
         <li>
-    <a class="dropdown-item" href="../../doc/cours/intro.html">
+    <a class="dropdown-item" href="../../doc/cours/01-intro.html">
  <span class="dropdown-text">Introduction</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../doc/cours/bases-de-donnees.html">
+    <a class="dropdown-item" href="../../doc/cours/02-bases-de-donnees.html">
  <span class="dropdown-text">Base de données</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../doc/cours/sql-intro.html">
+    <a class="dropdown-item" href="../../doc/cours/03-sql-intro.html">
  <span class="dropdown-text">Introduction à SQL</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../doc/cours/agregations.html">
+    <a class="dropdown-item" href="../../doc/cours/04-agregations.html">
  <span class="dropdown-text">Agrégations</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../doc/cours/algebre.html">
+    <a class="dropdown-item" href="../../doc/cours/05-algebre.html">
  <span class="dropdown-text">Algèbre Relationnelle</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../doc/cours/jointures.html">
+    <a class="dropdown-item" href="../../doc/cours/06-jointures.html">
  <span class="dropdown-text">Jointures</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../doc/cours/sql-avance.html">
+    <a class="dropdown-item" href="../../doc/cours/07-sql-avance.html">
  <span class="dropdown-text">SQL avancé</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../doc/cours/formalisation.html">
+    <a class="dropdown-item" href="../../doc/cours/08-formalisation.html">
  <span class="dropdown-text">Formalisation des BDD</span></a>
   </li>  
     </ul>
@@ -400,6 +409,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
     </ul>
   </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-examens" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Examens</span>
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-examens">    
+        <li>
+    <a class="dropdown-item" href="../../doc/examens/bdr-2024.html">
+ <span class="dropdown-text">Examen 2024</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../doc/examens/bdr-2025.html">
+ <span class="dropdown-text">Examen 2025</span></a>
+  </li>  
+    </ul>
+  </li>
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/ludo2ne/ENSAI-1A-SQL" target="_blank"> <i class="bi bi-github" role="img">
 </i> 
@@ -422,29 +446,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <nav id="TOC" role="doc-toc" class="toc-active">
+    <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="3">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#données-utilisées" id="toc-données-utilisées" class="nav-link active" data-scroll-target="#données-utilisées"><span class="header-section-number">1</span> Données utilisées</a></li>
-  <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions"><span class="header-section-number">2</span> Questions</a></li>
-  <li><a href="#compter-les-lignes" id="toc-compter-les-lignes" class="nav-link" data-scroll-target="#compter-les-lignes"><span class="header-section-number">3</span> Compter les lignes</a>
+  <li><a href="#algèbre-relationnelle" id="toc-algèbre-relationnelle" class="nav-link active" data-scroll-target="#algèbre-relationnelle"><span class="header-section-number">1</span> Algèbre Relationnelle</a></li>
+  <li><a href="#principaux-opérateurs" id="toc-principaux-opérateurs" class="nav-link" data-scroll-target="#principaux-opérateurs"><span class="header-section-number">2</span> Principaux opérateurs</a>
   <ul class="collapse">
-  <li><a href="#compter-avec-un-filtre" id="toc-compter-avec-un-filtre" class="nav-link" data-scroll-target="#compter-avec-un-filtre">Compter avec un filtre</a></li>
-  </ul></li>
-  <li><a href="#somme" id="toc-somme" class="nav-link" data-scroll-target="#somme"><span class="header-section-number">4</span> Somme</a></li>
-  <li><a href="#stats-descriptives" id="toc-stats-descriptives" class="nav-link" data-scroll-target="#stats-descriptives"><span class="header-section-number">5</span> Stats descriptives</a>
-  <ul class="collapse">
-  <li><a href="#sous-requête" id="toc-sous-requête" class="nav-link" data-scroll-target="#sous-requête">Sous-requête</a></li>
-  </ul></li>
-  <li><a href="#regroupement" id="toc-regroupement" class="nav-link" data-scroll-target="#regroupement"><span class="header-section-number">6</span> Regroupement</a>
-  <ul class="collapse">
-  <li><a href="#colonnes-du-group-by" id="toc-colonnes-du-group-by" class="nav-link" data-scroll-target="#colonnes-du-group-by">Colonnes du GROUP BY</a></li>
-  <li><a href="#filtrer-suite-au-group-by" id="toc-filtrer-suite-au-group-by" class="nav-link" data-scroll-target="#filtrer-suite-au-group-by">Filtrer suite au GROUP BY</a></li>
-  <li><a href="#having-vs-where" id="toc-having-vs-where" class="nav-link" data-scroll-target="#having-vs-where">Having Vs Where</a></li>
+  <li><a href="#sélection" id="toc-sélection" class="nav-link" data-scroll-target="#sélection"><span class="header-section-number">2.1</span> Sélection</a></li>
+  <li><a href="#projection" id="toc-projection" class="nav-link" data-scroll-target="#projection"><span class="header-section-number">2.2</span> Projection</a></li>
+  <li><a href="#union" id="toc-union" class="nav-link" data-scroll-target="#union"><span class="header-section-number">2.3</span> Union</a></li>
+  <li><a href="#différence" id="toc-différence" class="nav-link" data-scroll-target="#différence"><span class="header-section-number">2.4</span> Différence</a></li>
+  <li><a href="#intersection" id="toc-intersection" class="nav-link" data-scroll-target="#intersection"><span class="header-section-number">2.5</span> Intersection</a></li>
+  <li><a href="#jointure" id="toc-jointure" class="nav-link" data-scroll-target="#jointure"><span class="header-section-number">2.6</span> Jointure</a></li>
+  <li><a href="#produit-cartésien" id="toc-produit-cartésien" class="nav-link" data-scroll-target="#produit-cartésien"><span class="header-section-number">2.7</span> Produit Cartésien</a></li>
   </ul></li>
   </ul>
-<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="agregations-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="05-algebre-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -456,12 +474,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Agrégations</h1>
-</div>
+<h1 class="title">Algèbre Relationnelle</h1>
+  <div class="quarto-categories">
+    <div class="quarto-category">Opérations</div>
+  </div>
+  </div>
 
 <div>
   <div class="description">
-    <a href="agregations-slides.html">Slides</a>
+    <a href="05-algebre-slides.html">Slides</a>
   </div>
 </div>
 
@@ -484,197 +505,98 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="données-utilisées" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="données-utilisées"><span class="header-section-number">1</span> Données utilisées</h2>
+<section id="algèbre-relationnelle" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="algèbre-relationnelle"><span class="header-section-number">1</span> Algèbre Relationnelle</h2>
+<ul>
+<li><a href="https://www.seas.upenn.edu/~zives/03f/cis550/codd.pdf" target="_blank">A Relational Model of Data for Large Shared Data Banks</a>, Edgar F. Codd, 1970</li>
+<li>Objectif : Modéliser une base de données ainsi que ses opérations</li>
+<li>Dans un SGBD relationel, tout est question de relation</li>
+</ul>
+</section>
+<section id="principaux-opérateurs" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="principaux-opérateurs"><span class="header-section-number">2</span> Principaux opérateurs</h2>
 <div class="small-table">
 <table class="caption-top table">
 <colgroup>
-<col style="width: 19%">
-<col style="width: 28%">
-<col style="width: 21%">
-<col style="width: 10%">
-<col style="width: 19%">
+<col style="width: 32%">
+<col style="width: 67%">
 </colgroup>
 <thead>
 <tr class="header">
-<th><strong>id_joueuse</strong></th>
-<th><strong>nom</strong></th>
-<th><strong>prenom</strong></th>
-<th><strong>elo</strong></th>
-<th><strong>ville_club</strong></th>
+<th><strong>Opérateur</strong></th>
+<th><strong>Description</strong></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>1</td>
-<td>Guichard</td>
-<td>Pauline</td>
-<td>2357</td>
-<td>Asnieres</td>
+<td><strong>σ (Sélection)</strong></td>
+<td>Filtrer les lignes selon une condition</td>
 </tr>
 <tr class="even">
-<td>2</td>
-<td>Daulyte</td>
-<td>Deimante</td>
-<td>2371</td>
-<td>Chartres</td>
+<td><strong>π (Projection)</strong></td>
+<td>Sélectionner des colonnes spécifiques</td>
 </tr>
 <tr class="odd">
-<td>3</td>
-<td>Navrotescu</td>
-<td>Andreea</td>
-<td>2338</td>
-<td>Asnieres</td>
+<td><strong>U (Union)</strong></td>
+<td>Combiner les lignes de deux relations</td>
 </tr>
 <tr class="even">
-<td>4</td>
-<td>Sebag</td>
-<td>Marie</td>
-<td>2448</td>
-<td>Bischwiller</td>
+<td><strong>− (Différence)</strong></td>
+<td>Retourner les lignes présentes dans une relation mais pas dans l’autre</td>
 </tr>
 <tr class="odd">
-<td>5</td>
-<td>Millet</td>
-<td>Sophie</td>
-<td>2366</td>
-<td>Asnieres</td>
+<td><strong>∩ (Intersection)</strong></td>
+<td>Trouver les lignes communes aux deux relations</td>
 </tr>
 <tr class="even">
-<td>6</td>
-<td>Skrichempko</td>
-<td>Almira</td>
-<td>2361</td>
-<td>Bischwiller</td>
+<td><strong>⨝ (Jointure)</strong></td>
+<td>Combiner deux relations basées sur une condition</td>
+</tr>
+<tr class="odd">
+<td><strong>x (Produit Cartésien)</strong></td>
+<td>Combinaison des colonnes</td>
 </tr>
 </tbody>
 </table>
 </div>
-<div class="notes">
-<p>j’ai intégré ici le club pour faciliter les choses</p>
-</div>
-</section>
-<section id="questions" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="questions"><span class="header-section-number">2</span> Questions</h2>
-<p>Quelques questions que l’on peut se poser :</p>
-<div class="incremental">
-<ul class="incremental">
-<li>Quel est le id_joueuse maximum ?</li>
-<li>Quel est le nombre de joueuses ?</li>
-<li>Quelle est la moyenne elo par club ?</li>
+<section id="sélection" class="level3" data-number="2.1">
+<h3 data-number="2.1" class="anchored" data-anchor-id="sélection"><span class="header-section-number">2.1</span> Sélection</h3>
+<ul>
+<li>Permet de filtrer les lignes d’une table selon une condition</li>
 </ul>
-</div>
-</section>
-<section id="compter-les-lignes" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="compter-les-lignes"><span class="header-section-number">3</span> Compter les lignes</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">COUNT</span>(<span class="op">*</span>)</span>
+<div class="fragment">
+<ul>
+<li><span class="emoji" data-emoji="warning">⚠️</span> Mot clé SQL associé : WHERE</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> elo <span class="op">&lt;</span> <span class="dv">2400</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="small-table">
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th><strong>count</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>5</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p><br></p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">COUNT</span>(<span class="kw">DISTINCT</span> prenom)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="small-table">
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th><strong>count</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>6</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="notes">
-<p>J’utilise souvent COUNT(1) -&gt; c’est pareil</p>
-</div>
-<section id="compter-avec-un-filtre" class="level3">
-<h3 class="anchored" data-anchor-id="compter-avec-un-filtre">Compter avec un filtre</h3>
-<p>L’opérateur <code>FILTER</code> permet de calculer une agrégation conditionnelle.</p>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">FILTER</span> (<span class="kw">WHERE</span> elo <span class="kw">BETWEEN</span> <span class="dv">2300</span> <span class="kw">AND</span> <span class="dv">2399</span>) <span class="kw">AS</span> niv_fm,</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">FILTER</span> (<span class="kw">WHERE</span> elo <span class="kw">BETWEEN</span> <span class="dv">2400</span> <span class="kw">AND</span> <span class="dv">2499</span>) <span class="kw">AS</span> niv_im</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="small-table">
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th><strong>niv_fm</strong></th>
-<th><strong>niv_im</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>5</td>
-<td>1</td>
-</tr>
-</tbody>
-</table>
 </div>
 </section>
+<section id="projection" class="level3" data-number="2.2">
+<h3 data-number="2.2" class="anchored" data-anchor-id="projection"><span class="header-section-number">2.2</span> Projection</h3>
+<ul>
+<li>Permet de sélectionner certaines colonnes d’une table.</li>
+<li>Mot clé SQL associé : SELECT</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>       prenom</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </section>
-<section id="somme" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="somme"><span class="header-section-number">4</span> Somme</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">SUM</span>(elo)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="small-table">
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th><strong>sum</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>14223</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div class="notes">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">SUM</span>(elo) <span class="op">/</span> <span class="fu">COUNT</span>(elo)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</section>
-<section id="stats-descriptives" class="level2" data-number="5">
-<h2 data-number="5" class="anchored" data-anchor-id="stats-descriptives"><span class="header-section-number">5</span> Stats descriptives</h2>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">MAX</span>(elo),</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">MIN</span>(elo),</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>       <span class="fu">AVG</span>(elo)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="small-table">
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th><strong>max</strong></th>
-<th><strong>min</strong></th>
-<th><strong>avg</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>2448</td>
-<td>2338</td>
-<td>2373.5</td>
-</tr>
-</tbody>
-</table>
-</div>
+<section id="union" class="level3" data-number="2.3">
+<h3 data-number="2.3" class="anchored" data-anchor-id="union"><span class="header-section-number">2.3</span> Union</h3>
+<ul>
+<li>Combine les lignes de deux tables ayant le <u>même nombre de colonnes et des types compatibles</u></li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>       prenom</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="kw">UNION</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>       prenom</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueur;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -685,124 +607,79 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Vous pouvez également calculer : <code>VARIANCE</code>, <code>STDDEV</code>.</p>
-</div>
-</div>
-<div class="fragment">
-<p>Comment afficher la joueuse avec le plus grand elo ? <span class="emoji" data-emoji="dizzy_face">😵</span></p>
-</div>
-<section id="sous-requête" class="level3">
-<h3 class="anchored" data-anchor-id="sous-requête">Sous-requête</h3>
-<p>En utilisant une <strong>sous-requête</strong> :</p>
 <ul>
-<li><code>SELECT MAX(elo) FROM echecs.joueuse</code> <span class="emoji" data-emoji="arrow_right">➡️</span> renvoie un nombre</li>
-<li>Nous pouvons ensuite tester si <em>elo</em> est égal à ce nombre</li>
+<li><strong>UNION</strong> : Combine les résultats des requêtes et supprime les doublons</li>
+<li><strong>UNION ALL</strong> : Combine les résultats des requêtes et garde tous les doublons</li>
 </ul>
-<div class="fragment">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>       prenom,</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>       elo</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a> <span class="kw">WHERE</span> elo <span class="op">=</span> (<span class="kw">SELECT</span> <span class="fu">MAX</span>(elo) <span class="kw">FROM</span> echecs.joueuse);</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-</section>
-</section>
-<section id="regroupement" class="level2" data-number="6">
-<h2 data-number="6" class="anchored" data-anchor-id="regroupement"><span class="header-section-number">6</span> Regroupement</h2>
-<p>Comment obtenir la moyenne elo par club ?</p>
-<div class="fragment">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> ville_club,    <span class="co">-- Supposons que la table joueuse a un attribut ville_club</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">AVG</span>(elo)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a> <span class="kw">GROUP</span> <span class="kw">BY</span> ville_club;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="small-table">
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th><strong>ville_club</strong></th>
-<th><strong>avg_elo</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Asnieres</td>
-<td>2372.4</td>
-</tr>
-<tr class="even">
-<td>Chartres</td>
-<td>2371.0</td>
-</tr>
-<tr class="odd">
-<td>Bischwiller</td>
-<td>2404.5</td>
-</tr>
-</tbody>
-</table>
 </div>
 </div>
 <div class="notes">
-<p>J’ai mis ville_club car id_club c’est moins joli et on verra les jointures ensuite.</p>
-<p>Vous pouvez utiliser ROUND() pour arrondir.</p>
-</div>
-<section id="colonnes-du-group-by" class="level3">
-<h3 class="anchored" data-anchor-id="colonnes-du-group-by">Colonnes du GROUP BY</h3>
-<p>Vous pouvez grouper en utilisant plusieurs colonnes.</p>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Important
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Les colonnes présentes dans le <em>SELECT</em> doivent impérativement être présentes dans le <em>GROUP BY</em>.</p>
-<p>L’inverse n’est pas vrai. Vous pouvez avoir des colonnes du <em>GROUP BY</em> que vous n’affichez pas dans le <em>SELECT</em>.</p>
-</div>
-</div>
-<div class="notes">
-<p>je dis bien colonnes et pas fonctions d’aggrégation</p>
-</div>
-</section>
-<section id="filtrer-suite-au-group-by" class="level3">
-<h3 class="anchored" data-anchor-id="filtrer-suite-au-group-by">Filtrer suite au GROUP BY</h3>
-<p>Comment faire pour afficher uniquement les clubs où la moyenne élo est inférieure à 2400 ?</p>
-<div class="fragment">
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> ville_club,</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">AVG</span>(elo)</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a> <span class="kw">GROUP</span> <span class="kw">BY</span> ville_club</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="kw">HAVING</span> <span class="fu">AVG</span>(elo) <span class="op">&lt;</span> <span class="dv">2400</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><br></p>
-<div class="small-table">
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th><strong>club</strong></th>
-<th><strong>avg_elo</strong></th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Asnieres</td>
-<td>2372.4</td>
-</tr>
-<tr class="even">
-<td>Chartres</td>
-<td>2371.0</td>
-</tr>
-</tbody>
-</table>
-</div>
-</div>
-</section>
-<section id="having-vs-where" class="level3">
-<h3 class="anchored" data-anchor-id="having-vs-where">Having Vs Where</h3>
 <ul>
-<li><strong>WHERE</strong> - Filtre Avant l’Agrégation</li>
-<li><strong>HAVING</strong> - Filtre Après l’Agrégation</li>
+<li>En général, on prend les mêmes colonnes des 2 côtés</li>
+<li>Possible de faire plusieurs UNION</li>
+<li>ORDER BY à la fin : ordonne le tout</li>
 </ul>
+</div>
+</section>
+<section id="différence" class="level3" data-number="2.4">
+<h3 data-number="2.4" class="anchored" data-anchor-id="différence"><span class="header-section-number">2.4</span> Différence</h3>
+<ul>
+<li>Lignes qui se trouvent dans la première relation mais pas dans la seconde</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Joueuses évoluant dans un club français et pas dans un club belge</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>       prenom</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse_club_fr</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="kw">EXCEPT</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>       prenom</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse_club_be;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="notes">
+<p>Imaginons que vous ayez créé 2 tables :</p>
+<ul>
+<li>joueuses évoluant dans un club français</li>
+<li>joueuses évoluant dans un club belge</li>
+</ul>
+</div>
+</section>
+<section id="intersection" class="level3" data-number="2.5">
+<h3 data-number="2.5" class="anchored" data-anchor-id="intersection"><span class="header-section-number">2.5</span> Intersection</h3>
+<ul>
+<li>Lignes communes aux deux tables</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Joueuses évoluant dans un club francais et dans un club belge</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>       prenom</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse_club_fr</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="kw">INTERSECT</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> nom,</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>       prenom</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse_club_be;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="jointure" class="level3" data-number="2.6">
+<h3 data-number="2.6" class="anchored" data-anchor-id="jointure"><span class="header-section-number">2.6</span> Jointure</h3>
+<ul>
+<li>Permet de combiner deux tables en se basant sur une correspondance entre les colonnes</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> j.nom,</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>       j.prenom,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>       c.nom <span class="kw">AS</span> club</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse j</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="kw">JOIN</span> echecs.club c <span class="kw">USING</span> (id_club);</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="produit-cartésien" class="level3" data-number="2.7">
+<h3 data-number="2.7" class="anchored" data-anchor-id="produit-cartésien"><span class="header-section-number">2.7</span> Produit Cartésien</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> echecs.joueuse j,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>       echecs.club c;</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">-- WHERE j.id_club = c.id_club</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="notes">
+<p>Ancienne pratique : utilisé avant à la place des jointures</p>
+</div>
 
 
 </section>
