@@ -2,19 +2,19 @@
 title: "Examen final : Bases de données relationnelles"
 subtitle: "ENSAI 1A UE3"
 date: "2026/01/05"
+author: ""
 format:
   html: default
-  pdf:
-    documentclass: article
-    geometry:
-      - top=20mm
-      - bottom=20mm
-      - left=15mm
-      - right=15mm
-      - heightrounded
+  typst:
+    papersize: a4
+    margin:
+      x: 1.5cm
+      y: 2.0cm
+    section-numbering: 1.1.a
+    mainfont: "Libertinus Serif"
     fontsize: 12pt
 number-sections: true
-number-depth: 2
+number-depth: 3
 ---
 
 
