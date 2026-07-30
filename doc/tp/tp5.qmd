@@ -1,16 +1,7 @@
 ---
 title: "NBA stats 🏀"
 description: "TP5"
-author: "Ludovic Deneuville"
-format: 
-  html:
-    toc: true
-    toc-location: left
-    toc-expand: 3
-from: markdown+emoji
-number-sections: true
-number-depth: 3
-lightbox: true
+format: html
 ---
 
 
@@ -19,7 +10,7 @@ lightbox: true
 
 Vous allez travailler sur des données de la nba depuis les années 2000.
 
-Les données sont brutes i.e. elles ont été récupérée via l'api [stats nba](https://www.nba.com/stats){target="_blank"} et elles n'ont quasiment pas été retouchées.
+Les données sont brutes, i.e. elles ont été récupérées via l'api [stats nba](https://www.nba.com/stats){target="_blank"} et elles n'ont quasiment pas été retouchées.
 
 Le modèle de données n'est pas fourni ! Ce sera à vous d'explorer vous même la base de données.
 

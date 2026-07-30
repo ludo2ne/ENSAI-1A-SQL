@@ -1,3 +1,21 @@
 {
-    "terminal.integrated.defaultProfile.windows": "Git Bash"
+  "workbench.colorTheme": "Dark Modern",
+  "editor.fontSize": 16,
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+  "[quarto]": {
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.wrappingIndent": "none",
+    "editor.wordWrapColumn": 120,
+    "editor.rulers": [
+      120
+    ],
+  },
+  "[json]": {
+    "editor.formatOnSave": true,
+  },
+  "[yaml]": {
+    "editor.formatOnSave": true,
+  },
+  "terminal.integrated.defaultProfile.windows": "Git Bash",
 }

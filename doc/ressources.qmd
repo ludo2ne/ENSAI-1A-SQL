@@ -6,10 +6,6 @@ format: html
 from: markdown+emoji
 ---
 
-<https://sql.sh/>
-
-
-### Le coin stat
-
-[SQL pour débutant](https://www.youtube.com/watch?v=LRjnjipMe54&list=PLyh35eYRez8cAEBfi1LWN70Cs77bBvCOp){target="blank"} en 7 vidéos par Natacha Njongwa Yepnga
-
+- <https://sql.sh/>{target="blank"}
+- [Le coin stat - SQL pour débutant](https://www.youtube.com/watch?v=LRjnjipMe54&list=PLyh35eYRez8cAEBfi1LWN70Cs77bBvCOp){target="blank"} en 7 vidéos par Natacha Njongwa Yepnga
+- [Openclassrooms - Requetez avec SQL](https://openclassrooms.com/fr/courses/7818671-requetez-une-base-de-donnees-avec-sql){target="blank"} 

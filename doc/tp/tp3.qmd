@@ -1,16 +1,7 @@
 ---
 title: "Discographie 🎵"
 description: "TP3"
-author: "Ludovic Deneuville"
-format: 
-  html:
-    toc: true
-    toc-location: left
-    toc-expand: 3
-from: markdown+emoji
-number-sections: true
-number-depth: 3
-lightbox: true
+format: html
 ---
 
 ## Introduction {.unnumbered}

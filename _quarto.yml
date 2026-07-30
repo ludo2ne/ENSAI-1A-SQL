@@ -4,34 +4,36 @@ var:
 project:
   type: website
 
+author: Ludovic Deneuville
+
 website:
   title: "Base de données"
   repo-url: "{{< meta var.url-repo >}}"
   repo-branch: main
   reader-mode: true
   navbar:
-    background: "#447099"
+    background: "#D1CE15"
     left:
       - icon: house
         href: index.qmd
         text: Home
       - text: Cours
         menu:
-          - href: doc/cours/intro.qmd
+          - href: doc/cours/01-intro.qmd
             text: "Introduction"
-          - href: doc/cours/bases-de-donnees.qmd
+          - href: doc/cours/02-bases-de-donnees.qmd
             text: "Base de données"
-          - href: doc/cours/sql-intro.qmd
+          - href: doc/cours/03-sql-intro.qmd
             text: "Introduction à SQL"
-          - href: doc/cours/agregations.qmd
+          - href: doc/cours/04-agregations.qmd
             text: "Agrégations"
-          - href: doc/cours/algebre.qmd
+          - href: doc/cours/05-algebre.qmd
             text: "Algèbre Relationnelle"
-          - href: doc/cours/jointures.qmd
+          - href: doc/cours/06-jointures.qmd
             text: "Jointures"
-          - href: doc/cours/sql-avance.qmd
+          - href: doc/cours/07-sql-avance.qmd
             text: "SQL avancé"
-          - href: doc/cours/formalisation.qmd
+          - href: doc/cours/08-formalisation.qmd
             text: "Formalisation des BDD"
       - text: TP
         menu:
@@ -62,6 +64,12 @@ website:
             text: Ressources
           - href: doc/decouverte.qmd
             text: Découverte
+      - text: Examens
+        menu:
+          - href: doc/examens/bdr-2024.qmd
+            text: Examen 2024
+          - href: doc/examens/bdr-2025.qmd
+            text: Examen 2025
       - icon: github
         href: "{{< meta var.url-repo >}}"
         target: "_blank"
@@ -71,13 +79,29 @@ website:
       [Code source]({{< meta var.url-repo >}}){.external target="_blank"}
 
 execute:
-  freeze: auto  # re-render only when source changes
+  freeze: auto
 
 format:
   html:
     theme:
-      dark: solar
       light: cosmo
+      dark: solar
     css: styles.css
-  revealjs: 
+    toc: true
+    toc-location: left
+    toc-depth: 3
+    toc-expand: 3
+    number-sections: true
+    number-depth: 3
+  revealjs:
     css: styles-reveal.css
+    theme: moon
+    slide-number: c/t
+    slide-level: 3
+    controls: true
+
+mermaid:
+  theme: forest
+code-line-numbers: false
+from: markdown+emoji
+lightbox: true

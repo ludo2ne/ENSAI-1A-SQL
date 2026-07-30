@@ -1,9 +1,7 @@
 ---
 title: "Glossaire"
 description: "Vocabulaire sur les bases de données"
-author: "Ludovic Deneuville"
 format: html
-from: markdown+emoji
 ---
 
 :construction:

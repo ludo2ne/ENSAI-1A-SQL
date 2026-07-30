@@ -1,25 +1,18 @@
 ---
 title: "SQL - Introduction"
-description: "[Slides](sql-intro-slides.html)"
-author: "Ludovic Deneuville"
+description: "[Slides](03-sql-intro-slides.html)"
 format: 
-  html:
-    toc: true
-    toc-location: left
-    toc-depth: 3
-    number-sections: true
-    number-depth: 2
+  html: default
   revealjs:
-    theme: moon
-    footer: "[Home](../../index.html) --- [SQL intro](sql-intro.html)"
-    slide-number: c/t                    # collapsed/total
-    slide-level: 3
-    controls: true
-    output-file: sql-intro-slides.html
-mermaid:
-  theme: forest
-code-line-numbers: false
-from: markdown+emoji
+    footer: "[Home](../../index.html) --- [SQL intro](03-sql-intro.html)"
+    output-file: 03-sql-intro-slides.html
+categories:
+  - Créer des tables
+  - Lire des données
+  - Filtrer
+  - Ordonner
+  - Dates
+  - Valeurs Nulles
 ---
 
 ## Structured Query Language

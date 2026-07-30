@@ -1,25 +1,15 @@
 ---
 title: "Formalisation des bases de données"
-description: "[Slides](formalisation-slides.html)"
-author: "Ludovic Deneuville"
+description: "[Slides](08-formalisation-slides.html)"
 format: 
-  html:
-    toc: true
-    toc-location: left
-    toc-depth: 3
-    number-sections: true
-    number-depth: 2
+  html: default
   revealjs:
-    theme: moon
-    footer: "[Home](../../index.html) --- [Modélisation](formalisation.html)"
-    slide-number: c/t                    # collapsed/total
-    slide-level: 3
-    controls: true
-    output-file: formalisation-slides.html
-mermaid:
-  theme: forest
-code-line-numbers: false
-from: markdown+emoji
+    footer: "[Home](../../index.html) --- [Modélisation](08-formalisation.html)"
+    output-file: 08-formalisation-slides.html
+categories:
+  - Dépendances fonctionnelles
+  - Formes Normales
+  - UML
 ---
 
 
@@ -262,7 +252,7 @@ classDiagram
 ```
 
 
-[cf. Cours BDD, partie associations](./bases-de-donnees.qmd#associations)
+[cf. Cours BDD, partie associations](./02-bases-de-donnees.qmd#associations)
 
 
 ### Associations multiples {background-color="beige"}

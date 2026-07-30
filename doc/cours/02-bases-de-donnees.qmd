@@ -1,25 +1,18 @@
 ---
 title: "Bases de Données"
-description: "[Slides](bases-de-donnees-slides.html)"
-author: "Ludovic Deneuville"
+description: "[Slides](02-bases-de-donnees-slides.html)"
 format: 
-  html:
-    toc: true
-    toc-location: left
-    toc-depth: 3
-    number-sections: true
+  html: default
   revealjs:
-    theme: moon
-    footer: "[Home](../../index.html) --- [Bases de Données](bases-de-donnees.html)"
-    slide-number: c/t                    # collapsed/total
-    slide-level: 3
-    controls: true
-    output-file: bases-de-donnees-slides.html
-mermaid:
-  theme: forest
-code-line-numbers: false
-from: markdown+emoji
+    footer: "[Home](../../index.html) --- [Bases de Données](02-bases-de-donnees.html)"
+    output-file: 02-bases-de-donnees-slides.html
+categories:
+  - Tables
+  - Clé primaire
+  - Clé étrangère
+  - Association
 ---
+
 
 ## Une donnée ?
 

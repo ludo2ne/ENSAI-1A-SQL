@@ -1,25 +1,13 @@
 ---
 title: "Algèbre Relationnelle"
-description: "[Slides](algebre-slides.html)"
-author: "Ludovic Deneuville"
+description: "[Slides](05-algebre-slides.html)"
 format: 
-  html:
-    toc: true
-    toc-location: left
-    toc-depth: 3
-    number-sections: true
-    number-depth: 2
+  html: default
   revealjs:
-    theme: moon
-    footer: "[Home](../../index.html) --- [Algèbre Relationnelle](algebre.html)"
-    slide-number: c/t                    # collapsed/total
-    slide-level: 3
-    controls: true
-    output-file: algebre-slides.html
-mermaid:
-  theme: forest
-code-line-numbers: false
-from: markdown+emoji
+    footer: "[Home](../../index.html) --- [Algèbre Relationnelle](05-algebre.html)"
+    output-file: 05-algebre-slides.html
+categories:
+  - Opérations
 ---
 
 ## Algèbre Relationnelle

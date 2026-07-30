@@ -6,13 +6,9 @@ format:
     toc-location: left
     toc-expand: 3
   ipynb: default
-from: markdown+emoji
-number-sections: true
-number-depth: 3
 jupyter: python3
 execute:
   eval: false
-lightbox: true
 ---
 
 

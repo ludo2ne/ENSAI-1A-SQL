@@ -1,9 +1,16 @@
 ---
 title: "Base de données relationnelles"
 description: "Cours ENSAI de 1ère année"
-author: "Ludovic Deneuville"
 format: html
-from: markdown+emoji
+listing:
+  id: lessons-listing
+  type: table
+  fields: [title, categories]
+  contents: 
+    - doc/cours/*.qmd
+  sort: "filename"
+  sort-ui: false
+  filter-ui: false
 ---
 
 - 6h de cours
@@ -11,18 +18,8 @@ from: markdown+emoji
 
 ## Contenu du cours
 
-- Les bases de données
-  - Les bases de données relationnelles
-- Introduction au langage SQL
-  - Opérations CRUD
-  - Filtre sur les lignes
-  - Dates, Gestion des valeurs nulles
-- Les Agrégations
-- L'Algébre relationnelle
-- Les jointures
-- SQL avancé (Vues, Index, Droits, CTE)
-- Modélisation UML
-  - Formes normales
+::: {#lessons-listing}
+:::
 
 ## TP
 

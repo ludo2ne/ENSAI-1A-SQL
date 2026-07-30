@@ -1,15 +1,8 @@
 ---
 title: "Découverte du SQL"
 description: "Explorer des données avec SQL"
-author: "Ludovic Deneuville"
 format: 
-  html:
-    toc: true
-    toc-location: left
-    toc-expand: 3
-from: markdown+emoji
-number-sections: true
-number-depth: 3
+  html: default
 ---
 
 :construction:

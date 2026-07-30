@@ -1,16 +1,7 @@
 ---
 title: "Découverte du Datalab"
 description: "TP3 - Onyxia et le Datalab pour le statisticien"
-author: "Ludovic Deneuville"
-format: 
-  html:
-    toc: true
-    toc-location: left
-    toc-expand: 3
-from: markdown+emoji
-number-sections: true
-number-depth: 3
-lightbox: true
+format: html
 ---
 
 
