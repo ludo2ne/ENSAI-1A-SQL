@@ -1,0 +1,71 @@
+---
+title: "Database with Docker"
+description: "Running a PostgreSQL server with Docker"
+format: 
+  html: default
+---
+
+Setting up a relational database management system on a personal computer can be time-consuming. It usually requires installing the database server, configuring users, creating a database, and installing a client application to connect to it.
+
+Docker greatly simplifies this process by packaging everything into isolated containers. With a single command, you can start a complete working environment including PostgreSQL and CloudBeaver, without having to install or configure either application manually.
+
+## Prerequisites
+
+- [ ] Install [Docker Desktop](https://docs.docker.com/get-started/get-docker/){target="_blank"}
+- [ ] Start Docker Desktop
+- [ ] Get the [docker-compose.yml](./docker-compose.yml){target="_blank"} file
+  - or clone this repository
+
+
+## Start the environment
+
+- [ ] Open a terminal in the same folder of *docker-compose.yml*
+- [ ] Start the containers
+  - `docker compose up -d`
+
+This command creates and starts two containers:
+
+- **PostgreSQL**, containing the `ensai` database.
+- **CloudBeaver**, a web interface used to browse and query the database.
+
+
+Other usefull commands:
+
+```{.bash}
+docker compose stop           # To stop the containers without deleting the database
+docker compose start          # To restart them later
+
+docker compose down -v        # To completely remove the containers and the PostgreSQL data
+```
+
+
+## Connect to CloudBeaver
+
+CloudBeaver is deployed on port 8978.
+
+At the first startup, you have to create an admin account and login:
+
+- [ ] Open <http://localhost:8978>{target="_blank"}
+- [ ] Create an admin account filling *login* and *password* and click *Next*
+- [ ] Login using this account
+
+
+## Create the PostgreSQL connection
+
+The next step is to connect to the PostgreSQL database.
+
+- [ ] Create a new connection (PostgreSQL)
+- [ ] Fill the form and create the connection
+  - Host: postgres
+  - Database: ensai
+  - Username: ensai
+  - Password: ensai
+
+These values are those provided in the *docker-compose.yml* file.
+
+The connection now appears in the explorer on the left.
+
+- [ ] Clic on the connection and login (ensai/ensai)
+- [ ] Open a SQL Editor
+
+And here we go!

@@ -1,0 +1,38 @@
+services:
+
+  postgres:
+    image: postgres:17
+    container_name: tp-postgres
+
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_DB: ensai
+      POSTGRES_USER: ensai
+      POSTGRES_PASSWORD: ensai
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./init:/docker-entrypoint-initdb.d
+
+  cloudbeaver:
+    image: dbeaver/cloudbeaver:latest
+    container_name: tp-cloudbeaver
+
+    restart: unless-stopped
+
+    ports:
+      - "8978:8978"
+
+    volumes:
+      - ./cloudbeaver:/opt/cloudbeaver/workspace
+
+    depends_on:
+      - postgres
+
+volumes:
+  postgres-data:
+  cloudbeaver-data:

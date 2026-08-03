@@ -53,6 +53,8 @@ website:
             text: Datalab
           - href: doc/outils/tp-datalab.qmd
             text: TP Datalab
+          - href: doc/outils/docker.qmd
+            text: Docker
           - href: doc/outils/vm.qmd
             text: VM
     right:

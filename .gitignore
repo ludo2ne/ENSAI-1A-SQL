@@ -2,3 +2,5 @@
 _site/*
 _freeze/*
 **/*.quarto_ipynb
+
+_TODO.md
