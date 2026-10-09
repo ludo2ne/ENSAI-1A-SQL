@@ -1,0 +1,8 @@
+title: Rm-notes-typst
+author: Ludovic Deneuville
+version: 1.0.0
+quarto-required: ">=1.9.0"
+contributes:
+  filters:
+    - rm-notes-typst.lua
+
