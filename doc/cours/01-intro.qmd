@@ -7,6 +7,7 @@ format:
   revealjs:
     footer: "[Home](../../index.html) --- [Introduction à SQL](01-intro.html)"
     output-file: 01-intro-slides.html
+  typst: default
 categories:
   - Introduction
   - Conventions
@@ -79,7 +80,7 @@ USING (id_club) WHERE mail IS NOT NULL GROUP BY c.nom HAVING AVG(j.elo) > 2000 O
 
 
 ::::::{.fragment}
-::: {.hide-html-render}
+::: {.content-visible when-format="revealjs"}
 ![](https://media.giphy.com/media/xT5LMDiHQNDcF3F1vO/source.gif){width=50%}
 :::
 ::::::
@@ -105,7 +106,7 @@ HAVING AVG(j.elo) > 2000
 
 
 ::::::{.fragment}
-::: {.hide-html-render}
+::: {.content-visible when-format="revealjs"}
 ![](https://media.giphy.com/media/3o7absbD7PbTFQa0c8/source.gif){width=50%}
 :::
 ::::::

@@ -2,6 +2,8 @@
 title: "NBA stats 🏀"
 description: "TP5"
 format: html
+categories:
+  - Données brutes
 ---
 
 

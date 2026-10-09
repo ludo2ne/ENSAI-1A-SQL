@@ -2,6 +2,11 @@
 title: "Discographie 🎵"
 description: "TP3"
 format: html
+categories:
+  - LEFT JOIN
+  - HAVING
+  - INSERT
+  - SEQUENCE
 ---
 
 ## Introduction {.unnumbered}

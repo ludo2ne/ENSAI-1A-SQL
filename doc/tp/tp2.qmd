@@ -2,6 +2,9 @@
 title: "Exercices vintages 💾"
 description: "TP2"
 format: html
+categories:
+  - JOIN
+  - CREATE
 ---
 
 

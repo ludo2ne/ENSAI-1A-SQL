@@ -26,22 +26,6 @@
 - TP4 : LEFT JOIN
 - TP5 : VIEW, COALESCE
 
-## :construction: TODO
-
-- [ ] Soucis pour lancer cloudBeaver avec le wifi ENSAI
-- [ ] callout block -> couleurs moches dans les diapos lors du deploy sur github
-- [ ] Ajouter un UPDATE FROM dans les diapos
-- [ ] Parler un peu plus des databases nosql
-  - https://blog.amigoscode.com/p/relational-vs-nosql-databases
-  - https://blog.amigoscode.com/p/sql-vs-nosql-explained
-  - https://www.sqlnoir.com/
-- [ ] DBA, son rôle, sauvegardes, PRA
-- [ ] ORM
-- Insister sur ces notions pour les Master STD
-  - Intégrité référentielle, Trigger, Procédure stockée
-- UML
-  - https://www.drawdb.app/editor
-
 ## :rocket: Publier les pages
 
 Site construit avec [Quarto](https://quarto.org/) ([Tuto](https://ludo2ne.github.io/Quarto-tuto/))
@@ -56,5 +40,3 @@ Pour générer les pages :
 Ce projet est sous licence [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-nc-sa/4.0/).
 
 Vous êtes libre de partager et modifier ce travail à des fins non commerciales, à condition de me créditer et de redistribuer sous la même licence.
-
-

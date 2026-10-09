@@ -6,6 +6,7 @@ format:
   revealjs:
     footer: "[Home](../../index.html) --- [Algèbre Relationnelle](05-algebre.html)"
     output-file: 05-algebre-slides.html
+  typst: default
 categories:
   - Opérations
 ---

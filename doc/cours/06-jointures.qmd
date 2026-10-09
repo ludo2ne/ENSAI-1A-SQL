@@ -6,6 +6,7 @@ format:
   revealjs:
     footer: "[Home](../../index.html) --- [Jointures](06-jointures.html)"
     output-file: 06-jointures-slides.html
+  typst: default
 categories:
   - Joindre les tables
   - Jointures externes
@@ -224,7 +225,7 @@ Comment faire ? :neutral_face:
 
 ---
 
-:::::: {.hide-html-render}
+:::::: {.content-visible when-format="revealjs"}
 <iframe src="https://giphy.com/embed/1zRgQYRbZWFXGZ1Tgw" width="960" height="540" frameBorder="0" class="giphy-embed no-print" allowFullScreen></iframe>
 ::::::
 

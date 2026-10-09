@@ -13,7 +13,7 @@ Docker greatly simplifies this process by packaging everything into isolated con
 
 - [ ] Install [Docker Desktop](https://docs.docker.com/get-started/get-docker/){target="_blank"}
 - [ ] Start Docker Desktop
-- [ ] Get the [docker-compose.yml](./docker-compose.yml){target="_blank"} file
+- [ ] Get the [docker-compose.yml](../../docker-compose.yml){target="_blank"} file
   - or clone this repository
 
 

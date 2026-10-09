@@ -6,6 +6,7 @@ format:
   revealjs:
     footer: "[Home](../../index.html) --- [SQL avancé](07-sql-avance.html)"
     output-file: 07-sql-avance-slides.html
+  typst: default
 categories:
   - Sous-requêtes
   - Vues

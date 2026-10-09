@@ -2,6 +2,11 @@
 title: "Premières requêtes SQL 🦆"
 description: "Sélectionner, Filtrer, Agréger"
 format: html
+categories:
+  - DuckDB
+  - SELECT
+  - WHERE
+  - GROUP BY
 ---
 
 ## Introduction {.unnumbered}
@@ -135,14 +140,11 @@ Vous pourrez ensuite requêter sur cette vue comme si c'était une table.
 Cliquez sur la requête pour y positionner le pointeur de la souris, puis au choix :
 
 - Cliquez sur le petit triangle orange
-- CTRL + ENTREE
+- [CTRL]{.keyboard} + [ENTREE]{.keyboard}
 :::
 
 
-
-
 ### Premières requêtes
-
 
 ::: {.callout-important}
 

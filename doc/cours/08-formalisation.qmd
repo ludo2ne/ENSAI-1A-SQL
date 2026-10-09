@@ -6,6 +6,7 @@ format:
   revealjs:
     footer: "[Home](../../index.html) --- [Modélisation](08-formalisation.html)"
     output-file: 08-formalisation-slides.html
+  typst: default
 categories:
   - Dépendances fonctionnelles
   - Formes Normales

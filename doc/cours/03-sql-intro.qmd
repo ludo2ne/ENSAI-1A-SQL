@@ -6,6 +6,7 @@ format:
   revealjs:
     footer: "[Home](../../index.html) --- [SQL intro](03-sql-intro.html)"
     output-file: 03-sql-intro-slides.html
+  typst: default
 categories:
   - Créer des tables
   - Lire des données

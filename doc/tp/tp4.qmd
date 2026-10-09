@@ -2,6 +2,10 @@
 title: "Unofficial Chess Federation ♕"
 description: "TP4"
 format: html
+categories:
+  - LEFT JOIN
+  - UPDATE
+  - EXISTS
 ---
 
 

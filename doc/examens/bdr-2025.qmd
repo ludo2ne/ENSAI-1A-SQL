@@ -4,7 +4,9 @@ subtitle: "ENSAI 1A UE3"
 date: "2026/01/05"
 author: ""
 format:
-  html: default
+  html:
+    toc-depth: 2
+    toc-expand: 2
   typst:
     papersize: a4
     margin:

@@ -6,6 +6,7 @@ format:
   revealjs:
     footer: "[Home](../../index.html) --- [Bases de Données](02-bases-de-donnees.html)"
     output-file: 02-bases-de-donnees-slides.html
+  typst: default
 categories:
   - Tables
   - Clé primaire
@@ -492,7 +493,7 @@ Si une joueuse peut adhérer à plusieurs clubs ? :confused:
 
 
 ::::::{.fragment}
-::: {.hide-html-render}
+::: {.content-visible when-format="revealjs"}
 ![](https://media.giphy.com/media/Y8hzdgPnZ6Hwk/source.gif){width=50%}
 :::
 ::::::

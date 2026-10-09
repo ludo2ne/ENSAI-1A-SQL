@@ -3,7 +3,9 @@ title: "Examen final : Bases de données relationnelles"
 subtitle: "ENSAI 1A UE3"
 date: "2025/01/06"
 format:
-  html: default
+  html:
+    toc-depth: 2
+    toc-expand: 2
   typst:
     papersize: a4
     margin:

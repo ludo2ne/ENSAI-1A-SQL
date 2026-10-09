@@ -101,6 +101,15 @@ format:
     slide-number: c/t
     slide-level: 3
     controls: true
+  typst:
+    filters:
+      - rm-notes-typst
+    papersize: a4
+    margin:
+      x: 1.5cm
+      y: 2.0cm
+    mainfont: "Libertinus Serif"
+    fontsize: 12pt
 
 mermaid:
   theme: forest
