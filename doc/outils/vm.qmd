@@ -49,7 +49,7 @@ DBeaver va vous permettre de vous connecter à cette base de données et lancer 
 
 Commençons par modifier quelques paramétres par défaut qui vous faciliterons la vie.
 
-- [ ] Allez dans le menu **Fenêtre** :arrow_right: **Preference**
+- [ ] Allez dans le menu **Fenêtre** ➡️ **Preference**
 
 Utilisez la fonction de recherche pour accéder aux sections suivantes :
 
@@ -68,7 +68,7 @@ Utilisez la fonction de recherche pour accéder aux sections suivantes :
 Créons maintenant la connexion vers la base de données
 
 - [ ] Créez une nouvelle connexion
-  - Menu *Base de données* :arrow_right: *Nouvelle connexion*
+  - Menu *Base de données* ➡️ *Nouvelle connexion*
 - [ ] Sélectionnez *PostgreSQL* puis suivant
 - [ ] Renseignez les paramèters de connexion (Host, Port, Database, Username, Password)
   - voir section PostgreSQL ci-dessus pour les valeurs à saisir
@@ -79,9 +79,9 @@ Créons maintenant la connexion vers la base de données
 La connexion apparait alors dans votre explorer à gauche.
 
 - [ ] Ouvrez la connexion
-  - clic droit sur la connexion :arrow_right: **Se connecter**
+  - clic droit sur la connexion ➡️ **Se connecter**
 - [ ] Ouvrez une fenêtre SQL
-  - clic droit :arrow_right: Editeur SQL :arrow_right: Nouveau script
+  - clic droit ➡️ Editeur SQL ➡️ Nouveau script
 
 Vous pouvez lancer quelques requêtes simples pour vérifier que tout fonctionne.
 

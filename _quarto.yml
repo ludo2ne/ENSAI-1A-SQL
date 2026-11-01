@@ -18,6 +18,7 @@ website:
         href: index.qmd
         text: Home
       - text: Cours
+        icon: database-fill
         menu:
           - href: doc/cours/01-intro.qmd
             text: "Introduction"
@@ -35,7 +36,8 @@ website:
             text: "SQL avancé"
           - href: doc/cours/08-formalisation.qmd
             text: "Formalisation des BDD"
-      - text: TP
+      - text: Travaux Pratiques
+        icon: rocket-takeoff
         menu:
           - href: doc/tp/tp1.qmd
             text: "TP1 - Premières requêtes"
@@ -48,6 +50,7 @@ website:
           - href: doc/tp/tp5.qmd
             text: "TP5 - NBA stats"
       - text: Outils
+        icon: wrench
         menu:
           - href: doc/outils/datalab.qmd
             text: Datalab
@@ -57,8 +60,16 @@ website:
             text: Docker
           - href: doc/outils/vm.qmd
             text: VM
+      - text: Examens
+        icon: mortarboard
+        menu:
+          - href: doc/examens/bdr-2024.qmd
+            text: Examen 2024
+          - href: doc/examens/bdr-2025.qmd
+            text: Examen 2025
     right:
       - text: Divers
+        icon: layers
         menu:
           - href: doc/glossaire.qmd
             text: Glossaire
@@ -66,12 +77,6 @@ website:
             text: Ressources
           - href: doc/decouverte.qmd
             text: Découverte
-      - text: Examens
-        menu:
-          - href: doc/examens/bdr-2024.qmd
-            text: Examen 2024
-          - href: doc/examens/bdr-2025.qmd
-            text: Examen 2025
       - icon: github
         href: "{{< meta var.url-repo >}}"
         target: "_blank"
@@ -102,6 +107,7 @@ format:
     slide-level: 3
     controls: true
   typst:
+    include-in-header: typst-template.typ
     filters:
       - rm-notes-typst
     papersize: a4

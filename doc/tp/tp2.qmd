@@ -34,7 +34,7 @@ Pour plus de détails, allez dans l'onglet [Datalab](../outils/datalab.qmd){targ
 - [ ] Lancez un service **cloudBeaver**
   - ouvrez ce service
   - vérifiez que vous êtes connectés à la base de données PostgreSQL
-  - ouvrez la connexion (clic droit > Open), un petit rond vert apparait :green_circle:
+  - ouvrez la connexion
 
 ::: {.callout-important}
 cloudBeaver est parfois capricieux, en cas de blocage, n'hésitez pas à rafraichir la page (F5).
@@ -139,8 +139,8 @@ Nous allons commencer par créer les tables et insérer les données :
   - raccourci (ALT + X)
   - En cas d'erreur, corrigez, puis relancez intégralement le script
 - [ ] Vérifiez que votre schéma et vos tables sont créés
-  - Dans l'explorateur : PostgreSQL :arrow_right: Databases :arrow_right: defaultdb :arrow_right: Schemas
-  - Clic droit sur *Schemas* :arrow_right: Refresh
+  - Dans l'explorateur : PostgreSQL ➡️ Databases ➡️ defaultdb ➡️ Schemas
+  - Clic droit sur *Schemas* ➡️ Refresh
 
 Si tout est ok, vous n'avez plus besoin du script de création et d'insertion de données.
 

@@ -137,7 +137,7 @@ Comment afficher la joueuse avec le plus grand elo ? :dizzy_face:
 
 En utilisant une **sous-requête** :
 
-- `SELECT MAX(elo) FROM echecs.joueuse` :arrow_right: renvoie un nombre
+- `SELECT MAX(elo) FROM echecs.joueuse` ➡️ renvoie un nombre
 - Nous pouvons ensuite tester si *elo* est égal à ce nombre
 
 ::: {.fragment}

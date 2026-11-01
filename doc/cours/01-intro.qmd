@@ -131,7 +131,7 @@ Le SQL ça ressemble à ça (1ere lecture de requête) :
 
 - Base de données : PostgreSQL
 - Communication avec la BDD : cloudBeaver
-- [Datalab SSPCloud de l'INSEE](https://datalab.sspcloud.fr/){target="_blank"} 
+- [Datalab SSP Cloud de l'INSEE](https://datalab.sspcloud.fr/){target="_blank"} 
   - créer un compte avec : `prenom.nom@eleve.ensai.fr`
 - [Datalab du GENES](https://onyxia.lab.groupe-genes.fr/){target="_blank"}
 
@@ -174,10 +174,10 @@ Sauf si vous voulez ne rien retenir...
 
 ## Évaluation
 
-- Lundi 5 Janvier 10h
+- Lundi 4 Janvier 10h
 - Durée : 2h
 - Sur papier
-- Sans documents
+- Sans documents (un aide-mémoire est fourni)
 
 ::: {.notes}
 - partie QCM

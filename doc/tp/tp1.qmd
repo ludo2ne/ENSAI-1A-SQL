@@ -13,34 +13,9 @@ categories:
 
 Vous allez réaliser ce TP sur un Datalab.
 
+ à l'une des deux instances suivantes  :
 
-### Datalab du GENES ou SSPCloud {.unnumbered}
-
-Connectez-vous à l'une des deux instances suivantes  :
-
-- [ ] [Datalab SSPCloud de l'INSEE](https://datalab.sspcloud.fr/){target="_blank"} 
-  - en créant un compte avec votre mail `prenom.nom@eleve.ensai.fr`
-  - il est recommandé d'utiliser en priorité le SSPCloud qui est plus stable
-- [ ] [Datalab du GENES](https://onyxia.lab.groupe-genes.fr/){target="_blank"}
-
-
-### VM ENSAI {.unnumbered}
-
-::: {.callout-important title="En cas d'indisponibilité des Datalabs" collapse="true"}
-Uniquement en cas d'indisponibilité des Datalabs, vous pouvez réaliser le TP directement sur la VM. Le logiciel DBeaver est installé.
-
-- [ ] Lancez DBeaver
-- [ ] Onglet *Base de données* :arrow_right: *Nouvelle Connexion*
-  - Type de connexion : `DuckDB`
-  - Suivant
-  - Path : `:memory:`
-  - Terminer
-- [ ] Dans l'explorer (à gauche), clic droit sur la connexion que vous venez de créer
-  - *Editeur SQL* :arrow_right: *Script SQL* (raccourci : F3)
-
-Cela ouvre une fenêtre dans laquelle vous pouvez saisir du SQL.
-
-:::
+- [ ] Connectez-vous au [SSP Cloud](https://datalab.sspcloud.fr/){target="_blank"} 
 
 ## Lancement du service
 
@@ -50,14 +25,14 @@ Cela ouvre une fenêtre dans laquelle vous pouvez saisir du SQL.
 - [ ] Ouvrez le service
   - Renseignez username et password
 
-::: {.callout-tip title="CloudBeaver"}
+::: {.callout-note title="CloudBeaver"}
 CloudBeaver est une application web légère dédiée à la gestion de bases de données. Elle permet de se connecter à divers types de bases de données, qu'elles soient SQL, NoSQL ou hébergées dans le cloud, à partir d'un seul point d'accès via un navigateur. CloudBeaver facilite l'exploration, la modification et la visualisation des données sans nécessiter l'installation de logiciels locaux. 
 :::
 
 Pour ce premier TP, nous n'allons pas utiliser de base de données PostgreSQL. Nous allons simplement utiliser [DuckDB](https://duckdb.org/){target="_blank"} pour lire des fichiers de données.
 
 
-::: {.callout-tip title="DuckDB"}
+::: {.callout-note title="DuckDB"}
 DuckDB est un moteur de base de données relationnelle conçu pour des analyses rapides et efficaces.
 
 DuckDB est idéal pour les charges de travail analytiques en raison de sa simplicité, de sa rapidité et de son extensibilité, surtout pour traiter des fichiers volumineux localement.
@@ -79,18 +54,17 @@ Nous allons créer une base de données stockée en mémoire vive. L'avantage es
   - Database : `:memory:`
   - Cliquez sur le bouton [CREATE]{.blue-button}
 - [ ] Ouvrez un éditeur SQL
-  - Dans l'explorer à gauche, clic droit sur votre connexion *DuckDB* :arrow_right: SQL Editor
+  - Dans l'explorer à gauche, clic droit sur votre connexion *DuckDB* ➡️ SQL Editor
   - vous pouvez maintenant saisir du code *SQL*
 
 
 ::: {.callout-caution}
-Votre connexion doit être ouverte (rond vert).
+Votre connexion doit être ouverte (petit rond vert).
 
 Si ce n'est pas le cas : clic droit > Open.
 
 Puis réouvrez une nouvelle fenêtre SQL
 :::
-
 
 
 ## Les prénoms

@@ -35,6 +35,20 @@ Pour générer les pages :
 - en local : `quarto render` (les pages sont crées dans le dossier *_site*)
 - sur [GitHub](https://ludo2ne.github.io/ENSAI-1A-SQL) : voir fichier `.github/workflows/publish.yml`
 
+### Comment ça marche ?
+
+- **Le contenu** : rédigé en Markdown dans les fichiers `.qmd` dans le dossier `doc/`
+- **Les métadonnées** : définies à deux niveaux :
+  - globalement, dans `_quarto.yml` (configuration du projet, navigation, formats de sortie, etc.)
+  - individuellement, dans l'en-tête YAML de chaque fichier `.qmd` (titre, description, options de rendu, etc.)
+- **Le rendu** : Quarto combine le contenu, les métadonnées et les ressources (CSS, extensions...) pour produire les documents dans `_site/`
+
+Les fichiers de cours sont générés dans 3 formats :
+
+- `html`
+- `revealjs` : diapositives avec notes (Speaker Mode)
+- `typst` : documents PDF
+
 ## Licence
 
 Ce projet est sous licence [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International](https://creativecommons.org/licenses/by-nc-sa/4.0/).

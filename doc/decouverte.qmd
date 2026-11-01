@@ -63,7 +63,7 @@ Pourquoi Utiliser une Base de Données ?
 
 ## Lancement
 
-- [ ] Se connecter au SSPCloud
+- [ ] Se connecter au SSP Cloud
 - [ ] Ouvrir un service CloudBeaver
 - [ ] Créer une connexion DuckDB
   - JDBC URL : `jdbc:duckdb::memory:`

@@ -74,7 +74,7 @@ Votre mission, si vous l'acceptez, est de retrouver ce fameux prénom. Pour cela
 Vous pouvez réaliser ce TP soit sur :
 
 - Le [Datalab du GENES](https://onyxia.lab.groupe-genes.fr/){target="_blank"}
-- Le [Datalab SSPCloud de l'INSEE](https://datalab.sspcloud.fr/){target="_blank"} 
+- Le [Datalab SSP Cloud de l'INSEE](https://datalab.sspcloud.fr/){target="_blank"} 
   - si besoin de créer un compte, utilisez votre mail ENSAI
 
 
@@ -154,7 +154,7 @@ K8s récupére via le chart Helm toutes les infos nécessaires et déploie le co
 :::
 
 - [ ] Créez un Notebook Python
-  - File :arrow_right: New :arrow_right: Notebook
+  - File ➡️ New ➡️ Notebook
 - [ ] Dans la cellule, écrivez un code Python qui permet de compter combien il y a de nombres premiers entre 10 000 et 100 000
 
 Pour vous aider, vous pouvez utiliser cette fonction qui génére une liste de booléens.
@@ -604,7 +604,7 @@ Nous allons utiliser ici la librairie [s3fs](https://s3fs.readthedocs.io/){targe
   with fs.open(destination, mode='wb') as f:
       top10f2021.write_csv(f)
   ```
-- [ ] Sur le Datalab, allez dans `Mes fichiers` :arrow_right: ENSAI :arrow_right: SQL
+- [ ] Sur le Datalab, allez dans `Mes fichiers` ➡️ ENSAI ➡️ SQL
   - le fichier *output.csv* a été généré
   - rafraichissez la page si besoin
 - [ ] Double-cliquez sur ce fichier pour en avoir un aperçu
@@ -623,7 +623,7 @@ Pour plus de détails sur le stockage des fichiers sur S3 :
 Une fois vos travaux terminés, il est temps de libérer les ressources réservées.
 
 - [ ] Si besoin, sauvegardez vos notebooks
-  - clic droit sur le nom du fichier :arrow_right: Download
+  - clic droit sur le nom du fichier ➡️ Download
 - [ ] Puis sur la page d'accueil, allez dans *Mes services*, mettez votre service à la poubelle
 
 Vous pouvez aisément reproduire votre travail plus tard :
@@ -665,7 +665,7 @@ D'autres videos sur la [page GitHub du projet](https://github.com/InseeFrLab/ony
 
 ### Bibliographie {.unnumbered}
 
-- [Utiliser RStudio sur l’environnement SSP Cloud](https://book.utilitr.org/01_R_Insee/Fiche_utiliser_Rstudio_SSPCloud.html){target="_blank"}, UtilitR
+- [Utiliser RStudio sur l’environnement SSP Cloud](https://book.utilitr.org/01_R_Insee/Fiche_utiliser_Rstudio_SSP Cloud.html){target="_blank"}, UtilitR
 - [Formations et tutoriels du SSP Cloud](https://www.sspcloud.fr/formation){target="_blank"}
   - Nombreux tutos : Python, R, ML, Spark, Cartographie 
 - [Doc SSP Cloud](https://docs.sspcloud.fr/){target="_blank"}
@@ -696,11 +696,11 @@ Si vous avez déjà généré et déclaré un jeton GitHub, inutile de refaire c
 :::
 
 - [ ] Connectez-vous à votre compte GitHub
-- [ ] Allez dans settings :arrow_right: Developer settings :arrow_right: Personal access tokens :arrow_right: Tokens (classic)
+- [ ] Allez dans settings ➡️ Developer settings ➡️ Personal access tokens ➡️ Tokens (classic)
 - [ ] Générez un [nouveau jeton classique](https://github.com/settings/tokens/new){target="_blank"}
   - Renseigner : 
     - nom du token : Datalab GENES
-    - date d'expiration :arrow_right: Custom :arrow_right: 1 an
+    - date d'expiration ➡️ Custom ➡️ 1 an
   - :white_check_mark: Cochez repo
   - Cliquez sur [Generate token]{.green-button}
   - Copiez ce jeton commençant par `ghp_` et gardez le précieusement de côté quelques minutes
@@ -715,7 +715,7 @@ Si vous avez déjà généré et déclaré un jeton GitHub, inutile de refaire c
 
 GitHub vous a fournit un jeton. Il faut maintenant le déclarer sur le Datalab :
 
-- [ ] Allez dans `Mon Compte` :arrow_right: Onglet `Git`
+- [ ] Allez dans `Mon Compte` ➡️ Onglet `Git`
 - [ ] Renseignez les informations suivantes 
   - nom d'utilisateur Git 
   - mail (celui utilisé pour votre compte GitHub)
@@ -761,7 +761,7 @@ Lancez un service *Jupyter Notebook*
 ### Sauver son code
 
 - [ ] Sur Jupyter, ouvrez un terminal
-  - File :arrow_right: New :arrow_right: Terminal
+  - File ➡️ New ➡️ Terminal
 - [ ] Positionnez-vous dans le repo : `cd /home/onyxia/work/TP3-datalab/`
 - [ ] `git status` pour voir l'état actuel
   - le fichier *ex0.ipynb* doit apparaître dans les *Untracked files*
@@ -798,7 +798,7 @@ D'autres possibilités pour accéder à votre stockage
 
 Le [client MinIO](https://min.io/docs/minio/linux/reference/minio-mc.html){target="_blank"} installé et [utilisable depuis le terminal]{.underline} permet également d'interagir avec vos fichiers.
 
-Ouvrez un terminal (File :arrow_right: New :arrow_right: Terminal):
+Ouvrez un terminal (File ➡️ New ➡️ Terminal):
 
 - [ ] `mc ls s3/<username>/ENSAI/SQL` : pour lister le contenu de votre dossier
 - [ ] `mc cp s3/<username>/ENSAI/SQL/output.csv .` : pour copier le fichier depuis s3 dans votre dossier courant

@@ -971,10 +971,10 @@ SELECT COALESCE(mail, tel, 'pas de contact')
 
 La requête ci-dessus va afficher :
 
-- Si mail est NON NULL :arrow_right: mail
+- Si mail est NON NULL ➡️ mail
 - Sinon 
-  - Si tel NON NULL :arrow_right: tel
-  - Sinon :arrow_right: `pas de contact`
+  - Si tel NON NULL ➡️ tel
+  - Sinon ➡️ `pas de contact`
 
 
 ### NULLIF
