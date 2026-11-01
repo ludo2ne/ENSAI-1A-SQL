@@ -84,6 +84,25 @@ p{
   border: solid 2px black;
 }
 
+.button {
+  display: inline-block;
+  padding: 2px 5px;
+  font-size: 14px;
+  color: #1f2937;
+  background-color: white;
+  border: 2px solid #1f2937;
+  border-radius: 12px;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.button:hover {
+  color: white;
+  background-color: #1f2937;
+}
+
 .green-button {
   display: inline-block;
   padding: 2px 5px;
@@ -122,7 +141,7 @@ p{
 }
 
 .blue-button {
-  background-color: #2d8cd0;      /* bleu similaire à celui de l’image */
+  background-color: #2d8cd0;
   color: white;
   font-weight: bold;
   border: none;
@@ -137,8 +156,22 @@ p{
   transform: translateY(-2px);   
 }
 
-
-
+.keyboard {
+  display: inline-block;
+  padding: 1px 5px;
+  margin: 0 1px;
+  font-family: "Courier New", monospace;
+  font-size: 0.9em;
+  font-weight: bold;
+  line-height: 1.2;
+  color: #000;
+  background: #ddd;
+  border: 1px solid #999;
+  border-bottom: 2px solid #777;
+  border-radius: 3px;
+  box-shadow: 0 1px 1px #999;
+  vertical-align: baseline;
+}
 
 /************************************************************/
 /* html Vs RevealJS                                         */
@@ -146,7 +179,7 @@ p{
 
 /* Hide revealJS speaker notes in the html*/
 .notes,
-.hide-html-render{
+.hide-html-render {
   display: none;
 }
 
