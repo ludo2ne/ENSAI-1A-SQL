@@ -147,6 +147,7 @@ Rappel Datalab : Infra + logiciel Onyxia
 
 ### Ce qu'il faut faire
 
+- Lire le sujet en avance
 - Lire attentivement les consignes
 - Essayer de résoudre par soi même
 - Chercher dans le cours / sur internet
@@ -154,6 +155,9 @@ Rappel Datalab : Infra + logiciel Onyxia
 - Demander de l'aide à l'enseignant
 
 ::: {.notes}
+- [ ] -> Ce qu'il faut faire
+- Les explications sont au dessus ou en dessous
+
 ça peut paraitre un peu infentilisant mais c'est nécessaire de le rappeler !!!
 
 si je demande un setup... faites le sinon ça risque de péter plus tard.

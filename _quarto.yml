@@ -56,6 +56,8 @@ website:
             text: Datalab
           - href: doc/outils/tp-datalab.qmd
             text: TP Datalab
+          - href: doc/outils/cloudbeaver.qmd
+            text: CloudBeaver
           - href: doc/outils/docker.qmd
             text: Docker
           - href: doc/outils/vm.qmd

@@ -13,26 +13,20 @@ categories:
 
 Vous allez réaliser ce TP sur un Datalab.
 
- à l'une des deux instances suivantes  :
-
 - [ ] Connectez-vous au [SSP Cloud](https://datalab.sspcloud.fr/){target="_blank"} 
 
-## Lancement du service
+Pour ce premier TP, nous n'allons pas utiliser de base de données PostgreSQL.
 
-- [ ] Lancez le service [CloudBeaver](https://dbeaver.com/docs/cloudbeaver/){target="_blank"}
-  - Allez dans **Catalogue de services**
-  - Onglet **Databases**
-- [ ] Ouvrez le service
-  - Renseignez username et password
+Vous allez utiliser les logiciels [CloudBeaver](https://dbeaver.com/docs/cloudbeaver/){target="_blank"} et [DuckDB](https://duckdb.org/){target="_blank"} pour lire des fichiers de données.
 
-::: {.callout-note title="CloudBeaver"}
-CloudBeaver est une application web légère dédiée à la gestion de bases de données. Elle permet de se connecter à divers types de bases de données, qu'elles soient SQL, NoSQL ou hébergées dans le cloud, à partir d'un seul point d'accès via un navigateur. CloudBeaver facilite l'exploration, la modification et la visualisation des données sans nécessiter l'installation de logiciels locaux. 
-:::
+### CloudBeaver {.unnumbered}
 
-Pour ce premier TP, nous n'allons pas utiliser de base de données PostgreSQL. Nous allons simplement utiliser [DuckDB](https://duckdb.org/){target="_blank"} pour lire des fichiers de données.
+CloudBeaver est une application web légère dédiée à la gestion de bases de données. Elle permet de se connecter à divers types de bases de données, qu'elles soient SQL, NoSQL ou hébergées dans le cloud, à partir d'un seul point d'accès via un navigateur. 
 
+CloudBeaver facilite l'exploration, la modification et la visualisation des données sans nécessiter l'installation de logiciels locaux.
 
-::: {.callout-note title="DuckDB"}
+### DuckDB {.unnumbered}
+
 DuckDB est un moteur de base de données relationnelle conçu pour des analyses rapides et efficaces.
 
 DuckDB est idéal pour les charges de travail analytiques en raison de sa simplicité, de sa rapidité et de son extensibilité, surtout pour traiter des fichiers volumineux localement.
@@ -42,11 +36,24 @@ DuckDB est idéal pour les charges de travail analytiques en raison de sa simpli
 | **Simplicité**        | Fonctionne sans serveur, intégré dans le processus hôte. Aucune dépendance externe pour la compilation ou l'exécution, simplifiant son déploiement. |
 | **Rapidité**          | Optimisé pour l'analytique (OLAP) avec un moteur d'exécution vectorisé en colonnes, réduisant le temps de traitement pour les requêtes complexes. |
 | **Richesse fonctionnelle** | Supporte des requêtes SQL complexes, fonctions de fenêtre, index secondaires, et assure des garanties ACID grâce au contrôle de concurrence (MVCC).|
-| **Extensibilité**     | Permet l’ajout de types de données, fonctions et formats de fichiers via des extensions (supporte Parquet, JSON, S3, HTTP(S)). |
+| **Extensibilité**     | Permet l'ajout de types de données, fonctions et formats de fichiers via des extensions (supporte Parquet, JSON, S3, HTTP(S)). |
 | **Gratuit et open-source** | Licence MIT, code source disponible et contributions ouvertes à tous. |
+
+
+::: {.callout-tip}
+Vous allez créer une base de données stockée en mémoire vive. L'avantage est que c'est très rapide. L'inconvénient, c'est que rien ne sera sauvegardé.
 :::
 
-Nous allons créer une base de données stockée en mémoire vive. L'avantage est que c'est très rapide. L'inconvénient, c'est que rien ne sera sauvegardé.
+
+
+## Lancement du service
+
+- [ ] Lancez le service CloudBeaver
+  - Allez dans **Catalogue de services** ➡️ Onglet **Databases**
+- [ ] Ouvrez le service
+  - Renseignez username et password
+
+Une fois dans CloudBeaver, vous allez créer une connexion DuckDB :
 
 - [ ] Créez une nouvelle connexion **DuckDB**
   - En haut à gauche, cliquez sur le +, puis New connection
@@ -59,7 +66,7 @@ Nous allons créer une base de données stockée en mémoire vive. L'avantage es
 
 
 ::: {.callout-caution}
-Votre connexion doit être ouverte (petit rond vert).
+Votre connexion doit être ouverte 🟢.
 
 Si ce n'est pas le cas : clic droit > Open.
 
@@ -71,20 +78,16 @@ Puis réouvrez une nouvelle fenêtre SQL
 
 Le fichier des prénoms contient des données sur les prénoms attribués aux enfants nés en France depuis 1900. Ces données sont disponibles au niveau France et par département.
 
-Dans ce TP, nous allons utiliser la version au format [parquet](https://parquet.apache.org/){target="_blank"}.
+Dans ce TP, nous allons utiliser la version au format [Parquet](https://parquet.apache.org/){target="_blank"}.
 
 
 ::: {.callout-note title="Fichier parquet"}
 Le format **Parquet** est un format de fichier de stockage de données optimisé pour les systèmes de traitement analytique de grande échelle. Voici ses principales caractéristiques :
 
 1. **Stockage en colonnes** : Parquet stocke les données par colonnes plutôt que par lignes, ce qui améliore l'efficacité de l'accès aux données dans les charges de travail analytiques.
-   
 2. **Compression efficace** : La compression par colonne permet un taux de compression moyen de 5 à 10 fois par rapport aux formats CSV, voire plus pour de gros fichiers. Cela réduit significativement la taille des données stockées et le coût de stockage.
-
 3. **Optimisé pour l'analytique** : Parquet est conçu pour les requêtes en lecture intensive, car il permet de charger uniquement les colonnes nécessaires pour une analyse, ce qui améliore les performances en particulier sur les données volumineuses.
-
 4. **Métadonnées Riches et Auto-descriptives** : Parquet inclut des métadonnées détaillées (schéma, types de données, statistiques min/max), permettant une lecture rapide et sans risque d'erreur. Ces métadonnées facilitent également le traitement des données par différents outils.
-
 5. **Langage Indépendant et Open Source** : Le format Parquet est indépendant du langage et peut être utilisé avec divers langages de programmation (Python, R, C++, Java). Il est aussi open source et compatible avec la plupart des frameworks de big data.
 :::
 
@@ -93,38 +96,41 @@ Pour en savoir plus sur le format Parquet :
 - [Parquet, qu'est-ce que c'est ?, Databricks](https://www.databricks.com/fr/glossary/what-is-parquet){target="_blank"}
 - [What is the Parquet File Format?, Upsolver blog](https://www.upsolver.com/blog/apache-parquet-why-use){target="_blank"}
 
+Ici le fichier est relativement modeste (10 Mo), nous pouvons nous permettre de le stocker intégralement en mémoire.
 
-Pour des requêtes plus rapides, nous allons forcer le téléchargement en cache du fichier
+Pour des requêtes plus rapides, nous allons forcer le téléchargement en cache du fichier :
 
 - [ ] Exécutez `SET force_download=true;`
 
+::: {.callout-tip title="Éxécuter une requête"}
+Cliquez sur la requête pour y positionner le pointeur de la souris, puis au choix :
 
-Ici le fichier est relativement modeste (10 Mo), nous pouvons nous permettre de le stocker intégralement en mémoire.
+- Cliquez sur le petit triangle orange [⯈]{style="color:orange"}
+- [CTRL]{.keyboard} + [ENTREE]{.keyboard}
+:::
+
 
 - [ ] Créez une table `prenoms` à partir du contenu du fichier
 
 ```{.sql}
 CREATE OR REPLACE TABLE prenoms AS
-FROM 'https://www.insee.fr/fr/statistiques/fichier/8595130/prenoms-2024.parquet'
+FROM 'https://www.insee.fr/fr/statistiques/fichier/8595130/prenoms-2025.parquet';
 ```
 
-Vous pourrez ensuite requêter sur cette vue comme si c'était une table.
+::: {.callout-note}
+Cette requête est un peu longue et peut prendre parfois jusque 30s.
 
-::: {.callout-tip title="Éxécuter une requête"}
-Cliquez sur la requête pour y positionner le pointeur de la souris, puis au choix :
-
-- Cliquez sur le petit triangle orange
-- [CTRL]{.keyboard} + [ENTREE]{.keyboard}
+Si le lien n'est plus valide, allez chercher la dernière version sur le site de l'INSEE.
 :::
+
+Vous pourrez ensuite requêter sur cette vue comme si c'était une table.
 
 
 ### Premières requêtes
 
-::: {.callout-important}
+::: {.callout-important title="Prenez le temps et l'habitude d'écrire de jolies requêtes bien alignées !!!"}
 
-**Prenez le temps et l'habitude d'écrire de jolies requêtes bien alignées !!!**
-
-```{.sql filename="bien.sql"}
+```{.sql filename="👍 bien.sql"}
 SELECT c.nom AS club, 
        AVG(j.elo) AS moyenne_elo
   FROM joueuse j 
@@ -134,32 +140,39 @@ SELECT c.nom AS club,
  ORDER BY 2 DESC;
 ```
 
-<br>
 
-```{.sql filename="pasbien.sql"}
+
+```{.sql filename="👿 pas_bien.sql"}
 SELECT c.nom AS club, AVG(j.elo) AS moyenne_elo FROM joueuse j INNER JOIN club c USING (id_club) WHERE mail IS NOT NULL GROUP BY c.nom ORDER BY 2 DESC;
 ```
-
 :::
+
+
+::: {.callout-tip title="Dictionnaire des variables"}
+Avant de vous lancer tête baissée, ce qui serait pas mal c'est d'aller jeter un oeil au dictionnaire des variables.
+
+Vous le trouverez sur le site de l'INSEE.
+:::
+
 
 - [ ] Listez tous les éléments de *prenoms*
 - [ ] Filtrez pour n'afficher que le niveau géographique *FRANCE* et le prénom *GINETTE*
 
-::: {.callout-tip title="Secret statistique"}
+::: {.callout-note title="Secret statistique"}
 Vous remarquerez que les valeurs sont des multiples de 5.
 
-> Pour chaque prénom, il est indiqué, pour chaque année de naissance et chaque sexe, le nombre de personnes inscrites à l’état civil sous ce prénom, arrondi au multiple de 5 le plus proche
+> Pour chaque prénom, il est indiqué, pour chaque année de naissance et chaque sexe, le nombre de personnes inscrites à l'état civil sous ce prénom, arrondi au multiple de 5 le plus proche.
 
 Vous remarquerez également que certaines années sont manquantes.
 
-> Un prénom est diffusé s'il a été attribué au moins 3 fois à des personnes de sexe féminin ou à des personnes de sexe masculin
+> Un prénom est diffusé s'il a été attribué au moins 3 fois à des personnes de sexe féminin ou à des personnes de sexe masculin.
 
 En statistique publique, on exige au moins 3 individus pour garantir le secret statistique. Avec 1 ou 2 personnes, on peut identifier ou déduire leurs données.
 :::
 
 Pour **la suite du TP**, nous allons uniquement nous interesser au niveau géographique *FRANCE* :
 
-- [ ] À partir de la table *prenoms*, créez une table *prenoms_fr* conservant uniquement
+- [ ] À partir de la table *prenoms*, créez une table *prenoms_fr* conservant uniquement :
   - les lignes où le niveau géographique est égal à *FRANCE*
   - les colonnes suivantes : *sexe*, *prenom*, *periode*, *valeur*
 - [ ] Combien de lignes contient cette table ?
@@ -177,9 +190,9 @@ Pour **la suite du TP**, nous allons uniquement nous interesser au niveau géogr
   - Affichez également ces colonnes pour les questions suivantes
 - [ ] Listez les prénoms de l'année 2022 donnés 2000 fois ou plus
 - [ ] Classez-les d'abord par sexe, puis par nombre décroissant d'occurrences
-  - Quels sont les prénoms masculins et féminins les plus donnés ?
+  - Quels sont les prénoms masculins et féminins les plus donnés ? 🥇
 - [ ] Listez les prénoms féminins commençant par la lettre *Q*
-- [ ] Listez les prénoms contenant exactement deux fois la lettre *V*
+- [ ] Listez les prénoms contenant exactement deux fois la lettre *U*
 - [ ] Comptez le nombre de prénoms commençant par chaque lettre
 
 ::: {.callout-tip}
@@ -188,17 +201,17 @@ Pour extraire la première lettre d'un prénom, vous pouvez utiliser :
 - la fonction [SUBSTRING](https://duckdb.org/docs/stable/sql/functions/text){target="_blank"}
 - le slicing comme en R ou Python
 :::
-  
-- [ ] Bonus : Comptez le nombre de prénoms commençant par chaque lettre en différenciant filles et garçons
+
+- [ ] Bonus : Même question en ignorant les accents
+- [ ] Bonus 2 : Comptez le nombre de prénoms commençant par chaque lettre en différenciant filles et garçons
 
 
 ### Statistiques descriptives
 
-
 - [ ] Lancez la commande `SUMMARIZE prenoms;` pour avoir quelques stats sur la table
 - [ ] Affichez pour l'année 2003, les prénoms et leurs nombres de caractères
   - Trouvez une [fonction adéquate](https://duckdb.org/docs/stable/sql/functions/text){target="_blank"}
-- [ ] Affichez le nombres de caractères minimum, maximum et moyen parmi les prénoms de 2003
+- [ ] Affichez le nombre de caractères minimum, maximum et moyen parmi les prénoms de 2003
 - [ ] Listez les 3 prénoms de 2003 ayant le nombre de caractères maximum
   - Commencez par écrire une requête donnant le nombre de caractères maximum
   - Utilisez-là comme sous-requête pour afficher les 3 prénoms
@@ -212,7 +225,6 @@ Pour extraire la première lettre d'un prénom, vous pouvez utiliser :
 
 
 ### Jérôme, c'est moi
-
 
 - [ ] Listez les différentes années où le prénom `JÉRÔME` a été donné
   - Classez par année décroissante
@@ -231,13 +243,12 @@ Pour extraire la première lettre d'un prénom, vous pouvez utiliser :
 
 ### Vérifions le classement
 
-Avec cette histoire d'accents, posons-nous la question si cela peut modifier le classement des top prénoms.
+Avec cette histoire d'accents, posons-nous la question si cela peut modifier le classement des top prénoms. 🤔
 
 - [ ] Affichez le top 10 des prénoms féminins en 2023 ?
 - [ ] Quel prénom se classe onzième ?
   - Y-a-t-il d'autres orthographes proches pour écrire ce prénom ?
 - [ ] Refaites le classement en ignorant les accents
-
 
 
 ### Prénoms composés
@@ -258,7 +269,6 @@ Nous allons maintenant nous interesser aux prénoms composés entre 2000 et 2009
 
 > Filtrez sur l'année 1962.
 
-
 - [ ] Comptez le nombre de prénoms distincts donnés
 - [ ] Complétez en comptant le nombre de prénoms distincts donnés par sexe
 - [ ] Complétez en calculant le nombre total des prénoms distincts donnés, en prenant en compte la distinction entre les sexes
@@ -274,7 +284,11 @@ Nous allons maintenant nous interesser aux prénoms composés entre 2000 et 2009
 
 ## Fichier des individus
 
-- [ ] Créez une vue qui pointe vers le fichier des individus du recensement de la population 2020
+> Les requêtes peuvent être un peu lentes.
+
+Dans cet exercice, vous allez utiliser le fichier détail des individus du recensement de la population 2020.
+
+- [ ] Créez une vue qui pointe vers le fichier
 
 ```{.sql}
 CREATE OR REPLACE VIEW individus AS

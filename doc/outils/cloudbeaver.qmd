@@ -1,0 +1,33 @@
+---
+title: "CloudBeaver"
+description: "Comment utiliser facilement"
+format: html
+---
+
+Dans l'écran principal, vous avez :
+
+- un explorer à gauche : il liste les connexions disponibles vers les bases de données
+- au milieu, un éditeur SQL : pour écrire et lancer des requêtes
+- en bas, les résultats des requêtes
+
+
+## Exécuter une requête
+
+- [ ] Positionnez le curseur de votre souris sur une des lignes de la requête
+- [ ] Cliquez sur le bouton avec un triangle orange [⯈]{style="color:orange"}
+  - Alternative : [CTRL]{.keyboard} + [ENTREE]{.keyboard}
+
+
+::: {.callout-note}
+Il est important de passer des lignes entre chaque requête.
+:::
+
+
+## Exécuter plusieurs requêtes
+
+- [ ] Cliquez sur le bouton orange avec un triangle ⯈ dans un parchemin 📜
+  - Alternative : [ALT]{.keyboard} + [X]{.keyboard}
+
+::: {.callout-caution}
+Chaque requête doit se terminer par un point virgule.
+:::

@@ -223,11 +223,11 @@ Vous avez écrit précédemment une requête listant les playlists avec les arti
 Les CTE seront évoquées au dernier cours. Cela parait compliqué à première vue mais le principe est très simple.
 
 ::: {.callout-note title="CTE"}
-Une CTE (Common Table Expression) est une table temporaire nommée définie au début d’une requête avec le mot-clé **WITH**.
+Une CTE (Common Table Expression) est une table temporaire nommée définie au début d'une requête avec le mot-clé **WITH**.
 
 À quoi ça sert ?
 
-- Rendre une requête plus lisible (au lieu d’imbriquer des sous-requêtes)
+- Rendre une requête plus lisible (au lieu d'imbriquer des sous-requêtes)
 - Réutiliser un même sous-résultat plusieurs fois
 - Servir de base à des requêtes récursives
 :::

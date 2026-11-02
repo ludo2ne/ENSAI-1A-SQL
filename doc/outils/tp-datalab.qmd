@@ -665,7 +665,7 @@ D'autres videos sur la [page GitHub du projet](https://github.com/InseeFrLab/ony
 
 ### Bibliographie {.unnumbered}
 
-- [Utiliser RStudio sur l’environnement SSP Cloud](https://book.utilitr.org/01_R_Insee/Fiche_utiliser_Rstudio_SSP Cloud.html){target="_blank"}, UtilitR
+- [Utiliser RStudio sur l'environnement SSP Cloud](https://book.utilitr.org/01_R_Insee/Fiche_utiliser_Rstudio_SSP Cloud.html){target="_blank"}, UtilitR
 - [Formations et tutoriels du SSP Cloud](https://www.sspcloud.fr/formation){target="_blank"}
   - Nombreux tutos : Python, R, ML, Spark, Cartographie 
 - [Doc SSP Cloud](https://docs.sspcloud.fr/){target="_blank"}
