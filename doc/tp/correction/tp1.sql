@@ -1,7 +1,13 @@
-CREATE OR REPLACE TABLE prenoms AS
-FROM 'https://www.insee.fr/fr/statistiques/fichier/8595130/prenoms-2024.parquet';
-
 SET force_download=true;
+
+
+CREATE OR REPLACE TABLE prenoms AS
+FROM 'https://www.insee.fr/fr/statistiques/fichier/8595130/prenoms-2025.parquet';
+
+
+SELECT *
+  FROM prenoms;
+
 
 SELECT *
   FROM prenoms
@@ -30,7 +36,16 @@ SELECT *
  WHERE periode = '2022'
  ORDER BY valeur DESC;
 
--- Colonnes
+
+-- Colonnes sexe, prenom et valeur
+SELECT sexe,
+       prenom,
+       valeur
+  FROM prenoms_fr
+ WHERE periode = '2022';
+
+
+-- Donnés 2000 fois ou plus
 SELECT sexe,
        prenom,
        valeur
@@ -38,11 +53,6 @@ SELECT sexe,
  WHERE periode = '2022'
    AND valeur >= 2000;
 
--- Donnés 2000 fois ou plus
-SELECT *
-  FROM prenoms_fr
- WHERE periode = '2022'
-   AND valeur >= 2000;
 
 -- Classés par sexe et nombre
 SELECT sexe,
@@ -63,14 +73,14 @@ SELECT sexe,
    AND sexe = '2'
    AND prenom LIKE 'Q%';
 
--- Prénoms contenant un X et pas de A
+-- Prénoms contenant exactement 2 U
 SELECT sexe,
        prenom,
        valeur
   FROM prenoms_fr
  WHERE periode = '2022'
-   AND prenom LIKE '%X%'
-   AND prenom NOT LIKE '%A%';
+   AND prenom LIKE '%U%U%'
+   AND prenom NOT LIKE '%U%U%U%';
 
 -- Nombre de prénoms commençant par chaque lettre
 SELECT SUBSTRING(prenom, 1, 1) AS premiere_lettre,
@@ -80,7 +90,16 @@ SELECT SUBSTRING(prenom, 1, 1) AS premiere_lettre,
  GROUP BY premiere_lettre
  ORDER BY 1;
 
--- Nombre de prénoms par sexe commençant par chaque lettre
+
+-- Bonus idem en ignorant les accents
+SELECT strip_accents(SUBSTRING(prenom, 1, 1)) AS premiere_lettre,
+       COUNT(1) AS nombre
+  FROM prenoms_fr
+ WHERE periode = '2022'
+ GROUP BY premiere_lettre
+ ORDER BY 1;
+
+-- Bonus Nombre de prénoms par sexe commençant par chaque lettre
 SELECT SUBSTRING(prenom, 1, 1) AS premiere_lettre,
        COUNT(1) FILTER (WHERE sexe = 1) AS garcon,
        COUNT(1) FILTER (WHERE sexe = 2) AS fille
@@ -125,6 +144,7 @@ SELECT prenom
                              FROM prenoms_fr 
                             WHERE periode = '2003');
 
+
 -- afficher pour chaque année entre 2015 et 2022 le ou les prénoms avec le plus de caractères
 -- step1 : taille max par année
 SELECT p2.periode,
@@ -145,6 +165,7 @@ SELECT p1.periode,
                           WHERE p1.periode = p2.periode)
  ORDER BY periode;
 
+
 -- Affichez pour chaque année la taille moyenne des prénoms
 SELECT periode,
        ROUND(AVG(LENGTH(prenom)),1)
@@ -163,16 +184,19 @@ SELECT DISTINCT periode
  WHERE prenom = 'JÉRÔME'
  ORDER BY periode DESC;
 
+
 -- Différentes manières d'écrire JEROME
 SELECT DISTINCT(prenom)
   FROM prenoms_fr
  WHERE prenom LIKE 'J_R_ME';
+
 
 -- JEROME avec d'autres accents / sans accent
 SELECT *
   FROM prenoms_fr
  WHERE strip_accents(prenom) = 'JEROME'
  ORDER BY periode DESC;
+
 
 -- valeur de fois où le prénom JEROME a été donné, quelle que soit l'accentuation
 SELECT strip_accents(prenom),
@@ -226,6 +250,7 @@ SELECT DISTINCT prenom
  WHERE prenom LIKE '%-%'
    AND periode BETWEEN '2000' AND '2009';
 
+
 -- affichez également le valeur de fois où ils ont été donnés, trié en décroissant
 SELECT prenom,
        SUM(valeur) AS nb_donnes
@@ -234,6 +259,7 @@ SELECT prenom,
    AND periode BETWEEN '2000' AND '2009'
  GROUP BY prenom
  ORDER BY nb_donnes DESC;
+
 
 -- Prénoms composés contenant JEAN
 SELECT prenom,
@@ -244,6 +270,7 @@ SELECT prenom,
    AND periode BETWEEN '2000' AND '2009'
  GROUP BY prenom
  ORDER BY nb_donnes DESC;
+
 
 -- Pour retirer les JEANNE...
 SELECT prenom,
@@ -261,13 +288,14 @@ SELECT prenom,
 -- Cette année-là
 -------------------------------------------------------------------------------
 
--- valeur de prénoms distincts en 2016
+-- valeur de prénoms distincts en 1962
 SELECT COUNT(DISTINCT prenom) AS nb_prenoms,
        COUNT(DISTINCT prenom) FILTER (WHERE sexe = 2) AS prenoms_filles,
        COUNT(DISTINCT prenom) FILTER (WHERE sexe = 1) AS prenoms_garcons,
        prenoms_filles + prenoms_garcons
   FROM prenoms_fr
  WHERE periode = '1962';
+
 
 -- Prénoms 1962 donnés à des filles et des garçons
 SELECT prenom,
@@ -279,6 +307,7 @@ SELECT prenom,
  GROUP BY prenom
  HAVING COUNT(DISTINCT sexe) = 2  -- Le prénom doit avoir été donné aux deux sexes
 ORDER BY total DESC;
+
 
 -- Prénoms plus donnés aux filles
 SELECT prenom,
@@ -306,9 +335,11 @@ FROM 'https://static.data.gouv.fr/resources/recensement-de-la-population-fichier
 SELECT COUNT(1)
   FROM individus;
 
+
 -- sommer la variable ipondi
 SELECT SUM(ipondi)::INT
   FROM individus;
+
 
 -- Affichez 10 lignes
 SELECT *
@@ -318,14 +349,17 @@ SELECT *
 CREATE OR REPLACE VIEW variables_individus AS
 FROM 'https://static.data.gouv.fr/resources/recensement-de-la-population-fichiers-detail-individus-localises-au-canton-ou-ville-2020-1/20231025-082910/dictionnaire-variables-indcvi-2020.csv'
 
+
 -- dictionnaire des variables
 SELECT *
   FROM variables_individus;
+
 
 -- modalité représentant le département de résidence de l'individu
 SELECT *
   FROM variables_individus
  WHERE lib_var ILIKE '%partem%';
+
 
 -- valeur d'habitants par départements
 SELECT dept,
@@ -333,6 +367,7 @@ SELECT dept,
   FROM individus
  GROUP BY dept
  ORDER BY 1;
+
 
 -- valeur d'habitants par départements par sexe entre 25 et 29 ans
 SELECT dept,

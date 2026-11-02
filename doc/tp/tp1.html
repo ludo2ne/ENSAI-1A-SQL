@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.20">
+<meta name="generator" content="quarto-1.11.9">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -75,18 +75,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <meta name="quarto:offset" content="../../">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-17888a1159294d3eb470f19f6f52f5a5.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-0ae969d3293726db143f6e9eb89af930.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-17888a1159294d3eb470f19f6f52f5a5.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-dark-447e42e69aaa9833c0ba1b986f430b20.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-d07a6ab924e89bf784d51cb9837db6d2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-46870b4d20955636cd9761b17410bed3.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-d07a6ab924e89bf784d51cb9837db6d2.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-1877d3a43983daeeadee91f49a979ea5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-30799fa43e988d48a73a7f75f25551c9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-1877d3a43983daeeadee91f49a979ea5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -119,7 +120,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body class="floating nav-fixed quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+<body class="floating nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -142,6 +143,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       for (let i=0; i < toggles.length; i++) {
         const toggle = toggles[i];
         if (toggle) {
+          toggle.setAttribute("aria-checked", alternate ? "true" : "false");
           if (alternate) {
             toggle.classList.add("alternate");
           } else {
@@ -171,13 +173,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       manageTransitions('#quarto-margin-sidebar .nav-link', true);
       // Switch the toggles
       setColorSchemeToggle(alternate)
-      // Hack to workaround the fact that safari doesn't
-      // properly recolor the scrollbar when toggling (#1455)
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455).
+    // Not run on load: stylesheets are set before first paint there, and
+    // scrolling would undo the scroll to a URL fragment (#14973).
+    // The one pixel nudge keeps the reader where they were.
+    const refreshSafariScrollbar = () => {
       if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
         manageTransitions("body", false);
-        window.scrollTo(0, 1);
+        const scrollY = window.scrollY;
+        window.scrollTo(0, scrollY > 0 ? scrollY - 1 : 1);
         setTimeout(() => {
-          window.scrollTo(0, 0);
+          window.scrollTo(0, scrollY);
           manageTransitions("body", true);
         }, 40);
       }
@@ -271,6 +279,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       // Read the current dark / light value
       let toAlternate = !hasAlternateSentinel();
       toggleColorMode(toAlternate);
+      refreshSafariScrollbar();
       setStyleSentinel(toAlternate);
       toggleGiscusIfUsed(toAlternate, darkModeDefault);
       window.dispatchEvent(new Event('resize'));
@@ -285,15 +294,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Base de données</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -389,6 +397,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">TP Datalab</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="../../doc/outils/cloudbeaver.html">
+ <span class="dropdown-text">CloudBeaver</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="../../doc/outils/docker.html">
  <span class="dropdown-text">Docker</span></a>
   </li>  
@@ -446,25 +458,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
-  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+  <button type="button" role="switch" aria-checked="false" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode" aria-label="Toggle dark mode"><i class="bi"></i></button>
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
   <i class="bi"></i>
   </div>
 </a>
 </div>
+            <div id="quarto-search" class="" title="Search"></div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <nav id="TOC" role="doc-toc" class="toc-active" data-toc-expanded="3">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto" aria-label="Section">
+    <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active" data-toc-expanded="3">
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
+  <ul class="collapse">
+  <li><a href="#cloudbeaver" id="toc-cloudbeaver" class="nav-link" data-scroll-target="#cloudbeaver">CloudBeaver</a></li>
+  <li><a href="#duckdb" id="toc-duckdb" class="nav-link" data-scroll-target="#duckdb">DuckDB</a></li>
+  </ul></li>
   <li><a href="#lancement-du-service" id="toc-lancement-du-service" class="nav-link" data-scroll-target="#lancement-du-service"><span class="header-section-number">1</span> Lancement du service</a></li>
   <li><a href="#les-prénoms" id="toc-les-prénoms" class="nav-link" data-scroll-target="#les-prénoms"><span class="header-section-number">2</span> Les prénoms</a>
   <ul class="collapse">
@@ -487,7 +504,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content" id="quarto-document-content" tabindex="-1">
 
 
 <header id="title-block-header" class="quarto-title-block default">
@@ -529,48 +546,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="introduction" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="introduction">Introduction</h2>
 <p>Vous allez réaliser ce TP sur un Datalab.</p>
-<p>à l’une des deux instances suivantes :</p>
 <ul class="task-list">
 <li><label><input type="checkbox">Connectez-vous au <a href="https://datalab.sspcloud.fr/" target="_blank">SSP Cloud</a></label></li>
 </ul>
+<p>Pour ce premier TP, nous n’allons pas utiliser de base de données PostgreSQL.</p>
+<p>Vous allez utiliser les logiciels <a href="https://dbeaver.com/docs/cloudbeaver/" target="_blank">CloudBeaver</a> et <a href="https://duckdb.org/" target="_blank">DuckDB</a> pour lire des fichiers de données.</p>
+<section id="cloudbeaver" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="cloudbeaver">CloudBeaver</h3>
+<p>CloudBeaver est une application web légère dédiée à la gestion de bases de données. Elle permet de se connecter à divers types de bases de données, qu’elles soient SQL, NoSQL ou hébergées dans le cloud, à partir d’un seul point d’accès via un navigateur.</p>
+<p>CloudBeaver facilite l’exploration, la modification et la visualisation des données sans nécessiter l’installation de logiciels locaux.</p>
 </section>
-<section id="lancement-du-service" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="lancement-du-service"><span class="header-section-number">1</span> Lancement du service</h2>
-<ul class="task-list">
-<li><label><input type="checkbox">Lancez le service <a href="https://dbeaver.com/docs/cloudbeaver/" target="_blank">CloudBeaver</a></label>
-<ul>
-<li>Allez dans <strong>Catalogue de services</strong></li>
-<li>Onglet <strong>Databases</strong></li>
-</ul></li>
-<li><label><input type="checkbox">Ouvrez le service</label>
-<ul>
-<li>Renseignez username et password</li>
-</ul></li>
-</ul>
-<div class="callout callout-style-default callout-note callout-titled" title="CloudBeaver">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>CloudBeaver
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>CloudBeaver est une application web légère dédiée à la gestion de bases de données. Elle permet de se connecter à divers types de bases de données, qu’elles soient SQL, NoSQL ou hébergées dans le cloud, à partir d’un seul point d’accès via un navigateur. CloudBeaver facilite l’exploration, la modification et la visualisation des données sans nécessiter l’installation de logiciels locaux.</p>
-</div>
-</div>
-<p>Pour ce premier TP, nous n’allons pas utiliser de base de données PostgreSQL. Nous allons simplement utiliser <a href="https://duckdb.org/" target="_blank">DuckDB</a> pour lire des fichiers de données.</p>
-<div class="callout callout-style-default callout-note callout-titled" title="DuckDB">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Note</span>DuckDB
-</div>
-</div>
-<div class="callout-body-container callout-body">
+<section id="duckdb" class="level3 unnumbered">
+<h3 class="unnumbered anchored" data-anchor-id="duckdb">DuckDB</h3>
 <p>DuckDB est un moteur de base de données relationnelle conçu pour des analyses rapides et efficaces.</p>
 <p>DuckDB est idéal pour les charges de travail analytiques en raison de sa simplicité, de sa rapidité et de son extensibilité, surtout pour traiter des fichiers volumineux localement.</p>
 <table class="caption-top table">
@@ -607,9 +594,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
 </div>
 </div>
-<p>Nous allons créer une base de données stockée en mémoire vive. L’avantage est que c’est très rapide. L’inconvénient, c’est que rien ne sera sauvegardé.</p>
+<div class="callout-body-container callout-body">
+<p>Vous allez créer une base de données stockée en mémoire vive. L’avantage est que c’est très rapide. L’inconvénient, c’est que rien ne sera sauvegardé.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="lancement-du-service" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="lancement-du-service"><span class="header-section-number">1</span> Lancement du service</h2>
+<ul class="task-list">
+<li><label><input type="checkbox">Lancez le service CloudBeaver</label>
+<ul>
+<li>Allez dans <strong>Catalogue de services</strong> ➡️ Onglet <strong>Databases</strong></li>
+</ul></li>
+<li><label><input type="checkbox">Ouvrez le service</label>
+<ul>
+<li>Renseignez username et password</li>
+</ul></li>
+</ul>
+<p>Une fois dans CloudBeaver, vous allez créer une connexion DuckDB :</p>
 <ul class="task-list">
 <li><label><input type="checkbox">Créez une nouvelle connexion <strong>DuckDB</strong></label>
 <ul>
@@ -634,7 +646,7 @@ Caution
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Votre connexion doit être ouverte (petit rond vert).</p>
+<p>Votre connexion doit être ouverte 🟢.</p>
 <p>Si ce n’est pas le cas : clic droit &gt; Open.</p>
 <p>Puis réouvrez une nouvelle fenêtre SQL</p>
 </div>
@@ -643,8 +655,8 @@ Caution
 <section id="les-prénoms" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="les-prénoms"><span class="header-section-number">2</span> Les prénoms</h2>
 <p>Le fichier des prénoms contient des données sur les prénoms attribués aux enfants nés en France depuis 1900. Ces données sont disponibles au niveau France et par département.</p>
-<p>Dans ce TP, nous allons utiliser la version au format <a href="https://parquet.apache.org/" target="_blank">parquet</a>.</p>
-<div class="callout callout-style-default callout-note callout-titled" title="Fichier parquet">
+<p>Dans ce TP, nous allons utiliser la version au format <a href="https://parquet.apache.org/" target="_blank">Parquet</a>.</p>
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -656,11 +668,11 @@ Caution
 <div class="callout-body-container callout-body">
 <p>Le format <strong>Parquet</strong> est un format de fichier de stockage de données optimisé pour les systèmes de traitement analytique de grande échelle. Voici ses principales caractéristiques :</p>
 <ol type="1">
-<li><p><strong>Stockage en colonnes</strong> : Parquet stocke les données par colonnes plutôt que par lignes, ce qui améliore l’efficacité de l’accès aux données dans les charges de travail analytiques.</p></li>
-<li><p><strong>Compression efficace</strong> : La compression par colonne permet un taux de compression moyen de 5 à 10 fois par rapport aux formats CSV, voire plus pour de gros fichiers. Cela réduit significativement la taille des données stockées et le coût de stockage.</p></li>
-<li><p><strong>Optimisé pour l’analytique</strong> : Parquet est conçu pour les requêtes en lecture intensive, car il permet de charger uniquement les colonnes nécessaires pour une analyse, ce qui améliore les performances en particulier sur les données volumineuses.</p></li>
-<li><p><strong>Métadonnées Riches et Auto-descriptives</strong> : Parquet inclut des métadonnées détaillées (schéma, types de données, statistiques min/max), permettant une lecture rapide et sans risque d’erreur. Ces métadonnées facilitent également le traitement des données par différents outils.</p></li>
-<li><p><strong>Langage Indépendant et Open Source</strong> : Le format Parquet est indépendant du langage et peut être utilisé avec divers langages de programmation (Python, R, C++, Java). Il est aussi open source et compatible avec la plupart des frameworks de big data.</p></li>
+<li><strong>Stockage en colonnes</strong> : Parquet stocke les données par colonnes plutôt que par lignes, ce qui améliore l’efficacité de l’accès aux données dans les charges de travail analytiques.</li>
+<li><strong>Compression efficace</strong> : La compression par colonne permet un taux de compression moyen de 5 à 10 fois par rapport aux formats CSV, voire plus pour de gros fichiers. Cela réduit significativement la taille des données stockées et le coût de stockage.</li>
+<li><strong>Optimisé pour l’analytique</strong> : Parquet est conçu pour les requêtes en lecture intensive, car il permet de charger uniquement les colonnes nécessaires pour une analyse, ce qui améliore les performances en particulier sur les données volumineuses.</li>
+<li><strong>Métadonnées Riches et Auto-descriptives</strong> : Parquet inclut des métadonnées détaillées (schéma, types de données, statistiques min/max), permettant une lecture rapide et sans risque d’erreur. Ces métadonnées facilitent également le traitement des données par différents outils.</li>
+<li><strong>Langage Indépendant et Open Source</strong> : Le format Parquet est indépendant du langage et peut être utilisé avec divers langages de programmation (Python, R, C++, Java). Il est aussi open source et compatible avec la plupart des frameworks de big data.</li>
 </ol>
 </div>
 </div>
@@ -669,18 +681,12 @@ Caution
 <li><a href="https://www.databricks.com/fr/glossary/what-is-parquet" target="_blank">Parquet, qu’est-ce que c’est ?, Databricks</a></li>
 <li><a href="https://www.upsolver.com/blog/apache-parquet-why-use" target="_blank">What is the Parquet File Format?, Upsolver blog</a></li>
 </ul>
-<p>Pour des requêtes plus rapides, nous allons forcer le téléchargement en cache du fichier</p>
+<p>Ici le fichier est relativement modeste (10 Mo), nous pouvons nous permettre de le stocker intégralement en mémoire.</p>
+<p>Pour des requêtes plus rapides, nous allons forcer le téléchargement en cache du fichier :</p>
 <ul class="task-list">
 <li><label><input type="checkbox">Exécutez <code>SET force_download=true;</code></label></li>
 </ul>
-<p>Ici le fichier est relativement modeste (10 Mo), nous pouvons nous permettre de le stocker intégralement en mémoire.</p>
-<ul class="task-list">
-<li><label><input type="checkbox">Créez une table <code>prenoms</code> à partir du contenu du fichier</label></li>
-</ul>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">OR</span> <span class="kw">REPLACE</span> <span class="kw">TABLE</span> prenoms <span class="kw">AS</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> <span class="st">'https://www.insee.fr/fr/statistiques/fichier/8595130/prenoms-2024.parquet'</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>Vous pourrez ensuite requêter sur cette vue comme si c’était une table.</p>
-<div class="callout callout-style-default callout-tip callout-titled" title="Éxécuter une requête">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -692,11 +698,31 @@ Caution
 <div class="callout-body-container callout-body">
 <p>Cliquez sur la requête pour y positionner le pointeur de la souris, puis au choix :</p>
 <ul>
-<li>Cliquez sur le petit triangle orange</li>
+<li>Cliquez sur le petit triangle orange <span style="color:orange">⯈</span></li>
 <li><span class="keyboard">CTRL</span> + <span class="keyboard">ENTREE</span></li>
 </ul>
 </div>
 </div>
+<ul class="task-list">
+<li><label><input type="checkbox">Créez une table <code>prenoms</code> à partir du contenu du fichier</label></li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">OR</span> <span class="kw">REPLACE</span> <span class="kw">TABLE</span> prenoms <span class="kw">AS</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> <span class="st">'https://www.insee.fr/fr/statistiques/fichier/8595130/prenoms-2025.parquet'</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Cette requête est un peu longue et peut prendre parfois jusque 30s.</p>
+<p>Si le lien n’est plus valide, allez chercher la dernière version sur le site de l’INSEE.</p>
+</div>
+</div>
+<p>Vous pourrez ensuite requêter sur cette vue comme si c’était une table.</p>
 <section id="premières-requêtes" class="level3" data-number="2.1">
 <h3 data-number="2.1" class="anchored" data-anchor-id="premières-requêtes"><span class="header-section-number">2.1</span> Premières requêtes</h3>
 <div class="callout callout-style-default callout-important callout-titled">
@@ -705,16 +731,15 @@ Caution
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Important
+<span class="screen-reader-only">Important</span>Prenez le temps et l’habitude d’écrire de jolies requêtes bien alignées !!!
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><strong>Prenez le temps et l’habitude d’écrire de jolies requêtes bien alignées !!!</strong></p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
-<pre><strong>bien.sql</strong></pre>
+<pre><strong>👍 bien.sql</strong></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" data-filename="bien.sql"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> c.nom <span class="kw">AS</span> club, </span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" data-filename="👍 bien.sql"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> c.nom <span class="kw">AS</span> club, </span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">AVG</span>(j.elo) <span class="kw">AS</span> moyenne_elo</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">FROM</span> joueuse j </span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a> <span class="kw">INNER</span> <span class="kw">JOIN</span> club c <span class="kw">USING</span> (id_club) </span>
@@ -722,43 +747,56 @@ Important
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a> <span class="kw">GROUP</span> <span class="kw">BY</span> c.nom </span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a> <span class="kw">ORDER</span> <span class="kw">BY</span> <span class="dv">2</span> <span class="kw">DESC</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p><br></p>
 <div class="code-with-filename">
 <div class="code-with-filename-file">
-<pre><strong>pasbien.sql</strong></pre>
+<pre><strong>👿 pas_bien.sql</strong></pre>
 </div>
-<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3" data-filename="pasbien.sql"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> c.nom <span class="kw">AS</span> club, <span class="fu">AVG</span>(j.elo) <span class="kw">AS</span> moyenne_elo <span class="kw">FROM</span> joueuse j <span class="kw">INNER</span> <span class="kw">JOIN</span> club c <span class="kw">USING</span> (id_club) <span class="kw">WHERE</span> mail <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">GROUP</span> <span class="kw">BY</span> c.nom <span class="kw">ORDER</span> <span class="kw">BY</span> <span class="dv">2</span> <span class="kw">DESC</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3" data-filename="👿 pas_bien.sql"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> c.nom <span class="kw">AS</span> club, <span class="fu">AVG</span>(j.elo) <span class="kw">AS</span> moyenne_elo <span class="kw">FROM</span> joueuse j <span class="kw">INNER</span> <span class="kw">JOIN</span> club c <span class="kw">USING</span> (id_club) <span class="kw">WHERE</span> mail <span class="kw">IS</span> <span class="kw">NOT</span> <span class="kw">NULL</span> <span class="kw">GROUP</span> <span class="kw">BY</span> c.nom <span class="kw">ORDER</span> <span class="kw">BY</span> <span class="dv">2</span> <span class="kw">DESC</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Dictionnaire des variables
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Avant de vous lancer tête baissée, ce qui serait pas mal c’est d’aller jeter un oeil au dictionnaire des variables.</p>
+<p>Vous le trouverez sur le site de l’INSEE.</p>
 </div>
 </div>
 <ul class="task-list">
 <li><label><input type="checkbox">Listez tous les éléments de <em>prenoms</em></label></li>
 <li><label><input type="checkbox">Filtrez pour n’afficher que le niveau géographique <em>FRANCE</em> et le prénom <em>GINETTE</em></label></li>
 </ul>
-<div class="callout callout-style-default callout-tip callout-titled" title="Secret statistique">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Tip</span>Secret statistique
+<span class="screen-reader-only">Note</span>Secret statistique
 </div>
 </div>
 <div class="callout-body-container callout-body">
 <p>Vous remarquerez que les valeurs sont des multiples de 5.</p>
 <blockquote class="blockquote">
-<p>Pour chaque prénom, il est indiqué, pour chaque année de naissance et chaque sexe, le nombre de personnes inscrites à l’état civil sous ce prénom, arrondi au multiple de 5 le plus proche</p>
+<p>Pour chaque prénom, il est indiqué, pour chaque année de naissance et chaque sexe, le nombre de personnes inscrites à l’état civil sous ce prénom, arrondi au multiple de 5 le plus proche.</p>
 </blockquote>
 <p>Vous remarquerez également que certaines années sont manquantes.</p>
 <blockquote class="blockquote">
-<p>Un prénom est diffusé s’il a été attribué au moins 3 fois à des personnes de sexe féminin ou à des personnes de sexe masculin</p>
+<p>Un prénom est diffusé s’il a été attribué au moins 3 fois à des personnes de sexe féminin ou à des personnes de sexe masculin.</p>
 </blockquote>
 <p>En statistique publique, on exige au moins 3 individus pour garantir le secret statistique. Avec 1 ou 2 personnes, on peut identifier ou déduire leurs données.</p>
 </div>
 </div>
 <p>Pour <strong>la suite du TP</strong>, nous allons uniquement nous interesser au niveau géographique <em>FRANCE</em> :</p>
 <ul class="task-list">
-<li><label><input type="checkbox">À partir de la table <em>prenoms</em>, créez une table <em>prenoms_fr</em> conservant uniquement</label>
+<li><label><input type="checkbox">À partir de la table <em>prenoms</em>, créez une table <em>prenoms_fr</em> conservant uniquement :</label>
 <ul>
 <li>les lignes où le niveau géographique est égal à <em>FRANCE</em></li>
 <li>les colonnes suivantes : <em>sexe</em>, <em>prenom</em>, <em>periode</em>, <em>valeur</em></li>
@@ -783,10 +821,10 @@ Important
 <li><label><input type="checkbox">Listez les prénoms de l’année 2022 donnés 2000 fois ou plus</label></li>
 <li><label><input type="checkbox">Classez-les d’abord par sexe, puis par nombre décroissant d’occurrences</label>
 <ul>
-<li>Quels sont les prénoms masculins et féminins les plus donnés ?</li>
+<li>Quels sont les prénoms masculins et féminins les plus donnés ? 🥇</li>
 </ul></li>
 <li><label><input type="checkbox">Listez les prénoms féminins commençant par la lettre <em>Q</em></label></li>
-<li><label><input type="checkbox">Listez les prénoms contenant exactement deux fois la lettre <em>V</em></label></li>
+<li><label><input type="checkbox">Listez les prénoms contenant exactement deux fois la lettre <em>U</em></label></li>
 <li><label><input type="checkbox">Comptez le nombre de prénoms commençant par chaque lettre</label></li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled">
@@ -807,7 +845,8 @@ Tip
 </div>
 </div>
 <ul class="task-list">
-<li><label><input type="checkbox">Bonus : Comptez le nombre de prénoms commençant par chaque lettre en différenciant filles et garçons</label></li>
+<li><label><input type="checkbox">Bonus : Même question en ignorant les accents</label></li>
+<li><label><input type="checkbox">Bonus 2 : Comptez le nombre de prénoms commençant par chaque lettre en différenciant filles et garçons</label></li>
 </ul>
 </section>
 <section id="statistiques-descriptives" class="level3" data-number="2.3">
@@ -818,7 +857,7 @@ Tip
 <ul>
 <li>Trouvez une <a href="https://duckdb.org/docs/stable/sql/functions/text" target="_blank">fonction adéquate</a></li>
 </ul></li>
-<li><label><input type="checkbox">Affichez le nombres de caractères minimum, maximum et moyen parmi les prénoms de 2003</label></li>
+<li><label><input type="checkbox">Affichez le nombre de caractères minimum, maximum et moyen parmi les prénoms de 2003</label></li>
 <li><label><input type="checkbox">Listez les 3 prénoms de 2003 ayant le nombre de caractères maximum</label>
 <ul>
 <li>Commencez par écrire une requête donnant le nombre de caractères maximum</li>
@@ -852,8 +891,8 @@ Tip
 </ul></li>
 <li><label><input type="checkbox">Affichez pour chaque année le nombre de fois où le prénom JEROME a été donné, quelle que soit l’accentuation</label></li>
 </ul>
-<div class="callout callout-style-default callout-tip callout-titled" title="Aide">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-9-contents" aria-controls="callout-9" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-10-contents" aria-controls="callout-10" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -862,7 +901,7 @@ Tip
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-9" class="callout-9-contents callout-collapse collapse">
+<div id="callout-10" class="callout-10-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
 <li>voir Fonction DuckDB strip_accents()</li>
@@ -875,7 +914,7 @@ Tip
 </section>
 <section id="vérifions-le-classement" class="level3" data-number="2.5">
 <h3 data-number="2.5" class="anchored" data-anchor-id="vérifions-le-classement"><span class="header-section-number">2.5</span> Vérifions le classement</h3>
-<p>Avec cette histoire d’accents, posons-nous la question si cela peut modifier le classement des top prénoms.</p>
+<p>Avec cette histoire d’accents, posons-nous la question si cela peut modifier le classement des top prénoms. 🤔</p>
 <ul class="task-list">
 <li><label><input type="checkbox">Affichez le top 10 des prénoms féminins en 2023 ?</label></li>
 <li><label><input type="checkbox">Quel prénom se classe onzième ?</label>
@@ -929,8 +968,12 @@ Tip
 </section>
 <section id="fichier-des-individus" class="level2" data-number="3">
 <h2 data-number="3" class="anchored" data-anchor-id="fichier-des-individus"><span class="header-section-number">3</span> Fichier des individus</h2>
+<blockquote class="blockquote">
+<p>Les requêtes peuvent être un peu lentes.</p>
+</blockquote>
+<p>Dans cet exercice, vous allez utiliser le fichier détail des individus du recensement de la population 2020.</p>
 <ul class="task-list">
-<li><label><input type="checkbox">Créez une vue qui pointe vers le fichier des individus du recensement de la population 2020</label></li>
+<li><label><input type="checkbox">Créez une vue qui pointe vers le fichier</label></li>
 </ul>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">CREATE</span> <span class="kw">OR</span> <span class="kw">REPLACE</span> <span class="kw">VIEW</span> individus <span class="kw">AS</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> <span class="st">'https://static.data.gouv.fr/resources/recensement-de-la-population-fichiers-detail-individus-localises-au-canton-ou-ville-2020-1/20231023-122841/fd-indcvi-2020.parquet'</span>;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
@@ -940,7 +983,7 @@ Tip
 <li>Pourquoi ce nombre d’individus vivant en France paraît faible ?</li>
 </ul></li>
 </ul>
-<div class="callout callout-style-default callout-tip callout-titled" title="Poids de l'individu">
+<div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -964,7 +1007,7 @@ Tip
 <li>Que remarquez-vous ?</li>
 </ul></li>
 </ul>
-<div class="callout callout-style-default callout-note callout-titled" title="Codification">
+<div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -1000,8 +1043,8 @@ Tip
 <li>différenciant les hommes et les femmes</li>
 </ul></li>
 </ul>
-<div class="callout callout-style-default callout-tip callout-titled" title="Solutions">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-12-contents" aria-controls="callout-12" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-13-contents" aria-controls="callout-13" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -1010,7 +1053,7 @@ Tip
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-12" class="callout-12-contents callout-collapse collapse">
+<div id="callout-13" class="callout-13-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
 <li><a href="./correction/tp1.sql">Correction TP1</a></li>
@@ -1047,15 +1090,50 @@ Tip
   window.document.addEventListener("DOMContentLoaded", function (event) {
     // Ensure there is a toggle, if there isn't float one in the top right
     if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
-      const a = window.document.createElement('a');
-      a.classList.add('top-right');
-      a.classList.add('quarto-color-scheme-toggle');
-      a.href = "";
-      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const toggle = window.document.createElement('button');
+      toggle.type = "button";
+      toggle.setAttribute("role", "switch");
+      toggle.setAttribute("aria-checked", "false");
+      toggle.classList.add('top-right');
+      toggle.classList.add('quarto-color-scheme-toggle');
+      toggle.setAttribute("aria-label", "Toggle dark mode");
+      toggle.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
       const i = window.document.createElement("i");
       i.classList.add('bi');
-      a.appendChild(i);
-      window.document.body.appendChild(a);
+      toggle.appendChild(i);
+      // Put the toggle in a landmark of its own, so that landmark navigation
+      // can reach it.
+      //
+      // The container is always a fresh direct child of body, and the toggle is
+      // never moved into page furniture that the theme or the author controls.
+      // The toggle is positioned against the page, so any ancestor that
+      // establishes a containing block captures it: a positioned element or a
+      // grid for position: absolute, and transform, filter, will-change or
+      // contain for position: fixed. A direct child of body has none of these
+      // to inherit, and the shift when one appears is silent and visual.
+      //
+      // ARIA says a document should have at most one banner, and axe reports a
+      // duplicate whether or not the banners carry distinct labels. So use a
+      // header when the page has no banner yet, and a named region otherwise.
+      //
+      // A header is a banner wherever it sits, unless it is inside sectioning
+      // content, so this cannot just look at the children of body: a custom
+      // page layout wraps the title block header in a plain div. An explicit
+      // role="banner" always counts.
+      const sectioning = 'article, aside, main, nav, section, [role="article"], [role="complementary"], [role="main"], [role="navigation"], [role="region"]';
+      const hasBanner = Array.from(
+        window.document.querySelectorAll('header:not([role]), [role="banner"]')
+      ).some(function(el) {
+        return el.hasAttribute("role") || el.closest(sectioning) === null;
+      });
+      const container = window.document.createElement(hasBanner ? "div" : "header");
+      if (hasBanner) {
+        container.setAttribute("role", "region");
+        container.setAttribute("aria-label", "Toggle dark mode");
+      }
+      container.classList.add('quarto-color-scheme-toggle-container');
+      container.appendChild(toggle);
+      window.document.body.appendChild(container);
     }
     setColorSchemeToggle(hasAlternateSentinel())
     const icon = "";
@@ -1134,7 +1212,8 @@ Tip
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
       // Inspect non-navigation links and adorn them if external
-     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
       for (var i=0; i<links.length; i++) {
         const link = links[i];
         if (!isInternal(link.href)) {
@@ -1143,8 +1222,69 @@ Tip
           if (link.dataset.originalHref !== undefined) {
             link.href = link.dataset.originalHref;
           }
+          if (!link.classList.contains('no-external-icon')) {
+          }
         }
       }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
     function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
       const config = {
         allowHTML: true,
@@ -1158,6 +1298,7 @@ Tip
         interactiveBorder: 10,
         theme: 'quarto',
         placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
       };
       if (contentFn) {
         config.content = contentFn;
@@ -1320,44 +1461,54 @@ Tip
           const lineIds = lines.map((line) => {
             return targetCell + "-" + line;
           })
-          let top = null;
-          let height = null;
-          let parent = null;
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
           if (lineIds.length > 0) {
-              //compute the position of the single el (top and bottom and make a div)
-              const el = window.document.getElementById(lineIds[0]);
-              top = el.offsetTop;
-              height = el.offsetHeight;
-              parent = el.parentElement.parentElement;
-            if (lineIds.length > 1) {
-              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
-              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
-              height = bottom - top;
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
             }
-            if (top !== null && height !== null && parent !== null) {
-              // cook up a div (if necessary) and position it 
-              let div = window.document.getElementById("code-annotation-line-highlight");
-              if (div === null) {
-                div = window.document.createElement("div");
-                div.setAttribute("id", "code-annotation-line-highlight");
-                div.style.position = 'absolute';
-                parent.appendChild(div);
-              }
-              div.style.top = top - 2 + "px";
-              div.style.height = height + 4 + "px";
-              div.style.left = 0;
-              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
-              if (gutterDiv === null) {
-                gutterDiv = window.document.createElement("div");
-                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
-                gutterDiv.style.position = 'absolute';
-                const codeCell = window.document.getElementById(targetCell);
-                const gutter = codeCell.querySelector('.code-annotation-gutter');
-                gutter.appendChild(gutterDiv);
-              }
-              gutterDiv.style.top = top - 2 + "px";
-              gutterDiv.style.height = height + 4 + "px";
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
             }
+            placeBand(gutterDiv, el, lastEl);
             selectedAnnoteEl = annoteEl;
           }
         };
@@ -1455,6 +1606,9 @@ Tip
       }
     }
   });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
   </script>
 </div> <!-- /content -->
 <footer class="footer">
