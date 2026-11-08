@@ -207,6 +207,30 @@ Ludovic Deneuville
 </div>
 <p>Source : <a href="https://www.insee.fr/fr/information/5008707" target="_blank">Qu’est-ce qu’une donnée ?</a>, Courrier des statistiques N5, Pascal Rivière</p>
 </div>
+<aside class="notes">
+<ul>
+<li>Un concept : ce que l’on cherche à représenter</li>
+<li>les valeurs possibles</li>
+<li>la valeur observée pour ce concept</li>
+</ul>
+<p>Les métadonnées sont des données qui décrivent d’autres données.</p>
+<ul>
+<li>Signification : Hauteur du monument</li>
+<li>Type : Nombre réel positive</li>
+<li>Unité : Mètre</li>
+</ul>
+<p>Elles sont de multiples natures : définitions, nomenclatures, caractéristiques de source</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="où-stocker-des-données" class="slide level3">
 <h3>Où stocker des données</h3>
@@ -325,7 +349,19 @@ Ludovic Deneuville
 <li>Applications et utilisateurs métiers</li>
 </ul>
 <aside class="notes">
+<p>Opérationnel</p>
 <p>C’est quoi un domaine métier ?</p>
+<ul>
+<li>transverse : RH, Compta, Commandes, Stock</li>
+<li>sectoriel : Gestion des patients, Gestion des comptes, billetterie</li>
+</ul>
+<p>Caractéristiques des bases de données :</p>
+<ul>
+<li>Transactions fréquentes et rapides</li>
+<li>Opérations de lecture et d’écriture</li>
+<li>Données détaillées et actualisées</li>
+<li>Transactions fiables (ACID)</li>
+</ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -349,6 +385,13 @@ Ludovic Deneuville
 <aside class="notes">
 <p>Données pour les décideurs, tendances…</p>
 <p>Le système décisionnel est souvent alimenté par le transactionnel via des ETL : Extract – Transform – Load</p>
+<p>Caractéristiques des bases de données :</p>
+<ul>
+<li>Requêtes complexes et agrégations</li>
+<li>Analyse de volumes importants de données</li>
+<li>Données historiques</li>
+<li>Lecture intensive, généralement peu de modifications directes</li>
+</ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -505,25 +548,60 @@ Ludovic Deneuville
 </div>
 </div>
 </div>
+<aside class="notes">
+<p>adapté lorsque les informations ont naturellement une structure hiérarchique.</p>
+<ul>
+<li>Un enfant ne peut avoir qu’un seul parent</li>
+<li>Navigation en suivant les chemins de l’arborescence</li>
+<li>Adaptée aux données naturellement hiérarchisées</li>
+</ul>
+<p>Pour retrouver une information, on parcourt l’arbre depuis la racine en suivant les liens.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="réseau" class="slide level3">
 <h3>Réseau</h3>
 <ul>
 <li>Organisée en graphe</li>
 <li>Les enregistrements peuvent avoir plusieurs parents et enfants</li>
-<li>Réseaux de transports &nbsp;</li>
+<li>Réseaux de transports</li>
 </ul>
+<aside class="notes">
+<p>Un élément peut être relié à plusieurs autres éléments (plusieurs parents et plusieurs enfants).</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="relationnelle" class="slide level3">
 <h3>Relationnelle</h3>
 <ul>
 <li>Organisée en tables</li>
 <li>Lien entre les tables</li>
+<li>Données structurées de manière organisée</li>
+<li>Cohérence des données grâce aux contraintes</li>
+<li>Peu de duplications</li>
 </ul>
 <aside class="notes">
 <p>Quelques tables sont gérables avec Excel ou Calc.</p>
 <p>Mais ça devient vite trop compliqué.</p>
-<p>Si ça vous amuse, vous pouvez essayer de refaire les TP avec Excel.</p>
+<p>Si ça vous amuse, vous pouvez essayer de refaire les TP avec un tableur.</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -604,7 +682,27 @@ Ludovic Deneuville
 <li>Graph Database</li>
 <li>Bases NewSQL (relationnelles « modernes » distribuées)</li>
 <li>Bases de données de séries temporelles</li>
+<li>Bases de données vectorielles</li>
+<li>Lakehouse</li>
 </ul>
+<aside class="notes">
+<p>Pas des bdd, mais des architectures de stockage et d’exploitation des données :</p>
+<ul>
+<li>Datalake : espace de stockage centralisé permettant de conserver de grandes quantités de données dans leur format d’origine</li>
+<li>Data Warehouse : rassemble des données provenant de différentes sources, préalablement nettoyées, transformées et structurées pour faciliter leur analyse</li>
+<li>Lakehouse : combine la souplesse de stockage d’un Data Lake avec les fonctionnalités de gestion et d’analyse d’un Data Warehouse</li>
+</ul>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section></section>
 <section>
 <section id="base-de-données-relationnelle" class="title-slide slide level2 center">
@@ -623,7 +721,10 @@ Ludovic Deneuville
 </ul></li>
 </ul>
 <aside class="notes">
-<p>Imaginez un classeur Excel avec plusieurs feuilles</p>
+<p>Pour commencer :</p>
+<ul>
+<li>Imaginez un classeur Excel avec plusieurs feuilles</li>
+</ul>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -1125,7 +1226,7 @@ Ludovic Deneuville
 </section>
 <section id="question" class="slide level3">
 <h3>Question</h3>
-<p>Et si vous supprimez, le club de C’Chartres Echecs ? <span class="emoji" data-emoji="innocent">😇</span></p>
+<p>Et si vous supprimez, le club de C’Chartres Echecs ? 😇</p>
 <p><br></p>
 <div class="fragment">
 <div class="callout callout-warning callout-titled callout-style-default">
@@ -1183,7 +1284,7 @@ Ludovic Deneuville
 </section>
 <section id="autre-question" class="slide level3">
 <h3>Autre question</h3>
-<p>Si une joueuse peut adhérer à plusieurs clubs ? <span class="emoji" data-emoji="confused">😕</span></p>
+<p>Si une joueuse peut adhérer à plusieurs clubs ? 😯</p>
 <ul>
 <li class="fragment"><em>id_club</em> devient une liste de clubs ?</li>
 </ul>
@@ -1208,7 +1309,7 @@ Ludovic Deneuville
 </section>
 <section id="table-dassociation" class="slide level3">
 <h3>Table d’association</h3>
-<p>Création d’une table d’association : <strong>adhesion</strong> <span class="emoji" data-emoji="sweat_smile">😅</span></p>
+<p>Création d’une table d’association : <strong>adhesion</strong> 😅</p>
 <div class="cell" data-reveal="true" data-layout-align="default">
 <div class="cell-output-display">
 <div>
@@ -1391,6 +1492,7 @@ Ludovic Deneuville
 <li>PK soulignée</li>
 <li>FK avec #</li>
 </ul>
+<p>🚧 Faire un tableau</p>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;

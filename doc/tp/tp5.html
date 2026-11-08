@@ -85,9 +85,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-1877d3a43983daeeadee91f49a979ea5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-30799fa43e988d48a73a7f75f25551c9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-1877d3a43983daeeadee91f49a979ea5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-70f72adb51cad36e24edca7ab52a5dc9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-81e7f7c737e0b46e39b74676b234f48d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-70f72adb51cad36e24edca7ab52a5dc9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -478,15 +478,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#importer-la-base-de-données" id="toc-importer-la-base-de-données" class="nav-link" data-scroll-target="#importer-la-base-de-données"><span class="header-section-number">1</span> Importer la base de données</a></li>
-  <li><a href="#rendez-vous-en-base-inconnue" id="toc-rendez-vous-en-base-inconnue" class="nav-link" data-scroll-target="#rendez-vous-en-base-inconnue"><span class="header-section-number">2</span> Rendez-vous en base inconnue</a></li>
-  <li><a href="#explorons-avec-les-spurs" id="toc-explorons-avec-les-spurs" class="nav-link" data-scroll-target="#explorons-avec-les-spurs"><span class="header-section-number">3</span> Explorons avec les Spurs</a></li>
-  <li><a href="#afficher-les-matchs" id="toc-afficher-les-matchs" class="nav-link" data-scroll-target="#afficher-les-matchs"><span class="header-section-number">4</span> Afficher les matchs</a></li>
-  <li><a href="#triple-zéro" id="toc-triple-zéro" class="nav-link" data-scroll-target="#triple-zéro"><span class="header-section-number">5</span> Triple zéro</a></li>
-  <li><a href="#classement-par-saison" id="toc-classement-par-saison" class="nav-link" data-scroll-target="#classement-par-saison"><span class="header-section-number">6</span> Classement par saison</a></li>
-  <li><a href="#arrêtez-vos-services" id="toc-arrêtez-vos-services" class="nav-link" data-scroll-target="#arrêtez-vos-services">Arrêtez vos services</a></li>
+  <li><a href="#lancement-des-services" id="toc-lancement-des-services" class="nav-link" data-scroll-target="#lancement-des-services"><span class="header-section-number">1</span> Lancement des services</a></li>
+  <li><a href="#importer-la-base-de-données" id="toc-importer-la-base-de-données" class="nav-link" data-scroll-target="#importer-la-base-de-données"><span class="header-section-number">2</span> Importer la base de données</a></li>
+  <li><a href="#rendez-vous-en-base-inconnue" id="toc-rendez-vous-en-base-inconnue" class="nav-link" data-scroll-target="#rendez-vous-en-base-inconnue"><span class="header-section-number">3</span> Rendez-vous en base inconnue</a></li>
+  <li><a href="#explorons-avec-les-spurs" id="toc-explorons-avec-les-spurs" class="nav-link" data-scroll-target="#explorons-avec-les-spurs"><span class="header-section-number">4</span> Explorons avec les Spurs</a></li>
+  <li><a href="#afficher-les-matchs" id="toc-afficher-les-matchs" class="nav-link" data-scroll-target="#afficher-les-matchs"><span class="header-section-number">5</span> Afficher les matchs</a></li>
+  <li><a href="#triple-zéro" id="toc-triple-zéro" class="nav-link" data-scroll-target="#triple-zéro"><span class="header-section-number">6</span> Triple zéro</a></li>
+  <li><a href="#classement-par-saison" id="toc-classement-par-saison" class="nav-link" data-scroll-target="#classement-par-saison"><span class="header-section-number">7</span> Classement par saison</a></li>
   </ul>
-</nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="tp5.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li></ul></div></nav>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -549,13 +549,29 @@ Tip
 </div>
 </div>
 </section>
-<section id="importer-la-base-de-données" class="level2" data-number="1">
-<h2 data-number="1" class="anchored" data-anchor-id="importer-la-base-de-données"><span class="header-section-number">1</span> Importer la base de données</h2>
+<section id="lancement-des-services" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="lancement-des-services"><span class="header-section-number">1</span> Lancement des services</h2>
 <ul class="task-list">
-<li><label><input type="checkbox">Connectez-vous à un Datalab</label></li>
+<li><label><input type="checkbox">Connectez-vous au <a href="https://datalab.sspcloud.fr/" target="_blank">SSP Cloud</a></label></li>
 <li><label><input type="checkbox">Lancez un service <strong>PostgreSQL</strong></label></li>
-<li><label><input type="checkbox">Lancez un service <strong>cloudBeaver</strong></label></li>
+<li><label><input type="checkbox">Lancez un service <strong>cloudBeaver</strong></label>
+<ul>
+<li>ouvrez ce service et ouvrez la connexion PostgreSQL</li>
+</ul></li>
 </ul>
+<p>En cas de besoin, vous trouverez plus d’informations dans l’onglet <a href="../../doc/outils/datalab.html" target="_blank">Datalab</a>.</p>
+<p><strong>À la fin du TP</strong></p>
+<p>N’oubliez pas de sauvegarder votre travail et libérer les ressources :</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Sauvegardez votre travail</label>
+<ul>
+<li>Copiez-collez vos scripts SQL sur votre machine</li>
+</ul></li>
+<li><label><input type="checkbox">Mettez en pause ou Arrêter les services du Datalab</label></li>
+</ul>
+</section>
+<section id="importer-la-base-de-données" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="importer-la-base-de-données"><span class="header-section-number">2</span> Importer la base de données</h2>
 <p>Aujourd’hui, pas de script sql pour créer les tables et importer les données, vous allez utiliser un <strong>dump</strong>.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -614,8 +630,8 @@ Tip
 </div>
 </div>
 </section>
-<section id="rendez-vous-en-base-inconnue" class="level2" data-number="2">
-<h2 data-number="2" class="anchored" data-anchor-id="rendez-vous-en-base-inconnue"><span class="header-section-number">2</span> Rendez-vous en base inconnue</h2>
+<section id="rendez-vous-en-base-inconnue" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="rendez-vous-en-base-inconnue"><span class="header-section-number">3</span> Rendez-vous en base inconnue</h2>
 <p>Je n’ai pas réussi à inviter Laury T. pour vous accompagner dans cette aventure mais voici quelques requêtes utiles pour explorer une base de données PostgreSQL.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Liste des tables du schema</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> table_name</span>
@@ -992,8 +1008,8 @@ Tip
 <li>Par exemple au format utilsé par ce site : <a href="https://dbdiagram.io/" target="_blank">https://dbdiagram.io/</a></li>
 </ul>
 </section>
-<section id="explorons-avec-les-spurs" class="level2" data-number="3">
-<h2 data-number="3" class="anchored" data-anchor-id="explorons-avec-les-spurs"><span class="header-section-number">3</span> Explorons avec les Spurs</h2>
+<section id="explorons-avec-les-spurs" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="explorons-avec-les-spurs"><span class="header-section-number">4</span> Explorons avec les Spurs</h2>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -1034,8 +1050,8 @@ Tip
 <li><label><input type="checkbox">Est-ce que cette table contient les stats des joueurs par match de toutes les saisons ?</label></li>
 </ul>
 </section>
-<section id="afficher-les-matchs" class="level2" data-number="4">
-<h2 data-number="4" class="anchored" data-anchor-id="afficher-les-matchs"><span class="header-section-number">4</span> Afficher les matchs</h2>
+<section id="afficher-les-matchs" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="afficher-les-matchs"><span class="header-section-number">5</span> Afficher les matchs</h2>
 <p>Dans toute cette partie nous nous interesserons à la saison <em>2020-2021</em>.</p>
 <ul class="task-list">
 <li><label><input type="checkbox">Listez les matchs de la saison</label></li>
@@ -1118,8 +1134,8 @@ Tip
 </div>
 </div>
 </section>
-<section id="triple-zéro" class="level2" data-number="5">
-<h2 data-number="5" class="anchored" data-anchor-id="triple-zéro"><span class="header-section-number">5</span> Triple zéro</h2>
+<section id="triple-zéro" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="triple-zéro"><span class="header-section-number">6</span> Triple zéro</h2>
 <p>Lors d’un match, les principales statistiques utilisées pour mesurer les performances des joueurs sont : les points, les rebonds, les passes décisives, les interceptions et les contres.</p>
 <p>Un joueur réalise alors un :</p>
 <ul>
@@ -1185,18 +1201,11 @@ Tip
 <li><label><input type="checkbox">Ajoutez les deux équipes et le score du match</label></li>
 </ul>
 </section>
-<section id="classement-par-saison" class="level2" data-number="6">
-<h2 data-number="6" class="anchored" data-anchor-id="classement-par-saison"><span class="header-section-number">6</span> Classement par saison</h2>
-<div class="callout callout-style-simple callout-none no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
+<section id="classement-par-saison" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="classement-par-saison"><span class="header-section-number">7</span> Classement par saison</h2>
+<blockquote class="blockquote">
 <p>Pour occuper les plus rapides <span class="emoji" data-emoji="rocket">🚀</span></p>
-</div>
-</div>
-</div>
+</blockquote>
 <ul class="task-list">
 <li><label><input type="checkbox">Affichez le classement de la conférence OUEST de la saison régulière 2008-2009</label>
 <ul>
@@ -1235,14 +1244,6 @@ Tip
 </div>
 </div>
 </div>
-</section>
-<section id="arrêtez-vos-services" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="arrêtez-vos-services">Arrêtez vos services</h2>
-<p>C’est la fin du TP, vous pouvez maintenant sauvegarder votre travail et libérer les ressources réservées :</p>
-<ul class="task-list">
-<li><label><input type="checkbox">Copiez-collez vos scripts SQL sur votre machine</label></li>
-<li><label><input type="checkbox">Arrêter les services du Datalab</label></li>
-</ul>
 
 
 </section>

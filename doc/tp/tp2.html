@@ -85,9 +85,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-1877d3a43983daeeadee91f49a979ea5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-30799fa43e988d48a73a7f75f25551c9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-1877d3a43983daeeadee91f49a979ea5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-70f72adb51cad36e24edca7ab52a5dc9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-81e7f7c737e0b46e39b74676b234f48d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-70f72adb51cad36e24edca7ab52a5dc9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script src="../../site_libs/quarto-contrib/glightbox/glightbox.min.js"></script>
 <link href="../../site_libs/quarto-contrib/glightbox/glightbox.min.css" rel="stylesheet">
 <link href="../../site_libs/quarto-contrib/glightbox/lightbox.css" rel="stylesheet">
@@ -495,9 +495,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#location-de-dvd" id="toc-location-de-dvd" class="nav-link" data-scroll-target="#location-de-dvd"><span class="header-section-number">3.2</span> Location de DVD <span class="emoji" data-emoji="cd">💿</span></a></li>
   <li><a href="#rugby-world-cup" id="toc-rugby-world-cup" class="nav-link" data-scroll-target="#rugby-world-cup"><span class="header-section-number">3.3</span> Rugby World Cup <span class="emoji" data-emoji="rugby_football">🏉</span></a></li>
   </ul></li>
-  <li><a href="#arrêtez-vos-services" id="toc-arrêtez-vos-services" class="nav-link" data-scroll-target="#arrêtez-vos-services">Arrêtez vos services</a></li>
   </ul>
-</nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="tp2.pdf"><i class="bi bi-file-pdf"></i>Typst</a></li></ul></div></nav>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
@@ -563,55 +562,41 @@ Important
 <div class="callout-body-container callout-body">
 <ul>
 <li>Écrivez des requêtes jolies !</li>
-<li>À la fin du TP, exportez ou copiez vos requêtes dans un fichier de votre VM ou machine personnelle</li>
 </ul>
 </div>
 </div>
 </section>
 <section id="lancement-des-services" class="level2" data-number="1">
 <h2 data-number="1" class="anchored" data-anchor-id="lancement-des-services"><span class="header-section-number">1</span> Lancement des services</h2>
-<p>Pour plus de détails, allez dans l’onglet <a href="../../doc/outils/datalab.html" target="_blank">Datalab</a>.</p>
 <ul class="task-list">
-<li><label><input type="checkbox">Connectez-vous à un Datalab</label></li>
+<li><label><input type="checkbox">Connectez-vous au <a href="https://datalab.sspcloud.fr/" target="_blank">SSP Cloud</a></label></li>
 <li><label><input type="checkbox">Lancez un service <strong>PostgreSQL</strong></label></li>
 <li><label><input type="checkbox">Lancez un service <strong>cloudBeaver</strong></label>
 <ul>
-<li>ouvrez ce service</li>
-<li>vérifiez que vous êtes connectés à la base de données PostgreSQL</li>
-<li>ouvrez la connexion</li>
+<li>ouvrez ce service et ouvrez la connexion PostgreSQL</li>
 </ul></li>
 </ul>
-<div class="callout callout-style-default callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Important
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>cloudBeaver est parfois capricieux, en cas de blocage, n’hésitez pas à rafraichir la page (F5).</p>
-</div>
-</div>
+<p>En cas de besoin, vous trouverez plus d’informations dans l’onglet <a href="../../doc/outils/datalab.html" target="_blank">Datalab</a>.</p>
+<p><strong>À la fin du TP</strong></p>
+<p>N’oubliez pas de sauvegarder votre travail et libérer les ressources :</p>
+<ul class="task-list">
+<li><label><input type="checkbox">Sauvegardez votre travail</label>
+<ul>
+<li>Copiez-collez vos scripts SQL sur votre machine</li>
+</ul></li>
+<li><label><input type="checkbox">Mettez en pause ou Arrêter les services du Datalab</label></li>
+</ul>
 <p>En attendant le lancement des services, voici un peu de lecture ci-dessous.</p>
 </section>
 <section id="méthodo-écrire-une-requête" class="level2" data-number="2">
 <h2 data-number="2" class="anchored" data-anchor-id="méthodo-écrire-une-requête"><span class="header-section-number">2</span> Méthodo : Écrire une requête</h2>
 <p>Il est parfois difficile d’écrire du premier coup LA requête qui répond directement à la question posée.</p>
 <p>Voici une méthode qui peut vous aider à écrire vos requêtes pas à pas :</p>
-<div class="callout callout-style-simple callout-none no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
 <p>Imaginons que l’on vous demande de lister les noms et prénoms des joueuses du club de la ville de <em>Saint Quentin</em>, dont le prénom commence par un <em>A</em> classées par elo décroissant.</p>
-<p>joueuse(<u>id_joueuse</u>, nom, prenom, elo, #id_club)</p>
-<p>club(<u>id_club</u>, nom, ville)</p>
-</div>
-</div>
-</div>
+<blockquote class="blockquote">
+<p>joueuse(<u>id_joueuse</u>, nom, prenom, elo, #id_club)<br>
+club(<u>id_club</u>, nom, ville)</p>
+</blockquote>
 <section id="listez-les-tables-nécessaires" class="level3" data-number="2.1">
 <h3 data-number="2.1" class="anchored" data-anchor-id="listez-les-tables-nécessaires"><span class="header-section-number">2.1</span> Listez les tables nécessaires</h3>
 <p>Commençons par lister les tables nécessaires, puis joignons-les.</p>
@@ -754,7 +739,7 @@ Tip
 <li><p><label><input type="checkbox">Chargez les données avec ce <a href="./data/tp2-dvd-pop.sql" target="_blank">script sql</a></label></p></li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -763,7 +748,7 @@ Tip
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Attention, ici l’ordre de création des tables a son importance.</p>
 <p>Reprenons et modifions l’exemple ci-dessus :</p>
@@ -798,7 +783,7 @@ Tip
 </div>
 <div class="callout-body-container callout-body">
 <ul class="task-list">
-<li><label><input type="checkbox">Recherchez dans la <a href="https://www.postgresql.org/docs/" target="_blank">documentation officielle PostgreSQL</a>, un moyen de répondre au besoin ci-dessous</label></li>
+<li><label><input type="checkbox">Recherchez dans la <a href="https://www.postgresql.org/docs/" target="_blank">documentation officielle PostgreSQL</a>, un moyen de répondre au besoin ci-dessous.</label></li>
 </ul>
 <p>Pour connaitre la version utilisée : <code>SELECT version();</code></p>
 </div>
@@ -811,7 +796,7 @@ Tip
 <li><label><input type="checkbox">Nom, Prénom du réalisateur de la <em>Guerre des étoiles</em></label></li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-5-contents" aria-controls="callout-5" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -820,7 +805,7 @@ Tip
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-6" class="callout-6-contents callout-collapse collapse">
+<div id="callout-5" class="callout-5-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Il existe différentes manières de concaténer du texte :</p>
 <ul>
@@ -860,16 +845,9 @@ Tip
 </section>
 <section id="rugby-world-cup" class="level3" data-number="3.3">
 <h3 data-number="3.3" class="anchored" data-anchor-id="rugby-world-cup"><span class="header-section-number">3.3</span> Rugby World Cup <span class="emoji" data-emoji="rugby_football">🏉</span></h3>
-<div class="callout callout-style-simple callout-none no-icon">
-<div class="callout-body d-flex">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-body-container">
+<blockquote class="blockquote">
 <p>Pour les plus rapides <span class="emoji" data-emoji="rocket">🚀</span></p>
-</div>
-</div>
-</div>
+</blockquote>
 <p>Nous souhaitons informatiser les résultats de la coupe du monde de rugby. Pour cela nous avons créé les deux tables suivantes : <em>equipe</em> et <em>matches</em>.</p>
 <p>Commencez par créez et charger les tables avec <a href="./data/tp2-rugby-create-pop.sql" target="_blank">ce script</a>.</p>
 <ul class="task-list">
@@ -889,7 +867,7 @@ Tip
 <li><label><input type="checkbox">Donner le nombre total de points obtenus par équipe en classant les équipes de celle ayant marqué le plus à celle ayant marqué le moins</label></li>
 </ul>
 <div class="callout callout-style-default callout-tip callout-titled">
-<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-7-contents" aria-controls="callout-7" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-6-contents" aria-controls="callout-6" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
 </div>
@@ -898,7 +876,7 @@ Tip
 </div>
 <div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-7" class="callout-7-contents callout-collapse collapse">
+<div id="callout-6" class="callout-6-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <ul>
 <li><a href="./correction/tp2.sql">Correction TP2</a></li>
@@ -906,17 +884,9 @@ Tip
 </div>
 </div>
 </div>
-</section>
-</section>
-<section id="arrêtez-vos-services" class="level2 unnumbered">
-<h2 class="unnumbered anchored" data-anchor-id="arrêtez-vos-services">Arrêtez vos services</h2>
-<p>C’est la fin du TP, vous pouvez maintenant sauvegarder votre travail et libérer les ressources réservées :</p>
-<ul class="task-list">
-<li><label><input type="checkbox">Copiez-collez vos scripts SQL sur votre machine</label></li>
-<li><label><input type="checkbox">Arrêter les services du Datalab</label></li>
-</ul>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
