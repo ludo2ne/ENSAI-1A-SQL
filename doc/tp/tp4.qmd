@@ -1,7 +1,12 @@
 ---
 title: "Unofficial Chess Federation ♕"
 description: "TP4"
-format: html
+format:
+  html: default
+  typst: 
+    author: ""
+    number-sections: true
+    section-numbering: 1.1.a.
 categories:
   - LEFT JOIN
   - UPDATE
@@ -9,23 +14,7 @@ categories:
 ---
 
 
-## Introduction {.unnumbered}
-
-::: {.callout-important}
-- Écrivez des requêtes jolies !
-- À la fin du TP, exportez ou copiez vos requêtes dans un fichier de votre VM ou machine personnelle
-:::
-
-
-## Lancement des services
-
-Pour plus de détails, allez dans l'onglet [Datalab](../outils/datalab.qmd){target="_blank"}.
-
-- [ ] Connectez-vous à un Datalab
-- [ ] Lancez un service **PostgreSQL**
-- [ ] Lancez un service **cloudBeaver**
-  - ouvrez ce service
-  - vérifiez que vous êtes connectés à la base de données PostgreSQL
+{{< include _tp-start.qmd >}}
 
 
 ## Les données
@@ -397,10 +386,3 @@ Choisissez une joueuse, par exemple *Judith POLGAR*
 ::: {.callout-tip collapse="true" title="Solutions"}
 - [Correction TP4](./correction/tp4.sql)
 :::
-
-## Arrêtez vos services {.unnumbered}
-
-C'est la fin du TP, vous pouvez maintenant sauvegarder votre travail et libérer les ressources réservées :
-
-- [ ] Copiez-collez vos scripts SQL sur votre machine
-- [ ] Arrêter les services du Datalab

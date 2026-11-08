@@ -51,6 +51,19 @@ Source : [Qu'est-ce qu'une donnée ?](https://www.insee.fr/fr/information/500870
 
 ::::::
 
+:::{.notes}
+- Un concept : ce que l'on cherche à représenter
+- les valeurs possibles
+- la valeur observée pour ce concept
+
+Les métadonnées sont des données qui décrivent d'autres données.
+
+- Signification	: Hauteur du monument
+- Type : Nombre réel positive
+- Unité	: Mètre
+
+Elles sont de multiples natures : définitions, nomenclatures, caractéristiques de source
+:::
 
 ### Où stocker des données
 
@@ -118,7 +131,19 @@ On n'utilise pas la même structure pour du texte, des fichiers, des images.
 - Applications et utilisateurs métiers
 
 :::{.notes}
+Opérationnel
+
 C'est quoi un domaine métier ?
+
+- transverse : RH, Compta, Commandes, Stock
+- sectoriel : Gestion des patients, Gestion des comptes, billetterie
+
+Caractéristiques des bases de données :
+
+- Transactions fréquentes et rapides
+- Opérations de lecture et d'écriture
+- Données détaillées et actualisées
+- Transactions fiables (ACID)
 :::
 
 
@@ -133,6 +158,13 @@ C'est quoi un domaine métier ?
 Données pour les décideurs, tendances...
 
 Le système décisionnel est souvent alimenté par le transactionnel via des ETL : Extract – Transform – Load
+
+Caractéristiques des bases de données :
+
+- Requêtes complexes et agrégations
+- Analyse de volumes importants de données
+- Données historiques
+- Lecture intensive, généralement peu de modifications directes
 :::
 
 
@@ -183,25 +215,41 @@ digraph {
 }
 ```
 
+:::{.notes}
+adapté lorsque les informations ont naturellement une structure hiérarchique.
+
+- Un enfant ne peut avoir qu'un seul parent
+- Navigation en suivant les chemins de l'arborescence
+- Adaptée aux données naturellement hiérarchisées
+
+Pour retrouver une information, on parcourt l'arbre depuis la racine en suivant les liens.
+:::
 
 ### Réseau
 
 - Organisée en graphe
 - Les enregistrements peuvent avoir plusieurs parents et enfants
 - Réseaux de transports
-  
+
+:::{.notes}
+Un élément peut être relié à plusieurs autres éléments (plusieurs parents et plusieurs enfants).
+:::
+
 
 ### Relationnelle
 
 - Organisée en tables
 - Lien entre les tables
+- Données structurées de manière organisée
+- Cohérence des données grâce aux contraintes
+- Peu de duplications
 
 ::: {.notes}
 Quelques tables sont gérables avec Excel ou Calc.
 
 Mais ça devient vite trop compliqué.
 
-Si ça vous amuse, vous pouvez essayer de refaire les TP avec Excel.
+Si ça vous amuse, vous pouvez essayer de refaire les TP avec un tableur.
 :::
 
 ### NoSQL
@@ -235,6 +283,16 @@ Théorème CAP :
 - Graph Database
 - Bases NewSQL (relationnelles « modernes » distribuées)
 - Bases de données de séries temporelles
+- Bases de données vectorielles
+- Lakehouse
+
+:::{.notes}
+Pas des bdd, mais des architectures de stockage et d'exploitation des données :
+
+- Datalake : espace de stockage centralisé permettant de conserver de grandes quantités de données dans leur format d'origine
+- Data Warehouse : rassemble des données provenant de différentes sources, préalablement nettoyées, transformées et structurées pour faciliter leur analyse
+- Lakehouse : combine la souplesse de stockage d'un Data Lake avec les fonctionnalités de gestion et d'analyse d'un Data Warehouse
+:::
 
 ## Base de données relationnelle
 
@@ -247,7 +305,9 @@ Théorème CAP :
   - Types de données : texte, num...
 
 :::{.notes}
-Imaginez un classeur Excel avec plusieurs feuilles
+Pour commencer : 
+
+- Imaginez un classeur Excel avec plusieurs feuilles
 :::
 
 ### Relations entre les tables
@@ -454,7 +514,7 @@ Une clé étrangère référence une valeur existante de clé primaire.
 
 ### Question
 
-Et si vous supprimez, le club de C'Chartres Echecs ? :innocent:
+Et si vous supprimez, le club de C'Chartres Echecs ? 😇
 
 <br>
 
@@ -485,7 +545,7 @@ Permet des actions en cascade gérées directement par le SGBD.
 
 ### Autre question
 
-Si une joueuse peut adhérer à plusieurs clubs ? :confused:
+Si une joueuse peut adhérer à plusieurs clubs ? 😯
 
 ::::::{.incremental}
 - *id_club* devient une liste de clubs ?
@@ -509,7 +569,7 @@ C'est possible techniquement mais pas adapté (perte cohérence, flexibilité, p
 
 ### Table d'association
 
-Création d'une table d'association : **adhesion** :sweat_smile:
+Création d'une table d'association : **adhesion** 😅
 
 ```{mermaid}
 classDiagram
@@ -623,6 +683,8 @@ Conventions
 
 - PK soulignée
 - FK avec #
+
+🚧 Faire un tableau 
 :::
 
 

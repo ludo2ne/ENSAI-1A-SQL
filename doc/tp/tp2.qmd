@@ -1,7 +1,12 @@
 ---
 title: "Exercices vintages 💾"
 description: "TP2"
-format: html
+format:
+  html: default
+  typst: 
+    author: ""
+    number-sections: true
+    section-numbering: 1.1.a.
 categories:
   - JOIN
   - CREATE
@@ -19,26 +24,12 @@ Lors de ce TP, vous allez :
 - Relier des tables en utilisant les jointures
 - Sélectionner et filtrer des données
 
-
 ::: {.callout-important}
 - Écrivez des requêtes jolies !
-- À la fin du TP, exportez ou copiez vos requêtes dans un fichier de votre VM ou machine personnelle
 :::
 
-## Lancement des services
+{{< include _tp-start.qmd >}}
 
-Pour plus de détails, allez dans l'onglet [Datalab](../outils/datalab.qmd){target="_blank"}.
-
-- [ ] Connectez-vous à un Datalab
-- [ ] Lancez un service **PostgreSQL**
-- [ ] Lancez un service **cloudBeaver**
-  - ouvrez ce service
-  - vérifiez que vous êtes connectés à la base de données PostgreSQL
-  - ouvrez la connexion
-
-::: {.callout-important}
-cloudBeaver est parfois capricieux, en cas de blocage, n'hésitez pas à rafraichir la page (F5).
-:::
 
 En attendant le lancement des services, voici un peu de lecture ci-dessous.
 
@@ -49,13 +40,10 @@ Il est parfois difficile d'écrire du premier coup LA requête qui répond direc
 
 Voici une méthode qui peut vous aider à écrire vos requêtes pas à pas :
 
-::: {.callout}
 Imaginons que l'on vous demande de lister les noms et prénoms des joueuses du club de la ville de *Saint Quentin*, dont le prénom commence par un *A* classées par elo décroissant.
 
-joueuse([id_joueuse]{.underline}, nom, prenom, elo, #id_club)
-
-club([id_club]{.underline}, nom, ville)
-:::
+> joueuse([id_joueuse]{.underline}, nom, prenom, elo, #id_club) \
+> club([id_club]{.underline}, nom, ville)
 
 ### Listez les tables nécessaires
 
@@ -224,7 +212,7 @@ Donnez les requêtes pour obtenir :
 - [ ] Numéro des DVD du film *la guerre des etoiles*
 
 ::: {.callout-note title="Recherche dans la doc"}
-- [ ] Recherchez dans la [documentation officielle PostgreSQL](https://www.postgresql.org/docs/){target="_blank"}, un moyen de répondre au besoin ci-dessous
+- [ ] Recherchez dans la [documentation officielle PostgreSQL](https://www.postgresql.org/docs/){target="_blank"}, un moyen de répondre au besoin ci-dessous.
 
 Pour connaitre la version utilisée : `SELECT version();`
 :::
@@ -276,9 +264,7 @@ Pour terminer cet exercice, nous allons rechercher les titres des films qui n'on
 
 ### Rugby World Cup :rugby_football:
 
-::: {.callout}
-Pour les plus rapides :rocket:
-:::
+> Pour les plus rapides :rocket:
 
 Nous souhaitons informatiser les résultats de la coupe du monde de rugby. Pour cela nous avons créé les deux tables suivantes : *equipe* et *matches*.
 
@@ -300,10 +286,3 @@ Commencez par créez et charger les tables avec [ce script](./data/tp2-rugby-cre
 ::: {.callout-tip collapse="true" title="Solutions"}
 - [Correction TP2](./correction/tp2.sql)
 :::
-
-## Arrêtez vos services {.unnumbered}
-
-C'est la fin du TP, vous pouvez maintenant sauvegarder votre travail et libérer les ressources réservées :
-
-- [ ] Copiez-collez vos scripts SQL sur votre machine
-- [ ] Arrêter les services du Datalab

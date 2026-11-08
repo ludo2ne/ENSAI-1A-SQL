@@ -1,7 +1,12 @@
 ---
 title: "Premières requêtes SQL 🦆"
 description: "Sélectionner, Filtrer, Agréger"
-format: html
+format:
+  html: default
+  typst: 
+    author: ""
+    number-sections: true
+    section-numbering: 1.1.a.
 categories:
   - DuckDB
   - SELECT

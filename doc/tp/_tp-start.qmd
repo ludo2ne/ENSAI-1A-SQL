@@ -1,0 +1,16 @@
+## Lancement des services
+
+- [ ] Connectez-vous au [SSP Cloud](https://datalab.sspcloud.fr/){target="_blank"}
+- [ ] Lancez un service **PostgreSQL**
+- [ ] Lancez un service **cloudBeaver**
+  - ouvrez ce service et ouvrez la connexion PostgreSQL
+
+En cas de besoin, vous trouverez plus d'informations dans l'onglet [Datalab](../outils/datalab.qmd){target="_blank"}.
+
+**À la fin du TP**
+
+N'oubliez pas de sauvegarder votre travail et libérer les ressources :
+
+- [ ] Sauvegardez votre travail
+  - Copiez-collez vos scripts SQL sur votre machine
+- [ ] Mettez en pause ou Arrêter les services du Datalab

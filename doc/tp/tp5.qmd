@@ -1,7 +1,12 @@
 ---
 title: "NBA stats 🏀"
 description: "TP5"
-format: html
+format:
+  html: default
+  typst: 
+    author: ""
+    number-sections: true
+    section-numbering: 1.1.a.
 categories:
   - Données brutes
 ---
@@ -23,11 +28,10 @@ Il faut donc apprendre à vous débrouiller dès maintenant. Et au passage, vous
 :::
 
 
-## Importer la base de données
+{{< include _tp-start.qmd >}}
 
-- [ ] Connectez-vous à un Datalab
-- [ ] Lancez un service **PostgreSQL**
-- [ ] Lancez un service **cloudBeaver**
+
+## Importer la base de données
 
 Aujourd'hui, pas de script sql pour créer les tables et importer les données, vous allez utiliser un **dump**.
 
@@ -63,7 +67,6 @@ Le script *5_import_for_students.py* :
   - Celles que vous avez renseigné dans le fichier *.env*
 - Utilise l'utilitaire *pg_restore* pour créer la base de données à partir du dump
 :::
-
 
 
 ## Rendez-vous en base inconnue
@@ -514,9 +517,7 @@ Ils ont essayé de faire perdre leur équipe mais ils n'ont pas réussi :
 
 ## Classement par saison
 
-::: {.callout}
-Pour occuper les plus rapides :rocket:
-:::
+> Pour occuper les plus rapides :rocket:
 
 - [ ] Affichez le classement de la conférence OUEST de la saison régulière 2008-2009
   - Triez par pourcentage de victoires
@@ -537,21 +538,3 @@ Pour chaque saison régulière donnez le match :
 ::: {.callout-tip collapse="true" title="Solutions"}
 - [Correction TP5](./correction/tp5.sql)
 :::
-
-
-## Arrêtez vos services {.unnumbered}
-
-C'est la fin du TP, vous pouvez maintenant sauvegarder votre travail et libérer les ressources réservées :
-
-- [ ] Copiez-collez vos scripts SQL sur votre machine
-- [ ] Arrêter les services du Datalab
-
-
-
-
-
-
-
-
-
-

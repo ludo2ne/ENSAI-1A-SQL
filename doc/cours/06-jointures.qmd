@@ -88,7 +88,11 @@ classDiagram
 L'**INNER JOIN** renvoie uniquement les lignes qui ont des [correspondances dans les deux tables]{.underline}.
 
 ::: {.notes}
-Au max, vous avez le nombre de lignes de la table la plus grande
+Au max, vous avez le nombre de lignes de la table la plus grande.
+
+Une jointure permet de combiner des données provenant de plusieurs tables en s'appuyant sur une condition de correspondance, généralement entre une clé primaire et une clé étrangère.
+
+La jointure permet de les retrouver et de les réunir au moment où l'on interroge la base de données.
 :::
 
 ### 1ere tentative

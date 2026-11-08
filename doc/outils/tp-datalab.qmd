@@ -4,6 +4,7 @@ description: "TP3 - Onyxia et le Datalab pour le statisticien"
 format: html
 ---
 
+> TP anciennement dispensé dans le cadre de ce cours.
 
 ## Introduction {.unnumbered}
 

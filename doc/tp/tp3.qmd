@@ -1,7 +1,12 @@
 ---
 title: "Discographie 🎵"
 description: "TP3"
-format: html
+format:
+  html: default
+  typst: 
+    author: ""
+    number-sections: true
+    section-numbering: 1.1.a.
 categories:
   - LEFT JOIN
   - HAVING
@@ -13,7 +18,6 @@ categories:
 
 ::: {.callout-important}
 - Écrivez des requêtes jolies !
-- À la fin du TP, exportez ou copiez vos requêtes dans un fichier de votre VM ou machine personnelle
 :::
 
 Les notions vues dans ce TP :
@@ -25,15 +29,7 @@ Les notions vues dans ce TP :
 - bonus : CTE (vu au dernier cours)
 
 
-## Lancement des services
-
-Pour plus de détails, allez dans l'onglet [Datalab](../outils/datalab.qmd){target="_blank"}.
-
-- [ ] Connectez-vous à un Datalab
-- [ ] Lancez un service **PostgreSQL**
-- [ ] Lancez un service **cloudBeaver**
-  - ouvrez ce service
-  - vérifiez que vous êtes connectés à la base de données PostgreSQL
+{{< include _tp-start.qmd >}}
 
 
 ## Les données
@@ -65,7 +61,7 @@ Les tables sont les suivantes :
 ### Modèle de données
 
 
-![](./data/tp3-uml.PNG)
+![](./data/tp3-uml.jpg)
 
 
 ## Exercice
@@ -293,10 +289,3 @@ SELECT a.*
 ::: {.callout-tip collapse="true" title="Solutions"}
 - [Correction TP3](./correction/tp3.sql)
 :::
-
-## Arrêtez vos services {.unnumbered}
-
-C'est la fin du TP, vous pouvez maintenant sauvegarder votre travail et libérer les ressources réservées :
-
-- [ ] Copiez-collez vos scripts SQL sur votre machine
-- [ ] Arrêter les services du Datalab
