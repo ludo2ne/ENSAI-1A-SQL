@@ -85,9 +85,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-70f72adb51cad36e24edca7ab52a5dc9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../site_libs/bootstrap/bootstrap-dark-81e7f7c737e0b46e39b74676b234f48d.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../site_libs/bootstrap/bootstrap-70f72adb51cad36e24edca7ab52a5dc9.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-92f9dca6a970ead035e2ebef6d5979d5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-dark-95f19369380f74bf545473795d54be25.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../site_libs/bootstrap/bootstrap-92f9dca6a970ead035e2ebef6d5979d5.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -836,12 +836,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="retirer-des-droits" class="level3" data-number="3.2">
 <h3 data-number="3.2" class="anchored" data-anchor-id="retirer-des-droits"><span class="header-section-number">3.2</span> Retirer des droits</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- Lecture</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="kw">REVOKE</span> <span class="kw">SELECT</span> <span class="kw">ON</span> echecs.joueuse <span class="kw">TO</span> chantal;</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="kw">REVOKE</span> <span class="kw">SELECT</span> <span class="kw">ON</span> echecs.joueuse <span class="kw">FROM</span> chantal;</span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">-- Tous les droits</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="kw">REVOKE</span> <span class="kw">ALL</span> <span class="kw">PRIVILEGES</span> <span class="kw">ON</span> echecs.joueuse <span class="kw">TO</span> chantal;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="kw">REVOKE</span> <span class="kw">ALL</span> <span class="kw">PRIVILEGES</span> <span class="kw">ON</span> echecs.joueuse <span class="kw">FROM</span> chantal;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><br></p>
 <p>Suffixe <code>CASCADE</code> pour retirer les droits à ceux qui ont reçu les droits de la part de…</p>
+<div class="notes">
+<p>Subtilité, si vous executez à la suite :</p>
+<ul>
+<li><code>GRANT SELECT ON echecs.joueuse TO PUBLIC;</code></li>
+<li><code>REVOKE SELECT ON echecs.joueuse FROM chantal;</code></li>
+</ul>
+<p>Est-ce que Chantal peut lire la table ?</p>
+<p>Oui car Chantal ⊂ PUBLIC</p>
+</div>
 </section>
 <section id="rôle" class="level3" data-number="3.3">
 <h3 data-number="3.3" class="anchored" data-anchor-id="rôle"><span class="header-section-number">3.3</span> Rôle</h3>

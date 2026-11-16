@@ -1078,8 +1078,8 @@ INSERT INTO music.chanson (id_chanson, id_artiste_principal, titre, duree, id_al
 INSERT INTO music.playlist (id_playlist, nom, date_creation, description) VALUES
   (1, 'Les Ondes de Ludovic',     '2025-10-15', 'Sélection musicale éclectique de Ludovic.'),
   (2, 'Le Groove de Sylvain',     '2025-10-16', 'Mélange de titres énergiques choisis par Sylvain.'),
-  (3, 'L''Univers de Clémentine',  '2025-10-17', 'Les coups de cœur musicaux de Clémentine.'),
-  (4, 'Christophe en Voyage',  '2025-10-18', 'Une sélection personnelle de Christophe.'),
+  (3, 'L''Univers de Vito',  '2025-10-17', 'Les coups de cœur musicaux de Vito.'),
+  (4, 'Nathan en Voyage',  '2025-10-18', 'Une sélection personnelle de Nathan.'),
   (5, 'Explorations Sonores d''Olivier',      '2025-10-19', 'Les favoris d''Olivier, tous styles confondus.'),  
 (6, 'Playlist Rock Énergie',  '2025-10-18', 'Une sélection de titres rock pour se motiver.'),
 (7, 'Playlist Chill Soirée',  '2025-10-18', 'Ambiance détendue pour la fin de journée.'),

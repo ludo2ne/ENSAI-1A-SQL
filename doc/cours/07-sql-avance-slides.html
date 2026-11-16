@@ -554,12 +554,31 @@ Ludovic Deneuville
 <section id="retirer-des-droits" class="slide level3">
 <h3>Retirer des droits</h3>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb13-1"><a aria-hidden="true" tabindex="-1"></a><span class="co">-- Lecture</span></span>
-<span id="cb13-2"><a aria-hidden="true" tabindex="-1"></a><span class="kw">REVOKE</span> <span class="kw">SELECT</span> <span class="kw">ON</span> echecs.joueuse <span class="kw">TO</span> chantal;</span>
+<span id="cb13-2"><a aria-hidden="true" tabindex="-1"></a><span class="kw">REVOKE</span> <span class="kw">SELECT</span> <span class="kw">ON</span> echecs.joueuse <span class="kw">FROM</span> chantal;</span>
 <span id="cb13-3"><a aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb13-4"><a aria-hidden="true" tabindex="-1"></a><span class="co">-- Tous les droits</span></span>
-<span id="cb13-5"><a aria-hidden="true" tabindex="-1"></a><span class="kw">REVOKE</span> <span class="kw">ALL</span> <span class="kw">PRIVILEGES</span> <span class="kw">ON</span> echecs.joueuse <span class="kw">TO</span> chantal;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb13-5"><a aria-hidden="true" tabindex="-1"></a><span class="kw">REVOKE</span> <span class="kw">ALL</span> <span class="kw">PRIVILEGES</span> <span class="kw">ON</span> echecs.joueuse <span class="kw">FROM</span> chantal;</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <p><br></p>
 <p>Suffixe <code>CASCADE</code> pour retirer les droits à ceux qui ont reçu les droits de la part de…</p>
+<aside class="notes">
+<p>Subtilité, si vous executez à la suite :</p>
+<ul>
+<li><code>GRANT SELECT ON echecs.joueuse TO PUBLIC;</code></li>
+<li><code>REVOKE SELECT ON echecs.joueuse FROM chantal;</code></li>
+</ul>
+<p>Est-ce que Chantal peut lire la table ?</p>
+<p>Oui car Chantal ⊂ PUBLIC</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
 </section>
 <section id="rôle" class="slide level3">
 <h3>Rôle</h3>
