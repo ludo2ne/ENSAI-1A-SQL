@@ -347,3 +347,7 @@ SELECT j.nom,
 | ...        | ...   | ...   |
 
 :::
+
+:::{.notes}
+Le nombre de lignes de chaque table est multiplié.
+:::

@@ -269,6 +269,7 @@ SELECT p.nom,
 
 -- Quelle playlist dure le plus longtemps
 SELECT p.nom, 
+       SUM(c.duree), 
        SUM(EXTRACT(EPOCH FROM c.duree)) AS duree_totale_secondes
   FROM music.playlist p
   JOIN music.playlist_chanson pc USING(id_playlist)

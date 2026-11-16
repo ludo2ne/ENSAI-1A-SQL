@@ -47,6 +47,9 @@ SELECT *
 ```
 :::
 
+:::{.notes}
+Dessiner une patate.
+:::
 
 ### Projection
 
@@ -84,6 +87,8 @@ SELECT nom,
 - En général, on prend les mêmes colonnes des 2 côtés
 - Possible de faire plusieurs UNION
 - ORDER BY à la fin : ordonne le tout
+
+🎨 🖌️ Dessiner des patates.
 :::
 
 ### Différence

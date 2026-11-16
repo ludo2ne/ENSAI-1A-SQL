@@ -34,17 +34,17 @@ Les notions vues dans ce TP :
 
 ## Les données
 
-Le thème du jour sera la musique :musical_note: :guitar: :trumpet:
+🎵 🪗 🎷 Le thème du jour sera la musique. 🥁 🎸 🪇
 
 ### Chargez les données
 
-- [ ] Copiez le contenu de ces 2 scripts sql 
+- [ ] Copiez le contenu de ces deux scripts sql 
   - [création des tables](./data/tp3-create-tables.sql){target="_blank"} 
   - [insertion des données](./data/tp3-pop-tables.sql){target="_blank"} 
 - [ ] Collez-les dans la fenêtre SQL de CloudBeaver
 - [ ] Exécutez les scripts
-  - Cliquez sur la petite icone sous les triangles oranges qui ressemble à :scroll:
-  - raccourci (ALT + X)
+  - Cliquez sur le bouton orange avec un triangle ⯈ dans un parchemin 📜
+  - Raccourci : [ALT]{.keyboard} + [X]{.keyboard}
 
 
 ### Description
@@ -68,7 +68,7 @@ Les tables sont les suivantes :
 
 ### Exploration des tables
 
-Lorsque vous prenez en main une base de données, la première chose à faire est de regarder ce que contiennent les tables.
+Lorsque vous prenez en main une base de données, la première chose à faire est de regarder ce que contiennent les tables. 🔎
 
 - [ ] Listez toutes les chansons
 - [ ] Affichez les colonnes *titre* et *année* ainsi que le *nom de l'artiste principal*
@@ -79,13 +79,14 @@ Lorsque vous prenez en main une base de données, la première chose à faire es
   - l'artiste principal de la chanson
   - l'artiste de l'album qui contient cette chanson
 
-Faisons quelques statistiques descriptives.
+Faisons quelques statistiques descriptives. 📊
 
 - [ ] Quelle sont les durées minimum, maximum et moyenne des chansons
 - [ ] Affichez le nombre de chansons par année
   - ordonnez par nombre de chansons décroissant
 - [ ] Quelles sont les années avec au moins 10 chansons
 - [ ] Complétez la dernière requête en ajoutant la durée moyenne des chansons pour chaque année
+  - 💡 Utilisez la fonction [date_trunc()](https://www.postgresql.org/docs/current/functions-datetime.html){target="_blank"} pour arrondir à la seconde
 
 Est-ce qu'il y a plusieurs chansons ayant le même titre ?
 
@@ -94,7 +95,7 @@ Est-ce qu'il y a plusieurs chansons ayant le même titre ?
 - [ ] Est-ce qu'il y a des chansons en doublon ?
   - i.e. même titre et même artiste
 
-Si vous en trouvez une, essayez de la supprimer. À votre avis, pourquoi cela ne fonctionne pas ?
+Si vous en trouvez une, essayez de la supprimer. À votre avis, pourquoi cela ne fonctionne pas ? 🗑️
 
 - [ ] Créez une vue *titre_frequent* listant les titres des chansons présents au moins deux fois ?
 - [ ] Pour ces titres, affichez tous les détails des chansons, ainsi que l'artiste principal
@@ -105,14 +106,14 @@ Si vous en trouvez une, essayez de la supprimer. À votre avis, pourquoi cela ne
 
 - [ ] Listez les noms d'artistes ainsi que les titres de leurs chansons
 - [ ] Comptez le nombre de chansons par artiste
-- [ ] Classez par ordre décroissant
-- [ ] Conservez uniquement les artistes ayant 20 chansons ou plus
+  - Classez par ordre décroissant du nombre de chansons
+- [ ] Conservez uniquement les six artistes ayant 20 chansons ou plus
 
 Il y a des artistes solo et des groupes. Pour les groupe la date de naissance ne devrait pas être renseignée.
 
 - [ ] Mettez à jour la table pour supprimer les dates de naissance des groupes
-  - :scream: si vous avez fait une bétise, pas de panique, il faut relancer les deux scripts du début de TP (create and pop)
-- [ ] Quel est le plus viel artiste solo en activité ?
+  - 😱 si vous avez fait une bétise, pas de panique, il faut relancer les deux scripts du début de TP (create and pop)
+- [ ] Quel est le plus viel artiste solo en activité ? 👴🏻
 
 Interessons nous maintenant aux pays des artistes.
 
@@ -124,7 +125,7 @@ Interessons nous maintenant aux pays des artistes.
 - [ ] Ajoutez 5 chansons dans votre playlist
 
 ::: {.callout-tip}
-Aucune de ces chansons ne correspond à vos goût musicaux...
+Aucune de ces chansons ne correspond à vos goûts musicaux...
 
 Vous êtes vraiment sûr ?
 
@@ -135,14 +136,14 @@ Nous allons maintenant ajouter à votre playlist toutes les chansons de l'album 
 
 Pour créer votre requête d'insertion, vous allez avoir besoin des données suivantes : 
 
-- *id_playlist* : vous pouvez soit :
+- *id_playlist*, vous pouvez soit :
   - insérer la valeur "en dur"
   - utiliser `CURRVAL('playlist_id_playlist_seq')` pour obtenir la dernière valeur de *id_playlist* i.e. celui de la playlist que vous venez de créer
 - *id_chanson* : il va falloir une reqûete pour les récupérer
 - *ordre* : vous allez créer et utiliser une séquence
 - *date_ajout* : vous utiliserez simplement : `CURRENT_DATE`
 
----
+Let's go, step by step :
 
 - [ ] Créez une séquence nommée *seq_playlist_ordre*
   - comme vous avez déjà inséré 5 chansons, les valeurs de la colonne ordre de 1 à 5 sont normalement déjà prises
@@ -150,9 +151,7 @@ Pour créer votre requête d'insertion, vous allez avoir besoin des données sui
 - [ ] Listez toutes les chansons de l'album *Californian Soil*
 - [ ] Insérer dans votre playlist toutes les chansons de l'album *Californian Soil*
 
-::: {.callout-tip title="Un peu d'aide" collapse="true"}
-Pour trouver un peu d'inspiration, un exemple d'INSERT en utilisant un SELECT :
-
+::: {.callout-tip title="Un exemple d'INSERT utilisant un SELECT" collapse="true"}
 ```{.sql}
 INSERT INTO joueuse_copy(nom, prenom, numero, date_creation)
 SELECT nom,
@@ -163,10 +162,8 @@ SELECT nom,
 ```
 :::
 
-
-Est-ce que vous pouvez ajouter plusieurs fois la même chanson dans une playlist ? Pourquoi ?
-
-Comment pourrait-t-on faire pour s'affranchir de cette contrainte ?
+- [ ] Est-ce que vous pouvez ajouter plusieurs fois la même chanson dans une playlist ? Pourquoi ?
+- [ ] Comment pourrait-t-on faire pour s'affranchir de cette contrainte ?
 
 
 ### Votez pour la meilleure playlist
@@ -183,9 +180,9 @@ Vous remarquez qu'à l'affichage vous avez deux colonnes appelées "nom". Pour f
 
 - [ ] Modifiez le *SELECT* pour afficher les entêtes de colonnes *Nom de la playlist*, *Titre de la chanson* et *Nom de l'artiste*
 
----
+Proposez des requêtes pour répondre aux questions ci-dessous :
 
-- [ ] Quelle playlist a le plus de chansons ?
+- [ ] Quelle playlist contient le plus de chansons ?
 - [ ] Quelle playlist dure le plus longtemps ?
 
 Nous allons maintenant rechercher les artistes mal-aimés i.e. ceux qui ne sont dans aucune playlist. 
@@ -194,7 +191,7 @@ Procédons par étape:
 
 - [ ] Listez les artistes présents dans les playlists
 - [ ] Ensuite, gardez uniquement les *id_artiste* sans doublons
-- [ ] Affichez les artistes qui ne sont présents dans aucune playlist
+- [ ] Affichez les 38 artistes qui ne sont présents dans aucune playlist
   - en utilisant `NOT IN` et une sous-requête
   - conservez uniquement les *id_artiste* qui ne sont pas dans la requête précédente
 - [ ] Même question avec `NOT EXISTS`

@@ -281,15 +281,26 @@ propriétaire <> créateur
 
 ```{.sql}
 -- Lecture
-REVOKE SELECT ON echecs.joueuse TO chantal;
+REVOKE SELECT ON echecs.joueuse FROM chantal;
 
 -- Tous les droits
-REVOKE ALL PRIVILEGES ON echecs.joueuse TO chantal;
+REVOKE ALL PRIVILEGES ON echecs.joueuse FROM chantal;
 ```
 
 <br>
 
 Suffixe `CASCADE` pour retirer les droits à ceux qui ont reçu les droits de la part de...
+
+:::{.notes}
+Subtilité, si vous executez à la suite :
+
+- `GRANT SELECT ON echecs.joueuse TO PUBLIC;`
+- `REVOKE SELECT ON echecs.joueuse FROM chantal;`
+
+Est-ce que Chantal peut lire la table ?
+
+Oui car Chantal ⊂ PUBLIC
+:::
 
 ### Rôle
 
